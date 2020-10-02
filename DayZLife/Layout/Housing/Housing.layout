@@ -1,0 +1,278 @@
+FrameWidgetClass Housing {
+ position 0 0
+ size 1248 656
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0 0 0 1
+   position 0 0
+   size 1232 640
+   halign center_ref
+   valign center_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     color 0.6588 0.6588 0.6588 0.6275
+     position 0 0
+     size 1216 624
+     halign center_ref
+     valign center_ref
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     style EditorPanel
+     {
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       color 0.6588 0.6588 0.6588 0.6275
+       position 0 8
+       size 400 48
+       halign center_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        TextWidgetClass Housing_Menu {
+         ignorepointer 1
+         color 0 0 0 1
+         position 0 0
+         size 400 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "#Housing Menue"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       color 0 0 0 1
+       position 8 64
+       size 592 552
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        ItemPreviewWidgetClass Hous_Preview {
+         ignorepointer 1
+         position 8 8
+         size 576 536
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget4 {
+       ignorepointer 1
+       color 0 0 0 1
+       position 608 64
+       size 600 552
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        TextWidgetClass Buy_Price {
+         ignorepointer 1
+         color 0 0 0 1
+         position 8 8
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "#Buy_Price:"
+         "text valign" center
+        }
+        TextWidgetClass Sell_Price {
+         ignorepointer 1
+         color 0 0 0 1
+         position 8 64
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "#Sell_Price:"
+         "text valign" center
+        }
+        TextWidgetClass Storage {
+         ignorepointer 1
+         color 0 0 0 1
+         position 8 120
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "#Storage:"
+         "text valign" center
+        }
+        TextWidgetClass Price_Buy {
+         ignorepointer 1
+         color 0 0 0 1
+         position 342 8
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "123456789"
+         "text halign" right
+         "text valign" center
+        }
+        TextWidgetClass Price_Sell {
+         ignorepointer 1
+         color 0 0 0 1
+         position 342 64
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "123456789"
+         "text halign" right
+         "text valign" center
+        }
+        TextWidgetClass Number_of_Strage {
+         ignorepointer 1
+         color 0 0 0 1
+         position 342 120
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "10"
+         "text halign" right
+         "text valign" center
+        }
+        PanelWidgetClass PanelWidget5 {
+         ignorepointer 1
+         color 0 0 0 1
+         position 342 496
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style EditorPanel
+         {
+          ButtonWidgetClass Button_Buy {
+           color 0 0.1255 0.502 1
+           position 0 0
+           size 250 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           style Default
+           text "#Buy"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget6 {
+         ignorepointer 1
+         color 0 0 0 1
+         position 8 496
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style EditorPanel
+         {
+          ButtonWidgetClass Button_Sell {
+           color 0.251 0.502 0 1
+           position 0 0
+           size 250 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           text "#Sell"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget8 {
+         ignorepointer 1
+         color 0 0 0 1
+         position 0 176
+         size 600 312
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style EditorPanel
+         {
+          MapWidgetClass Map {
+           position 8 8
+           size 584 296
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget7 {
+       ignorepointer 1
+       color 0 0 0 1
+       position 1160 8
+       size 48 48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 48 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style OldStyle
+         text "X"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
