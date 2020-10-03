@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class P2PTrader
+	class DayZLifeServer
 	{
 		units[]={};
         weapons[]={};
@@ -8,7 +8,6 @@ class CfgPatches
         requiredAddons[]={
             "DZ_Data",
             "DZ_Scripts",
-            "JM_CF_Scripts"
         };
 	};
 };
@@ -27,17 +26,17 @@ class CfgAddons
 
 class CfgMods
 {
-	class P2PTrader
+	class DayZLifeServer
 	{
-	    dir = "DayZLife";
+	    dir = "DayZLifeServer";
         picture = "";
         action = "";
         hideName = 0;
-		inputs = "DayZLife\inputs.xml";
-		name = "DayZLife";
+		inputs = "DayZLifeServer/inputs.xml";
+		name = "DayZLifeServer";
 		credits = "TheBuster, Sense";
-		creditsJson = "DayZLife/Scripts/Data/Credits.json";
-		versionPath = "DayZLife/scripts/Data/Version.hpp";
+		creditsJson = "DayZLifeServer/Scripts/Data/Credits.json";
+		versionPath = "DayZLifeServer/scripts/Data/Version.hpp";
 		author = "TheBuster Sense";
 		authorID = "76561198196317725";
 		version = "0.0.1";
@@ -53,7 +52,7 @@ class CfgMods
                 value="";
                 files[]=
                 {
-                    "DayZLife/scripts/3_Game"
+                    "DayZLifeServer/scripts/3_Game"
                 };
             };
             class worldScriptModule
@@ -61,14 +60,14 @@ class CfgMods
                 value="";
                 files[]=
                 {
-                    "DayZLife/scripts/4_World"
+                    "DayZLifeServer/scripts/4_World"
                 };
             };
 			class missionScriptModule
 			{
 				value = "";
 				files[] = {
-				     "DayZLife/scripts/5_Mission"
+				     "DayZLifeServer/scripts/5_Mission"
 				};
 			};
 		};

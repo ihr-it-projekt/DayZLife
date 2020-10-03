@@ -1,14 +1,13 @@
 class CfgPatches
 {
-	class P2PTrader
+	class DayZLife
 	{
 		units[]={};
         weapons[]={};
         requiredVersion=1.0;
         requiredAddons[]={
             "DZ_Data",
-            "DZ_Scripts",
-            "JM_CF_Scripts"
+            "DZ_Scripts"
         };
 	};
 };
@@ -27,17 +26,12 @@ class CfgAddons
 
 class CfgMods
 {
-	class P2PTrader
+	class DayZLife
 	{
 	    dir = "DayZLife";
-        picture = "";
-        action = "";
         hideName = 0;
-		inputs = "DayZLife\inputs.xml";
 		name = "DayZLife";
 		credits = "TheBuster, Sense";
-		creditsJson = "DayZLife/Scripts/Data/Credits.json";
-		versionPath = "DayZLife/scripts/Data/Version.hpp";
 		author = "TheBuster Sense";
 		authorID = "76561198196317725";
 		version = "0.0.1";
