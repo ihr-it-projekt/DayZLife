@@ -1,11 +1,11 @@
-class DLBuilding {
+class DZLBuilding {
 
     private Building building;
-    private ref DLHouse house;
+    private ref DZLHouse house;
 
-    void DLBuilding(Building building) {
+    void DZLBuilding(Building building) {
         this.building = building;
-        house = new DLHouse(building);
+        house = new DZLHouse(building);
     }
 
     bool HasOwner() {
@@ -18,7 +18,7 @@ class DLBuilding {
 
     void Buy(PlayerBase player) {
         house.AddOwner(player);
-        ref DLPlayerHouse playerHouse = new DLPlayerHouse(player);
+        ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player);
         playerHouse.AddHouse(house);
     }
 }

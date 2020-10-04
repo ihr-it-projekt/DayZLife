@@ -1,10 +1,10 @@
-class DLBuildingHelper
+class DZLBuildingHelper
 {
-    static ref DLBuilding ActionTargetToDLBuilding(ActionTarget target){
+    static ref DZLBuilding ActionTargetToDZLBuilding(ActionTarget target){
         Building building;
         if(Class.CastTo(building, target.GetObject()))
         {
-            return new DLBuilding(building);
+            return new DZLBuilding(building);
         }
         return NULL;
     }

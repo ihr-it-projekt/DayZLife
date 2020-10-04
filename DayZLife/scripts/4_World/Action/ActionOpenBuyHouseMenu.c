@@ -9,7 +9,7 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 
 	override string GetText()
 	{
-		return "#open_buy_menu";
+		return "#open_house_buy_menu";
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item)
@@ -21,11 +21,11 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 	{
 		super.OnExecuteClient(action_data);
 		
-		if(!DLBuyHouseMenu.GetInstance().IsVisible())
+		if(!DZLBuyHouseMenu.GetInstance().IsVisible())
 		{
 			UIManager uiManager = GetGame().GetUIManager();
 			uiManager.CloseAll();
-			uiManager.ShowScriptedMenu(DLBuyHouseMenu.GetInstance(), null);
+			uiManager.ShowScriptedMenu(DZLBuyHouseMenu.GetInstance(), null);
 		}
 	}
 }

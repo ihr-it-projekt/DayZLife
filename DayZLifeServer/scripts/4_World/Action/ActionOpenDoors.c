@@ -11,7 +11,7 @@ modded class ActionOpenDoors: ActionInteractBase
 
 		DebugMessageServerDZL("Try open Door22");
 		if(super.ActionCondition(player, target, item)){
-			DLBuilding building = DLBuildingHelper.ActionTargetToDLBuilding(target);
+			DZLBuilding building = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
 			if(building && (building.HasOwner() && building.IsOwner(player))){
 
 				return true;

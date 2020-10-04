@@ -1,22 +1,22 @@
-class DLPlayerHouse {
+class DZLPlayerHouse {
     private string fileName;
-    ref array<ref DLHouse> playerHouseCollection;
+    ref array<ref DZLHouse> playerHouseCollection;
 
 
-    void DLPlayerHouse(PlayerBase player) {
+    void DZLPlayerHouse(PlayerBase player) {
         fileName = player.GetIdentity().GetId();
         if (!Load()) {
-            playerHouseCollection = new array<ref DLHouse>;
+            playerHouseCollection = new array<ref DZLHouse>;
             Save();
         }
     }
 
-    void AddHouse(ref DLHouse house) {
+    void AddHouse(ref DZLHouse house) {
         playerHouseCollection.Insert(house);
 	}
 	
-	void RemoveHouse(DLHouse house) {
-		foreach(int index, DLHouse tempHouse: playerHouseCollection) {
+	void RemoveHouse(DZLHouse house) {
+		foreach(int index, DZLHouse tempHouse: playerHouseCollection) {
             if (house.fileName == tempHouse.fileName) {
 				playerHouseCollection.Remove(index);
 				Save();
@@ -28,7 +28,7 @@ class DLPlayerHouse {
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName + ".json")) {
-            JsonFileLoader<DLPlayerHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName + ".json", this);
+            JsonFileLoader<DZLPlayerHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName + ".json", this);
             return true;
         }
         return false;
@@ -36,8 +36,8 @@ class DLPlayerHouse {
 
     private void Save(){
         if (GetGame().IsServer()) {
-            CheckDLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
-            JsonFileLoader<DLPlayerHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName + ".json", this);
+            CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
+            JsonFileLoader<DZLPlayerHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName + ".json", this);
         }
     }
 }

@@ -1,7 +1,10 @@
-class DLBuyHouseMenu : UIScriptedMenu
+class DZLBuyHouseMenu : UIScriptedMenu
 {
-	private static ref DLBuyHouseMenu instance;
+	private static ref DZLBuyHouseMenu instance;
 	private ref DZLUIItemCreator creator;
+	private DZLServerConfig config;
+	private ref DZLPlayerInventory inventory;
+	private ref DZLObjectFinder objectFinder;
 	
 	ButtonWidget closeButton;
 	ButtonWidget buyButton;
@@ -12,28 +15,36 @@ class DLBuyHouseMenu : UIScriptedMenu
 	TextWidget storageTextWidget;
 	
 	
-	void DLBuyHouseMenu()
+	void DZLBuyHouseMenu()
 	{
 		if(GetGame().IsClient()){
 			
 		}
 	}
 	
-	void ~DLBuyHouseMenu()
+	void ~DZLBuyHouseMenu()
 	{
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
 	}
 	
-	static DLBuyHouseMenu GetInstance()
+	static DZLBuyHouseMenu GetInstance(DZLServerConfig configExt = null)
 	{
-		if (!instance)
+		if (!instance && configExt)
         {
-            instance = new DLBuyHouseMenu();
+            instance = new DZLBuyHouseMenu();
 			instance.Init();
+			instance.SetConfig(configExt);
         }
 		return instance;
+	}
+	
+	void SetConfig(DZLServerConfig config) {
+		this.config = config;
+
+		inventory = new DZLPlayerInventory(this.config.moneyConfig.currencyValues);
+		objectFinder = new DZLObjectFinder(this.config.houseConfig);
 	}
 	
 	static void ClearInstance()
@@ -52,7 +63,7 @@ class DLBuyHouseMenu : UIScriptedMenu
 		sellButton.Show(false);
 		
 		buyButton = creator.GetButtonWidget("Button_Buy");
-		buyButton.Show(false);
+		buyButton.Show(true);
 		
 		mapWidget = creator.GetMapWidget("Map");
 		
@@ -97,6 +108,31 @@ class DLBuyHouseMenu : UIScriptedMenu
                 OnHide();
                 return true;
             case buyButton:
+				DayZPlayer player = GetGame().GetPlayer();
+				Object object = objectFinder.GetObjectsAt(player.GetPosition(), player);
+				
+				if (!object) {
+					return true;
+				}
+				
+				Building house = Building.Cast(object);
+				DZLHouseDefinition actualHouseDef;
+			
+				foreach(DZLHouseDefinition houseDef: config.houseConfig.houseConfigs) {
+					if(house.GetType() == houseDef.houseType) {
+						actualHouseDef = houseDef;
+						break;
+					}
+				}
+			
+				if (!actualHouseDef) {
+					return true;
+				}
+			
+                if (inventory.PlayerHasEnoughMoney(player, actualHouseDef.price)) {
+					DebugMessageDZL("Can send buy request");
+			
+				}
                 // buy logic
                 return true;
             case sellButton:
@@ -105,4 +141,6 @@ class DLBuyHouseMenu : UIScriptedMenu
 		}
 		return false;
 	}
+
+
 }
