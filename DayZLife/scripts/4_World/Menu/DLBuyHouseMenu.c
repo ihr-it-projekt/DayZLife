@@ -33,7 +33,7 @@ class DLBuyHouseMenu : UIScriptedMenu
 	
 	override Widget Init()
     {
-		layoutRoot = GetGame().GetWorkspace().CreateWidgets("DayZLife/layout/Housing.layout");
+		layoutRoot = GetGame().GetWorkspace().CreateWidgets("DayZLife/layout/Housing/Housing.layout");
 
 		layoutRoot.Show(false);
 		
