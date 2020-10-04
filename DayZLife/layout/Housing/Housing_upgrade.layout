@@ -1,4 +1,4 @@
-FrameWidgetClass Housing {
+FrameWidgetClass Housing_Upgrade {
  position 0 0
  size 1248 656
  halign center_ref
@@ -24,7 +24,7 @@ FrameWidgetClass Housing {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
      color 0.6588 0.6588 0.6588 0.6275
-     position 0 0
+     position 0.00003 0
      size 1216 624
      halign center_ref
      valign center_ref
@@ -56,7 +56,7 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Housing_Menue"
+         text "#Housing_Upgrade_Menue"
          "text halign" center
          "text valign" center
         }
@@ -73,14 +73,38 @@ FrameWidgetClass Housing {
        vexactsize 1
        style EditorPanel
        {
-        ItemPreviewWidgetClass Hous_Preview {
-         ignorepointer 1
-         position 8 8
-         size 576 536
+        TextListboxWidgetClass TextListboxWidget0 {
+         position 8 0
+         size 280 536
+         valign center_ref
          hexactpos 1
          vexactpos 1
          hexactsize 1
          vexactsize 1
+         style NoScrollBar
+        }
+        PanelWidgetClass PanelWidget9 {
+         ignorepointer 1
+         color 0 0 0 1
+         position 296 0
+         size 296 552
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style EditorPanel
+         {
+          ItemPreviewWidgetClass ItemPreviewWidget0 {
+           ignorepointer 1
+           size 280 280
+           halign center_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+          }
+         }
         }
        }
       }
@@ -108,19 +132,6 @@ FrameWidgetClass Housing {
          text "#Buy_Price:"
          "text valign" center
         }
-        TextWidgetClass Sell_Price {
-         ignorepointer 1
-         color 0 0 0 1
-         position 8 64
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "#Sell_Price:"
-         "text valign" center
-        }
         TextWidgetClass Storage {
          ignorepointer 1
          color 0 0 0 1
@@ -131,27 +142,13 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Storage_Options:"
+         text "#Storage_Size:"
          "text valign" center
         }
         TextWidgetClass Price_Buy {
          ignorepointer 1
          color 0 0 0 1
          position 342 8
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "123456789"
-         "text halign" right
-         "text valign" center
-        }
-        TextWidgetClass Price_Sell {
-         ignorepointer 1
-         color 0 0 0 1
-         position 342 64
          size 250 48
          hexactpos 1
          vexactpos 1
@@ -172,7 +169,7 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "3"
+         text "250"
          "text halign" right
          "text valign" center
         }
@@ -234,7 +231,8 @@ FrameWidgetClass Housing {
          vexactsize 1
          style EditorPanel
          {
-          MapWidgetClass Map {
+          MultilineTextWidgetClass MultilineTextWidget0 {
+           ignorepointer 1
            position 8 8
            size 584 296
            hexactpos 1
