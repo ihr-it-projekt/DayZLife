@@ -18,5 +18,7 @@ class DLBuilding {
 
     void Buy(PlayerBase player) {
         house.AddOwner(player);
+        ref DLPlayerHouse playerHouse = new DLPlayerHouse(player);
+        playerHouse.AddHouse(house);
     }
 }

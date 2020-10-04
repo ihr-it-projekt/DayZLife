@@ -1,1 +1,3 @@
 static bool DAY_Z_LIFE_DEBUG = true;
+static int DAY_Z_LIFE_EVENT_GET_CONFIG = 2222219;
+static int DAY_Z_LIFE_OPEN_BUY_MENU = 222220;

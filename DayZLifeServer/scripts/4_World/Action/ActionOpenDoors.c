@@ -16,9 +16,7 @@ modded class ActionOpenDoors: ActionInteractBase
 
 				return true;
 			} else if (building && !building.HasOwner()) {
-                building.Buy(player);
-
-			    return false;
+                return false;
 			}
 		}
 		return false;

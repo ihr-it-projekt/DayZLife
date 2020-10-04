@@ -6,7 +6,7 @@ class DLHouse {
 
 
     void DLHouse(Building building) {
-        this.fileName = DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + building.GetPosition().ToString(false) + ".json";
+        this.fileName = building.GetPosition().ToString(false) + ".json";
         this.name = building.GetType();
         Load();
     }
@@ -22,15 +22,15 @@ class DLHouse {
 	}
 
     private void Load(){
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
-			JsonFileLoader<DLHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
+        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName + ".json")) {
+			JsonFileLoader<DLHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName + ".json", this);
         }
     }
 
     private void Save(){
         if (GetGame().IsServer()) {
-			CheckPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
-			JsonFileLoader<DLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
+			CheckDLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
+			JsonFileLoader<DLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName + ".json", this);
 		}
     }
 }
