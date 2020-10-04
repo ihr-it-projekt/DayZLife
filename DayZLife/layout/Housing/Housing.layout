@@ -105,7 +105,7 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Buy_Price:"
+         text "#Buy_Price"
          "text valign" center
         }
         TextWidgetClass Sell_Price {
@@ -118,7 +118,7 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Sell_Price:"
+         text "#Sell_Price"
          "text valign" center
         }
         TextWidgetClass Storage {
@@ -131,7 +131,7 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Storage_Options:"
+         text "#Storage_Options"
          "text valign" center
         }
         TextWidgetClass Price_Buy {
