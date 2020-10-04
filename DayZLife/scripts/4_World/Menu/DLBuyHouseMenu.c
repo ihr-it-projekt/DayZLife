@@ -1,11 +1,21 @@
 class DLBuyHouseMenu : UIScriptedMenu
 {
-	protected static ref DLBuyHouseMenu instance;
+	private static ref DLBuyHouseMenu instance;
+	private ref DZLUIItemCreator creator;
+	
+	ButtonWidget closeButton;
+	ButtonWidget buyButton;
+	ButtonWidget sellButton;
+	MapWidget mapWidget;
+	TextWidget priceBuyTextWidget;
+	TextWidget priceSellTextWidget;
+	TextWidget storageTextWidget;
+	
 	
 	void DLBuyHouseMenu()
 	{
 		if(GetGame().IsClient()){
-
+			
 		}
 	}
 	
@@ -33,11 +43,28 @@ class DLBuyHouseMenu : UIScriptedMenu
 	
 	override Widget Init()
     {
-		layoutRoot = GetGame().GetWorkspace().CreateWidgets("DayZLife/layout/Housing/Housing.layout");
+		creator = new DZLUIItemCreator("DayZLife/layout/Housing/Housing.layout");
+		
+		closeButton = creator.GetButtonWidget("Button_Closed");
+		closeButton.Show(true);
+		
+		sellButton = creator.GetButtonWidget("Button_Sell");
+		sellButton.Show(false);
+		
+		buyButton = creator.GetButtonWidget("Button_Buy");
+		buyButton.Show(false);
+		
+		mapWidget = creator.GetMapWidget("Map");
+		
+		priceBuyTextWidget = creator.GetTextWidget("Price_Buy");
+		priceSellTextWidget = creator.GetTextWidget("Price_Sell");
+		storageTextWidget = creator.GetTextWidget("Number_of_Storage");
+		
+		layoutRoot = creator.GetLayoutRoot();
 
 		layoutRoot.Show(false);
 		
-        return layoutRoot;
+	    return layoutRoot;
     }
 	
 	override void OnShow()
@@ -60,45 +87,22 @@ class DLBuyHouseMenu : UIScriptedMenu
 		Close();
 	}
 	
-	override void Update(float timeslice)
-	{
-		super.Update(timeslice);
-		
 
-	}
-	
 	override bool OnClick( Widget w, int x, int y, int button )
 	{
 		super.OnClick(w, x, y, button);
 	
-		switch(w)
-		{
-
+		switch(w){
+            case closeButton:
+                OnHide();
+                return true;
+            case buyButton:
+                // buy logic
+                return true;
+            case sellButton:
+                // sell logic
+                return true;
 		}
 		return false;
 	}
-	
-	override bool OnDoubleClick( Widget w, int x, int y, int button )
-	{
-		super.OnDoubleClick(w, x, y, button);
-	
-		switch(w)
-		{
-
-		}
-		return false;
-	}
-	
-
-	override bool OnChange(Widget w, int x, int y, bool finished)
-	{
-		super.OnChange(w,x,y,finished);
-		
-		switch(w)
-		{
-
-        }
-        return false;
-	}
-
 }

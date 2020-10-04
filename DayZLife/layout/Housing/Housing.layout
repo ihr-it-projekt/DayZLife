@@ -162,7 +162,7 @@ FrameWidgetClass Housing {
          "text halign" right
          "text valign" center
         }
-        TextWidgetClass Number_of_Strage {
+        TextWidgetClass Number_of_Storage {
          ignorepointer 1
          color 0 0 0 1
          position 342 120
