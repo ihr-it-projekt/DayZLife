@@ -7,7 +7,8 @@ class CfgPatches
         requiredVersion=1.0;
         requiredAddons[]={
             "DZ_Data",
-            "DZ_Scripts"
+            "DZ_Scripts",
+            "DZ_Structures_Residential"
         };
 	};
 };
@@ -66,5 +67,16 @@ class CfgMods
 				};
 			};
 		};
+	};
+};
+
+
+class CfgVehicles
+{
+	class HouseNoDestruct;
+	class HouseInfoPoint: HouseNoDestruct
+	{
+		scope = 1;
+		model = "\DZ\structures\residential\misc\misc_noticeboard1.p3d";
 	};
 };
