@@ -5,7 +5,9 @@ class DZLHouseConfig: DZLHouseServerConfig {
         if(!Load()) {
             houseConfigs = new array<ref DZLHouseDefinition>;
 
-            houseConfigs.Insert(new DZLHouseDefinition("1 0 0", "1 0 0", "Land_House_1W03", 100));
+			array<vector> storagePosition = new array<vector>;
+			storagePosition.Insert("1 1 1");
+            houseConfigs.Insert(new DZLHouseDefinition("1 0 0", "1 0 0", "Land_House_1W03", 100, 50, 3, storagePosition));
 
             Save();
         }

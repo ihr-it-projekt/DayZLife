@@ -5,7 +5,7 @@ modded class MissionServer {
 	void MissionServer()
 	{
         DebugMessageServerDZL("Load DayZLifeServer");
-        SpawnDZLHouse("15150 12 13861", "0 0 0", "HouseInfoPoint");
+        SpawnDZLHouse("15150 11 13861", "0 0 0", "HouseInfoPoint");
 
         config = new DZLConfig;
 
@@ -20,6 +20,7 @@ modded class MissionServer {
         if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG) {
             autoptr Param1<PlayerBase> paramGetConfig;
             if (ctx.Read(paramGetConfig)){
+				DebugMessageServerDZL("Send Config");
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLConfig>(config), true, sender);
             }
         }

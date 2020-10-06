@@ -2,12 +2,15 @@ class DZLPlayerInventory
 {
 	private map<string, int> currencyValues;
 	
-	void DZLPlayerInventory(map<string, int> currencyValues) {
+	void SetConfig(map<string, int> currencyValues) {
 		this.currencyValues = currencyValues;
 	}
 	
     bool PlayerHasEnoughMoney(DayZPlayer player, int money) {
         int amount = GetPlayerMoneyAmount(player);
+
+        DebugMessageDZL("Has money: " + amount.ToString());
+        DebugMessageDZL("must have money: " + money.ToString());
 
         return money <= amount;
     }
@@ -29,6 +32,7 @@ class DZLPlayerInventory
             Class.CastTo(item, itemsArray.Get(i));
 			
             if(item && item.GetType()) {
+                 DebugMessageDZL("Inventory item type: " + item.GetType());
 				int value = currencyValues.Get(item.GetType());
 				if (value) {
 					currencyAmount += value * item.GetQuantity();

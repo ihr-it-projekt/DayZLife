@@ -4,8 +4,9 @@ class DZLBuyHouseMenu : UIScriptedMenu
 	private ref DZLUIItemCreator creator;
 	private DZLServerConfig config;
 	private ref DZLPlayerInventory inventory;
-	private ref DZLObjectFinder objectFinder;
-	
+	private ref DZLHouseFinder houseFinder;
+	private ref DZLHouseDefinition actualHouseDef;
+
 	ButtonWidget closeButton;
 	ButtonWidget buyButton;
 	ButtonWidget sellButton;
@@ -18,7 +19,12 @@ class DZLBuyHouseMenu : UIScriptedMenu
 	void DZLBuyHouseMenu()
 	{
 		if(GetGame().IsClient()){
-			
+			GetDayZGame().Event_OnRPC.Insert(HandleEvents);
+		
+			Param1<DayZPlayer> paramGetConfig = new Param1<DayZPlayer>(GetGame().GetPlayer());
+	        GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
+			houseFinder = new DZLHouseFinder();
+			inventory = new DZLPlayerInventory();
 		}
 	}
 	
@@ -27,15 +33,16 @@ class DZLBuyHouseMenu : UIScriptedMenu
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
+		
+		GetDayZGame().Event_OnRPC.Remove(HandleEvents);
 	}
 	
-	static DZLBuyHouseMenu GetInstance(DZLServerConfig configExt = null)
+	static DZLBuyHouseMenu GetInstance()
 	{
-		if (!instance && configExt)
+		if (!instance)
         {
             instance = new DZLBuyHouseMenu();
 			instance.Init();
-			instance.SetConfig(configExt);
         }
 		return instance;
 	}
@@ -43,8 +50,8 @@ class DZLBuyHouseMenu : UIScriptedMenu
 	void SetConfig(DZLServerConfig config) {
 		this.config = config;
 
-		inventory = new DZLPlayerInventory(this.config.moneyConfig.currencyValues);
-		objectFinder = new DZLObjectFinder(this.config.houseConfig);
+
+		
 	}
 	
 	static void ClearInstance()
@@ -80,11 +87,21 @@ class DZLBuyHouseMenu : UIScriptedMenu
 	
 	override void OnShow()
 	{
-		super.OnShow();
-		
-        GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-        GetGame().GetUIManager().ShowCursor(true);
-        GetGame().GetInput().ChangeGameFocus(1);
+		if (config) {
+			actualHouseDef = houseFinder.find();
+			if (actualHouseDef) {
+			    DebugMessageDZL("has house def " + actualHouseDef.houseType);
+		        super.OnShow();
+				
+				priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
+				priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
+				storageTextWidget.SetText(actualHouseDef.countStorage.ToString());
+	
+	            GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
+	            GetGame().GetUIManager().ShowCursor(true);
+	            GetGame().GetInput().ChangeGameFocus(1);
+	        }
+		}
 
 	}
 	
@@ -108,28 +125,10 @@ class DZLBuyHouseMenu : UIScriptedMenu
                 OnHide();
                 return true;
             case buyButton:
-				DayZPlayer player = GetGame().GetPlayer();
-				Object object = objectFinder.GetObjectsAt(player.GetPosition(), player);
-				
-				if (!object) {
-					return true;
-				}
-				
-				Building house = Building.Cast(object);
-				DZLHouseDefinition actualHouseDef;
+
 			
-				foreach(DZLHouseDefinition houseDef: config.houseConfig.houseConfigs) {
-					if(house.GetType() == houseDef.houseType) {
-						actualHouseDef = houseDef;
-						break;
-					}
-				}
-			
-				if (!actualHouseDef) {
-					return true;
-				}
-			
-                if (inventory.PlayerHasEnoughMoney(player, actualHouseDef.price)) {
+				DebugMessageDZL("has house found");
+                if (inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), actualHouseDef.buyPrice)) {
 					DebugMessageDZL("Can send buy request");
 			
 				}
@@ -141,6 +140,19 @@ class DZLBuyHouseMenu : UIScriptedMenu
 		}
 		return false;
 	}
+	
+	void HandleEvents(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+   		if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE) {
+		
+			DebugMessageDZL("GET config");
+   			Param1 <ref DZLServerConfig> configParam;
+   			if (ctx.Read(configParam)){
+				this.config = configParam.param1;
+				inventory.SetConfig(this.config.moneyConfig.currencyValues);
+				houseFinder.SetConfig(this.config);
+   			}
+   		}
+   	}
 
 
 }
