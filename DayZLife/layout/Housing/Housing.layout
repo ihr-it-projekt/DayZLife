@@ -76,7 +76,7 @@ FrameWidgetClass Housing {
         ItemPreviewWidgetClass Hous_Preview {
          ignorepointer 1
          position 8 8
-         size 576 536
+         size 576 468.17999
          hexactpos 1
          vexactpos 1
          hexactsize 1
@@ -269,6 +269,46 @@ FrameWidgetClass Housing {
          vexactsize 1
          style OldStyle
          text "X"
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget9 {
+       ignorepointer 1
+       color 0 0 0 1
+       position 8.26007 548.73999
+       size 591.48004 67
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        TextWidgetClass Money {
+         ignorepointer 1
+         color 0 0 0 1
+         position 8.26004 8.26007
+         size 139.243 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "#Money"
+         "text valign" center
+        }
+        TextWidgetClass Balance {
+         ignorepointer 1
+         color 0 0 0 1
+         position 155.763 8.26002
+         size 206.50101 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "123456789"
+         "text halign" right
+         "text valign" center
         }
        }
       }
