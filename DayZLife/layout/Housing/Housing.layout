@@ -1,6 +1,6 @@
 FrameWidgetClass Housing {
- position 0 0
- size 1248 656
+ position 0 -0.00002
+ size 1248 712.53705
  halign center_ref
  valign center_ref
  hexactpos 1
@@ -11,8 +11,8 @@ FrameWidgetClass Housing {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0 0 0 1
-   position 0 0
-   size 1232 640
+   position 0.26008 0.00002
+   size 1232 696.86401
    halign center_ref
    valign center_ref
    hexactpos 1
@@ -24,8 +24,8 @@ FrameWidgetClass Housing {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
      color 0.6588 0.6588 0.6588 0.6275
-     position 0 0
-     size 1216 624
+     position 0.26002 0.00005
+     size 1216 680.34399
      halign center_ref
      valign center_ref
      hexactpos 1
@@ -308,6 +308,36 @@ FrameWidgetClass Housing {
          style Bold
          text "123456789"
          "text halign" right
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget10 {
+       ignorepointer 1
+       color 0 0 0 1
+       position 0 8.08399
+       size 1199.47998 48
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        TextWidgetClass TextWidget0 {
+         ignorepointer 1
+         color 0.502 0 0 1
+         size 1182.96008 48
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Normal
+         text "Error Nachricht!"
+         "text halign" center
          "text valign" center
         }
        }
