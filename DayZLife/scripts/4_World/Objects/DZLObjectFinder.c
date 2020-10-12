@@ -1,8 +1,8 @@
 class DZLObjectFinder
 {
-    ref DZLHouseServerConfig config;
+    ref DZLHouseConfig config;
 
-    void SetConfig(DZLHouseServerConfig config) {
+    void SetConfig(DZLHouseConfig config) {
         this.config = config;
     }
 

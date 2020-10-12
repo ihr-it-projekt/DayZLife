@@ -1,13 +1,13 @@
 class DZLHouseFinder
 {
 	private ref DZLObjectFinder objectFinder;
-	private ref DZLServerConfig config;
+	private ref DZLConfig config;
 
 	void DZLHouseFinder() {
 	    objectFinder = new DZLObjectFinder;
 	}
 	
-	void SetConfig(DZLServerConfig config) {
+	void SetConfig(DZLConfig config) {
 		this.config = config;
 		objectFinder.SetConfig(config.houseConfig);
 	}

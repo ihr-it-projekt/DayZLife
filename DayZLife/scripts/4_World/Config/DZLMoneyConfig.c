@@ -1,4 +1,5 @@
-class DZLMoneyConfig: DZLMoneyServerConfig {
+class DZLMoneyConfig {
+    ref map <string, int> currencyValues;
 
     void DZLMoneyConfig() 
 	{

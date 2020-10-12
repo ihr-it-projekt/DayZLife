@@ -1,8 +1,7 @@
 class DZLBuyHouseMenu : UIScriptedMenu
 {
-	private static ref DZLBuyHouseMenu instance;
 	private ref DZLUIItemCreator creator;
-	private DZLServerConfig config;
+	private ref DZLConfig config;
 	private ref DZLPlayerInventory inventory;
 	private ref DZLHouseFinder houseFinder;
 	private ref DZLHouseDefinition actualHouseDef;
@@ -19,46 +18,26 @@ class DZLBuyHouseMenu : UIScriptedMenu
 	void DZLBuyHouseMenu()
 	{
 		if(GetGame().IsClient()){
-			GetDayZGame().Event_OnRPC.Insert(HandleEvents);
-		
-			Param1<DayZPlayer> paramGetConfig = new Param1<DayZPlayer>(GetGame().GetPlayer());
-	        GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
 			houseFinder = new DZLHouseFinder();
 			inventory = new DZLPlayerInventory();
+
+			DebugMessageDZL("Create Buy menu");
 		}
 	}
 	
 	void ~DZLBuyHouseMenu()
 	{
-        GetGame().GetUIManager().ShowCursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(true);
-		
-		GetDayZGame().Event_OnRPC.Remove(HandleEvents);
-	}
-	
-	static DZLBuyHouseMenu GetInstance()
-	{
-		if (!instance)
-        {
-            instance = new DZLBuyHouseMenu();
-			instance.Init();
-        }
-		return instance;
-	}
-	
-	void SetConfig(DZLServerConfig config) {
-		this.config = config;
+        OnHide();
+        DebugMessageDZL("Destroy Buy menu");
 
+	}
 
-		
+	void SetConfig(ref DZLConfig config) {
+        this.config = config;
+	    inventory.SetConfig(this.config.moneyConfig.currencyValues);
+        houseFinder.SetConfig(this.config);
 	}
-	
-	static void ClearInstance()
-	{
-		instance = null;
-	}
-	
+
 	override Widget Init()
     {
 		creator = new DZLUIItemCreator("DayZLife/layout/Housing/Housing.layout");
@@ -87,22 +66,21 @@ class DZLBuyHouseMenu : UIScriptedMenu
 	
 	override void OnShow()
 	{
-		if (config) {
-			actualHouseDef = houseFinder.find();
-			if (actualHouseDef) {
-			    DebugMessageDZL("has house def " + actualHouseDef.houseType);
-		        super.OnShow();
-				
-				priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
-				priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
-				storageTextWidget.SetText(actualHouseDef.countStorage.ToString());
-	
-	            GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-	            GetGame().GetUIManager().ShowCursor(true);
-	            GetGame().GetInput().ChangeGameFocus(1);
-	        }
-		}
+	    actualHouseDef = houseFinder.find();
+        if (actualHouseDef) {
+            DebugMessageDZL("has house def " + actualHouseDef.houseType);
+            super.OnShow();
 
+            priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
+            priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
+            storageTextWidget.SetText(actualHouseDef.countStorage.ToString());
+        } else {
+            DebugMessageDZL("can not show, now house deff");
+        }
+
+		GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
+        GetGame().GetUIManager().ShowCursor(true);
+        GetGame().GetInput().ChangeGameFocus(1);
 	}
 	
 	override void OnHide()
@@ -140,19 +118,7 @@ class DZLBuyHouseMenu : UIScriptedMenu
 		}
 		return false;
 	}
-	
-	void HandleEvents(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-   		if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE) {
-		
-			DebugMessageDZL("GET config");
-   			Param1 <ref DZLServerConfig> configParam;
-   			if (ctx.Read(configParam)){
-				this.config = configParam.param1;
-				inventory.SetConfig(this.config.moneyConfig.currencyValues);
-				houseFinder.SetConfig(this.config);
-   			}
-   		}
-   	}
+
 
 
 }

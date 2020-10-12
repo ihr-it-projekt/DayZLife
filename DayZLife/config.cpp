@@ -69,14 +69,3 @@ class CfgMods
 		};
 	};
 };
-
-
-class CfgVehicles
-{
-	class HouseNoDestruct;
-	class HouseInfoPoint: HouseNoDestruct
-	{
-		scope = 1;
-		model = "\DZ\structures\residential\misc\misc_noticeboard1.p3d";
-	};
-};

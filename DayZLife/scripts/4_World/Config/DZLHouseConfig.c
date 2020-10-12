@@ -1,4 +1,5 @@
-class DZLHouseConfig: DZLHouseServerConfig {
+class DZLHouseConfig {
+    ref array<ref DZLHouseDefinition> houseConfigs;
 
     void DZLHouseConfig()
 	{

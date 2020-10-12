@@ -5,8 +5,6 @@ modded class MissionServer {
 	void MissionServer()
 	{
         DebugMessageServerDZL("Load DayZLifeServer");
-        SpawnDZLHouse("15150 11 13861", "0 0 0", "HouseInfoPoint");
-
         config = new DZLConfig;
 
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -21,26 +19,14 @@ modded class MissionServer {
             autoptr Param1<PlayerBase> paramGetConfig;
             if (ctx.Read(paramGetConfig)){
 				DebugMessageServerDZL("Send Config");
+	
+				DebugMessageServerDZL("DZLMoneyConfig config: " + config.moneyConfig.currencyValues.Count().ToString());
+				DebugMessageServerDZL("DZLHouseConfig config: " + config.houseConfig.houseConfigs.Count().ToString());
+				
+
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLConfig>(config), true, sender);
             }
         }
-    }
-
-
-    private void SpawnDZLHouse(vector position, vector orientation, string gameObjectName) {
-        Building obj = GetGame().CreateObject(gameObjectName, position);
-        if (!obj) {
-            return;
-        }
-
-        obj.SetFlags( EntityFlags.STATIC, false );
-        obj.SetPosition( position );
-        obj.SetOrientation( orientation );
-        obj.SetOrientation( obj.GetOrientation() ); //Collision fix
-        obj.Update();
-        obj.SetAffectPathgraph( true, false );
-        DebugMessageServerDZL("Object placed");
-        if(obj.CanAffectPathgraph()) GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().UpdatePathgraphRegionByObject, 100, false, obj);
     }
 
 };
