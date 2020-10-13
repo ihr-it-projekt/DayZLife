@@ -56,7 +56,7 @@ FrameWidgetClass Housing {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Housing_Menue"
+         text "#Housing_Menu"
          "text halign" center
          "text valign" center
         }
@@ -325,7 +325,7 @@ FrameWidgetClass Housing {
        vexactsize 1
        style EditorPanel
        {
-        TextWidgetClass TextWidget0 {
+        TextWidgetClass Error_Message {
          ignorepointer 1
          color 0.502 0 0 1
          size 1182.96008 48

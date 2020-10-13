@@ -8,7 +8,7 @@ class DZLHouseConfig {
 
 			array<vector> storagePosition = new array<vector>;
 			storagePosition.Insert("1 1 1");
-            houseConfigs.Insert(new DZLHouseDefinition("1 0 0", "1 0 0", "Land_House_1W03", 100, 50, 3, storagePosition));
+            houseConfigs.Insert(new DZLHouseDefinition("Land_House_1W03", 100, 50, 3, storagePosition));
 
             Save();
         }

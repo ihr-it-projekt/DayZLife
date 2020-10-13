@@ -16,9 +16,11 @@ class DZLBuilding {
         return house.owner == player.GetIdentity().GetId();
     }
 
-    void Buy(PlayerBase player) {
-        house.AddOwner(player);
-        ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player);
-        playerHouse.AddHouse(house);
+    void BuyOnServer(PlayerBase player) {
+        if(!GetGame().IsClient()){
+            house.AddOwner(player);
+            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player);
+            playerHouse.AddHouse(house);
+        }
     }
 }

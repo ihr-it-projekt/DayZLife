@@ -22,10 +22,28 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 	{
 		super.OnStartClient(action_data);
 
-		if ( g_Game.GetUIManager().GetMenu() == NULL ){
+		if (g_Game.GetUIManager().GetMenu() == NULL){
 			DebugMessageDZL("Action create Menu");
             PlayerBase player = GetGame().GetPlayer();
-		    GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseBuyMenu(), NULL);
+			
+			if(!action_data) return;
+            if(!action_data.m_Target) return;
+            if(!IsBuilding(action_data.m_Target)) return;
+            if (!player.config) return;
+
+            DZLHouseDefinition definition;
+			array<ref DZLHouseDefinition> houseConfigs = player.config.houseConfig.houseConfigs;
+            foreach(DZLHouseDefinition _definition: houseConfigs) {
+                if (_definition.houseType == action_data.m_Target.GetObject().GetType()) {
+					definition = _definition;
+					DebugMessageDZL("has definition found");
+					break;
+                }
+            }
+			
+			DebugMessageDZL("Action create Menu6");
+			
+			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseBuyMenu(definition, action_data.m_Target.GetObject()), NULL);
         }
 	}
 
@@ -33,8 +51,10 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
         if(GetGame().IsClient()){
             if(!target) return false;
             if(!IsBuilding(target)) return false;
+            if (!player.config) return false;
 
             bool hasFound = false;
+
             foreach(DZLHouseDefinition definition: player.config.houseConfig.houseConfigs) {
                 if (definition.houseType == target.GetObject().GetType()) {
                     hasFound = true;

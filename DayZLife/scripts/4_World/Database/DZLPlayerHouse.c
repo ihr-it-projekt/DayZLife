@@ -2,7 +2,6 @@ class DZLPlayerHouse {
     private string fileName;
     ref array<ref DZLHouse> playerHouseCollection;
 
-
     void DZLPlayerHouse(PlayerBase player) {
         fileName = player.GetIdentity().GetId();
         if (!Load()) {

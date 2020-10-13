@@ -26,6 +26,13 @@ modded class MissionServer {
 
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLConfig>(config), true, sender);
             }
+        } else if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
+            autoptr Param2<PlayerBase, ref Building> paramGetBuildingProperties;
+            if (ctx.Read(paramGetBuildingProperties)){
+				DebugMessageServerDZL("Get Building DATA " + paramGetBuildingProperties.param2.GetPosition().ToString());
+	
+                GetGame().RPCSingleParam(paramGetBuildingProperties.param1, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param2)), true, sender);
+            }
         }
     }
 

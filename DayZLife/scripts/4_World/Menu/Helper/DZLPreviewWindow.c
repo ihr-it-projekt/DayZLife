@@ -4,7 +4,7 @@ class DZLPreviewWindow extends Managed
     private MultilineTextWidget description;
     private EntityAI previewItem;
 
-    void DZLPreviewWindow(ItemPreviewWidget widget, MultilineTextWidget description) {
+    void DZLPreviewWindow(ItemPreviewWidget widget, MultilineTextWidget description = null) {
         this.widget = widget;
         this.description = description;
     }
@@ -16,20 +16,20 @@ class DZLPreviewWindow extends Managed
 		
 		if (!previewItem) {
 			widget.Show(false);
-			description.Show(false);
+			if (description)description.Show(false);
 			return false;
 		}
 		
 		Update(previewItem);
 		
-		return false;
+		return true;
 	}
 	
 	private void Update(EntityAI previewItem){
 		widget.SetItem(previewItem);
 		widget.SetModelPosition(Vector(0,0,0.5));
 
-		InventoryItem itemCast = InventoryItem.Cast(previewItem);
+		//InventoryItem itemCast = InventoryItem.Cast(previewItem);
 
 //		if (itemCast) {
 //			this.description.SetText(item.GetTranslation() + " "+ itemCast.GetTooltip());
@@ -38,6 +38,6 @@ class DZLPreviewWindow extends Managed
 //		}
 		
 		widget.Show(true);
-		description.Show(true);
+		if (description) description.Show(true);
     }
 }

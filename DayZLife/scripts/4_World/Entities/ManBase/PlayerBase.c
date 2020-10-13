@@ -29,12 +29,12 @@ modded class PlayerBase
         }
     }
 
-    DZLBuyHouseMenu GetHouseBuyMenu() {
-        if (!houseBuyMenu) {
-            DebugMessageDZL("Initialize house buy menu");
-            houseBuyMenu = new DZLBuyHouseMenu;
-            houseBuyMenu.SetConfig(this.config);
-        }
+    DZLBuyHouseMenu GetHouseBuyMenu(DZLHouseDefinition definition, Building target) {
+        DebugMessageDZL("Initialize house buy menu");
+        houseBuyMenu = new DZLBuyHouseMenu;
+        houseBuyMenu.SetConfig(config);
+		houseBuyMenu.SetHouseDefinition(definition);
+		houseBuyMenu.SetTarget(target);
 
         return houseBuyMenu;
     }

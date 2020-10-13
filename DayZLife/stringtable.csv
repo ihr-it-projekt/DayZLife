@@ -1,6 +1,6 @@
 "Language","original","english","german","czech","russian","polish","hungarian","italian","spanish","french","portuguese","japanese","chinesesimp","chinese"
 "open_house_buy_menu", "Open house buy menu","Open house buy menu", "Öffne Hauskaufen Menü"
-"Housing_Menue", "Housing Menu", "Housing Menu", "Haus Menü"
+"Housing_Menu", "Housing Menu", "Housing Menu", "Haus Menü"
 "Buy_Price", "Purchase price:", "Purchase price:", "Kaufpreis:"
 "Sell_Price", "Selling price:", "Selling price:", "Verkaufspreis:"
 "Storage_Options", "Storage:", "Storage:", "Lager:"
@@ -14,3 +14,5 @@
 "License_Menue", "License Menu", "License Menu", "Lizenzen Menü"
 "License", "License", "License", "Lizenzen"
 "Price", "Price", "Price", "Preis"
+"Money", "Money", "Money", "Geld"
+"building_has_already_an_owner", "building_has_already_an_owner", "building_has_already_an_owner", "Gebäude hat schon einen Besitzer."

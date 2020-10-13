@@ -28,14 +28,8 @@ class DZLHouseFinder
         DebugMessageDZL("has object found");
 
         Building house = Building.Cast(object);
-        DZLHouseDefinition actualHouseDef;
-
-        foreach(DZLHouseDefinition houseDef: config.houseConfig.houseConfigs) {
-            if(house.GetType() == houseDef.houseType) {
-                actualHouseDef = houseDef;
-                break;
-            }
-        }
+        
+		DZLHouseDefinition actualHouseDef = GetHouseDefinitionByBuilding(house);
 
         if (!actualHouseDef) {
             DebugMessageDZL("has house not found");
@@ -44,4 +38,17 @@ class DZLHouseFinder
 
         return actualHouseDef;
     }
+	
+	DZLHouseDefinition GetHouseDefinitionByBuilding(Building house) {
+		DZLHouseDefinition actualHouseDef;
+
+        foreach(DZLHouseDefinition houseDef: config.houseConfig.houseConfigs) {
+            if(house.GetType() == houseDef.houseType) {
+                actualHouseDef = houseDef;
+                break;
+            }
+        }
+		
+		return actualHouseDef;
+	}
 }

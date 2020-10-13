@@ -1,19 +1,17 @@
 class DZLHouseDefinition {
 	
-    vector spawnPositionMenu;
-    string houseType;
+   string houseType;
     int sellPrice;
     int buyPrice;
-	int countStorage;
+	int countMaxStorage;
 	ref array<vector> storagePosition;
 
 	
-    void DZLHouseDefinition(vector spawnPositionDiffStorage, vector spawnPositionMenu, string houseType, int buyPrice, int sellPrice, int countStorag, ref array<vector> storagePosition) {
-        this.spawnPositionMenu = spawnPositionMenu;
+    void DZLHouseDefinition(string houseType, int buyPrice, int sellPrice, int countMaxStorage, ref array<vector> storagePosition) {
         this.houseType = houseType;
         this.sellPrice = sellPrice;
         this.buyPrice = buyPrice;
-        this.countStorage = countStorage;
+        this.countMaxStorage = countMaxStorage;
         this.storagePosition = storagePosition;
     }
 
