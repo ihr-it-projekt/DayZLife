@@ -92,8 +92,9 @@ class DZLBuyHouseMenu : UIScriptedMenu
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
             storageTextWidget.SetText(actualHouseDef.countMaxStorage.ToString());
 			preview.UpdatePreview(actualHouseDef.houseType);
-			mapWidget.SetMapPos(target.GetPosition());
 			mapWidget.SetScale(0.2);
+			mapWidget.SetMapPos(target.GetPosition());
+			mapWidget.AddUserMark(target.GetPosition(), "#here", ARGB(255,0,255,0), "\\dz\\gear\\navigation\\data\\map_bunker_ca.paa");
 			errorMessageTextWidget.SetText("");
 			balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(GetGame().GetPlayer()).ToString());
 			
@@ -126,12 +127,15 @@ class DZLBuyHouseMenu : UIScriptedMenu
                 OnHide();
                 return true;
             case buyButton:
-
-			
-				DebugMessageDZL("has house found");
-                if (inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), actualHouseDef.buyPrice)) {
-					DebugMessageDZL("Can send buy request");
-			
+                if (actualHouseDef) {
+                    if (inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), actualHouseDef.buyPrice)) {
+                        Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(GetGame().GetPlayer(), target);
+                        GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING, paramBuyHouse, true);
+                    } else {
+                        errorMessageTextWidget.SetText("#error_not_enough_money");
+                    }
+				} else {
+				    errorMessageTextWidget.SetText("#error_please_reopen_menu");
 				}
                 // buy logic
                 return true;
@@ -147,18 +151,19 @@ class DZLBuyHouseMenu : UIScriptedMenu
             autoptr Param1<ref DZLBuilding> paramGetBuildingProperties;
             if (ctx.Read(paramGetBuildingProperties)){
 				house = paramGetBuildingProperties.param1;
-
-				if (!house) {
-				    DebugMessageDZL("receive building data no data");
-				}
-
-				DebugMessageDZL("receive building data" + house.HasOwner());
 				UpdateGUI();
+	        }
+        } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE) {
+            autoptr Param2<ref DZLBuilding, string> paramBuyHouse;
+            if (ctx.Read(paramBuyHouse)){
+				house = paramBuyHouse.param1;
+				
+				UpdateGUI(paramBuyHouse.param2);
 	        }
         }
     }
 	
-	void UpdateGUI() {
+	void UpdateGUI(string message = "") {
 		if (house && house.HasOwner() && house.IsOwner(GetGame().GetPlayer())) {
 			sellButton.Show(true);
 			buyButton.Show(false);
@@ -176,6 +181,8 @@ class DZLBuyHouseMenu : UIScriptedMenu
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("");
 		}
+		
+		if(message) errorMessageTextWidget.SetText(message);
 	}
 
 }

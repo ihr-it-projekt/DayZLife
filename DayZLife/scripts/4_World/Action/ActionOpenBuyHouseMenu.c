@@ -36,13 +36,10 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
             foreach(DZLHouseDefinition _definition: houseConfigs) {
                 if (_definition.houseType == action_data.m_Target.GetObject().GetType()) {
 					definition = _definition;
-					DebugMessageDZL("has definition found");
 					break;
                 }
             }
-			
-			DebugMessageDZL("Action create Menu6");
-			
+
 			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseBuyMenu(definition, action_data.m_Target.GetObject()), NULL);
         }
 	}
@@ -68,11 +65,11 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 		if (GetGame().IsServer()) {
             DZLBuilding building = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
 
-            if (building && !building.HasOwner()) {
+            if (building && (!building.HasOwner() || (building.HasOwner() && building.IsOwner(player)))) {
                 return true;
             }
         }
-		
+
 		return false;
     }
 }

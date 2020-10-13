@@ -5,8 +5,6 @@ class DZLHouse {
     string name = "";
 	vector position;
 	vector orientation;
-	string className;
-
 
     void DZLHouse(Building building) {
         this.fileName = building.GetPosition().ToString(false) + ".json";

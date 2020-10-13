@@ -15,4 +15,8 @@
 "License", "License", "License", "Lizenzen"
 "Price", "Price", "Price", "Preis"
 "Money", "Money", "Money", "Geld"
+"error_not_enough_money", "error_not_enough_money", "error_not_enough_money", "Nicht genug Geld vorhanden!"
 "building_has_already_an_owner", "building_has_already_an_owner", "building_has_already_an_owner", "Gebäude hat schon einen Besitzer."
+"error_please_reopen_menu", "error_please_reopen_menu", "error_please_reopen_menu", "Irgendwas ist schief gelaufen. Bitte neu einloggen."
+"error_buying_house", "erro_buying_house", "erro_buying_house", "Irgendwas ist schief gelaufen. Bitte versuche es erneut."
+"successfully_buy_house", "successfully_buy_house", "successfully_buy_house", "Haus wurde erfolgreich gekauft."

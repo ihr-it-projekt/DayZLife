@@ -10,8 +10,8 @@ modded class PlayerBase
     override void SetActions() {
         super.SetActions();
         DebugMessageDZL("Create Player");
-        Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+        Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
         GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
 
         AddAction(ActionOpenBuyHouseMenu);

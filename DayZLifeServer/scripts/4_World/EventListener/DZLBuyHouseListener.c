@@ -1,0 +1,44 @@
+class DZLBuyHouseListener
+{
+    private ref DZLPlayerInventory inventory;
+    private ref DZLHouseFinder houseFinder;
+
+    void DZLBuyHouseListener() {
+        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+        inventory = new DZLPlayerInventory;
+        houseFinder = new DZLHouseFinder;
+        DZLConfig config = new DZLConfig;
+
+        inventory.SetConfig(config.moneyConfig.currencyValues);
+        houseFinder.SetConfig(config);
+    }
+
+    void ~DZLBuyHouseListener() {
+        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
+    }
+
+    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
+            autoptr Param2<PlayerBase, ref Building> paramGetBuildingProperties;
+            if (ctx.Read(paramGetBuildingProperties)){
+                GetGame().RPCSingleParam(paramGetBuildingProperties.param1, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param2)), true, sender);
+            }
+        } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
+            autoptr Param2<PlayerBase, ref Building> paramBuyHouse;
+            if (ctx.Read(paramBuyHouse)){
+				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param2);
+                DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param2);
+
+                string message = "#error_buying_house";
+
+                if (actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && inventory.PlayerHasEnoughMoney(paramBuyHouse.param1, actualHouseDef.buyPrice)) {
+                    inventory.AddMoneyToPlayer(paramBuyHouse.param1, actualHouseDef.buyPrice * -1);
+                    dzlBuilding.BuyOnServer(paramBuyHouse.param1);
+
+                    message = "#successfully_buy_house"
+                }
+                GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+            }
+        }
+    }
+}
