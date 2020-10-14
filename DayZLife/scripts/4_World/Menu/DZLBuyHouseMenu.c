@@ -92,9 +92,9 @@ class DZLBuyHouseMenu : UIScriptedMenu
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
             storageTextWidget.SetText(actualHouseDef.countMaxStorage.ToString());
 			preview.UpdatePreview(actualHouseDef.houseType);
-			mapWidget.SetScale(0.2);
-			mapWidget.SetMapPos(target.GetPosition());
-			mapWidget.AddUserMark(target.GetPosition(), "#here", ARGB(255,0,255,0), "\\dz\\gear\\navigation\\data\\map_bunker_ca.paa");
+			mapWidget.SetScale(0.1);
+			mapWidget.SetMapPos(mapWidget.ScreenToMap(target.GetPosition()));
+			mapWidget.AddUserMark(target.GetPosition(), "#here", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
 			errorMessageTextWidget.SetText("");
 			balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(GetGame().GetPlayer()).ToString());
 			
