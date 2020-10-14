@@ -1,6 +1,6 @@
 FrameWidgetClass Housing_Upgrade {
- position 0 0
- size 1248 656
+ position 0 -0.00001
+ size 1248 716.10895
  halign center_ref
  valign center_ref
  hexactpos 1
@@ -11,8 +11,8 @@ FrameWidgetClass Housing_Upgrade {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0 0 0 1
-   position 0 0
-   size 1232 640
+   position 0.26008 -0.00045
+   size 1232 699.58801
    halign center_ref
    valign center_ref
    hexactpos 1
@@ -24,8 +24,8 @@ FrameWidgetClass Housing_Upgrade {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
      color 0.6588 0.6588 0.6588 0.6275
-     position 0.00003 0
-     size 1216 624
+     position 0.25998 0.00002
+     size 1216 683.06799
      halign center_ref
      valign center_ref
      hexactpos 1
@@ -73,9 +73,9 @@ FrameWidgetClass Housing_Upgrade {
        vexactsize 1
        style EditorPanel
        {
-        TextListboxWidgetClass TextListboxWidget0 {
-         position 8 0
-         size 280 536
+        TextListboxWidgetClass Storage_List {
+         position 8.26002 -32.4998
+         size 280 470.479
          valign center_ref
          hexactpos 1
          vexactpos 1
@@ -87,7 +87,7 @@ FrameWidgetClass Housing_Upgrade {
          ignorepointer 1
          color 0 0 0 1
          position 296 0
-         size 296 552
+         size 296 489
          hexactpos 1
          vexactpos 1
          hexactsize 1
@@ -96,6 +96,7 @@ FrameWidgetClass Housing_Upgrade {
          {
           ItemPreviewWidgetClass ItemPreviewWidget0 {
            ignorepointer 1
+           position 0.26008 -0.00001
            size 280 280
            halign center_ref
            valign center_ref
@@ -103,6 +104,47 @@ FrameWidgetClass Housing_Upgrade {
            vexactpos 1
            hexactsize 1
            vexactsize 1
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget11 {
+         ignorepointer 1
+         color 0 0 0 1
+         size 591.48004 65
+         halign center_ref
+         valign bottom_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style EditorPanel
+         {
+          TextWidgetClass Money {
+           ignorepointer 1
+           color 0 0 0 1
+           position 8.26004 8.26007
+           size 139.243 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           style Bold
+           text "#Money"
+           "text valign" center
+          }
+          TextWidgetClass Balance {
+           ignorepointer 1
+           color 0 0 0 1
+           position 155.763 8.26002
+           size 206.50101 48
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           style Bold
+           text "123456789"
+           "text halign" right
+           "text valign" center
           }
          }
         }
@@ -129,20 +171,20 @@ FrameWidgetClass Housing_Upgrade {
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Buy_Price:"
+         text "#Buy_Price"
          "text valign" center
         }
         TextWidgetClass Storage {
          ignorepointer 1
          color 0 0 0 1
-         position 8 120
+         position 8.26002 120.52
          size 250 48
          hexactpos 1
          vexactpos 1
          hexactsize 1
          vexactsize 1
          style Bold
-         text "#Storage_Size:"
+         text "#Storage_Size"
          "text valign" center
         }
         TextWidgetClass Price_Buy {
@@ -162,7 +204,7 @@ FrameWidgetClass Housing_Upgrade {
         TextWidgetClass Number_of_Strage {
          ignorepointer 1
          color 0 0 0 1
-         position 342 120
+         position 342 120.52
          size 250 48
          hexactpos 1
          vexactpos 1
@@ -242,6 +284,33 @@ FrameWidgetClass Housing_Upgrade {
           }
          }
         }
+        TextWidgetClass Buy_Price0 {
+         ignorepointer 1
+         color 0 0 0 1
+         position 8.26002 64.25999
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "#Sell_Price"
+         "text valign" center
+        }
+        TextWidgetClass Price_Buy0 {
+         ignorepointer 1
+         color 0 0 0 1
+         position 342 64.25999
+         size 250 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Bold
+         text "123456789"
+         "text halign" right
+         "text valign" center
+        }
        }
       }
       PanelWidgetClass PanelWidget7 {
@@ -267,6 +336,36 @@ FrameWidgetClass Housing_Upgrade {
          vexactsize 1
          style OldStyle
          text "X"
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget10 {
+       ignorepointer 1
+       color 0 0 0 1
+       position 0.00006 8.26004
+       size 1199.47998 48
+       halign center_ref
+       valign bottom_ref
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       style EditorPanel
+       {
+        TextWidgetClass Error_Message {
+         ignorepointer 1
+         color 0.502 0 0 1
+         size 1182.96008 48
+         halign center_ref
+         valign center_ref
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         style Normal
+         text "Error Nachricht!"
+         "text halign" center
+         "text valign" center
         }
        }
       }
