@@ -5,5 +5,6 @@ modded class ActionConstructor
         super.RegisterActions(actions);
 		
 		actions.Insert(ActionOpenBuyHouseMenu);
+		actions.Insert(ActionOpenUpgradeHouseMenu);
     }
 }

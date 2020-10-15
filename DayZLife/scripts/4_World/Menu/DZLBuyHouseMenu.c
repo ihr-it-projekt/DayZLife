@@ -1,120 +1,49 @@
-class DZLBuyHouseMenu : UIScriptedMenu
+class DZLBuyHouseMenu : DZLBaseHouseMenu
 {
-	private ref DZLUIItemCreator creator;
-	private ref DZLConfig config;
-	private ref DZLPlayerInventory inventory;
-	private ref DZLHouseDefinition actualHouseDef;
-	private ref DZLBuilding house;
-	private Building target;
+	private MapWidget mapWidget;
 
-	ButtonWidget closeButton;
-	ButtonWidget buyButton;
-	ButtonWidget sellButton;
-	MapWidget mapWidget;
-	TextWidget priceBuyTextWidget;
-	TextWidget priceSellTextWidget;
-	TextWidget balanceTextWidget;
-	TextWidget errorMessageTextWidget;
-	TextWidget storageTextWidget;
-	ref DZLPreviewWindow preview;
-	
-	
 	void DZLBuyHouseMenu()
 	{
-		if(GetGame().IsClient()){
-			inventory = new DZLPlayerInventory();
-            GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-            
-			DebugMessageDZL("Create Buy menu");
-		}
+        Construct();
 	}
 	
 	void ~DZLBuyHouseMenu()
 	{
-        OnHide();
-        DebugMessageDZL("Destroy Buy menu");
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-	}
-
-	void SetConfig(ref DZLConfig config) {
-        this.config = config;
-	    inventory.SetConfig(this.config.moneyConfig.currencyValues);
-	}
-	
-	void SetTarget(Building target) {
-		this.target = target;
-		Param2<PlayerBase,ref Building> paramGetBuildingProperties = new Param2<PlayerBase,ref Building>(GetGame().GetPlayer(), this.target);
-        GetGame().RPCSingleParam(paramGetBuildingProperties.param1, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA, paramGetBuildingProperties, true);
+        Destruct();
 	}
 
 	override Widget Init()
     {
-		creator = new DZLUIItemCreator("DayZLife/layout/Housing/Housing.layout");
-		
-		closeButton = creator.GetButtonWidget("Button_Closed");
-		closeButton.Show(true);
-		
-		sellButton = creator.GetButtonWidget("Button_Sell");
-		sellButton.Show(false);
-		
-		buyButton = creator.GetButtonWidget("Button_Buy");
-		buyButton.Show(false);
-		
+        layoutPath = "DayZLife/layout/Housing/Housing.layout";
+        super.Init();
+
 		mapWidget = creator.GetMapWidget("Map");
-		
-		preview = new DZLPreviewWindow(creator.GetItemPreviewWidget("Hous_Preview"));
-		
-		priceBuyTextWidget = creator.GetTextWidget("Price_Buy");
-		priceSellTextWidget = creator.GetTextWidget("Price_Sell");
-		balanceTextWidget = creator.GetTextWidget("Balance");
-		errorMessageTextWidget = creator.GetTextWidget("Error_Message");
-		storageTextWidget = creator.GetTextWidget("Number_of_Storage");
-		
 
-		
-		layoutRoot = creator.GetLayoutRoot();
-
-		layoutRoot.Show(false);
-		
 	    return layoutRoot;
     }
-	
-	void SetHouseDefinition(DZLHouseDefinition definition) {
-		actualHouseDef = definition;
-	}
+
 	
 	override void OnShow()
 	{
 	    if (actualHouseDef) {
-            DebugMessageDZL("has house def " + actualHouseDef.houseType);
-            super.OnShow();
-            priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
+	        priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
-            storageTextWidget.SetText(actualHouseDef.countMaxStorage.ToString());
-			preview.UpdatePreview(actualHouseDef.houseType);
-			mapWidget.SetScale(0.1);
-			mapWidget.SetMapPos(mapWidget.ScreenToMap(target.GetPosition()));
-			mapWidget.AddUserMark(target.GetPosition(), "#here", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
-			errorMessageTextWidget.SetText("");
-			balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(GetGame().GetPlayer()).ToString());
+            storageTextWidget.SetText(actualHouseDef.GetMaxStorage().ToString());
+			vector mapPos;
+			float scale;
 			
-        } else {
-            DebugMessageDZL("can not show, no house def");
+			PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+			
+			if(player && !player.GetLastMapInfo(scale, mapPos)) {
+                mapPos = GetGame().GetCurrentCameraPosition();
+                scale = 0.1;
+			}
+
+			mapWidget.SetScale(scale);
+			mapWidget.SetMapPos(mapPos);
+			mapWidget.AddUserMark(target.GetPosition(), "", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
         }
-
-		GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-        GetGame().GetUIManager().ShowCursor(true);
-        GetGame().GetInput().ChangeGameFocus(1);
-	}
-	
-	override void OnHide()
-	{
-		super.OnHide();
-
-        GetGame().GetUIManager().ShowCursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(true);
-		Close();
+        super.OnShow();
 	}
 	
 
@@ -137,23 +66,20 @@ class DZLBuyHouseMenu : UIScriptedMenu
 				} else {
 				    errorMessageTextWidget.SetText("#error_please_reopen_menu");
 				}
-                // buy logic
                 return true;
             case sellButton:
-                // sell logic
+                if (house && house.HasOwner() && house.IsOwner(GetGame().GetPlayer())) {
+                    Param2<PlayerBase, ref Building> paramSellHouse = new Param2<PlayerBase, ref Building>(GetGame().GetPlayer(), target);
+                    GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING, paramSellHouse, true);
+                }
                 return true;
 		}
 		return false;
 	}
 
-	void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE) {
-            autoptr Param1<ref DZLBuilding> paramGetBuildingProperties;
-            if (ctx.Read(paramGetBuildingProperties)){
-				house = paramGetBuildingProperties.param1;
-				UpdateGUI();
-	        }
-        } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE) {
+	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+	    super.HandleEventsDZL(sender, target, rpc_type, ctx);
+        if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE || rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE) {
             autoptr Param2<ref DZLBuilding, string> paramBuyHouse;
             if (ctx.Read(paramBuyHouse)){
 				house = paramBuyHouse.param1;
@@ -163,7 +89,8 @@ class DZLBuyHouseMenu : UIScriptedMenu
         }
     }
 	
-	void UpdateGUI(string message = "") {
+	override void UpdateGUI(string message = "") {
+	    super.UpdateGUI(message);
 		if (house && house.HasOwner() && house.IsOwner(GetGame().GetPlayer())) {
 			sellButton.Show(true);
 			buyButton.Show(false);
@@ -181,8 +108,8 @@ class DZLBuyHouseMenu : UIScriptedMenu
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("");
 		}
-		
-		if(message) errorMessageTextWidget.SetText(message);
+
+
 	}
 
 }

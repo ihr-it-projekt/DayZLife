@@ -73,7 +73,7 @@ FrameWidgetClass Housing {
        vexactsize 1
        style EditorPanel
        {
-        ItemPreviewWidgetClass Hous_Preview {
+        ItemPreviewWidgetClass Preview {
          ignorepointer 1
          position 8 8
          size 576 468.17999

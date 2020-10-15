@@ -23,4 +23,24 @@ class DZLBuilding {
             playerHouse.AddHouse(house);
         }
     }
+    void SellOnServer(PlayerBase player) {
+        if(!GetGame().IsClient()){
+            house.RemoveOwner();
+            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player);
+            playerHouse.RemoveHouse(house);
+        }
+    }
+	
+	void BuyStorageOnServer(DZLStorageTypeBought storage) {
+		house.AddStorage(storage);
+	}
+	
+	void SellStorageOnServer(DZLStorageTypeBought storage) {
+		house.RemoveStorage(storage);
+	}
+
+    array<ref DZLStorageTypeBought> GetStorage() {
+       return house.GetStorage();
+    }
+
 }

@@ -94,7 +94,7 @@ FrameWidgetClass Housing_Upgrade {
          vexactsize 1
          style EditorPanel
          {
-          ItemPreviewWidgetClass ItemPreviewWidget0 {
+          ItemPreviewWidgetClass Preview {
            ignorepointer 1
            position 0.26008 -0.00001
            size 280 280
@@ -273,18 +273,19 @@ FrameWidgetClass Housing_Upgrade {
          vexactsize 1
          style EditorPanel
          {
-          MultilineTextWidgetClass MultilineTextWidget0 {
-           ignorepointer 1
-           position 8 8
-           size 584 296
+          TextListboxWidgetClass Sell_Storage_List {
+           position 12.5948 -0.00002
+           size 574.81 286.811
+           valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
+           style NoScrollBar
           }
          }
         }
-        TextWidgetClass Buy_Price0 {
+        TextWidgetClass Sell_Price {
          ignorepointer 1
          color 0 0 0 1
          position 8.26002 64.25999
@@ -297,7 +298,7 @@ FrameWidgetClass Housing_Upgrade {
          text "#Sell_Price"
          "text valign" center
         }
-        TextWidgetClass Price_Buy0 {
+        TextWidgetClass Price_Sell {
          ignorepointer 1
          color 0 0 0 1
          position 342 64.25999

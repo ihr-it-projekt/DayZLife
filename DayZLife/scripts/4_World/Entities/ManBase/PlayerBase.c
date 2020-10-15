@@ -1,6 +1,7 @@
 modded class PlayerBase
 {
     ref DZLBuyHouseMenu houseBuyMenu;
+    ref DZLUpgradeHouseMenu houseUpgradeMenu;
     ref DZLConfig config;
 
 	void ~PlayerBase() {
@@ -15,6 +16,7 @@ modded class PlayerBase
         GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
 
         AddAction(ActionOpenBuyHouseMenu);
+        AddAction(ActionOpenUpgradeHouseMenu);
     }
 
 
@@ -37,5 +39,15 @@ modded class PlayerBase
 		houseBuyMenu.SetTarget(target);
 
         return houseBuyMenu;
+    }
+
+    DZLUpgradeHouseMenu GetHouseUpgradeMenu(DZLHouseDefinition definition, Building target) {
+        DebugMessageDZL("Initialize house buy menu");
+        houseUpgradeMenu = new DZLUpgradeHouseMenu;
+        houseUpgradeMenu.SetConfig(config);
+		houseUpgradeMenu.SetHouseDefinition(definition);
+		houseUpgradeMenu.SetTarget(target);
+
+        return houseUpgradeMenu;
     }
 }

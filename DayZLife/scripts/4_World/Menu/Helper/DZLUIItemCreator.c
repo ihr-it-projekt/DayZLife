@@ -1,4 +1,5 @@
-class DZLUIItemCreator {
+class DZLUIItemCreator
+{
 
 	Widget layoutRoot;
 	

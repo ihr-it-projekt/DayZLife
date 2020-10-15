@@ -35,9 +35,25 @@ class DZLBuyHouseListener
                     inventory.AddMoneyToPlayer(paramBuyHouse.param1, actualHouseDef.buyPrice * -1);
                     dzlBuilding.BuyOnServer(paramBuyHouse.param1);
 
-                    message = "#successfully_buy_house"
+                    message = "#successfully_buy_house";
                 }
                 GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+            }
+        } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
+            autoptr Param2<PlayerBase, ref Building> paramSellHouse;
+            if (ctx.Read(paramSellHouse)){
+				DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param2);
+                DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellHouse.param2);
+
+                string messageSell = "#error_sell_house";
+
+                if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(paramSellHouse.param1)) {
+                    inventory.AddMoneyToPlayer(paramSellHouse.param1, actualHouseDefSell.sellPrice);
+                    dzlBuildingSell.SellOnServer(paramSellHouse.param1);
+
+                    messageSell = "#successfully_sell_house";
+                }
+                GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
             }
         }
     }
