@@ -39,7 +39,7 @@ class ActionOpenUpgradeHouseMenu: ActionInteractBase
                 }
             }
 
-			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseBuyMenu(definition, action_data.m_Target.GetObject()), NULL);
+			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseUpgradeMenu(definition, action_data.m_Target.GetObject()), NULL);
         }
 	}
 
@@ -52,6 +52,6 @@ class ActionOpenUpgradeHouseMenu: ActionInteractBase
             }
         }
 
-		return false;
+		return super.ActionCondition(player, target, item);
     }
 }
