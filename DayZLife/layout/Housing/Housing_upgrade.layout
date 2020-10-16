@@ -82,6 +82,8 @@ FrameWidgetClass Housing_Upgrade {
          hexactsize 1
          vexactsize 1
          style NoScrollBar
+         "title visible" 0
+         lines 15
         }
         PanelWidgetClass PanelWidget9 {
          ignorepointer 1
@@ -274,14 +276,17 @@ FrameWidgetClass Housing_Upgrade {
          style EditorPanel
          {
           TextListboxWidgetClass Sell_Storage_List {
-           position 12.5948 -0.00002
-           size 574.81 286.811
+           position 8.26009 0.00014
+           size 583.48004 295.47998
            valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
            style NoScrollBar
+           "title visible" 0
+           colums ""
+           lines 10
           }
          }
         }
