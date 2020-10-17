@@ -10,7 +10,7 @@ class DZLConfig
         storageTypes = new DZLStorageTypes;
     }
 	
-	ref array<ref DZLHouseDefinition> GetHouseDeinitions() {
+	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
 		return houseConfig.houseConfigs;
 	}
 

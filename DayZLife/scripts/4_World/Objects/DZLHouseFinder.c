@@ -9,7 +9,7 @@ class DZLHouseFinder
 	
 	void SetConfig(DZLConfig config) {
 		this.config = config;
-		objectFinder.SetConfig(config.GetHouseDeinitions());
+		objectFinder.SetConfig(config.GetHouseDefinitions());
 	}
 
     DZLHouseDefinition find() {
@@ -42,7 +42,7 @@ class DZLHouseFinder
 	DZLHouseDefinition GetHouseDefinitionByBuilding(Building house) {
 		DZLHouseDefinition actualHouseDef;
 
-        foreach(DZLHouseDefinition houseDef: config.GetHouseDeinitions()) {
+        foreach(DZLHouseDefinition houseDef: config.GetHouseDefinitions()) {
             if(house.GetType() == houseDef.houseType) {
                 actualHouseDef = houseDef;
                 break;
