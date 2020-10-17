@@ -32,7 +32,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 			vector mapPos;
 			float scale;
 			
-			PlayerBase player = PlayerBase.Cast(GetGame().GetPlayer());
+			PlayerBase player = PlayerBaseHelper.GetPlayer();
 			
 			if(player && !player.GetLastMapInfo(scale, mapPos)) {
                 mapPos = GetGame().GetCurrentCameraPosition();
@@ -58,7 +58,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
             case buyButton:
                 if (actualHouseDef) {
                     if (inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), actualHouseDef.buyPrice)) {
-                        Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(GetGame().GetPlayer(), target);
+                        Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(PlayerBaseHelper.GetPlayer(), target);
                         GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING, paramBuyHouse, true);
                     } else {
                         errorMessageTextWidget.SetText("#error_not_enough_money");
@@ -68,8 +68,8 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 				}
                 return true;
             case sellButton:
-                if (house && house.HasOwner() && house.IsOwner(GetGame().GetPlayer())) {
-                    Param2<PlayerBase, ref Building> paramSellHouse = new Param2<PlayerBase, ref Building>(GetGame().GetPlayer(), target);
+                if (house && house.HasOwner() && house.IsOwner(PlayerBaseHelper.GetPlayer())) {
+                    Param2<PlayerBase, ref Building> paramSellHouse = new Param2<PlayerBase, ref Building>(PlayerBaseHelper.GetPlayer(), target);
                     GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING, paramSellHouse, true);
                 }
                 return true;
@@ -91,11 +91,11 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 	
 	override void UpdateGUI(string message = "") {
 	    super.UpdateGUI(message);
-		if (house && house.HasOwner() && house.IsOwner(GetGame().GetPlayer())) {
+		if (house && house.HasOwner() && house.IsOwner(PlayerBaseHelper.GetPlayer())) {
 			sellButton.Show(true);
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("");
-		} else if (house && house.HasOwner() && !house.IsOwner(GetGame().GetPlayer())) {
+		} else if (house && house.HasOwner() && !house.IsOwner(PlayerBaseHelper.GetPlayer())) {
 			sellButton.Show(false);
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("#building_has_already_an_owner");

@@ -35,12 +35,12 @@ class DZLBaseHouseMenu : UIScriptedMenu
 
     void SetConfig(ref DZLConfig config) {
         this.config = config;
-        inventory.SetConfig(this.config.moneyConfig.currencyValues);
+        inventory.SetConfig(this.config.GetMoneyConfing());
     }
 
     void SetTarget(Building target) {
         this.target = target;
-        Param2<PlayerBase,ref Building> paramGetBuildingProperties = new Param2<PlayerBase,ref Building>(GetGame().GetPlayer(), this.target);
+        Param2<PlayerBase,ref Building> paramGetBuildingProperties = new Param2<PlayerBase,ref Building>(PlayerBaseHelper.GetPlayer(), this.target);
         GetGame().RPCSingleParam(paramGetBuildingProperties.param1, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA, paramGetBuildingProperties, true);
     }
 

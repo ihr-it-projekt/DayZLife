@@ -8,8 +8,8 @@ class DZLHouse {
 	ref array<ref DZLStorageTypeBought> storage;
 
     void DZLHouse(Building building) {
+        this.fileName = building.GetPosition().ToString(false) + ".json";
 		if (!Load()) {
-	        this.fileName = building.GetPosition().ToString(false) + ".json";
 	        this.name = building.GetType();
 			this.position = building.GetPosition();
 			this.orientation = building.GetOrientation();

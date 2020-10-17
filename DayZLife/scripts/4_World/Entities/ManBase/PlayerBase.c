@@ -3,6 +3,7 @@ modded class PlayerBase
     ref DZLBuyHouseMenu houseBuyMenu;
     ref DZLUpgradeHouseMenu houseUpgradeMenu;
     ref DZLConfig config;
+	ref DZLPlayerHouse house;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
@@ -11,9 +12,14 @@ modded class PlayerBase
     override void SetActions() {
         super.SetActions();
         DebugMessageDZL("Create Player");
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
-        GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
+		
+		if (GetGame().IsClient()) {
+			GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+        	Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
+        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
+        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
+		}
+        
 
         AddAction(ActionOpenBuyHouseMenu);
         AddAction(ActionOpenUpgradeHouseMenu);
@@ -22,11 +28,16 @@ modded class PlayerBase
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE) {
-            DebugMessageDZL("GET config");
             Param1 <ref DZLConfig> configParam;
-
+            DebugMessageDZL("Initialize DZLConfig");
             if (ctx.Read(configParam)){
                 this.config = configParam.param1;
+            }
+        } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {
+            Param1 <ref DZLPlayerHouse> houseParam;
+            DebugMessageDZL("Initialize DZLPlayerHouse");
+            if (ctx.Read(houseParam)){
+                this.house = houseParam.param1;
             }
         }
     }
@@ -50,4 +61,14 @@ modded class PlayerBase
 
         return houseUpgradeMenu;
     }
+	
+	DZLHouseDefinition FindHouseDefinition(Building building) {
+		array<ref DZLHouseDefinition> houseConfigs = config.GetHouseDeinitions();
+		foreach(DZLHouseDefinition definition: houseConfigs) {
+                if (definition.houseType == building.GetType()) {
+					return definition;
+                }
+            }
+		return null;
+	}
 }

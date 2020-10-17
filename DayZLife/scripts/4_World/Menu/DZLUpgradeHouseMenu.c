@@ -36,7 +36,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
             priceSellTextWidget.SetText("");
             storageTextWidget.SetText("");
 
-			foreach(DZLStorageType storageType: config.storageTypes.storageTypes) {
+			foreach(DZLStorageType storageType: config.GetStorageTypes()) {
 				storageListTextWidget.AddItem(storageType.type, storageType, 0);
 			}
 
@@ -76,19 +76,19 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 		return false;
 	}
 
-	void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 	    super.HandleEventsDZL(sender, target, rpc_type, ctx);
 
 
     }
 	
-	void UpdateGUI(string message = "") {
+	override void UpdateGUI(string message = "") {
 	    super.UpdateGUI(message);
-		if (house && house.IsOwner(GetGame().GetPlayer())) {
+		if (house && house.IsOwner(PlayerBaseHelper.GetPlayer())) {
 			sellButton.Show(true);
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("");
-		} else if (house && house.HasOwner() && !house.IsOwner(GetGame().GetPlayer())) {
+		} else if (house && house.HasOwner() && !house.IsOwner(PlayerBaseHelper.GetPlayer())) {
 			sellButton.Show(false);
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("#building_has_already_an_owner");

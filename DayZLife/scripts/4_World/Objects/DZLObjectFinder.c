@@ -1,9 +1,9 @@
 class DZLObjectFinder
 {
-    ref DZLHouseConfig config;
+   	ref array<ref DZLHouseDefinition> houseDefinitions;
 
-    void SetConfig(DZLHouseConfig config) {
-        this.config = config;
+    void SetConfig(ref array<ref DZLHouseDefinition> houseDefinitions) {
+        this.houseDefinitions = houseDefinitions;
     }
 
     Object GetObjectsAt(vector from, vector to, Object ignore = NULL, float radius = 0.5, Object with = NULL){
@@ -39,7 +39,7 @@ class DZLObjectFinder
     private Object CheckForObject(set< Object > geom) {
         for (int newObject = 0; newObject < geom.Count(); ++newObject){
             Object obj = geom.Get(newObject);
-            foreach(DZLHouseDefinition housedef: config.houseConfigs) {
+            foreach(DZLHouseDefinition housedef: houseDefinitions) {
                 DebugMessageDZL(obj.GetType());
                 if (obj.GetType() == housedef.houseType || obj.GetType() == "HouseInfoPoint") {
                     return obj;

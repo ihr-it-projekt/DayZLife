@@ -23,35 +23,29 @@ class ActionOpenUpgradeHouseMenu: ActionInteractBase
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-            PlayerBase player = GetGame().GetPlayer();
+            PlayerBase player = PlayerBaseHelper.GetPlayer();
 			
 			if(!action_data) return;
             if(!action_data.m_Target) return;
             if(!IsBuilding(action_data.m_Target)) return;
             if (!player.config) return;
+            if (!player.house) return;
+			
+			Building building = Building.Cast(action_data.m_Target.GetObject());
 
-            DZLHouseDefinition definition;
-			array<ref DZLHouseDefinition> houseConfigs = player.config.houseConfig.houseConfigs;
-            foreach(DZLHouseDefinition _definition: houseConfigs) {
-                if (_definition.houseType == action_data.m_Target.GetObject().GetType()) {
-					definition = _definition;
-					break;
-                }
-            }
-
-			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseUpgradeMenu(definition, action_data.m_Target.GetObject()), NULL);
+            DZLHouseDefinition definition = player.FindHouseDefinition(building);
+			
+			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseUpgradeMenu(definition, building), NULL);
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsServer()) {
-            DZLBuilding building = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
+		if (GetGame().IsClient()) {
+			if (!player.house) return false;
+			if(!IsBuilding(target)) return false;
+            return player.house.HasHouse(Building.Cast(target.GetObject()));
+		}
 
-            if (building && (building.IsOwner(player))) {
-                return true;
-            }
-        }
-
-		return super.ActionCondition(player, target, item);
-    }
+		return true;
+	}
 }

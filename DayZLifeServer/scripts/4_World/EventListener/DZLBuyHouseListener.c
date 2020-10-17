@@ -9,7 +9,7 @@ class DZLBuyHouseListener
         houseFinder = new DZLHouseFinder;
         DZLConfig config = new DZLConfig;
 
-        inventory.SetConfig(config.moneyConfig.currencyValues);
+        inventory.SetConfig(config.GetMoneyConfing());
         houseFinder.SetConfig(config);
     }
 
@@ -38,6 +38,7 @@ class DZLBuyHouseListener
                     message = "#successfully_buy_house";
                 }
                 GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+                GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramBuyHouse.param1)), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
             autoptr Param2<PlayerBase, ref Building> paramSellHouse;
@@ -54,6 +55,7 @@ class DZLBuyHouseListener
                     messageSell = "#successfully_sell_house";
                 }
                 GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
+                GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramSellHouse.param1)), true, sender);
             }
         }
     }
