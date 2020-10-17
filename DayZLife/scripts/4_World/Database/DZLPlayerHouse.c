@@ -27,7 +27,7 @@ class DZLPlayerHouse {
 	}
 	
 	bool HasHouse(notnull Building building) {
-		string houseFileName = building.GetPosition().ToString(false) + ".json";
+		string houseFileName = DZLHouse.GetFileName(building);
 		foreach(string fileName: playerHouseCollection) {
             if (houseFileName == fileName) {
 				return true;

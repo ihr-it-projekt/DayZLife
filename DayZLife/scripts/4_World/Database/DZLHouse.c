@@ -6,9 +6,10 @@ class DZLHouse {
 	vector position;
 	vector orientation;
 	ref array<ref DZLStorageTypeBought> storage;
+	
 
     void DZLHouse(Building building) {
-        this.fileName = building.GetPosition().ToString(false) + ".json";
+        this.fileName = DZLHouse.GetFileName(building);
 		if (!Load()) {
 	        this.name = building.GetType();
 			this.position = building.GetPosition();
@@ -17,6 +18,10 @@ class DZLHouse {
 			Save();
 		}
     }
+	
+	static string GetFileName(Building building) {
+		return building.GetPosition().ToString(false) + ".json";
+	}
 
     void AddOwner(PlayerBase player) {
         owner = player.GetIdentity().GetId();
