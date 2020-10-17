@@ -8,11 +8,12 @@ class DZLStorageTypes
 
             storageTypes.Insert(new DZLStorageType("SeaChest", 5, 100));
             storageTypes.Insert(new DZLStorageType("SeaChest", 50, 200));
+            Save();
         }
     }
 
     private bool Load(){
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "house.json")) {
+        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "storageTypes.json")) {
             JsonFileLoader<DZLStorageTypes>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "storageTypes.json", this);
             return true;
         }
