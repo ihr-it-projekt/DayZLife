@@ -1,6 +1,6 @@
 class DZLHouseFinder
 {
-	private ref DZLObjectFinder objectFinder;
+	ref DZLObjectFinder objectFinder;
 	private ref DZLConfig config;
 
 	void DZLHouseFinder() {

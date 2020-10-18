@@ -36,13 +36,16 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
             priceSellTextWidget.SetText("");
             storageTextWidget.SetText("");
 
-			foreach(DZLStorageType storageType: config.GetStorageTypes()) {
-				storageListTextWidget.AddItem(storageType.type, storageType, 0);
-			}
+            if (config) {
+				array<ref DZLStorageType> storageTypes = config.GetStorageTypes();
+                foreach(DZLStorageType storageType: storageTypes) {
+                    storageListTextWidget.AddItem(storageType.type, storageType, 0);
+                }
+            }
 
             if (house) {
-                int x = 1;
-                foreach(DZLStorageTypeBought storage: house.GetStorage()) {
+				array<ref DZLStorageTypeBought> storages = house.GetStorage();
+                foreach(DZLStorageTypeBought storage: storages) {
                     sellStorageListTextWidget.AddItem(storage.storageType.type, storage, 0);
                 }
             }
@@ -58,18 +61,96 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                 OnHide();
                 return true;
             case storageListTextWidget:
-                DebugMessageDZL("Click on 1");
+				int itemPos = storageListTextWidget.GetSelectedRow();
 
+				DebugMessageDZL("Has row " + itemPos.ToString());
+
+				if (-1 == itemPos) return true;
+
+				DZLStorageType currentItem;
+				storageListTextWidget.GetItemData(itemPos, 0, currentItem);
+			
+				if (!currentItem) return true;
+
+				DebugMessageDZL("Has type " + currentItem.type);
+			
+				int itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
+			
+				preview.UpdatePreview(currentItem.type);
+			
+				int buyPrice =  currentItem.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
+			
+				DebugMessageDZL("Buy price " + buyPrice.ToString());
+			
+				priceBuyTextWidget.SetText(buyPrice.ToString());
+			
+				int sellPrice =  buyPrice / 2;
+				DebugMessageDZL("sellPrice price " + sellPrice.ToString());
+			
+				priceSellTextWidget.SetText(sellPrice.ToString());
+			
+				storageTextWidget.SetText(currentItem.space.ToString());
+				
+				sellButton.Show(false);
+				buyButton.Show(true);
+			
                 return true;
             case sellStorageListTextWidget:
 			
-                DebugMessageDZL("Click on 2");
+                int itemPosSell = sellStorageListTextWidget.GetSelectedRow();
+				
+				DebugMessageDZL("Has row " + itemPosSell.ToString());
+			
+				if (-1 == itemPosSell) return true;
+			
+				DZLStorageTypeBought currentItemSell;
+				sellStorageListTextWidget.GetItemData(itemPosSell, 0, currentItemSell);
+			
+				if (!currentItemSell) return true;
+			
+				DebugMessageDZL("Has type " + currentItemSell.type);
+			
+				preview.UpdatePreview(currentItemSell.type);
+			
+				priceBuyTextWidget.SetText(currentItemSell.paidPrice.ToString());
+				priceSellTextWidget.SetText(currentItemSell.sellPrice.ToString());
+				storageTextWidget.SetText(currentItemSell.storageType.space.ToString());
+			
+				buyButton.Show(false);
+				sellButton.Show(true);
 
                 return true;
             case buyButton:
-
+				int itemPosBuy = storageListTextWidget.GetSelectedRow();
+				DZLStorageType currentItemBuy;
+				storageListTextWidget.GetItemData(itemPosBuy, 0, currentItemBuy);
+			
+				if (!currentItemBuy) {
+				    DebugMessageDZL("not found currentItemBuy");
+				    return true;
+				}
+			
+				
+				int buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
+				PlayerBase playerBaseBuy = PlayerBaseHelper.GetPlayer();
+				if (actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), buyPriceBuy) && house.IsOwner(playerBaseBuy)) {
+					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_STORAGE, new Param3<PlayerBase, ref Building, ref DZLStorageType>(playerBaseBuy, target, currentItemBuy), true);
+				}
+				
+			
                 return true;
             case sellButton:
+			
+				int itemPosStorageSell = sellStorageListTextWidget.GetSelectedRow();
+				DZLStorageTypeBought currentItemStorageSell;
+				storageListTextWidget.GetItemData(itemPosStorageSell, 0, currentItemStorageSell);
+			
+				if (!itemPosStorageSell) return true;
+			
+				PlayerBase playerBaseSell = PlayerBaseHelper.GetPlayer();
+				if (house.IsOwner(playerBaseSell)) {
+					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_SELL_STORAGE, new Param3<PlayerBase, ref Building, vector>(playerBaseSell, target, currentItemStorageSell.position), true);
+				}
 
                 return true;
 		}
@@ -78,29 +159,27 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 	    super.HandleEventsDZL(sender, target, rpc_type, ctx);
-
-
+		
+		if (rpc_type == DAY_Z_LIFE_BUY_STORAGE_RESPONSE || rpc_type == DAY_Z_LIFE_SELL_STORAGE_RESPONSE) {
+            autoptr Param2<ref DZLBuilding, string> paramBuyStorageResponse;
+            if (ctx.Read(paramBuyStorageResponse)){
+				house = paramBuyStorageResponse.param1;
+				
+				UpdateGUI(paramBuyStorageResponse.param2);
+	        }
+        }
     }
 	
 	override void UpdateGUI(string message = "") {
 	    super.UpdateGUI(message);
-		if (house && house.IsOwner(PlayerBaseHelper.GetPlayer())) {
-			sellButton.Show(true);
-			buyButton.Show(false);
-			errorMessageTextWidget.SetText("");
-		} else if (house && house.HasOwner() && !house.IsOwner(PlayerBaseHelper.GetPlayer())) {
-			sellButton.Show(false);
-			buyButton.Show(false);
-			errorMessageTextWidget.SetText("#building_has_already_an_owner");
-		} else if (house && !house.HasOwner()) {
-			sellButton.Show(false);
-			buyButton.Show(true);
-			errorMessageTextWidget.SetText("");
-		} else if (!house) {
-			sellButton.Show(false);
-			buyButton.Show(false);
-			errorMessageTextWidget.SetText("");
-		}
+		
+		if (house) {
+            array<ref DZLStorageTypeBought> storages = house.GetStorage();
+            foreach(DZLStorageTypeBought storage: storages) {
+                sellStorageListTextWidget.AddItem(storage.storageType.type, storage, 0);
+            }
+        }
+		
 	}
 
 }

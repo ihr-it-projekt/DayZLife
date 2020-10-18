@@ -81,7 +81,7 @@ FrameWidgetClass Housing_Upgrade {
          vexactpos 1
          hexactsize 1
          vexactsize 1
-         style NoScrollBar
+         style Default
          "title visible" 0
          lines 15
         }
@@ -203,7 +203,7 @@ FrameWidgetClass Housing_Upgrade {
          "text halign" right
          "text valign" center
         }
-        TextWidgetClass Number_of_Strage {
+        TextWidgetClass Number_of_Storage {
          ignorepointer 1
          color 0 0 0 1
          position 342 120.52
@@ -283,7 +283,7 @@ FrameWidgetClass Housing_Upgrade {
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           style NoScrollBar
+           style Default
            "title visible" 0
            colums ""
            lines 10

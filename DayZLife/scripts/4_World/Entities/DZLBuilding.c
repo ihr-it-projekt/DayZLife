@@ -31,12 +31,20 @@ class DZLBuilding {
         }
     }
 	
-	void BuyStorageOnServer(DZLStorageTypeBought storage) {
+	void BuyStorageOnServer(ref DZLStorageTypeBought storage) {
 		house.AddStorage(storage);
 	}
 	
 	void SellStorageOnServer(DZLStorageTypeBought storage) {
 		house.RemoveStorage(storage);
+	}
+	
+	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
+		return house.GetNextFreeStoragePosition(definition);
+	}
+	
+	DZLStorageTypeBought FindStorageByPosition(vector position) {
+		return house.FindStorageByPosition(position);
 	}
 
     array<ref DZLStorageTypeBought> GetStorage() {

@@ -31,6 +31,8 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
             storageTextWidget.SetText(actualHouseDef.GetMaxStorage().ToString());
 			vector mapPos;
 			float scale;
+
+			preview.UpdatePreview(actualHouseDef.houseType);
 			
 			PlayerBase player = PlayerBaseHelper.GetPlayer();
 			

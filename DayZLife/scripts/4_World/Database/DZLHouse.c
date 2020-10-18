@@ -33,7 +33,7 @@ class DZLHouse {
 		Save();
 	}
 	
-	void AddStorage(DZLStorageTypeBought storageItem) {
+	void AddStorage(ref DZLStorageTypeBought storageItem) {
 		storage.Insert(storageItem);
 		Save();
 	}
@@ -53,6 +53,33 @@ class DZLHouse {
 
 	array<ref DZLStorageTypeBought> GetStorage() {
 	    return storage;
+	}
+	
+	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
+		foreach(vector pos: definition.storagePosition) {
+			bool notFound = true;
+			
+			foreach(DZLStorageTypeBought storageObject: storage) {
+				if (storageObject.position == pos) {
+					notFound = false;
+					break;
+				}
+			}
+			
+			if (notFound) {
+				return pos;
+			}
+		} 
+		return "0 0 0";
+	}
+	
+	DZLStorageTypeBought FindStorageByPosition(vector postion) {
+		foreach(DZLStorageTypeBought storageObject: storage) {
+			if (storageObject.position == postion) {
+				return storageObject;
+			}
+		}
+		return null;	
 	}
 
     private bool Load(){

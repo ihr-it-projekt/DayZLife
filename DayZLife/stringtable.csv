@@ -23,3 +23,5 @@
 "error_please_reopen_menu", "error please reopen menu", "error please reopen menu", "Irgendwas ist schief gelaufen. Bitte neu einloggen."
 "error_buying_house", "erro buying house", "erro buying house", "Irgendwas ist schief gelaufen. Bitte versuche es erneut."
 "successfully_buy_house", "successfully buy house", "successfully buy house", "Haus wurde erfolgreich gekauft."
+"error_buying_storage", "error_buying_storage", "error_buying_storage", "Erweiterung konnte nicht gekauft werden."
+"successfully_buy_storage", "successfully_buy_storage", "successfully_buy_storage", "Erweiterung erfolgreich gekauft."

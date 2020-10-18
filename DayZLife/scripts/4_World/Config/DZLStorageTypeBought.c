@@ -3,12 +3,14 @@ class DZLStorageTypeBought
     DZLStorageType storageType;
     vector position;
     int paidPrice;
-    int spelledPrice;
+    int sellPrice;
+	string type;
 
-    void DZLStorageType(DZLStorageType storageType, vector position, int paidPrice, int spelledPrice) {
+    void DZLStorageTypeBought(DZLStorageType storageType, vector position, int paidPrice) {
         this.storageType = storageType;
         this.position = position;
         this.paidPrice = paidPrice;
-        this.spelledPrice = spelledPrice;
+        this.sellPrice = paidPrice / 2;
+		this.type = storageType.type;
     }
 }

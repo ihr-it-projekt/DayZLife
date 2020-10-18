@@ -9,7 +9,6 @@ class DZLBaseHouseMenu : UIScriptedMenu
     protected ref DZLPreviewWindow preview;
     protected string layoutPath;
 
-
     ButtonWidget closeButton;
     ButtonWidget buyButton;
     ButtonWidget sellButton;
@@ -94,7 +93,7 @@ class DZLBaseHouseMenu : UIScriptedMenu
         if (actualHouseDef) {
             super.OnShow();
 
-            preview.UpdatePreview(actualHouseDef.houseType);
+
             errorMessageTextWidget.SetText("");
             balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(GetGame().GetPlayer()).ToString());
         }

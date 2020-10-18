@@ -1,15 +1,15 @@
-class SpawnCalculator
+class DZLSpawnCalculator
 {
     static vector GetPosition(vector position, vector rotation, vector relativePosition) {
-		vector basePosition;
-		basePosition[0] = position[0] + relativePosition[0];
-		basePosition[1] = position[1] + relativePosition[1];
-		basePosition[2] = position[2] + relativePosition[2];
-		
-		TrieAngel trieAngel = TrieAngel.CreateFromVector(basePosition);
-		
-		
-		return GetNewPositions(trieAngel.c, trieAngel.a, trieAngel.b, trieAngel.beta, trieAngel.alpha); 
+		TrieAngel trieAngel = TrieAngel.CreateFromVector(relativePosition);
+
+		vector newRelativePos = GetNewPositions(trieAngel.c, trieAngel.a, trieAngel.b, trieAngel.beta, trieAngel.alpha);
+
+        newRelativePos[0] = position[0] + newRelativePos[0];
+        newRelativePos[1] = position[1] + newRelativePos[1];
+        newRelativePos[2] = position[2] + newRelativePos[2];
+
+        return newRelativePos;
     }
 
     

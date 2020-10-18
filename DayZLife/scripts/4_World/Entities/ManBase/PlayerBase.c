@@ -53,7 +53,7 @@ modded class PlayerBase
     }
 
     DZLUpgradeHouseMenu GetHouseUpgradeMenu(DZLHouseDefinition definition, Building target) {
-        DebugMessageDZL("Initialize house buy menu");
+        DebugMessageDZL("Initialize house upgrade menu");
         houseUpgradeMenu = new DZLUpgradeHouseMenu;
         houseUpgradeMenu.SetConfig(config);
 		houseUpgradeMenu.SetHouseDefinition(definition);
