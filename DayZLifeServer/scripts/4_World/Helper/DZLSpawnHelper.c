@@ -2,7 +2,7 @@ class DZLSpawnHelper
 {
 
     static bool SpawnContainer(vector position, vector orientation, string gameObjectName) {
-        Container_Base obj = GetGame().CreateObject(gameObjectName, position);
+        Container_Base obj = Container_Base.Cast(GetGame().CreateObject(gameObjectName, position));
         if (!obj) {
             return false;
         }
