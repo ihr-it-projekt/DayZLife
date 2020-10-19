@@ -10,8 +10,10 @@ FrameWidgetClass DZLCash_HUD {
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   position 1600 800
+   position 796.73602 -494.168
    size 300 85
+   halign center_ref
+   valign center_ref
    hexactpos 1
    vexactpos 1
    hexactsize 1
