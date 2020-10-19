@@ -3,7 +3,7 @@ class DZLPlayerHouse {
     ref array<string> playerHouseCollection;
 
     void DZLPlayerHouse(notnull PlayerBase player) {
-        fileName = player.GetIdentity().GetId() + ".json";
+        fileName = player.GetIdentity().GetId() + "house.json";
         if (!Load()) {
             playerHouseCollection = new array<string>;
             Save();

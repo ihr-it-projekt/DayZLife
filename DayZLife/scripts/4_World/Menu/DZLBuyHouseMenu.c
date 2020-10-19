@@ -59,7 +59,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
                 return true;
             case buyButton:
                 if (actualHouseDef) {
-                    if (inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), actualHouseDef.buyPrice)) {
+                    if (inventory.PlayerHasEnoughMoney(PlayerBaseHelper.GetPlayer(), actualHouseDef.buyPrice)) {
                         Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(PlayerBaseHelper.GetPlayer(), target);
                         GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING, paramBuyHouse, true);
                     } else {

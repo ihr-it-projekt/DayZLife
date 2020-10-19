@@ -4,6 +4,7 @@ modded class PlayerBase
     ref DZLUpgradeHouseMenu houseUpgradeMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
+	ref DZLPlayer dzlPlayer;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
@@ -18,6 +19,7 @@ modded class PlayerBase
         	Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
         	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
         	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
+        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
 		}
         
 
@@ -38,6 +40,12 @@ modded class PlayerBase
             DebugMessageDZL("Initialize DZLPlayerHouse");
             if (ctx.Read(houseParam)){
                 this.house = houseParam.param1;
+            }
+        } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
+            Param1 <ref DZLPlayer> dzlPlayerParam;
+            DebugMessageDZL("Initialize DZLPlayer");
+            if (ctx.Read(dzlPlayerParam)){
+                this.dzlPlayer = dzlPlayerParam.param1;
             }
         }
     }

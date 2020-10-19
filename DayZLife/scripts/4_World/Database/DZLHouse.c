@@ -6,6 +6,7 @@ class DZLHouse {
 	vector position;
 	vector orientation;
 	ref array<ref DZLStorageTypeBought> storage;
+	ref array<int> storagePositions;
 	
 
     void DZLHouse(Building building) {
@@ -15,6 +16,7 @@ class DZLHouse {
 			this.position = building.GetPosition();
 			this.orientation = building.GetOrientation();
 			this.storage = new array<ref DZLStorageTypeBought>;
+			this.storagePositions = new array<int>;
 			Save();
 		}
     }
@@ -56,11 +58,13 @@ class DZLHouse {
 	}
 	
 	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
-		foreach(vector pos: definition.storagePosition) {
+		array<vector> storagePositions = definition.storagePosition;
+		foreach(vector pos: storagePositions) {
 			bool notFound = true;
 			
 			foreach(DZLStorageTypeBought storageObject: storage) {
-				if (storageObject.position == pos) {
+			    DebugMessageDZL("position compare: " + storageObject.relativePos.ToString(false) +" | "+ pos.ToString(false));
+				if (storageObject.relativePos == pos) {
 					notFound = false;
 					break;
 				}
@@ -73,9 +77,9 @@ class DZLHouse {
 		return "0 0 0";
 	}
 	
-	DZLStorageTypeBought FindStorageByPosition(vector postion) {
+	DZLStorageTypeBought FindStorageByPosition(vector position) {
 		foreach(DZLStorageTypeBought storageObject: storage) {
-			if (storageObject.position == postion) {
+			if (storageObject.position == position) {
 				return storageObject;
 			}
 		}

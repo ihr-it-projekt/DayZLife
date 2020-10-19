@@ -18,6 +18,12 @@ class DZLConfigListener
                 DebugMessageServerDZL("Send Config");
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLConfig>(config), true, sender);
             }
+        } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA) {
+            autoptr Param1<PlayerBase> paramGetPlayerData;
+            if (ctx.Read(paramGetPlayerData)){
+                DebugMessageServerDZL("Send player data");
+                GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramGetPlayerData.param1)), true, sender);
+            }
         }
     }
 }
