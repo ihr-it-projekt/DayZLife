@@ -30,7 +30,8 @@ class DZLBuyStorageListener
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param2);
 
 				DZLStorageType storageType;
-				foreach(DZLStorageType _storageType: config.GetStorageTypes()) {
+				array<ref DZLStorageType> storageTypes = config.GetStorageTypes()
+				foreach(DZLStorageType _storageType: storageTypes) {
 					if (_storageType.type == paramBuyStorage.param3.type) {
 						storageType = _storageType;
 						break;
