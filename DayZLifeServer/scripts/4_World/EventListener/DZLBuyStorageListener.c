@@ -46,14 +46,8 @@ class DZLBuyStorageListener
 					
 					bool canNotSpawn = posToSpawnRelavtiv == "0 0 0";
 					
-					
-					
-	
 	                if (!canNotSpawn && actualHouseDef.GetMaxStorage() > dzlBuilding.GetStorage().Count() && inventory.PlayerHasEnoughMoney(paramBuyStorage.param1, buyPriceBuy) && dzlBuilding.IsOwner(paramBuyStorage.param1)) {
 	                   vector posToSpawn = paramBuyStorage.param2.ModelToWorld(posToSpawnRelavtiv);
-						//posToSpawn[1] = GetGame().SurfaceY(posToSpawn[0], posToSpawn[2]);
-						DebugMessageServerDZL("spawn at " + posToSpawn.ToString(false));
-						
 						bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), storageType.type);
 						
 						if (hasSpawned) {

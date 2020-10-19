@@ -23,8 +23,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
     }
 
 	
-	override void OnShow()
-	{
+	override void OnShow() {
 	    if (actualHouseDef) {
 	        priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());

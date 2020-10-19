@@ -41,8 +41,8 @@ class DZLHouseFinder
 	
 	DZLHouseDefinition GetHouseDefinitionByBuilding(Building house) {
 		DZLHouseDefinition actualHouseDef;
-
-        foreach(DZLHouseDefinition houseDef: config.GetHouseDefinitions()) {
+        array<ref DZLHouseDefinition> houseDefs = config.GetHouseDefinitions();
+        foreach(DZLHouseDefinition houseDef: houseDefs) {
             if(house.GetType() == houseDef.houseType) {
                 actualHouseDef = houseDef;
                 break;

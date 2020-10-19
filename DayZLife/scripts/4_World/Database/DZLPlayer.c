@@ -1,6 +1,7 @@
 class DZLPlayer {
     private string fileName;
     int money = 0;
+    int bank = 0;
 
     void DZLPlayer(notnull PlayerBase player) {
         fileName = player.GetIdentity().GetId() + ".json";
