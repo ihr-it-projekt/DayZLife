@@ -131,9 +131,9 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				}
 			
 				
-				int buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
+				int buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * (itemsHasBought + 1));
 				PlayerBase playerBaseBuy = PlayerBaseHelper.GetPlayer();
-				if (actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && inventory.PlayerHasEnoughMoney(GetGame().GetPlayer(), buyPriceBuy) && house.IsOwner(playerBaseBuy)) {
+				if (actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && inventory.PlayerHasEnoughMoney(PlayerBaseHelper.GetPlayer(), buyPriceBuy) && house.IsOwner(playerBaseBuy)) {
 					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_STORAGE, new Param3<PlayerBase, ref Building, ref DZLStorageType>(playerBaseBuy, target, currentItemBuy), true);
 				}
 				

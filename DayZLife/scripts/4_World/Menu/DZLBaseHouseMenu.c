@@ -48,7 +48,7 @@ class DZLBaseHouseMenu : UIScriptedMenu
 	}
 
     void UpdateGUI(string message = "") {
-        balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(GetGame().GetPlayer()).ToString());
+        balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(PlayerBaseHelper.GetPlayer()).ToString());
         if(message) errorMessageTextWidget.SetText(message);
     }
 
@@ -95,7 +95,7 @@ class DZLBaseHouseMenu : UIScriptedMenu
 
 
             errorMessageTextWidget.SetText("");
-            balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(GetGame().GetPlayer()).ToString());
+            balanceTextWidget.SetText(inventory.GetPlayerMoneyAmount(PlayerBaseHelper.GetPlayer()).ToString());
         }
 
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);

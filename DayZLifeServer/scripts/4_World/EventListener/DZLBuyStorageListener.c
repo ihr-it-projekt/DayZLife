@@ -30,7 +30,7 @@ class DZLBuyStorageListener
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param2);
 
 				DZLStorageType storageType;
-				array<ref DZLStorageType> storageTypes = config.GetStorageTypes()
+				array<ref DZLStorageType> storageTypes = config.GetStorageTypes();
 				foreach(DZLStorageType _storageType: storageTypes) {
 					if (_storageType.type == paramBuyStorage.param3.type) {
 						storageType = _storageType;
@@ -42,27 +42,27 @@ class DZLBuyStorageListener
 					DebugMessageServerDZL("has storage type");
 	                string message = "#error_buying_storage";
 					int buyPriceBuy =  storageType.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
-					vector posToSpawn = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
+					vector posToSpawnRelavtiv = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
 					
-					bool canNotSpawn = posToSpawn == "0 0 0";
+					bool canNotSpawn = posToSpawnRelavtiv == "0 0 0";
 	
 	                if (!canNotSpawn && actualHouseDef.GetMaxStorage() > dzlBuilding.GetStorage().Count() && inventory.PlayerHasEnoughMoney(paramBuyStorage.param1, buyPriceBuy) && dzlBuilding.IsOwner(paramBuyStorage.param1)) {
-	                   posToSpawn = DZLSpawnCalculator.GetPosition(paramBuyStorage.param2.GetPosition(), paramBuyStorage.param2.GetOrientation(), posToSpawn);
-						
+	                   vector posToSpawn = DZLSpawnCalculator.GetPosition(paramBuyStorage.param2.GetPosition(), paramBuyStorage.param2.GetOrientation(), posToSpawnRelavtiv);
+						posToSpawn[1] = GetGame().SurfaceY(posToSpawn[0], posToSpawn[2]);
 						DebugMessageServerDZL("spawn at " + posToSpawn.ToString(false));
 						
 						bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), storageType.type);
 						
 						if (hasSpawned) {
-							inventory.AddMoneyToPlayer(paramBuyStorage.param1, buyPriceBuy);
-							dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(storageType, posToSpawn, buyPriceBuy));
+							inventory.AddMoneyToPlayer(paramBuyStorage.param1, buyPriceBuy * -1);
+							dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(storageType, posToSpawn, buyPriceBuy, posToSpawnRelavtiv));
 							message = "#successfully_buy_storage";
 						}
 
 					}
 					
 					GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_BUY_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
-	                GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramBuyStorage.param1)), true, sender);
+	                GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramBuyStorage.param1)), true, sender);
 				} else {
 					DebugMessageServerDZL("has NO storage type");
 				}
@@ -91,7 +91,7 @@ class DZLBuyStorageListener
                     }
                 }
                 GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_SELL_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
-                GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramSellStorage.param1)), true, sender);
+                GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramSellStorage.param1)), true, sender);
             }
         }
     }
