@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{152656A82774FE46}DayZLife/Gui/Banking/DZLBank.edds"
+ Author "desktop-en33qro"
+ ChangeDate -1293162157
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "DZLBank.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}
