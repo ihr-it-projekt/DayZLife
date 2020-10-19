@@ -140,16 +140,15 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			
                 return true;
             case sellButton:
-			
 				int itemPosStorageSell = sellStorageListTextWidget.GetSelectedRow();
 				DZLStorageTypeBought currentItemStorageSell;
-				storageListTextWidget.GetItemData(itemPosStorageSell, 0, currentItemStorageSell);
+				sellStorageListTextWidget.GetItemData(itemPosStorageSell, 0, currentItemStorageSell);
 			
-				if (!itemPosStorageSell) return true;
-			
+				if (!currentItemStorageSell) return true;
+
 				PlayerBase playerBaseSell = PlayerBaseHelper.GetPlayer();
 				if (house.IsOwner(playerBaseSell)) {
-					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_SELL_STORAGE, new Param3<PlayerBase, ref Building, vector>(playerBaseSell, target, currentItemStorageSell.position), true);
+					GetGame().RPCSingleParam(playerBaseSell, DAY_Z_LIFE_SELL_STORAGE, new Param3<PlayerBase, ref Building, vector>(playerBaseSell, target, currentItemStorageSell.position), true);
 				}
 
                 return true;
@@ -174,6 +173,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	    super.UpdateGUI(message);
 		
 		if (house) {
+			sellStorageListTextWidget.ClearItems();
             array<ref DZLStorageTypeBought> storages = house.GetStorage();
             foreach(DZLStorageTypeBought storage: storages) {
                 sellStorageListTextWidget.AddItem(storage.storageType.type, storage, 0);

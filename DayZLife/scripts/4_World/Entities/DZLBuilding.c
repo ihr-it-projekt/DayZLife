@@ -32,11 +32,15 @@ class DZLBuilding {
     }
 	
 	void BuyStorageOnServer(ref DZLStorageTypeBought storage) {
-		house.AddStorage(storage);
+		if(!GetGame().IsClient()){
+			house.AddStorage(storage);
+		}
 	}
 	
 	void SellStorageOnServer(DZLStorageTypeBought storage) {
-		house.RemoveStorage(storage);
+		if(!GetGame().IsClient()){
+			house.RemoveStorage(storage);
+		}
 	}
 	
 	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
