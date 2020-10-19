@@ -1,23 +1,23 @@
-class DZLHudMenu : UIScriptedMenu
-{
-	private ref DZLUIItemCreator creator;
-    TextWidget moneyAtBank;
-    TextWidget moneyAtPlayer;
+// class DZLHudMenu : UIScriptedMenu
+// {
+	// private ref DZLUIItemCreator creator;
+    // TextWidget moneyAtBank;
+    // TextWidget moneyAtPlayer;
 
-    override Widget Init()
-    {
-        creator = new DZLUIItemCreator("DayZLife/layout/Banking/DZLCash.layout");
+    // override Widget Init()
+    // {
+        // creator = new DZLUIItemCreator("DayZLife/layout/Banking/DZLCash.layout");
 		
-		layoutRoot = creator.GetLayoutRoot();
-		moneyAtPlayer = creator.GetTextWidget("DZLCash");
-		moneyAtBank = creator.GetTextWidget("DZLBank");
+		// layoutRoot = creator.GetLayoutRoot();
+		// moneyAtPlayer = creator.GetTextWidget("DZLCash");
+		// moneyAtBank = creator.GetTextWidget("DZLBank");
 
-		return layoutRoot;
-    }
+		// return layoutRoot;
+    // }
 
-    override void OnShow() {
-		super.OnShow();
-		moneyAtBank.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
-		moneyAtPlayer.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.money.ToString());
-	}
-}
+    // override void OnShow() {
+		// super.OnShow();
+		// moneyAtBank.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
+		// moneyAtPlayer.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.money.ToString());
+	// }
+// }
