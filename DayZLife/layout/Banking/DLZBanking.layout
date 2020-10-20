@@ -262,7 +262,7 @@ FrameWidgetClass Banking {
          vexactsize 1
          style EditorPanel
          {
-          EditBoxWidgetClass EditBoxWidget1 {
+          EditBoxWidgetClass Input_Deposit {
            position -0.00001 0
            size 250 48
            hexactpos 1
