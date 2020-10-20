@@ -49,6 +49,14 @@ modded class PlayerBase
             }
         }
     }
+	
+	void CloseMenu() {
+		if (houseBuyMenu && houseBuyMenu.IsVisible()) {
+			houseBuyMenu.OnHide();
+		} else if (houseUpgradeMenu && houseBuyMenu.IsVisible()) {
+			houseUpgradeMenu.OnHide();
+		}
+	}
 
     DZLBuyHouseMenu GetHouseBuyMenu(DZLHouseDefinition definition, Building target) {
         DebugMessageDZL("Initialize house buy menu");

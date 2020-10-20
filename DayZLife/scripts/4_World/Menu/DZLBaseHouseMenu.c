@@ -87,8 +87,8 @@ class DZLBaseHouseMenu : UIScriptedMenu
 
         return layoutRoot;
     }
-
-    override void OnShow() {
+	
+	override void OnShow() {
         if (actualHouseDef) {
             super.OnShow();
 
