@@ -6,7 +6,10 @@ class DZLBankingConfig
         if(!Load()) {
             positionOfBankingPoints = new array<ref DZLBankingPosition>;
             array<string> attachments = new array<string>;
-            attachments.Insert("");
+            attachments.Insert("ManSuit_Black");
+            attachments.Insert("SlacksPants_Black");
+            attachments.Insert("ThickFramesGlasses");
+            attachments.Insert("DressShoes_Black");
 
             positionOfBankingPoints.Insert(new DZLBankingPosition("11053.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
             positionOfBankingPoints.Insert(new DZLBankingPosition("12326.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
