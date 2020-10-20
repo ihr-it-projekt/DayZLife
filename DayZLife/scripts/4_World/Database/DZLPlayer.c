@@ -20,6 +20,12 @@ class DZLPlayer {
 		    Save();
 		}
     }
+	void AddMoneyToPlayerBank(float moneyCount) {
+        if (!DayZGame().IsClient()) {
+			bank += moneyCount;
+		    Save();
+		}
+    }
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {

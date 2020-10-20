@@ -9,7 +9,7 @@ class DZLHouseConfig {
 			array<vector> storagePosition = new array<vector>;
             houseConfigs.Insert(new DZLHouseDefinition("Land_Garage_Row_Small", 100, 50, storagePosition, 0.5));
 			
-			array<vector> storagePosition = new array<vector>;
+			storagePosition = new array<vector>;
             houseConfigs.Insert(new DZLHouseDefinition("Land_Shed_W6", 100, 50, storagePosition, 0.5));
 
 			storagePosition = new array<vector>;
@@ -91,10 +91,6 @@ class DZLHouseConfig {
 			storagePosition = new array<vector>;
 			storagePosition.Insert("-2.516602 -2.65 -2.958008");
             houseConfigs.Insert(new DZLHouseDefinition("Land_House_1W11", 100, 50, storagePosition, 0.5));
-			
-			storagePosition = new array<vector>;
-			storagePosition.Insert();
-            houseConfigs.Insert(new DZLHouseDefinition("", 100, 50, storagePosition, 0.5));
 			
 			storagePosition = new array<vector>;
 			storagePosition.Insert("4.485352 -1.024 -1.217285");

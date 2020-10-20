@@ -48,8 +48,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 	}
 	
 
-	override bool OnClick( Widget w, int x, int y, int button )
-	{
+	override bool OnClick(Widget w, int x, int y, int button) {
 		super.OnClick(w, x, y, button);
 	
 		switch(w){

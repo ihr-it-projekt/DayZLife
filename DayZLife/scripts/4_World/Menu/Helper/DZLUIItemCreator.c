@@ -42,7 +42,6 @@ class DZLUIItemCreator
     }
 
     ButtonWidget GetButtonWidget(string name) {
-        ButtonWidget button =  ButtonWidget.Cast(layoutRoot.FindAnyWidget(name));
-        return button;
+        return ButtonWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
 }

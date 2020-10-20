@@ -3,8 +3,8 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 	void ActionOpenBuyHouseMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
-		m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
-		m_HUDCursorIcon = CursorIcons.None;
+        m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
+        m_HUDCursorIcon = CursorIcons.CloseHood;
 	}
 
     override void CreateConditionComponents()

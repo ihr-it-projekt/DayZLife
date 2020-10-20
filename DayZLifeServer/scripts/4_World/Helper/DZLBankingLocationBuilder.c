@@ -1,19 +1,21 @@
 class DZLBankingLocationBuilder {
 
-    void Create(DZLBankingConfig bankingConfig) {
+    static void Create() {
+        DZLBankingConfig bankingConfig = new DZLBankingConfig;
 		array<ref DZLBankingPosition> positions = bankingConfig.positionOfBankingPoints;
 		
 		foreach(DZLBankingPosition position: positions) {
-			DZLSpawnHelper.SpawnBankingPoint(position.position, position.orientation, position.survivor);
+			PlayerBase player = DZLSpawnHelper.SpawnBankingPoint(position.position, position.orientation, position.survivor);
+			
+			if (!player) {
+				continue;
+			} 
 			
 			array<string> attachments = position.attachments;
-			
-			foreach(string attachment: attachments) {
-				EntityAI itemClothing = player.FindAttachmentBySlotName("Body");
-				if (itemClothing){
-					itemClothing.GetInventory().CreateInInventory(attachment);
-				}
-			}
+
+            foreach(string attachment: attachments) {
+                player.GetInventory().CreateInInventory(attachment);
+            }
 		}
 	}
 };
