@@ -9,7 +9,6 @@ class DZLBuyHouseListener
         houseFinder = new DZLHouseFinder;
         DZLConfig config = new DZLConfig;
 
-        inventory.SetConfig(config.GetMoneyConfing());
         houseFinder.SetConfig(config);
     }
 

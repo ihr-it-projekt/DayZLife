@@ -34,7 +34,6 @@ class DZLBaseHouseMenu : UIScriptedMenu
 
     void SetConfig(ref DZLConfig config) {
         this.config = config;
-        inventory.SetConfig(this.config.GetMoneyConfing());
     }
 
     void SetTarget(Building target) {

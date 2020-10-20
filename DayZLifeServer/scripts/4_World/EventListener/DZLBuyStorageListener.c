@@ -10,7 +10,6 @@ class DZLBuyStorageListener
         houseFinder = new DZLHouseFinder;
         config = new DZLConfig;
 
-        inventory.SetConfig(config.GetMoneyConfing());
         houseFinder.SetConfig(config);
 
         DebugMessageServerDZL("load DZLBuyStorageListener");

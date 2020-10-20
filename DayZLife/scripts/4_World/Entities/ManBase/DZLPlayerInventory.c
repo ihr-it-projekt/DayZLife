@@ -1,12 +1,6 @@
 class DZLPlayerInventory
 {
-	private map<string, int> currencyValues;
-	
-	void SetConfig(map<string, int> currencyValues) {
-		this.currencyValues = currencyValues;
-	}
-	
-    bool PlayerHasEnoughMoney(PlayerBase player, int money) {
+	bool PlayerHasEnoughMoney(PlayerBase player, int money) {
         int amount = GetPlayerMoneyAmount(player);
 
         DebugMessageDZL("Has money: " + amount.ToString());
