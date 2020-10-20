@@ -2,10 +2,6 @@ class DZLPlayerInventory
 {
 	bool PlayerHasEnoughMoney(PlayerBase player, int money) {
         int amount = GetPlayerMoneyAmount(player);
-
-        DebugMessageDZL("Has money: " + amount.ToString());
-        DebugMessageDZL("must have money: " + money.ToString());
-
         return money <= amount;
     }
 

@@ -2,13 +2,21 @@ modded class PlayerBase
 {
     ref DZLBuyHouseMenu houseBuyMenu;
     ref DZLUpgradeHouseMenu houseUpgradeMenu;
+    ref DZLBankingMenu bankingMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
 	ref DZLPlayer dzlPlayer;
+	ref DZLBank dzlBank;
+	bool IsDZLBank = false;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
 	}
+
+	override void Init() {
+        super.Init();
+        RegisterNetSyncVariableBool("IsDZLBank");
+    }
 
     override void SetActions() {
         super.SetActions();
@@ -20,11 +28,13 @@ modded class PlayerBase
         	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
         	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
         	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
+        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
 		}
         
 
         AddAction(ActionOpenBuyHouseMenu);
         AddAction(ActionOpenUpgradeHouseMenu);
+        AddAction(ActionOpenBankingMenu);
     }
 
 
@@ -47,6 +57,12 @@ modded class PlayerBase
             if (ctx.Read(dzlPlayerParam)){
                 this.dzlPlayer = dzlPlayerParam.param1;
             }
+        } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
+            Param1 <ref DZLBank> dzlBankParam;
+            DebugMessageDZL("Initialize Bank");
+            if (ctx.Read(dzlBankParam)){
+                this.dzlBank = dzlBankParam.param1;
+            }
         }
     }
 	
@@ -55,6 +71,8 @@ modded class PlayerBase
 			houseBuyMenu.OnHide();
 		} else if (houseUpgradeMenu && houseBuyMenu.IsVisible()) {
 			houseUpgradeMenu.OnHide();
+		} else if (bankingMenu && bankingMenu.IsVisible()) {
+			bankingMenu.OnHide();
 		}
 	}
 
@@ -86,5 +104,11 @@ modded class PlayerBase
                 }
             }
 		return null;
+	}
+	
+	DZLBankingMenu GetBankingMenu() {
+		bankingMenu = DZLBankingMenu();
+		bankingMenu.SetConfig(config);
+		return bankingMenu;
 	}
 }
