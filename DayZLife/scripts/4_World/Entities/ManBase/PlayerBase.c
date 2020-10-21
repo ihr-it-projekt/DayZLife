@@ -8,7 +8,8 @@ modded class PlayerBase
 	ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
 	bool IsDZLBank = false;
-	float moneyPlayerIsDead = 0;
+	private float moneyPlayerIsDead = 0;
+	bool IsRealPlayer = false;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
@@ -17,29 +18,27 @@ modded class PlayerBase
 	override void Init() {
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
-        RegisterNetSyncVariableFloat("moneyPlayerIsDead");
+        RegisterNetSyncVariableBool("IsRealPlayer");
+        RegisterNetSyncVariableFloat("moneyPlayerIsDead", 0, 99999999999);
     }
 
     override void SetActions() {
         super.SetActions();
-        DebugMessageDZL("Create Player");
-		
-		if (GetGame().IsClient()) {
-			GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        	Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
-        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
-        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
-        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
-        	GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
-		}
-        
 
         AddAction(ActionOpenBuyHouseMenu);
         AddAction(ActionOpenUpgradeHouseMenu);
         AddAction(ActionOpenBankingMenu);
         AddAction(ActionRobMoney);
-    }
 
+        if (GetGame().IsClient()) {
+            GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+            Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
+        }
+    }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE) {
@@ -47,6 +46,7 @@ modded class PlayerBase
             DebugMessageDZL("Initialize DZLConfig");
             if (ctx.Read(configParam)){
                 this.config = configParam.param1;
+                IsRealPlayer = true;
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {
             Param1 <ref DZLPlayerHouse> houseParam;
@@ -118,5 +118,14 @@ modded class PlayerBase
     void TransferFromDeadPlayer(DZLPlayer playerTarget) {
         playerTarget.AddMoneyToPlayer(moneyPlayerIsDead);
         moneyPlayerIsDead = 0;
+    }
+
+    float GetMoneyPlayerIsDead() {
+        return moneyPlayerIsDead;
+    }
+
+    void SetMoneyPlayerIsDead(float money) {
+        IsRealPlayer = false;
+        moneyPlayerIsDead = money;
     }
 }

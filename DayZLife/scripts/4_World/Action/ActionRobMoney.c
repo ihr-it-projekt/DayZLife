@@ -24,10 +24,10 @@ class ActionRobMoney : ActionInteractBase
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        if (!targetPlayer.IsAlive() && targetPlayer.moneyPlayerIsDead > 0) {
+        if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
             return true;
-        } else if (targetPlayer.moneyPlayerIsDead > 0) {
+        } else if (targetPlayer.GetMoneyPlayerIsDead() > 0 && targetPlayer.IsRealPlayer) {
             m_CommandUID = DayZPlayerConstants.CMD_GESTUREFB_COME;
             return true;
         }
@@ -35,19 +35,21 @@ class ActionRobMoney : ActionInteractBase
         return false;
     }
 
-    override void OnEndServer(ActionData action_data)
-    {
+    override void OnEndServer(ActionData action_data) {
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
 
         DZLPlayer dzlPlayer = new DZLPlayer(player);
 
-        if (!targetPlayer.IsAlive()) {
+        if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             targetPlayer.TransferFromDeadPlayer(dzlPlayer);
 
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
         }
     }
 
-
+    override void OnEndClient(ActionData action_data) {
+        PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
+        targetPlayer.SetMoneyPlayerIsDead(0);
+    }
 }
