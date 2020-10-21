@@ -1,7 +1,7 @@
 class DZLBankingConfig
 {
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
-	bool showSumOfStoredCashInBank = false;
+	bool showSumOfStoredCashInBank = true;
 
     void DZLBankingConfig() {
         if(!Load()) {

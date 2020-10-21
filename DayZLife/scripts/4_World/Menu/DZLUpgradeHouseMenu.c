@@ -3,7 +3,6 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	TextListboxWidget storageListTextWidget;
 	TextListboxWidget sellStorageListTextWidget;
 
-	
 	void DZLUpgradeHouseMenu()
 	{
 		Construct();
@@ -14,8 +13,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
         Destruct();
 	}
 
-	override Widget Init()
-    {
+	override Widget Init(){
         layoutPath = "DayZLife/layout/Housing/Housing_upgrade.layout";
 		super.Init();
 		storageListTextWidget = creator.GetTextListboxWidget("Storage_List");
@@ -25,8 +23,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
     }
 	
 
-	override void OnShow()
-	{
+	override void OnShow(){
         super.OnShow();
 
         storageListTextWidget.ClearItems();
@@ -39,14 +36,14 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
             if (config) {
 				array<ref DZLStorageType> storageTypes = config.GetStorageTypes();
                 foreach(DZLStorageType storageType: storageTypes) {
-                    storageListTextWidget.AddItem(storageType.type, storageType, 0);
+                    storageListTextWidget.AddItem(GetItemDisplayName(storageType.type), storageType, 0);
                 }
             }
 
             if (house) {
 				array<ref DZLStorageTypeBought> storages = house.GetStorage();
                 foreach(DZLStorageTypeBought storage: storages) {
-                    sellStorageListTextWidget.AddItem(storage.storageType.type, storage, 0);
+                    sellStorageListTextWidget.AddItem(GetItemDisplayName(storage.storageType.type), storage, 0);
                 }
             }
         }
@@ -92,7 +89,12 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				storageTextWidget.SetText(currentItem.space.ToString());
 				
 				sellButton.Show(false);
-				buyButton.Show(true);
+				buyButton.Show(actualHouseDef.GetMaxStorage() > house.GetStorage().Count());
+				
+				if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
+					errorMessageTextWidget.SetText("#building_has_all_storrage_positions_upgraded");
+				}
+			
 			
                 return true;
             case sellStorageListTextWidget:
@@ -176,10 +178,26 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			sellStorageListTextWidget.ClearItems();
             array<ref DZLStorageTypeBought> storages = house.GetStorage();
             foreach(DZLStorageTypeBought storage: storages) {
-                sellStorageListTextWidget.AddItem(storage.storageType.type, storage, 0);
+                sellStorageListTextWidget.AddItem(GetItemDisplayName(storage.storageType.type), storage, 0);
             }
+
+            sellButton.Show(false);
+			
+			if (buyButton.IsVisible()) buyButton.Show(actualHouseDef.GetMaxStorage() > storages.Count());
         }
 		
 	}
+
+	string GetItemDisplayName(string itemClassname){
+        string displayName;
+        string cfg = CFG_VEHICLESPATH + " " + itemClassname + " displayName";
+        GetGame().ConfigGetText(cfg, displayName);
+
+        if (displayName == "") {
+            displayName = itemClassname;
+        }
+
+        return displayName;
+    }
 
 }

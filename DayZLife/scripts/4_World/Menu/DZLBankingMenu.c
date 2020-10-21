@@ -8,7 +8,7 @@ class DZLBankingMenu : UIScriptedMenu
     ButtonWidget payInButton;
     ButtonWidget payOutButton;
 	
-    TextWidget balanceTextWidget;
+    TextWidget allPlayerBankBalanceTextWidget;
     TextWidget balanceTextLabelWidget;
     TextWidget playerBalanceTextWidget;
     TextWidget bankBalanceTextWidget;
@@ -25,7 +25,9 @@ class DZLBankingMenu : UIScriptedMenu
 
     void ~DZLBankingMenu() {
         OnHide();
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
+        if(GetGame().IsClient()){
+            GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
+        }
     }
 
     void SetConfig(ref DZLConfig config) {
@@ -37,21 +39,13 @@ class DZLBankingMenu : UIScriptedMenu
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
-            autoptr Param1<ref DZLBank> paramGetBankData;
-            if (ctx.Read(paramGetBankData)){
-                bankBalanceTextWidget.SetText(paramGetBankData.param1.moneyAtBank.ToString());
-            }
-        } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
-           autoptr Param1<ref DZLPlayer> paramGetPlayerData;
-           if (ctx.Read(paramGetPlayerData)){
-                playerBalanceTextWidget.SetText(paramGetPlayerData.param1.money.ToString());
-                bankBalanceTextWidget.SetText(paramGetPlayerData.param1.bank.ToString());
-           }
-       } else if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA_RESPONSE) {
-           autoptr Param1<string> paramGetResponse;
+        if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA_RESPONSE) {
+           autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
-                errorMessageTextWidget.SetText(paramGetResponse.param1);
+                bankBalanceTextWidget.SetText(paramGetResponse.param1.bank.ToString());
+                playerBalanceTextWidget.SetText(paramGetResponse.param1.money.ToString());
+                allPlayerBankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
+                errorMessageTextWidget.SetText(paramGetResponse.param3);
            }
        }
     }
@@ -67,15 +61,14 @@ class DZLBankingMenu : UIScriptedMenu
 		payInButton = creator.GetButtonWidget("Button_Deposit");
 		payInButton.Show(true);
 
-        balanceTextWidget = creator.GetTextWidget("DZLBank");
-        balanceTextWidget.Show(true);
+        allPlayerBankBalanceTextWidget = creator.GetTextWidget("DZLBank");
+        allPlayerBankBalanceTextWidget.Show(true);
         playerBalanceTextWidget = creator.GetTextWidget("DZLCash");
         playerBalanceTextWidget.Show(true);
         bankBalanceTextWidget = creator.GetTextWidget("DZLBank_Cash");
         balanceTextLabelWidget = creator.GetTextWidget("Cash_at_Bank");
 		
 		inputDeposit = creator.GetEditBoxWidget("Input_Deposit");
-        
 		errorMessageTextWidget = creator.GetTextWidget("Error_Message");
         
         layoutRoot = creator.GetLayoutRoot();
@@ -90,13 +83,13 @@ class DZLBankingMenu : UIScriptedMenu
             super.OnShow();
             errorMessageTextWidget.SetText("");
             playerBalanceTextWidget.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.money.ToString());
-            balanceTextWidget.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
+            allPlayerBankBalanceTextWidget.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
 
 			balanceTextLabelWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
 			bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
 
 			PlayerBase player = PlayerBaseHelper.GetPlayer();
-			bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
+			if (player.dzlBank) bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
 
 			GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
             GetGame().GetUIManager().ShowCursor(true);
@@ -136,9 +129,10 @@ class DZLBankingMenu : UIScriptedMenu
         float deposit = factor * inputDeposit.GetText().ToFloat();
 
         if (deposit != 0) {
-            if (deposit > PlayerBaseHelper.GetPlayer().dzlPlayer.money || deposit < PlayerBaseHelper.GetPlayer().dzlPlayer.bank) {
+            if (deposit >= PlayerBaseHelper.GetPlayer().dzlPlayer.money || deposit <= PlayerBaseHelper.GetPlayer().dzlPlayer.bank) {
                 GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, float>(PlayerBaseHelper.GetPlayer(), deposit), true);
                 errorMessageTextWidget.SetText("");
+                inputDeposit.SetText("");
             } else {
                 errorMessageTextWidget.SetText("#error_not_enough_money_to_transfer");
             }

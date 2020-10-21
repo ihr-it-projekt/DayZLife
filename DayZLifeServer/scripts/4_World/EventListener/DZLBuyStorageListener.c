@@ -77,7 +77,6 @@ class DZLBuyStorageListener
                         Container_Base itemToDestroy = houseFinder.objectFinder.GetContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param2);
 
                         if (itemToDestroy) {
-                            DebugMessageServerDZL("has object to destroy");
                             inventory.AddMoneyToPlayer(paramSellStorage.param1, positionToSell.sellPrice);
                             dzlBuildingSell.SellStorageOnServer(positionToSell);
 

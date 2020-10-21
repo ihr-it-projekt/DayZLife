@@ -6,6 +6,7 @@ class DZLStorageTypeBought
     int paidPrice;
     int sellPrice;
 	string type;
+	string displayName;
 
     void DZLStorageTypeBought(DZLStorageType storageType, vector position, int paidPrice, vector relativePos) {
         this.storageType = storageType;
@@ -14,5 +15,6 @@ class DZLStorageTypeBought
         this.paidPrice = paidPrice;
         this.sellPrice = paidPrice / 2;
 		this.type = storageType.type;
+		this.displayName = displayName;
     }
 }

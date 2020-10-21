@@ -48,7 +48,21 @@ class DZLBuyHouseListener
                 string messageSell = "#error_sell_house";
 
                 if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(paramSellHouse.param1)) {
-                    inventory.AddMoneyToPlayer(paramSellHouse.param1, actualHouseDefSell.sellPrice);
+                    float sellPrice = actualHouseDefSell.sellPrice;
+
+                    array<ref DZLStorageTypeBought> storages = dzlBuildingSell.GetStorage();
+                    foreach(DZLStorageTypeBought storage: storages) {
+                        if (!storage) continue;
+                        Container_Base itemToDestroy = houseFinder.objectFinder.GetContainerAt(storage.position, storage.position, storage.type, paramSellHouse.param2);
+
+                        if (!itemToDestroy) continue;
+                        sellPrice += storage.sellPrice;
+                        GetGame().ObjectDelete(itemToDestroy);
+                    }
+
+                    dzlBuildingSell.GetStorage().Clear();
+
+                    inventory.AddMoneyToPlayer(paramSellHouse.param1, sellPrice);
                     dzlBuildingSell.SellOnServer(paramSellHouse.param1);
 
                     messageSell = "#successfully_sell_house";
