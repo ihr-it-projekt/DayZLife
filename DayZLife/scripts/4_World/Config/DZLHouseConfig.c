@@ -28,7 +28,7 @@ class DZLHouseConfig {
 			storagePosition = new array<vector>;
 			storagePosition.Insert("0 -2.82 1");
 			storagePosition.Insert("3.200195 -2.82 3.799805");
-			storagePosition.Insert("-4.200195 0 5.200195");
+			storagePosition.Insert("-1 -2:82 9");
 			storagePosition.Insert("6 -2.82 9");
             houseConfigs.Insert(new DZLHouseDefinition("Land_House_1B01_Pub", 100, 50, storagePosition, 0.5));
 			
