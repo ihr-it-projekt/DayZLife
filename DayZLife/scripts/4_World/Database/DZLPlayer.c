@@ -1,7 +1,7 @@
 class DZLPlayer {
     private string fileName;
-    int money = 0;
-    int bank = 0;
+    float money = 0;
+    float bank = 0;
 
     void DZLPlayer(notnull PlayerBase player) {
         fileName = player.GetIdentity().GetId() + ".json";
@@ -25,6 +25,17 @@ class DZLPlayer {
 			bank += moneyCount;
 		    Save();
 		}
+    }
+
+    void PlayerHasDied() {
+        money = 0;
+        Save();
+    }
+
+    void TransferFromPlayer(DZLPlayer playerTarget) {
+        playerTarget.AddMoneyToPlayer(money);
+        money = 0;
+        Save();
     }
 
     private bool Load(){

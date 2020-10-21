@@ -33,6 +33,7 @@
 "Pay_out","Pay out","Pay out","Auszahlen"
 "Player_Cash","Inventory","Inventory","Inventar"
 "Player_Bank","Balance","Balance","Guthaben"
+"rob_money","rob_money","rob_money","Geld rauben"
 "Cash_at_Bank","Bank Balance","Bank Balance","Bank Guthaben"
 "money_transfer_successful","money_transfer_successful","money_transfer_successful","Geldtransfer war erfolgreich."
 "building_has_all_storrage_positions_upgraded","building_has_all_storrage_positions_upgraded","building_has_all_storrage_positions_upgraded","Alle Lagerplätze wurden ausgebaut."

@@ -8,6 +8,7 @@ modded class PlayerBase
 	ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
 	bool IsDZLBank = false;
+	float moneyPlayerIsDead = 0;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
@@ -16,6 +17,7 @@ modded class PlayerBase
 	override void Init() {
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
+        RegisterNetSyncVariableFloat("moneyPlayerIsDead");
     }
 
     override void SetActions() {
@@ -35,6 +37,7 @@ modded class PlayerBase
         AddAction(ActionOpenBuyHouseMenu);
         AddAction(ActionOpenUpgradeHouseMenu);
         AddAction(ActionOpenBankingMenu);
+        AddAction(ActionRobMoney);
     }
 
 
@@ -111,4 +114,9 @@ modded class PlayerBase
 		bankingMenu.SetConfig(config);
 		return bankingMenu;
 	}
+
+    void TransferFromDeadPlayer(DZLPlayer playerTarget) {
+        playerTarget.AddMoneyToPlayer(moneyPlayerIsDead);
+        moneyPlayerIsDead = 0;
+    }
 }
