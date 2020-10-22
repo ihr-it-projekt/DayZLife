@@ -1,57 +1,58 @@
 FrameWidgetClass Banking {
- size 865.09003 716.10895
+ position 0 0
+ size 1 1
  halign center_ref
  valign center_ref
- hexactpos 1
- vexactpos 1
- hexactsize 1
- vexactsize 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0 0 0 1
-   size 849.677 699.58801
+   color 0.6588 0.6588 0.6588 1
+   position 0 0
+   size 0.5 0.6
    halign center_ref
    valign center_ref
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
    style editor_quad_dark
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     color 0.6588 0.6588 0.6588 0.6275
-     size 833.09003 683.06799
+     position 0 0
+     size 0.985 0.98
      halign center_ref
      valign center_ref
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-     style EditorPanel
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
      {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
-       color 0.6588 0.6588 0.6588 0.6275
-       position 0 8.26003
-       size 400 48
+       position 0 0.012
+       size 0.37 0.07
        halign center_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         TextWidgetClass Banking_Menu {
          ignorepointer 1
-         color 0 0 0 1
-         position 0 0
-         size 400 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Bold
          text "#Banking_Menue"
          "text halign" center
@@ -61,214 +62,327 @@ FrameWidgetClass Banking {
       }
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
-       color 0 0 0 1
-       position 8.26004 64.5201
-       size 816.57001 552
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       position -0.00104 0.0004
+       size 0.981 0.81161
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
-        TextListboxWidgetClass Player_list {
-         visible 0
-         position 8.26004 -0.00044
-         size 278.371 535.479
-         valign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Default
-         "title visible" 0
-         lines 15
-        }
-        PanelWidgetClass PanelWidget8 {
+        PanelWidgetClass PanelWidget11 {
          ignorepointer 1
-         color 0 0 0 1
-         position 558.31 496
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         position 0 0
+         size 0.4 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
-          ButtonWidgetClass Button_Deposit {
-           color 0 0.1255 0.502 1
-           size 250 48
+          TextListboxWidgetClass Player_list {
+           visible 0
+           size 0.95 0.98
            halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           "title visible" 0
+           lines 15
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget12 {
+         ignorepointer 1
+         size 0.602 0.1079
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass DZLBank_Cash {
+           visible 1
+           ignorepointer 1
+           position 0.08387 -0
+           size 0.41613 0.71229
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "123.456.789.000"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass Cash_at_Bank {
+           ignorepointer 1
+           position 0.01437 0
+           size 0.4748 0.7123
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Cash_at_Bank"
+           "text valign" center
+          }
+          TextWidgetClass TextWidget0 {
+           ignorepointer 1
+           position 8.00366 0
+           size 30.83 39.612
+           halign right_ref
            valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           style Default
-           text "#Deposit"
+           style Bold
+           text "$"
+           "text halign" center
+           "text valign" center
           }
          }
         }
-        PanelWidgetClass PanelWidget9 {
+        PanelWidgetClass PanelWidget13 {
          ignorepointer 1
-         color 0 0 0 1
-         position 558.31 439.74002
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         position -0.00038 0.10477
+         size 0.602 0.1079
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
-          ButtonWidgetClass Button_Pay_out {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 250 48
+          TextWidgetClass DZLBank {
+           ignorepointer 1
+           position 0.08449 -0
+           size 0.41551 0.71229
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "123.456.789"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass Player_Bank {
+           ignorepointer 1
+           position 0.01437 -0
+           size 0.47355 0.71229
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Player_Bank"
+           "text valign" center
+          }
+          TextWidgetClass TextWidget1 {
+           ignorepointer 1
+           position 8.00366 0
+           size 30.83 39.612
+           halign right_ref
+           valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           text "#Pay_out"
+           style Bold
+           text "$"
+           "text halign" center
+           "text valign" center
           }
          }
         }
-        PanelWidgetClass PanelWidget4 {
-         visible 0
+        PanelWidgetClass PanelWidget14 {
          ignorepointer 1
-         color 0 0 0 1
-         position 558.31 215.43399
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         position -0.00038 0.20955
+         size 0.602 0.1079
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
-          ButtonWidgetClass Button_Cash_Transfer {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 250 48
+          TextWidgetClass Player_Cash {
+           ignorepointer 1
+           position 0.01437 -0
+           size 0.47483 0.71229
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Player_Cash"
+           "text valign" center
+          }
+          TextWidgetClass DZLCash {
+           ignorepointer 1
+           position 0.08449 -0
+           size 0.4155 0.7123
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "123.456.789"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass TextWidget2 {
+           ignorepointer 1
+           position 8.00366 0
+           size 30.83 39.612
+           halign right_ref
+           valign center_ref
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           text "#Cash_Transfer"
+           style Bold
+           text "$"
+           "text halign" center
+           "text valign" center
           }
          }
         }
-        TextWidgetClass Cash_at_Bank {
+        PanelWidgetClass PanelWidget15 {
          ignorepointer 1
-         position 558.31 8.26006
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         text "#Cash_at_Bank"
-         "text halign" center
-         "text valign" center
-        }
-        TextWidgetClass Player_Bank {
-         ignorepointer 1
-         position 558.31 64.5201
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         text "#Player_Bank"
-         "text halign" center
-         "text valign" center
-        }
-        TextWidgetClass Player_Cash {
-         ignorepointer 1
-         position 558.31 120.78
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         text "#Player_Cash"
-         "text halign" center
-         "text valign" center
-        }
-        TextWidgetClass DZLBank_Cash {
-         visible 1
-         ignorepointer 1
-         position 300.04999 8.26006
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         text "123.456.789"
-         "text halign" right
-         "text valign" center
-        }
-        TextWidgetClass DZLBank {
-         ignorepointer 1
-         position 300.04999 64.5201
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         text "123.456.789"
-         "text halign" right
-         "text valign" center
-        }
-        TextWidgetClass DZLCash {
-         ignorepointer 1
-         position 300.04999 120.78
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         text "123.456.789"
-         "text halign" right
-         "text valign" center
-        }
-        PanelWidgetClass PanelWidget5 {
-         visible 0
-         ignorepointer 1
-         color 0 0 0 1
-         position 300.04999 215.43399
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         position 0 -0.13194
+         size 0.602 0.1079
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
-          EditBoxWidgetClass EditBoxWidget0 {
-           visible 1
-           position -0.00001 0
-           size 250 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+          PanelWidgetClass PanelWidget4 {
+           visible 0
+           ignorepointer 1
+           position 0.01433 0
+           size 0.48567 0.71229
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Cash_Transfer {
+             color 0.502 0 0 1
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Cash_Transfer"
+            }
+           }
+          }
+          EditBoxWidgetClass EditBoxWidget {
+           visible 0
+           position 0.01433 0
+           size 0.47135 0.71229
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
           }
          }
         }
-        PanelWidgetClass PanelWidget6 {
+        PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         color 0 0 0 1
-         position 301.08099 467.866
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         position 0 0.36864
+         size 0.602 0.21334
+         halign right_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
+          PanelWidgetClass PanelWidget8 {
+           ignorepointer 1
+           position 0.01435 0.07724
+           size 0.4713 0.38
+           halign right_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Deposit {
+             color 0 0.502 0.1255 1
+             position 0 0
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             text "#Deposit"
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget9 {
+           ignorepointer 1
+           position 0.01435 0.07276
+           size 0.4713 0.38
+           halign right_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Pay_out {
+             color 0 0.1255 0.502 1
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Pay_out"
+            }
+           }
+          }
           EditBoxWidgetClass Input_Deposit {
-           position -0.00001 0
-           size 250 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.01433 0
+           size 0.4857 0.4
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
           }
          }
         }
@@ -276,25 +390,25 @@ FrameWidgetClass Banking {
       }
       PanelWidgetClass PanelWidget7 {
        ignorepointer 1
-       color 0 0 0 1
-       position 8 8
-       size 48 48
+       position 0.01 0.012
+       size 0.048 0.07
        halign right_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         ButtonWidgetClass Button_Closed {
          color 0.502 0 0 1
-         size 48 48
+         position 0 0
+         size 0.9 0.9
          halign center_ref
          valign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style OldStyle
          text "X"
         }
@@ -302,28 +416,27 @@ FrameWidgetClass Banking {
       }
       PanelWidgetClass PanelWidget10 {
        ignorepointer 1
-       color 0 0 0 1
-       position 0.00144 10.548
-       size 816.57001 48
+       position 0.00001 0.0126
+       size 0.9831 0.0686
        halign center_ref
        valign bottom_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         TextWidgetClass Error_Message {
          ignorepointer 1
          color 0.502 0 0 1
-         position 0.00004 0
-         size 816.57001 48
+         position 0 0
+         size 0.9 1
          halign center_ref
          valign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Normal
          text "Error Nachricht!"
          "text halign" center

@@ -1,60 +1,59 @@
 FrameWidgetClass Housing_Upgrade {
- position 0 -0.00001
- size 1248 716.10895
+ position 0 0
+ size 1 1
  halign center_ref
  valign center_ref
- hexactpos 1
- vexactpos 1
- hexactsize 1
- vexactsize 1
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0 0 0 1
-   position 0.26008 -0.00045
-   size 1232 699.58801
+   color 0.6588 0.6588 0.6588 1
+   position 0 0
+   size 0.6 0.6
    halign center_ref
    valign center_ref
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
    style editor_quad_dark
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     color 0.6588 0.6588 0.6588 0.6275
-     position 0.25998 0.00002
-     size 1216 683.06799
+     position 0 0
+     size 0.99 0.98
      halign center_ref
      valign center_ref
-     hexactpos 1
-     vexactpos 1
-     hexactsize 1
-     vexactsize 1
-     style EditorPanel
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
      {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
-       color 0.6588 0.6588 0.6588 0.6275
-       position 0 8
-       size 400 48
+       position 0 0.0126
+       size 0.3 0.07
        halign center_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         TextWidgetClass Housing_Menu {
          ignorepointer 1
-         color 0 0 0 1
          position 0 0
-         size 400 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Bold
          text "#Housing_Upgrade_Menue"
          "text halign" center
@@ -64,88 +63,87 @@ FrameWidgetClass Housing_Upgrade {
       }
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
-       color 0 0 0 1
-       position 8 64
-       size 592 552
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       position 0.00701 0.00071
+       size 0.519 0.81099
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         TextListboxWidgetClass Storage_List {
-         position 8.26002 -32.4998
-         size 280 470.479
+         position 0.014 -0.05347
+         size 0.47248 0.86007
          valign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Default
          "title visible" 0
          lines 15
         }
         PanelWidgetClass PanelWidget9 {
          ignorepointer 1
-         color 0 0 0 1
-         position 296 0
-         size 296 489
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         size 0.5 0.9
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
           ItemPreviewWidgetClass Preview {
            ignorepointer 1
-           position 0.26008 -0.00001
-           size 280 280
+           position 0.00003 0
+           size 0.946 0.60124
            halign center_ref
            valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
           }
          }
         }
         PanelWidgetClass PanelWidget11 {
          ignorepointer 1
-         color 0 0 0 1
-         size 591.48004 65
+         position 0 -0.00002
+         size 1 0.1079
          halign center_ref
          valign bottom_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
           TextWidgetClass Money {
            ignorepointer 1
-           color 0 0 0 1
-           position 8.26004 8.26007
-           size 139.243 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.01352 0
+           size 0.32816 0.71214
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
            style Bold
            text "#Money"
            "text valign" center
           }
           TextWidgetClass Balance {
            ignorepointer 1
-           color 0 0 0 1
-           position 155.763 8.26002
-           size 206.50101 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.29581 0
+           size 0.349 0.71214
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
            style Bold
            text "123456789"
-           "text halign" right
            "text valign" center
           }
          }
@@ -154,192 +152,240 @@ FrameWidgetClass Housing_Upgrade {
       }
       PanelWidgetClass PanelWidget4 {
        ignorepointer 1
-       color 0 0 0 1
-       position 608 64
-       size 600 552
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       position 0.00697 0.0007
+       size 0.46 0.811
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
-        TextWidgetClass Buy_Price {
+        PanelWidgetClass PanelWidget12 {
          ignorepointer 1
-         color 0 0 0 1
-         position 8 8
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "#Buy_Price"
-         "text valign" center
-        }
-        TextWidgetClass Storage {
-         ignorepointer 1
-         color 0 0 0 1
-         position 8.26002 120.52
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "#Storage_Size"
-         "text valign" center
-        }
-        TextWidgetClass Price_Buy {
-         ignorepointer 1
-         color 0 0 0 1
-         position 342 8
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "123456789"
-         "text halign" right
-         "text valign" center
-        }
-        TextWidgetClass Number_of_Storage {
-         ignorepointer 1
-         color 0 0 0 1
-         position 342 120.52
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "250"
-         "text halign" right
-         "text valign" center
-        }
-        PanelWidgetClass PanelWidget5 {
-         ignorepointer 1
-         color 0 0 0 1
-         position 342 496
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         size 1 0.1079
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
-          ButtonWidgetClass Button_Buy {
-           color 0 0.1255 0.502 1
-           position 0 0
-           size 250 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Default
-           text "#Buy"
+          PanelWidgetClass PanelWidget6 {
+           ignorepointer 1
+           position 0.01525 0.14396
+           size 0.423 0.7121
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Sell {
+             color 0.251 0.502 0 1
+             position 0 0
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Sell"
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           position 0.01525 0.14396
+           size 0.423 0.7121
+           halign right_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Buy {
+             color 0 0.1255 0.502 1
+             position 0 0
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             text "#Buy"
+            }
+           }
           }
          }
         }
-        PanelWidgetClass PanelWidget6 {
-         ignorepointer 1
-         color 0 0 0 1
-         position 8 496
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
-         {
-          ButtonWidgetClass Button_Sell {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 250 48
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           text "#Sell"
-          }
-         }
+        TextListboxWidgetClass Sell_Storage_List {
+         position 0 0.10644
+         size 0.9695 0.54661
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+         "title visible" 0
+         colums ""
+         lines 10
         }
-        PanelWidgetClass PanelWidget8 {
+        PanelWidgetClass PanelWidget13 {
          ignorepointer 1
-         color 0 0 0 1
-         position 0 176
-         size 600 312
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style EditorPanel
+         size 1 0.1079
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
          {
-          TextListboxWidgetClass Sell_Storage_List {
-           position 8.26009 0.00014
-           size 583.48004 295.47998
+          TextWidgetClass Price_Buy {
+           ignorepointer 1
+           position 0.01525 0
+           size 0.47709 0.71208
+           halign right_ref
            valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Default
-           "title visible" 0
-           colums ""
-           lines 10
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "123456789"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass Buy_Price {
+           ignorepointer 1
+           position 0.01525 0
+           size 0.47716 0.7121
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "#Buy_Price"
+           "text valign" center
           }
          }
         }
-        TextWidgetClass Sell_Price {
+        PanelWidgetClass PanelWidget14 {
          ignorepointer 1
-         color 0 0 0 1
-         position 8.26002 64.25999
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "#Sell_Price"
-         "text valign" center
+         position 0 0.10485
+         size 1 0.1079
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass Price_Sell {
+           ignorepointer 1
+           position 0.01478 0
+           size 0.477 0.71208
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "123456789"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass Sell_Price {
+           ignorepointer 1
+           position 0.01525 0
+           size 0.47772 0.71208
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "#Sell_Price"
+           "text valign" center
+          }
+         }
         }
-        TextWidgetClass Price_Sell {
+        PanelWidgetClass PanelWidget15 {
          ignorepointer 1
-         color 0 0 0 1
-         position 342 64.25999
-         size 250 48
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
-         style Bold
-         text "123456789"
-         "text halign" right
-         "text valign" center
+         position 0 0.2097
+         size 1 0.1079
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass Number_of_Storage {
+           ignorepointer 1
+           position 0.0155 0
+           size 0.477 0.71208
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "250"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass Storage {
+           ignorepointer 1
+           position 0.01525 0
+           size 0.477 0.71208
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "#Storage_Size"
+           "text valign" center
+          }
+         }
         }
        }
       }
       PanelWidgetClass PanelWidget7 {
        ignorepointer 1
-       color 0 0 0 1
-       position 8 8
-       size 48 48
+       position 0.007 0.013
+       size 0.04 0.07
        halign right_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         ButtonWidgetClass Button_Closed {
          color 0.502 0 0 1
-         size 48 48
+         position 0 0
+         size 0.9 0.9
          halign center_ref
          valign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style OldStyle
          text "X"
         }
@@ -347,27 +393,27 @@ FrameWidgetClass Housing_Upgrade {
       }
       PanelWidgetClass PanelWidget10 {
        ignorepointer 1
-       color 0 0 0 1
-       position 0.00006 8.26004
-       size 1199.47998 48
+       position 0 0.0126
+       size 0.986 0.0686
        halign center_ref
        valign bottom_ref
-       hexactpos 1
-       vexactpos 1
-       hexactsize 1
-       vexactsize 1
-       style EditorPanel
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
        {
         TextWidgetClass Error_Message {
          ignorepointer 1
          color 0.502 0 0 1
-         size 1182.96008 48
+         position 0 0
+         size 0.9 1
          halign center_ref
          valign center_ref
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          style Normal
          text "Error Nachricht!"
          "text halign" center
