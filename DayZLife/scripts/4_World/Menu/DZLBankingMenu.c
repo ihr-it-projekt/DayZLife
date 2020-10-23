@@ -8,7 +8,7 @@ class DZLBankingMenu : UIScriptedMenu
     ButtonWidget payInButton;
     ButtonWidget payOutButton;
 	
-    TextWidget allPlayerBankBalanceTextWidget;
+    TextWidget playerBankBalanceTextWidget;
     TextWidget balanceTextLabelWidget;
     TextWidget playerBalanceTextWidget;
     TextWidget bankBalanceTextWidget;
@@ -42,9 +42,9 @@ class DZLBankingMenu : UIScriptedMenu
         if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA_RESPONSE) {
            autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
-                bankBalanceTextWidget.SetText(paramGetResponse.param1.bank.ToString());
-                playerBalanceTextWidget.SetText(paramGetResponse.param2.money.ToString());
-                allPlayerBankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
+                bankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
+                playerBalanceTextWidget.SetText(paramGetResponse.param1.money.ToString());
+                playerBankBalanceTextWidget.SetText(paramGetResponse.param1.bank.ToString());
                 errorMessageTextWidget.SetText(paramGetResponse.param3);
            }
        }
@@ -61,8 +61,8 @@ class DZLBankingMenu : UIScriptedMenu
 		payInButton = creator.GetButtonWidget("Button_Deposit");
 		payInButton.Show(true);
 
-        allPlayerBankBalanceTextWidget = creator.GetTextWidget("DZLBank");
-        allPlayerBankBalanceTextWidget.Show(true);
+        playerBankBalanceTextWidget = creator.GetTextWidget("DZLBank");
+        playerBankBalanceTextWidget.Show(true);
         playerBalanceTextWidget = creator.GetTextWidget("DZLCash");
         playerBalanceTextWidget.Show(true);
         bankBalanceTextWidget = creator.GetTextWidget("DZLBank_Cash");
@@ -83,7 +83,7 @@ class DZLBankingMenu : UIScriptedMenu
             super.OnShow();
             errorMessageTextWidget.SetText("");
             playerBalanceTextWidget.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.money.ToString());
-            allPlayerBankBalanceTextWidget.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
+            playerBankBalanceTextWidget.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
 
 			balanceTextLabelWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
 			bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
