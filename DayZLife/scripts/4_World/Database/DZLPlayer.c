@@ -32,7 +32,7 @@ class DZLPlayer {
         Save();
     }
 
-    void TransferFromPlayer(DZLPlayer playerTarget) {
+    void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
         Save();
