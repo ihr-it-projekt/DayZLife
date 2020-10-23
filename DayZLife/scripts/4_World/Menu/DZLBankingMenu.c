@@ -43,7 +43,7 @@ class DZLBankingMenu : UIScriptedMenu
            autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
                 bankBalanceTextWidget.SetText(paramGetResponse.param1.bank.ToString());
-                playerBalanceTextWidget.SetText(paramGetResponse.param1.money.ToString());
+                playerBalanceTextWidget.SetText(paramGetResponse.param2.money.ToString());
                 allPlayerBankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
                 errorMessageTextWidget.SetText(paramGetResponse.param3);
            }
