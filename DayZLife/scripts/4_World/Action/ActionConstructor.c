@@ -8,5 +8,6 @@ modded class ActionConstructor
 		actions.Insert(ActionOpenUpgradeHouseMenu);
 		actions.Insert(ActionOpenBankingMenu);
 		actions.Insert(ActionRobMoney);
+		actions.Insert(ActionRobBank);
     }
 }

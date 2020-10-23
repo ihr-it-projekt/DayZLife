@@ -16,8 +16,11 @@ class DZLBankListener
             autoptr Param2<PlayerBase, float> paramDeposit;
             string message = "";
             if (ctx.Read(paramDeposit)){
-                DZLPlayer dzlPlayer = new DZLPlayer(paramDeposit.param1);
-                if(paramDeposit.param2 >= dzlPlayer.money || paramDeposit.param2 <= dzlPlayer.bank) {
+                DZLPlayer dzlPlayer = new DZLPlayer(paramDeposit.param1.GetIdentity().GetId());
+								
+				if (!bank.CanUseBank()) {
+					message = "#bank_can_not_be_used_in_moment";
+				} else if(paramDeposit.param2 >= dzlPlayer.money || paramDeposit.param2 <= dzlPlayer.bank) {
                     bank.AddMoney(paramDeposit.param2 * -1);
                     dzlPlayer.AddMoneyToPlayer(paramDeposit.param2);
                     dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param2 * -1);

@@ -3,12 +3,15 @@ class DZLPlayer {
     float money = 0;
     float bank = 0;
 
-    void DZLPlayer(notnull PlayerBase player) {
-        fileName = player.GetIdentity().GetId() + ".json";
+    void DZLPlayer(string playerId) {
+        fileName = playerId + ".json";
         if (!Load()) {
             if (DAY_Z_LIFE_DEBUG) {
                 money = 100000;
             }
+
+            DZLPlayerIdentities idents = new DZLPlayerIdentities;
+            idents.AddPlayer(playerId);
 
             Save();
         }

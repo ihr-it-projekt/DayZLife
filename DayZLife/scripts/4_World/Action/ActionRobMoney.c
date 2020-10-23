@@ -38,14 +38,14 @@ class ActionRobMoney : ActionInteractBase
     override void OnEndServer(ActionData action_data) {
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
-        DZLPlayer dzlPlayer = new DZLPlayer(player);
+        DZLPlayer dzlPlayer = new DZLPlayer(player.GetIdentity().GetId());
 
         if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             targetPlayer.TransferFromDeadPlayer(dzlPlayer);
 
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
         } else if (targetPlayer.IsAlive() && targetPlayer.IsRestrained()) {
-            DZLPlayer dzlTargetPlayer = new DZLPlayer(targetPlayer);
+            DZLPlayer dzlTargetPlayer = new DZLPlayer(targetPlayer.GetIdentity().GetId());
             if (dzlTargetPlayer) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
 
