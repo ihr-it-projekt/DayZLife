@@ -27,7 +27,7 @@ class ActionRobMoney : ActionInteractBase
         if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
             return true;
-        } else if (targetPlayer.GetMoneyPlayerIsDead() > 0 && targetPlayer.IsRealPlayer) {
+        } else if (targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0 && targetPlayer.IsRestrained()) {
             m_CommandUID = DayZPlayerConstants.CMD_GESTUREFB_COME;
             return true;
         }
