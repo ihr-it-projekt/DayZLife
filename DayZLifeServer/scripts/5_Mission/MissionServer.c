@@ -4,7 +4,7 @@ modded class MissionServer {
 
 	void MissionServer()
 	{
-        DebugMessageServerDZL("Load DayZLifeServer");
+        DebugMessageDZL("Load DayZLifeServer");
         manager = new DZLEventManager;
 
 	}

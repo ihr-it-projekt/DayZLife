@@ -10,7 +10,7 @@ class DZLPlayerIdentities
     }
 
     void AddPlayer(string playerId) {
-        if (!playerIdentities.Find(playerId)) {
+        if (-1 == playerIdentities.Find(playerId)) {
             playerIdentities.Insert(playerId);
             Save();
         }

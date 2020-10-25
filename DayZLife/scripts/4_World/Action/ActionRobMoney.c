@@ -27,7 +27,7 @@ class ActionRobMoney : ActionInteractBase
         if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
             return true;
-        } else if (targetPlayer.IsAlive() && targetPlayer.IsRestrained()) {
+        } else if (targetPlayer.IsAlive() && (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious())) {
             m_CommandUID = DayZPlayerConstants.CMD_GESTUREFB_COME;
             return true;
         }
@@ -44,9 +44,9 @@ class ActionRobMoney : ActionInteractBase
             targetPlayer.TransferFromDeadPlayer(dzlPlayer);
 
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
-        } else if (targetPlayer.IsAlive() && targetPlayer.IsRestrained()) {
+        } else if (targetPlayer.IsAlive() && (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious())) {
             DZLPlayer dzlTargetPlayer = new DZLPlayer(targetPlayer.GetIdentity().GetId());
-            if (dzlTargetPlayer) {
+            if (dzlTargetPlayer && dzlTargetPlayer.money > 0) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
 
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());

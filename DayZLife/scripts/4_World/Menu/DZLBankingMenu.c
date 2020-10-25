@@ -126,18 +126,18 @@ class DZLBankingMenu : UIScriptedMenu
 
 
     private bool SendDeposit(int factor) {
-        float deposit = factor * inputDeposit.GetText().ToFloat();
+        float deposit = factor * inputDeposit.GetText().ToInt();
 
         if (deposit != 0) {
             if (deposit >= PlayerBaseHelper.GetPlayer().dzlPlayer.money || deposit <= PlayerBaseHelper.GetPlayer().dzlPlayer.bank) {
-                GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, float>(PlayerBaseHelper.GetPlayer(), deposit), true);
+                GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, int>(PlayerBaseHelper.GetPlayer(), deposit), true);
                 errorMessageTextWidget.SetText("");
                 inputDeposit.SetText("");
             } else {
                 errorMessageTextWidget.SetText("#error_not_enough_money_to_transfer");
             }
         } else {
-            errorMessageTextWidget.SetText("#error_deposit_is_not_a_float");
+            errorMessageTextWidget.SetText("#error_deposit_is_not_a_int");
         }
         return true;
 

@@ -1,7 +1,7 @@
 class DZLPlayer {
     private string fileName;
-    float money = 0;
-    float bank = 0;
+    int money = 0;
+    int bank = 0;
 
     void DZLPlayer(string playerId) {
         fileName = playerId + ".json";
@@ -17,13 +17,13 @@ class DZLPlayer {
         }
     }
 	
-	void AddMoneyToPlayer(float moneyCount) {
+	void AddMoneyToPlayer(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			money += moneyCount;
 		    Save();
 		}
     }
-	void AddMoneyToPlayerBank(float moneyCount) {
+	void AddMoneyToPlayerBank(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			bank += moneyCount;
 		    Save();

@@ -8,7 +8,7 @@ modded class PlayerBase
 	ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
 	bool IsDZLBank = false;
-	private float moneyPlayerIsDead = 0;
+	private int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
 
 	void ~PlayerBase() {
@@ -19,7 +19,7 @@ modded class PlayerBase
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
         RegisterNetSyncVariableBool("IsRealPlayer");
-        RegisterNetSyncVariableFloat("moneyPlayerIsDead", 0, 99999999999);
+        RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
     }
 
     override void SetActions() {

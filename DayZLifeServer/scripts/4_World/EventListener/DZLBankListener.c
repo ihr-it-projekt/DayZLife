@@ -1,10 +1,11 @@
 class DZLBankListener
 {
     ref DZLBank bank;
+    ref DZLBankingConfig config;
 
     void DZLBankListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        bank = new DZLBank;
+        config = new DZLBankingConfig;
     }
 
     void ~DZLBankListener() {
@@ -13,12 +14,12 @@ class DZLBankListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA) {
-            autoptr Param2<PlayerBase, float> paramDeposit;
+            autoptr Param2<PlayerBase, int> paramDeposit;
             string message = "";
             if (ctx.Read(paramDeposit)){
                 DZLPlayer dzlPlayer = new DZLPlayer(paramDeposit.param1.GetIdentity().GetId());
-								
-				if (!bank.CanUseBank()) {
+				bank = new DZLBank;
+				if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					message = "#bank_can_not_be_used_in_moment";
 				} else if(paramDeposit.param2 >= dzlPlayer.money || paramDeposit.param2 <= dzlPlayer.bank) {
                     bank.AddMoney(paramDeposit.param2 * -1);
@@ -36,7 +37,7 @@ class DZLBankListener
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
             autoptr Param1<PlayerBase> paramGetBankData;
             if (ctx.Read(paramGetBankData)){
-                GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+                GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(new DZLBank), true);
             }
         }
     }
