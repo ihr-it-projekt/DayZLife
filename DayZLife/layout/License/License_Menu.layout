@@ -1,0 +1,160 @@
+FrameWidgetClass License_Menu {
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   position 0 0
+   size 0.26 0.55
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position -0 -0
+     size 0.98 0.98
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       position 0 0.048
+       size 0.967 0.875
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget4 {
+         ignorepointer 1
+         position 0 0
+         size 1 0.11986
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           position -0 -0
+           size 0.5 0.73606
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Buy {
+             color 0 0.1255 0.502 1
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             text "#Buy"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       position 0.01656 0.01384
+       size 0.6763 0.08282
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextWidgetClass License {
+         ignorepointer 1
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Bold
+         text "#License_Menue"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      TextListboxWidgetClass License_ListBox {
+       position -0.0001 -0.00692
+       size 0.9373 0.7474
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       "title visible" 1
+       colums "#License;60;#Price;40"
+       lines 20
+      }
+      PanelWidgetClass PanelWidget7 {
+       ignorepointer 1
+       position 0.01656 0.01384
+       size 0.099 0.083
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "X"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
