@@ -1,5 +1,5 @@
 FrameWidgetClass Banking {
- position 0 0
+ position 0.00054 0
  size 1 1
  halign center_ref
  valign center_ref
@@ -84,7 +84,7 @@ FrameWidgetClass Banking {
          style editor_quad_dark
          {
           TextListboxWidgetClass Player_list {
-           visible 0
+           visible 1
            size 0.95 0.98
            halign center_ref
            valign center_ref
@@ -111,7 +111,7 @@ FrameWidgetClass Banking {
           TextWidgetClass DZLBank_Cash {
            visible 1
            ignorepointer 1
-           position 0.08387 -0
+           position 0.08387 0
            size 0.41613 0.71229
            halign right_ref
            valign center_ref
@@ -165,7 +165,7 @@ FrameWidgetClass Banking {
          {
           TextWidgetClass DZLBank {
            ignorepointer 1
-           position 0.08449 -0
+           position 0.08449 0
            size 0.41551 0.71229
            halign right_ref
            valign center_ref
@@ -179,7 +179,7 @@ FrameWidgetClass Banking {
           }
           TextWidgetClass Player_Bank {
            ignorepointer 1
-           position 0.01437 -0
+           position 0.01437 0
            size 0.47355 0.71229
            valign center_ref
            hexactpos 0
@@ -219,7 +219,7 @@ FrameWidgetClass Banking {
          {
           TextWidgetClass Player_Cash {
            ignorepointer 1
-           position 0.01437 -0
+           position 0.01437 0
            size 0.47483 0.71229
            valign center_ref
            hexactpos 0
@@ -231,7 +231,7 @@ FrameWidgetClass Banking {
           }
           TextWidgetClass DZLCash {
            ignorepointer 1
-           position 0.08449 -0
+           position 0.08449 0
            size 0.4155 0.7123
            halign right_ref
            valign center_ref
@@ -261,6 +261,7 @@ FrameWidgetClass Banking {
          }
         }
         PanelWidgetClass PanelWidget15 {
+         visible 1
          ignorepointer 1
          position 0 -0.13194
          size 0.602 0.1079
@@ -273,7 +274,7 @@ FrameWidgetClass Banking {
          style editor_quad_dark
          {
           PanelWidgetClass PanelWidget4 {
-           visible 0
+           visible 1
            ignorepointer 1
            position 0.01433 0
            size 0.48567 0.71229
@@ -298,8 +299,8 @@ FrameWidgetClass Banking {
             }
            }
           }
-          EditBoxWidgetClass EditBoxWidget {
-           visible 0
+          EditBoxWidgetClass Input_Cash_Transfer {
+           visible 1
            position 0.01433 0
            size 0.47135 0.71229
            valign center_ref
