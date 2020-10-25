@@ -42,3 +42,7 @@
 "bank_rob_was_successful", "bank_rob_was_successful", "bank_rob_was_successful", "Bankraub war erfolgreich. Beute: "
 "bank_rob_was_started", "bank_rob_was_started", "bank_rob_was_started", "Bankraub wurde gestarted."
 "bank_rob_was_canceled", "bank_rob_was_canceled", "bank_rob_was_canceled", "Bankraub wurde abgebrochen."
+"error_deposit_must_be_positiv", "", "", "Überweisung muss positiv sein."
+"error_no_player_was_selected", "", "", "Es muss ein Spieler ausgewählt sein."
+"error_you_cant_send_money_to_yourself", "", "", "Du kannst dir selber kein Geld überweisen."
+"Cash_Transfer", "", "", "Überweisen."

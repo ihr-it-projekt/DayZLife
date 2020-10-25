@@ -19,21 +19,24 @@ class DZLBank
     }
 	
 	float PlayerRaidBank(DZLPlayer player, int percentage) {
-		float moneyToRaid = percentage/100 * moneyAtBank;
-		player.AddMoneyToPlayer(moneyToRaid);
-
-		moneyAtBank -= moneyToRaid;
-		Save();
-
 		DZLPlayerIdentities identities = new DZLPlayerIdentities;
 		ref array<string> playerIdentities = identities.playerIdentities;
 
 		DZLPlayer playerRobt;
+		int moneyToRaid = 0;
 		foreach(string ident: playerIdentities) {
 		    playerRobt = new DZLPlayer(ident);
-		    if (!playerRobt.bank) continue;
-		    playerRobt.AddMoneyToPlayerBank((percentage/100 * playerRobt.bank) * -1);
+		    if (!playerRobt.bank || player.fileName == playerRobt.fileName) continue;
+
+		    int moneyToSteal = percentage/100 * playerRobt.bank;
+
+		    playerRobt.AddMoneyToPlayerBank(moneyToSteal * -1);
+		    moneyToRaid += moneyToSteal;
 		}
+
+        player.AddMoneyToPlayer(moneyToRaid);
+        moneyAtBank -= moneyToRaid;
+        Save();
 		
 		return moneyToRaid;
 	}
