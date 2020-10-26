@@ -54,14 +54,14 @@ class DZLBankingMenu : UIScriptedMenu
            	if (ctx.Read(paramGetPlayerResponse)){
 				playerListbox.ClearItems();
 				array<ref DZLPlayerBankInfo> players = paramGetPlayerResponse.param1;
+				
+				DebugMessageDZL(players.ToString());
+				
 				foreach(DZLPlayerBankInfo reciver: players) {
 					playerListbox.AddItem(reciver.name, reciver, 0);
 				}
 			
 			}
-			
-	
-		
 		}
     }
 

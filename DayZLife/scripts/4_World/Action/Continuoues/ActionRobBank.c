@@ -89,7 +89,7 @@ class ActionRobBank: ActionContinuousBase
             bank.RaidIsFinished();
 			DZLPlayer dzlPlayer = new DZLPlayer(action_data.m_Player.GetIdentity().GetId());
             
-			float money = bank.PlayerRaidBank(dzlPlayer, GetConfig().percentOfMoneyWhenRaid);
+			int money = bank.PlayerRaidBank(dzlPlayer, GetConfig().percentOfMoneyWhenRaid);
             GetGame().RPCSingleParam(action_data.m_Player, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#bank_rob_was_successful " + money.ToString()), true);
             GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
 			GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(action_data.m_Player.GetIdentity().GetId())), true, action_data.m_Player.GetIdentity());
