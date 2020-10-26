@@ -25,7 +25,7 @@ class DZLBank
 		int moneyToRaid = 0;
 		foreach(string ident: playerIdentities) {
 		    DZLPlayer playerRobt = new DZLPlayer(ident);
-		    if (!playerRobt || playerRobt.bank == 0 || player.fileName == playerRobt.fileName) continue;
+		    if (playerRobt.bank == 0 || player.fileName == playerRobt.fileName) continue;
 
 		    int moneyToSteal = percentage/100 * playerRobt.bank;
 
