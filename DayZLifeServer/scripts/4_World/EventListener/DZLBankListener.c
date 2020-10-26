@@ -89,7 +89,7 @@ class DZLBankListener
 				collection.Insert(new DZLPlayerBankInfo(_player.GetIdentity().GetId(), _player.GetIdentity().GetName()));
 			}
 			
-			GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE, new Param1<ref array<ref DZLPlayerBankInfo>>(collection), true, sender);
+			GetGame().RPCSingleParam(sender, DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE, new Param1<ref array<ref DZLPlayerBankInfo>>(collection), true, sender);
         }
     }
 }
