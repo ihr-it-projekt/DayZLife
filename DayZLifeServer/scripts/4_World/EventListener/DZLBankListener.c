@@ -40,10 +40,9 @@ class DZLBankListener
                 DZLPlayer dzlPlayerSender = new DZLPlayer(paramDepositPlayer.param1.GetIdentity().GetId());
                 DZLPlayer dzlPlayerReciver = new DZLPlayer(paramDepositPlayer.param2.id);
 				
-				array<Man> allPlayers;
+				array<Man> allPlayers = new array<Man>;
             	GetGame().GetPlayers(allPlayers);
-				
-				
+
 				Man playerFound;
 				foreach(Man player: allPlayers) {
 					if (player.GetIdentity().GetId() == paramDepositPlayer.param2.id) {
