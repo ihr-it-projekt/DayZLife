@@ -93,6 +93,16 @@ class ActionRobBank: ActionContinuousBase
             GetGame().RPCSingleParam(action_data.m_Player, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#bank_rob_was_successful " + money.ToString()), true);
             GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
 			GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(action_data.m_Player.GetIdentity().GetId())), true, action_data.m_Player.GetIdentity());
+
+			array<Man> _players = new array<Man>;
+            GetGame().GetPlayers(_players);
+
+            if (_players) {
+                foreach(Man _player: _players) {
+                    GetGame().RPCSingleParam(_player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(_player.GetIdentity().GetId())), true, _player.GetIdentity());
+                }
+            }
+
 			bank = null;
 		} else if ((action_data.m_State == UA_CANCEL || action_data.m_State == UA_INTERRUPT || action_data.m_State == UA_FAILED) && done == false) {
 		    done = true;

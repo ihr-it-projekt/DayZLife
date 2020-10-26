@@ -87,7 +87,6 @@ class DZLBankListener
 			if (_players) {
 				foreach(Man _player: _players) {
 					collection.Insert(new DZLPlayerBankInfo(_player.GetIdentity().GetId(), _player.GetIdentity().GetName()));
-					DebugMessageDZL(_player.GetIdentity().GetName());
 				}
 			}
 			
