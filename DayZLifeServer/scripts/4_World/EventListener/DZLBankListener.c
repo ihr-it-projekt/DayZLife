@@ -80,7 +80,7 @@ class DZLBankListener
                 GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(new DZLBank), true);
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA) {
-			array<Man> _players
+			array<Man> _players;
             GetGame().GetPlayers(_players);
 			
 			array<ref DZLPlayerBankInfo> collection = new array<ref DZLPlayerBankInfo>;
