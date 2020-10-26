@@ -24,14 +24,12 @@ class DZLBank
 
 		int moneyToRaid = 0;
 		foreach(string ident: playerIdentities) {
-			DebugMessageDZL("Try take money from playerIdent " + ident);
-			
-		    DZLPlayer playerRobt = new DZLPlayer(ident);
+			DZLPlayer playerRobt = new DZLPlayer(ident);
 		    if (playerRobt.bank == 0 || player.fileName == playerRobt.fileName) continue;
 			
-			DebugMessageDZL("Take money from playerIdent " + ident);
-
-		    int moneyToSteal = percentage/100 * playerRobt.bank;
+			int moneyToSteal = percentage/100 * playerRobt.bank;
+			
+			DebugMessageDZL("Take money from playerIdent " + ident + " Money: " + moneyToSteal.ToString() + " percentage: " + percentage.ToString()+ "playerRobt.bank: " + playerRobt.bank.ToString());
 
 		    playerRobt.AddMoneyToPlayerBank(moneyToSteal * -1);
 		    moneyToRaid += moneyToSteal;

@@ -80,14 +80,16 @@ class DZLBankListener
                 GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(new DZLBank), true);
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA) {
-			array<Man> _players;
+			array<Man> _players = new array<Man>;
             GetGame().GetPlayers(_players);
 			
 			array<ref DZLPlayerBankInfo> collection = new array<ref DZLPlayerBankInfo>;
 			
-			foreach(Man _player: _players) {
-				collection.Insert(new DZLPlayerBankInfo(_player.GetIdentity().GetId(), _player.GetIdentity().GetName()));
-				DebugMessageDZL(_player.GetIdentity().GetName());
+			if (_players) {
+				foreach(Man _player: _players) {
+					collection.Insert(new DZLPlayerBankInfo(_player.GetIdentity().GetId(), _player.GetIdentity().GetName()));
+					DebugMessageDZL(_player.GetIdentity().GetName());
+				}
 			}
 			
 			GetGame().RPCSingleParam(target, DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE, new Param1<ref array<ref DZLPlayerBankInfo>>(collection), true, sender);
