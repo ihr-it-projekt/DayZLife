@@ -5,6 +5,7 @@ class DZLEventManager
     ref DZLPlayerHouseListener playerHouse;
     ref DZLBuyStorageListener buyStorage;
     ref DZLBankListener bankListener;
+    ref DZLBankRaidListener bankRaidListener;
 
     void DZLEventManager() {
         buyHouse = new DZLBuyHouseListener;
@@ -12,5 +13,6 @@ class DZLEventManager
         playerHouse = new DZLPlayerHouseListener;
         buyStorage = new DZLBuyStorageListener;
         bankListener = new DZLBankListener;
+        bankRaidListener = new DZLBankRaidListener;
     }
 }

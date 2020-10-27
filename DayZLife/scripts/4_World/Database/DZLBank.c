@@ -29,8 +29,6 @@ class DZLBank
 			
 			float moneyToSteal = Math.Round(playerRobt.bank * percentage / 100);
 			
-			DebugMessageDZL("Take money from playerIdent " + ident + " Money: " + moneyToSteal.ToString() + " percentage: " + percentage.ToString()+ "playerRobt.bank: " + playerRobt.bank.ToString());
-
 		    playerRobt.AddMoneyToPlayerBank(moneyToSteal * -1);
 		    moneyToRaid += moneyToSteal;
 		}

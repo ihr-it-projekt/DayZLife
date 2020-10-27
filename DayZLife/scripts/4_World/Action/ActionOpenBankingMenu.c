@@ -13,13 +13,11 @@ class ActionOpenBankingMenu: ActionInteractBase
         m_ConditionTarget = new CCTNone;
     }
 
-	override string GetText()
-	{
+	override string GetText() {
 		return "#open_banking_menu";
 	}
 
-	override void OnStartClient(ActionData action_data)
-	{
+	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){

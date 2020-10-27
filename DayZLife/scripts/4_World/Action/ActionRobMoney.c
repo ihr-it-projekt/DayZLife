@@ -1,7 +1,6 @@
-class ActionRobMoney : ActionInteractBase
+class ActionRobMoney: ActionInteractBase
 {
-    void ActionRobMoney()
-    {
+    void ActionRobMoney() {
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
@@ -9,8 +8,8 @@ class ActionRobMoney : ActionInteractBase
 
     override void CreateConditionComponents()
     {
+        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);;
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTNone;
     }
 
     override string GetText()
