@@ -27,7 +27,13 @@ class ActionRobBank: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
-		if (player.GetInstanceType() == DayZPlayerInstanceType.INSTANCETYPE_SERVER) {
+		if (GetGame().IsClient()) {
+			config = player.config.bankConfig;
+		} else {
+			GetConfig();
+		}
+		
+		if (config) {
 			PlayerBase other_player = PlayerBase.Cast(target.GetObject());
 			EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
@@ -35,7 +41,7 @@ class ActionRobBank: ActionInteractBase
 			if(!other_player) return false;
 
 			bool hasItem = false;
-			foreach (string itemForRaid: GetConfig().itemsCanUsedToRaidBank) {
+			foreach (string itemForRaid: player.config.bankConfig.itemsCanUsedToRaidBank) {
 			    if (item_in_hands_source.GetType() == itemForRaid) {
 			        hasItem = true;
 			        break;
@@ -48,7 +54,7 @@ class ActionRobBank: ActionInteractBase
 			return other_player.IsDZLBank;
 		}
 
-		return true;
+		return false;
 	}
 
 	override void OnStartClient(ActionData action_data) {
