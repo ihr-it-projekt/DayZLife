@@ -2,7 +2,6 @@ class DZLBankingConfig
 {
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
 	bool showSumOfStoredCashInBank = true;
-	bool raidIsEnabled = false;
 	int raidTimeBankInSeconds = 5;
 	ref array<string> itemsCanUsedToRaidBank;
     int percentOfMoneyWhenRaid = 50;

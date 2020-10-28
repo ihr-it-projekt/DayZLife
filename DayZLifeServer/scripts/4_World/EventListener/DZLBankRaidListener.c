@@ -72,7 +72,7 @@ class DZLBankRaidListener : Managed
         }
     }
 
-    private bool isInNearOfBank() {
+    private bool isInNearOfBankAndLocationIsEnabled() {
         if (!playerWhoStartedRaid) {
             return false;
         }
@@ -82,7 +82,7 @@ class DZLBankRaidListener : Managed
         }
         foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
             if (vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
-                return true;
+                return position.raidIsEnabled;;
             }
         }
         return false;
