@@ -25,8 +25,14 @@ class DZLBank
 		int moneyToRaid = 0;
 		foreach(string ident: playerIdentities) {
 			DZLPlayer playerRobt = new DZLPlayer(ident);
-		    if (playerRobt.bank == 0 || player.fileName == playerRobt.fileName) continue;
+		    if (playerRobt.bank == 0) continue;
+
+		    DebugMessageDZL(player.fileName + " = " +  playerRobt.fileName); 
+
+		    if (player.fileName == playerRobt.fileName) continue;
 			
+			DebugMessageDZL("Take money");
+
 			float moneyToSteal = Math.Round(playerRobt.bank * percentage / 100);
 			
 		    playerRobt.AddMoneyToPlayerBank(moneyToSteal * -1);

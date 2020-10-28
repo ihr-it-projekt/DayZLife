@@ -31,7 +31,7 @@ class ActionRobBank: ActionInteractBase
 			PlayerBase other_player = PlayerBase.Cast(target.GetObject());
 			EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
-			if(!item_in_hands_source) return false;
+			if(!item_in_hands_source || !other_player) return false;
 
 			bool hasItem = false;
 			foreach (string itemForRaid: GetConfig().itemsCanUsedToRaidBank) {
