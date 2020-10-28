@@ -39,7 +39,7 @@ class DZLBankRaidListener : Managed
 
     void Finish() {
 		if (time > timeHappened) {
-            if (!isInNearOfBank()) {
+            if (!isInNearOfBankAndLocationIsEnabled()) {
 				DebugMessageDZL("is not in near");
                 raidTimer.Stop();
                 DZLBank bank_cancel = new DZLBank;
