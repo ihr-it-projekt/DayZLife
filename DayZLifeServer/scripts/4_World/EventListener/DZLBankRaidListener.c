@@ -25,6 +25,7 @@ class DZLBankRaidListener : Managed
 				DZLBank bank = new DZLBank;
 				if (!bank.raidRuns) {
 					bank.StartRaid();
+					timeHappened = 0;
 					playerWhoStartedRaid = param.param1;
 					GetGame().RPCSingleParam(target, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#bank_rob_was_started"), true);
 			        raidTimer.Run(1, this, "Finish", null, true);
