@@ -9,5 +9,6 @@ modded class ActionConstructor
 		actions.Insert(ActionOpenBankingMenu);
 		actions.Insert(ActionRobMoney);
 		actions.Insert(ActionRobBank);
+		actions.Insert(ActionHarvestItem);
     }
 }

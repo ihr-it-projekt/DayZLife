@@ -30,6 +30,7 @@ modded class PlayerBase
         AddAction(ActionOpenBankingMenu);
         AddAction(ActionRobMoney);
         AddAction(ActionRobBank);
+        AddAction(ActionHarvestItem);
 
         if (GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
