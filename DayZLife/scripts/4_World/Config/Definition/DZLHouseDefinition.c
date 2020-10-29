@@ -1,6 +1,6 @@
 class DZLHouseDefinition {
 	
-   string houseType;
+   	string houseType;
     int sellPrice;
     int buyPrice;
 	ref array<vector> storagePosition;
