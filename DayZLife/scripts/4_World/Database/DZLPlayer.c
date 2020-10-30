@@ -2,6 +2,8 @@ class DZLPlayer {
     string fileName;
     int money = 0;
     int bank = 0;
+	
+	ref array<ref DZLLicence> licences;
 
     void DZLPlayer(string playerId) {
         fileName = playerId + ".json";
@@ -12,7 +14,8 @@ class DZLPlayer {
 
             DZLPlayerIdentities idents = new DZLPlayerIdentities;
             idents.AddPlayer(playerId);
-
+			licences = new array<ref DZLLicence>;
+			
             Save();
         }
     }
@@ -58,6 +61,24 @@ class DZLPlayer {
 			bank -= moneyToTransfer;
 		}
 		
+		Save();
+	}
+	
+	string CanBuyLicence(DZLLicence licenceToBuy){
+		if(money < licenceToBuy.price) return "#not_enough_money";
+		if(-1 != licences.Find(licenceToBuy)) return "#your_already_have_the_licence";
+		if("" == licenceToBuy.dependencyLicence) return "";
+		foreach(DZLLicence licence: licences){
+			if(licence.name == licenceToBuy.dependencyLicence){
+				return "";
+			}
+		}
+		return "#you_have_not_the_dependency_licence";
+	}
+	
+	void BuyLicence(DZLLicence licenceToBuy){
+		money -= licenceToBuy.price;
+		licences.Insert(licenceToBuy);
 		Save();
 	}
 

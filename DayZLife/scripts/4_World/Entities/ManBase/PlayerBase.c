@@ -7,6 +7,8 @@ modded class PlayerBase
 	ref DZLPlayerHouse house;
 	ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
+	ref DZLLicenceMenu licenceMenu;
+	
 	bool IsDZLBank = false;
 	private int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
@@ -115,6 +117,12 @@ modded class PlayerBase
 		bankingMenu = DZLBankingMenu();
 		bankingMenu.SetConfig(config);
 		return bankingMenu;
+	}
+	
+	DZLLicenceMenu GetLicenceMenu() {
+		licenceMenu = DZLLicenceMenu();
+		licenceMenu.SetConfig(config);
+		return licenceMenu;
 	}
 
     void TransferFromDeadPlayer(DZLPlayer playerTarget) {

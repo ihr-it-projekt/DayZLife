@@ -49,3 +49,6 @@
 "start_work", "", "", "starte arbeit"
 "no_space_left_in_inventory", "", "", "Kein Platz mehr."
 "you_got", "", "", "Du bekommst"
+"not_enough_money", "", "", "Du hast nicht genug Geld dabei"
+"your_already_have_the_licence", "", "", "Du hast die Lizenz bereits"
+"you_have_not_the_dependency_licence", "", "", "Du haben nicht die Abhängigkeitslizenz erworben."
