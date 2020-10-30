@@ -3,6 +3,9 @@ class DZLLicenceMenu : UIScriptedMenu
     private ref DZLUIItemCreator creator;
 	private ref DZLConfig config;
 
+	PlayerBase player;
+    DZLPlayer dzlPlayer;
+
 	TextListboxWidget playerListbox;
 
     ButtonWidget closeButton;
@@ -33,13 +36,28 @@ class DZLLicenceMenu : UIScriptedMenu
 
     void UpdateGUI(string message = "") {
         if(message) errorMessageTextWidget.SetText(message);
+		
+		array<ref DZLLicence> licences = config.licenceConfig.licences;
+		licenceListBox.ClearItems();
+		foreach(DZLLicence licence: licences){
+			string hasLicenseText = "x";
+			if (!dzlPlayer.HasLicense(licence)) {
+				hasLicenseText = "";
+			}
+			
+			int pos = licenceListBox.AddItem(licence.name, licence, 0);
+			licenceListBox.SetItem(pos, licence.price.ToString(), licence, 1);
+			licenceListBox.SetItem(pos, licence.dependencyLicence, licence, 2);
+			licenceListBox.SetItem(pos, hasLicenseText, licence, 3);
+		}
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_RESPONSE) {
-           autoptr Param1<string> paramGetResponse;
+           autoptr Param2<ref DZLPlayer, string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
-				UpdateGUI(paramGetResponse.param1);
+				dzlPlayer = paramGetResponse.param1;
+				UpdateGUI(paramGetResponse.param2);
            }
 		}
     }
@@ -54,12 +72,14 @@ class DZLLicenceMenu : UIScriptedMenu
         buyButton.Show(false);
 		
 		errorMessageTextWidget = creator.GetTextWidget("Error_Message");
-		
 		licenceListBox = creator.GetTextListboxWidget("Licence_ListBox");
         
         layoutRoot = creator.GetLayoutRoot();
 
         layoutRoot.Show(false);
+		
+		player = PlayerBaseHelper.GetPlayer();
+		dzlPlayer = player.dzlPlayer;
 
         return layoutRoot;
     }
@@ -69,12 +89,7 @@ class DZLLicenceMenu : UIScriptedMenu
             super.OnShow();
 			buyButton.Show(false);
             errorMessageTextWidget.SetText("");
-			
-			array<ref DZLLicence> licences = config.licenceConfig.licences;
-			licenceListBox.ClearItems();
-			foreach(DZLLicence licence: licences){
-				licenceListBox.AddItem(licence.name, licence, 0);
-			}
+			UpdateGUI();
 			
 			GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
             GetGame().GetUIManager().ShowCursor(true);
@@ -108,13 +123,10 @@ class DZLLicenceMenu : UIScriptedMenu
 				
 				if(!licence) return true;
 			
-				PlayerBase player = PlayerBaseHelper.GetPlayer();
-				DZLPlayer dzlPlayer = player.dzlPlayer;
-				
 				string messege = dzlPlayer.CanBuyLicence(licence);
 			
 				if("" == messege){
-					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, DZLLicence>(player, licence), true);
+					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, ref DZLLicence>(player, licence), true);
 				} else {
 					UpdateGUI(messege);
 				}

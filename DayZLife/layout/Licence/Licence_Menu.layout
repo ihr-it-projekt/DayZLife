@@ -57,7 +57,7 @@ FrameWidgetClass License_Menu {
          vexactsize 0
          style editor_quad_dark
          {
-          TextWidgetClass error {
+          TextWidgetClass Error_Message {
            ignorepointer 1
            color 0.502 0 0 1
            position 0 0
@@ -119,7 +119,7 @@ FrameWidgetClass License_Menu {
       }
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
-       position -0 0.01147
+       position 0 0.01147
        size 0.53403 0.075
        halign center_ref
        hexactpos 0
@@ -138,13 +138,14 @@ FrameWidgetClass License_Menu {
          hexactsize 0
          vexactsize 0
          style Bold
-         text "#License_Menue"
+         text "#Licence_Menu"
          "text halign" center
          "text valign" center
         }
        }
       }
-      TextListboxWidgetClass License_ListBox {
+      TextListboxWidgetClass Licence_ListBox {
+       disabled 0
        position 0.00081 -0.05798
        size 0.949 0.65356
        halign center_ref
@@ -154,7 +155,7 @@ FrameWidgetClass License_Menu {
        hexactsize 0
        vexactsize 0
        "title visible" 1
-       colums "#License;35;#Dependence;35;#Price;20;#Purchased;10;"
+       colums "#License;35;#depend_on;35;#Price;20;#Purchased;10;"
        lines 20
       }
       PanelWidgetClass PanelWidget7 {

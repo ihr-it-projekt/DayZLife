@@ -28,6 +28,8 @@ class ActionRobBank: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
 		if (GetGame().IsClient()) {
+		    if (!player.config) return false;
+
 			config = player.config.bankConfig;
 		} else {
 			GetConfig();

@@ -10,6 +10,7 @@ modded class PlayerBase
 	ref DZLLicenceMenu licenceMenu;
 	
 	bool IsDZLBank = false;
+	bool IsLicencePoint = false;
 	private int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
 
@@ -21,6 +22,7 @@ modded class PlayerBase
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
         RegisterNetSyncVariableBool("IsRealPlayer");
+        RegisterNetSyncVariableBool("IsLicencePoint");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
     }
 
@@ -33,6 +35,7 @@ modded class PlayerBase
         AddAction(ActionRobMoney);
         AddAction(ActionRobBank);
         AddAction(ActionHarvestItem);
+        AddAction(ActionOpenLicenseMenu);
 
         if (GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);

@@ -13,20 +13,21 @@ class DZLSpawnHelper
 		return true;
     }
 
-    static PlayerBase SpawnBankingPoint(vector pos, vector orientation, string gameObjectName) {
+    static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence) {
         pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true );
         if (!game_obj) {
            return null;
         }
 
-        PlayerBase bankChar = PlayerBase.Cast(game_obj);
+        PlayerBase char = PlayerBase.Cast(game_obj);
 
-        bankChar.SetAllowDamage(false);
-        DZLSpawnHelper.SetPositionAndOrientation(bankChar, pos, orientation);
-        bankChar.IsDZLBank = true;
+        char.SetAllowDamage(false);
+        DZLSpawnHelper.SetPositionAndOrientation(char, pos, orientation);
+        char.IsDZLBank = isBanking;
+        char.IsLicencePoint = isLicence;
 
-        return bankChar;
+        return char;
     }
 
     static void SetPositionAndOrientation(Entity game_obj, vector position, vector orientation) {
