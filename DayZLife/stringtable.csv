@@ -47,3 +47,5 @@
 "error_you_cant_send_money_to_yourself", "", "", "Du kannst dir selber kein Geld überweisen."
 "Cash_Transfer", "", "", "Überweisen."
 "start_work", "", "", "starte arbeit"
+"no_space_left_in_inventory", "", "", "Kein Platz mehr."
+"you_got", "", "", "Du bekommst"

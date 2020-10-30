@@ -36,14 +36,14 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
             if (config) {
 				array<ref DZLStorageType> storageTypes = config.GetStorageTypes();
                 foreach(DZLStorageType storageType: storageTypes) {
-                    storageListTextWidget.AddItem(GetItemDisplayName(storageType.type), storageType, 0);
+                    storageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageType.type), storageType, 0);
                 }
             }
 
             if (house) {
 				array<ref DZLStorageTypeBought> storages = house.GetStorage();
                 foreach(DZLStorageTypeBought storage: storages) {
-                    sellStorageListTextWidget.AddItem(GetItemDisplayName(storage.storageType.type), storage, 0);
+                    sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storage.storageType.type), storage, 0);
                 }
             }
         }
@@ -178,7 +178,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			sellStorageListTextWidget.ClearItems();
             array<ref DZLStorageTypeBought> storages = house.GetStorage();
             foreach(DZLStorageTypeBought storage: storages) {
-                sellStorageListTextWidget.AddItem(GetItemDisplayName(storage.storageType.type), storage, 0);
+                sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storage.storageType.type), storage, 0);
             }
 
             sellButton.Show(false);
@@ -187,17 +187,5 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
         }
 		
 	}
-
-	string GetItemDisplayName(string itemClassname){
-        string displayName;
-        string cfg = CFG_VEHICLESPATH + " " + itemClassname + " displayName";
-        GetGame().ConfigGetText(cfg, displayName);
-
-        if (displayName == "") {
-            displayName = itemClassname;
-        }
-
-        return displayName;
-    }
 
 }
