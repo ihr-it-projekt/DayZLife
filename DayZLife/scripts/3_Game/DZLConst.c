@@ -25,7 +25,8 @@ static int DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA = 222240;
 static int DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE = 222241;
 static int DAY_Z_LIFE_START_BANK_RAID = 222242;
 
-
+static string DAY_Z_LIFE_ZONE_TYPE_HARVEST_1 = "harvest_1";
+static string DAY_Z_LIFE_ZONE_TYPE_HARVEST_2 = "harvest_2";
 
 
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE = "$profile:DayZLife\\";
