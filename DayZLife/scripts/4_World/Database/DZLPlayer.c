@@ -68,7 +68,6 @@ class DZLPlayer {
 		DebugMessageDZL("licenceToBuy.price" + licenceToBuy.price.ToString());
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
-		
 		if(!licenceToBuy.dependencyLicence) return "";
 		
 		foreach(DZLLicence licence: licences){

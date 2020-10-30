@@ -37,6 +37,8 @@ class DZLLicenceMenu : UIScriptedMenu
     void UpdateGUI(string message = "") {
         if(message) errorMessageTextWidget.SetText(message);
 		
+		dzlPlayer = player.dzlPlayer;
+		
 		array<ref DZLLicence> licences = config.licenceConfig.licences;
 		licenceListBox.ClearItems();
 		foreach(DZLLicence licence: licences){
@@ -54,10 +56,9 @@ class DZLLicenceMenu : UIScriptedMenu
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_RESPONSE) {
-           autoptr Param2<ref DZLPlayer, string> paramGetResponse;
+           autoptr Param1<string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
-				dzlPlayer = paramGetResponse.param1;
-				UpdateGUI(paramGetResponse.param2);
+				UpdateGUI(paramGetResponse.param1);
            }
 		}
     }
@@ -79,8 +80,7 @@ class DZLLicenceMenu : UIScriptedMenu
         layoutRoot.Show(false);
 		
 		player = PlayerBaseHelper.GetPlayer();
-		dzlPlayer = player.dzlPlayer;
-
+		
         return layoutRoot;
     }
 	
@@ -126,7 +126,7 @@ class DZLLicenceMenu : UIScriptedMenu
 				string messege = dzlPlayer.CanBuyLicence(licence);
 			
 				if("" == messege){
-					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, ref DZLLicence>(player, licence), true);
+					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, int>(player, position), true);
 				} else {
 					UpdateGUI(messege);
 				}
