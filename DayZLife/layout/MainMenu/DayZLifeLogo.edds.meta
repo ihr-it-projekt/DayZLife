@@ -1,0 +1,16 @@
+MetaFileClass {
+ Name "{4F1FB8717C546919}DayZLife/DayZLife/layout/MainMenu/DayZ Life Logo.edds"
+ Author "desktop-en33qro"
+ ChangeDate -401757857
+ Configurations {
+  PNGResourceClass PC {
+   SourceFile "DayZ Life Logo.png"
+  }
+  PNGResourceClass XBOX_ONE : PC {
+  }
+  PNGResourceClass PS4 : PC {
+  }
+  PNGResourceClass LINUX : PC {
+  }
+ }
+}
