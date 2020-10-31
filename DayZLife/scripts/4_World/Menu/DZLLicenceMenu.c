@@ -80,6 +80,8 @@ class DZLLicenceMenu : DZLBaseMenu
 				string messege = dzlPlayer.CanBuyLicence(licence);
 			
 				if("" == messege){
+					errorMessageTextWidget.SetText("");
+					buyButton.Show(false);
 					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, int>(player, position), true);
 				} else {
 					UpdateGUI(messege);
@@ -87,6 +89,25 @@ class DZLLicenceMenu : DZLBaseMenu
 				
 				return true;
 			case licenceListBox:
+				int positionBox = licenceListBox.GetSelectedRow();
+				
+				if(-1 == positionBox) return true;
+				DZLLicence licenceBox;
+				licenceListBox.GetItemData(positionBox, 0, licenceBox);
+				
+				if(!licenceBox) {
+					buyButton.Show(false);
+					return true;
+				}
+			
+				string hasLicenceText;
+				licenceListBox.GetItemText(positionBox, 3, hasLicenceText);
+			
+				if (hasLicenceText == "x") {
+					buyButton.Show(false);
+					return true;
+				} 
+			
 				buyButton.Show(true);
 				return true;
 			default:

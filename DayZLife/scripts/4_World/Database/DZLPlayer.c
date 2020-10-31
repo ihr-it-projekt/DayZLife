@@ -69,7 +69,6 @@ class DZLPlayer {
 	}
 	
 	string CanBuyLicence(notnull DZLLicence licenceToBuy){
-		DebugMessageDZL("licenceToBuy.price" + licenceToBuy.price.ToString());
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
 		if(!licenceToBuy.dependencyLicence) return "";
@@ -82,8 +81,13 @@ class DZLPlayer {
 		return "#you_have_not_the_dependency_licence";
 	}
 	
-	bool HasLicense(DZLLicence licence) {
-		return -1 != licences.Find(licence);
+	bool HasLicense(DZLLicence licenceToBuy) {
+		foreach(DZLLicence licence: licences){
+            if(licence.id == licenceToBuy.id){
+                return true;
+            }
+        }
+        return false;
 	}
 	
 	void BuyLicence(DZLLicence licenceToBuy){

@@ -20,6 +20,13 @@ class DZLLicenceConfig
             positionOfLicencePoints.Insert(new DZLLicencePosition("12333.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
 			
 			Save();
+		} else {
+		    foreach(DZLLicence licence: licences) {
+		        if (!licence.HasCorrectId()) {
+                    licence.SetId();
+		        }
+		    }
+            Save();
 		}
 	}
 	
