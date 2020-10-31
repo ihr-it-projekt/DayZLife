@@ -6,8 +6,15 @@ class DZLLicenceConfig
 	void DZLLicenceConfig() {
         if (!Load()) {
 			licences = new array<ref DZLLicence>;
-			licences.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, ""));
-			licences.Insert(new DZLLicence(100, "Cement Licence 2", "12310 140 12633", 20, "Cement Licence"));
+			
+			array<ref DZLLicenceCraftItem> craftItems = new array<ref DZLLicenceCraftItem>;
+			craftItems.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
+			craftItems.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
+
+			array<ref DZLLicenceToolItem> toolItems = new array<ref DZLLicenceToolItem>;
+			toolItems.Insert(new DZLLicenceToolItem("Bucket", 100, 10, 10));
+
+			licences.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 2, 100), 5, toolItems, craftItems));
 
 			positionOfLicencePoints = new array<ref DZLLicencePosition>;
             array<string> attachments = new array<string>;
