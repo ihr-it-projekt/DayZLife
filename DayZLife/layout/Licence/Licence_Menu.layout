@@ -70,6 +70,7 @@ FrameWidgetClass License_Menu {
            vexactsize 0
            style Bold
            text "Error"
+           text_proportion 0.6
            "text halign" center
            "text valign" center
           }
