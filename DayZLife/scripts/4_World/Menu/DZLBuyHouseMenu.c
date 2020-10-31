@@ -2,29 +2,26 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 {
 	private MapWidget mapWidget;
 
-	void DZLBuyHouseMenu()
-	{
+	void DZLBuyHouseMenu(){
+	    layoutPath = "DayZLife/layout/Housing/Housing.layout";
         Construct();
 	}
 	
-	void ~DZLBuyHouseMenu()
-	{
+	void ~DZLBuyHouseMenu(){
         Destruct();
 	}
 
-	override Widget Init()
-    {
-        layoutPath = "DayZLife/layout/Housing/Housing.layout";
+	override Widget Init(){
         super.Init();
-
 		mapWidget = creator.GetMapWidget("Map");
 
 	    return layoutRoot;
     }
 
-	
 	override void OnShow() {
 	    if (actualHouseDef) {
+	        super.OnShow();
+
 	        priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
             storageTextWidget.SetText(actualHouseDef.GetMaxStorage().ToString());
@@ -32,8 +29,6 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 			float scale;
 
 			preview.UpdatePreview(actualHouseDef.houseType);
-			
-			PlayerBase player = PlayerBaseHelper.GetPlayer();
 			
 			if(player && !player.GetLastMapInfo(scale, mapPos)) {
                 mapPos = GetGame().GetCurrentCameraPosition();
@@ -44,20 +39,15 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 			mapWidget.SetMapPos(mapPos);
 			mapWidget.AddUserMark(target.GetPosition(), "", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
         }
-        super.OnShow();
 	}
 	
-
 	override bool OnClick(Widget w, int x, int y, int button) {
-		super.OnClick(w, x, y, button);
+		if(super.OnClick(w, x, y, button)) return true;
 	
 		switch(w){
-            case closeButton:
-                OnHide();
-                return true;
             case buyButton:
                 if (actualHouseDef) {
-                    if (inventory.PlayerHasEnoughMoney(PlayerBaseHelper.GetPlayer(), actualHouseDef.buyPrice)) {
+                    if (dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
                         Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(PlayerBaseHelper.GetPlayer(), target);
                         GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING, paramBuyHouse, true);
                     } else {
@@ -73,6 +63,8 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
                     GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING, paramSellHouse, true);
                 }
                 return true;
+            default:
+                break;
 		}
 		return false;
 	}
@@ -83,7 +75,6 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
             autoptr Param2<ref DZLBuilding, string> paramBuyHouse;
             if (ctx.Read(paramBuyHouse)){
 				house = paramBuyHouse.param1;
-				
 				UpdateGUI(paramBuyHouse.param2);
 	        }
         }
@@ -108,8 +99,6 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 			buyButton.Show(false);
 			errorMessageTextWidget.SetText("");
 		}
-
-
 	}
 
 }

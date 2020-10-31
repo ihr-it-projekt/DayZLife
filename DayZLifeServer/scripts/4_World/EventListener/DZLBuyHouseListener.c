@@ -27,10 +27,11 @@ class DZLBuyHouseListener
             if (ctx.Read(paramBuyHouse)){
 				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param2);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param2);
+				DZLPlayer dzlPlayer = new DZLPlayer(paramBuyHouse.param1.GetIdentity().GetId());
 
                 string message = "#error_buying_house";
 
-                if (actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && inventory.PlayerHasEnoughMoney(paramBuyHouse.param1, actualHouseDef.buyPrice)) {
+                if (actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
                     inventory.AddMoneyToPlayer(paramBuyHouse.param1, actualHouseDef.buyPrice * -1);
                     dzlBuilding.BuyOnServer(paramBuyHouse.param1);
 

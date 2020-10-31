@@ -66,6 +66,7 @@ modded class PlayerBase
             DebugMessageDZL("Initialize DZLPlayer");
             if (ctx.Read(dzlPlayerParam)){
                 this.dzlPlayer = dzlPlayerParam.param1;
+                UpdatePlayerAtDependencies();
             }
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
             Param1 <ref DZLBank> dzlBankParam;
@@ -75,21 +76,24 @@ modded class PlayerBase
             }
         }
     }
-	
-	void CloseMenu() {
-		if (houseBuyMenu && houseBuyMenu.IsVisible()) {
-			houseBuyMenu.OnHide();
-		} else if (houseUpgradeMenu && houseBuyMenu.IsVisible()) {
-			houseUpgradeMenu.OnHide();
-		} else if (bankingMenu && bankingMenu.IsVisible()) {
-			bankingMenu.OnHide();
-		}
-	}
+
+    void UpdatePlayerAtDependencies() {
+        if (houseBuyMenu && houseBuyMenu.IsVisible()) {
+            houseBuyMenu.UpdatePlayer(this);;
+        } else if (houseUpgradeMenu && houseUpgradeMenu.IsVisible()) {
+            houseUpgradeMenu.UpdatePlayer(this);;
+        } else if (bankingMenu && bankingMenu.IsVisible()) {
+            bankingMenu.UpdatePlayer(this);;
+        } else if (licenceMenu && licenceMenu.IsVisible()) {
+            licenceMenu.UpdatePlayer(this);;
+        }
+    }
 
     DZLBuyHouseMenu GetHouseBuyMenu(DZLHouseDefinition definition, Building target) {
         DebugMessageDZL("Initialize house buy menu");
         houseBuyMenu = new DZLBuyHouseMenu;
-        houseBuyMenu.SetConfig(config);
+        InitMenu(houseBuyMenu);
+
 		houseBuyMenu.SetHouseDefinition(definition);
 		houseBuyMenu.SetTarget(target);
 
@@ -99,13 +103,43 @@ modded class PlayerBase
     DZLUpgradeHouseMenu GetHouseUpgradeMenu(DZLHouseDefinition definition, Building target) {
         DebugMessageDZL("Initialize house upgrade menu");
         houseUpgradeMenu = new DZLUpgradeHouseMenu;
-        houseUpgradeMenu.SetConfig(config);
+        InitMenu(houseUpgradeMenu);
+
 		houseUpgradeMenu.SetHouseDefinition(definition);
 		houseUpgradeMenu.SetTarget(target);
 
         return houseUpgradeMenu;
     }
-	
+
+    private void InitMenu(DZLBaseMenu menu) {
+        menu.SetConfig(config);
+        menu.SetPlayer(this);
+    }
+
+	DZLBankingMenu GetBankingMenu() {
+		bankingMenu = DZLBankingMenu();
+		InitMenu(bankingMenu);
+		return bankingMenu;
+	}
+
+	DZLLicenceMenu GetLicenceMenu() {
+		licenceMenu = DZLLicenceMenu();
+		InitMenu(licenceMenu);
+		return licenceMenu;
+	}
+
+	void CloseMenu() {
+		if (houseBuyMenu && houseBuyMenu.IsVisible()) {
+			houseBuyMenu.OnHide();
+		} else if (houseUpgradeMenu && houseUpgradeMenu.IsVisible()) {
+			houseUpgradeMenu.OnHide();
+		} else if (bankingMenu && bankingMenu.IsVisible()) {
+			bankingMenu.OnHide();
+		} else if (licenceMenu && licenceMenu.IsVisible()) {
+			licenceMenu.OnHide();
+		}
+	}
+
 	DZLHouseDefinition FindHouseDefinition(Building building) {
 		array<ref DZLHouseDefinition> houseConfigs = config.GetHouseDefinitions();
 		foreach(DZLHouseDefinition definition: houseConfigs) {
@@ -114,18 +148,6 @@ modded class PlayerBase
                 }
             }
 		return null;
-	}
-	
-	DZLBankingMenu GetBankingMenu() {
-		bankingMenu = DZLBankingMenu();
-		bankingMenu.SetConfig(config);
-		return bankingMenu;
-	}
-	
-	DZLLicenceMenu GetLicenceMenu() {
-		licenceMenu = DZLLicenceMenu();
-		licenceMenu.SetConfig(config);
-		return licenceMenu;
 	}
 
     void TransferFromDeadPlayer(DZLPlayer playerTarget) {

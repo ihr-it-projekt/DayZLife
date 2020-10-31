@@ -1,44 +1,25 @@
-class DZLLicenceMenu : UIScriptedMenu
+class DZLLicenceMenu : DZLBaseMenu
 {
-    private ref DZLUIItemCreator creator;
-	private ref DZLConfig config;
-
-	PlayerBase player;
-    DZLPlayer dzlPlayer;
-
 	TextListboxWidget playerListbox;
 
-    ButtonWidget closeButton;
     ButtonWidget buyButton;
 	
 	TextListboxWidget licenceListBox;
 	
 	EditBoxWidget inputDeposit;
 	
-    TextWidget errorMessageTextWidget;
-	
     void DZLLicenceMenu() {
-        if(GetGame().IsClient()){
-            GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        }
+        layoutPath = "DayZLife/layout/Licence/Licence_Menu.layout";
+        Construct();
     }
 
     void ~DZLLicenceMenu() {
-        OnHide();
-        if(GetGame().IsClient()){
-            GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-        }
+        Destruct();
     }
 
-    void SetConfig(ref DZLConfig config) {
-        this.config = config;
-    }
+    override void UpdateGUI(string message = "") {
+        super.UpdateGUI(message);
 
-    void UpdateGUI(string message = "") {
-        if(message) errorMessageTextWidget.SetText(message);
-		
-		dzlPlayer = player.dzlPlayer;
-		
 		array<ref DZLLicence> licences = config.licenceConfig.licences;
 		licenceListBox.ClearItems();
 		foreach(DZLLicence licence: licences){
@@ -54,7 +35,7 @@ class DZLLicenceMenu : UIScriptedMenu
 		}
     }
 
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_RESPONSE) {
            autoptr Param1<string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
@@ -64,23 +45,12 @@ class DZLLicenceMenu : UIScriptedMenu
     }
 
     override Widget Init() {
-        creator = new DZLUIItemCreator("DayZLife/layout/Licence/Licence_Menu.layout");
-
-        closeButton = creator.GetButtonWidget("Button_Closed");
-        closeButton.Show(true);
+        super.Init();
 
         buyButton = creator.GetButtonWidget("Button_Buy");
         buyButton.Show(false);
-		
-		errorMessageTextWidget = creator.GetTextWidget("Error_Message");
 		licenceListBox = creator.GetTextListboxWidget("Licence_ListBox");
         
-        layoutRoot = creator.GetLayoutRoot();
-
-        layoutRoot.Show(false);
-		
-		player = PlayerBaseHelper.GetPlayer();
-		
         return layoutRoot;
     }
 	
@@ -88,32 +58,16 @@ class DZLLicenceMenu : UIScriptedMenu
         if (config) {
             super.OnShow();
 			buyButton.Show(false);
-            errorMessageTextWidget.SetText("");
+
 			UpdateGUI();
-			
-			GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-            GetGame().GetUIManager().ShowCursor(true);
-            GetGame().GetInput().ChangeGameFocus(1);
         } else {
             OnHide();
         }
     }
 
-    override void OnHide() {
-        super.OnHide();
-
-        GetGame().GetUIManager().ShowCursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(true);
-        Close();
-    }
-
     override bool OnClick(Widget w, int x, int y, int button) {
-        super.OnClick(w, x, y, button);
+        if(super.OnClick(w, x, y, button)) return true;
         switch(w){
-            case closeButton:
-                OnHide();
-                return true;
             case buyButton:
 				int position = licenceListBox.GetSelectedRow();
 				

@@ -33,6 +33,10 @@ class DZLPlayer {
 		}
     }
 
+    bool HasEnoughMoney(int amount) {
+        return money >= amount;
+    }
+
     void PlayerHasDied() {
         money = 0;
         Save();

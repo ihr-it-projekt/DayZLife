@@ -9,7 +9,7 @@ modded class ActionOpenDoors: ActionInteractBase
 		}
 
 		if(super.ActionCondition(player, target, item)){
-			if (config) {
+			if (!config) {
 				config = new DZLHouseConfig;
 			}
 			

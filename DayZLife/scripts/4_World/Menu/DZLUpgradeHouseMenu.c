@@ -3,13 +3,11 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	TextListboxWidget storageListTextWidget;
 	TextListboxWidget sellStorageListTextWidget;
 
-	void DZLUpgradeHouseMenu()
-	{
+	void DZLUpgradeHouseMenu(){
 		Construct();
 	}
 	
-	void ~DZLUpgradeHouseMenu()
-	{
+	void ~DZLUpgradeHouseMenu(){
         Destruct();
 	}
 
@@ -24,11 +22,10 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	
 
 	override void OnShow(){
-        super.OnShow();
-
         storageListTextWidget.ClearItems();
         sellStorageListTextWidget.ClearItems();
 	    if (actualHouseDef) {
+	        super.OnShow();
 	        priceBuyTextWidget.SetText("");
             priceSellTextWidget.SetText("");
             storageTextWidget.SetText("");
@@ -49,14 +46,10 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
         }
 	}
 	
-	override bool OnClick( Widget w, int x, int y, int button )
-	{
-		super.OnClick(w, x, y, button);
+	override bool OnClick(Widget w, int x, int y, int button){
+		if(super.OnClick(w, x, y, button)) return true;
 	
 		switch(w){
-            case closeButton:
-                OnHide();
-                return true;
             case storageListTextWidget:
 				int itemPos = storageListTextWidget.GetSelectedRow();
 
@@ -135,11 +128,10 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				
 				int buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * (itemsHasBought + 1));
 				PlayerBase playerBaseBuy = PlayerBaseHelper.GetPlayer();
-				if (actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && inventory.PlayerHasEnoughMoney(PlayerBaseHelper.GetPlayer(), buyPriceBuy) && house.IsOwner(playerBaseBuy)) {
+				if (actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(playerBaseBuy)) {
 					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_STORAGE, new Param3<PlayerBase, ref Building, ref DZLStorageType>(playerBaseBuy, target, currentItemBuy), true);
 				}
-				
-			
+
                 return true;
             case sellButton:
 				int itemPosStorageSell = sellStorageListTextWidget.GetSelectedRow();
@@ -185,7 +177,5 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			
 			if (buyButton.IsVisible()) buyButton.Show(actualHouseDef.GetMaxStorage() > storages.Count());
         }
-		
 	}
-
 }
