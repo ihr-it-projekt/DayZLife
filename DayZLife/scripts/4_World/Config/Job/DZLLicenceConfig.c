@@ -5,27 +5,30 @@ class DZLLicenceConfig
 
 	void DZLLicenceConfig() {
         if (!Load()) {
-			licences = new DZLLicenceCollection;
-			
-			DZLLicenceCraftItemCollection craftItems = new DZLLicenceCraftItemCollection;
-			craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", -1, 50));
-			craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", -1, 50));
-			craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", -1, 50));
 
-			DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
-			toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", -1, 10));
+            if (DAY_Z_LIFE_DEBUG) {
+                licences = new DZLLicenceCollection;
 
-			licences.collection.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 2, 100), 5, toolItems, craftItems));
+                DZLLicenceCraftItemCollection craftItems = new DZLLicenceCraftItemCollection;
+                craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 0, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 0, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 0, 50));
 
-			positionOfLicencePoints = new array<ref DZLLicencePosition>;
-            array<string> attachments = new array<string>;
-            attachments.Insert("ManSuit_Black");
-            attachments.Insert("SlacksPants_Black");
-            attachments.Insert("ThickFramesGlasses");
-            attachments.Insert("DressShoes_Black");
+                DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
+                toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 0, 10));
 
-            positionOfLicencePoints.Insert(new DZLLicencePosition("11055.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
-            positionOfLicencePoints.Insert(new DZLLicencePosition("12333.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
+                licences.collection.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 0, 100), 5, toolItems, craftItems));
+
+                positionOfLicencePoints = new array<ref DZLLicencePosition>;
+                array<string> attachments = new array<string>;
+                attachments.Insert("ManSuit_Black");
+                attachments.Insert("SlacksPants_Black");
+                attachments.Insert("ThickFramesGlasses");
+                attachments.Insert("DressShoes_Black");
+
+                positionOfLicencePoints.Insert(new DZLLicencePosition("11055.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
+                positionOfLicencePoints.Insert(new DZLLicencePosition("12333.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
+            }
 			
 			Save();
 		} else {
