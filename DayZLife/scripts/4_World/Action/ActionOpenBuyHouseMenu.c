@@ -23,7 +23,6 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-			DebugMessageDZL("Action create Menu");
             PlayerBase player = PlayerBaseHelper.GetPlayer();
 			
 			if(!action_data) return;

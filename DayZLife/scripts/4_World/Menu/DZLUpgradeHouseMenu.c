@@ -53,8 +53,6 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
             case storageListTextWidget:
 				int itemPos = storageListTextWidget.GetSelectedRow();
 
-				DebugMessageDZL("Has row " + itemPos.ToString());
-
 				if (-1 == itemPos) return true;
 
 				DZLStorageType currentItem;
@@ -62,21 +60,16 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			
 				if (!currentItem) return true;
 
-				DebugMessageDZL("Has type " + currentItem.type);
-			
 				int itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
 			
 				preview.UpdatePreview(currentItem.type);
 			
 				int buyPrice =  currentItem.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
 			
-				DebugMessageDZL("Buy price " + buyPrice.ToString());
-			
 				priceBuyTextWidget.SetText(buyPrice.ToString());
 			
 				int sellPrice =  buyPrice / 2;
-				DebugMessageDZL("sellPrice price " + sellPrice.ToString());
-			
+
 				priceSellTextWidget.SetText(sellPrice.ToString());
 			
 				storageTextWidget.SetText(currentItem.space.ToString());
@@ -94,16 +87,12 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			
                 int itemPosSell = sellStorageListTextWidget.GetSelectedRow();
 				
-				DebugMessageDZL("Has row " + itemPosSell.ToString());
-			
 				if (-1 == itemPosSell) return true;
 			
 				DZLStorageTypeBought currentItemSell;
 				sellStorageListTextWidget.GetItemData(itemPosSell, 0, currentItemSell);
 			
 				if (!currentItemSell) return true;
-			
-				DebugMessageDZL("Has type " + currentItemSell.type);
 			
 				preview.UpdatePreview(currentItemSell.type);
 			
@@ -121,7 +110,6 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				storageListTextWidget.GetItemData(itemPosBuy, 0, currentItemBuy);
 			
 				if (!currentItemBuy) {
-				    DebugMessageDZL("not found currentItemBuy");
 				    return true;
 				}
 			

@@ -7,36 +7,42 @@ class DZLJobConfig
             workZones = new array<ref DZLWorkZone>;
 			
             array<ref DZLHarvestItemToolRelation> harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
-			
-			// First relation
-            array<string> itemsThatCanHarvest = new array<string>;
-            itemsThatCanHarvest.Insert("Stone");
-            itemsThatCanHarvest.Insert("SmallStone");
-            itemsThatCanHarvest.Insert("SmallStone");
-            itemsThatCanHarvest.Insert("SmallStone");
 
-            array<string> itemsThatNeededForHarvest = new array<string>;
-            itemsThatNeededForHarvest.Insert("Pickaxe");
-            itemsThatNeededForHarvest.Insert("Sledgehammer");
+			if (DAY_Z_LIFE_DEBUG) {
+                // First relation
+                array<string> itemsThatCanHarvest = new array<string>;
+                itemsThatCanHarvest.Insert("Stone");
+                itemsThatCanHarvest.Insert("SmallStone");
+                itemsThatCanHarvest.Insert("SmallStone");
+                itemsThatCanHarvest.Insert("SmallStone");
 
-            DZLHarvestItemToolRelation relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
-            harvestItemToolRelation.Insert(relation);
-			
-			
-			// Second relation
-            itemsThatCanHarvest = new array<string>;
-            itemsThatCanHarvest.Insert("SmallStone");
+                array<string> itemsThatNeededForHarvest = new array<string>;
+                itemsThatNeededForHarvest.Insert("Pickaxe");
+                itemsThatNeededForHarvest.Insert("Sledgehammer");
 
-            itemsThatNeededForHarvest = new array<string>;
-            itemsThatNeededForHarvest.Insert("WoodAxe");
-            itemsThatNeededForHarvest.Insert("FirefighterAxe");
+                DZLHarvestItemToolRelation relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
+                harvestItemToolRelation.Insert(relation);
 
-            relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
-            harvestItemToolRelation.Insert(relation);
-			
-            DZLWorkZone zone = new DZLWorkZone("12330 140 12666", 20, "Mining Zone", 10, 2, harvestItemToolRelation);
-			
-			workZones.Insert(zone);
+
+                // Second relation
+                itemsThatCanHarvest = new array<string>;
+                itemsThatCanHarvest.Insert("SmallStone");
+
+                itemsThatNeededForHarvest = new array<string>;
+                itemsThatNeededForHarvest.Insert("WoodAxe");
+                itemsThatNeededForHarvest.Insert("FirefighterAxe");
+
+                relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
+                harvestItemToolRelation.Insert(relation);
+
+                DZLWorkZone zone = new DZLWorkZone("12330 140 12666", 20, "Mining Zone", 10, 2, harvestItemToolRelation);
+
+                workZones.Insert(zone);
+            } else {
+             // add life config;
+            }
+
+
 			
 		    Save();
         }

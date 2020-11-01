@@ -15,8 +15,6 @@ class DZLObjectFinder
 
         DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius);
 
-		DebugMessageDZL("has found count objects: " + geom.Count().ToString());
-
         Object obj;
 
         obj = CheckForObject(geom);
@@ -34,8 +32,6 @@ class DZLObjectFinder
 
         DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius);
 
-		DebugMessageDZL("has found count objects: " + geom.Count().ToString());
-
         Object obj = CheckForContainer(geom, typeToSearch);
         if (!obj) return null;
 
@@ -45,7 +41,6 @@ class DZLObjectFinder
     private Object CheckForContainer(set< Object > geom, string typeToSearch) {
         for (int newObject = 0; newObject < geom.Count(); ++newObject){
            Object obj = geom.Get(newObject);
-		   DebugMessageDZL("Has found: " + obj.GetType() + "search for: " +typeToSearch);
            if (obj.GetType() == typeToSearch) {
                return obj;
                break;
@@ -59,7 +54,6 @@ class DZLObjectFinder
         for (int newObject = 0; newObject < geom.Count(); ++newObject){
             Object obj = geom.Get(newObject);
             foreach(DZLHouseDefinition housedef: houseDefinitions) {
-                DebugMessageDZL(obj.GetType());
                 if (obj.GetType() == housedef.houseType) {
                     return obj;
                     break;

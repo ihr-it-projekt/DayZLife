@@ -56,3 +56,8 @@
 "depend_on", "", "", "Abhängig von"
 "Purchased", "", "", "in Besitz"
 "start_crafting", "", "", "Herstellung starten"
+"item_crafted", "", "", "Herstellung erfolgreich"
+"not_enough_items_to_craft", "", "", "Nicht alle Resourcen gefunden."
+"missing_craft_item", "", "", "Nicht alle Resourcen gefunden."
+"not_enough_tools_to_craft", "", "", "Nicht alle Werkzeuge gefunden."
+"has_not_found_all_items_that_is_needed_to_craft", "", "", "Nicht alle Resourcen gefunden."

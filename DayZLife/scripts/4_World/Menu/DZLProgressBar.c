@@ -7,6 +7,7 @@ class DZLProgressBar: UIScriptedMenu
 	private ProgressBarWidget progressBar;
 	private TextWidget status;
 	private ref Timer timer;
+	private int iterations;
 
     private void SetLicence(DZLLicence licence) {
 		this.licence = licence;
@@ -30,6 +31,7 @@ class DZLProgressBar: UIScriptedMenu
         layoutRoot = creator.GetLayoutRoot();
 		
 		timer = new Timer;
+		iterations = 0;
 		
 		return layoutRoot;
     }
@@ -39,16 +41,22 @@ class DZLProgressBar: UIScriptedMenu
 		GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
         GetGame().GetUIManager().ShowCursor(true);
         GetGame().GetInput().ChangeGameFocus(1);
+		
+		SetLicence(player.GetLicenceByPosition());
+        progressBar.SetCurrent(0);
+        status.SetText("0");
     }
 	
 	void CheckDuration() {
-		if (timer.GetDuration() >= licence.durationForCrafting) {
+	    DebugMessageDZL("licence.durationForCrafting " + licence.durationForCrafting);
+	    iterations++;
+		if (iterations >= licence.durationForCrafting) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE_USE, new Param2<PlayerBase, string>(player, licence.id), true);
 			OnHide();
 		} else {
             vector playerPosition = player.GetPosition();
 
-		    if (vector.Distance(licence.position, playerPosition) <= licence.range){
+		    if (vector.Distance(licence.position, playerPosition) > licence.range){
 		        OnHide();
 		        return;
 		    }

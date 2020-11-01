@@ -37,8 +37,6 @@ class DZLBankingMenu : DZLBaseMenu
 				playerListbox.ClearItems();
 				array<ref DZLPlayerBankInfo> players = paramGetPlayerResponse.param1;
 				
-				DebugMessageDZL(players.ToString());
-				
 				foreach(DZLPlayerBankInfo reciver: players) {
 					playerListbox.AddItem(reciver.name, reciver, 0);
 				}

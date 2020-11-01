@@ -8,7 +8,6 @@ class DZLLicenceCollection
 
     DZLLicence FindById(string id) {
         foreach(DZLLicence licence: collection) {
-			DebugMessageDZL("licence ids" + id + licence.id);
 			if (licence.id == id) return licence;
 		}
 		

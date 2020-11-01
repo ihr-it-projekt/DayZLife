@@ -63,7 +63,6 @@ class DZLHouse {
 			bool notFound = true;
 			
 			foreach(DZLStorageTypeBought storageObject: storage) {
-			    DebugMessageDZL("position compare: " + storageObject.relativePos.ToString(false) +" | "+ pos.ToString(false));
 				if (storageObject.relativePos == pos) {
 					notFound = false;
 					break;

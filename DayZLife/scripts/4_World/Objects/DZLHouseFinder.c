@@ -22,17 +22,14 @@ class DZLHouseFinder
         Object object = objectFinder.GetObjectsAt(from, to, player);
 
         if (!object) {
-            DebugMessageDZL("has object not found");
             return null;
         }
-        DebugMessageDZL("has object found");
 
         Building house = Building.Cast(object);
         
 		DZLHouseDefinition actualHouseDef = GetHouseDefinitionByBuilding(house);
 
         if (!actualHouseDef) {
-            DebugMessageDZL("has house not found");
             return null;
         }
 

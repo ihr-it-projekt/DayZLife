@@ -8,8 +8,9 @@ class DZLLicenceConfig
 			licences = new DZLLicenceCollection;
 			
 			DZLLicenceCraftItemCollection craftItems = new DZLLicenceCraftItemCollection;
-			craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
-			craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
+			craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", -1, 50));
+			craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", -1, 50));
+			craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", -1, 50));
 
 			DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
 			toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", -1, 10));

@@ -177,6 +177,12 @@ modded class PlayerBase
     }
 	
 	DZLLicence GetLicenceByPosition() {
+		
+		if (GetGame().IsServer()) {
+			dzlPlayer = new DZLPlayer(GetIdentity().GetId());
+			config = new DZLConfig();
+		}
+
 	    if(!dzlPlayer) return null;
 
         vector playerPosition = GetPosition();
@@ -192,12 +198,11 @@ modded class PlayerBase
             if (vector.Distance(licence.position, playerPosition) <= licence.range){
                 return licence;
             }
-			DebugMessageDZL("licenc not in range");
         }
         return null;
     }
 	
-	string CanUseLicence(DZLLicence licence) {
+	string CanUseLicence(notnull DZLLicence licence) {
         array<EntityAI> items = GetPlayerItems();
         map<string, int> craft = new map<string, int>;
         map<string, int> tools = new map<string, int>;
@@ -208,6 +213,7 @@ modded class PlayerBase
             itemType.ToLower();
 			
 			bool isCraft = false;
+
 			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
                 if(IsNeededItem(craftItem, item, itemType)) {
 					if (craft.Contains(itemType)) {
@@ -242,7 +248,7 @@ modded class PlayerBase
 				int countFound = 0;
 				if (craft.Find(type, countFound)) {
 					if (countFound <= count) {
-						return "#not_enoug_items_to_craft";
+						return "#not_enough_items_to_craft";
 					}
 				} else {
 					return "#missing_craft_item";
@@ -254,7 +260,7 @@ modded class PlayerBase
                 int countFoundTool = 0;
                 if (tools.Find(typeTool, countFoundTool)) {
                     if (countFoundTool <= countTool) {
-                        return "#not_enoug_tools_to_craft";
+                        return "#not_enough_tools_to_craft";
                     }
                 } else {
                     return "#missing_tool_item";

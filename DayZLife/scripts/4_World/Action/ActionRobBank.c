@@ -61,7 +61,6 @@ class ActionRobBank: ActionInteractBase
 
 	override void OnStartClient(ActionData action_data) {
 	    super.OnStartClient(action_data);
-		DebugMessageDZL("Start raid from client");
         GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_START_BANK_RAID, new Param1<ref PlayerBase>(action_data.m_Player), true, action_data.m_Player.GetIdentity());
     }
 

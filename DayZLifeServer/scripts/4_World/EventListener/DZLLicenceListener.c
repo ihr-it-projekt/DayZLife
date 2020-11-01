@@ -32,12 +32,15 @@ class DZLLicenceListener
             if (ctx.Read(paramUseLicence)){
                 DZLPlayer dzlPlayerUse = new DZLPlayer(sender.GetId());
                 DZLLicence licenceUse = config.licenceConfig.licences.FindById(paramUseLicence.param2);
-                string messageUse = paramBuyLicence.param1.CanUseLicence(licenceUse);
+
+                if (!licenceUse) return;
+
+                string messageUse = paramUseLicence.param1.CanUseLicence(licenceUse);
                 if (!messageUse) {
                     paramUseLicence.param1.UseLicence(licenceUse);
+                    messageUse = "#item_crafted";
                 }
-
-                GetGame().RPCSingleParam(paramBuyLicence.param1, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>(messageUse), true, sender);
+                GetGame().RPCSingleParam(paramUseLicence.param1, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>(messageUse), true, sender);
             }
         }
     }
