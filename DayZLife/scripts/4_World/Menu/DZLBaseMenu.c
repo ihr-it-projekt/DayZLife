@@ -41,9 +41,7 @@ class DZLBaseMenu: UIScriptedMenu
     }
 
     override Widget Init() {
-        player = PlayerBaseHelper.GetPlayer();
         creator = new DZLUIItemCreator(layoutPath);
-
         closeButton = creator.GetButtonWidget("Button_Closed");
         errorMessageTextWidget = creator.GetTextWidget("Error_Message");
         closeButton.Show(true);
@@ -76,13 +74,9 @@ class DZLBaseMenu: UIScriptedMenu
 
     override void OnHide() {
         super.OnHide();
-
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
         Close();
     }
-
-
-
 }

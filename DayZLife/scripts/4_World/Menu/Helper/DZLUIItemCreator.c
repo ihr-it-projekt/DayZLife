@@ -44,4 +44,9 @@ class DZLUIItemCreator
     ButtonWidget GetButtonWidget(string name) {
         return ButtonWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
+	
+    ProgressBarWidget GetProgressBarWidget(string name) {
+        return ProgressBarWidget.Cast(layoutRoot.FindAnyWidget(name));
+    }
+	
 }

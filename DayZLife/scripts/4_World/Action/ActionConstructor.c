@@ -11,5 +11,6 @@ modded class ActionConstructor
 		actions.Insert(ActionRobBank);
 		actions.Insert(ActionHarvestItem);
 		actions.Insert(ActionOpenLicenseMenu);
+		actions.Insert(ActionLicenceCrafting);
     }
 }

@@ -3,7 +3,7 @@ class DZLPlayer {
     int money = 0;
     int bank = 0;
 	
-	ref array<ref DZLLicence> licences;
+	ref TStringArray licenceIds;
 
     void DZLPlayer(string playerId) {
         fileName = playerId + ".json";
@@ -14,7 +14,7 @@ class DZLPlayer {
 
             DZLPlayerIdentities idents = new DZLPlayerIdentities;
             idents.AddPlayer(playerId);
-			licences = new array<ref DZLLicence>;
+			licenceIds = new TStringArray;
 			
             Save();
         }
@@ -71,19 +71,19 @@ class DZLPlayer {
 	string CanBuyLicence(notnull DZLLicence licenceToBuy){
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
-		if(!licenceToBuy.dependencyLicence) return "";
-		
-		foreach(DZLLicence licence: licences){
-			if(licence.name == licenceToBuy.dependencyLicence){
-				return "";
-			}
-		}
+		if(HasDependencyLicense(licenceToBuy)) return "";
+
 		return "#you_have_not_the_dependency_licence";
+	}
+
+	bool HasDependencyLicense(notnull DZLLicence depLicence) {
+	    if(!depLicence.dependencyLicence) return true;
+	    return HasLicense(depLicence);
 	}
 	
 	bool HasLicense(DZLLicence licenceToBuy) {
-		foreach(DZLLicence licence: licences){
-            if(licence.id == licenceToBuy.id){
+		foreach(string licenceId: licenceIds){
+            if(licenceId == licenceToBuy.id){
                 return true;
             }
         }
@@ -92,7 +92,7 @@ class DZLPlayer {
 	
 	void BuyLicence(DZLLicence licenceToBuy){
 		money -= licenceToBuy.price;
-		licences.Insert(licenceToBuy);
+		licenceIds.Insert(licenceToBuy.id);
 		Save();
 	}
 

@@ -8,12 +8,12 @@ class DZLLicence
 	string id;
 	string ItemThatCanBeCrafted;
     ref DZLLicenceCraftedItem craftedItem;
-	ref array<ref DZLLicenceCraftItem> craftItems;
-	ref array<ref DZLLicenceToolItem> toolItems;
+	ref DZLLicenceCraftItemCollection craftItems;
+	ref DZLLicenceToolItemCollection toolItems;
 	int durationForCrafting;
 
 
-	void DZLLicence(int price, string name, vector position, int range, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, array<ref DZLLicenceToolItem> toolItems, array<ref DZLLicenceCraftItem> craftItems) {
+	void DZLLicence(int price, string name, vector position, int range, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
 		this.price = price;
 		this.name = name;
 		this.position = position;
@@ -28,10 +28,10 @@ class DZLLicence
 	}
 
 	bool HasCorrectId() {
-	    return id == name + dependencyLicence + price.ToString() + position.ToString(false) + range.ToString();
+	    return id != "";
 	}
 
 	void SetId() {
-	    id = name + dependencyLicence + price.ToString() + position.ToString(false) + range.ToString();
+	    id = Math.RandomInt(0, 100000000000).ToString();
 	}
 }

@@ -21,15 +21,13 @@ class ActionOpenBankingMenu: ActionInteractBase
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-            PlayerBase player = PlayerBaseHelper.GetPlayer();
-			
-			if(!action_data) return;
+            if(!action_data) return;
             if(!action_data.m_Target) return;
             if(!action_data.m_Target.GetObject()) return;
             if(!action_data.m_Target.GetObject().IsMan()) return;
            	if (!PlayerBase.Cast(action_data.m_Target.GetObject()).IsDZLBank) return;
 			
-			GetGame().GetUIManager().ShowScriptedMenu(player.GetBankingMenu(), NULL);
+			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
         }
 	}
 

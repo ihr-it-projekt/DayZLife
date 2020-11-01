@@ -20,7 +20,7 @@ class DZLLicenceMenu : DZLBaseMenu
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
 
-		array<ref DZLLicence> licences = config.licenceConfig.licences;
+		DZLLicenceCollection licences = config.licenceConfig.licences;
 		licenceListBox.ClearItems();
 		foreach(DZLLicence licence: licences){
 			string hasLicenseText = "x";
@@ -77,14 +77,14 @@ class DZLLicenceMenu : DZLBaseMenu
 				
 				if(!licence) return true;
 			
-				string messege = dzlPlayer.CanBuyLicence(licence);
+				string message = dzlPlayer.CanBuyLicence(licence);
 			
-				if("" == messege){
+				if("" == message){
 					errorMessageTextWidget.SetText("");
 					buyButton.Show(false);
-					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, int>(player, position), true);
+					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, string>(player, licence.id), true);
 				} else {
-					UpdateGUI(messege);
+					UpdateGUI(message);
 				}
 				
 				return true;

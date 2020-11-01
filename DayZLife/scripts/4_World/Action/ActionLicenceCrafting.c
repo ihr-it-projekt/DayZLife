@@ -16,34 +16,15 @@ class ActionLicenceCrafting: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-		DZLLicence licence = GetLicence();
+		DZLLicence licence = player.GetLicenceByPosition();
 		
 		if (!licence) return false;
-
-		return false;
+		
+		return !player.CanUseLicence(licence);
 	}
 
 	override void OnStartClient(ActionData action_data) {
 	    super.OnStartClient(action_data);
-		
-        
-    }
-
-    private DZLLicence GetLicence(PlayerBase player) {
-        if (!player) {
-            return false;
-        }
-        vector playerPosition = player.GetPosition();
-        if (!playerPosition) {
-            return false;
-        }
-		
-        foreach(DZLLicence licence: player.dzlPlayer.licences) {
-            if (vector.Distance(licence.position, playerPosition) <= licence.range){
-                return licence;
-            }
-        }
-        return null;
-    }
-
+	    GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetProgressBar(), NULL);
+	}
 };

@@ -34,7 +34,7 @@ class DZLJobConfig
             relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
             harvestItemToolRelation.Insert(relation);
 			
-            DZLWorkZone zone = new DZLWorkZone("12330 140 12666", 20, "Mining Zone", DAY_Z_LIFE_ZONE_TYPE_HARVEST_1, 10, 2, harvestItemToolRelation);
+            DZLWorkZone zone = new DZLWorkZone("12330 140 12666", 20, "Mining Zone", 10, 2, harvestItemToolRelation);
 			
 			workZones.Insert(zone);
 			

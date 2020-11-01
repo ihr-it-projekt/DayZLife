@@ -8,7 +8,8 @@ modded class PlayerBase
 	ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
 	ref DZLLicenceMenu licenceMenu;
-	
+	ref DZLProgressBar progressBar;
+
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
 	private int moneyPlayerIsDead = 0;
@@ -36,6 +37,7 @@ modded class PlayerBase
         AddAction(ActionRobBank);
         AddAction(ActionHarvestItem);
         AddAction(ActionOpenLicenseMenu);
+        AddAction(ActionLicenceCrafting);
 
         if (GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -86,6 +88,8 @@ modded class PlayerBase
             bankingMenu.UpdatePlayer(this);;
         } else if (licenceMenu && licenceMenu.IsVisible()) {
             licenceMenu.UpdatePlayer(this);;
+        }else if (progressBar && progressBar.IsVisible()) {
+            progressBar.UpdatePlayer(this);;
         }
     }
 
@@ -128,6 +132,12 @@ modded class PlayerBase
 		return licenceMenu;
 	}
 
+    DZLProgressBar GetProgressBar() {
+        progressBar = DZLProgressBar();
+        progressBar.SetPlayer(this);
+        return progressBar;
+    }
+
 	void CloseMenu() {
 		if (houseBuyMenu && houseBuyMenu.IsVisible()) {
 			houseBuyMenu.OnHide();
@@ -137,6 +147,8 @@ modded class PlayerBase
 			bankingMenu.OnHide();
 		} else if (licenceMenu && licenceMenu.IsVisible()) {
 			licenceMenu.OnHide();
+		} else if (progressBar && progressBar.IsVisible()) {
+			progressBar.OnHide();
 		}
 	}
 
@@ -162,5 +174,176 @@ modded class PlayerBase
     void SetMoneyPlayerIsDead(float money) {
         IsRealPlayer = false;
         moneyPlayerIsDead = money;
+    }
+	
+	DZLLicence GetLicenceByPosition() {
+        vector playerPosition = GetPosition();
+        if (!playerPosition) {
+            return null;
+        }
+		
+        foreach(string licenceId: dzlPlayer.licenceIds) {
+			DZLLicence licence = config.licenceConfig.licences.FindById(licenceId);
+			
+			if(!licence) continue;
+			
+            if (vector.Distance(licence.position, playerPosition) <= licence.range){
+                return licence;
+            }
+        }
+        return null;
+    }
+	
+	string CanUseLicence(DZLLicence licence) {
+        array<EntityAI> items = GetPlayerItems();
+        map<string, int> craft = new map<string, int>;
+        map<string, int> tools = new map<string, int>;
+		string message = "";
+
+        foreach(EntityAI item: items) {
+            string itemType = item.GetType();
+            itemType.ToLower();
+			
+			bool isCraft = false;
+			foreach(DZLLicenceCraftItem craftItem: licence.craftItems) {
+                if(IsNeededItem(craftItem, item, itemType)) {
+					if (craft.Contains(itemType)) {
+						craft.Set(itemType, craft.Get(itemType) + 1);
+					} else {
+						craft.Set(itemType, 1);
+					}
+					isCraft = true;
+					break;
+				}
+			}
+			
+			if(isCraft) continue;
+			
+			foreach(DZLLicenceToolItem toolItem: licence.toolItems) {
+                if(IsNeededItem(toolItem, item, itemType)) {
+					if (tools.Contains(itemType)) {
+						tools.Set(itemType, tools.Get(itemType) + 1);
+					} else {
+						tools.Set(itemType, 1);
+					}
+					break;
+				}
+			}
+        }
+		
+		map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
+		map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
+
+		if (craft.Count() == craftMap.Count() && tools.Count() == toolMap.Count()) {
+		    foreach(string type, int count: craftMap) {
+				int countFound = 0;
+				if (craft.Find(type, countFound)) {
+					if (countFound <= count) {
+						return "#not_enoug_items_to_craft";
+					}
+				} else {
+					return "#missing_craft_item";
+				}
+			}
+			
+
+			foreach(string typeTool, int countTool: toolMap) {
+                int countFoundTool = 0;
+                if (tools.Find(typeTool, countFoundTool)) {
+                    if (countFoundTool <= countTool) {
+                        return "#not_enoug_tools_to_craft";
+                    }
+                } else {
+                    return "#missing_tool_item";
+                }
+            }
+		} else {
+			message = "#has_not_found_all_items_that_is_needed_to_craft";
+		}
+
+        return message;
+	}
+
+	void UseLicence(DZLLicence licence) {
+        array<EntityAI> items = GetPlayerItems();
+        map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
+        map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
+
+		string message = "";
+
+        foreach(EntityAI item: items) {
+			if (craftMap.Count() == 0 && toolMap.Count() == 0) break;
+			
+            string itemType = item.GetType();
+            itemType.ToLower();
+
+			bool isCraft = false;
+			foreach(DZLLicenceCraftItem craftItem: licence.craftItems) {
+				if (craftMap.Count() == 0) break;
+				
+                if(IsNeededItem(craftItem, item, itemType)) {
+					int countFoundCraft = 0;
+					if(craftMap.Find(itemType, countFoundCraft)) {
+						int quant = item.GetQuantity();
+						
+						if (quant == -1) {
+							GetGame().ObjectDelete(item);
+							craftMap.Remove(itemType);
+						} else if (quant > countFoundCraft) {
+							ItemBase.Cast(item).SetQuantity(quant - countFoundCraft);
+							
+							craftMap.Remove(itemType);
+						} else {
+							countFoundCraft -= quant;
+							GetGame().ObjectDelete(item);
+							craftMap.Set(itemType, countFoundCraft);
+						}
+						isCraft = true;
+						break;
+					}
+				}
+			}
+
+			if(isCraft) continue;
+
+			foreach(DZLLicenceToolItem toolItem: licence.toolItems) {
+				if (toolMap.Count() == 0) break;
+				
+                if(IsNeededItem(toolItem, item, itemType)) {
+					int countFoundTool = 0;
+					if(toolMap.Find(itemType, countFoundTool)) {
+					    int health = item.GetHealth();
+						
+						if (health >= toolItem.damageToTool) {
+							craftMap.Remove(itemType);
+							item.SetHealth(item.GetHealth() - toolItem.damageToTool);
+						}
+						break;
+					    
+					}
+				}
+			}
+        }
+	}
+
+	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
+        if(item.GetLowerCaseType() == ItemSearchType) {
+            if(GetGame().IsServer()) {
+                if (itemSearch.GetHealth() >= item.health && itemSearch.GetQuantity() >= item.quantity) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+
+        return false;
+	}
+
+	array<EntityAI> GetPlayerItems() {
+        array<EntityAI> itemsArray = new array<EntityAI>;
+        GetInventory().EnumerateInventory(InventoryTraversalType.INORDER, itemsArray);
+
+        return itemsArray;
     }
 }
