@@ -8,13 +8,13 @@ class DZLLicenceConfig
 			licences = new DZLLicenceCollection;
 			
 			DZLLicenceCraftItemCollection craftItems = new DZLLicenceCraftItemCollection;
-			craftItems.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
-			craftItems.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
+			craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
+			craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
 
 			DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
-			toolItems.Insert(new DZLLicenceToolItem("Bucket", 100, 10, 10));
+			toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", -1, 10));
 
-			licences.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 2, 100), 5, toolItems, craftItems));
+			licences.collection.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 2, 100), 5, toolItems, craftItems));
 
 			positionOfLicencePoints = new array<ref DZLLicencePosition>;
             array<string> attachments = new array<string>;
@@ -28,7 +28,7 @@ class DZLLicenceConfig
 			
 			Save();
 		} else {
-		    foreach(DZLLicence licence: licences) {
+		    foreach(DZLLicence licence: licences.collection) {
 		        if (!licence.HasCorrectId()) {
                     licence.SetId();
 		        }

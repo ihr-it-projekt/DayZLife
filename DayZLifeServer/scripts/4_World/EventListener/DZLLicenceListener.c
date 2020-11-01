@@ -34,8 +34,7 @@ class DZLLicenceListener
                 DZLLicence licenceUse = config.licenceConfig.licences.FindById(paramUseLicence.param2);
                 string messageUse = paramBuyLicence.param1.CanUseLicence(licenceUse);
                 if (!messageUse) {
-
-
+                    paramUseLicence.param1.UseLicence(licenceUse);
                 }
 
                 GetGame().RPCSingleParam(paramBuyLicence.param1, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>(messageUse), true, sender);

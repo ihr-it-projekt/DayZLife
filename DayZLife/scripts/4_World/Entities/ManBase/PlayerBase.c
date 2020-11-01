@@ -177,6 +177,8 @@ modded class PlayerBase
     }
 	
 	DZLLicence GetLicenceByPosition() {
+	    if(!dzlPlayer) return null;
+
         vector playerPosition = GetPosition();
         if (!playerPosition) {
             return null;
@@ -190,6 +192,7 @@ modded class PlayerBase
             if (vector.Distance(licence.position, playerPosition) <= licence.range){
                 return licence;
             }
+			DebugMessageDZL("licenc not in range");
         }
         return null;
     }
@@ -205,7 +208,7 @@ modded class PlayerBase
             itemType.ToLower();
 			
 			bool isCraft = false;
-			foreach(DZLLicenceCraftItem craftItem: licence.craftItems) {
+			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
                 if(IsNeededItem(craftItem, item, itemType)) {
 					if (craft.Contains(itemType)) {
 						craft.Set(itemType, craft.Get(itemType) + 1);
@@ -219,7 +222,7 @@ modded class PlayerBase
 			
 			if(isCraft) continue;
 			
-			foreach(DZLLicenceToolItem toolItem: licence.toolItems) {
+			foreach(DZLLicenceToolItem toolItem: licence.toolItems.collection) {
                 if(IsNeededItem(toolItem, item, itemType)) {
 					if (tools.Contains(itemType)) {
 						tools.Set(itemType, tools.Get(itemType) + 1);
@@ -269,8 +272,6 @@ modded class PlayerBase
         map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
         map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
 
-		string message = "";
-
         foreach(EntityAI item: items) {
 			if (craftMap.Count() == 0 && toolMap.Count() == 0) break;
 			
@@ -278,23 +279,23 @@ modded class PlayerBase
             itemType.ToLower();
 
 			bool isCraft = false;
-			foreach(DZLLicenceCraftItem craftItem: licence.craftItems) {
+			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
 				if (craftMap.Count() == 0) break;
 				
                 if(IsNeededItem(craftItem, item, itemType)) {
 					int countFoundCraft = 0;
 					if(craftMap.Find(itemType, countFoundCraft)) {
-						int quant = item.GetQuantity();
+						int quantity = item.GetQuantity();
 						
-						if (quant == -1) {
+						if (quantity == -1) {
 							GetGame().ObjectDelete(item);
 							craftMap.Remove(itemType);
-						} else if (quant > countFoundCraft) {
-							ItemBase.Cast(item).SetQuantity(quant - countFoundCraft);
+						} else if (quantity > countFoundCraft) {
+							ItemBase.Cast(item).SetQuantity(quantity - countFoundCraft);
 							
 							craftMap.Remove(itemType);
 						} else {
-							countFoundCraft -= quant;
+							countFoundCraft -= quantity;
 							GetGame().ObjectDelete(item);
 							craftMap.Set(itemType, countFoundCraft);
 						}
@@ -306,7 +307,7 @@ modded class PlayerBase
 
 			if(isCraft) continue;
 
-			foreach(DZLLicenceToolItem toolItem: licence.toolItems) {
+			foreach(DZLLicenceToolItem toolItem: licence.toolItems.collection) {
 				if (toolMap.Count() == 0) break;
 				
                 if(IsNeededItem(toolItem, item, itemType)) {
@@ -314,9 +315,9 @@ modded class PlayerBase
 					if(toolMap.Find(itemType, countFoundTool)) {
 					    int health = item.GetHealth();
 						
-						if (health >= toolItem.damageToTool) {
+						if (health >= toolItem.health) {
 							craftMap.Remove(itemType);
-							item.SetHealth(item.GetHealth() - toolItem.damageToTool);
+							item.SetHealth(item.GetHealth() - toolItem.health);
 						}
 						break;
 					    
@@ -324,6 +325,25 @@ modded class PlayerBase
 				}
 			}
         }
+
+		
+        InventoryLocation inventoryLocation = new InventoryLocation;
+        EntityAI itemSpawn;
+		DZLLicenceCraftedItem itemToCraft = licence.craftedItem;
+		
+        if (GetInventory().FindFirstFreeLocationForNewEntity(itemToCraft.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+            itemSpawn = GetHumanInventory().CreateInInventory(itemToCraft.type);
+        } else if (GetHumanInventory().GetEntityInHands()) {
+            itemSpawn = GetHumanInventory().CreateInHands(itemToCraft.type);
+        } else {
+            itemSpawn = SpawnEntityOnGroundPos(itemToCraft.type, GetPosition());
+        }
+		
+		if (itemSpawn) {
+			itemSpawn.SetHealth(itemToCraft.health);
+			ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
+		}
+		
 	}
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {

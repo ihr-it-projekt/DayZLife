@@ -118,16 +118,13 @@ class ActionHarvestItem: ActionContinuousBase
                 string randomItemType = randRelation.itemsThatCanHarvest.GetRandomElement();
 
                 InventoryLocation inventoryLocation = new InventoryLocation;
-
                 EntityAI item;
 
                 GetGame().RPCSingleParam(action_data.m_Player, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType)), true, action_data.m_Player.GetIdentity());
                 if (action_data.m_Player.GetInventory().FindFirstFreeLocationForNewEntity(randomItemType, FindInventoryLocationType.ANY, inventoryLocation)) {
                     item = action_data.m_Player.GetHumanInventory().CreateInInventory(randomItemType);
-					DebugMessageDZL("inventory spawn");
                 } else if (!action_data.m_Player.GetHumanInventory().GetEntityInHands()) {
                     item = action_data.m_Player.GetHumanInventory().CreateInHands(randomItemType);
-					DebugMessageDZL("hands spawn");
                 } else {
                     GetGame().RPCSingleParam(action_data.m_Player, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#no_space_left_in_inventory"), true, action_data.m_Player.GetIdentity());
                 }

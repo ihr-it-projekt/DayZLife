@@ -16,11 +16,18 @@ class ActionLicenceCrafting: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
+		DebugMessageDZL("try get licence");
 		DZLLicence licence = player.GetLicenceByPosition();
 		
 		if (!licence) return false;
 		
-		return !player.CanUseLicence(licence);
+		DebugMessageDZL("has licence");
+		
+		string message = player.CanUseLicence(licence);
+		
+		DebugMessageDZL(message);
+		
+		return !message;
 	}
 
 	override void OnStartClient(ActionData action_data) {

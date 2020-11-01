@@ -6,7 +6,6 @@ class DZLLicence
 	int range;
 	string dependencyLicence;
 	string id;
-	string ItemThatCanBeCrafted;
     ref DZLLicenceCraftedItem craftedItem;
 	ref DZLLicenceCraftItemCollection craftItems;
 	ref DZLLicenceToolItemCollection toolItems;

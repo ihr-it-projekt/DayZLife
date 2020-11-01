@@ -22,7 +22,7 @@ class DZLLicenceMenu : DZLBaseMenu
 
 		DZLLicenceCollection licences = config.licenceConfig.licences;
 		licenceListBox.ClearItems();
-		foreach(DZLLicence licence: licences){
+		foreach(DZLLicence licence: licences.collection){
 			string hasLicenseText = "x";
 			if (!dzlPlayer.HasLicense(licence)) {
 				hasLicenseText = "";
