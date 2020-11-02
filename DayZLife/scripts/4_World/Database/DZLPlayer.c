@@ -5,9 +5,10 @@ class DZLPlayer {
 	
 	ref TStringArray licenceIds;
 
-    void DZLPlayer(string playerId) {
+    void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
         if (!Load()) {
+            money = moneyToAdd;
             if (DAY_Z_LIFE_DEBUG) {
                 money = 100000;
             }

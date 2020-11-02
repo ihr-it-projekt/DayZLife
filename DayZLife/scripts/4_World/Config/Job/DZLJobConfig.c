@@ -45,7 +45,7 @@ class DZLJobConfig
                 // start second zone
                 itemsThatCanHarvest = new array<string>;
                 itemsThatNeededForHarvest = new array<string>;
-                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>
+                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 
                 itemsThatCanHarvest.Insert("Stone");
                 itemsThatCanHarvest.Insert("SmallStone");

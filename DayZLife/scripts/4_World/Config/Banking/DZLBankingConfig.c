@@ -7,6 +7,7 @@ class DZLBankingConfig
     int percentOfMoneyWhenRaid = 50;
 	int raidCoolDownTimeInSeconds = 60;
 	int maximumRaidDistanceToBank = 5;
+	int startCapital = 1000;
 
     void DZLBankingConfig() {
         if(!Load()) {

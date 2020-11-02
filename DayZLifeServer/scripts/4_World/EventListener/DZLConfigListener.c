@@ -22,7 +22,7 @@ class DZLConfigListener
             autoptr Param1<PlayerBase> paramGetPlayerData;
             if (ctx.Read(paramGetPlayerData)){
                 DebugMessageDZL("Send player data");
-                GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramGetPlayerData.param1.GetIdentity().GetId())), true, sender);
+                GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramGetPlayerData.param1.GetIdentity().GetId(), config.bankConfig.startCapital)), true, sender);
             }
         }
     }
