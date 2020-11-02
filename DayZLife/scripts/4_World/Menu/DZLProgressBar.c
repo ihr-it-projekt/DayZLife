@@ -61,11 +61,7 @@ class DZLProgressBar: UIScriptedMenu
 		        return;
 		    }
 
-			//  20 - 5 = 15 
-			// 15 * secInPerc = procNoOffen 
-			// 100 - proceNoOffe = procdone
-		 
-			float percent = 100 - ((licence.durationForCrafting - timer.GetDuration()) * (licence.durationForCrafting / 100));
+			float percent = licence.durationForCrafting / iterations * 100;
 			
 			progressBar.SetCurrent(percent);
 			status.SetText(percent.ToString());

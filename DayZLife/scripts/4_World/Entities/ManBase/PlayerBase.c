@@ -211,15 +211,20 @@ modded class PlayerBase
         foreach(EntityAI item: items) {
             string itemType = item.GetType();
             itemType.ToLower();
+			int quantity = item.GetQuantity();
+			if (quantity == 0) {
+                quantity = 1;
+            }
 			
 			bool isCraft = false;
 
 			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
                 if(IsNeededItem(craftItem, item, itemType)) {
-					if (craft.Contains(itemType)) {
-						craft.Set(itemType, craft.Get(itemType) + 1);
+					int countCraft = 0;
+					if (craft.Find(itemType, countCraft)) {
+						craft.Set(itemType, countCraft + quantity);
 					} else {
-						craft.Set(itemType, 1);
+						craft.Insert(itemType, quantity);
 					}
 					isCraft = true;
 					break;
@@ -230,10 +235,11 @@ modded class PlayerBase
 			
 			foreach(DZLLicenceToolItem toolItem: licence.toolItems.collection) {
                 if(IsNeededItem(toolItem, item, itemType)) {
-					if (tools.Contains(itemType)) {
-						tools.Set(itemType, tools.Get(itemType) + 1);
+					int countTools = 0;
+					if (tools.Find(itemType, countTools)) {
+						tools.Set(itemType, countTools + quantity);
 					} else {
-						tools.Set(itemType, 1);
+						tools.Insert(itemType, quantity);
 					}
 					break;
 				}
@@ -243,11 +249,11 @@ modded class PlayerBase
 		map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
 		map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
 
-		if (craft.Count() == craftMap.Count() && tools.Count() == toolMap.Count()) {
+		if (craft.Count() >= craftMap.Count() && tools.Count() >= toolMap.Count()) {
 		    foreach(string type, int count: craftMap) {
 				int countFound = 0;
 				if (craft.Find(type, countFound)) {
-					if (countFound <= count) {
+					if (countFound < count) {
 						return "#not_enough_items_to_craft";
 					}
 				} else {
@@ -255,11 +261,10 @@ modded class PlayerBase
 				}
 			}
 			
-
 			foreach(string typeTool, int countTool: toolMap) {
                 int countFoundTool = 0;
                 if (tools.Find(typeTool, countFoundTool)) {
-                    if (countFoundTool <= countTool) {
+                    if (countFoundTool < countTool) {
                         return "#not_enough_tools_to_craft";
                     }
                 } else {
@@ -269,6 +274,8 @@ modded class PlayerBase
 		} else {
 			message = "#has_not_found_all_items_that_is_needed_to_craft";
 		}
+		
+		DebugMessageDZL(message);
 
         return message;
 	}
@@ -283,28 +290,41 @@ modded class PlayerBase
 			
             string itemType = item.GetType();
             itemType.ToLower();
+            int quantity = item.GetQuantity();
+            if (quantity == 0) {
+                quantity = 1;
+            }
 
 			bool isCraft = false;
 			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
 				if (craftMap.Count() == 0) break;
 				
                 if(IsNeededItem(craftItem, item, itemType)) {
+					DebugMessageDZL("craftItem " + craftItem.type);
 					int countFoundCraft = 0;
 					if(craftMap.Find(itemType, countFoundCraft)) {
-						int quantity = item.GetQuantity();
-						
-						if (quantity == -1) {
+						DebugMessageDZL("itemType" + itemType);
+						DebugMessageDZL("countFoundCraft" + countFoundCraft);
+						DebugMessageDZL("itemType q" + craftItem.quantity);
+						if (quantity == 1) {
 							GetGame().ObjectDelete(item);
-							craftMap.Remove(itemType);
+							countFoundCraft -= 1;
+							craftMap.Set(itemType, countFoundCraft);
 						} else if (quantity > countFoundCraft) {
 							ItemBase.Cast(item).SetQuantity(quantity - countFoundCraft);
-							
-							craftMap.Remove(itemType);
+							countFoundCraft = 0;
 						} else {
 							countFoundCraft -= quantity;
 							GetGame().ObjectDelete(item);
 							craftMap.Set(itemType, countFoundCraft);
 						}
+
+						DebugMessageDZL("countFoundCraft " + countFoundCraft.ToString());
+						if (0 == countFoundCraft) {
+							DebugMessageDZL("remove");
+                            craftMap.Remove(itemType);
+						}
+
 						isCraft = true;
 						break;
 					}
@@ -322,11 +342,15 @@ modded class PlayerBase
 					    int health = item.GetHealth();
 						
 						if (health >= toolItem.health) {
-							craftMap.Remove(itemType);
-							item.SetHealth(item.GetHealth() - toolItem.health);
+						    if (quantity == 1) {
+						        craftMap.Remove(itemType);
+						    } else {
+						        craftMap.Set(itemType, craftMap.Get(itemType) - 1);
+						    }
+
+							item.SetHealth(health - toolItem.health);
 						}
 						break;
-					    
 					}
 				}
 			}
@@ -355,8 +379,8 @@ modded class PlayerBase
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
         if(item.GetLowerCaseType() == ItemSearchType) {
             if(GetGame().IsServer()) {
-                if (itemSearch.GetHealth() >= item.health && itemSearch.GetQuantity() >= item.quantity) {
-                    return true;
+                if (itemSearch.GetHealth() >= item.health){
+					return true;
                 }
             } else {
                 return true;

@@ -10,14 +10,13 @@ class DZLLicenceConfig
                 licences = new DZLLicenceCollection;
 
                 DZLLicenceCraftItemCollection craftItems = new DZLLicenceCraftItemCollection;
-                craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 0, 50));
-                craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 0, 50));
-                craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 0, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
 
                 DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
-                toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 0, 10));
+                toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
 
-                licences.collection.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 0, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
 
                 positionOfLicencePoints = new array<ref DZLLicencePosition>;
                 array<string> attachments = new array<string>;
