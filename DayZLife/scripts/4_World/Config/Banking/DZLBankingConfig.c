@@ -11,17 +11,24 @@ class DZLBankingConfig
     void DZLBankingConfig() {
         if(!Load()) {
             positionOfBankingPoints = new array<ref DZLBankingPosition>;
+            itemsCanUsedToRaidBank = new array<string>;
+
             array<string> attachments = new array<string>;
             attachments.Insert("ManSuit_Black");
             attachments.Insert("SlacksPants_Black");
             attachments.Insert("ThickFramesGlasses");
             attachments.Insert("DressShoes_Black");
 
-            positionOfBankingPoints.Insert(new DZLBankingPosition("11053.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
-            positionOfBankingPoints.Insert(new DZLBankingPosition("12326.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
+            if (DAY_Z_LIFE_DEBUG) {
+                 // first Bank
+                positionOfBankingPoints.Insert(new DZLBankingPosition("11053.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
+                // second bank
+                positionOfBankingPoints.Insert(new DZLBankingPosition("12326.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
 
-            itemsCanUsedToRaidBank = new array<string>;
-            itemsCanUsedToRaidBank.Insert("M4A1");
+                itemsCanUsedToRaidBank.Insert("M4A1");
+            } else {
+
+            }
 
             Save();
         }

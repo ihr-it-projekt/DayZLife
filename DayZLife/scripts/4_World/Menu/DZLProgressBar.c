@@ -51,6 +51,8 @@ class DZLProgressBar: UIScriptedMenu
 	    DebugMessageDZL("licence.durationForCrafting " + licence.durationForCrafting);
 	    iterations++;
 		if (iterations >= licence.durationForCrafting) {
+		    progressBar.SetCurrent(100);
+            status.SetText("100");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE_USE, new Param2<PlayerBase, string>(player, licence.id), true);
 			OnHide();
 		} else {
@@ -61,7 +63,7 @@ class DZLProgressBar: UIScriptedMenu
 		        return;
 		    }
 
-			float percent = licence.durationForCrafting / iterations * 100;
+			float percent = iterations / licence.durationForCrafting  * 100;
 			
 			progressBar.SetCurrent(percent);
 			status.SetText(percent.ToString());
