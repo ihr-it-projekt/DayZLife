@@ -1,0 +1,41 @@
+FrameWidgetClass DZL_Message {
+ position -0 0
+ size 0.22055 0.12237
+ halign right_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   position -0 0
+   size 0.9717 0.898
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    MultilineTextWidgetClass Announcements {
+     ignorepointer 1
+     position 0 0
+     size 0.97083 0.88644
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style None
+     text "Error Meldungen, Hinweise, sonstige meldungen"
+     "text halign" center
+     "text valign" center
+     wrap 1
+    }
+   }
+  }
+ }
+}
