@@ -1,4 +1,4 @@
-static bool DAY_Z_LIFE_DEBUG = true;
+static bool DAY_Z_LIFE_DEBUG = false;
 static int DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE = 2222218;
 static int DAY_Z_LIFE_EVENT_GET_CONFIG = 2222219;
 static int DAY_Z_LIFE_OPEN_GET_BUILDING_DATA = 222220;
