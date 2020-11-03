@@ -268,18 +268,19 @@ class DZLJobConfig
                 itemsThatNeededForHarvest = new array<string>;
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 
-                itemsThatCanHarvest.Insert("Scrap_1");
-                itemsThatCanHarvest.Insert("Scrap_2");
-                itemsThatCanHarvest.Insert("Scrap_3");
-                itemsThatCanHarvest.Insert("Scrap_4");
-                itemsThatCanHarvest.Insert("Scrap_5");
-                itemsThatCanHarvest.Insert("Scrap_6");
-                itemsThatCanHarvest.Insert("Scrap_7");
-                itemsThatCanHarvest.Insert("Scrap_8");
-                itemsThatCanHarvest.Insert("Scrap_9");
-                itemsThatCanHarvest.Insert("Scrap_10");
+                itemsThatCanHarvest.Insert("DZL_Scrap_1");
+                itemsThatCanHarvest.Insert("DZL_Scrap_2");
+                itemsThatCanHarvest.Insert("DZL_Scrap_3");
+                itemsThatCanHarvest.Insert("DZL_Scrap_4");
+                itemsThatCanHarvest.Insert("DZL_Scrap_5");
+                itemsThatCanHarvest.Insert("DZL_Scrap_6");
+                itemsThatCanHarvest.Insert("DZL_Scrap_7");
+                itemsThatCanHarvest.Insert("DZL_Scrap_8");
+                itemsThatCanHarvest.Insert("DZL_Scrap_9");
+                itemsThatCanHarvest.Insert("DZL_Scrap_10");
 
-                itemsThatNeededForHarvest.Insert("");
+                itemsThatNeededForHarvest.Insert("Wrench");
+                itemsThatNeededForHarvest.Insert("LugWrench");
 
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
