@@ -70,9 +70,7 @@ class DZLJobConfig
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 				
 				itemsThatCanHarvest.Insert("Apple");
-				
-				itemsThatNeededForHarvest.Insert("");
-				
+
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
                 harvestItemToolRelation.Insert(relation);
@@ -87,8 +85,6 @@ class DZLJobConfig
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 				
 				itemsThatCanHarvest.Insert("Apple");
-				
-				itemsThatNeededForHarvest.Insert("");
 				
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
@@ -105,8 +101,6 @@ class DZLJobConfig
 				
 				itemsThatCanHarvest.Insert("Apple");
 				
-				itemsThatNeededForHarvest.Insert("");
-				
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
                 harvestItemToolRelation.Insert(relation);
@@ -121,8 +115,6 @@ class DZLJobConfig
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 				
 				itemsThatCanHarvest.Insert("Apple");
-				
-				itemsThatNeededForHarvest.Insert("");
 				
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
