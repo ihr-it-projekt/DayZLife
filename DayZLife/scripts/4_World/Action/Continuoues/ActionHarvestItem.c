@@ -63,6 +63,7 @@ class ActionHarvestItem: ActionContinuousBase
 		
 		DZLWorkZone zone = FindZone(playerPosition, config);
 		if (zone) {
+		    m_CommandUID = zone.m_CommandUID;
 			foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
                 foreach(string _item: relation.itemsThatNeededForHarvest) {
 					_item.ToLower();
@@ -86,8 +87,6 @@ class ActionHarvestItem: ActionContinuousBase
 	override void OnUpdateServer(ActionData action_data) {
         if (action_data.m_State == UA_FINISHED && done == false) {
             done = true;
-
-
 
             DZLWorkZone zone = FindZone(action_data.m_Player.GetPosition(), GetConfig());
 			

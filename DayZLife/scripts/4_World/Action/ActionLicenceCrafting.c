@@ -19,6 +19,8 @@ class ActionLicenceCrafting: ActionInteractBase
 		DZLLicence licence = player.GetLicenceByPosition();
 		if (!licence) return false;
 
+		m_CommandUID = licence.m_CommandUID;
+
 		string message = player.CanUseLicence(licence);
 
 		return !message;

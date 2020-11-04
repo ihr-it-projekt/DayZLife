@@ -23,7 +23,7 @@ class DZLLicenceConfig
                 craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
-                licences.collection.Insert(new DZLLicence(100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
                 // end first licence
                 // start second licence
                 craftItems = new DZLLicenceCraftItemCollection;
@@ -32,7 +32,7 @@ class DZLLicenceConfig
                 craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
-                licences.collection.Insert(new DZLLicence(100, "Cement Licence 2", "12310 140 12633", 20, "Cement Licence", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence 2", "12310 140 12633", 20, "Cement Licence", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
                 // end second license
                 // Position of licence dealer
 
