@@ -45,12 +45,6 @@ class ActionHarvestItem: ActionContinuousBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
-		EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
-		if(!item_in_hands_source) return false;
-
-		string handItemType = item_in_hands_source.GetType();
-		handItemType.ToLower();
-
 		if(GetGame().IsServer()) {
 			config = GetConfig();
 		} else if(player && player.config) {
@@ -64,7 +58,19 @@ class ActionHarvestItem: ActionContinuousBase
 		DZLWorkZone zone = FindZone(playerPosition, config);
 		if (zone) {
 		    m_CommandUID = zone.m_CommandUID;
+
+		    EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
+
+            if (item_in_hands_source) {
+                string handItemType = item_in_hands_source.GetType();
+                handItemType.ToLower();
+            }
+
 			foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
+			    if (0 == relation.itemsThatNeededForHarvest.Count()) return true;
+
+			    if (!handItemType) return false;
+
                 foreach(string _item: relation.itemsThatNeededForHarvest) {
 					_item.ToLower();
                     if (handItemType == _item) {
