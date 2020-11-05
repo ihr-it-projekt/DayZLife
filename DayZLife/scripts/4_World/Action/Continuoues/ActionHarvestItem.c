@@ -97,31 +97,30 @@ class ActionHarvestItem: ActionContinuousBase
             DZLWorkZone zone = FindZone(action_data.m_Player.GetPosition(), GetConfig());
 			
             if (zone) {
+				DebugMessageDZL("zone");
                 EntityAI item_in_hands_source = action_data.m_Player.GetHumanInventory().GetEntityInHands();
                 array<DZLHarvestItemToolRelation> matchedRelations = new array<DZLHarvestItemToolRelation>;
                 if(item_in_hands_source) {
                     string handItemType = item_in_hands_source.GetType();
                     handItemType.ToLower();
+                }
 
-
-                    foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
-                        foreach(string _item: relation.itemsThatNeededForHarvest) {
-                            _item.ToLower();
-                            if (handItemType == _item) {
-                                if (0 < item_in_hands_source.GetHealth()) {
-                                    matchedRelations.Insert(relation);
-                                }
-                            }
-                        }
+                foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
+                    if (0 == relation.itemsThatNeededForHarvest.Count()) {
+                        matchedRelations.Insert(relation);
+                        continue;
                     }
-                } else {
-                    foreach(DZLHarvestItemToolRelation _relation: zone.harvestItemToolRelation) {
-                        if (0 == _relation.itemsThatNeededForHarvest.Count()) {
-                            matchedRelations.Insert(_relation);
+                    foreach(string _item: relation.itemsThatNeededForHarvest) {
+                        _item.ToLower();
+                         if (item_in_hands_source && handItemType == _item) {
+                            if (0 < item_in_hands_source.GetHealth()) {
+                                matchedRelations.Insert(relation);
+                            }
                         }
                     }
                 }
 
+                DebugMessageDZL("matchedRelations.Count()" + matchedRelations.Count().ToString());
                 if (matchedRelations.Count() == 0) return;
 
                 DZLHarvestItemToolRelation randRelation = matchedRelations.GetRandomElement();
@@ -145,7 +144,9 @@ class ActionHarvestItem: ActionContinuousBase
                 if (item_in_hands_source) {
                     item_in_hands_source.SetHealth(item_in_hands_source.GetHealth() - zone.damagePerHarvestItem);
                 }
-            }
+            } else {
+				DebugMessageDZL("!zone");
+			}
 
         } else if ((action_data.m_State == UA_CANCEL || action_data.m_State == UA_INTERRUPT || action_data.m_State == UA_FAILED) && done == false) {
             done = true;
