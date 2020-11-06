@@ -34,6 +34,6 @@ class ActionLicenceCrafting: ActionInteractBase
 
 	override void OnStartClient(ActionData action_data) {
 	    super.OnStartClient(action_data);
-	    GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetProgressBar(), NULL);
+	    GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceProgressBar(), NULL);
 	}
 };

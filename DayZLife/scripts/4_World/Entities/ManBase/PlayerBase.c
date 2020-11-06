@@ -8,7 +8,8 @@ modded class PlayerBase
 	ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
 	ref DZLLicenceMenu licenceMenu;
-	ref DZLProgressBar progressBar;
+	ref DZLLicenceProgressBar progressBarLicence;
+	ref DZLDoorRaidProgressBar progressBarRaid;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -38,6 +39,9 @@ modded class PlayerBase
         AddAction(ActionHarvestItem);
         AddAction(ActionOpenLicenseMenu);
         AddAction(ActionLicenceCrafting);
+        AddAction(DZLActionLockDoors);
+        AddAction(DZLActionRaidDoors);
+        AddAction(DZLActionUnLockDoors);
 
         if (GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -88,8 +92,8 @@ modded class PlayerBase
             bankingMenu.UpdatePlayer(this);;
         } else if (licenceMenu && licenceMenu.IsVisible()) {
             licenceMenu.UpdatePlayer(this);;
-        }else if (progressBar && progressBar.IsVisible()) {
-            progressBar.UpdatePlayer(this);;
+        }else if (progressBarLicence && progressBarLicence.IsVisible()) {
+            progressBarLicence.UpdatePlayer(this);;
         }
     }
 
@@ -132,10 +136,16 @@ modded class PlayerBase
 		return licenceMenu;
 	}
 
-    DZLProgressBar GetProgressBar() {
-        progressBar = DZLProgressBar();
-        progressBar.SetPlayer(this);
-        return progressBar;
+    DZLLicenceProgressBar GetLicenceProgressBar() {
+        progressBarLicence = DZLLicenceProgressBar();
+        progressBarLicence.SetPlayer(this);
+        return progressBarLicence;
+    }
+
+    DZLDoorRaidProgressBar GetRaidProgressBar() {
+        progressBarRaid = DZLDoorRaidProgressBar();
+        progressBarRaid.SetPlayer(this);
+        return progressBarRaid;
     }
 
 	void CloseMenu() {
@@ -147,8 +157,10 @@ modded class PlayerBase
 			bankingMenu.OnHide();
 		} else if (licenceMenu && licenceMenu.IsVisible()) {
 			licenceMenu.OnHide();
-		} else if (progressBar && progressBar.IsVisible()) {
-			progressBar.OnHide();
+		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
+			progressBarLicence.OnHide();
+		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
+			progressBarRaid.OnHide();
 		}
 	}
 
@@ -389,7 +401,7 @@ modded class PlayerBase
 
         return false;
 	}
-
+		
 	array<EntityAI> GetPlayerItems() {
         array<EntityAI> itemsArray = new array<EntityAI>;
         GetInventory().EnumerateInventory(InventoryTraversalType.INORDER, itemsArray);

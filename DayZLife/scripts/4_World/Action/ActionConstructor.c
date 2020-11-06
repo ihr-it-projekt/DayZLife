@@ -12,5 +12,8 @@ modded class ActionConstructor
 		actions.Insert(ActionHarvestItem);
 		actions.Insert(ActionOpenLicenseMenu);
 		actions.Insert(ActionLicenceCrafting);
+		actions.Insert(DZLActionLockDoors);
+		actions.Insert(DZLActionRaidDoors);
+		actions.Insert(DZLActionUnLockDoors);
     }
 }

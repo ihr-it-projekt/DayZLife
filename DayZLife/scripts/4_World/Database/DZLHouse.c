@@ -7,7 +7,7 @@ class DZLHouse {
 	vector orientation;
 	ref array<ref DZLStorageTypeBought> storage;
 	ref array<int> storagePositions;
-	
+	int raidTime = 3;
 
     void DZLHouse(Building building) {
         this.fileName = DZLHouse.GetFileName(building);

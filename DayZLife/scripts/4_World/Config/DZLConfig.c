@@ -1,7 +1,7 @@
 class DZLConfig
 {
-    private ref DZLHouseConfig houseConfig;
-    private ref DZLStorageTypes storageTypes;
+    ref DZLHouseConfig houseConfig;
+    ref DZLStorageTypes storageTypes;
 	ref DZLBankingConfig bankConfig;
 	ref DZLJobConfig jobConfig;
 	ref DZLLicenceConfig licenceConfig;
