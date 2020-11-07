@@ -19,7 +19,6 @@ class DZLBankRaidListener : Managed
 
 	void Start(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_START_BANK_RAID) {
-			DebugMessageDZL("Recive Rob bank");
             autoptr Param1<PlayerBase> param;
             if (ctx.Read(param)){
 				DZLBank bank = new DZLBank;
@@ -29,7 +28,6 @@ class DZLBankRaidListener : Managed
 					playerWhoStartedRaid = param.param1;
 					GetGame().RPCSingleParam(target, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#bank_rob_was_started"), true);
 			        raidTimer.Run(1, this, "Finish", null, true);
-					DebugMessageDZL("Rob started");
 				} else {
 					GetGame().RPCSingleParam(target, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>("#raid_allready_started"), true, sender);
 				}
@@ -40,7 +38,6 @@ class DZLBankRaidListener : Managed
     void Finish() {
 		if (time > timeHappened) {
             if (!isInNearOfBankAndLocationIsEnabled()) {
-				DebugMessageDZL("is not in near");
                 raidTimer.Stop();
                 DZLBank bank_cancel = new DZLBank;
                 bank_cancel.CancelRaid();
@@ -51,7 +48,6 @@ class DZLBankRaidListener : Managed
 		    timeHappened++;
 			return;
 		}
-		DebugMessageDZL("Rob finished");
         raidTimer.Stop();
 		DZLBank bank = new DZLBank;
         bank.RaidIsFinished();

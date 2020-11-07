@@ -1,14 +1,13 @@
 class DZLActionRaidDoors: ActionInteractBase
 {
-	ref DZLPlayerHouse house;
 	ref DZLDoorRaidProgressBar bar;
 	Building buildingClient;
 	EntityAI usedItem;
 
 	void DZLActionRaidDoors() {
-		m_CallbackClass = ActionInteractBaseCB;
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_PICKUP_HANDS;
-		m_HUDCursorIcon = CursorIcons.Cursor;
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
+        m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
+        m_HUDCursorIcon = CursorIcons.CloseDoors;
 		
 		if (GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -20,32 +19,41 @@ class DZLActionRaidDoors: ActionInteractBase
             GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
 		}
 	}
+		
+	override void CreateConditionComponents()
+	{	
+		m_ConditionItem = new CCINonRuined;
+		m_ConditionTarget = new CCTCursor;
+	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
+	    DZLPlayerHouse house;
 		if(GetGame().IsClient()){
 			house = player.house;
+			if (!house) return false;
 		} else {
 			house = new DZLPlayerHouse(player);
 		}
-
-		if(super.ActionCondition(player, target, item)){
-			Building building = Building.Cast(target.GetObject());
-			if(building.IsBuilding() && house.HasHouse(building)) {
-			    DZLHouseDefinition definition = player.config.houseConfig.GetHouseDefinitionByBuilding(building);
-			   
-				foreach(string itemType: definition.raidTools) {
-					if (item.GetType() == itemType) {
-						if (GetGame().IsServer()) {
-							if (item.GetHealth() < 50) {
-								return false;
-							}
-						} 
-						return building.IsDoorLocked(target.GetComponentIndex());
+		Building building = Building.Cast(target.GetObject());
+		if(building.IsBuilding() && house.HasHouse(building)) {
+			DZLHouseDefinition definition = player.config.houseConfig.GetHouseDefinitionByBuilding(building);
+		   
+			foreach(string itemType: definition.raidTools) {
+				if (item.GetType() == itemType) {
+					if (GetGame().IsServer()) {
+						if (item.GetHealth() < 50) {
+							return false;
+						}
+					}
+					int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
+					if ( doorIndex != -1 ) {
+						return !building.IsDoorOpen(doorIndex) && building.IsDoorLocked(doorIndex);
 					}
 				}
-			} 
+			}
 		}
+		
 		return false;
 	}
 
@@ -60,22 +68,22 @@ class DZLActionRaidDoors: ActionInteractBase
             }
         }
 	}
-	
-	
+
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 		buildingClient = Building.Cast(action_data.m_Target.GetObject());
-		
 		DZLDoorRaidProgressBar bar = action_data.m_Player.GetRaidProgressBar();
-		bar.SetBuilding(buildingClient, action_data.m_Target.GetComponentIndex());
 		
-		DZLHouseDefinition definition = action_data.m_Player.config.houseConfig.GetHouseDefinitionByBuilding(buildingClient);
-		
-		if (definition) {
-			bar.SetMaxRange(definition.raidRange);
-			usedItem = action_data.m_MainItem;
+		int doorIndex = buildingClient.GetDoorIndex(action_data.m_Target.GetComponentIndex());
+		if (doorIndex != -1) {
+			bar.SetBuilding(buildingClient, doorIndex);
+			DZLHouseDefinition definition = action_data.m_Player.config.houseConfig.GetHouseDefinitionByBuilding(buildingClient);
 			
-			GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR, new Param2<PlayerBase, Building>(action_data.m_Player, buildingClient), true);
+			if (definition) {
+				bar.SetMaxRange(definition.raidRange);
+				usedItem = action_data.m_MainItem;
+				GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR, new Param2<PlayerBase, Building>(action_data.m_Player, buildingClient), true);
+			}
 		}
 	}
 	

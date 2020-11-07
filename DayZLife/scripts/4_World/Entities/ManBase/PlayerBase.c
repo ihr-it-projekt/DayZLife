@@ -312,12 +312,8 @@ modded class PlayerBase
 				if (craftMap.Count() == 0) break;
 				
                 if(IsNeededItem(craftItem, item, itemType)) {
-					DebugMessageDZL("craftItem " + craftItem.type);
 					int countFoundCraft = 0;
 					if(craftMap.Find(itemType, countFoundCraft)) {
-						DebugMessageDZL("itemType" + itemType);
-						DebugMessageDZL("countFoundCraft" + countFoundCraft);
-						DebugMessageDZL("itemType q" + craftItem.quantity);
 						if (quantity == 1) {
 							GetGame().ObjectDelete(item);
 							countFoundCraft -= 1;
@@ -331,9 +327,7 @@ modded class PlayerBase
 							craftMap.Set(itemType, countFoundCraft);
 						}
 
-						DebugMessageDZL("countFoundCraft " + countFoundCraft.ToString());
 						if (0 == countFoundCraft) {
-							DebugMessageDZL("remove");
                             craftMap.Remove(itemType);
 						}
 

@@ -1,6 +1,15 @@
 class DZLActionLockDoors: ActionInteractBase
 {
-	ref DZLPlayerHouse house;
+	void DZLActionLockDoors() {
+		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
+		m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
+		m_HUDCursorIcon = CursorIcons.OpenDoors;
+	}
+	
+	override void CreateConditionComponents(){
+		m_ConditionItem = new CCINone;
+		m_ConditionTarget = new CCTCursor;
+	}
 	
 	override string GetText() {
         return "#lock_door";
@@ -8,33 +17,43 @@ class DZLActionLockDoors: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
+		DZLPlayerHouse house;
 		if(GetGame().IsClient()){
 			house = player.house;
+			
 		} else {
 			house = new DZLPlayerHouse(player);
 		}
+		
+		if (!house) {
+			return false;
+		}
 
-		if(super.ActionCondition(player, target, item)){
-			Building building = Building.Cast(target.GetObject());
-			if(building.IsBuilding() && house.HasHouse(building)) {
+		Building building = Building.Cast(target.GetObject());	
+		if(building.IsBuilding() && house.HasHouse(building)) {
+			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
+			if ( doorIndex != -1 ) {
 				if (GetGame().IsServer()) {
 					DZLBuilding dzlBuilding = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
-	
-					if(dzlBuilding && (dzlBuilding.HasOwner() && dzlBuilding.IsOwner(player))){
-						return !building.IsDoorLocked(target.GetComponentIndex());
+					if(dzlBuilding && dzlBuilding.HasOwner() && dzlBuilding.IsOwner(player)){
+						return !building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex);
 					} 
 				
 				} else {
-					return !building.IsDoorLocked(target.GetComponentIndex());;
+					return !building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex);
 				}
-			} 
+			}
 		}
 		return false;
 	}
 	
+
 	override void OnEndServer(ActionData action_data) {
 		Building building = Building.Cast(action_data.m_Target.GetObject());
-		building.LockDoor(action_data.m_Target.GetComponentIndex());
+		int doorIndex = building.GetDoorIndex(action_data.m_Target.GetComponentIndex());
+		if ( doorIndex != -1 ) {
+			building.LockDoor(doorIndex);
+		}
 	}
 
 };

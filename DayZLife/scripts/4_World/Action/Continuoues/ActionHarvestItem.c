@@ -97,7 +97,6 @@ class ActionHarvestItem: ActionContinuousBase
             DZLWorkZone zone = FindZone(action_data.m_Player.GetPosition(), GetConfig());
 			
             if (zone) {
-				DebugMessageDZL("zone");
                 EntityAI item_in_hands_source = action_data.m_Player.GetHumanInventory().GetEntityInHands();
                 array<DZLHarvestItemToolRelation> matchedRelations = new array<DZLHarvestItemToolRelation>;
                 if(item_in_hands_source) {
@@ -120,7 +119,6 @@ class ActionHarvestItem: ActionContinuousBase
                     }
                 }
 
-                DebugMessageDZL("matchedRelations.Count()" + matchedRelations.Count().ToString());
                 if (matchedRelations.Count() == 0) return;
 
                 DZLHarvestItemToolRelation randRelation = matchedRelations.GetRandomElement();
@@ -144,9 +142,7 @@ class ActionHarvestItem: ActionContinuousBase
                 if (item_in_hands_source) {
                     item_in_hands_source.SetHealth(item_in_hands_source.GetHealth() - zone.damagePerHarvestItem);
                 }
-            } else {
-				DebugMessageDZL("!zone");
-			}
+            }
 
         } else if ((action_data.m_State == UA_CANCEL || action_data.m_State == UA_INTERRUPT || action_data.m_State == UA_FAILED) && done == false) {
             done = true;
