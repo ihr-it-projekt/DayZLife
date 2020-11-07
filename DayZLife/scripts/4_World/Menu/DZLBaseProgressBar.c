@@ -79,6 +79,7 @@ class DZLBaseProgressBar: UIScriptedMenu
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
+
         Close();
     }
 

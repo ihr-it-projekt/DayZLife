@@ -29,7 +29,10 @@ class DZLActionLockDoors: ActionInteractBase
 			return false;
 		}
 
-		Building building = Building.Cast(target.GetObject());	
+		Building building = Building.Cast(target.GetObject());
+
+		if (!building) return false;
+
 		if(building.IsBuilding() && house.HasHouse(building)) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 			if ( doorIndex != -1 ) {

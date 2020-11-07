@@ -29,12 +29,15 @@ class DZLActionUnLockDoors: ActionInteractBase
         }
 
 		Building building = Building.Cast(target.GetObject());
+
+		if (!building) return false;
+
 		if(building.IsBuilding() && house.HasHouse(building)) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 			if ( doorIndex != -1 ) {	
 				if (GetGame().IsServer()) {
 					DZLBuilding dzlBuilding = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
-					if(dzlBuilding && (dzlBuilding.HasOwner() && dzlBuilding.IsOwner(player))){
+					if(dzlBuilding && ((dzlBuilding.HasOwner() && dzlBuilding.IsOwner(player)) || !dzlBuilding.HasOwner())){
 						return !building.IsDoorOpen(doorIndex) && building.IsDoorLocked(doorIndex);
 					} 
 				

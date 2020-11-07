@@ -45,7 +45,6 @@ class DZLBuyHouseListener
             if (ctx.Read(paramSellHouse)){
 				DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param2);
                 DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellHouse.param2);
-
                 string messageSell = "#error_sell_house";
 
                 if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(paramSellHouse.param1)) {
