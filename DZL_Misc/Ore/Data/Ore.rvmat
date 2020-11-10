@@ -10,7 +10,7 @@ PixelShaderID = "Super";
 VertexShaderID = "Super";
 class Stage1
 {
-	texture = "DZL_Misc\Data\Stone_nohq.paa";
+	texture = "DZL_Misc\Ore\Data\Stone_nohq.paa";
 	uvSource = "tex";
 	class uvTransform
 	{
@@ -22,7 +22,7 @@ class Stage1
 };
 class Stage2
 {
-	texture = "DZL_Misc\Data\Stone_dt.paa";
+	texture = "DZL_Misc\Ore\Data\Stone_dt.paa";
 	uvSource = "tex";
 	class uvTransform
 	{
