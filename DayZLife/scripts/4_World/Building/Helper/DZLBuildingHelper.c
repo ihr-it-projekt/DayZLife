@@ -5,6 +5,14 @@ class DZLBuildingHelper
         if(building) {
             return new DZLBuilding(building);
         }
-        return NULL;
+        return null;
+    }
+	
+	static ref DZLHouse ActionTargetToDZLHouse(ActionTarget target){
+        Building building = Building.Cast(target.GetObject());
+        if(building) {
+            return new DZLHouse(building);
+        }
+        return null;
     }
 }

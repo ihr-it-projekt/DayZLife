@@ -54,5 +54,9 @@ class DZLBuilding {
     array<ref DZLStorageTypeBought> GetStorage() {
        return house.GetStorage();
     }
+	
+	DZLHouse GetDZLHouse() {
+		return house;
+	}
 
 }

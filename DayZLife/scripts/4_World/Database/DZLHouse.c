@@ -8,6 +8,8 @@ class DZLHouse {
 	ref array<ref DZLStorageTypeBought> storage;
 	ref array<int> storagePositions;
 	int raidTime = 3;
+	ref array<int> lockedDoors;
+
 
     void DZLHouse(Building building) {
         this.fileName = DZLHouse.GetFileName(building);
@@ -17,6 +19,7 @@ class DZLHouse {
 			this.orientation = building.GetOrientation();
 			this.storage = new array<ref DZLStorageTypeBought>;
 			this.storagePositions = new array<int>;
+			this.lockedDoors = new array<int>;
 			Save();
 		}
     }
@@ -30,8 +33,13 @@ class DZLHouse {
         Save();
     }
 	
+	bool IsOwner(PlayerBase player) {
+		return owner == player.GetIdentity().GetId();
+	}
+	
 	void RemoveOwner() {
 		owner = "";
+		this.lockedDoors = new array<int>;
 		Save();
 	}
 	
@@ -83,6 +91,32 @@ class DZLHouse {
 			}
 		}
 		return null;	
+	}
+	
+	bool IsDoorLooked(int doorIndex) {
+		return -1 < lockedDoors.Find(doorIndex);
+	}
+	
+	void UnLookDoor(int doorIndex) {
+		lockedDoors.RemoveItem(doorIndex);
+		Save();
+	}
+	
+	void LockDoor(int doorIndex) {
+		lockedDoors.Insert(doorIndex);
+		Save();
+	}
+	
+	bool CanUnLookDoor(PlayerBase player, int index) {
+		return IsDoorLooked(index) && IsOwner(player);
+	}
+
+	bool CanLookDoor(PlayerBase player, int index) {
+		return !IsDoorLooked(index) && IsOwner(player);
+	}
+
+	bool CanRaidDoor(PlayerBase player, int index) {
+		return IsDoorLooked(index) && !IsOwner(player);
 	}
 
     private bool Load(){

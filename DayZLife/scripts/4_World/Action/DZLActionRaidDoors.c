@@ -1,9 +1,16 @@
 class DZLActionRaidDoors: ActionInteractBase
 {
+    ref DZLHouseConfig config;
+
 	void DZLActionRaidDoors() {
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
         m_HUDCursorIcon = CursorIcons.CloseDoors;
+
+
+        if (GetGame().IsServer()) {
+            config = new DZLHouseConfig();
+        }
 	}
 
 	override string GetText(){
@@ -18,9 +25,12 @@ class DZLActionRaidDoors: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
+	    if (!player.config || !player.config.houseConfig) return false;
+
 	    DZLPlayerHouse house;
 		if(GetGame().IsClient()){
 			house = player.house;
+			config = player.config.houseConfig;
 		} else {
 			house = new DZLPlayerHouse(player);
 		}
@@ -33,8 +43,10 @@ class DZLActionRaidDoors: ActionInteractBase
 
 		if (!building) return false;
 
-		if(building.IsBuilding() && house.HasHouse(building)) {
-			DZLHouseDefinition definition = player.config.houseConfig.GetHouseDefinitionByBuilding(building);
+		if(building.IsBuilding()) {
+		   	DZLHouseDefinition definition = config.GetHouseDefinitionByBuilding(building);
+			
+			if (!definition) return false;
 		   
 			foreach(string itemType: definition.raidTools) {
 				if (item.GetType() == itemType) {
@@ -43,9 +55,16 @@ class DZLActionRaidDoors: ActionInteractBase
 							return false;
 						}
 					}
+
 					int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 					if (doorIndex != -1) {
-						return !building.IsDoorOpen(doorIndex) && building.IsDoorLocked(doorIndex);
+						if (GetGame().IsServer()) {
+							DZLHouse dzlHouse = new DZLHouse(building);
+							
+							return !building.IsDoorOpen(doorIndex) && dzlHouse && dzlHouse.CanRaidDoor(player, doorIndex);
+						}
+						
+						return !building.IsDoorOpen(doorIndex);
 					}
 				}
 			}
@@ -62,7 +81,7 @@ class DZLActionRaidDoors: ActionInteractBase
 		int doorIndex = buildingClient.GetDoorIndex(action_data.m_Target.GetComponentIndex());
 		if (doorIndex != -1) {
 			bar.SetBuilding(buildingClient, doorIndex);
-			DZLHouseDefinition definition = action_data.m_Player.config.houseConfig.GetHouseDefinitionByBuilding(buildingClient);
+			DZLHouseDefinition definition = config.GetHouseDefinitionByBuilding(buildingClient);
 			
 			if (definition) {
 				bar.SetMaxRange(definition.raidRange);

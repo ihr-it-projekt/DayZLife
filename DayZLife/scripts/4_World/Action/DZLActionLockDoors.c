@@ -35,27 +35,26 @@ class DZLActionLockDoors: ActionInteractBase
 
 		if(building.IsBuilding() && house.HasHouse(building)) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
-			if ( doorIndex != -1 ) {
+			if (doorIndex != -1) {
 				if (GetGame().IsServer()) {
-					DZLBuilding dzlBuilding = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
-					if(dzlBuilding && dzlBuilding.HasOwner() && dzlBuilding.IsOwner(player)){
-						return !building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex);
-					} 
-				
+					DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
+
+					//TODO notify why we can not execute action
+					return dzlHouse && dzlHouse.CanLookDoor(player, doorIndex) && !building.IsDoorOpen(doorIndex);
 				} else {
-					return !building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex);
+					return !building.IsDoorOpen(doorIndex);
 				}
 			}
 		}
 		return false;
 	}
-	
 
 	override void OnEndServer(ActionData action_data) {
 		Building building = Building.Cast(action_data.m_Target.GetObject());
 		int doorIndex = building.GetDoorIndex(action_data.m_Target.GetComponentIndex());
-		if ( doorIndex != -1 ) {
-			building.LockDoor(doorIndex);
+		DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(action_data.m_Target);
+		if (dzlHouse && doorIndex != -1) {
+			dzlHouse.LockDoor(doorIndex);
 		}
 	}
 
