@@ -43,6 +43,8 @@ class DZLActionRaidDoors: ActionInteractBase
 			foreach(string itemType: definition.raidTools) {
 				if (item.GetType() == itemType) {
 					if (GetGame().IsServer() && item.GetHealth() < 50) {
+						DZLSendMessage(player.GetIdentity(), "#raid_item_has_not_enough_helth");
+					    
                         return false;
 					}
 
@@ -50,7 +52,11 @@ class DZLActionRaidDoors: ActionInteractBase
 					if (doorIndex != -1) {
 						if (GetGame().IsServer()) {
 							DZLHouse dzlHouse = new DZLHouse(building);
-							return !building.IsDoorOpen(doorIndex) && dzlHouse && dzlHouse.CanRaidDoor(player, doorIndex);
+							if (!building.IsDoorOpen(doorIndex) && dzlHouse && dzlHouse.CanRaidDoor(player, doorIndex)) {
+								DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
+								
+								return false;
+							}
 						}
 						
 						return !building.IsDoorOpen(doorIndex);

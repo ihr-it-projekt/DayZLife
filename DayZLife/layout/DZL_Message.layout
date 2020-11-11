@@ -1,6 +1,6 @@
 FrameWidgetClass DZL_Message {
- position -0 0
- size 0.22055 0.12237
+ position 0.01 0.01
+ size 0.2131 0.0571
  halign right_ref
  hexactpos 0
  vexactpos 0
@@ -9,7 +9,7 @@ FrameWidgetClass DZL_Message {
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   position -0 0
+   position 0 0
    size 0.9717 0.898
    halign center_ref
    valign center_ref
@@ -29,8 +29,11 @@ FrameWidgetClass DZL_Message {
      vexactpos 0
      hexactsize 0
      vexactsize 0
+     scaled 1
      style None
      text "Error Meldungen, Hinweise, sonstige meldungen"
+     "size to text h" 0
+     "size to text v" 0
      "text halign" center
      "text valign" center
      wrap 1

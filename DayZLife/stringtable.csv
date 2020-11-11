@@ -62,3 +62,5 @@
 "not_enough_tools_to_craft", "", "", "Nicht alle Werkzeuge gefunden."
 "has_not_found_all_items_that_is_needed_to_craft", "", "", "Nicht alle Resourcen gefunden."
 "break_door", "", "", "Tür aufbrechen."
+"raid_item_has_not_enough_helth", "", "", "Einbruchswerkzeug schaut beschädgt aus. Besorg dir ein neues."
+"you_can_not_raid_that_door", "", "", "Du kannst deine eigene Tür nicht aufbrechen."

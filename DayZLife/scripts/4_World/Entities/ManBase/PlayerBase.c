@@ -10,6 +10,7 @@ modded class PlayerBase
 	ref DZLLicenceMenu licenceMenu;
 	ref DZLLicenceProgressBar progressBarLicence;
 	ref DZLDoorRaidProgressBar progressBarRaid;
+	ref DZLMessageMenu messageMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -80,6 +81,14 @@ modded class PlayerBase
             if (ctx.Read(dzlBankParam)){
                 this.dzlBank = dzlBankParam.param1;
             }
+        } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
+            Param1 <string> dzlMessage;
+            DebugMessageDZL("Receive Message");
+            if (ctx.Read(dzlMessage)){
+				GetMessageMenu();
+				messageMenu.SetText(dzlMessage.param1);
+                GetGame().GetUIManager().ShowScriptedMenu(messageMenu, NULL);
+            }
         }
     }
 
@@ -123,6 +132,11 @@ modded class PlayerBase
         menu.SetConfig(config);
         menu.SetPlayer(this);
     }
+
+	DZLMessageMenu GetMessageMenu() {
+		messageMenu = DZLMessageMenu();
+		return messageMenu;
+	}
 
 	DZLBankingMenu GetBankingMenu() {
 		bankingMenu = DZLBankingMenu();

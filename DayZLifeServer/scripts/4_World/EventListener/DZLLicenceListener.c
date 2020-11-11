@@ -40,7 +40,7 @@ class DZLLicenceListener
                     paramUseLicence.param1.UseLicence(licenceUse);
                     messageUse = "#item_crafted";
                 }
-                GetGame().RPCSingleParam(paramUseLicence.param1, ERPCs.RPC_USER_ACTION_MESSAGE, new Param1<string>(messageUse), true, sender);
+                DZLSendMessage(sender, messageUse);
             }
         }
     }
