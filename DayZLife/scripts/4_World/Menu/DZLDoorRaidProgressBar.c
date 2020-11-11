@@ -33,14 +33,12 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar
 	}
 
 	override void OnHide() {
-		
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
 		
 		super.OnHide();
 	}
 	
 	override void SendFinishEvent() {
-		
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_RAID_DOOR, new Param4<PlayerBase, Building, int, EntityAI>(player, building, doorIndex, item), true);
     }
 }

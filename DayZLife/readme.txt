@@ -1,0 +1,2 @@
+- server muss einstellen das Türen im status bleiben
+-

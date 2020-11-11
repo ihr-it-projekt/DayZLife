@@ -74,12 +74,12 @@ class DZLBaseProgressBar: UIScriptedMenu
 	}
 
     override void OnHide() {
+		layoutRoot.Show(false);
         timer.Stop();
         super.OnHide();
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
-
         Close();
     }
 

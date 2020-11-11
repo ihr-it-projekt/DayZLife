@@ -12,7 +12,8 @@ class DZLRaidListener
         if (rpc_type == DAY_Z_LIFE_RAID_DOOR) {
             autoptr Param4<PlayerBase, Building, int, EntityAI> paramRaidDoor;
             if (ctx.Read(paramRaidDoor)){
-                paramRaidDoor.param2.UnlockDoor(paramRaidDoor.param3);
+                DZLHouse dzlHouse = new DZLHouse(paramRaidDoor.param2);
+                dzlHouse.UnLookDoor(paramRaidDoor.param3);
                 paramRaidDoor.param4.SetHealth(0);
             }
         }else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
