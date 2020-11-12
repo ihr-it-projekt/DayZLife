@@ -53,9 +53,9 @@ class DZLActionRaidDoors: ActionInteractBase
 						if (GetGame().IsServer()) {
 							DZLHouse dzlHouse = new DZLHouse(building);
 							if (!building.IsDoorOpen(doorIndex) && dzlHouse && dzlHouse.CanRaidDoor(player, doorIndex)) {
-								DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
-								
-								return false;
+								return true;
+							} else {
+							    DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
 							}
 						}
 						
