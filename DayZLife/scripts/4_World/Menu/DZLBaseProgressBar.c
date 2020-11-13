@@ -48,14 +48,14 @@ class DZLBaseProgressBar: UIScriptedMenu
         GetGame().GetInput().ChangeGameFocus(1);
 
         progressBar.SetCurrent(0);
-        status.SetText("0");
+        status.SetText("0 %");
     }
 	
 	void CheckDuration() {
 	    iterations++;
 		if (iterations >= duration) {
 		    progressBar.SetCurrent(100);
-            status.SetText("100");
+            status.SetText("100 %");
 			SendFinishEvent();
 			OnHide();
 		} else {
@@ -69,7 +69,7 @@ class DZLBaseProgressBar: UIScriptedMenu
 			float percent = iterations / duration  * 100;
 			
 			progressBar.SetCurrent(percent);
-			status.SetText(percent.ToString());
+			status.SetText(percent.ToString() + " %");
 		}
 	}
 

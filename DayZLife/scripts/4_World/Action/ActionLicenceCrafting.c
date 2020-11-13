@@ -9,7 +9,7 @@ class ActionLicenceCrafting: ActionInteractBase
 	}
 
 	override string GetText() {
-		if(licence) {
+		if(licence && licence.actionText) {
 			return licence.actionText;
 		}
 		

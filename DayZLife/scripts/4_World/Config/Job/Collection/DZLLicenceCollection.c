@@ -13,4 +13,12 @@ class DZLLicenceCollection
 		
 		return null;
     }
+	
+    DZLLicence FindByName(string name) {
+        foreach(DZLLicence licence: collection) {
+			if (licence.name == name) return licence;
+		}
+		
+		return null;
+    }
 }

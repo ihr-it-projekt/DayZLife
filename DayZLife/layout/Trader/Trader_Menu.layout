@@ -63,7 +63,7 @@ FrameWidgetClass Trader_Menu {
       }
       PanelWidgetClass PannelWidget {
        ignorepointer 1
-       position -0 0.035
+       position 0 0.035
        size 0.98953 0.91005
        halign center_ref
        valign center_ref
@@ -86,7 +86,7 @@ FrameWidgetClass Trader_Menu {
          {
           TextListboxWidgetClass Shopping_Card {
            color 0.502 0 0 1
-           position -0 0.01196
+           position 0 0.01196
            size 0.96694 0.57608
            halign center_ref
            hexactpos 0
@@ -110,7 +110,7 @@ FrameWidgetClass Trader_Menu {
            vexactsize 0
            style editor_quad_dark
            {
-            ItemPreviewWidgetClass ItemPreviewWidget0 {
+            ItemPreviewWidgetClass previewItem {
              ignorepointer 1
              position 0.00003 0.0299
              size 0.967 0.92

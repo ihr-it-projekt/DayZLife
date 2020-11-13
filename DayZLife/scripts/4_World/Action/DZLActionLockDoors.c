@@ -39,8 +39,11 @@ class DZLActionLockDoors: ActionInteractBase
 				if (GetGame().IsServer()) {
 					DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
 
-					//TODO notify why we can not execute action
-					return dzlHouse && dzlHouse.CanLookDoor(player, doorIndex) && !building.IsDoorOpen(doorIndex);
+					if (dzlHouse && dzlHouse.CanLookDoor(player, doorIndex) && !building.IsDoorOpen(doorIndex)) {
+					    return true;
+					} else {
+					    DZLSendMessage(player.GetIdentity(), "#can_not_look_door");
+					}
 				} else {
 					return !building.IsDoorOpen(doorIndex);
 				}

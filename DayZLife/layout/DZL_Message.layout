@@ -17,7 +17,7 @@ FrameWidgetClass DZL_Message {
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style rover_sim_blackbox
    {
     MultilineTextWidgetClass Announcements {
      ignorepointer 1

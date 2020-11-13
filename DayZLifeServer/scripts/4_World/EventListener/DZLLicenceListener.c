@@ -17,10 +17,15 @@ class DZLLicenceListener
             if (ctx.Read(paramBuyLicence)){
                 DZLPlayer dzlPlayer = new DZLPlayer(sender.GetId());
 				DZLLicence licence = config.licenceConfig.licences.FindById(paramBuyLicence.param2);
+				DZLLicence depLicence;
 
-                string message = dzlPlayer.CanBuyLicence(licence);
+				if (licence.dependencyLicence) {
+					depLicence = config.licenceConfig.licences.FindByName(licence.dependencyLicence);
+				}
 
-                if("" == message){
+                string message = dzlPlayer.CanBuyLicence(licence, depLicence);
+
+                if(!message){
                     dzlPlayer.BuyLicence(licence);
                 }
 				

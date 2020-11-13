@@ -14,7 +14,7 @@ modded class PlayerBase
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
-	private int moneyPlayerIsDead = 0;
+	int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
 
 	void ~PlayerBase() {
@@ -36,6 +36,7 @@ modded class PlayerBase
         AddAction(ActionOpenUpgradeHouseMenu);
         AddAction(ActionOpenBankingMenu);
         AddAction(ActionRobMoney);
+        AddAction(ActionRobMoneyFromDead);
         AddAction(ActionRobBank);
         AddAction(ActionHarvestItem);
         AddAction(ActionOpenLicenseMenu);
@@ -87,7 +88,8 @@ modded class PlayerBase
             if (ctx.Read(dzlMessage)){
 				GetMessageMenu();
 				messageMenu.SetText(dzlMessage.param1);
-                GetGame().GetUIManager().ShowScriptedMenu(messageMenu, NULL);
+                messageMenu.Init();
+                messageMenu.OnShow();
             }
         }
     }

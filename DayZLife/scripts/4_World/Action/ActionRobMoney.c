@@ -1,7 +1,7 @@
 class ActionRobMoney: ActionInteractBase
 {
     void ActionRobMoney() {
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
+		m_CommandUID = DayZPlayerConstants.CMD_GESTUREFB_COME;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
     }
@@ -23,15 +23,7 @@ class ActionRobMoney: ActionInteractBase
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
-            m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
-            return true;
-        } else if (targetPlayer.IsAlive() && (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious())) {
-            m_CommandUID = DayZPlayerConstants.CMD_GESTUREFB_COME;
-            return true;
-        }
-
-        return false;
+        return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious();
     }
 
     override void OnEndServer(ActionData action_data) {
@@ -39,11 +31,7 @@ class ActionRobMoney: ActionInteractBase
         PlayerBase player = action_data.m_Player;
         DZLPlayer dzlPlayer = new DZLPlayer(player.GetIdentity().GetId());
 
-        if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
-            targetPlayer.TransferFromDeadPlayer(dzlPlayer);
-
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
-        } else if (targetPlayer.IsAlive() && (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious())) {
+        if (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious()) {
             DZLPlayer dzlTargetPlayer = new DZLPlayer(targetPlayer.GetIdentity().GetId());
             if (dzlTargetPlayer && dzlTargetPlayer.money > 0) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
@@ -52,10 +40,5 @@ class ActionRobMoney: ActionInteractBase
                 GetGame().RPCSingleParam(targetPlayer, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlTargetPlayer), true, targetPlayer.GetIdentity());
             }
         }
-    }
-
-    override void OnEndClient(ActionData action_data) {
-        PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
-        targetPlayer.SetMoneyPlayerIsDead(0);
     }
 }

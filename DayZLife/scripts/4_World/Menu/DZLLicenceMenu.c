@@ -29,8 +29,8 @@ class DZLLicenceMenu : DZLBaseMenu
 			}
 			
 			int pos = licenceListBox.AddItem(licence.name, licence, 0);
-			licenceListBox.SetItem(pos, licence.price.ToString(), licence, 1);
-			licenceListBox.SetItem(pos, licence.dependencyLicence, licence, 2);
+			licenceListBox.SetItem(pos, licence.dependencyLicence, licence, 1);
+			licenceListBox.SetItem(pos, licence.price.ToString(), licence, 2);
 			licenceListBox.SetItem(pos, hasLicenseText, licence, 3);
 		}
     }
@@ -77,9 +77,14 @@ class DZLLicenceMenu : DZLBaseMenu
 				
 				if(!licence) return true;
 			
-				string message = dzlPlayer.CanBuyLicence(licence);
+				DZLLicence depLicence;
+				if (licence.dependencyLicence) {
+					depLicence = config.licenceConfig.licences.FindByName(licence.dependencyLicence);
+				}
 			
-				if("" == message){
+				string message = dzlPlayer.CanBuyLicence(licence, depLicence);
+			
+				if(!message){
 					errorMessageTextWidget.SetText("");
 					buyButton.Show(false);
 					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, string>(player, licence.id), true);

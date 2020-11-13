@@ -53,6 +53,8 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
 
             if (building && (!building.HasOwner() || (building.HasOwner() && building.IsOwner(player)))) {
                 return true;
+            } else {
+                DZLSendMessage(player.GetIdentity(), "#building_has_alrready_an_owner");
             }
         }
 

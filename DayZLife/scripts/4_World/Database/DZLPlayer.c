@@ -69,16 +69,16 @@ class DZLPlayer {
 		Save();
 	}
 	
-	string CanBuyLicence(notnull DZLLicence licenceToBuy){
+	string CanBuyLicence(notnull DZLLicence licenceToBuy, DZLLicence depLicence){
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
-		if(HasDependencyLicense(licenceToBuy)) return "";
+
+		if(depLicence && HasDependencyLicense(depLicence)) return "";
 
 		return "#you_have_not_the_dependency_licence";
 	}
 
 	bool HasDependencyLicense(notnull DZLLicence depLicence) {
-	    if(!depLicence.dependencyLicence) return true;
 	    return HasLicense(depLicence);
 	}
 	

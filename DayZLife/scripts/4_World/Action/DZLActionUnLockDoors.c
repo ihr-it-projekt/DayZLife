@@ -37,7 +37,11 @@ class DZLActionUnLockDoors: ActionInteractBase
 			if (doorIndex != -1 ) {
 				if (GetGame().IsServer()) {
                     DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
-                    return dzlHouse && dzlHouse.CanUnLookDoor(player, doorIndex) && !building.IsDoorOpen(doorIndex);
+                    if(dzlHouse && dzlHouse.CanUnLookDoor(player, doorIndex) && !building.IsDoorOpen(doorIndex)) {
+                        return true;
+                    } else {
+                        DZLSendMessage(player.GetIdentity(), "#can_not_unlook_door");
+                    }
                 } else {
                     return !building.IsDoorOpen(doorIndex);
                 }

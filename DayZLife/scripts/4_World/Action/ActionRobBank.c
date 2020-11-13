@@ -17,7 +17,7 @@ class ActionRobBank: ActionInteractBase
 	}
 
 	override string GetText() {
-        return "#rob_bank";
+        return "#get_money_from_dead_body";
     }
 
 	override void CreateConditionComponents() {
@@ -43,7 +43,7 @@ class ActionRobBank: ActionInteractBase
 			if(!other_player) return false;
 
 			bool hasItem = false;
-			foreach (string itemForRaid: player.config.bankConfig.itemsCanUsedToRaidBank) {
+			foreach (string itemForRaid: config.itemsCanUsedToRaidBank) {
 			    if (item_in_hands_source.GetType() == itemForRaid) {
 			        hasItem = true;
 			        break;

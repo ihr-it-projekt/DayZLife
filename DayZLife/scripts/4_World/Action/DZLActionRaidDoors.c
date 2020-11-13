@@ -39,6 +39,8 @@ class DZLActionRaidDoors: ActionInteractBase
 			if (!definition) return false;
 			
 			item = player.GetItemInHands();
+
+			if (!item) return false;
 		   
 			foreach(string itemType: definition.raidTools) {
 				if (item.GetType() == itemType) {
