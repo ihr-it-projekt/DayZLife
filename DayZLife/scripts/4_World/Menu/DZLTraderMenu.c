@@ -49,7 +49,16 @@ class DZLTraderMenu: DZLBaseMenu
     }
 
     override void OnShow() {
+        super.OnShow();
 		position = player.GetTraderByPosition();
+
+		if (!position) {
+		    position = player.GetTraderByPosition(4);
+
+		    if (!position) {
+		        DisplayMessage("keine position gefunden");
+		    }
+		}
 		
 		int index;
 		string name = "";
@@ -61,7 +70,7 @@ class DZLTraderMenu: DZLBaseMenu
         bool hasAddFirstCategory = false;
 		foreach(string categoryName: position.categoryNames) {
 			DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
-			itemCategory.AddItem("categoryName");
+			itemCategory.AddItem(categoryName);
 
 			displayCategories.Insert(categoryName, category.items);
 

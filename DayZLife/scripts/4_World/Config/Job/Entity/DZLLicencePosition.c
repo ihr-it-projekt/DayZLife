@@ -3,7 +3,7 @@ class DZLLicencePosition
     vector position;
 	vector orientation
     string survivor;
-    array<string> attachments;
+    ref array<string> attachments;
 
     void DZLLicencePosition(vector position, vector orientation, string survivor, array<string> attachments) {
         Init(position, orientation, survivor, attachments);

@@ -16,6 +16,7 @@ class DZLLicenceLocationBuilder {
         }
 
         array<string> attachments = position.attachments;
+        DebugMessageDZL("DZLLicenceLocationBuilder" + attachments.ToString());
 
         foreach(string attachment: attachments) {
             player.GetInventory().CreateInInventory(attachment);

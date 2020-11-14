@@ -28,6 +28,7 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsDZLBank");
         RegisterNetSyncVariableBool("IsRealPlayer");
         RegisterNetSyncVariableBool("IsLicencePoint");
+        RegisterNetSyncVariableBool("IsTrader");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
     }
 
@@ -247,7 +248,7 @@ modded class PlayerBase
         return null;
     }
 
-    DZLTraderPosition GetTraderByPosition() {
+    DZLTraderPosition GetTraderByPosition(int distance = 2) {
 		vector playerPosition = GetPosition();
         if (!playerPosition) {
             return null;
@@ -257,7 +258,7 @@ modded class PlayerBase
 		
 		foreach(DZLTraderPosition position: positions) {
 			
-			if (vector.Distance(position.position, playerPosition) <= 2){
+			if (vector.Distance(position.position, playerPosition) <= distance){
                 return position;
             }
 		}

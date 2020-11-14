@@ -58,6 +58,7 @@ class DZLActionRaidDoors: ActionInteractBase
 								return true;
 							} else {
 							    DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
+							    return false;
 							}
 						}
 						

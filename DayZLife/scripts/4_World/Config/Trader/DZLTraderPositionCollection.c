@@ -8,12 +8,13 @@ class DZLTraderPositionCollection
             array<string> catNames = new array<string>;
             array<string> attachments = new array<string>;
 
-            attachments.Insert("ManSuit_Black");
-            attachments.Insert("SlacksPants_Black");
-            attachments.Insert("ThickFramesGlasses");
-            attachments.Insert("DressShoes_Black");
 
             if (DAY_Z_LIFE_DEBUG) {
+                attachments.Insert("ManSuit_Black");
+                attachments.Insert("SlacksPants_Black");
+                attachments.Insert("ThickFramesGlasses");
+                attachments.Insert("DressShoes_Black");
+
                 catNames.Insert("Weapons");
                 positions.Insert(new DZLTraderPosition("12336.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Boris", attachments, catNames, "12332.892578 140.493500 12659.409180"));
             } else {

@@ -19,7 +19,9 @@ class ActionRobMoneyFromDead: ActionInteractBase
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         if (!target.GetObject()) return false;
-        if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
+        EntityAI targetEntity = EntityAI.Cast(target.GetObject());
+
+        if (!targetEntity || !targetEntity.IsPlayer()) return false;
 
 		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 

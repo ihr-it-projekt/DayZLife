@@ -2,16 +2,13 @@ class DZLTraderCategoryCollection
 {
      ref array<ref DZLTraderCategory> categories;
 
-     void DZLTraderConfigParams(string name) {
+     void DZLTraderCategoryCollection() {
         if (!Load()){
             categories = new array<ref DZLTraderCategory>;
-
             array<ref DZLTraderType> items = new array<ref DZLTraderType>;
 
             DZLTraderType type = new DZLTraderType("Crowbar", 200, 500);
             items.Insert(type);
-
-            DZLTraderCategory category = new DZLTraderCategory("Weapons", items);
 
             categories.Insert(new DZLTraderCategory("Weapons", items));
             Save();

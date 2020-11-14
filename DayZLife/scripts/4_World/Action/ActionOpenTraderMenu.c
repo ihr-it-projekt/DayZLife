@@ -27,7 +27,7 @@ class ActionOpenTraderMenu: ActionInteractBase
             if(!action_data.m_Target.GetObject().IsMan()) return;
            	if (!PlayerBase.Cast(action_data.m_Target.GetObject()).IsTrader) return;
 			
-			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
+			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(), NULL);
         }
 	}
 
