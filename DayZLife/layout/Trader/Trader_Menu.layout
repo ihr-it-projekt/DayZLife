@@ -76,7 +76,7 @@ FrameWidgetClass Trader_Menu {
         PanelWidgetClass PanelWidget3 {
          ignorepointer 1
          position 0 0
-         size 0.32 0.91648
+         size 0.32 0.9165
          halign center_ref
          hexactpos 0
          vexactpos 0
@@ -86,8 +86,8 @@ FrameWidgetClass Trader_Menu {
          {
           TextListboxWidgetClass sell_card {
            color 0.502 0 0 1
-           position 0 0.01196
-           size 0.96694 0.27297
+           position -0.00002 0.01196
+           size 0.9669 0.26
            halign center_ref
            hexactpos 0
            vexactpos 0
@@ -95,13 +95,14 @@ FrameWidgetClass Trader_Menu {
            vexactsize 0
            style Default
            "title visible" 1
-           colums "# Shopping_Cart;70;#Quantity;30"
-           lines 15
+           colums "#sell_Shopping_Cart;80;#Quantity;20"
+           lines 10
            "text color" 0 0 0 1
           }
           PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           size 1 0.4
+           position -0 -0
+           size 1 0.34688
            halign center_ref
            valign bottom_ref
            hexactpos 0
@@ -124,8 +125,8 @@ FrameWidgetClass Trader_Menu {
           }
           TextListboxWidgetClass buy_card {
            color 0.502 0 0 1
-           position 0.00671 0.30175
-           size 0.96694 0.28143
+           position -0.00002 0.28392
+           size 0.9669 0.26
            halign center_ref
            hexactpos 0
            vexactpos 0
@@ -133,9 +134,34 @@ FrameWidgetClass Trader_Menu {
            vexactsize 0
            style Default
            "title visible" 1
-           colums "# Shopping_Cart;"
-           lines 15
+           colums "# buy_Shopping_Cart"
+           lines 10
            "text color" 0 0 0 1
+          }
+          PanelWidgetClass PanelWidget10 {
+           ignorepointer 1
+           position 0.00002 0.10626
+           size 1 0.09769
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass sum {
+             ignorepointer 1
+             position 0 0
+             size 0.96694 0.735
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+            }
+           }
           }
          }
         }

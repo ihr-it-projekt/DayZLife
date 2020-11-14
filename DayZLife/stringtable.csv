@@ -9,6 +9,8 @@
 "trade", "trade", "trade", "handeln"
 "Sell", "Sell", "Sell", "Verkaufen"
 "Price", "Price", "Price", "Preis"
+"sell_Shopping_Cart", "sell Shopping Cart", "sell Shopping Cart", "Warenkorb Verkaufen"
+"buy_Shopping_Cart", "buy Shopping Cart", "buy Shopping Cart", "Warenkorb kaufen"
 "Money", "Money:", "Money:", "Bargeld:"
 "Housing_Info", "Housing Info", "Housing Info", "Haus Info"
 "Houses", "Houses", "Houses", "Häuser"
