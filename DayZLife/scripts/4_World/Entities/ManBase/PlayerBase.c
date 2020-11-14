@@ -14,6 +14,7 @@ modded class PlayerBase
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
+	bool IsTrader = false;
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
 
@@ -86,12 +87,16 @@ modded class PlayerBase
             Param1 <string> dzlMessage;
             DebugMessageDZL("Receive Message");
             if (ctx.Read(dzlMessage)){
-				GetMessageMenu();
-				messageMenu.SetText(dzlMessage.param1);
-                messageMenu.Init();
-                messageMenu.OnShow();
+                DisplayMessage(dzlMessage.param1);
             }
         }
+    }
+
+    void DisplayMessage(string message) {
+        GetMessageMenu();
+        messageMenu.SetText(message);
+        messageMenu.Init();
+        messageMenu.OnShow();
     }
 
     void UpdatePlayerAtDependencies() {

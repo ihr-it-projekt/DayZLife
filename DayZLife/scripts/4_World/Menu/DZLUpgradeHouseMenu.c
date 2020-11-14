@@ -78,7 +78,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				buyButton.Show(actualHouseDef.GetMaxStorage() > house.GetStorage().Count());
 				
 				if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
-					errorMessageTextWidget.SetText("#building_has_all_storrage_positions_upgraded");
+					player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
 				}
 			
 			

@@ -28,7 +28,7 @@ class DZLBankingConfig
 
                 itemsCanUsedToRaidBank.Insert("M4A1");
             } else {
-
+                //TODO normal base config add
             }
 
             Save();

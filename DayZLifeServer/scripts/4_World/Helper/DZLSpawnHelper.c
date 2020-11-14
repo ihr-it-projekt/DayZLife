@@ -13,7 +13,7 @@ class DZLSpawnHelper
 		return true;
     }
 
-    static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence) {
+    static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence, bool isTrader) {
         pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true );
         if (!game_obj) {
@@ -26,6 +26,7 @@ class DZLSpawnHelper
         DZLSpawnHelper.SetPositionAndOrientation(char, pos, orientation);
         char.IsDZLBank = isBanking;
         char.IsLicencePoint = isLicence;
+        char.IsTrader = isTrader;
 
         return char;
     }

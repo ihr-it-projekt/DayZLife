@@ -85,7 +85,6 @@ class DZLLicenceMenu : DZLBaseMenu
 				string message = dzlPlayer.CanBuyLicence(licence, depLicence);
 			
 				if(!message){
-					errorMessageTextWidget.SetText("");
 					buyButton.Show(false);
 					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param2<PlayerBase, string>(player, licence.id), true);
 				} else {

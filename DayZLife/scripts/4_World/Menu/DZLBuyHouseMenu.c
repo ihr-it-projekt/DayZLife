@@ -51,10 +51,10 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
                         Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(PlayerBaseHelper.GetPlayer(), target);
                         GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING, paramBuyHouse, true);
                     } else {
-                        errorMessageTextWidget.SetText("#error_not_enough_money");
+                        player.DisplayMessage("#error_not_enough_money");
                     }
 				} else {
-				    errorMessageTextWidget.SetText("#error_please_reopen_menu");
+				    player.DisplayMessage("#error_please_reopen_menu");
 				}
                 return true;
             case sellButton:
@@ -85,19 +85,16 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 		if (house && house.HasOwner() && house.IsOwner(PlayerBaseHelper.GetPlayer())) {
 			sellButton.Show(true);
 			buyButton.Show(false);
-			errorMessageTextWidget.SetText("");
 		} else if (house && house.HasOwner() && !house.IsOwner(PlayerBaseHelper.GetPlayer())) {
 			sellButton.Show(false);
 			buyButton.Show(false);
-			errorMessageTextWidget.SetText("#building_has_already_an_owner");
+			player.DisplayMessage("#building_has_already_an_owner");
 		} else if (house && !house.HasOwner()) {
 			sellButton.Show(false);
 			buyButton.Show(true);
-			errorMessageTextWidget.SetText("");
 		} else if (!house) {
 			sellButton.Show(false);
 			buyButton.Show(false);
-			errorMessageTextWidget.SetText("");
 		}
 	}
 

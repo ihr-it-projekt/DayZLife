@@ -6,6 +6,7 @@
 "Sell_Price", "Selling price:", "Selling price:", "Verkaufspreis:"
 "Storage_Options", "Storage:", "Storage:", "Lager:"
 "Buy", "Buy", "Buy", "Kaufen"
+"trade", "trade", "trade", "handeln"
 "Sell", "Sell", "Sell", "Verkaufen"
 "Price", "Price", "Price", "Preis"
 "Money", "Money:", "Money:", "Bargeld:"
@@ -68,3 +69,4 @@
 "can_not_unlook_door", "", "", "Du kannst die Tür nicht aufschließen."
 "can_not_look_door", "", "", "Du kannst die Tür nicht abschließen."
 "building_has_alrready_an_owner", "", "", "Das Gebäude hat schon einen Besitzer."
+"open_trader_menu", "", "", "Trader öffnen."

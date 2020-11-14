@@ -4,7 +4,6 @@ class DZLBaseMenu: UIScriptedMenu
     protected ref DZLConfig config;
     protected string layoutPath;
     protected ButtonWidget closeButton;
-    protected TextWidget errorMessageTextWidget;
     protected PlayerBase player;
     protected DZLPlayer dzlPlayer;
 
@@ -19,9 +18,9 @@ class DZLBaseMenu: UIScriptedMenu
         GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
     }
 
-    void SetPlayer(PlayerBase player) {
-        this.player = player;
-        this.dzlPlayer = player.dzlPlayer;
+    void SetPlayer(PlayerBase _player) {
+        this.player = _player;
+        this.dzlPlayer = _player.dzlPlayer;
     }
     void UpdatePlayer(PlayerBase player) {
         SetPlayer(player);
@@ -33,7 +32,9 @@ class DZLBaseMenu: UIScriptedMenu
     }
 
     void UpdateGUI(string message = "") {
-       if(message) errorMessageTextWidget.SetText(message);
+       if(message) {
+            player.DisplayMessage(message);
+       }
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
@@ -43,7 +44,6 @@ class DZLBaseMenu: UIScriptedMenu
     override Widget Init() {
         creator = new DZLUIItemCreator(layoutPath);
         closeButton = creator.GetButtonWidget("Button_Closed");
-        errorMessageTextWidget = creator.GetTextWidget("Error_Message");
         closeButton.Show(true);
         layoutRoot = creator.GetLayoutRoot();
 
@@ -66,7 +66,6 @@ class DZLBaseMenu: UIScriptedMenu
     }
 
     override void OnShow() {
-        errorMessageTextWidget.SetText("");
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
         GetGame().GetUIManager().ShowCursor(true);
         GetGame().GetInput().ChangeGameFocus(1);

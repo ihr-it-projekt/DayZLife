@@ -29,7 +29,7 @@ class DZLBankingMenu : DZLBaseMenu
                 bankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
                 playerBalanceTextWidget.SetText(paramGetResponse.param1.money.ToString());
                 playerBankBalanceTextWidget.SetText(paramGetResponse.param1.bank.ToString());
-                errorMessageTextWidget.SetText(paramGetResponse.param3);
+                player.DisplayMessage(paramGetResponse.param3);
            }
        	} else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE) {
 			autoptr Param1<ref array<ref DZLPlayerBankInfo>> paramGetPlayerResponse;
@@ -110,14 +110,14 @@ class DZLBankingMenu : DZLBaseMenu
 		int deposit = inputDeposit.GetText().ToInt();
 		
 		if (deposit < 1) {
-			errorMessageTextWidget.SetText("#error_deposit_must_be_positiv");
+		    player.DisplayMessage("#error_deposit_must_be_positiv");
 			return;
 		}
 		
 		int selected = playerListbox.GetSelectedRow();
 		
 		if (-1 == selected) {
-			errorMessageTextWidget.SetText("#error_no_player_was_selected");
+			player.DisplayMessage("#error_no_player_was_selected");
 			return;
 		}
 		
@@ -126,25 +126,24 @@ class DZLBankingMenu : DZLBaseMenu
 		playerListbox.GetItemData(selected, 0, playerBankInfo);
 		
 		if (!playerBankInfo) {
-			errorMessageTextWidget.SetText("#error_no_player_was_selected");
+			player.DisplayMessage("#error_no_player_was_selected");
 			return;
 		}
 		
 		if (playerBankInfo.id == player.GetIdentity().GetId()) {
-			errorMessageTextWidget.SetText("#error_you_cant_send_money_to_yourself");
+			player.DisplayMessage("#error_you_cant_send_money_to_yourself");
 			return;
 		}
 		
 		if (deposit != 0) {
             if (deposit <= dzlPlayer.money + dzlPlayer.bank) {
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER, new Param3<PlayerBase, DZLPlayerBankInfo, int>(player, playerBankInfo, deposit), true);
-                errorMessageTextWidget.SetText("");
                 inputDeposit.SetText("");
             } else {
-                errorMessageTextWidget.SetText("#error_not_enough_money_to_transfer");
+                player.DisplayMessage("#error_not_enough_money_to_transfer");
             }
         } else {
-            errorMessageTextWidget.SetText("#error_deposit_is_not_a_int");
+            player.DisplayMessage("#error_deposit_is_not_a_int");
         }
 	}
 
@@ -154,15 +153,14 @@ class DZLBankingMenu : DZLBaseMenu
 			int deposit = factor * inputDeposit.GetText().ToInt();
             if (deposit >= dzlPlayer.money || deposit <= dzlPlayer.bank) {
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, int>(player, deposit), true);
-                errorMessageTextWidget.SetText("");
                 inputDeposit.SetText("");
             } else {
-                errorMessageTextWidget.SetText("#error_not_enough_money_to_transfer");
+                player.DisplayMessage("#error_not_enough_money_to_transfer");
             }
         } else if(inputDeposit.GetText().ToInt() <= 1){
-			errorMessageTextWidget.SetText("#error_deposit_must_be_positiv");
+			player.DisplayMessage("#error_deposit_must_be_positiv");
 		} else {
-            errorMessageTextWidget.SetText("#error_deposit_is_not_a_int");
+            player.DisplayMessage("#error_deposit_is_not_a_int");
         }
 	}
 
