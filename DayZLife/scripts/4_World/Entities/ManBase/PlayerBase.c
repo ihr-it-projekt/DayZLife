@@ -3,6 +3,7 @@ modded class PlayerBase
     ref DZLBuyHouseMenu houseBuyMenu;
     ref DZLUpgradeHouseMenu houseUpgradeMenu;
     ref DZLBankingMenu bankingMenu;
+    ref DZLTraderMenu traderMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
 	ref DZLPlayer dzlPlayer;
@@ -35,6 +36,7 @@ modded class PlayerBase
 
         AddAction(ActionOpenBuyHouseMenu);
         AddAction(ActionOpenUpgradeHouseMenu);
+        AddAction(ActionOpenTraderMenu);
         AddAction(ActionOpenBankingMenu);
         AddAction(ActionRobMoney);
         AddAction(ActionRobMoneyFromDead);
@@ -106,6 +108,8 @@ modded class PlayerBase
             houseUpgradeMenu.UpdatePlayer(this);;
         } else if (bankingMenu && bankingMenu.IsVisible()) {
             bankingMenu.UpdatePlayer(this);;
+        } else if (traderMenu && traderMenu.IsVisible()) {
+            traderMenu.UpdatePlayer(this);;
         } else if (licenceMenu && licenceMenu.IsVisible()) {
             licenceMenu.UpdatePlayer(this);;
         }else if (progressBarLicence && progressBarLicence.IsVisible()) {
@@ -145,6 +149,12 @@ modded class PlayerBase
 		return messageMenu;
 	}
 
+	DZLTraderMenu GetTraderMenu() {
+		traderMenu = DZLTraderMenu();
+		InitMenu(traderMenu);
+		return traderMenu;
+	}
+
 	DZLBankingMenu GetBankingMenu() {
 		bankingMenu = DZLBankingMenu();
 		InitMenu(bankingMenu);
@@ -176,6 +186,8 @@ modded class PlayerBase
 			houseUpgradeMenu.OnHide();
 		} else if (bankingMenu && bankingMenu.IsVisible()) {
 			bankingMenu.OnHide();
+		} else if (traderMenu && traderMenu.IsVisible()) {
+			traderMenu.OnHide();
 		} else if (licenceMenu && licenceMenu.IsVisible()) {
 			licenceMenu.OnHide();
 		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
@@ -233,6 +245,25 @@ modded class PlayerBase
             }
         }
         return null;
+    }
+
+    DZLTraderPosition GetTraderByPosition() {
+		vector playerPosition = GetPosition();
+        if (!playerPosition) {
+            return null;
+        }
+		
+		array<ref DZLTraderPosition> positions = config.traderConfig.positions.positions;
+		
+		foreach(DZLTraderPosition position: positions) {
+			
+			if (vector.Distance(position.position, playerPosition) <= 2){
+                return position;
+            }
+		}
+		
+		return null;
+        
     }
 	
 	string CanUseLicence(notnull DZLLicence licence) {

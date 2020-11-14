@@ -13,5 +13,6 @@ modded class MissionServer {
         super.OnInit();
         DZLBankingLocationBuilder.Create();
         DZLLicenceLocationBuilder.Create();
+        DZLTraderLocationBuilder.Create();
     }
 };

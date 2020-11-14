@@ -5,6 +5,7 @@ class DZLConfig
 	ref DZLBankingConfig bankConfig;
 	ref DZLJobConfig jobConfig;
 	ref DZLLicenceConfig licenceConfig;
+	ref DZLTraderConfig traderConfig;
 
     void DZLConfig() {
         houseConfig = new DZLHouseConfig;
@@ -12,7 +13,7 @@ class DZLConfig
         bankConfig = new DZLBankingConfig;
         jobConfig = new DZLJobConfig;
 		licenceConfig = new DZLLicenceConfig;
-		
+		traderConfig = new DZLTraderConfig;
     }
 	
 	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
