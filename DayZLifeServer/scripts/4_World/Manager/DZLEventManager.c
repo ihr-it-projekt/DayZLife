@@ -8,6 +8,7 @@ class DZLEventManager
     ref DZLBankRaidListener bankRaidListener;
     ref DZLLicenceListener licenceListener;
     ref DZLRaidListener raidListener;
+    ref DZLTraderListener traderListener;
 
     void DZLEventManager() {
         buyHouse = new DZLBuyHouseListener;
@@ -18,5 +19,6 @@ class DZLEventManager
         bankRaidListener = new DZLBankRaidListener;
         licenceListener = new DZLLicenceListener;
         raidListener = new DZLRaidListener;
+        traderListener = new DZLTraderListener;
     }
 }
