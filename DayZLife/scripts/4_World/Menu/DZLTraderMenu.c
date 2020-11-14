@@ -56,7 +56,7 @@ class DZLTraderMenu: DZLBaseMenu
 		    position = player.GetTraderByPosition(4);
 
 		    if (!position) {
-		        DisplayMessage("keine position gefunden");
+		        player.DisplayMessage("keine position gefunden");
 		    }
 		}
 		
