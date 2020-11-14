@@ -11,8 +11,8 @@ FrameWidgetClass License_Menu {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0.6588 0.6588 0.6588 1
-   position 0.04764 0.05227
-   size 0.35036 0.65454
+   position 0.0476 -0.02
+   size 0.35036 0.51574
    halign center_ref
    valign center_ref
    hexactpos 0
@@ -45,41 +45,10 @@ FrameWidgetClass License_Menu {
        vexactsize 0
        style editor_quad_dark
        {
-        PanelWidgetClass PanelWidget4 {
-         ignorepointer 1
-         position 0 0
-         size 1 0.11123
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass Error_Message {
-           ignorepointer 1
-           color 0.502 0 0 1
-           position 0 0
-           size 0.98 0.75
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Bold
-           text "Error"
-           text_proportion 0.6
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
         PanelWidgetClass PanelWidget6 {
          ignorepointer 1
-         position 0 0.1081
-         size 1 0.11123
+         position 0 0
+         size 1 0.11755
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -147,8 +116,8 @@ FrameWidgetClass License_Menu {
       }
       TextListboxWidgetClass Licence_ListBox {
        disabled 0
-       position 0.00081 -0.05798
-       size 0.949 0.65356
+       position 0.00081 -0.00996
+       size 0.949 0.7496
        halign center_ref
        valign center_ref
        hexactpos 0
