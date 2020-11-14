@@ -11,8 +11,8 @@ FrameWidgetClass Banking {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0.6588 0.6588 0.6588 1
-   position 0 0
-   size 0.5 0.6
+   position 0 -0.02
+   size 0.5 0.56296
    halign center_ref
    valign center_ref
    hexactpos 0
@@ -62,8 +62,8 @@ FrameWidgetClass Banking {
       }
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
-       position -0.00104 0.0004
-       size 0.981 0.81161
+       position 0 0.04079
+       size 0.98308 0.89238
        halign center_ref
        valign center_ref
        hexactpos 0
@@ -388,36 +388,6 @@ FrameWidgetClass Banking {
          vexactsize 0
          style OldStyle
          text "X"
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget10 {
-       ignorepointer 1
-       position 0.00001 0.0126
-       size 0.9831 0.0686
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass Error_Message {
-         ignorepointer 1
-         color 0.502 0 0 1
-         position 0 0
-         size 0.9 1
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style Normal
-         text "Error Nachricht!"
-         "text halign" center
-         "text valign" center
         }
        }
       }
