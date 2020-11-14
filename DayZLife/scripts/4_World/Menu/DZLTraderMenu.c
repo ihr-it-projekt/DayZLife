@@ -5,7 +5,7 @@ class DZLTraderMenu: DZLBaseMenu
 	private TextListboxWidget buyCard;
 	private TextListboxWidget traderItemList;
 	private TextWidget sum;
-	private int sumInt;
+	private int sumInt = 0;
 	private XComboBoxWidget itemCategory;
 	private ButtonWidget tradeButton;
 	private TextWidget credits;
@@ -50,6 +50,7 @@ class DZLTraderMenu: DZLBaseMenu
 
     override void OnShow() {
         super.OnShow();
+        sumInt = 0;
 		position = player.GetTraderByPosition();
 
 		if (!position) {
