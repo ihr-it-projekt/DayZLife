@@ -22,7 +22,7 @@ class DZLBankingConfig
 
             if (DAY_Z_LIFE_DEBUG) {
                  // first Bank
-                positionOfBankingPoints.Insert(new DZLBankingPosition("11053.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
+                positionOfBankingPoints.Insert(new DZLBankingPosition("4660.000000 339.282990 10305.000000", "0 0 0", "SurvivorM_Boris", attachments));
                 // second bank
                 positionOfBankingPoints.Insert(new DZLBankingPosition("12326.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
 

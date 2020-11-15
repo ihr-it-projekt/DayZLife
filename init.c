@@ -1,5 +1,48 @@
+void SpawnObject(string objectName, vector position, vector orientation)
+{
+    Object obj;
+    obj = Object.Cast(GetGame().CreateObject(objectName, "0 0 0"));
+    obj.SetPosition(position);
+    obj.SetOrientation(orientation);
+	//Force collision update
+    vector roll = obj.GetOrientation();
+    roll [ 2 ] = roll [ 2 ] - 1;
+    obj.SetOrientation( roll );
+    roll [ 2 ] = roll [ 2 ] + 1;
+    obj.SetOrientation( roll );
+
+    // Force update collisions
+    if (obj.CanAffectPathgraph())
+    {
+        obj.SetAffectPathgraph(true, false);
+        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().UpdatePathgraphRegionByObject, 100, false, obj);
+    }
+}
+
 void main()
 {
+	SpawnObject( "SignBoard_Stone", "4620.000000 339.589233 10360.000000", "0.000000 0.000000 0.000000" );
+	SpawnObject( "SignBoard_Coal", "4630.000000 339.589233 10359.974609", "0.000000 0.000000 0.000000" );
+	SpawnObject( "SignBoard_Copper", "4640.000000 339.589233 10360.000000", "0.000000 0.000000 0.000000" );
+	SpawnObject( "SignBoard_Iron", "4650.000000 339.589233 10360.000000", "0.000000 0.000000 0.000000" );
+	SpawnObject( "SignBoard_Gold", "4670.000000 339.589233 10360.000000", "0.000000 0.000000 0.000000" );
+	SpawnObject( "SignBoard_Diamond", "4680.000000 339.589233 10360.000000", "0.000000 0.000000 0.000000" );
+	SpawnObject( "DZL_sign_relic_tree", "4620.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); //Steinverarbeitung
+	//SpawnObject( "DZL_sign_relic_tree", "4630.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); 
+	SpawnObject( "DZL_sign_relic_tree", "4640.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); //Kupferschmelze
+	SpawnObject( "DZL_sign_relic_tree", "4650.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); //Eisenschmelze
+	SpawnObject( "DZL_sign_relic_tree", "4660.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); //Silberschmelze
+	SpawnObject( "DZL_sign_relic_tree", "4670.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); //Goldschmelze
+	SpawnObject( "DZL_sign_relic_tree", "4680.000000 339.609009 10340.000000", "0.000000 0.000000 0.000000" ); //Diamantenschleiferei
+	// SpawnObject( "bldr_Misc_Tree_Pavement1", "4650.000000 338.825012 10320.000000", "0.000000 0.000000 0.000000" ); //Playerspawn
+	// SpawnObject( "bldr_Misc_Tree_Pavement2", "4660.000000 339.282990 10325.000000", "0.000000 0.000000 0.000000" ); //Trader
+	// SpawnObject( "bldr_Misc_Tree_Pavement2", "4660.000000 339.282990 10315.000000", "0.000000 0.000000 0.000000" ); //Licenzhändler
+	// SpawnObject( "bldr_Misc_Tree_Pavement2", "4660.000000 339.282990 10305.000000", "0.000000 0.000000 0.000000" ); //Bänker
+	SpawnObject( "Land_House_1W03", "4640.000000 341.737000 10300.000000", "-59.999996 0.000000 0.000000" );
+	SpawnObject( "DZL_sign_parking", "4630.000000 339.500000 10320.000000", "-90.000000 0.000000 0.000000" );
+	// SpawnObject( "OffroadHatchback_Blue", "4634.000000 338.049988 10319.981445", "90.000000 0.000000 0.000000" ); //Fahrzeugspawn
+
+	
 	//INIT WEATHER BEFORE ECONOMY INIT------------------------
 	Weather weather = g_Game.GetWeather();
 
@@ -87,7 +130,7 @@ class CustomMission: MissionServer
 
 			player.RemoveAllItems();
 
-			player.GetInventory().CreateInInventory("M65Jacket_Black");
+			player.GetInventory().CreateInInventory("DZL_M65Jacket_Black");
 			player.GetInventory().CreateInInventory("CargoPants_Black");
 			player.GetInventory().CreateInInventory("Sneakers_Black");
 			player.GetInventory().CreateInInventory("WorkingGloves_Black");
@@ -108,7 +151,7 @@ class CustomMission: MissionServer
 			player.SetQuickBarEntityShortcut(melee2, 2, true);
 			player.SetQuickBarEntityShortcut(melee3, 3, true);
 
-			player.SetPosition("12325 140 12648");
+			player.SetPosition("4650.000000 338.825012 10320.000000");
 
 			break;
 		}

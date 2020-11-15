@@ -16,7 +16,7 @@ class DZLTraderPositionCollection
                 attachments.Insert("DressShoes_Black");
 
                 catNames.Insert("Weapons");
-                positions.Insert(new DZLTraderPosition("12336.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Boris", attachments, catNames, "12332.892578 140.493500 12659.409180"));
+                positions.Insert(new DZLTraderPosition("4660.000000 339.282990 10325.000000", "0 0 0", "SurvivorM_Boris", attachments, catNames, "4634.000000 338.049988 10319.981445"));
             } else {
                 //TODO normal base config add
             }

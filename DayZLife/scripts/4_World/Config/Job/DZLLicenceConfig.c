@@ -18,26 +18,40 @@ class DZLLicenceConfig
             attachments.Insert("DressShoes_Black");
 
             if (DAY_Z_LIFE_DEBUG) {
-                // Crafting
-                // start first licence
+                // Start Crafting
                 craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
-                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence", "12310 140 12633", 20, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
-                // end first licence
-                // start second licence
+                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence", "4620.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
                 toolItems = new DZLLicenceToolItemCollection;
-
-                craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
-                craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
-                toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
-                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence 2", "12310 140 12633", 20, "Cement Licence", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
-                // end second license
+				
+                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Copper", 1, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 1, 50));
+                licences.collection.Insert(new DZLLicence(109, 100, "Copper Licence", "4640.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+				
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Iron", 1, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 2, 50));
+                licences.collection.Insert(new DZLLicence(109, 100, "Iron Licence", "4650.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+				
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Silver", 1, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 2, 50));
+                licences.collection.Insert(new DZLLicence(109, 100, "Silver Licence", "4660.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+				
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Gold", 1, 50));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 3, 50));
+                licences.collection.Insert(new DZLLicence(109, 100, "Gold Licence", "4670.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+				
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Diamond", 2, 50));
+                licences.collection.Insert(new DZLLicence(109, 100, "", "4680.000000 339.609009 10340.000000", 5, "Diamond Licence", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+				// End Crafting
                 // Position of licence dealer
-
-                positionOfLicencePoints.Insert(new DZLLicencePosition("11055.101563 226.815567 12388.920898", "0 0 0", "SurvivorM_Boris", attachments));
-                positionOfLicencePoints.Insert(new DZLLicencePosition("12333.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
+                positionOfLicencePoints.Insert(new DZLLicencePosition("4660.000000 339.282990 10315.000000", "0 0 0", "SurvivorM_Boris", attachments));
                 // end position
 
             } else {
