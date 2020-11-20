@@ -30,24 +30,24 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsLicencePoint");
         RegisterNetSyncVariableBool("IsTrader");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-    }
+	}
 
-    override void SetActions() {
-        super.SetActions();
+    override void SetActions(out TInputActionMap InputActionMap) {
+        super.SetActions(InputActionMap);
 
-        AddAction(ActionOpenBuyHouseMenu);
-        AddAction(ActionOpenUpgradeHouseMenu);
-        AddAction(ActionOpenTraderMenu);
-        AddAction(ActionOpenBankingMenu);
-        AddAction(ActionRobMoney);
-        AddAction(ActionRobMoneyFromDead);
-        AddAction(ActionRobBank);
-        AddAction(ActionHarvestItem);
-        AddAction(ActionOpenLicenseMenu);
-        AddAction(ActionLicenceCrafting);
-        AddAction(DZLActionLockDoors);
-        AddAction(DZLActionRaidDoors);
-        AddAction(DZLActionUnLockDoors);
+        AddAction(ActionOpenBuyHouseMenu, InputActionMap);
+        AddAction(ActionOpenUpgradeHouseMenu, InputActionMap);
+        AddAction(ActionOpenTraderMenu, InputActionMap);
+        AddAction(ActionOpenBankingMenu, InputActionMap);
+        AddAction(ActionRobMoney, InputActionMap);
+        AddAction(ActionRobMoneyFromDead, InputActionMap);
+        AddAction(ActionRobBank, InputActionMap);
+        AddAction(ActionHarvestItem, InputActionMap);
+        AddAction(ActionOpenLicenseMenu, InputActionMap);
+        AddAction(ActionLicenceCrafting, InputActionMap);
+        AddAction(DZLActionLockDoors, InputActionMap);
+        AddAction(DZLActionRaidDoors, InputActionMap);
+        AddAction(DZLActionUnLockDoors, InputActionMap);
 
         if (GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -88,7 +88,7 @@ modded class PlayerBase
             }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
             Param1 <string> dzlMessage;
-            DebugMessageDZL("Receive Message");
+            DebugMessageDZL("Receive Messaeg");
             if (ctx.Read(dzlMessage)){
                 DisplayMessage(dzlMessage.param1);
             }
@@ -113,7 +113,7 @@ modded class PlayerBase
             traderMenu.UpdatePlayer(this);;
         } else if (licenceMenu && licenceMenu.IsVisible()) {
             licenceMenu.UpdatePlayer(this);;
-        }else if (progressBarLicence && progressBarLicence.IsVisible()) {
+        } else if (progressBarLicence && progressBarLicence.IsVisible()) {
             progressBarLicence.UpdatePlayer(this);;
         }
     }
@@ -146,36 +146,36 @@ modded class PlayerBase
     }
 
 	DZLMessageMenu GetMessageMenu() {
-		messageMenu = DZLMessageMenu();
+		messageMenu = new DZLMessageMenu();
 		return messageMenu;
 	}
 
 	DZLTraderMenu GetTraderMenu() {
-		traderMenu = DZLTraderMenu();
+		traderMenu = new DZLTraderMenu();
 		InitMenu(traderMenu);
 		return traderMenu;
 	}
 
 	DZLBankingMenu GetBankingMenu() {
-		bankingMenu = DZLBankingMenu();
+		bankingMenu = new DZLBankingMenu();
 		InitMenu(bankingMenu);
 		return bankingMenu;
 	}
 
 	DZLLicenceMenu GetLicenceMenu() {
-		licenceMenu = DZLLicenceMenu();
+		licenceMenu = new DZLLicenceMenu();
 		InitMenu(licenceMenu);
 		return licenceMenu;
 	}
 
     DZLLicenceProgressBar GetLicenceProgressBar() {
-        progressBarLicence = DZLLicenceProgressBar();
+        progressBarLicence = new DZLLicenceProgressBar();
         progressBarLicence.SetPlayer(this);
         return progressBarLicence;
     }
 
     DZLDoorRaidProgressBar GetRaidProgressBar() {
-        progressBarRaid = DZLDoorRaidProgressBar();
+        progressBarRaid = new DZLDoorRaidProgressBar();
         progressBarRaid.SetPlayer(this);
         return progressBarRaid;
     }
@@ -340,8 +340,6 @@ modded class PlayerBase
 			message = "#has_not_found_all_items_that_is_needed_to_craft";
 		}
 		
-		DebugMessageDZL(message);
-
         return message;
 	}
 

@@ -6,7 +6,6 @@ modded class MissionServer {
 	{
         DebugMessageDZL("Load DayZLifeServer");
         manager = new DZLEventManager;
-
 	}
 
 	override void OnInit() {

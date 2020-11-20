@@ -63,14 +63,26 @@ class DZLTraderMenu: DZLBaseMenu
 		
 		int index;
 		string name = "";
+		
+		credits.SetText(dzlPlayer.money.ToString());
+		
 		traderItemList.ClearItems();
 		inventory.ClearItems();
 		
 		array<EntityAI> playerItems = player.GetPlayerItems();
 		
         bool hasAddFirstCategory = false;
+		
+		DebugMessageDZL("position.categoryNames" + position.categoryNames.Count().ToString());
+		
 		foreach(string categoryName: position.categoryNames) {
+			
+			DebugMessageDZL(categoryName);
+			
 			DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
+			
+			if (!category) continue;
+			
 			itemCategory.AddItem(categoryName);
 
 			displayCategories.Insert(categoryName, category.items);
