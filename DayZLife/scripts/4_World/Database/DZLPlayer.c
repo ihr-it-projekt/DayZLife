@@ -73,6 +73,8 @@ class DZLPlayer {
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
 
+		if (!depLicence) return "";
+
 		if(depLicence && HasDependencyLicense(depLicence)) return "";
 
 		return "#you_have_not_the_dependency_licence";
