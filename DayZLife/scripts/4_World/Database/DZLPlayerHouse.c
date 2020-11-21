@@ -2,8 +2,8 @@ class DZLPlayerHouse {
     private string fileName;
     ref array<string> playerHouseCollection;
 
-    void DZLPlayerHouse(notnull PlayerBase player) {
-        fileName = player.GetIdentity().GetId() + "house.json";
+    void DZLPlayerHouse(notnull PlayerIdentity player) {
+        fileName = player.GetId() + "house.json";
         if (!Load()) {
             playerHouseCollection = new array<string>;
             Save();

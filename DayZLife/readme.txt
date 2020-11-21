@@ -1,2 +1,4 @@
 - server muss einstellen das Türen im status bleiben
--
+- action player to player money transfer... .
+- bank deaktivierbar machen
+- dynmaic price

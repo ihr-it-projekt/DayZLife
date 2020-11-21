@@ -29,7 +29,6 @@ class DZLMessageMenu: UIScriptedMenu
     override void OnHide() {
         layoutRoot.Show(false);
         timer.Stop();
-        super.OnHide();
         Close();
     }
 }

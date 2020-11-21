@@ -95,13 +95,13 @@ FrameWidgetClass Trader_Menu {
            vexactsize 0
            style Default
            "title visible" 1
-           colums "#sell_Shopping_Cart;80;#Quantity;20"
+           colums "#sell_Shopping_Cart;50;#Sell;30;#Quantity;20"
            lines 10
            "text color" 0 0 0 1
           }
           PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           position -0 -0
+           position 0 0
            size 1 0.34688
            halign center_ref
            valign bottom_ref
@@ -134,7 +134,7 @@ FrameWidgetClass Trader_Menu {
            vexactsize 0
            style Default
            "title visible" 1
-           colums "# buy_Shopping_Cart"
+           colums "#buy_Shopping_Cart;75;#Buy;25;"
            lines 10
            "text color" 0 0 0 1
           }
@@ -174,7 +174,7 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "# Inventory;50;#Sell;30;#Quantity;20"
+         colums "#Inventory;50;#Sell;30;#Quantity;20"
          lines 25
          "text color" 0 0 0 1
         }

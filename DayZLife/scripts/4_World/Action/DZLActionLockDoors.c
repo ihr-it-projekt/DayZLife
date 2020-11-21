@@ -22,7 +22,7 @@ class DZLActionLockDoors: ActionInteractBase
 			house = player.house;
 			
 		} else {
-			house = new DZLPlayerHouse(player);
+			house = new DZLPlayerHouse(player.GetIdentity());
 		}
 		
 		if (!house) {

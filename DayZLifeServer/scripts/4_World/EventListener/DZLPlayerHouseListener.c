@@ -14,7 +14,9 @@ class DZLPlayerHouseListener
         if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING) {
             autoptr Param1<PlayerBase> paramGetConfig;
             if (ctx.Read(paramGetConfig)){
-                GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(paramGetConfig.param1)), true, sender);
+                if (paramGetConfig.param1) {
+                    GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender)), true, sender);
+                }
             }
         }
     }

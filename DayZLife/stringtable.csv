@@ -72,3 +72,5 @@
 "can_not_look_door", "", "", "Du kannst die Tür nicht abschließen."
 "building_has_alrready_an_owner", "", "", "Das Gebäude hat schon einen Besitzer."
 "open_trader_menu", "", "", "Trader öffnen."
+"Quantity", "Quantity", "Quantity", "Menge"
+"trade_was_successful", "", "", "Handel war erfolgreich."

@@ -32,6 +32,10 @@ modded class PlayerBase
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 	}
 
+	bool IsDZLPlayer() {
+	    return !IsDZLBank && !IsLicencePoint && !IsTrader;
+	}
+
     override void SetActions(out TInputActionMap InputActionMap) {
         super.SetActions(InputActionMap);
 
@@ -49,7 +53,7 @@ modded class PlayerBase
         AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionUnLockDoors, InputActionMap);
 
-        if (GetGame().IsClient()) {
+        if (GetGame().IsClient() && IsDZLPlayer()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
             Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
@@ -88,7 +92,7 @@ modded class PlayerBase
             }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
             Param1 <string> dzlMessage;
-            DebugMessageDZL("Receive Messaeg");
+            DebugMessageDZL("Receive Message");
             if (ctx.Read(dzlMessage)){
                 DisplayMessage(dzlMessage.param1);
             }
@@ -257,8 +261,8 @@ modded class PlayerBase
 		array<ref DZLTraderPosition> positions = config.traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
-			
-			if (vector.Distance(position.position, playerPosition) <= distance){
+			float distanceToPos = vector.Distance(position.position, playerPosition);
+			if (distanceToPos <= distance){
                 return position;
             }
 		}

@@ -54,11 +54,7 @@ class DZLTraderMenu: DZLBaseMenu
 		position = player.GetTraderByPosition();
 
 		if (!position) {
-		    position = player.GetTraderByPosition(4);
-
-		    if (!position) {
-		        player.DisplayMessage("keine position gefunden");
-		    }
+		    position = player.GetTraderByPosition();
 		}
 		
 		int index;
@@ -73,12 +69,7 @@ class DZLTraderMenu: DZLBaseMenu
 		
         bool hasAddFirstCategory = false;
 		
-		DebugMessageDZL("position.categoryNames" + position.categoryNames.Count().ToString());
-		
 		foreach(string categoryName: position.categoryNames) {
-			
-			DebugMessageDZL(categoryName);
-			
 			DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
 			
 			if (!category) continue;
@@ -92,8 +83,8 @@ class DZLTraderMenu: DZLBaseMenu
 				type.displayName = name;
 				if(!hasAddFirstCategory) {
 					index = traderItemList.AddItem(name, type, 0);
-                    traderItemList.AddItem(type.buyPrice.ToString(), type, 1, index);
-                    traderItemList.AddItem(type.sellPrice.ToString(), type, 2, index);
+                    traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
+                    traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
 				}
 			
 				foreach(EntityAI item: playerItems) {
@@ -103,9 +94,15 @@ class DZLTraderMenu: DZLBaseMenu
 					
 					GetGame().ObjectGetDisplayName(item, name);
 					
+					string quant = item.GetQuantity().ToString();
+					
+					if (quant == "0") {
+						quant = "1";
+					}
+					
 					index = inventory.AddItem(name, item, 0);
-					inventory.AddItem(type.sellPrice.ToString(), item, 1, index);
-					inventory.AddItem(item.GetQuantity().ToString(), item, 2, index);
+					inventory.SetItem(index, type.sellPrice.ToString(), item, 1);
+					inventory.SetItem(index, quant, item, 2);
 				}
 
 
@@ -122,15 +119,27 @@ class DZLTraderMenu: DZLBaseMenu
 		if (items) {
 			foreach(DZLTraderType type: items) {
 				int index = traderItemList.AddItem(type.displayName, type, 0);
-				traderItemList.AddItem(type.buyPrice.ToString(), type, 1, index);
-                traderItemList.AddItem(type.sellPrice.ToString(), type, 2, index);
+				traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
+                traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
 			}
 		}
 	}
 
     override bool OnClick(Widget w, int x, int y, int button) {
-		if (super.OnClick(w, x, y, button)) return true;
-
+		
+		if (MouseState.MIDDLE == button) {
+			if (w == inventory) {
+				UpdaterPreviewByEntityAI(inventory);
+			} else if (w == sellCard) {
+				UpdaterPreviewByEntityAI(sellCard);
+			} else if (w == traderItemList) {
+				UpdaterPreviewType(traderItemList);
+			} else if (w == buyCard) {
+				UpdaterPreviewType(buyCard);
+			}
+		}
+		
+		
 		if (w == tradeButton) {
 			array<ref DZLTraderType> buyItems = new array<ref DZLTraderType>;
 			array<EntityAI> sellItems = new array<EntityAI>;
@@ -165,7 +174,7 @@ class DZLTraderMenu: DZLBaseMenu
 				return true;
 			}
 
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param2<ref array<ref DZLTraderType>, array<EntityAI>>(buyItems, sellItems), true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param4<ref array<ref DZLTraderType>, array<EntityAI>, ref DZLTraderPosition, PlayerBase>(buyItems, sellItems, position, player), true);
 		} if (w == itemCategory) {
 			int categoryIndex = itemCategory.GetCurrentItem();
 			string name = position.categoryNames.Get(categoryIndex);
@@ -180,29 +189,15 @@ class DZLTraderMenu: DZLBaseMenu
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {
 		if (w == inventory) {
-			MoveItemFromListWidgetToListWidgetInventory(inventory, sellCard, 1);
+			MoveItemFromListWidgetToListWidgetInventory(inventory, sellCard, -1);
 		} else if (w == sellCard) {
-			MoveItemFromListWidgetToListWidgetInventory(sellCard, inventory, -1);
+			MoveItemFromListWidgetToListWidgetInventory(sellCard, inventory, 1);
 		} else if (w == traderItemList) {
 			MoveItemFromListWidgetToListWidgetTrader(traderItemList, buyCard, false, 1);
 		} else if (w == buyCard) {
 			MoveItemFromListWidgetToListWidgetTrader(buyCard, traderItemList, true, -1);
 		}
-		
-		return true;
-	}
-	
-	override bool OnMouseEnter(Widget w, int x, int y) {
-		if (w == inventory) {
-			UpdaterPreviewByEntityAI(inventory);
-		} else if (w == sellCard) {
-			UpdaterPreviewByEntityAI(sellCard);
-		} else if (w == traderItemList) {
-			UpdaterPreviewType(traderItemList);
-		} else if (w == buyCard) {
-			UpdaterPreviewType(buyCard);
-		}
-		
+
 		return true;
 	}
 
@@ -268,26 +263,25 @@ class DZLTraderMenu: DZLBaseMenu
    			return;
    		}
    		EntityAI item;
+		DebugMessageDZL("Try get item");
    		sourceWidget.GetItemData(pos, 0, item);
-
+		DebugMessageDZL("has item");
+		
    		if (item) {
    		    string name = "";
             sourceWidget.GetItemText(pos, 0, name);
-
    		    int index;
             index = targetWidget.AddItem(name, item, 0);
-
             string price = "";
             sourceWidget.GetItemText(pos, 1, price);
-            targetWidget.AddItem(price, item, 1, index);
 
+            targetWidget.SetItem(index, price, item, 1);
             string quantity = "";
             sourceWidget.GetItemText(pos, 2, quantity);
-            targetWidget.AddItem(quantity, item, 2, index);
-
-  			sourceWidget.RemoveRow(pos);
+            targetWidget.SetItem(index, quantity, item, 2);
 			sumInt = sumInt + price.ToInt() * factor;
 			sum.SetText(sumInt.ToString());
+			sourceWidget.RemoveRow(pos);
    		}
    	}
 	
@@ -305,25 +299,17 @@ class DZLTraderMenu: DZLBaseMenu
 			
 			sumInt = sumInt + buyPrice.ToInt() * factor;
 			sum.SetText(sumInt.ToString());
-   		   	
 			if (removeRow) {
-				sourceWidget.RemoveRow(pos);
+				DebugMessageDZL("pos" + pos.ToString());
+				 sourceWidget.RemoveRow(pos);
 			} else {
 				string name = "";
 	            sourceWidget.GetItemText(pos, 0, name);
 	
 	   		    int index;
 	            index = targetWidget.AddItem(name, itemType, 0);
-	
-	            string sellPrice = "";
-	            sourceWidget.GetItemText(pos, 2, sellPrice);
-	            targetWidget.AddItem(sellPrice, itemType, 2, index);
-	
-	            
-	            targetWidget.AddItem(buyPrice, itemType, 1, index);
+	            targetWidget.SetItem(index, buyPrice, itemType, 1);
 			}
-			
-			
    		}
    	}
 
