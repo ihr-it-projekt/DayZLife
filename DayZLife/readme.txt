@@ -1,4 +1,5 @@
 - server muss einstellen das Türen im status bleiben
 - action player to player money transfer... .
 - bank deaktivierbar machen
-- dynmaic price
+- dynmaic price (Angebot/ Nachfrage)
+- trader preise nach health

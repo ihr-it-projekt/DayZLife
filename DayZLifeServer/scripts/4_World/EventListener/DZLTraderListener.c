@@ -13,30 +13,34 @@ class DZLTraderListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_TRADE_ACTION) {
-            autoptr Param4<ref array<ref DZLTraderType>, array<EntityAI>, ref DZLTraderPosition, PlayerBase> paramTrade;
+            autoptr Param4<ref array<string>,ref array<EntityAI>, ref DZLTraderPosition, PlayerBase> paramTrade;
             if (ctx.Read(paramTrade)){
                 array<EntityAI> playerItems = paramTrade.param4.GetPlayerItems();
                 int sum = 0;
                 int countSellItems = 0;
-                int countBuyItems = 0;
-
+				array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
+                array<EntityAI> itemsToSell = paramTrade.param2;
 
                 foreach(string categoryName: paramTrade.param3.categoryNames) {
                     DZLTraderCategory category = config.categories.GetCatByName(categoryName);
 
                     if (!category) continue;
+					
                     foreach(DZLTraderType type: category.items) {
-                        foreach(DZLTraderType traderType: paramTrade.param1) {
-                            if (traderType.type == type.type) {
-                                sum += type.buyPrice;
-                                countBuyItems++;
+                        if (paramTrade.param1.Count() > 0) {
+                            foreach(string traderType: paramTrade.param1) {
+                                if (traderType == type.id) {
+                                    typesToBuy.Insert(type);
+                                    sum += type.buyPrice;
+                                }
                             }
                         }
-
-                        foreach(EntityAI item: paramTrade.param2) {
-                            if (item.GetType() == type.type) {
-                                sum -= type.sellPrice;
-                                countSellItems++;
+                        if (paramTrade.param2.Count() > 0) {
+                            foreach(EntityAI item: itemsToSell) {
+                                if (item.GetType() == type.type) {
+                                    sum -= type.sellPrice;
+                                    countSellItems++;
+                                }
                             }
                         }
                     }
@@ -45,17 +49,39 @@ class DZLTraderListener
                 DZLPlayer dzlPlayer = new DZLPlayer(sender.GetId());
                 string message = "#error_not_enough_money";
 
-                if (countBuyItems == paramTrade.param1.Count() && countSellItems == paramTrade.param2.Count() && dzlPlayer.HasEnoughMoney(sum)) {
-                    foreach(DZLTraderType _traderType: paramTrade.param1) {
-                        Add(paramTrade.param4, _traderType.type);
+                if (typesToBuy.Count() == 0 &&  countSellItems == 0) {
+                    message = "#you_have_to_trade_minimum_one_item";
+                } else if (typesToBuy.Count() != paramTrade.param1.Count() && countSellItems != paramTrade.param2.Count()) {
+                    message = "#not_all_items_found_that_you_want_to_trade";
+                } else if (dzlPlayer.HasEnoughMoney(sum)) {
+                    foreach(DZLTraderType _traderType: typesToBuy) {
+                        Add(paramTrade.param4, _traderType, paramTrade.param3);
                     }
-                    foreach(EntityAI _item: paramTrade.param2) {
-                        GetGame().ObjectDelete(_item);
-                    }
+
+                    int index = itemsToSell.Count() - 1;
+					if (index > -1) {
+						item = itemsToSell.Get(index);
+						while (item) {
+	                        GetGame().ObjectDelete(item);
+							
+							int tmpIndex = itemsToSell.Count() - 1;
+
+							if (tmpIndex == index) {
+							    itemsToSell.Remove(index);
+							}
+							index = itemsToSell.Count() - 1;
+							
+							if (index == -1) {
+								break;
+							}
+							item = itemsToSell.Get(index);
+	                    }
+					}
+
                     dzlPlayer.AddMoneyToPlayer(sum * -1);
 
                     message = "#trade_was_successful";
-                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(sender.GetId())), true, sender);
                 }
 
 			    GetGame().RPCSingleParam(target, DAY_Z_LIFE_TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
@@ -64,19 +90,32 @@ class DZLTraderListener
     }
 
 
-    private void Add(PlayerBase player, string type) {
+    private void Add(PlayerBase player, DZLTraderType type, DZLTraderPosition position) {
         EntityAI item;
         InventoryLocation inventoryLocation = new InventoryLocation;
+		
+		if (!type.usePlayerAsSpawnPoint) {
+			item = player.SpawnEntityOnGroundPos(type.type, position.spawnPositionOfVehicles);
+			
+		} else {
+			if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+	            item = player.GetHumanInventory().CreateInInventory(type.type);
+	        } else if (!player.GetHumanInventory().GetEntityInHands()) {
+	            item = player.GetHumanInventory().CreateInHands(type.type);
+	        }
+	
+	        if (!item) {
+	            item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
+	        }
+		}
 
-        if (player.GetInventory().FindFirstFreeLocationForNewEntity(type, FindInventoryLocationType.ANY, inventoryLocation)) {
-            item = player.GetHumanInventory().CreateInInventory(type);
-        } else if (!player.GetHumanInventory().GetEntityInHands()) {
-            item = player.GetHumanInventory().CreateInHands(type);
-        }
-
-        if (!item) {
-            item = player.SpawnEntityOnGroundPos(type, player.GetPosition());
-        }
+		if (item) {
+			foreach(string attachment: type.attachments) {
+				if (item.GetInventory()) {
+					item.GetInventory().CreateAttachment(attachment);
+				}
+			}
+		}
     }
 
 

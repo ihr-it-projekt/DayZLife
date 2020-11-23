@@ -9,6 +9,7 @@ class DZLTraderMenu: DZLBaseMenu
 	private XComboBoxWidget itemCategory;
 	private ButtonWidget tradeButton;
 	private TextWidget credits;
+	private TextWidget hintPreview;
 	private ItemPreviewWidget preview;
 	private DZLTraderPosition position;
 	private EntityAI previewItem;
@@ -42,10 +43,52 @@ class DZLTraderMenu: DZLBaseMenu
 		tradeButton = creator.GetButtonWidget("Button_Buy");
 
 		credits = creator.GetTextWidget("Cedits");
-		
+		hintPreview = creator.GetTextWidget("previewtext");
+
 		preview = creator.GetItemPreviewWidget("previewItem");
 
         return layoutRoot;
+    }
+
+    override void UpdateGUI(string message = "") {
+		super.UpdateGUI(message);
+		
+		array<EntityAI> playerItems = player.GetPlayerItems();
+		credits.SetText(dzlPlayer.money.ToString());
+		
+		inventory.ClearItems();
+		sellCard.ClearItems();
+		buyCard.ClearItems();
+		sumInt = 0;
+		UpdateSum();
+		string name = "";
+		int index;
+
+       foreach(string categoryName: position.categoryNames) {
+            DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
+
+            if (!category) continue;
+
+            foreach(DZLTraderType type: category.items) {
+                foreach(EntityAI item: playerItems) {
+                    if (item.GetType() != type.type) {
+                        continue;
+                    }
+
+                    GetGame().ObjectGetDisplayName(item, name);
+
+                    string quant = item.GetQuantity().ToString();
+
+                    if (quant == "0") {
+                        quant = "1";
+                    }
+
+                    index = inventory.AddItem(name, item, 0);
+                    inventory.SetItem(index, type.sellPrice.ToString(), item, 1);
+                    inventory.SetItem(index, quant, item, 2);
+                }
+            }
+       }
     }
 
     override void OnShow() {
@@ -104,8 +147,6 @@ class DZLTraderMenu: DZLBaseMenu
 					inventory.SetItem(index, type.sellPrice.ToString(), item, 1);
 					inventory.SetItem(index, quant, item, 2);
 				}
-
-
 			}
 			hasAddFirstCategory = true;
 		}
@@ -128,6 +169,7 @@ class DZLTraderMenu: DZLBaseMenu
     override bool OnClick(Widget w, int x, int y, int button) {
 		
 		if (MouseState.MIDDLE == button) {
+		    hintPreview.Show(false);
 			if (w == inventory) {
 				UpdaterPreviewByEntityAI(inventory);
 			} else if (w == sellCard) {
@@ -137,11 +179,8 @@ class DZLTraderMenu: DZLBaseMenu
 			} else if (w == buyCard) {
 				UpdaterPreviewType(buyCard);
 			}
-		}
-		
-		
-		if (w == tradeButton) {
-			array<ref DZLTraderType> buyItems = new array<ref DZLTraderType>;
+		} else if (w == tradeButton) {
+			array<string> buyItems = new array<string>;
 			array<EntityAI> sellItems = new array<EntityAI>;
 			int countBuyItems = buyCard.GetNumItems();
             int countSellItems = sellCard.GetNumItems();
@@ -161,29 +200,33 @@ class DZLTraderMenu: DZLBaseMenu
                 buyItem = null;
                 buyCard.GetItemData(x, 0, buyItem);
                 if (buyItem) {
-                    buyItems.Insert(buyItem);
+                    buyItems.Insert(buyItem.id);
                 }
             }
 
             if (buyItems.Count() == 0 && sellItems.Count() == 0) {
+                UpdateGUI("#you_have_to_trade_minimum_one_item");
                 return true;
             }
 
             if (sumInt > player.dzlPlayer.money) {
-				player.DisplayMessage("#error_not_enough_money");
+				UpdateGUI("#error_not_enough_money");
 				return true;
 			}
 
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param4<ref array<ref DZLTraderType>, array<EntityAI>, ref DZLTraderPosition, PlayerBase>(buyItems, sellItems, position, player), true);
-		} if (w == itemCategory) {
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param4<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition, PlayerBase>(buyItems, sellItems, position, player), true);
+		} else if (w == itemCategory) {
 			int categoryIndex = itemCategory.GetCurrentItem();
 			string name = position.categoryNames.Get(categoryIndex);
 			
 			if (name) {
 				SetCategoryItems(name);
 			}
+		} else if (w == closeButton){
+		    OnHide();
+            return true;
 		}
-		
+
 		return true;
     }
 	
@@ -250,10 +293,8 @@ class DZLTraderMenu: DZLBaseMenu
 			if (previewItem) {
 	            GetGame().ObjectDelete(previewItem);
 	        }
-	
 			preview.SetItem(item);
 			preview.SetModelPosition(Vector(0,0,0.5));
-	
 		}
 	}
 
@@ -263,10 +304,8 @@ class DZLTraderMenu: DZLBaseMenu
    			return;
    		}
    		EntityAI item;
-		DebugMessageDZL("Try get item");
    		sourceWidget.GetItemData(pos, 0, item);
-		DebugMessageDZL("has item");
-		
+
    		if (item) {
    		    string name = "";
             sourceWidget.GetItemText(pos, 0, name);
@@ -280,7 +319,8 @@ class DZLTraderMenu: DZLBaseMenu
             sourceWidget.GetItemText(pos, 2, quantity);
             targetWidget.SetItem(index, quantity, item, 2);
 			sumInt = sumInt + price.ToInt() * factor;
-			sum.SetText(sumInt.ToString());
+			UpdateSum();
+
 			sourceWidget.RemoveRow(pos);
    		}
    	}
@@ -298,10 +338,10 @@ class DZLTraderMenu: DZLBaseMenu
 	        sourceWidget.GetItemText(pos, 1, buyPrice);
 			
 			sumInt = sumInt + buyPrice.ToInt() * factor;
-			sum.SetText(sumInt.ToString());
+			UpdateSum();
+			
 			if (removeRow) {
-				DebugMessageDZL("pos" + pos.ToString());
-				 sourceWidget.RemoveRow(pos);
+				sourceWidget.RemoveRow(pos);
 			} else {
 				string name = "";
 	            sourceWidget.GetItemText(pos, 0, name);
@@ -312,5 +352,17 @@ class DZLTraderMenu: DZLBaseMenu
 			}
    		}
    	}
+
+	private void UpdateSum() {
+	    int displaySum = sumInt * -1;
+		sum.SetText(displaySum.ToString());
+		
+		if(displaySum >= 0) {
+			sum.SetColor(ARGB(255, 0, 94, 23));
+		} else {
+			sum.SetColor(ARGB(255, 143, 18, 18));
+		}
+	
+	}
 
 }

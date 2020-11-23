@@ -7,12 +7,28 @@ class DZLTraderCategoryCollection
             categories = new array<ref DZLTraderCategory>;
             array<ref DZLTraderType> items = new array<ref DZLTraderType>;
 
-            DZLTraderType type = new DZLTraderType("Crowbar", 200, 500);
+            DZLTraderType type = new DZLTraderType("Crowbar", 200, 500, new array<string>);
+			categories.Insert(new DZLTraderCategory("Weapons", items));
+			
+			array<string> attachments = new array<string>;
+			attachments.Insert("Sedan_02_Door_1_2");
+			
+            type = new DZLTraderType("Sedan_02", 200, 500, attachments, false);
+			items = new array<ref DZLTraderType>;
             items.Insert(type);
-
-            categories.Insert(new DZLTraderCategory("Weapons", items));
+			categories.Insert(new DZLTraderCategory("Cars", items));
+            
             Save();
-       }
+        } else {
+            foreach(DZLTraderCategory category: categories) {
+                foreach(DZLTraderType _items: category.items) {
+                    if (!_items.HasCorrectId()) {
+                        _items.SetId();
+                    }
+                }
+            }
+            Save();
+        }
     }
 	
 	DZLTraderCategory GetCatByName(string name) {

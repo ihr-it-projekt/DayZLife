@@ -1,4 +1,4 @@
-class DZLLicence
+class DZLLicence: DZLIdModel
 {
     int m_CommandUID;
 	string actionText;
@@ -7,7 +7,6 @@ class DZLLicence
 	vector position;
 	int range;
 	string dependencyLicence;
-	string id;
     ref DZLLicenceCraftedItem craftedItem;
 	ref DZLLicenceCraftItemCollection craftItems;
 	ref DZLLicenceToolItemCollection toolItems;
@@ -29,11 +28,5 @@ class DZLLicence
 		SetId();
 	}
 
-	bool HasCorrectId() {
-	    return id != "";
-	}
 
-	void SetId() {
-	    id = Math.RandomInt(0, 100000000000).ToString();
-	}
 }
