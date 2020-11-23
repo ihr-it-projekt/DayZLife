@@ -131,6 +131,8 @@ FrameWidgetClass Trader_Menu {
                hexactsize 0
                vexactsize 0
                text "#previewtext"
+               "exact text" 0
+               text_proportion 0.5
                "text halign" center
                "text valign" center
               }
