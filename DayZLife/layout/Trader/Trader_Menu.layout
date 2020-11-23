@@ -150,8 +150,8 @@ FrameWidgetClass Trader_Menu {
            {
             TextWidgetClass sum {
              ignorepointer 1
-             position 0 0
-             size 0.96694 0.735
+             position 0.20014 -0.01006
+             size 0.56615 0.735
              halign center_ref
              valign center_ref
              hexactpos 0
@@ -159,6 +159,19 @@ FrameWidgetClass Trader_Menu {
              hexactsize 0
              vexactsize 0
              "text halign" center
+             "text valign" center
+            }
+            TextWidgetClass sumText {
+             ignorepointer 1
+             position 0.01653 -0.01006
+             size 0.384 0.735
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#sum"
+             text_proportion 0.7
              "text valign" center
             }
            }
