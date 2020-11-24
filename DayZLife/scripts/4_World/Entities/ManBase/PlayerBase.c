@@ -103,7 +103,7 @@ modded class PlayerBase
         GetMessageMenu();
         messageMenu.SetText(message);
         messageMenu.Init();
-        messageMenu.OnShow();
+        messageMenu.Show();
     }
 
     void UpdatePlayerAtDependencies() {

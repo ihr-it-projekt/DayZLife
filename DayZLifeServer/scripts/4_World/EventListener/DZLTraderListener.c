@@ -117,7 +117,18 @@ class DZLTraderListener
 				}
 			}
 		}
+
+		if (item && type.isCar) {
+		    Car car = Car.Cast(item);
+		    car.Fill(CarFluid.FUEL, car.GetFluidCapacity(CarFluid.FUEL));
+            car.Fill(CarFluid.OIL, car.GetFluidCapacity(CarFluid.OIL));
+            car.Fill(CarFluid.BRAKE, car.GetFluidCapacity(CarFluid.BRAKE));
+            car.Fill(CarFluid.COOLANT, car.GetFluidCapacity(CarFluid.COOLANT));
+
+            car.Fill(CarFluid.USER1, car.GetFluidCapacity(CarFluid.USER1));
+            car.Fill(CarFluid.USER2, car.GetFluidCapacity(CarFluid.USER2));
+            car.Fill(CarFluid.USER3, car.GetFluidCapacity(CarFluid.USER3));
+            car.Fill(CarFluid.USER4, car.GetFluidCapacity(CarFluid.USER4));
+		}
     }
-
-
 }

@@ -59,7 +59,7 @@ class DZLTraderCategoryCollection
 			attachments.Insert("CarRadiator");
 			attachments.Insert("HeadlightH7");
 			attachments.Insert("HeadlightH7");
-            items.Insert(new DZLTraderType("OffroadHatchback", 25000, 60000, attachments, false));
+            items.Insert(new DZLTraderType("OffroadHatchback", 25000, 60000, attachments, false, true));
 			
 			attachments = new array<string>;
 			attachments.Insert("Hatchback_02_Door_1_1");
@@ -77,7 +77,7 @@ class DZLTraderCategoryCollection
 			attachments.Insert("CarRadiator");
 			attachments.Insert("HeadlightH7");
 			attachments.Insert("HeadlightH7");
-            items.Insert(new DZLTraderType("Hatchback_02", 20000, 50000, attachments, false));
+            items.Insert(new DZLTraderType("Hatchback_02", 20000, 50000, attachments, false, true));
 			categories.Insert(new DZLTraderCategory("Cars", items));
             
             Save();

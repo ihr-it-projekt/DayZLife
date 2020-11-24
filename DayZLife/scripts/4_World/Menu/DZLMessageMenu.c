@@ -20,15 +20,15 @@ class DZLMessageMenu: UIScriptedMenu
         messageText = text;
     }
 
-    override void OnShow() {
+    void Show() {
         message.SetText(messageText);
         layoutRoot.Show(true);
-        timer.Run(10, this, "OnHide");
+        timer.Run(10, this, "CloseMenu");
     }
 
-    override void OnHide() {
+    void CloseMenu() {
         layoutRoot.Show(false);
         timer.Stop();
-        Close();
+        super.Close();
     }
 }
