@@ -1,4 +1,6 @@
 FrameWidgetClass DZL_Message {
+ clipchildren 0
+ ignorepointer 1
  position 0.01 0.01
  size 0.2131 0.0571
  halign right_ref
@@ -8,7 +10,8 @@ FrameWidgetClass DZL_Message {
  vexactsize 0
  {
   PanelWidgetClass PanelWidget0 {
-   ignorepointer 1
+   clipchildren 1
+   ignorepointer 0
    position 0 0
    size 0.9717 0.898
    halign center_ref
