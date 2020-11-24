@@ -15,7 +15,9 @@ class DZLTraderPositionCollection
                 attachments.Insert("ThickFramesGlasses");
                 attachments.Insert("DressShoes_Black");
 
-                catNames.Insert("Weapons");
+                catNames.Insert("Tools");
+                catNames.Insert("Food");
+                catNames.Insert("Ore");
                 catNames.Insert("Cars");
                 positions.Insert(new DZLTraderPosition("4660.000000 339.282990 10325.000000", "0 0 0", "SurvivorM_Boris", attachments, catNames, "4634.000000 338.049988 10319.981445"));
             } else {
