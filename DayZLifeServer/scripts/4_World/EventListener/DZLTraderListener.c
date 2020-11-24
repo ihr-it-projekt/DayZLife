@@ -20,6 +20,7 @@ class DZLTraderListener
                 int countSellItems = 0;
 				array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
                 array<EntityAI> itemsToSell = paramTrade.param2;
+                array<string> itemsToBuyParam = paramTrade.param1;
 
                 foreach(string categoryName: paramTrade.param3.categoryNames) {
                     DZLTraderCategory category = config.categories.GetCatByName(categoryName);
@@ -27,8 +28,8 @@ class DZLTraderListener
                     if (!category) continue;
 					
                     foreach(DZLTraderType type: category.items) {
-                        if (paramTrade.param1.Count() > 0) {
-                            foreach(string traderType: paramTrade.param1) {
+                        if (itemsToBuyParam.Count() > 0) {
+                            foreach(string traderType: itemsToBuyParam) {
                                 if (traderType == type.id) {
                                     typesToBuy.Insert(type);
                                     sum += type.buyPrice;
@@ -51,7 +52,7 @@ class DZLTraderListener
 
                 if (typesToBuy.Count() == 0 &&  countSellItems == 0) {
                     message = "#you_have_to_trade_minimum_one_item";
-                } else if (typesToBuy.Count() != paramTrade.param1.Count() && countSellItems != paramTrade.param2.Count()) {
+                } else if (typesToBuy.Count() != itemsToBuyParam.Count() && countSellItems != itemsToSell.Count()) {
                     message = "#not_all_items_found_that_you_want_to_trade";
                 } else if (dzlPlayer.HasEnoughMoney(sum)) {
                     foreach(DZLTraderType _traderType: typesToBuy) {
