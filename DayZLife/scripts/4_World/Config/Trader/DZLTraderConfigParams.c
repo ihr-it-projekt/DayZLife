@@ -1,6 +1,7 @@
 class DZLTraderConfigParams
 {
 	string configVersion = "1";
+	int carLifeTime = 9999999;
 
     void DZLTraderConfigParams()
     {

@@ -111,6 +111,7 @@ class DZLTraderListener
 		}
 
 		if (item) {
+			
 			foreach(string attachment: type.attachments) {
 				if (item.GetInventory()) {
 					item.GetInventory().CreateAttachment(attachment);
@@ -119,7 +120,8 @@ class DZLTraderListener
 		}
 
 		if (item && type.isCar) {
-		    Car car = Car.Cast(item);
+			Car car = Car.Cast(item);
+			car.SetLifetime(config.traderConfigParams.carLifeTime);
 		    car.Fill(CarFluid.FUEL, car.GetFluidCapacity(CarFluid.FUEL));
             car.Fill(CarFluid.OIL, car.GetFluidCapacity(CarFluid.OIL));
             car.Fill(CarFluid.BRAKE, car.GetFluidCapacity(CarFluid.BRAKE));
