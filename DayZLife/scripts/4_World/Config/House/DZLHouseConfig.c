@@ -1,5 +1,6 @@
 class DZLHouseConfig {
     ref array<ref DZLHouseDefinition> houseConfigs;
+    string version = "1";
 
     void DZLHouseConfig()
 	{

@@ -1,6 +1,7 @@
 class DZLTraderPositionCollection
 {
     ref array<ref DZLTraderPosition> positions;
+    string version = "1";
 
     void DZLTraderPositionCollection() {
         if (!Load()){

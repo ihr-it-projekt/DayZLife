@@ -8,6 +8,7 @@ class DZLBankingConfig
 	int raidCoolDownTimeInSeconds = 60;
 	int maximumRaidDistanceToBank = 5;
 	int startCapital = 1000;
+	string version = "1";
 
     void DZLBankingConfig() {
         if(!Load()) {

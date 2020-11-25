@@ -1,6 +1,7 @@
 class DZLJobConfig
 {
     ref array<ref DZLWorkZone> workZones;
+    string version = "1";
 
     void DZLJobConfig() {
         if (!Load()) {
