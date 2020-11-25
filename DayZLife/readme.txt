@@ -4,6 +4,7 @@
 - trader preise nach health / quantity
 - nicht füttern von NPC
 - paywall
+- Nach Erwerb der Esten Lizenz wird bei der zweiten eine Abhängigkeit verlangt
 - Rollen
     - Rollen Klamoten
     - Actions
