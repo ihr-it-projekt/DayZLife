@@ -20,35 +20,29 @@ class DZLLicenceConfig
 
             if (DAY_Z_LIFE_DEBUG) {
                 // Start Crafting
-                craftItems.collection.Insert(new DZLLicenceCraftItem("Stone", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
-                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence", "4620.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Cement Licence", "4620.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Cement", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
                 toolItems = new DZLLicenceToolItemCollection;
 				
                 craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Copper", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 1, 50));
-                licences.collection.Insert(new DZLLicence(109, 100, "Copper Licence", "4640.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Copper Licence", "4640.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Copper", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Iron", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 2, 50));
-                licences.collection.Insert(new DZLLicence(109, 100, "Iron Licence", "4650.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
-                craftItems = new DZLLicenceCraftItemCollection;
-				
-				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Silver", 1, 50));
-                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 2, 50));
-                licences.collection.Insert(new DZLLicence(109, 100, "Silver Licence", "4660.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Iron Licence", "4650.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Iron", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Gold", 1, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Coal", 3, 50));
-                licences.collection.Insert(new DZLLicence(109, 100, "Gold Licence", "4670.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Gold Licence", "4670.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Gold", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Diamond", 2, 50));
-                licences.collection.Insert(new DZLLicence(109, 100, "", "4680.000000 339.609009 10340.000000", 5, "Diamond Licence", new DZLLicenceCraftedItem("Hatchet", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "", "4680.000000 339.609009 10340.000000", 5, "Diamond Licence", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
 				// End Crafting
                 // Position of licence dealer

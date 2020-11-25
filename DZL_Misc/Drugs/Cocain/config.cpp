@@ -32,12 +32,12 @@ class CfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"DZL_Misc\Drugs\Cocain\Cocain_Plant.paa",
-			"DZL_Misc\Drugs\Cocain\Cocain_Plant.paa",
-			"DZL_Misc\Drugs\Cocain\Cocain_Plant.paa",
-			"DZL_Misc\Drugs\Cocain\Cocain_Plant.paa",
-			"DZL_Misc\Drugs\Cocain\Cocain_Plant.paa",
-			"DZL_Misc\Drugs\Cocain\Cocain_Plant.paa"
+			"DZL_Misc\Drugs\Cocain\Data\Cocain_Plant.paa",
+			"DZL_Misc\Drugs\Cocain\Data\Cocain_Plant.paa",
+			"DZL_Misc\Drugs\Cocain\Data\Cocain_Plant.paa",
+			"DZL_Misc\Drugs\Cocain\Data\Cocain_Plant.paa",
+			"DZL_Misc\Drugs\Cocain\Data\Cocain_Plant.paa",
+			"DZL_Misc\Drugs\Cocain\Data\Cocain_Plant.paa"
 		};
 		hiddenSelectionsMaterials[]=
 		{

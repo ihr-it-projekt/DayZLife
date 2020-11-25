@@ -14,11 +14,9 @@ class DZLJobConfig
 			if (DAY_Z_LIFE_DEBUG) {
                 //Harvest Stone
 
-                itemsThatCanHarvest.Insert("Stone");
-                itemsThatCanHarvest.Insert("SmallStone");
+                itemsThatCanHarvest.Insert("DZL_Stone");
 
                 itemsThatNeededForHarvest.Insert("Pickaxe");
-                itemsThatNeededForHarvest.Insert("Sledgehammer");
 
 				DZLHarvestItemToolRelation relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				harvestItemToolRelation.Insert(relation);
@@ -75,22 +73,6 @@ class DZLJobConfig
 				workZones.Insert(zone);
 				//Harvest Iron end
 				
-				//Harvest Silver
-				// itemsThatCanHarvest = new array<string>;
-                // itemsThatNeededForHarvest = new array<string>;
-                // harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
-
-                // itemsThatCanHarvest.Insert("DZL_Ore_Silver");
-
-                // itemsThatNeededForHarvest.Insert("Pickaxe");
-
-                // relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
-                // harvestItemToolRelation.Insert(relation);
-				
-				// zone = new DZLWorkZone(109, "916 181 6691", 5, "Silver Mining Zone", 10, 2, harvestItemToolRelation);
-				// workZones.Insert(zone);
-				//Harvest Silver end
-				
 				//Harvest Gold
 				itemsThatCanHarvest = new array<string>;
                 itemsThatNeededForHarvest = new array<string>;
@@ -130,12 +112,17 @@ class DZLJobConfig
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 				
 				itemsThatCanHarvest.Insert("Apple");
+				
+                itemsThatNeededForHarvest.Insert("CombatKnife");
+                itemsThatNeededForHarvest.Insert("HuntingKnife");
+                itemsThatNeededForHarvest.Insert("KitchenKnife");
+                itemsThatNeededForHarvest.Insert("SteakKnife");
 
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "7592 6 3483", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(105, "7592 6 3483", 10, "Mining Zone", 2, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				// Harvest Apple 1 end
 				
@@ -146,11 +133,16 @@ class DZLJobConfig
 				
 				itemsThatCanHarvest.Insert("Apple");
 				
+                itemsThatNeededForHarvest.Insert("CombatKnife");
+                itemsThatNeededForHarvest.Insert("HuntingKnife");
+                itemsThatNeededForHarvest.Insert("KitchenKnife");
+                itemsThatNeededForHarvest.Insert("SteakKnife");
+				
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "12162 49 8984", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(105, "12162 49 8984", 10, "Mining Zone", 2, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				// Harvest Apple 2 end
 				
@@ -161,11 +153,16 @@ class DZLJobConfig
 				
 				itemsThatCanHarvest.Insert("Apple");
 				
+                itemsThatNeededForHarvest.Insert("CombatKnife");
+                itemsThatNeededForHarvest.Insert("HuntingKnife");
+                itemsThatNeededForHarvest.Insert("KitchenKnife");
+                itemsThatNeededForHarvest.Insert("SteakKnife");
+				
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "11992 90 13926", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(105, "11992 90 13926", 10, "Mining Zone", 2, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				// Harvest Apple 3 end
 				
@@ -176,11 +173,16 @@ class DZLJobConfig
 				
 				itemsThatCanHarvest.Insert("Apple");
 				
+                itemsThatNeededForHarvest.Insert("CombatKnife");
+                itemsThatNeededForHarvest.Insert("HuntingKnife");
+                itemsThatNeededForHarvest.Insert("KitchenKnife");
+                itemsThatNeededForHarvest.Insert("SteakKnife");
+				
 				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
 				
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "2637 204 5381", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(105, "2637 204 5381", 10, "Mining Zone", 2, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				// Harvest Apple 4 end
 				
@@ -189,34 +191,16 @@ class DZLJobConfig
                 itemsThatNeededForHarvest = new array<string>;
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 
-                itemsThatCanHarvest.Insert("Stone");
-                itemsThatCanHarvest.Insert("SmallStone");
+                itemsThatCanHarvest.Insert("DZL_Stone");
 
                 itemsThatNeededForHarvest.Insert("Pickaxe");
-                itemsThatNeededForHarvest.Insert("Sledgehammer");
 
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "6451 444 14747", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "13274 9 6095", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Stone end
-				
-				//Harvest Copper
-				itemsThatCanHarvest = new array<string>;
-                itemsThatNeededForHarvest = new array<string>;
-                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
-
-                itemsThatCanHarvest.Insert("DZL_Ore_Copper");
-
-                itemsThatNeededForHarvest.Insert("Pickaxe");
-
-                relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
-                harvestItemToolRelation.Insert(relation);
-				
-				zone = new DZLWorkZone(109, "8722 99 13264", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
-				workZones.Insert(zone);
-				//Harvest Copper end
 				
 				//Harvest Coal
 				itemsThatCanHarvest = new array<string>;
@@ -230,9 +214,25 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "8658 151 13630", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "8722 99 13264", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Coal end
+				
+				// Harvest Copper
+				itemsThatCanHarvest = new array<string>;
+                itemsThatNeededForHarvest = new array<string>;
+                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
+
+                itemsThatCanHarvest.Insert("DZL_Ore_Copper");
+
+                itemsThatNeededForHarvest.Insert("Pickaxe");
+
+                relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
+                harvestItemToolRelation.Insert(relation);
+				
+				zone = new DZLWorkZone(109, "8540 8 2978", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				workZones.Insert(zone);
+				// Harvest Copper end
 				
 				//Harvest Iron
 				itemsThatCanHarvest = new array<string>;
@@ -246,25 +246,9 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "8599 100 13337", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "919 180 6689", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Iron end
-				
-				//Harvest Silver
-				itemsThatCanHarvest = new array<string>;
-                itemsThatNeededForHarvest = new array<string>;
-                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
-
-                itemsThatCanHarvest.Insert("DZL_Ore_Silver");
-
-                itemsThatNeededForHarvest.Insert("Pickaxe");
-
-                relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
-                harvestItemToolRelation.Insert(relation);
-				
-				zone = new DZLWorkZone(109, "916 181 6691", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
-				workZones.Insert(zone);
-				//Harvest Silver end
 				
 				//Harvest Gold
 				itemsThatCanHarvest = new array<string>;
@@ -278,7 +262,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "14103 2 13400", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "14098 2 13406", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Gold end
 				
@@ -294,7 +278,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "13272 9 6090", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "13672 49 12299", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Diamond end
 				
@@ -311,25 +295,75 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "933 180 7723", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "932 180 7723", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest WoodenLog end
+				
+				// Harvest Cannabis
+				itemsThatCanHarvest = new array<string>;
+                itemsThatNeededForHarvest = new array<string>;
+                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
+				
+				itemsThatCanHarvest.Insert("DZL_Cannabis");
+				
+                itemsThatNeededForHarvest.Insert("CombatKnife");
+                itemsThatNeededForHarvest.Insert("HuntingKnife");
+                itemsThatNeededForHarvest.Insert("KitchenKnife");
+                itemsThatNeededForHarvest.Insert("SteakKnife");
+				
+				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
+				
+                harvestItemToolRelation.Insert(relation);
+				
+				zone = new DZLWorkZone(109, "2227 433 15259", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				workZones.Insert(zone);
+				// Harvest Cannabis end
+				
+				// Harvest Coca
+				itemsThatCanHarvest = new array<string>;
+                itemsThatNeededForHarvest = new array<string>;
+                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
+				
+				itemsThatCanHarvest.Insert("DZL_Coca");
+				
+                itemsThatNeededForHarvest.Insert("CombatKnife");
+                itemsThatNeededForHarvest.Insert("HuntingKnife");
+                itemsThatNeededForHarvest.Insert("KitchenKnife");
+                itemsThatNeededForHarvest.Insert("SteakKnife");
+				
+				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
+				
+                harvestItemToolRelation.Insert(relation);
+				
+				zone = new DZLWorkZone(109, "5180 222 13858", 10, "Mining Zone", 10, 2, harvestItemToolRelation);
+				workZones.Insert(zone);
+				// Harvest Coca end
 				
 				//Gather Vehicle Parts
 				itemsThatCanHarvest = new array<string>;
                 itemsThatNeededForHarvest = new array<string>;
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 
-                itemsThatCanHarvest.Insert("DZL_Scrap_1");
-                itemsThatCanHarvest.Insert("DZL_Scrap_2");
-                itemsThatCanHarvest.Insert("DZL_Scrap_3");
-                itemsThatCanHarvest.Insert("DZL_Scrap_4");
-                itemsThatCanHarvest.Insert("DZL_Scrap_5");
-                itemsThatCanHarvest.Insert("DZL_Scrap_6");
-                itemsThatCanHarvest.Insert("DZL_Scrap_7");
-                itemsThatCanHarvest.Insert("DZL_Scrap_8");
-                itemsThatCanHarvest.Insert("DZL_Scrap_9");
-                itemsThatCanHarvest.Insert("DZL_Scrap_10");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_1");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_2");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_3");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_4");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_5");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_6");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_7");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_8");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_9");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_10");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_11");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_12");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_13");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_14");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_15");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_16");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_17");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_18");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_19");
+                itemsThatCanHarvest.Insert("DZL_Vehicle_Part_20");
 
                 itemsThatNeededForHarvest.Insert("Wrench");
                 itemsThatNeededForHarvest.Insert("LugWrench");
@@ -341,8 +375,6 @@ class DZLJobConfig
 				workZones.Insert(zone);
 				//Gather Vehicle Parts end
             }
-
-
 			
 		    Save();
         }
