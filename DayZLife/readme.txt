@@ -3,6 +3,7 @@
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health / quantity
 - nicht füttern von NPC
+- paywall
 - Rollen
     - Rollen Klamoten
     - Actions
