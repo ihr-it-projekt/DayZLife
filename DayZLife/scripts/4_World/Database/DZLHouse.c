@@ -10,9 +10,13 @@ class DZLHouse {
 	int raidTime = 3;
 	ref array<int> lockedDoors;
 
+    void DZLHouse(Building building = null, string fileName = "") {
+        if (building) {
+            this.fileName = DZLHouse.GetFileName(building);;
+        } else {
+            this.fileName = fileName;
+        }
 
-    void DZLHouse(Building building) {
-        this.fileName = DZLHouse.GetFileName(building);
 		if (!Load()) {
 	        this.name = building.GetType();
 			this.position = building.GetPosition();
@@ -130,7 +134,7 @@ class DZLHouse {
     private void Save(){
         if (GetGame().IsServer()) {
 			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
-			JsonFileLoader<DZLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);
+			DZLJsonFileHandler<DZLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);
 		}
     }
 }

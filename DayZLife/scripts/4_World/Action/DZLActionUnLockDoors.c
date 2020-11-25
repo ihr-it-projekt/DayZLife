@@ -56,6 +56,8 @@ class DZLActionUnLockDoors: ActionInteractBase
         DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(action_data.m_Target);
         if (dzlHouse && doorIndex != -1) {
             dzlHouse.UnLookDoor(doorIndex);
+            DZLLockedHouses houses = new DZLLockedHouses();
+            houses.Remove(dzlHouse);
         }
 	}
 

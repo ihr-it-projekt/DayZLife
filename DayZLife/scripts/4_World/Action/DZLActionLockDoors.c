@@ -58,6 +58,8 @@ class DZLActionLockDoors: ActionInteractBase
 		DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(action_data.m_Target);
 		if (dzlHouse && doorIndex != -1) {
 			dzlHouse.LockDoor(doorIndex);
+			DZLLockedHouses houses = new DZLLockedHouses();
+            houses.Add(dzlHouse);
 		}
 	}
 

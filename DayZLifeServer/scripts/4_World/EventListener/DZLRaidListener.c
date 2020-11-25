@@ -14,6 +14,9 @@ class DZLRaidListener
             if (ctx.Read(paramRaidDoor)){
                 DZLHouse dzlHouse = new DZLHouse(paramRaidDoor.param2);
                 dzlHouse.UnLookDoor(paramRaidDoor.param3);
+                DZLLockedHouses houses = new DZLLockedHouses();
+                houses.Remove(dzlHouse);
+
                 paramRaidDoor.param4.SetHealth(0);
             }
         }else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {

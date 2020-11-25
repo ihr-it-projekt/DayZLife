@@ -1,19 +1,22 @@
-class DZLMessageMenu: UIScriptedMenu
+class DZLMessageMenu
 {
 	private ref DZLUIItemCreator creator;
 	private MultilineTextWidget message;
 	private ref Timer timer;
 	private string messageText;
+	private Widget layoutRoot;
 
-    override Widget Init() {
+	void ~DZLMessageMenu() {
+	    layoutRoot.Show(false);
+	}
+
+    void Init() {
         creator = new DZLUIItemCreator("DayZLife/layout/DZL_Message.layout");
         message = creator.GetMultilineTextWidget("Announcements");
         layoutRoot = creator.GetLayoutRoot();
 
         layoutRoot.Show(false);
         timer = new Timer;
-
-        return layoutRoot;
     }
 
     void SetText(string text) {
@@ -29,6 +32,5 @@ class DZLMessageMenu: UIScriptedMenu
     void CloseMenu() {
         layoutRoot.Show(false);
         timer.Stop();
-        super.Close();
     }
 }

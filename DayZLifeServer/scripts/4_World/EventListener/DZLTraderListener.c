@@ -121,8 +121,7 @@ class DZLTraderListener
 
 		if (item && type.isCar) {
 			Car car = Car.Cast(item);
-			car.SetLifetimeMax(config.traderConfigParams.carLifeTime);
-			car.SetLifetime(config.traderConfigParams.carLifeTime);
+
 		    car.Fill(CarFluid.FUEL, car.GetFluidCapacity(CarFluid.FUEL));
             car.Fill(CarFluid.OIL, car.GetFluidCapacity(CarFluid.OIL));
             car.Fill(CarFluid.BRAKE, car.GetFluidCapacity(CarFluid.BRAKE));
