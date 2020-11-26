@@ -16,11 +16,13 @@ class DZLTraderMenu: DZLBaseMenu
 	
 	
 	private ref map<string, ref array<ref DZLTraderType>> displayCategories;
+	private ref array<string> addedCats;
 	
 	
     void DZLTraderMenu() {
         layoutPath = "DayZLife/layout/Trader/Trader_Menu.layout";
 		displayCategories = new map<string, ref array<ref DZLTraderType>>;
+		addedCats = new array<string>;
         Construct();
     }
 
@@ -63,6 +65,8 @@ class DZLTraderMenu: DZLBaseMenu
 		UpdateSum();
 		string name = "";
 		int index;
+		
+		array<string> addInventoryTypes = new array<string>;
 
        foreach(string categoryName: position.categoryNames) {
             DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
@@ -71,10 +75,14 @@ class DZLTraderMenu: DZLBaseMenu
 
             foreach(DZLTraderType type: category.items) {
                 foreach(EntityAI item: playerItems) {
+					if (-1 != addInventoryTypes.Find(type.type)) continue;
+				
+					addInventoryTypes.Insert(type.type);
+					
                     if (item.GetType() != type.type) {
                         continue;
                     }
-
+					
                     GetGame().ObjectGetDisplayName(item, name);
 
                     string quant = item.GetQuantity().ToString();
@@ -111,15 +119,20 @@ class DZLTraderMenu: DZLBaseMenu
 		array<EntityAI> playerItems = player.GetPlayerItems();
 		
         bool hasAddFirstCategory = false;
+
+		array<string> addInventoryTypes = new array<string>;
 		
 		foreach(string categoryName: position.categoryNames) {
 			DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
 			
 			if (!category) continue;
 			
+			if (displayCategories.Get(category.name)) continue;
+			
 			itemCategory.AddItem(categoryName);
-
 			displayCategories.Insert(categoryName, category.items);
+			addedCats.Insert(categoryName);
+			
 
 			foreach(DZLTraderType type: category.items) {
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);
@@ -129,6 +142,10 @@ class DZLTraderMenu: DZLBaseMenu
                     traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
                     traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
 				}
+				
+				if (-1 != addInventoryTypes.Find(type.type)) continue;
+				
+				addInventoryTypes.Insert(type.type);
 			
 				foreach(EntityAI item: playerItems) {
 					if (item.GetType() != type.type) {
@@ -156,7 +173,7 @@ class DZLTraderMenu: DZLBaseMenu
 		traderItemList.ClearItems();
 
 	    ref array<ref DZLTraderType> items = displayCategories.Get(categoryName);
-		
+
 		if (items) {
 			foreach(DZLTraderType type: items) {
 				int index = traderItemList.AddItem(type.displayName, type, 0);
@@ -217,8 +234,8 @@ class DZLTraderMenu: DZLBaseMenu
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param4<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition, PlayerBase>(buyItems, sellItems, position, player), true);
 		} else if (w == itemCategory) {
 			int categoryIndex = itemCategory.GetCurrentItem();
-			string name = position.categoryNames.Get(categoryIndex);
-			
+			string name = addedCats.Get(categoryIndex);
+
 			if (name) {
 				SetCategoryItems(name);
 			}

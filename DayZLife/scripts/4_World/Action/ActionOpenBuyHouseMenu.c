@@ -10,7 +10,7 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTNone;
+        m_ConditionTarget = new CCTCursor;
     }
 
 	override string GetText()
@@ -43,6 +43,13 @@ class ActionOpenBuyHouseMenu: ActionInteractBase
             if(!IsBuilding(target)) return false;
             if (!player.config) return false;
 
+
+            Building _building = Building.Cast(target.GetObject());
+            int doorIndex = _building.GetDoorIndex(target.GetComponentIndex());
+            if (doorIndex == -1) return false;
+
+            if(!IsInReach(player, target, UAMaxDistances.DEFAULT) ) return false;
+            
             DZLHouseDefinition definition = player.FindHouseDefinition(Building.Cast(target.GetObject()));
 
             return !!definition;
