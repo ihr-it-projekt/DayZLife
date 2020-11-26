@@ -24,34 +24,42 @@ class DZLTraderCategoryCollection
 			items.Insert(new DZLTraderType("Hatchet", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Tools", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Stone", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Cement", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Cement and Stone Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Ore_Coal", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Coal Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Ore_Copper", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Copper", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Copper Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Ore_Iron", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Iron", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Iron Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Ore_Gold", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Gold", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Gold Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Ore_Diamond", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Diamond", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Diamond Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_WoodenLog", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_WoodenPlank", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Paper", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Paper and Wood Dealer", items));
 			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Money", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Money Dealer", items));
 			
