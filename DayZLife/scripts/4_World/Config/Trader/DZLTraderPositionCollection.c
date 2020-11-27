@@ -120,7 +120,7 @@ class DZLTraderPositionCollection
 				catNames.Insert("Drug Dealer");
                 catNames.Insert("Food");
                 catNames.Insert("Drinks");
-				positions.Insert(new DZLTraderPosition("14300.961914 3.308669 13254.615234", "3 0 0", "SurvivorM_Taiki", attachments, catNames, "0 0 0"));
+				positions.Insert(new DZLTraderPosition("14298.921875 3.697711 13301.237305", "170 0 0", "SurvivorM_Taiki", attachments, catNames, "0 0 0"));
                 
             }
             Save();
