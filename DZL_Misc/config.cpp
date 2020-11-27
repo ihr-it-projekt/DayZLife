@@ -90,19 +90,27 @@ class CfgVehicles
 	{
 		scope=2;
 		displayName="Sandpaper";
-		descriptionShort="$STR_CfgVehicles_Paper1";
+		descriptionShort="";
 		model="\dz\gear\consumables\Paper.p3d";
-		isMeleeWeapon=1;
-		weight=2;
-		absorbency=1;
-		itemSize[]={1,1};
-		rotationFlags=16;
+		rotationFlags=17;
+		lootCategory="Crafted";
+		weight=450;
+		itemSize[]={3,3};
+		absorbency=0.2;
 		canBeSplit=1;
 		varQuantityInit=1;
 		varQuantityMin=0;
 		varQuantityMax=1;
 		varQuantityDestroyOnMin=1;
 		varStackMax=1;
+		hiddenSelections[]=
+		{
+			"zbytek"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"DZL_Misc\Data\Sandpaper.paa"
+		};
 	};
 	class DZL_Cement: Paper
 	{

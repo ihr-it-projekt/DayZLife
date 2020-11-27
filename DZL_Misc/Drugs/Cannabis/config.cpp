@@ -15,6 +15,7 @@ class CfgVehicles
 {
 	class HouseNoDestruct;
 	class Inventory_Base;
+	class Container_Base;
 	class DZL_Cannabis_Plant: HouseNoDestruct
 	{
 		scope=1;
@@ -31,5 +32,26 @@ class CfgVehicles
 		rotationFlags=34;
 		weight=15;
 		itemSize[]={1,1};
+	};
+	class DZL_Cannabis_Brick: Container_Base
+	{	
+		scope=2;
+		displayName="Cannabis Brick";
+		descriptionShort="";
+		model="\dz\gear\containers\FirstAidKit.p3d";
+		rotationFlags=17;
+		lootCategory="Crafted";
+		weight=450;
+		itemSize[]={3,3};
+		absorbency=0.2;
+		isMeleeWeapon=1;
+		hiddenSelections[]=
+		{
+			"zbytek"
+		};
+		hiddenSelectionsTextures[]=
+		{
+			"DZL_Misc\Drugs\Cannabis\Data\Cannabis_Brick.paa"
+		};
 	};
 };
