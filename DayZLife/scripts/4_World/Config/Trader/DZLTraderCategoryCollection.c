@@ -54,6 +54,10 @@ class DZLTraderCategoryCollection
 			categories.Insert(new DZLTraderCategory("Diamond Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
+			items.Insert(new DZLTraderType("DZL_Jewelry", 130, 1600, new array<string>));
+			categories.Insert(new DZLTraderCategory("Jewelry Dealer", items));
+			
+			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_WoodenLog", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_WoodenPlank", 130, 1600, new array<string>));
 			items.Insert(new DZLTraderType("DZL_Paper", 130, 1600, new array<string>));
@@ -62,6 +66,11 @@ class DZLTraderCategoryCollection
 			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("DZL_Money", 130, 1600, new array<string>));
 			categories.Insert(new DZLTraderCategory("Money Dealer", items));
+			
+			items = new array<ref DZLTraderType>;
+			items.Insert(new DZLTraderType("DZL_Cannabis", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Coacain", 130, 1600, new array<string>));
+			categories.Insert(new DZLTraderCategory("Drug Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
 			items.Insert(new DZLTraderType("PowderedMilk", 30, 100, new array<string>));

@@ -195,6 +195,7 @@ class CfgVehicles
 	class DZL_Color: Spraycan_Black
 	{
 		scope=2;
+		displayName="Farbe";
 		descriptionShort="$STR_CfgVehicles_Spraycan_Black0";
 		color="Black";
 		hiddenSelectionsTextures[]=
