@@ -19,7 +19,7 @@ class DZLRaidListener
 
                 paramRaidDoor.param4.SetHealth(0);
             }
-        }else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
+        } else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
             autoptr Param2<PlayerBase, Building> paramRaidDoorDZLBuilding;
             if (ctx.Read(paramRaidDoorDZLBuilding)){
                 GetGame().RPCSingleParam(paramRaidDoorDZLBuilding.param1, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(new DZLHouse(paramRaidDoorDZLBuilding.param2)), true, sender);

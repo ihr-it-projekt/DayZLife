@@ -22,10 +22,10 @@ class DZLBankRaidListener : Managed
             autoptr Param1<PlayerBase> param;
             if (ctx.Read(param)){
 				DZLBank bank = new DZLBank;
-				if (!bank.raidRuns) {
+				if (!playerWhoStartedRaid) {
+					playerWhoStartedRaid = param.param1;
 					bank.StartRaid();
 					timeHappened = 0;
-					playerWhoStartedRaid = param.param1;
 					DZLSendMessage(null, "#bank_rob_was_started");
 			        raidTimer.Run(1, this, "Finish", null, true);
 				} else {
@@ -38,6 +38,7 @@ class DZLBankRaidListener : Managed
     void Finish() {
 		if (time > timeHappened) {
             if (!isInNearOfBankAndLocationIsEnabled()) {
+                playerWhoStartedRaid = null;
                 raidTimer.Stop();
                 DZLBank bank_cancel = new DZLBank;
                 bank_cancel.CancelRaid();
@@ -48,6 +49,7 @@ class DZLBankRaidListener : Managed
 		    timeHappened++;
 			return;
 		}
+
         raidTimer.Stop();
 		DZLBank bank = new DZLBank;
         bank.RaidIsFinished();
@@ -55,9 +57,9 @@ class DZLBankRaidListener : Managed
 
         int money = bank.PlayerRaidBank(new DZLPlayer(playerWhoStartedRaid.GetIdentity().GetId()), config.percentOfMoneyWhenRaid);
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
+		bank = new DZLBank;
         GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-        GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(playerWhoStartedRaid.GetIdentity().GetId())), true, playerWhoStartedRaid.GetIdentity());
-
+        playerWhoStartedRaid = null;
         array<Man> _players = new array<Man>;
         GetGame().GetPlayers(_players);
 

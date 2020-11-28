@@ -9,8 +9,14 @@
 - Orientation für Spawn Fahrzeuge
 - Autos verkaufen über Timer und wer auf Fahrer Sitz saß
 - Nach Erwerb der Ersten Lizenz wird bei der zweiten eine Abhängigkeit verlangt
+- bankraub zeiten einstellbar machen, mindest anzahl spieler für banckraub
+- telefon mod
+    - nur anrufen wenn bekannt
+    - blocken von spielern
+    -
 - Rollen
     - Rollen Klamoten
+    - Rollen Spieler Anzahl begrenzen pro Job
     - Actions
         - Gefängniss:
             - Tür Index von Zellen bestimmen
@@ -21,6 +27,7 @@
             - Befreien wie Raiden
             - Countdown für Zeit
         - Polizei
+            - Automatische Meldung an Polizei von Verbrechen
             - Gehalt
             - Strafzettel
                 - config Geld / länge Knast
@@ -36,6 +43,16 @@
             - Wiederbelebung dafür Geld
             - Preise Configurierbar
             - Gehalt
+
+        - Jäger
+            - Tiere jagen
+
+        - Richter
+            - verurteilen
+
+        - Wirt/Pub
+            -
+
 
 
 Text

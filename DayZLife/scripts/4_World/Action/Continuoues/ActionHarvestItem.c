@@ -92,10 +92,7 @@ class ActionHarvestItem: ActionContinuousBase
 	
 	override void OnUpdateServer(ActionData action_data) {
         if (action_data.m_State == UA_FINISHED && done == false) {
-            done = true;
-
             DZLWorkZone zone = FindZone(action_data.m_Player.GetPosition(), GetConfig());
-			
             if (zone) {
                 EntityAI item_in_hands_source = action_data.m_Player.GetHumanInventory().GetEntityInHands();
                 array<DZLHarvestItemToolRelation> matchedRelations = new array<DZLHarvestItemToolRelation>;
@@ -130,13 +127,17 @@ class ActionHarvestItem: ActionContinuousBase
                 InventoryLocation inventoryLocation = new InventoryLocation;
                 EntityAI item;
 
-                DZLSendMessage(action_data.m_Player.GetIdentity(), "#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType));
                 if (action_data.m_Player.GetInventory().FindFirstFreeLocationForNewEntity(randomItemType, FindInventoryLocationType.ANY, inventoryLocation)) {
                     item = action_data.m_Player.GetHumanInventory().CreateInInventory(randomItemType);
                 } else if (!action_data.m_Player.GetHumanInventory().GetEntityInHands()) {
                     item = action_data.m_Player.GetHumanInventory().CreateInHands(randomItemType);
                 } else {
                     DZLSendMessage(action_data.m_Player.GetIdentity(), "#no_space_left_in_inventory");
+                }
+
+                if (item) {
+                    DZLSendMessage(action_data.m_Player.GetIdentity(), "#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType));
+                    done = true;
                 }
 
                 if (item_in_hands_source) {
