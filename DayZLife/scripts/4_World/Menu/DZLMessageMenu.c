@@ -6,6 +6,12 @@ class DZLMessageMenu
 	private string messageText;
 	private Widget layoutRoot;
 
+
+    void ~DZLMessageMenu() {
+        if (layoutRoot) layoutRoot.Show(false);
+    }
+
+
     void Init() {
         creator = new DZLUIItemCreator("DayZLife/layout/DZL_Message.layout");
         message = creator.GetMultilineTextWidget("Announcements");
