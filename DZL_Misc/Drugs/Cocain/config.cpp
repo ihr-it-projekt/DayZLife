@@ -50,7 +50,7 @@ class CfgVehicles
 	{	
 		scope=2;
 		displayName="Cocain Brick";
-		descriptionShort="";
+		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";
@@ -71,7 +71,7 @@ class CfgVehicles
 	{	
 		scope=2;
 		displayName="Cocain";
-		descriptionShort="";
+		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";

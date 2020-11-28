@@ -37,7 +37,7 @@ class CfgVehicles
 	{	
 		scope=2;
 		displayName="Cannabis Brick";
-		descriptionShort="";
+		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";

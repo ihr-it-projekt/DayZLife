@@ -8,68 +8,70 @@ class DZLTraderCategoryCollection
             categories = new array<ref DZLTraderCategory>;
             array<ref DZLTraderType> items = new array<ref DZLTraderType>;
 
-			items.Insert(new DZLTraderType("Crowbar", 50, 500, new array<string>));
-			items.Insert(new DZLTraderType("Shovel", 50, 600, new array<string>));
-			items.Insert(new DZLTraderType("Pickaxe", 60, 1000, new array<string>));
-			items.Insert(new DZLTraderType("SledgeHammer", 120, 2000, new array<string>));
-			items.Insert(new DZLTraderType("WoodAxe", 80, 1000, new array<string>));
-			items.Insert(new DZLTraderType("FirefighterAxe", 200, 500, new array<string>));
-			items.Insert(new DZLTraderType("LugWrench", 10, 40, new array<string>));
-			items.Insert(new DZLTraderType("Screwdriver", 30, 250, new array<string>));
-			items.Insert(new DZLTraderType("Wrench", 10, 40, new array<string>));
-			items.Insert(new DZLTraderType("Pliers", 20, 140, new array<string>));
-			items.Insert(new DZLTraderType("Hammer", 130, 1400, new array<string>));
-			items.Insert(new DZLTraderType("Hacksaw", 130, 1400, new array<string>));
-			items.Insert(new DZLTraderType("HandSaw", 130, 1400, new array<string>));
-			items.Insert(new DZLTraderType("Hatchet", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("Crowbar", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Shovel", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Pickaxe", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("SledgeHammer", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("WoodAxe", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("FirefighterAxe", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("LugWrench", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Screwdriver", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Wrench", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Pliers", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Hammer", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Hacksaw", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("HandSaw", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("Hatchet", 10, 200, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Sandpaper", 10, 50, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Color", 10, 50, new array<string>));
 			categories.Insert(new DZLTraderCategory("Tools", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Stone", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Cement", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Stone", 5, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Cement", 30, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Cement and Stone Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Ore_Coal", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Ore_Coal", 40, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Coal Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Ore_Copper", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Copper", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Ore_Copper", 45, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Copper", 200, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Copper Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Ore_Iron", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Iron", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Ore_Iron", 60, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Iron", 350, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Iron Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Ore_Gold", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Gold", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Ore_Gold", 80, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Gold", 600, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Gold Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Ore_Diamond", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Diamond", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Ore_Diamond", 120, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Diamond", 1000, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Diamond Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Jewelry", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Jewelry", 3500, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Jewelry Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_WoodenLog", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_WoodenPlank", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Paper", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_WoodenLog", 55, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_WoodenPlank", 70, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Paper", 60, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Paper and Wood Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Money", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Money", 8000, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Money Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
-			items.Insert(new DZLTraderType("DZL_Cannabis", 130, 1600, new array<string>));
-			items.Insert(new DZLTraderType("DZL_Coacain", 130, 1600, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Cannabis", 10000, 50000, new array<string>));
+			items.Insert(new DZLTraderType("DZL_Coacain", 10000, 50000, new array<string>));
 			categories.Insert(new DZLTraderCategory("Drug Dealer", items));
 			
 			items = new array<ref DZLTraderType>;
@@ -83,6 +85,7 @@ class DZLTraderCategoryCollection
 			categories.Insert(new DZLTraderCategory("Food", items));
 			
 			items = new array<ref DZLTraderType>;
+			items.Insert(new DZLTraderType("Apple", 10, 60, new array<string>));
 			items.Insert(new DZLTraderType("ChickenBreastMeat", 30, 100, new array<string>));
 			items.Insert(new DZLTraderType("GoatSteakMeat", 30, 40, new array<string>));
 			items.Insert(new DZLTraderType("SheepSteakMeat", 30, 40, new array<string>));
@@ -188,6 +191,30 @@ class DZLTraderCategoryCollection
 			categories.Insert(new DZLTraderCategory("Ammo", items));
 			
 			items = new array<ref DZLTraderType>;
+			items.Insert(new DZLTraderType("M65Jacket_Black", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("M65Jacket_Khaki", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("M65Jacket_Olive", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("M65Jacket_Tan", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("CargoPants_Beige", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("CargoPants_Black", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("CargoPants_Blue", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("CargoPants_Green", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("CargoPants_Grey", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("MountainBag_Blue", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("MountainBag_Green", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("MountainBag_Orange", 30, 100, new array<string>));
+			items.Insert(new DZLTraderType("MountainBag_Red", 30, 100, new array<string>));
+			categories.Insert(new DZLTraderCategory("Clothing", items));
+			
+			items = new array<ref DZLTraderType>;
+			items.Insert(new DZLTraderType("TetracyclineAntibiotics", 2, 5, new array<string>));
+			items.Insert(new DZLTraderType("CharcoalTablets", 2, 5, new array<string>));
+			items.Insert(new DZLTraderType("PainkillerTablets", 2, 5, new array<string>));
+			items.Insert(new DZLTraderType("Splint", 2, 5, new array<string>));
+			items.Insert(new DZLTraderType("BandageDressing", 2, 5, new array<string>));
+			categories.Insert(new DZLTraderCategory("Medic", items));
+			
+			items = new array<ref DZLTraderType>;
 			attachments = new array<string>;
 			attachments.Insert("HatchbackDoors_CoDriver");
 			attachments.Insert("HatchbackDoors_Driver");
@@ -222,6 +249,24 @@ class DZLTraderCategoryCollection
 			attachments.Insert("HeadlightH7");
 			attachments.Insert("HeadlightH7");
             items.Insert(new DZLTraderType("Hatchback_02", 20000, 50000, attachments, false, true));
+			categories.Insert(new DZLTraderCategory("Cars", items));
+			
+			attachments = new array<string>;
+			attachments.Insert("Truck_01_Wheel");
+			attachments.Insert("Truck_01_Wheel");
+			attachments.Insert("Truck_01_Wheel");
+			attachments.Insert("Truck_01_Wheel");
+			attachments.Insert("Truck_01_WheelDouble");
+			attachments.Insert("Truck_01_WheelDouble");
+			attachments.Insert("Truck_01_WheelDouble");
+			attachments.Insert("Truck_01_WheelDouble");
+			attachments.Insert("Truck_01_Hood");
+			attachments.Insert("Truck_01_Door_1_1");
+			attachments.Insert("Truck_01_Door_2_1");
+			attachments.Insert("TruckBattery");
+			attachments.Insert("HeadlightH7");
+			attachments.Insert("HeadlightH7");
+            items.Insert(new DZLTraderType("Truck_01_Covered", 45000, 50000, attachments, false, true));
 			categories.Insert(new DZLTraderCategory("Cars", items));
             
             Save();

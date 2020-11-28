@@ -7,7 +7,7 @@ class DZLBankingConfig
     int percentOfMoneyWhenRaid = 50;
 	int raidCoolDownTimeInSeconds = 60;
 	int maximumRaidDistanceToBank = 5;
-	int startCapital = 1000;
+	int startCapital = 50000;
 	string version = "1";
 
     void DZLBankingConfig() {
@@ -30,6 +30,9 @@ class DZLBankingConfig
                 itemsCanUsedToRaidBank.Insert("M4A1");
             } else {
                 //TODO normal base config add
+				positionOfBankingPoints.Insert(new DZLBankingPosition("6570.417969 6.000000 2449.841309", "-56 0 0", "SurvivorM_Rolf", attachments));
+
+                itemsCanUsedToRaidBank.Insert("M4A1");
             }
 
             Save();

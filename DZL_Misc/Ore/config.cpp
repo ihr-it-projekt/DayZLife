@@ -88,7 +88,7 @@ class CfgVehicles
 	{
 		scope=2;
 		displayName="Diamond";
-		descriptionShort="";
+		descriptionShort="Model Platzhalter!";
 		model="\DZL_Misc\Ore\Diamond\DZL_Ore_Diamond.p3d";
 		weight=4000;
 		itemSize[]={2,2};

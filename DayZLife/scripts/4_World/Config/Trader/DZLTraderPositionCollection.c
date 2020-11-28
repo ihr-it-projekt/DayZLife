@@ -122,6 +122,24 @@ class DZLTraderPositionCollection
                 catNames.Insert("Drinks");
 				positions.Insert(new DZLTraderPosition("14298.921875 3.697711 13301.237305", "170 0 0", "SurvivorM_Taiki", attachments, catNames, "0 0 0"));
                 
+				attachments = new array<string>;
+				catNames = new array<string>;
+				attachments.Insert("ManSuit_Black");
+                attachments.Insert("SlacksPants_Black");
+                attachments.Insert("ThickFramesGlasses");
+                attachments.Insert("DressShoes_Black");
+                catNames.Insert("Clothing");
+                catNames.Insert("Medic");
+                catNames.Insert("Tools");
+                catNames.Insert("Food");
+                catNames.Insert("Meat");
+                catNames.Insert("Drinks");
+                catNames.Insert("Weapons");
+                catNames.Insert("Magazines");
+                catNames.Insert("Ammo");
+                catNames.Insert("Cars");
+				positions.Insert(new DZLTraderPosition("6573.415527 5.991199 2453.483154", "-25 0 0", "SurvivorM_Rolf", attachments, catNames, "6577.331543 6.198332 2469.446777"));
+                
             }
             Save();
         }
