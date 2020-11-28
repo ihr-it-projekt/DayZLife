@@ -71,7 +71,7 @@ class CfgVehicles
 	class DZL_Money: Paper
 	{
 		scope=2;
-		displayName="Falschgeld";
+		displayName="#Counterfeit_money";
 		descriptionShort="$STR_CfgVehicles_Paper1";
 		model="\dz\gear\consumables\Paper.p3d";
 		isMeleeWeapon=1;
@@ -89,7 +89,7 @@ class CfgVehicles
 	class DZL_Sandpaper: Paper
 	{
 		scope=2;
-		displayName="Sandpaper";
+		displayName="#Sandpaper";
 		descriptionShort="";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;
@@ -115,7 +115,7 @@ class CfgVehicles
 	class DZL_Cement: Paper
 	{
 		scope=2;
-		displayName="Cement";
+		displayName="#Cement";
 		descriptionShort="$STR_CfgVehicles_Paper1";
 		model="\dz\gear\consumables\Paper.p3d";
 		isMeleeWeapon=1;
@@ -148,7 +148,7 @@ class CfgVehicles
 	class DZL_Jewelry: SmallStone
 	{
 		scope=2;
-		displayName="Jewelry";
+		displayName="#Jewelry";
 		descriptionShort="$STR_CfgVehicles_SmallStone1";
 		model="\dz\gear\consumables\SmallStone.p3d";
 		animClass="NoFireClass";
@@ -159,7 +159,7 @@ class CfgVehicles
 	class DZL_Copper: SmallStone
 	{
 		scope=2;
-		displayName="Copper";
+		displayName="#Copper";
 		descriptionShort="$STR_CfgVehicles_SmallStone1";
 		model="\dz\gear\consumables\SmallStone.p3d";
 		animClass="NoFireClass";
@@ -170,7 +170,7 @@ class CfgVehicles
 	class DZL_Iron: SmallStone
 	{
 		scope=2;
-		displayName="Iron";
+		displayName="#Iron";
 		descriptionShort="$STR_CfgVehicles_SmallStone1";
 		model="\dz\gear\consumables\SmallStone.p3d";
 		animClass="NoFireClass";
@@ -181,7 +181,7 @@ class CfgVehicles
 	class DZL_Gold: SmallStone
 	{
 		scope=2;
-		displayName="Gold";
+		displayName="#Gold";
 		descriptionShort="$STR_CfgVehicles_SmallStone1";
 		model="\dz\gear\consumables\SmallStone.p3d";
 		animClass="NoFireClass";
@@ -192,7 +192,7 @@ class CfgVehicles
 	class DZL_Diamond: SmallStone
 	{
 		scope=2;
-		displayName="Diamond";
+		displayName="#Diamond";
 		descriptionShort="$STR_CfgVehicles_SmallStone1";
 		model="\dz\gear\consumables\SmallStone.p3d";
 		animClass="NoFireClass";
@@ -203,7 +203,7 @@ class CfgVehicles
 	class DZL_Color: Spraycan_Black
 	{
 		scope=2;
-		displayName="Farbe";
+		displayName="#Color";
 		descriptionShort="$STR_CfgVehicles_Spraycan_Black0";
 		color="Black";
 		hiddenSelectionsTextures[]=
@@ -217,7 +217,7 @@ class CfgVehicles
 	class DZL_Bucket: Pot
 	{
 		scope=1;
-		displayName="Bucket";
+		displayName="#Bucket";
 		descriptionShort="Bucket";
 		model="\DZ\structures\furniture\decoration\bucket\bucket.p3d";
 		weight=1000;
@@ -240,4 +240,3 @@ class CfgVehicles
 		itemsCargoSize[]={10,10};
 	};
 };
-	
