@@ -71,13 +71,8 @@ class CfgVehicles
 	class DZL_Money: Paper
 	{
 		scope=2;
-<<<<<<< HEAD
-		displayName="Falschgeld";
-		descriptionShort="Model Platzhalter!";
-=======
 		displayName="#Counterfeit_money";
-		descriptionShort="$STR_CfgVehicles_Paper1";
->>>>>>> 03704d32faa8a651ae333d7a352bbe3e05e103aa
+		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\consumables\Paper.p3d";
 		isMeleeWeapon=1;
 		weight=2;
@@ -120,13 +115,8 @@ class CfgVehicles
 	class DZL_Cement: Paper
 	{
 		scope=2;
-<<<<<<< HEAD
-		displayName="Cement";
-		descriptionShort="Model Platzhalter!";
-=======
 		displayName="#Cement";
-		descriptionShort="$STR_CfgVehicles_Paper1";
->>>>>>> 03704d32faa8a651ae333d7a352bbe3e05e103aa
+		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\consumables\Paper.p3d";
 		isMeleeWeapon=1;
 		weight=2;
@@ -158,57 +148,8 @@ class CfgVehicles
 	class DZL_Jewelry: SmallStone
 	{
 		scope=2;
-<<<<<<< HEAD
-		displayName="Jewelry";
-		descriptionShort="Model Platzhalter!";
-=======
 		displayName="#Jewelry";
-		descriptionShort="$STR_CfgVehicles_SmallStone1";
-		model="\dz\gear\consumables\SmallStone.p3d";
-		animClass="NoFireClass";
-		weight=500;
-		itemSize[]={1,1};
-		rotationFlags=17;
-	};
-	class DZL_Copper: SmallStone
-	{
-		scope=2;
-		displayName="#Copper";
-		descriptionShort="$STR_CfgVehicles_SmallStone1";
-		model="\dz\gear\consumables\SmallStone.p3d";
-		animClass="NoFireClass";
-		weight=500;
-		itemSize[]={1,1};
-		rotationFlags=17;
-	};
-	class DZL_Iron: SmallStone
-	{
-		scope=2;
-		displayName="#Iron";
-		descriptionShort="$STR_CfgVehicles_SmallStone1";
-		model="\dz\gear\consumables\SmallStone.p3d";
-		animClass="NoFireClass";
-		weight=500;
-		itemSize[]={1,1};
-		rotationFlags=17;
-	};
-	class DZL_Gold: SmallStone
-	{
-		scope=2;
-		displayName="#Gold";
-		descriptionShort="$STR_CfgVehicles_SmallStone1";
-		model="\dz\gear\consumables\SmallStone.p3d";
-		animClass="NoFireClass";
-		weight=500;
-		itemSize[]={1,1};
-		rotationFlags=17;
-	};
-	class DZL_Diamond: SmallStone
-	{
-		scope=2;
-		displayName="#Diamond";
-		descriptionShort="$STR_CfgVehicles_SmallStone1";
->>>>>>> 03704d32faa8a651ae333d7a352bbe3e05e103aa
+		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\consumables\SmallStone.p3d";
 		animClass="NoFireClass";
 		weight=500;
