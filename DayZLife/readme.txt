@@ -3,8 +3,12 @@
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health / quantity
 - nicht füttern von NPC
+- Almanach was für was.
+- Waffen für NPC
 - paywall
-- Nach Erwerb der Esten Lizenz wird bei der zweiten eine Abhängigkeit verlangt
+- Orientation für Spawn Fahrzeuge
+- Autos verkaufen über Timer und wer auf Fahrer Sitz saß
+- Nach Erwerb der Ersten Lizenz wird bei der zweiten eine Abhängigkeit verlangt
 - Rollen
     - Rollen Klamoten
     - Actions

@@ -81,7 +81,7 @@ class CfgVehicles
 	};
 	class DZL_Wooden_Crate_1: DZL_Crate_Base
 	{
-		displayName="1er Holzkiste";
+		displayName="#1_wood_grate";
 		descriptionShort=".";
 		model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate.p3d";
 		class Cargo
@@ -93,7 +93,7 @@ class CfgVehicles
 	};
 	class DZL_Wooden_Crate_3: DZL_Crate_Base
 	{
-		displayName="3er Holzkisten";
+		displayName="#3_wood_grate";
 		descriptionShort=".";
 		model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate_3x.p3d";
 		class Cargo
@@ -105,7 +105,7 @@ class CfgVehicles
 	};
 	class DZL_Wooden_Crate_5: DZL_Crate_Base
 	{
-		displayName="5er Holzkisten";
+		displayName="#5_wood_grate";
 		descriptionShort=".";
 		model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate_5x.p3d";
 		class Cargo
