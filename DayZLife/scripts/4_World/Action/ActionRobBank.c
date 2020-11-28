@@ -29,10 +29,11 @@ class ActionRobBank: ActionInteractBase
 	{
 		if (GetGame().IsClient()) {
 		    if (!player.config) return false;
-
 			config = player.config.bankConfig;
 		} else {
 			GetConfig();
+			DZLBank bank = new DZLBank;
+			if (bank.raidRuns) return false;
 		}
 		
 		if (config) {
@@ -52,6 +53,8 @@ class ActionRobBank: ActionInteractBase
 
 			if(!hasItem) return false;
 			if(!isInNearOfBankAndLocationIsEnabled(player)) return false;
+
+
 
 			return other_player.IsDZLBank;
 		}
