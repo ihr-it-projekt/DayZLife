@@ -123,7 +123,7 @@ FrameWidgetClass Trader_Menu {
               TextWidgetClass previewtext {
                ignorepointer 1
                position 0 0.0387
-               size 0.96882 0.232
+               size 0.9688 0.232
                halign center_ref
                valign bottom_ref
                hexactpos 0
@@ -211,14 +211,14 @@ FrameWidgetClass Trader_Menu {
         TextListboxWidgetClass Trader_Item_list {
          color 0.502 0 0 1
          position 0.00529 0.09896
-         size 0.32942 0.80007
+         size 0.3294 0.4885
          halign right_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "# Item;50;#Buy;25;#Sell;25"
+         colums "#Item;50;#Buy;25;#Sell;25"
          lines 25
         }
         PanelWidgetClass PanelWidget5 {
@@ -312,7 +312,7 @@ FrameWidgetClass Trader_Menu {
            {
             TextWidgetClass Balance {
              ignorepointer 1
-             position 0 0
+             position 0.02 0
              size 0.4 0.95
              valign center_ref
              hexactpos 0
@@ -353,6 +353,31 @@ FrameWidgetClass Trader_Menu {
              "text valign" center
             }
            }
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget12 {
+         ignorepointer 1
+         position 0 0.08658
+         size 0.3413 0.31499
+         halign right_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          MultilineTextWidgetClass discription {
+           ignorepointer 1
+           position 0 0
+           size 0.969 0.9304
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
           }
          }
         }

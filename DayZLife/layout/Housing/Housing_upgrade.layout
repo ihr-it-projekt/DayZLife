@@ -96,14 +96,39 @@ FrameWidgetClass Housing_Upgrade {
          {
           ItemPreviewWidgetClass Preview {
            ignorepointer 1
-           position 0.00003 0
-           size 0.946 0.60124
+           position 0.00003 -0.21203
+           size 0.946 0.54201
            halign center_ref
            valign center_ref
            hexactpos 0
            vexactpos 0
            hexactsize 0
            vexactsize 0
+          }
+          PanelWidgetClass PanelWidget8 {
+           ignorepointer 1
+           position 0 0.00141
+           size 1 0.4227
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            MultilineTextWidgetClass discription {
+             ignorepointer 1
+             position -0 0
+             size 0.94594 0.91974
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+            }
+           }
           }
          }
         }
@@ -228,8 +253,8 @@ FrameWidgetClass Housing_Upgrade {
          }
         }
         TextListboxWidgetClass Sell_Storage_List {
-         position 0 0.10644
-         size 0.9695 0.54661
+         position 0 0.05388
+         size 0.9695 0.65173
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -318,47 +343,6 @@ FrameWidgetClass Housing_Upgrade {
            vexactsize 0
            style Bold
            text "#Sell_Price"
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget15 {
-         ignorepointer 1
-         position 0 0.2097
-         size 1 0.1079
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass Number_of_Storage {
-           ignorepointer 1
-           position 0.0155 0
-           size 0.477 0.71208
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Bold
-           text "250"
-           "text halign" right
-           "text valign" center
-          }
-          TextWidgetClass Storage {
-           ignorepointer 1
-           position 0.01525 0
-           size 0.477 0.71208
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Bold
-           text "#Storage_Size"
            "text valign" center
           }
          }
