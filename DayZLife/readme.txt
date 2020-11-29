@@ -1,9 +1,25 @@
+- Almanach was für was.
+    - Licesns (Verarbeitung)
+        - Name
+        - Map
+        - Abhängikeiten
+        - craftedItem
+        - durationForCrafting
+        - toolItems
+        - craftItems
+    -  Workzone (Abbauen)
+        - Map
+        - Was wird da abgebaut
+        - Was für Werkzeuge
+
+
+- Alarmanlage
+-
 - action player to player money transfer... .
 - bank deaktivierbar machen
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health / quantity
 - nicht füttern von NPC
-- Almanach was für was.
 - Waffen für NPC
 - paywall
 - Orientation für Spawn Fahrzeuge
@@ -47,12 +63,29 @@
         - Jäger
             - Tiere jagen
 
+        - Schneide
+            - Kleideung herstellen
+            - Stofer
+
+        - Schuster
+            - Stiefel
+            - Schuhe
+
+        - Farmrer
+            - Baumwollen
+            - Hanf
+
         - Richter
             - verurteilen
 
         - Wirt/Pub
             -
 
+        - Bürgermeister
+         - Wahlen
+         - Gesetzes verabschieden
+         - Löhne steuern
+         - Steuern bezahlen
 
 
 Text

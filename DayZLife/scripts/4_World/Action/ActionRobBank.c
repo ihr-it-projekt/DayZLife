@@ -33,7 +33,10 @@ class ActionRobBank: ActionInteractBase
 		} else {
 			GetConfig();
 			DZLBank bank = new DZLBank;
-			if (bank.raidRuns) return false;
+			if (bank.raidRuns) {
+			    DZLSendMessage(sender, "#raid_allready_started");
+			    return false;
+			}
 		}
 		
 		if (config) {
@@ -53,8 +56,6 @@ class ActionRobBank: ActionInteractBase
 
 			if(!hasItem) return false;
 			if(!isInNearOfBankAndLocationIsEnabled(player)) return false;
-
-
 
 			return other_player.IsDZLBank;
 		}
