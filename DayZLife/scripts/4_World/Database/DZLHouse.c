@@ -6,6 +6,7 @@ class DZLHouse {
 	vector position;
 	vector orientation;
 	ref array<ref DZLStorageTypeBought> storage;
+	ref DZLHouseAlarm alarmSystem;
 	ref array<int> storagePositions;
 	int raidTime = 3;
 	ref array<int> lockedDoors;
@@ -44,6 +45,7 @@ class DZLHouse {
 	void RemoveOwner() {
 		owner = "";
 		this.lockedDoors = new array<int>;
+		alarmSystem = null;
 		Save();
 	}
 	
@@ -122,7 +124,20 @@ class DZLHouse {
 	bool CanRaidDoor(PlayerBase player, int index) {
 		return IsDoorLooked(index) && !IsOwner(player);
 	}
-
+	
+	bool HasAlarmSystem() {
+		return !!alarmSystem;
+	}
+	
+	DZLHouseAlarm GetHouseAlarm() {
+		return alarmSystem;
+	}
+	
+	void SetHouseAlarm(DZLHouseAlarm houseAlarm) {
+		alarmSystem = houseAlarm;
+		Save();
+	}
+	
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName)) {
 			JsonFileLoader<DZLHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);

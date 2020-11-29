@@ -1,12 +1,8 @@
-class DZLStorageType
+class DZLStorageType : DZLHouseExtension
 {
-    string type;
-    int price;
-    int space;
-
-    void DZLStorageType(string type, int price, int space) {
+    void DZLStorageType(string type, string description, int price) {
         this.type = type;
+        this.description = description;
         this.price = price;
-        this.space = space;
     }
 }

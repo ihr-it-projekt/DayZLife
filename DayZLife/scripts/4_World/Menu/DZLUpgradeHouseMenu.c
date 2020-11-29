@@ -28,12 +28,11 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	        super.OnShow();
 	        priceBuyTextWidget.SetText("");
             priceSellTextWidget.SetText("");
-            storageTextWidget.SetText("");
 
             if (config) {
-				array<ref DZLStorageType> storageTypes = config.GetStorageTypes();
-                foreach(DZLStorageType storageType: storageTypes) {
-                    storageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageType.type), storageType, 0);
+				array<ref DZLHouseExtension> extensions = config.GetExtensions();
+                foreach(DZLHouseExtension extension: extensions) {
+                    storageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(extension.type), extension, 0);
                 }
             }
 
@@ -55,7 +54,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 
 				if (-1 == itemPos) return true;
 
-				DZLStorageType currentItem;
+				DZLHouseExtension currentItem;
 				storageListTextWidget.GetItemData(itemPos, 0, currentItem);
 			
 				if (!currentItem) return true;
@@ -71,9 +70,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				int sellPrice =  buyPrice / 2;
 
 				priceSellTextWidget.SetText(sellPrice.ToString());
-			
-				storageTextWidget.SetText(currentItem.space.ToString());
-				
+							
 				sellButton.Show(false);
 				buyButton.Show(actualHouseDef.GetMaxStorage() > house.GetStorage().Count());
 				
@@ -98,7 +95,6 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 			
 				priceBuyTextWidget.SetText(currentItemSell.paidPrice.ToString());
 				priceSellTextWidget.SetText(currentItemSell.sellPrice.ToString());
-				storageTextWidget.SetText(currentItemSell.storageType.space.ToString());
 			
 				buyButton.Show(false);
 				sellButton.Show(true);

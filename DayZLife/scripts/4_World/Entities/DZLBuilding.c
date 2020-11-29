@@ -43,6 +43,20 @@ class DZLBuilding {
 		}
 	}
 	
+	bool HasAlarmSystem() {
+		return house.HasAlarmSystem();
+	}
+	
+	DZLHouseAlarm GetHouseAlarm() {
+		return house.alarmSystem;
+	}
+	
+	void SetHouseAlarm(DZLHouseAlarm houseAlarm) {
+		if(!GetGame().IsClient()){
+			house.SetHouseAlarm(houseAlarm);
+		}
+	}
+	
 	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
 		return house.GetNextFreeStoragePosition(definition);
 	}

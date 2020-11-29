@@ -1,6 +1,7 @@
 class DZLBuyHouseMenu : DZLBaseHouseMenu
 {
 	private MapWidget mapWidget;
+	private TextWidget storageTextWidget;
 
 	void DZLBuyHouseMenu(){
 	    layoutPath = "DayZLife/layout/Housing/Housing.layout";
@@ -14,6 +15,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 	override Widget Init(){
         super.Init();
 		mapWidget = creator.GetMapWidget("Map");
+		storageTextWidget = creator.GetTextWidget("Number_of_Storage");
 
 	    return layoutRoot;
     }

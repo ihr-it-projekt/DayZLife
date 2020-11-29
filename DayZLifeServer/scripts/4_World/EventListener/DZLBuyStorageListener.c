@@ -25,29 +25,36 @@ class DZLBuyStorageListener
 				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param2);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param2);
 
-				DZLStorageType storageType;
-				array<ref DZLStorageType> storageTypes = config.GetStorageTypes();
-				foreach(DZLStorageType _storageType: storageTypes) {
-					if (_storageType.type == paramBuyStorage.param3.type) {
-						storageType = _storageType;
+				DZLHouseExtension extension;
+				array<ref DZLHouseExtension> extensions = config.GetExtensions();
+				foreach(DZLHouseExtension _extension: extensions) {
+					if (_extension.type == paramBuyStorage.param3.type) {
+						extension = _extension;
 						break;
 					}
 				}
 			
-				if (storageType) {
+				if (extension) {
+					DZLStorageType storage = DZLStorageType.Cast(extension);
+					
 	                string message = "#error_buying_storage";
-					int buyPriceBuy =  storageType.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
+					
+					int buyPriceBuy =  storage.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
+					
 					vector posToSpawnRelavtiv = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
 					
 					bool canNotSpawn = posToSpawnRelavtiv == "0 0 0";
 					
 	                if (!canNotSpawn && actualHouseDef.GetMaxStorage() > dzlBuilding.GetStorage().Count() && inventory.PlayerHasEnoughMoney(paramBuyStorage.param1, buyPriceBuy) && dzlBuilding.IsOwner(paramBuyStorage.param1)) {
 	                   vector posToSpawn = paramBuyStorage.param2.ModelToWorld(posToSpawnRelavtiv);
-						bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), storageType.type);
+						bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), storage.type);
 						
 						if (hasSpawned) {
 							inventory.AddMoneyToPlayer(paramBuyStorage.param1, buyPriceBuy * -1);
-							dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(storageType, posToSpawn, buyPriceBuy, posToSpawnRelavtiv));
+							
+							
+							dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(storage, posToSpawn, buyPriceBuy, posToSpawnRelavtiv));
+							
 							message = "#successfully_buy_storage";
 						}
 

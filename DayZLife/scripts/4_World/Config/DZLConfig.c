@@ -1,7 +1,7 @@
 class DZLConfig
 {
     ref DZLHouseConfig houseConfig;
-    ref DZLStorageTypes storageTypes;
+    ref DZLHouseExtensions houseExtensions;
 	ref DZLBankingConfig bankConfig;
 	ref DZLJobConfig jobConfig;
 	ref DZLLicenceConfig licenceConfig;
@@ -9,7 +9,7 @@ class DZLConfig
 
     void DZLConfig() {
         houseConfig = new DZLHouseConfig;
-        storageTypes = new DZLStorageTypes;
+        houseExtensions = new DZLHouseExtensions;
         bankConfig = new DZLBankingConfig;
         jobConfig = new DZLJobConfig;
 		licenceConfig = new DZLLicenceConfig;
@@ -20,8 +20,8 @@ class DZLConfig
 		return houseConfig.houseConfigs;
 	}
 
-	ref array<ref DZLStorageType> GetStorageTypes() {
-		return storageTypes.storageTypes;
+	ref array<ref DZLHouseExtension> GetExtensions() {
+		return houseExtensions.extensions;
 	}
 	
 	

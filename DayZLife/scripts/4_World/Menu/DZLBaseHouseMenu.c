@@ -10,7 +10,6 @@ class DZLBaseHouseMenu: DZLBaseMenu
     protected TextWidget priceBuyTextWidget;
     protected TextWidget priceSellTextWidget;
     protected TextWidget balanceTextWidget;
-    protected TextWidget storageTextWidget;
 
     override protected void Construct() {
         super.Construct();
@@ -56,8 +55,6 @@ class DZLBaseHouseMenu: DZLBaseMenu
         priceSellTextWidget = creator.GetTextWidget("Price_Sell");
         balanceTextWidget = creator.GetTextWidget("Balance");
         
-        storageTextWidget = creator.GetTextWidget("Number_of_Storage");
-
         return layoutRoot;
     }
 	
