@@ -6,7 +6,6 @@ class ActionHarvestItemCB : ActionContinuousBaseCB
 class ActionHarvestItem: ActionContinuousBase
 {
     ref DZLJobConfig config;
-    bool done = false;
 
     DZLJobConfig GetConfig() {
         if (!config) {
@@ -22,7 +21,6 @@ class ActionHarvestItem: ActionContinuousBase
 		m_FullBody = true;
 		m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
 		m_SpecialtyWeight = UASoftSkillsWeight.PRECISE_LOW;
-		done = false;
 	}
 
 	override void Start(ActionData action_data) {
@@ -40,7 +38,6 @@ class ActionHarvestItem: ActionContinuousBase
 	override void CreateConditionComponents() {
 		m_ConditionTarget = new CCTNone;
 		m_ConditionItem = new CCINonRuined;
-		done = false;
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
@@ -91,7 +88,7 @@ class ActionHarvestItem: ActionContinuousBase
 	}
 	
 	override void OnUpdateServer(ActionData action_data) {
-        if (action_data.m_State == UA_FINISHED && done == false) {
+        if (action_data.m_State == UA_FINISHED && action_data.m_Player.isOnHarvest == true) {
             DZLWorkZone zone = FindZone(action_data.m_Player.GetPosition(), GetConfig());
             if (zone) {
                 EntityAI item_in_hands_source = action_data.m_Player.GetHumanInventory().GetEntityInHands();
@@ -137,24 +134,22 @@ class ActionHarvestItem: ActionContinuousBase
 
                 if (item) {
                     DZLSendMessage(action_data.m_Player.GetIdentity(), "#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType));
-                    done = true;
+                    action_data.m_Player.isOnHarvest = false;
                 }
 
                 if (item_in_hands_source) {
                     item_in_hands_source.SetHealth(item_in_hands_source.GetHealth() - zone.damagePerHarvestItem);
                 }
             }
-
-        } else if ((action_data.m_State == UA_CANCEL || action_data.m_State == UA_INTERRUPT || action_data.m_State == UA_FAILED) && done == false) {
-            done = true;
+        } else if ((action_data.m_State == UA_CANCEL || action_data.m_State == UA_INTERRUPT || action_data.m_State == UA_FAILED) && action_data.m_Player.isOnHarvest == true) {
+            action_data.m_Player.isOnHarvest = false;
         }
         super.OnUpdateServer(action_data);
 	}
 
 	override void OnStartServer(ActionData action_data) {
-	    done = false;
+	    action_data.m_Player.isOnHarvest = true;
 	}
-
 
 	private DZLWorkZone FindZone(vector playerPosition, DZLJobConfig config) {
 	    if (!playerPosition) {

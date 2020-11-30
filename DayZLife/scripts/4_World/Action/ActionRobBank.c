@@ -34,7 +34,7 @@ class ActionRobBank: ActionInteractBase
 			GetConfig();
 			DZLBank bank = new DZLBank;
 			if (bank.raidRuns) {
-			    DZLSendMessage(sender, "#raid_allready_started");
+			    DZLSendMessage(player.GetIdentity(), "#raid_allready_started");
 			    return false;
 			}
 		}
