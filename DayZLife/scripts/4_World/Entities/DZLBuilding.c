@@ -52,6 +52,7 @@ class DZLBuilding {
 	}
 
 	bool CanBuyAlarm(DZLHouseAlarm alarm) {
+	    DebugMessageDZL("Alarm" + alarm.level);
         if (house.HasAlarmSystem() && alarm.level == house.GetHouseAlarm().level + 1){
             return true;
         } else if (!house.HasAlarmSystem() && alarm.level == 1){

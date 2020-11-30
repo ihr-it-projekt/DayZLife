@@ -170,8 +170,11 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                 string name = "";
                 if (extension.isStorage) {
                     name = DZLDisplayHelper.GetItemDisplayName(extension.type);
-                } else if(extension.isHouseAlarm && house.CanBuyAlarm(DZLHouseAlarm.Cast(extension))) {
-                    name = extension.type;
+                } else if(extension.isHouseAlarm) {
+                    DZLHouseAlarm alarm = DZLHouseAlarm.Cast(extension);
+                    if (alarm && house.CanBuyAlarm(alarm)) {
+                        name = extension.type;
+                    }
                 }
 
                 if (name) {
