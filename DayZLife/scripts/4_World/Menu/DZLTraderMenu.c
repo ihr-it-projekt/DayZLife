@@ -9,12 +9,15 @@ class DZLTraderMenu: DZLBaseMenu
 	private XComboBoxWidget itemCategory;
 	private ButtonWidget tradeButton;
 	private TextWidget credits;
-	private TextWidget hintPreview;
 	private ItemPreviewWidget preview;
 	private DZLTraderPosition position;
 	private EntityAI previewItem;
-	
-	
+
+	private int lastSelectedInventory;
+	private int lastSelectedSellCard;
+	private int lastSelectedBuyCard;
+	private int lastSelectedTraderItemList;
+
 	private ref map<string, ref array<ref DZLTraderType>> displayCategories;
 	private ref array<string> addedCats;
 	
@@ -27,6 +30,9 @@ class DZLTraderMenu: DZLBaseMenu
     }
 
     void ~DZLTraderMenu() {
+        if (previewItem){
+            GetGame().ObjectDelete(previewItem);
+        }
         Destruct();
     }
 
@@ -45,7 +51,6 @@ class DZLTraderMenu: DZLBaseMenu
 		tradeButton = creator.GetButtonWidget("Button_Buy");
 
 		credits = creator.GetTextWidget("Cedits");
-		hintPreview = creator.GetTextWidget("previewtext");
 
 		preview = creator.GetItemPreviewWidget("previewItem");
 
@@ -168,6 +173,28 @@ class DZLTraderMenu: DZLBaseMenu
 			hasAddFirstCategory = true;
 		}
 	}
+
+	override void Update(float timeslice) {
+	    super.Update(timeslice);
+        int currentSelectedInventory = inventory.GetSelectedRow();
+        int currentSelectedSellCard = sellCard.GetSelectedRow();
+        int currentSelectedBuyCard = buyCard.GetSelectedRow();
+        int currentSelectedTraderItemList = traderItemList.GetSelectedRow();
+
+        if (currentSelectedInventory != lastSelectedInventory) {
+            UpdaterPreviewByEntityAI(inventory);
+            lastSelectedInventory = currentSelectedInventory;
+        } else if (currentSelectedSellCard != lastSelectedSellCard) {
+            UpdaterPreviewByEntityAI(sellCard);
+            lastSelectedSellCard = currentSelectedSellCard;
+        } else if (currentSelectedTraderItemList != lastSelectedTraderItemList) {
+            UpdaterPreviewType(traderItemList);
+            lastSelectedTraderItemList = currentSelectedTraderItemList;
+        } else if (currentSelectedBuyCard != lastSelectedBuyCard) {
+            UpdaterPreviewType(buyCard);
+            lastSelectedBuyCard = currentSelectedBuyCard;
+        }
+	}
 	
 	private void SetCategoryItems(string categoryName) {
 		traderItemList.ClearItems();
@@ -184,19 +211,7 @@ class DZLTraderMenu: DZLBaseMenu
 	}
 
     override bool OnClick(Widget w, int x, int y, int button) {
-		
-		if (MouseState.MIDDLE == button) {
-		    hintPreview.Show(false);
-			if (w == inventory) {
-				UpdaterPreviewByEntityAI(inventory);
-			} else if (w == sellCard) {
-				UpdaterPreviewByEntityAI(sellCard);
-			} else if (w == traderItemList) {
-				UpdaterPreviewType(traderItemList);
-			} else if (w == buyCard) {
-				UpdaterPreviewType(buyCard);
-			}
-		} else if (w == tradeButton) {
+		if (w == tradeButton) {
 			array<string> buyItems = new array<string>;
 			array<EntityAI> sellItems = new array<EntityAI>;
 			int countBuyItems = buyCard.GetNumItems();
