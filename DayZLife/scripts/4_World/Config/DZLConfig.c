@@ -23,6 +23,4 @@ class DZLConfig
 	ref array<ref DZLHouseExtension> GetExtensions() {
 		return houseExtensions.extensions;
 	}
-	
-	
 }

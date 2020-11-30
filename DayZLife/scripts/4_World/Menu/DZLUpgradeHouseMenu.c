@@ -1,7 +1,8 @@
 class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 {
-	TextListboxWidget storageListTextWidget;
+	TextListboxWidget extensionListTextWidget;
 	TextListboxWidget sellStorageListTextWidget;
+	TextWidget alarmLevel;
 
 	void DZLUpgradeHouseMenu(){
 		Construct();
@@ -14,34 +15,31 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	override Widget Init(){
         layoutPath = "DayZLife/layout/Housing/Housing_upgrade.layout";
 		super.Init();
-		storageListTextWidget = creator.GetTextListboxWidget("Storage_List");
+		extensionListTextWidget = creator.GetTextListboxWidget("Storage_List");
 		sellStorageListTextWidget = creator.GetTextListboxWidget("Sell_Storage_List");
+		alarmLevel = creator.GetTextWidget("alarmsystemlvl");
 
 	    return layoutRoot;
     }
 	
 
 	override void OnShow(){
-        storageListTextWidget.ClearItems();
+        extensionListTextWidget.ClearItems();
         sellStorageListTextWidget.ClearItems();
 	    if (actualHouseDef) {
 	        super.OnShow();
 	        priceBuyTextWidget.SetText("");
             priceSellTextWidget.SetText("");
+            alarmLevel.SetText("0");
+			
+			if (!config) {
+				DebugMessageDZL("no config");
+			}
+			if (!house) {
+				DebugMessageDZL("no house");
+			}
 
-            if (config) {
-				array<ref DZLHouseExtension> extensions = config.GetExtensions();
-                foreach(DZLHouseExtension extension: extensions) {
-                    storageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(extension.type), extension, 0);
-                }
-            }
 
-            if (house) {
-				array<ref DZLStorageTypeBought> storages = house.GetStorage();
-                foreach(DZLStorageTypeBought storage: storages) {
-                    sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storage.storageType.type), storage, 0);
-                }
-            }
         }
 	}
 	
@@ -49,35 +47,41 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 		if(super.OnClick(w, x, y, button)) return true;
 	
 		switch(w){
-            case storageListTextWidget:
-				int itemPos = storageListTextWidget.GetSelectedRow();
+            case extensionListTextWidget:
+				int itemPos = extensionListTextWidget.GetSelectedRow();
 
 				if (-1 == itemPos) return true;
 
 				DZLHouseExtension currentItem;
-				storageListTextWidget.GetItemData(itemPos, 0, currentItem);
+				extensionListTextWidget.GetItemData(itemPos, 0, currentItem);
 			
 				if (!currentItem) return true;
 
-				int itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
-			
-				preview.UpdatePreview(currentItem.type);
-			
-				int buyPrice =  currentItem.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
-			
-				priceBuyTextWidget.SetText(buyPrice.ToString());
-			
-				int sellPrice =  buyPrice / 2;
+                int buyPrice = currentItem.price;
+                int sellPrice = 0;
+                bool showBuyButton = true;
 
-				priceSellTextWidget.SetText(sellPrice.ToString());
-							
-				sellButton.Show(false);
-				buyButton.Show(actualHouseDef.GetMaxStorage() > house.GetStorage().Count());
-				
-				if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
-					player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
-				}
-			
+                if (currentItem.isStorage) {
+                    int itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
+
+                    preview.UpdatePreview(currentItem.type);
+
+                    buyPrice =  currentItem.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
+
+                    priceBuyTextWidget.SetText(buyPrice.ToString());
+
+                    sellPrice =  buyPrice / 2;
+
+                    sellButton.Show(false);
+                    showBuyButton = actualHouseDef.GetMaxStorage() > house.GetStorage().Count();
+
+                    if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
+                        player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
+                    }
+                }
+
+                priceSellTextWidget.SetText(sellPrice.ToString());
+                buyButton.Show(showBuyButton);
 			
                 return true;
             case sellStorageListTextWidget:
@@ -101,19 +105,25 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 
                 return true;
             case buyButton:
-				int itemPosBuy = storageListTextWidget.GetSelectedRow();
-				DZLStorageType currentItemBuy;
-				storageListTextWidget.GetItemData(itemPosBuy, 0, currentItemBuy);
+				int itemPosBuy = extensionListTextWidget.GetSelectedRow();
+				DZLHouseExtension currentItemBuy;
+				extensionListTextWidget.GetItemData(itemPosBuy, 0, currentItemBuy);
 			
 				if (!currentItemBuy) {
 				    return true;
 				}
-			
-				
-				int buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * (itemsHasBought + 1));
+
+			    int buyPriceBuy = currentItemBuy.price;
 				PlayerBase playerBaseBuy = PlayerBaseHelper.GetPlayer();
-				if (actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(playerBaseBuy)) {
-					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_STORAGE, new Param3<PlayerBase, ref Building, ref DZLStorageType>(playerBaseBuy, target, currentItemBuy), true);
+				bool canBuy = dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(playerBaseBuy);
+
+			    if (currentItem.isStorage) {
+				    buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * (itemsHasBought + 1));
+				    canBuy = actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && canBuy;
+                }
+
+				if (canBuy) {
+					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_EXTENSION, new Param3<PlayerBase, ref Building, ref DZLHouseExtension>(playerBaseBuy, target, currentItemBuy), true);
 				}
 
                 return true;
@@ -137,7 +147,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 	    super.HandleEventsDZL(sender, target, rpc_type, ctx);
 		
-		if (rpc_type == DAY_Z_LIFE_BUY_STORAGE_RESPONSE || rpc_type == DAY_Z_LIFE_SELL_STORAGE_RESPONSE) {
+		if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION_RESPONSE || rpc_type == DAY_Z_LIFE_SELL_STORAGE_RESPONSE) {
             autoptr Param2<ref DZLBuilding, string> paramBuyStorageResponse;
             if (ctx.Read(paramBuyStorageResponse)){
 				house = paramBuyStorageResponse.param1;
@@ -151,15 +161,37 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	    super.UpdateGUI(message);
 		
 		if (house) {
-			sellStorageListTextWidget.ClearItems();
+			if (house.HasAlarmSystem()) {
+				alarmLevel.SetText(house.GetHouseAlarm().level.ToString());
+			}
+            
+            array<ref DZLHouseExtension> extensions = config.GetExtensions();
+            foreach(DZLHouseExtension extension: extensions) {
+                string name = "";
+                if (extension.isStorage) {
+                    name = DZLDisplayHelper.GetItemDisplayName(extension.type);
+                } else if(extension.isHouseAlarm && house.CanBuyAlarm(DZLHouseAlarm.Cast(extension))) {
+                    name = extension.type;
+                }
+
+                if (name) {
+                    extensionListTextWidget.AddItem(name, extension, 0);
+                }
+            }
+
             array<ref DZLStorageTypeBought> storages = house.GetStorage();
             foreach(DZLStorageTypeBought storage: storages) {
                 sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storage.storageType.type), storage, 0);
             }
 
+			sellStorageListTextWidget.ClearItems();
+            array<ref DZLStorageTypeBought> storagesBought = house.GetStorage();
+            foreach(DZLStorageTypeBought storageBought: storagesBought) {
+                sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageBought.storageType.type), storage, 0);
+            }
+
             sellButton.Show(false);
-			
-			if (buyButton.IsVisible()) buyButton.Show(actualHouseDef.GetMaxStorage() > storages.Count());
+			buyButton.Show(false);
         }
 	}
 }

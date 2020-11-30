@@ -383,7 +383,7 @@ FrameWidgetClass Housing_Upgrade {
            hexactsize 0
            vexactsize 0
            style Bold
-           text "#Alarm_System"
+           text "#Alarm_System_Level"
            "text valign" center
           }
          }

@@ -4,5 +4,6 @@ class DZLStorageType : DZLHouseExtension
         this.type = type;
         this.description = description;
         this.price = price;
+        isStorage = true;
     }
 }

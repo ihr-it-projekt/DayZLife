@@ -50,6 +50,16 @@ class DZLBuilding {
 	DZLHouseAlarm GetHouseAlarm() {
 		return house.alarmSystem;
 	}
+
+	bool CanBuyAlarm(DZLHouseAlarm alarm) {
+        if (house.HasAlarmSystem() && alarm.level == house.GetHouseAlarm().level + 1){
+            return true;
+        } else if (!house.HasAlarmSystem() && alarm.level == 1){
+            return true;
+        }
+
+        return false;
+	}
 	
 	void SetHouseAlarm(DZLHouseAlarm houseAlarm) {
 		if(!GetGame().IsClient()){

@@ -8,6 +8,7 @@ class DZLHouseAlarm : DZLHouseExtension
         this.description = description;
         this.level = level;
         this.message = message;
+        isHouseAlarm = true;
     }
 
 }

@@ -71,6 +71,24 @@ class DZLActionRaidDoors: ActionInteractBase
 		return false;
 	}
 
+	override void OnStartServer(ActionData action_data) {
+	    Building building = Building.Cast(action_data.m_Target.GetObject());
+	    DZLHouse dzlHouse = new DZLHouse(building);
+
+	    if (dzlHouse.HasAlarmSystem()) {
+	        array<Man> _players = new array<Man>;
+            GetGame().GetPlayers(_players);
+
+            if (_players) {
+                foreach(Man _player: _players) {
+	                if (_player.GetIdentity().GetId() == dzlHouse.owner) {
+	                    DZLSendMessage(_player.GetIdentity(), dzlHouse.GetHouseAlarm().message);
+	                }
+                }
+            }
+	    }
+	}
+
 	override void OnEndClient(ActionData action_data) {
 		Building buildingClient = Building.Cast(action_data.m_Target.GetObject());
 		DZLDoorRaidProgressBar bar = action_data.m_Player.GetRaidProgressBar();

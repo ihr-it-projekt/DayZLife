@@ -13,8 +13,7 @@
         - Was für Werkzeuge
 
 
-- Alarmanlage
--
+- Schlüssel für gebäude vergeben
 - action player to player money transfer... .
 - bank deaktivierbar machen
 - dynmaic price (Angebot/ Nachfrage)
