@@ -1,7 +1,5 @@
 class ActionLicenceCrafting: ActionInteractBase
 {
-	DZLLicence licence;
-	
     void ActionLicenceCrafting() {
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
@@ -9,11 +7,7 @@ class ActionLicenceCrafting: ActionInteractBase
 	}
 
 	override string GetText() {
-		if(licence && licence.actionText) {
-			return licence.actionText;
-		}
-		
-        return "#start_crafting";
+		return "#start_crafting";
     }
 
 	override void CreateConditionComponents() {
@@ -22,7 +16,7 @@ class ActionLicenceCrafting: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-		licence = player.GetLicenceByPosition();
+		DZLLicence licence = player.GetLicenceByPosition();
 		if (!licence) return false;
 		
 		m_CommandUID = licence.m_CommandUID;

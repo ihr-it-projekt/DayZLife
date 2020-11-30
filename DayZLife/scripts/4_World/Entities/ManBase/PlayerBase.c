@@ -18,6 +18,7 @@ modded class PlayerBase
 	bool IsTrader = false;
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
+	bool isOnHarvest = false;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
