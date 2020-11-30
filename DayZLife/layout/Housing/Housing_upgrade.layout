@@ -119,7 +119,7 @@ FrameWidgetClass Housing_Upgrade {
            {
             MultilineTextWidgetClass discription {
              ignorepointer 1
-             position -0 0
+             position 0 0
              size 0.94594 0.91974
              halign center_ref
              valign center_ref
@@ -253,8 +253,8 @@ FrameWidgetClass Housing_Upgrade {
          }
         }
         TextListboxWidgetClass Sell_Storage_List {
-         position 0 0.05388
-         size 0.9695 0.65173
+         position 0 0.10629
+         size 0.9695 0.5469
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -343,6 +343,47 @@ FrameWidgetClass Housing_Upgrade {
            vexactsize 0
            style Bold
            text "#Sell_Price"
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget10 {
+         ignorepointer 1
+         position 0.00096 0.20918
+         size 1 0.1079
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass alarmsystemlvl {
+           ignorepointer 1
+           position 0.01478 0
+           size 0.477 0.71208
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "123456789"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass alarmsystem {
+           ignorepointer 1
+           position 0.01525 0
+           size 0.47772 0.71208
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Bold
+           text "#Alarm_System"
            "text valign" center
           }
          }
