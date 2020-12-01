@@ -47,12 +47,11 @@ class DZLBuilding {
 		return house.HasAlarmSystem();
 	}
 	
-	DZLHouseAlarm GetHouseAlarm() {
+	DZLHouseExtension GetHouseAlarm() {
 		return house.alarmSystem;
 	}
 
-	bool CanBuyAlarm(DZLHouseAlarm alarm) {
-	    DebugMessageDZL("Alarm" + alarm.level);
+	bool CanBuyAlarm(DZLHouseExtension alarm) {
         if (house.HasAlarmSystem() && alarm.level == house.GetHouseAlarm().level + 1){
             return true;
         } else if (!house.HasAlarmSystem() && alarm.level == 1){
@@ -62,7 +61,7 @@ class DZLBuilding {
         return false;
 	}
 	
-	void SetHouseAlarm(DZLHouseAlarm houseAlarm) {
+	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
 		if(!GetGame().IsClient()){
 			house.SetHouseAlarm(houseAlarm);
 		}

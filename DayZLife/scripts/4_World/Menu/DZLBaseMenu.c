@@ -6,6 +6,7 @@ class DZLBaseMenu: UIScriptedMenu
     protected ButtonWidget closeButton;
     protected PlayerBase player;
     protected DZLPlayer dzlPlayer;
+	
 
     protected void Construct() {
         if(GetGame().IsClient()){

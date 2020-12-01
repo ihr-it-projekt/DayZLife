@@ -31,15 +31,6 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	        priceBuyTextWidget.SetText("");
             priceSellTextWidget.SetText("");
             alarmLevel.SetText("0");
-			
-			if (!config) {
-				DebugMessageDZL("no config");
-			}
-			if (!house) {
-				DebugMessageDZL("no house");
-			}
-
-
         }
 	}
 	
@@ -78,7 +69,9 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                     if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
                         player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
                     }
-                }
+                } else {
+					priceBuyTextWidget.SetText(buyPrice.ToString());
+				}
 
                 priceSellTextWidget.SetText(sellPrice.ToString());
                 buyButton.Show(showBuyButton);
@@ -113,17 +106,20 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 				    return true;
 				}
 
-			    int buyPriceBuy = currentItemBuy.price;
+			    int buyPriceBuy = 0;
+				bool canBuy = false;
 				PlayerBase playerBaseBuy = PlayerBaseHelper.GetPlayer();
-				bool canBuy = dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(playerBaseBuy);
 
-			    if (currentItem.isStorage) {
+			    if (currentItemBuy.isStorage) {
 				    buyPriceBuy =  currentItemBuy.price * (actualHouseDef.storageBuyFactor * (itemsHasBought + 1));
-				    canBuy = actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems() && canBuy;
+				    canBuy = actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems();
+                } else {
+                    buyPriceBuy = currentItemBuy.price;
+                    canBuy = dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(playerBaseBuy) && house.CanBuyAlarm(currentItemBuy);
                 }
 
 				if (canBuy) {
-					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_EXTENSION, new Param3<PlayerBase, ref Building, ref DZLHouseExtension>(playerBaseBuy, target, currentItemBuy), true);
+					GetGame().RPCSingleParam(playerBaseBuy, DAY_Z_LIFE_BUY_EXTENSION, new Param3<PlayerBase, ref Building, string>(playerBaseBuy, target, currentItemBuy.id), true);
 				}
 
                 return true;
@@ -161,6 +157,8 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	    super.UpdateGUI(message);
 		
 		if (house) {
+			extensionListTextWidget.ClearItems();
+			DebugMessageDZL("update menu");
 			if (house.HasAlarmSystem()) {
 				alarmLevel.SetText(house.GetHouseAlarm().level.ToString());
 			}
@@ -171,10 +169,11 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                 if (extension.isStorage) {
                     name = DZLDisplayHelper.GetItemDisplayName(extension.type);
                 } else if(extension.isHouseAlarm) {
-                    DZLHouseAlarm alarm = DZLHouseAlarm.Cast(extension);
-                    if (alarm && house.CanBuyAlarm(alarm)) {
-                        name = extension.type;
-                    }
+                   	if (house.CanBuyAlarm(extension)) {
+						name = extension.type;
+                    } else if (!house.CanBuyAlarm(extension)){
+						DebugMessageDZL("can not buy");
+					}
                 }
 
                 if (name) {
@@ -182,15 +181,10 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                 }
             }
 
-            array<ref DZLStorageTypeBought> storages = house.GetStorage();
-            foreach(DZLStorageTypeBought storage: storages) {
-                sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storage.storageType.type), storage, 0);
-            }
-
 			sellStorageListTextWidget.ClearItems();
             array<ref DZLStorageTypeBought> storagesBought = house.GetStorage();
             foreach(DZLStorageTypeBought storageBought: storagesBought) {
-                sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageBought.storageType.type), storage, 0);
+                sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageBought.storageType.type), storageBought, 0);
             }
 
             sellButton.Show(false);

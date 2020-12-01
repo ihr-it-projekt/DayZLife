@@ -19,7 +19,7 @@ class DZLBuyExtensionListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
-			autoptr  Param3<PlayerBase, ref Building, ref DZLStorageType> paramBuyStorage;
+			autoptr  Param3<PlayerBase, ref Building, string> paramBuyStorage;
             if (ctx.Read(paramBuyStorage)){
 				
 				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param2);
@@ -28,7 +28,7 @@ class DZLBuyExtensionListener
 				DZLHouseExtension extension;
 				array<ref DZLHouseExtension> extensions = config.GetExtensions();
 				foreach(DZLHouseExtension _extension: extensions) {
-					if (_extension.type == paramBuyStorage.param3.type) {
+					if (_extension.id == paramBuyStorage.param3) {
 						extension = _extension;
 						break;
 					}
@@ -38,30 +38,28 @@ class DZLBuyExtensionListener
 
 				if (extension && dzlBuilding.IsOwner(player)) {
 				    string message = "#error_buying_alarm_system";
-				    int buyPriceBuy = extension.price;
-
-
+				    int buyPriceBuy = 0;
 				    if (extension.isStorage) {
 	                    message = "#error_buying_storage";
-					    DZLStorageType storage = DZLStorageType.Cast(extension);
-					    buyPriceBuy =  storage.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
+					    buyPriceBuy =  extension.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
 					    vector posToSpawnRelavtiv = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
 					    bool canNotSpawn = posToSpawnRelavtiv == "0 0 0";
 					    if (!canNotSpawn && actualHouseDef.GetMaxStorage() > dzlBuilding.GetStorage().Count() && inventory.PlayerHasEnoughMoney(paramBuyStorage.param1, buyPriceBuy)) {
                            vector posToSpawn = paramBuyStorage.param2.ModelToWorld(posToSpawnRelavtiv);
-                            bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), storage.type);
+                            bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), extension.type);
 
                             if (hasSpawned) {
                                 inventory.AddMoneyToPlayer(player, buyPriceBuy * -1);
-                                dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(storage, posToSpawn, buyPriceBuy, posToSpawnRelavtiv));
+                                dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(extension, posToSpawn, buyPriceBuy, posToSpawnRelavtiv));
                                 message = "#successfully_buy_storage";
                             }
                         }
 				    } else {
-				        DZLHouseAlarm alarmSystem = DZLHouseAlarm.Cast(extension);
-				        if (dzlBuilding.CanBuyAlarm(alarmSystem) && inventory.PlayerHasEnoughMoney(player, buyPriceBuy) ) {
-                           inventory.AddMoneyToPlayer(player, buyPriceBuy * -1);
-                           dzlBuilding.SetHouseAlarm(alarmSystem);
+				        if (dzlBuilding.CanBuyAlarm(extension) && inventory.PlayerHasEnoughMoney(player, buyPriceBuy) ) {
+							buyPriceBuy = extension.price;
+                           	inventory.AddMoneyToPlayer(player, buyPriceBuy * -1);
+                           	dzlBuilding.SetHouseAlarm(extension);
+                           	message = "#successfully_buy_alarm_system";
 				        }
 				    }
 

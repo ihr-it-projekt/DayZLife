@@ -1,6 +1,6 @@
 class DZLStorageTypeBought 
 {
-    DZLStorageType storageType;
+    DZLHouseExtension storageType;
     vector position;
     vector relativePos;
     int paidPrice;
@@ -8,7 +8,7 @@ class DZLStorageTypeBought
 	string type;
 	string displayName;
 
-    void DZLStorageTypeBought(DZLStorageType storageType, vector position, int paidPrice, vector relativePos) {
+    void DZLStorageTypeBought(DZLHouseExtension storageType, vector position, int paidPrice, vector relativePos) {
         this.storageType = storageType;
         this.position = position;
         this.relativePos = relativePos;

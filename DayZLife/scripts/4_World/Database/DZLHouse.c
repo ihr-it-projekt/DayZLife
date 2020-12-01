@@ -6,7 +6,7 @@ class DZLHouse {
 	vector position;
 	vector orientation;
 	ref array<ref DZLStorageTypeBought> storage;
-	ref DZLHouseAlarm alarmSystem;
+	ref DZLHouseExtension alarmSystem;
 	ref array<int> storagePositions;
 	int raidTime = 3;
 	ref array<int> lockedDoors;
@@ -129,11 +129,11 @@ class DZLHouse {
 		return !!alarmSystem;
 	}
 	
-	DZLHouseAlarm GetHouseAlarm() {
+	DZLHouseExtension GetHouseAlarm() {
 		return alarmSystem;
 	}
 	
-	void SetHouseAlarm(DZLHouseAlarm houseAlarm) {
+	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
 		alarmSystem = houseAlarm;
 		Save();
 	}

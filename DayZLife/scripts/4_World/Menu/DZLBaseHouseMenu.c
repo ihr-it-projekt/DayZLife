@@ -35,6 +35,7 @@ class DZLBaseHouseMenu: DZLBaseMenu
             autoptr Param1<ref DZLBuilding> paramGetBuildingProperties;
             if (ctx.Read(paramGetBuildingProperties)){
                 house = paramGetBuildingProperties.param1;
+				DebugMessageDZL("Has current building");
                 UpdateGUI();
             }
         }
