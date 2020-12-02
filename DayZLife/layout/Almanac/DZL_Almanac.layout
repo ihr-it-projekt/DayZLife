@@ -56,7 +56,7 @@ FrameWidgetClass Almanac {
        }
       }
       PanelWidgetClass workzone_panel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0
        size 1 0.9101
@@ -134,7 +134,7 @@ FrameWidgetClass Almanac {
         PanelWidgetClass PanelWidget13 {
          ignorepointer 1
          position 0.31982 0.001
-         size 0.25118 0.50134
+         size 0.30447 0.50134
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -168,8 +168,8 @@ FrameWidgetClass Almanac {
            }
           }
           TextListboxWidgetClass tool_listbox {
-           position -0.00092 0.07315
-           size 0.96164 0.81188
+           position -0.18452 0.07853
+           size 0.6 0.8119
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -179,12 +179,21 @@ FrameWidgetClass Almanac {
            "title visible" 0
            lines 15
           }
+          ItemPreviewWidgetClass ItemPreviewWidget1 {
+           ignorepointer 1
+           position 326.02698 65.4534
+           size 182.68401 305.802
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+          }
          }
         }
         PanelWidgetClass PanelWidget15 {
          ignorepointer 1
          position 0 0
-         size 0.2512 0.5013
+         size 0.30529 0.5013
          halign right_ref
          hexactpos 0
          vexactpos 0
@@ -219,22 +228,33 @@ FrameWidgetClass Almanac {
            }
           }
           TextListboxWidgetClass TextListboxWidget0 {
-           position 7.99999 65.29929
-           size 410.31299 305.92999
+           position -0.18456 0.0757
+           size 0.6 0.807
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Item;60;#chance_to_harvest;30"
+           lines 15
+          }
+          ItemPreviewWidgetClass ItemPreviewWidget2 {
+           ignorepointer 1
+           position 326.86099 65.3009
+           size 183.241 305.92398
            hexactpos 1
            vexactpos 1
            hexactsize 1
            vexactsize 1
-           "title visible" 1
-           colums "#Item;60;#chance_to_harvest;30"
-           lines 15
           }
          }
         }
        }
       }
       PanelWidgetClass lizenze_panel {
-       visible 1
+       visible 0
        ignorepointer 1
        position 0 0
        size 1 0.9101
@@ -357,7 +377,7 @@ FrameWidgetClass Almanac {
           }
           TextListboxWidgetClass craft_itembox {
            position 0.011 0.182
-           size 0.978 0.797
+           size 0.62747 0.797
            hexactpos 0
            vexactpos 0
            hexactsize 0
@@ -365,6 +385,15 @@ FrameWidgetClass Almanac {
            "title visible" 1
            colums "#Item;80;#quantity;20"
            lines 13
+          }
+          ItemPreviewWidgetClass ItemPreviewWidget0 {
+           ignorepointer 1
+           position 471.74701 69.2338
+           size 246.593 303.008
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
           }
          }
         }
@@ -398,11 +427,38 @@ FrameWidgetClass Almanac {
         ItemPreviewWidgetClass yield_ItemPreview {
          ignorepointer 1
          position 0.754 0.091
-         size 0.242 0.398
+         size 0.242 0.31785
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
+        }
+        PanelWidgetClass PanelWidget12 {
+         ignorepointer 1
+         position 0.0383 0.41943
+         size 0.1653 0.07
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass Item_Crafted {
+           ignorepointer 1
+           position 0 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Crafted_Item"
+           "text halign" center
+           "text valign" center
+          }
+         }
         }
        }
       }
