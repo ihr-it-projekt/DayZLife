@@ -71,11 +71,9 @@ class DZLTraderMenu: DZLBaseMenu
 		string name = "";
 		int index;
 		
-		array<string> addInventoryTypes = new array<string>;
-
+	   array<string> addInventoryTypes = new array<string>;
        foreach(string categoryName: position.categoryNames) {
             DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
-
             if (!category) continue;
 
             foreach(DZLTraderType type: category.items) {
@@ -129,15 +127,12 @@ class DZLTraderMenu: DZLBaseMenu
 		
 		foreach(string categoryName: position.categoryNames) {
 			DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
-			
 			if (!category) continue;
-			
 			if (displayCategories.Get(category.name)) continue;
 			
 			itemCategory.AddItem(categoryName);
 			displayCategories.Insert(categoryName, category.items);
 			addedCats.Insert(categoryName);
-			
 
 			foreach(DZLTraderType type: category.items) {
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);

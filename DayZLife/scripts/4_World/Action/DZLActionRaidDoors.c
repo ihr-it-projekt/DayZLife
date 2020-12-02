@@ -74,8 +74,11 @@ class DZLActionRaidDoors: ActionInteractBase
 	override void OnStartServer(ActionData action_data) {
 	    Building building = Building.Cast(action_data.m_Target.GetObject());
 	    DZLHouse dzlHouse = new DZLHouse(building);
-
+		
 	    if (dzlHouse.HasAlarmSystem() && dzlHouse.GetHouseAlarm().message) {
+			if (DAY_Z_LIFE_DEBUG) {
+				DZLSendMessage(action_data.m_Player.GetIdentity(), dzlHouse.GetHouseAlarm().GetMessage(action_data.m_Player, dzlHouse));
+			}
 	        array<Man> _players = new array<Man>;
             GetGame().GetPlayers(_players);
 

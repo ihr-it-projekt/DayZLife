@@ -10,6 +10,8 @@ class DZLHouseExtension : DZLIdModel
     int level;
 	
 	string GetMessage(PlayerBase raider, DZLHouse house) {
+		DebugMessageDZL("use DZLHouseExtension");
+
 		return message;
 	}
 

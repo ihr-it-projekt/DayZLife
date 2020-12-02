@@ -122,15 +122,22 @@ class DZLHouse {
 	}
 
 	bool CanRaidDoor(PlayerBase player, int index) {
+	    if (DAY_Z_LIFE_DEBUG) {
+	        return true;
+	    }
 		return IsDoorLooked(index) && !IsOwner(player);
 	}
 	
 	bool HasAlarmSystem() {
-		return !!alarmSystem;
+		return alarmSystem != null;
 	}
 	
 	DZLHouseExtension GetHouseAlarm() {
 		return alarmSystem;
+	}
+
+	DZLHouseExtension GetHouseAlarmCast() {
+		return DZLHouseAlarm.Cast(alarmSystem);
 	}
 	
 	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
