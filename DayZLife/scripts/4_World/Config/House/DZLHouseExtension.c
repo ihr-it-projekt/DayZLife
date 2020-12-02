@@ -8,5 +8,9 @@ class DZLHouseExtension : DZLIdModel
     bool isHouseAlarm = false;
     string message = "";
     int level;
+	
+	string GetMessage(PlayerBase raider, DZLHouse house) {
+		return message;
+	}
 
 }

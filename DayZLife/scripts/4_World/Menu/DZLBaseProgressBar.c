@@ -43,9 +43,6 @@ class DZLBaseProgressBar: UIScriptedMenu
 
     override void OnShow() {
         timer.Run(1, this, "CheckDuration", null, true);
-		GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-        GetGame().GetUIManager().ShowCursor(true);
-        GetGame().GetInput().ChangeGameFocus(1);
 
         progressBar.SetCurrent(0);
         status.SetText("0 %");
@@ -77,9 +74,6 @@ class DZLBaseProgressBar: UIScriptedMenu
 		layoutRoot.Show(false);
         timer.Stop();
         super.OnHide();
-        GetGame().GetUIManager().ShowCursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(true);
         Close();
     }
 

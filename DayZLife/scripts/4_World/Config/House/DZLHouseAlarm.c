@@ -9,4 +9,16 @@ class DZLHouseAlarm : DZLHouseExtension
         isHouseAlarm = true;
     }
 
+    override string GetMessage(PlayerBase raider, DZLHouse house) {
+        if (level == 1) {
+            return message;
+        } else if (level == 2) {
+            return message + house.name;
+        } else if (level == 3) {
+            return message + house.name + "/" + raider.GetIdentity().GetName();
+        }
+
+        return "";
+    }
+
 }

@@ -3,6 +3,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 	TextListboxWidget extensionListTextWidget;
 	TextListboxWidget sellStorageListTextWidget;
 	TextWidget alarmLevel;
+	MultilineTextWidget description;
 
 	void DZLUpgradeHouseMenu(){
 		Construct();
@@ -17,6 +18,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 		super.Init();
 		extensionListTextWidget = creator.GetTextListboxWidget("Storage_List");
 		sellStorageListTextWidget = creator.GetTextListboxWidget("Sell_Storage_List");
+		description = creator.GetMultilineTextWidget("discription");
 		alarmLevel = creator.GetTextWidget("alarmsystemlvl");
 
 	    return layoutRoot;
@@ -52,14 +54,14 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                 int sellPrice = 0;
                 bool showBuyButton = true;
 
+                description.SetText(currentItem.description);
+
                 if (currentItem.isStorage) {
                     int itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
 
                     preview.UpdatePreview(currentItem.type);
 
                     buyPrice =  currentItem.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
-
-                    priceBuyTextWidget.SetText(buyPrice.ToString());
 
                     sellPrice =  buyPrice / 2;
 
@@ -69,10 +71,9 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                     if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
                         player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
                     }
-                } else {
-					priceBuyTextWidget.SetText(buyPrice.ToString());
-				}
+                }
 
+                priceBuyTextWidget.SetText(buyPrice.ToString());
                 priceSellTextWidget.SetText(sellPrice.ToString());
                 buyButton.Show(showBuyButton);
 			
