@@ -40,15 +40,19 @@ class ActionOpenUpgradeHouseMenu: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (!player.house) return false;
-        if(!IsBuilding(target)) return false;
+        if (GetGame().IsClient()) {
+            if (!player.house) return false;
+            if(!IsBuilding(target)) return false;
 
-        Building _building = Building.Cast(target.GetObject());
-        int doorIndex = _building.GetDoorIndex(target.GetComponentIndex());
-        if (doorIndex == -1) return false;
+            Building _building = Building.Cast(target.GetObject());
+            int doorIndex = _building.GetDoorIndex(target.GetComponentIndex());
+            if (doorIndex == -1) return false;
 
-        if(!IsInReach(player, target, UAMaxDistances.DEFAULT) ) return false;
+            if(!IsInReach(player, target, UAMaxDistances.DEFAULT) ) return false;
 
-        return player.house.HasHouse(Building.Cast(target.GetObject()));
+            return player.house.HasHouse(Building.Cast(target.GetObject()));
+        }
+
+        return true;
 	}
 }
