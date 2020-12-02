@@ -72,20 +72,21 @@ class DZLTraderMenu: DZLBaseMenu
 		int index;
 		
 	   array<string> addInventoryTypes = new array<string>;
+
        foreach(string categoryName: position.categoryNames) {
             DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
+			
             if (!category) continue;
 
             foreach(DZLTraderType type: category.items) {
+                if (-1 != addInventoryTypes.Find(type.type)) continue;
+                addInventoryTypes.Insert(type.type);
+
                 foreach(EntityAI item: playerItems) {
-					if (-1 != addInventoryTypes.Find(type.type)) continue;
-				
-					addInventoryTypes.Insert(type.type);
-					
                     if (item.GetType() != type.type) {
                         continue;
                     }
-					
+
                     GetGame().ObjectGetDisplayName(item, name);
 
                     string quant = item.GetQuantity().ToString();
