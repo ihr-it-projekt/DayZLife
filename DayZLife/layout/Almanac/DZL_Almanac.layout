@@ -356,12 +356,12 @@ FrameWidgetClass Almanac {
            }
           }
           TextListboxWidgetClass craft_itembox {
-           position 7.99998 69.2338
-           size 710.33997 303.008
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.011 0.182
+           size 0.978 0.797
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
            "title visible" 1
            colums "#Item;80;#quantity;20"
            lines 13
@@ -397,12 +397,12 @@ FrameWidgetClass Almanac {
         }
         ItemPreviewWidgetClass yield_ItemPreview {
          ignorepointer 1
-         position 1279.10999 68.9539
-         size 409.99399 301.28799
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0.754 0.091
+         size 0.242 0.398
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
         }
        }
       }
