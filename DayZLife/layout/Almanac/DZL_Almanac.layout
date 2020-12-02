@@ -1,4 +1,4 @@
-FrameWidgetClass Almanach {
+FrameWidgetClass Almanac {
  size 0.9 0.8
  halign center_ref
  valign center_ref
@@ -42,7 +42,7 @@ FrameWidgetClass Almanach {
        vexactsize 0
        style editor_quad_dark
        {
-        XComboBoxWidgetClass almanach_box {
+        XComboBoxWidgetClass almanac_box {
          position 0 0
          size 0.9593 0.852
          halign center_ref
@@ -56,7 +56,7 @@ FrameWidgetClass Almanach {
        }
       }
       PanelWidgetClass workzone_panel {
-       visible 1
+       visible 0
        ignorepointer 1
        position 0 0
        size 1 0.9101
@@ -118,91 +118,118 @@ FrameWidgetClass Almanach {
           }
          }
         }
-        ItemPreviewWidgetClass workzone_tool_preview {
-         ignorepointer 1
-         position -0.04519 0.09115
-         size 0.25839 0.39827
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-        }
-        PanelWidgetClass PanelWidget4 {
-         ignorepointer 1
-         position -0.04519 0.01058
-         size 0.21213 0.07
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass tool_workzone {
-           ignorepointer 1
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Tool"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        ItemPreviewWidgetClass workzone_yield_preview {
-         visible 1
-         ignorepointer 1
-         position 0.36609 0.09115
-         size 0.25839 0.39827
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-        }
-        PanelWidgetClass PanelWidget9 {
-         ignorepointer 1
-         position 0.36609 0.01058
-         size 0.21213 0.07
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass yield_workzone {
-           ignorepointer 1
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Yield"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
         TextWidgetClass TextWidget0 {
          visible 1
          ignorepointer 1
-         position 1068.10999 180.88901
-         size 104.268 77.4173
-         hexactpos 1
-         vexactpos 1
-         hexactsize 1
-         vexactsize 1
+         position 0.629 0.239
+         size 0.061 0.102
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
          text "="
          "text halign" center
          "text valign" center
+        }
+        PanelWidgetClass PanelWidget13 {
+         ignorepointer 1
+         position 0.31982 0.001
+         size 0.25118 0.50134
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget4 {
+           ignorepointer 1
+           position -0.03746 0.02149
+           size 0.7 0.13
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass tool_workzone {
+             ignorepointer 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Tool"
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          TextListboxWidgetClass tool_listbox {
+           position -0.00092 0.07315
+           size 0.96164 0.81188
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 0
+           lines 15
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget15 {
+         ignorepointer 1
+         position 0 0
+         size 0.2512 0.5013
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget9 {
+           ignorepointer 1
+           position 0 0.0211
+           size 0.7 0.13
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass yield_workzone {
+             ignorepointer 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Yield"
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          TextListboxWidgetClass TextListboxWidget0 {
+           position 7.99999 65.29929
+           size 410.31299 305.92999
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           "title visible" 1
+           colums "#Item;60;#chance_to_harvest;30"
+           lines 15
+          }
+         }
         }
        }
       }
@@ -267,118 +294,85 @@ FrameWidgetClass Almanach {
           }
          }
         }
-        PanelWidgetClass PanelWidget5 {
-         ignorepointer 1
-         position -0.10939 0.01058
-         size 0.13 0.07
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass lizenz_tool {
-           ignorepointer 1
-           position 0 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Tool"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget6 {
-         ignorepointer 1
-         position 0.02533 0.01058
-         size 0.13 0.07
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass lizenz_item_1 {
-           ignorepointer 1
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#item_1"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
         PanelWidgetClass PanelWidget7 {
          ignorepointer 1
-         position 0.16004 0.01058
-         size 0.13 0.07
-         halign center_ref
+         position 0.321 0
+         size 0.42799 0.50264
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
          style editor_quad_dark
          {
-          TextWidgetClass lizenz_item_2 {
+          PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           position 0 0
-           size 0.9 0.9
+           position 0.18942 0.02104
+           size 0.5991 0.14
            halign center_ref
-           valign center_ref
            hexactpos 0
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           text "#item_2"
-           "text halign" center
-           "text valign" center
+           style editor_quad_dark
+           {
+            TextWidgetClass tool_list {
+             ignorepointer 1
+             position 0 0
+             size 0.95 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           position -0.30506 0.02104
+           size 0.3678 0.14
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass lizenz_tool {
+             ignorepointer 1
+             position 0 0
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Tool"
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          TextListboxWidgetClass craft_itembox {
+           position 7.99998 69.2338
+           size 710.33997 303.008
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           "title visible" 1
+           colums "#Item;80;#quantity;20"
+           lines 13
           }
          }
         }
         PanelWidgetClass PanelWidget11 {
          ignorepointer 1
-         position 0.29476 0.01058
-         size 0.13 0.07
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass lizenz_item_3 {
-           ignorepointer 1
-           position 0 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#item_3"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget12 {
-         ignorepointer 1
-         position 0.42947 0.01058
-         size 0.13 0.07
-         halign center_ref
+         position 0.0383 0.01058
+         size 0.1653 0.07
+         halign right_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -401,61 +395,14 @@ FrameWidgetClass Almanach {
           }
          }
         }
-        ItemPreviewWidgetClass lizentoolpreview {
+        ItemPreviewWidgetClass yield_ItemPreview {
          ignorepointer 1
-         position -0.10939 -0.20985
-         size 0.13 0.398
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-        }
-        ItemPreviewWidgetClass item_1_preview {
-         ignorepointer 1
-         position 0.02533 -0.21117
-         size 0.13 0.398
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-        }
-        ItemPreviewWidgetClass item_2_preview {
-         visible 1
-         ignorepointer 1
-         position 0.16004 -0.20985
-         size 0.13 0.398
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-        }
-        ItemPreviewWidgetClass item_3_preview {
-         ignorepointer 1
-         position 0.29476 -0.20985
-         size 0.13 0.398
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-        }
-        ItemPreviewWidgetClass item_yield_preview {
-         ignorepointer 1
-         position 0.42947 -0.20985
-         size 0.13 0.398
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
+         position 1279.10999 68.9539
+         size 409.99399 301.28799
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
         }
        }
       }
