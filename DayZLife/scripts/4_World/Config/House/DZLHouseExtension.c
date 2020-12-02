@@ -10,7 +10,6 @@ class DZLHouseExtension : DZLIdModel
     int level;
 	
 	string GetMessage(PlayerBase raider, DZLHouse house) {
-		DebugMessageDZL("use DZLHouseAlarm");
         if (level == 1) {
             return message;
         } else if (level == 2) {
