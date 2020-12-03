@@ -4,6 +4,7 @@ modded class PlayerBase
     ref DZLUpgradeHouseMenu houseUpgradeMenu;
     ref DZLBankingMenu bankingMenu;
     ref DZLTraderMenu traderMenu;
+    ref DZLAlmanacMenu alamancMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
 	ref DZLPlayer dzlPlayer;
@@ -155,6 +156,12 @@ modded class PlayerBase
 		return messageMenu;
 	}
 
+	DZLAlmanacMenu GetAlmanacMenu() {
+		alamancMenu = new DZLAlmanacMenu();
+		InitMenu(alamancMenu);
+		return alamancMenu;
+	}
+	
 	DZLTraderMenu GetTraderMenu() {
 		traderMenu = new DZLTraderMenu();
 		InitMenu(traderMenu);
@@ -198,6 +205,8 @@ modded class PlayerBase
 			licenceMenu.OnHide();
 		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
 			progressBarLicence.OnHide();
+		} else if (alamancMenu && alamancMenu.IsVisible()) {
+			alamancMenu.OnHide();
 		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
 			progressBarRaid.OnHide();
 		}

@@ -16,6 +16,10 @@ class DZLUIItemCreator
 
         return widget;
     }
+	
+	Widget GetWidget(string name) {
+		return layoutRoot.FindAnyWidget(name);
+	}
 
     XComboBoxWidget GetXComboBoxWidget(string name) {
         return XComboBoxWidget.Cast(layoutRoot.FindAnyWidget(name));
