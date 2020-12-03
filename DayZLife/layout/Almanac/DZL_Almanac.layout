@@ -168,8 +168,8 @@ FrameWidgetClass Almanac {
            }
           }
           TextListboxWidgetClass tool_listbox {
-           position -0.18452 0.07853
-           size 0.6 0.8119
+           position -0.18452 0.07574
+           size 0.6 0.80633
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -181,12 +181,14 @@ FrameWidgetClass Almanac {
           }
           ItemPreviewWidgetClass ItemPreviewWidget1 {
            ignorepointer 1
-           position 326.02698 65.4534
-           size 182.68401 305.802
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.01448 0.07804
+           size 0.35456 0.8109
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
           }
          }
         }
@@ -228,8 +230,8 @@ FrameWidgetClass Almanac {
            }
           }
           TextListboxWidgetClass TextListboxWidget0 {
-           position -0.18456 0.0757
-           size 0.6 0.807
+           position -0.18456 0.07555
+           size 0.6 0.8067
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -242,12 +244,14 @@ FrameWidgetClass Almanac {
           }
           ItemPreviewWidgetClass ItemPreviewWidget2 {
            ignorepointer 1
-           position 326.86099 65.3009
-           size 183.241 305.92398
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           position 0.015 0.076
+           size 0.354 0.807
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
           }
          }
         }

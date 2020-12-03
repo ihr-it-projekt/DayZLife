@@ -11,6 +11,37 @@ class CfgPatches
 		};
 	};
 };
+
+class CfgMods
+{
+	class DZL_Misc
+	{
+		dir = "DayZLifeMisc";
+        hideName = 0;
+		name = "DayZLife";
+		credits = "TheBuster, Sense";
+		author = "TheBuster Sense";
+		authorID = "76561198196317725";
+		version = "0.0.1";
+		extra = 0;
+		type = "mod";
+		dependencies[]=
+		{
+			"World"
+		};
+		class defs
+		{
+			class worldScriptModule
+			{
+				value="";
+				files[]=
+				{
+					"DZL_Misc/scripts/4_World"
+				};
+			};
+		};
+	};
+};
 class CfgVehicles
 {
 	class WoodenLog;
@@ -19,6 +50,10 @@ class CfgVehicles
 	class Stone;
 	class SmallStone;
 	class Spraycan_Black;
+	class Container_Base;
+	class Pot;
+	class HouseNoDestruct;
+	class M65Jacket_Black;
 	class DZL_WoodenLog: WoodenLog
 	{
 		scope=2;
@@ -68,24 +103,6 @@ class CfgVehicles
 		varQuantityDestroyOnMin=1;
 		varStackMax=10;
 	};
-	class DZL_Money: Paper
-	{
-		scope=2;
-		displayName="#Counterfeit_money";
-		descriptionShort="Model Platzhalter!";
-		model="\dz\gear\consumables\Paper.p3d";
-		isMeleeWeapon=1;
-		weight=2;
-		absorbency=1;
-		itemSize[]={1,2};
-		rotationFlags=16;
-		canBeSplit=1;
-		varQuantityInit=10;
-		varQuantityMin=0;
-		varQuantityMax=10;
-		varQuantityDestroyOnMin=1;
-		varStackMax=10;
-	};
 	class DZL_Sandpaper: Paper
 	{
 		scope=2;
@@ -112,24 +129,6 @@ class CfgVehicles
 			"DZL_Misc\Data\Sandpaper.paa"
 		};
 	};
-	class DZL_Cement: Paper
-	{
-		scope=2;
-		displayName="#Cement";
-		descriptionShort="Model Platzhalter!";
-		model="\dz\gear\consumables\Paper.p3d";
-		isMeleeWeapon=1;
-		weight=2;
-		absorbency=1;
-		itemSize[]={1,1};
-		rotationFlags=16;
-		canBeSplit=1;
-		varQuantityInit=1;
-		varQuantityMin=0;
-		varQuantityMax=1;
-		varQuantityDestroyOnMin=1;
-		varStackMax=1;
-	};
 	class DZL_Stone: Stone
 	{
 		scope=2;
@@ -145,17 +144,6 @@ class CfgVehicles
 		varQuantityMax=1;
 		varStackMax=1;
 	};
-	class DZL_Jewelry: SmallStone
-	{
-		scope=2;
-		displayName="#Jewelry";
-		descriptionShort="Model Platzhalter!";
-		model="\dz\gear\consumables\SmallStone.p3d";
-		animClass="NoFireClass";
-		weight=500;
-		itemSize[]={1,1};
-		rotationFlags=17;
-	};
 	class DZL_Color: Spraycan_Black
 	{
 		scope=2;
@@ -167,9 +155,48 @@ class CfgVehicles
 			"DZ\gear\consumables\data\spraycan_black_co.paa"
 		};
 	};
-	class Pot;
-	class HouseNoDestruct;
-	class M65Jacket_Black;
+	class DZL_Crate_Base: Container_Base
+	{
+		scope=2;
+		autocenter = false;
+		canBeDigged=0;
+	};
+	class DZL_Wooden_Crate_1: DZL_Crate_Base
+	{
+		displayName="#1_wood_crate";
+		descriptionShort=".";
+		model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate.p3d";
+		class Cargo
+		{
+			itemsCargoSize[]={10,5};
+			openable=0;
+			allowOwnedCargoManipulation=1;
+		};
+	};
+	class DZL_Wooden_Crate_3: DZL_Crate_Base
+	{
+		displayName="#3_wood_crate";
+		descriptionShort=".";
+		model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate_3x.p3d";
+		class Cargo
+		{
+			itemsCargoSize[]={10,15};
+			openable=0;
+			allowOwnedCargoManipulation=1;
+		};
+	};
+	class DZL_Wooden_Crate_5: DZL_Crate_Base
+	{
+		displayName="#5_wood_crate";
+		descriptionShort=".";
+		model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate_5x.p3d";
+		class Cargo
+		{
+			itemsCargoSize[]={10,25};
+			openable=0;
+			allowOwnedCargoManipulation=1;
+		};
+	};
 	class DZL_Bucket: Pot
 	{
 		scope=1;
@@ -195,4 +222,17 @@ class CfgVehicles
 	{
 		itemsCargoSize[]={10,10};
 	};
+	// Model Platzhalter!
+	class DZL_Jewelry: SmallStone
+	{
+		scope=2;
+		displayName="#Jewelry";
+		descriptionShort="Model Platzhalter!";
+		model="\dz\gear\consumables\SmallStone.p3d";
+		animClass="NoFireClass";
+		weight=500;
+		itemSize[]={1,1};
+		rotationFlags=17;
+	};
+	// Model Platzhalter Ende!
 };
