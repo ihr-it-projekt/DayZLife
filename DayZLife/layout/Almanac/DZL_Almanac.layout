@@ -290,7 +290,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#License;70;#tool_damage;30"
+           colums "#License"
            lines 30
           }
          }
