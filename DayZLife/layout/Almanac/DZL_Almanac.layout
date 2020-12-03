@@ -21,6 +21,7 @@ FrameWidgetClass Almanac {
    style editor_quad_dark
    {
     PanelWidgetClass PanelWidget1 {
+     visible 1
      ignorepointer 1
      position 0.00452 -0.00016
      size 0.991 0.9808
@@ -56,7 +57,7 @@ FrameWidgetClass Almanac {
        }
       }
       PanelWidgetClass workzone_panel {
-       visible 1
+       visible 0
        ignorepointer 1
        position 0 0
        size 1 0.9101
@@ -179,7 +180,7 @@ FrameWidgetClass Almanac {
            "title visible" 0
            lines 15
           }
-          ItemPreviewWidgetClass ItemPreviewWidget1 {
+          ItemPreviewWidgetClass tool_preview {
            ignorepointer 1
            position 0.01448 0.07804
            size 0.35456 0.8109
@@ -229,7 +230,7 @@ FrameWidgetClass Almanac {
             }
            }
           }
-          TextListboxWidgetClass TextListboxWidget0 {
+          TextListboxWidgetClass yield_listbox {
            position -0.18456 0.07555
            size 0.6 0.8067
            halign center_ref
@@ -242,7 +243,7 @@ FrameWidgetClass Almanac {
            colums "#Item;60;#chance_to_harvest;30"
            lines 15
           }
-          ItemPreviewWidgetClass ItemPreviewWidget2 {
+          ItemPreviewWidgetClass yield_preview {
            ignorepointer 1
            position 0.015 0.076
            size 0.354 0.807
@@ -258,7 +259,7 @@ FrameWidgetClass Almanac {
        }
       }
       PanelWidgetClass lizenze_panel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0
        size 1 0.9101
@@ -390,10 +391,10 @@ FrameWidgetClass Almanac {
            colums "#Item;80;#quantity;20"
            lines 13
           }
-          ItemPreviewWidgetClass ItemPreviewWidget0 {
+          ItemPreviewWidgetClass harvestPreview {
            ignorepointer 1
-           position 471.74701 69.2338
-           size 246.593 303.008
+           position 742.19 66.0142
+           size 386.64401 303.008
            hexactpos 1
            vexactpos 1
            hexactsize 1
