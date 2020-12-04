@@ -97,6 +97,7 @@ class DZLTraderListener
 		
 		if (!type.usePlayerAsSpawnPoint) {
 			item = player.SpawnEntityOnGroundPos(type.type, position.spawnPositionOfVehicles);
+			item.SetOrientation(position.spawnOrientationOfVehicles);
 			
 		} else {
 			if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
