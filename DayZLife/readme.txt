@@ -1,17 +1,3 @@
-- Almanach was für was.
-    - Licesns (Verarbeitung)
-        - Name
-        - Map
-        - Abhängikeiten
-        - craftedItem
-        - durationForCrafting
-        - toolItems
-        - craftItems
-    -  Workzone (Abbauen)
-        - Map
-        - Was wird da abgebaut
-        - Was für Werkzeuge
-
 
 - Schlüssel für gebäude vergeben
 - action player to player money transfer... .

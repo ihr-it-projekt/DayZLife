@@ -1,6 +1,7 @@
 modded class MissionGameplay{
     private bool holdRControl = false;
     private bool holdLControl = false;
+	private UIScriptedMenu almanac;
 
     PlayerBase player
 
@@ -34,16 +35,16 @@ modded class MissionGameplay{
         switch (key){
             case KeyCode.KC_RCONTROL:
                 holdRControl = true;
-
-                if (holdRControl && holdLControl) {
-                    GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
+				 
+                if (holdRControl && holdLControl && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
+                    almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
 
                 break;
             case KeyCode.KC_LCONTROL:
                 holdLControl = true;
-                if (holdRControl && holdLControl) {
-                    GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
+                if (holdRControl && holdLControl && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
+					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
 
                 break;
