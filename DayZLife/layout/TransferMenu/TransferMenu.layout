@@ -1,0 +1,178 @@
+FrameWidgetClass rootFrame {
+ size 0.32742 0.52773
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   size 0.97455 0.97193
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0
+     size 0.97388 0.97112
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       position 0 0
+       size 1 0.13565
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget3 {
+         ignorepointer 1
+         position 0 0
+         size 0.51857 0.78074
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass transferMenu {
+           disabled 0
+           clipchildren 1
+           inheritalpha 0
+           ignorepointer 1
+           keepsafezone 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           draggable 0
+           text "#Transfer_Menu"
+           "exact text" 0
+           text_proportion 0.5
+           "size to text h" 0
+           "size to text v" 0
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget16 {
+         ignorepointer 1
+         position 0.015 0.1396
+         size 0.0978 0.7
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass Button_Closed {
+           color 0.502 0 0 1
+           position 0 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "X"
+           text_proportion 0.7
+          }
+         }
+        }
+       }
+      }
+      TextListboxWidgetClass TransferPlayerList {
+       position 0.01341 0.06782
+       size 0.47318 0.83461
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       "title visible" 1
+       colums "#Player_list"
+       lines 20
+      }
+      PanelWidgetClass PanelWidget4 {
+       ignorepointer 1
+       position 0 0.06689
+       size 0.5 0.86621
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        EditBoxWidgetClass transfer {
+         position -0.00018 0.13934
+         size 0.946 0.105
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
+        }
+        PanelWidgetClass PanelWidget5 {
+         ignorepointer 1
+         position -0.00018 0.01717
+         size 0.946 0.105
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass transferButton {
+           color 0.251 0.502 0 1
+           position 0 0
+           size 0.98 0.98
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Cash_Transfer"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

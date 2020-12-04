@@ -350,6 +350,8 @@ FrameWidgetClass Almanac {
              vexactpos 0
              hexactsize 0
              vexactsize 0
+             "text halign" center
+             "text valign" center
             }
            }
           }
@@ -471,7 +473,7 @@ FrameWidgetClass Almanac {
       }
       PanelWidgetClass PanelWidget16 {
        ignorepointer 1
-       position 0.007 0.013
+       position 0.00452 0.00994
        size 0.04 0.07
        halign right_ref
        hexactpos 0
