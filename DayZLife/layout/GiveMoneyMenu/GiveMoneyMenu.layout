@@ -1,5 +1,5 @@
 FrameWidgetClass rootFrame {
- size 0.32742 0.52773
+ size 0.20711 0.22706
  halign center_ref
  valign center_ref
  hexactpos 0
@@ -34,7 +34,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
        position 0 0
-       size 1 0.13565
+       size 1 0.31209
        halign center_ref
        hexactpos 0
        vexactpos 0
@@ -44,8 +44,8 @@ FrameWidgetClass rootFrame {
        {
         PanelWidgetClass PanelWidget3 {
          ignorepointer 1
-         position 0 0
-         size 0.51857 0.78074
+         position -0.08042 0.00112
+         size 0.79677 0.78074
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -54,7 +54,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          TextWidgetClass transferMenu {
+          TextWidgetClass giveMoneyMenu {
            disabled 0
            clipchildren 1
            inheritalpha 0
@@ -68,9 +68,9 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            draggable 0
-           text "#Transfer_Menu"
+           text "#Give_Money_Menu"
            "exact text" 0
-           text_proportion 0.5
+           text_proportion 0.7
            "size to text h" 0
            "size to text v" 0
            "text halign" center
@@ -80,8 +80,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0.015 0.1396
-         size 0.0978 0.7
+         position 0.0212 0.11075
+         size 0.13964 0.7785
          halign right_ref
          hexactpos 0
          vexactpos 0
@@ -107,66 +107,40 @@ FrameWidgetClass rootFrame {
         }
        }
       }
-      TextListboxWidgetClass TransferPlayerList {
-       position 0.01341 0.06782
-       size 0.47318 0.83461
-       valign center_ref
+      EditBoxWidgetClass input_of_money {
+       position -0 0.30025
+       size 0.9576 0.23
+       halign center_ref
+       valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       "title visible" 1
-       colums "#Player_list"
-       lines 20
+       style DefaultBorder
       }
-      PanelWidgetClass PanelWidget4 {
+      PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position 0 0.06689
-       size 0.5 0.86621
-       halign right_ref
-       valign center_ref
+       position -0 0.03569
+       size 0.9576 0.23
+       halign center_ref
+       valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
        style editor_quad_dark
        {
-        EditBoxWidgetClass transfer {
-         position -0.00018 0.13934
-         size 0.946 0.105
+        ButtonWidgetClass giveMoneyButton {
+         color 0.251 0.502 0 1
+         position 0 0
+         size 0.98 0.98
          halign center_ref
-         valign bottom_ref
+         valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style DefaultBorder
-        }
-        PanelWidgetClass PanelWidget5 {
-         ignorepointer 1
-         position -0.00018 0.01717
-         size 0.946 0.105
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass transferButton {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 0.98 0.98
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Cash_Transfer"
-          }
-         }
+         text "#Give_Money"
         }
        }
       }
