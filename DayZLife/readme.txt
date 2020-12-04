@@ -1,6 +1,5 @@
 
-- Schlüssel für gebäude vergeben
-- action player to player money transfer... .
+- Erweiterung Code Look fürs haus
 - bank deaktivierbar machen
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health / quantity

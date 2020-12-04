@@ -73,6 +73,23 @@ class DZLBankListener
                 }
                 GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE, new Param3<ref DZLPlayer, ref DZLBank, string>(dzlPlayerSender, bankTransfer, messageDeposit), true, sender);
             }
+        } else if (rpc_type == DAY_Z_LIFE_MONEY_TRANSFER) {
+            autoptr Param3<PlayerBase, PlayerBase, int> paramDepositPlayerPlayer;
+            string messageDepositPP = "";
+            if (ctx.Read(paramDepositPlayerPlayer)){
+                DZLPlayer dzlPlayerSenderPP = new DZLPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId());
+                DZLPlayer dzlPlayerReciverPP = new DZLPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId());
+
+				if(dzlPlayerSenderPP.money >= paramDepositPlayerPlayer.param3) {
+				    messageDepositPP = "#money_transfer_successful";
+                    dzlPlayerSenderPP.DepositMoneyFromPlayerToOtherPlayer(dzlPlayerReciverPP, paramDepositPlayerPlayer.param3);
+                    GetGame().RPCSingleParam(paramDepositPlayerPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId())), true, sender);
+                    GetGame().RPCSingleParam(paramDepositPlayerPlayer.param2, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId())), true, paramDepositPlayerPlayer.param2.GetIdentity());
+                } else {
+                    messageDepositPP = "#error_not_enough_money_to_transfer";
+                }
+				GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_MONEY_TRANSFER_RESPONSE, new Param1<string>(messageDepositPP), true, sender);
+            }
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
             autoptr Param1<PlayerBase> paramGetBankData;
             if (ctx.Read(paramGetBankData)){

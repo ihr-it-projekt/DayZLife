@@ -17,5 +17,6 @@ modded class ActionConstructor
 		actions.Insert(DZLActionLockDoors);
 		actions.Insert(DZLActionRaidDoors);
 		actions.Insert(DZLActionUnLockDoors);
+		actions.Insert(DZLActionTransferMoney);
     }
 }

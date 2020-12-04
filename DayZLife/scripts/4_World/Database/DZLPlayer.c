@@ -49,6 +49,13 @@ class DZLPlayer {
         Save();
     }
 	
+	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+		playerTarget.AddMoneyToPlayer(moneyToTransfer);
+		money -= moneyToTransfer;
+		
+		Save();
+	}
+	
 	void DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
 		playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
 		

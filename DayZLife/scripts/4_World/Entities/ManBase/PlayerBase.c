@@ -13,6 +13,7 @@ modded class PlayerBase
 	ref DZLLicenceProgressBar progressBarLicence;
 	ref DZLDoorRaidProgressBar progressBarRaid;
 	ref DZLMessageMenu messageMenu;
+	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -54,6 +55,7 @@ modded class PlayerBase
         AddAction(DZLActionLockDoors, InputActionMap);
         AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionUnLockDoors, InputActionMap);
+        AddAction(DZLActionTransferMoney, InputActionMap);
 
         if (GetGame().IsClient() && IsDZLPlayer()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -179,6 +181,12 @@ modded class PlayerBase
 		InitMenu(licenceMenu);
 		return licenceMenu;
 	}
+	
+	DZLPlayerMoneyTransferMenu GetPlayerMoneyTransferMenu() {
+		moneyTransferMenu = new DZLPlayerMoneyTransferMenu();
+		InitMenu(moneyTransferMenu);
+		return moneyTransferMenu;
+	}
 
     DZLLicenceProgressBar GetLicenceProgressBar() {
         progressBarLicence = new DZLLicenceProgressBar();
@@ -209,6 +217,8 @@ modded class PlayerBase
 			alamancMenu.OnHide();
 		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
 			progressBarRaid.OnHide();
+		} else if (moneyTransferMenu && moneyTransferMenu.IsVisible()) {
+			moneyTransferMenu.OnHide();
 		}
 	}
 
