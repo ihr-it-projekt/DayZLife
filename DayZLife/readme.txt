@@ -1,18 +1,27 @@
+- medic
+    - kann nur legale Jobs ausführen
+
+
+- Admin Job Menu
+    - nur für Cops
+
+- Inactive Tracker
+    - wenn keine Activität länger als 10 minuten, dann muss Spieler innerhalb von 15 sec bestätigen das er Paycheck bekommt.
+    - Button zum bestätigen immer an anderer position
+
+
 
 - Erweiterung Code Look fürs haus
-- bank deaktivierbar machen
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health / quantity
 - nicht füttern von NPC
 - Waffen für NPC
 - paywall
 - Autos verkaufen über Timer und wer auf Fahrer Sitz saß
-- Nach Erwerb der Ersten Lizenz wird bei der zweiten eine Abhängigkeit verlangt
 - bankraub zeiten einstellbar machen, mindest anzahl spieler für banckraub
 - telefon mod
     - nur anrufen wenn bekannt
     - blocken von spielern
-    -
 - Rollen
     - Rollen Klamoten
     - Rollen Spieler Anzahl begrenzen pro Job
