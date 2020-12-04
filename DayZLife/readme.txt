@@ -7,7 +7,6 @@
 - nicht füttern von NPC
 - Waffen für NPC
 - paywall
-- Orientation für Spawn Fahrzeuge
 - Autos verkaufen über Timer und wer auf Fahrer Sitz saß
 - Nach Erwerb der Ersten Lizenz wird bei der zweiten eine Abhängigkeit verlangt
 - bankraub zeiten einstellbar machen, mindest anzahl spieler für banckraub
