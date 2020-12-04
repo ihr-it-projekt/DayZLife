@@ -12,7 +12,7 @@
 			case KeyCode.KC_ESCAPE:
 				player.CloseMenu();
 				break;
-			case KeyCode.KC_LCONTROL + KeyCode.KC_RCONTROL:
+			case KeyCode.KC_RCONTROL:
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
 				break;
 			default:

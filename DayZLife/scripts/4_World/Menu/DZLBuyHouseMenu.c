@@ -15,6 +15,7 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 	override Widget Init(){
         super.Init();
 		mapWidget = creator.GetMapWidget("Map");
+		mapWidget.SetScale(0.1);
 		storageTextWidget = creator.GetTextWidget("Number_of_Storage");
 
 	    return layoutRoot;

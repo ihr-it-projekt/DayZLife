@@ -42,7 +42,7 @@ class DZLLicenceConfig
                 craftItems = new DZLLicenceCraftItemCollection;
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Diamond", 2, 50));
-                licences.collection.Insert(new DZLLicence(109, 100, "", "4680.000000 339.609009 10340.000000", 5, "Diamond Licence", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 100, "Diamond Licence", "4680.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
 				// End Crafting
                 // Position of licence dealer
