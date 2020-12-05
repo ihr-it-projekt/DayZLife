@@ -14,6 +14,8 @@ modded class PlayerBase
 	ref DZLDoorRaidProgressBar progressBarRaid;
 	ref DZLMessageMenu messageMenu;
 	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
+	ref DZLSpawnJobMenu spanwJobMenu;
+	ref DZLSpawnPositionMenu spawnPositionMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -201,6 +203,19 @@ modded class PlayerBase
         progressBarRaid.SetPlayer(this);
         return progressBarRaid;
     }
+	
+	
+	DZLSpawnJobMenu GetJobSpawnMenu() {
+		spanwJobMenu = new DZLSpawnJobMenu();
+		InitMenu(spanwJobMenu);
+		return spanwJobMenu;
+	}
+	
+	DZLSpawnPositionMenu GetSpawnPositionMenu(string jobId) {
+		spawnPositionMenu = new DZLSpawnPositionMenu(jobId);
+		InitMenu(spawnPositionMenu);
+		return spawnPositionMenu;
+	}
 
 	void CloseMenu() {
 		if (houseBuyMenu && houseBuyMenu.IsVisible()) {

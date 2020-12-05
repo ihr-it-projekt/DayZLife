@@ -14,7 +14,7 @@ class DZLSpawnJobMenu : DZLBaseMenu
         civilian = creator.GetButtonWidget("civ_button");
         medic = creator.GetButtonWidget("medic_button");
 
-		police.Show(false);
+		return layoutRoot;
     }
 	
 	override void OnShow() {
@@ -27,17 +27,19 @@ class DZLSpawnJobMenu : DZLBaseMenu
         if (super.OnClick(w, x, y, button)) return true;
 
         if (w == police) {
-
+           return openSpawnPositionMenu(DAY_Z_LIFE_JOB_COP);
         } else if (w == medic) {
-
+            return openSpawnPositionMenu(DAY_Z_LIFE_JOB_MEDIC);
         } else if (w == civilian) {
-
+            return openSpawnPositionMenu(DAY_Z_LIFE_JOB_CIVIL);
         }
 
         return false;
     }
 
-    private bool OpenSpawnPositionMenu() {
-
+    private bool OpenSpawnPositionMenu(string jobId) {
+        player.GetSpawnPositionMenu(jobId);
+		OnHide();
+		return true;
     }
 }

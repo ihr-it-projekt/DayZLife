@@ -16,4 +16,10 @@ modded class MissionServer {
 
         DZLLockedHouses.OnServerStart();
     }
-};
+	
+	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
+		PlayerBase player = super.OnClientNewEvent(identity, pos, ctx);
+		
+		
+	}
+}

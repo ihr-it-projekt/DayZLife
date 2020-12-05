@@ -2,7 +2,9 @@ class DZLJobConfig
 {
     ref array<ref DZLWorkZone> workZones;
     string version = "1";
-    ref DZLJobSpawnPoints jobSpawnPoints;
+    ref DZLJobSpawnPoints copSpawnPoints;
+    ref DZLJobSpawnPoints medicSpawnPoints;
+    ref DZLJobSpawnPoints civilSpawnPoints;
 
     void DZLJobConfig() {
         if (!Load()) {
@@ -379,8 +381,20 @@ class DZLJobConfig
 		    Save();
         }
 
-        jobSpawnPoints = new DZLJobSpawnPoints;
+        copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
+        medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
+        civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
     }
+	
+	DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
+		if (searchJobId == DAY_Z_LIFE_JOB_COP) {
+			return copSpawnPoints;
+		} else if (searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
+			return medicSpawnPoints;
+		}
+		
+		return civilSpawnPoints;
+	}
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json")) {
@@ -391,7 +405,10 @@ class DZLJobConfig
     }
 
     private void Save(){
-        jobSpawnPoints = null;
+
+        copSpawnPoints = null;
+        medicSpawnPoints = null;
+        civilSpawnPoints = null;
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLJobConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);

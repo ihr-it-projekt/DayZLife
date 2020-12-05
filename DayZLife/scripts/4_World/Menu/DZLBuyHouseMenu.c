@@ -34,13 +34,10 @@ class DZLBuyHouseMenu : DZLBaseHouseMenu
 			preview.UpdatePreview(actualHouseDef.houseType);
 			
 			if(player && !player.GetLastMapInfo(scale, mapPos)) {
-                mapPos = GetGame().GetCurrentCameraPosition();
-                scale = 0.1;
+                mapPos = GetGame().GetCurrentCameraPosition();;
 			}
 
-			mapWidget.SetScale(scale);
-			mapWidget.SetMapPos(mapPos);
-			mapWidget.AddUserMark(target.GetPosition(), "", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
+			DZLDisplayHelper.UpdateMap(mapWidget, mapPos);
         }
 	}
 	

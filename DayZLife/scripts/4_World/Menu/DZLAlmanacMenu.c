@@ -86,7 +86,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			if (!zoneWZL) return true;
 
-			SetPosOnMap(workingZoneMap, zoneWZL.position);
+			DZLDisplayHelper.UpdateMap(workingZoneMap, zoneWZL.position);
 			
 			workingZoneToolsList.ClearItems();
 			workzoneYieldList.ClearItems();
@@ -165,7 +165,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			if (!licence) return true;
 			
-			SetPosOnMap(licenceMap, licence.position);
+			DZLDisplayHelper.UpdateMap(licenceMap, licence.position);
 
 			name = "#no_tool_required";
 			
@@ -249,13 +249,6 @@ class DZLAlmanacMenu : DZLBaseMenu
         if (previewItem) {
             GetGame().ObjectDelete(previewItem);
         }
-	}
-
-	private void SetPosOnMap(MapWidget mapWidget, vector pos) {
-        mapWidget.ClearUserMarks();
-        mapWidget.SetScale(1);
-        mapWidget.SetMapPos(pos);
-        mapWidget.AddUserMark(pos, "", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
 	}
 
 }

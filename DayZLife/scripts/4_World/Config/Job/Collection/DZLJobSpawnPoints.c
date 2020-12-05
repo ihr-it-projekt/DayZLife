@@ -11,18 +11,38 @@ class DZLJobSpawnPoints
 			array<string> items = new array<string>;
 						
 			if (DAY_Z_LIFE_DEBUG) {
-				items.Insert("");
-				
-				point = new DZLSpawnPoint("","",items);
-				
-				spawnPoints.Insert(point);
+			    if (jobId == DAY_Z_LIFE_JOB_COP) {
+                    items.Insert("CombatKnife");
+                    point = new DZLSpawnPoint("Cop", "4620 340 10350", "0 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("HuntingKnife");
+                    point = new DZLSpawnPoint("Military", "4620 340 10330", "0 0 0", items);
+                    spawnPoints.Insert(point);
+
+			    } else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
+                    items.Insert("KitchenKnife");
+                    point = new DZLSpawnPoint("Cop", "4620 340 10370", "0 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("SteakKnife");
+                    point = new DZLSpawnPoint("Cop", "4620 340 10390", "0 0 0", items);
+                    spawnPoints.Insert(point);
+			    } else {
+                    items.Insert("Pickaxe");
+                    point = new DZLSpawnPoint("Cop", "4620 340 10310", "0 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("Crowbar");
+                    point = new DZLSpawnPoint("Cop", "4620 340 10290", "0 0 0", items);
+                    spawnPoints.Insert(point);
+			    }
 			} else {
-			
+			    // TODO
 			}
-			
-	
-			
-            
             Save();
         }
     }
@@ -36,7 +56,6 @@ class DZLJobSpawnPoints
     }
 
     private void Save(){
-        jobSpawnPoints = null;
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLJobSpawnPoints>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "jobSpawnPoints.json", this);
