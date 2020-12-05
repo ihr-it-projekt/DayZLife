@@ -35,7 +35,7 @@ FrameWidgetClass rootFrame {
      {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
-       position 0.00045 -0
+       position 0.00045 0
        size 0.25 0.99835
        valign center_ref
        hexactpos 0
@@ -44,7 +44,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        TextListboxWidgetClass TextListboxWidget0 {
+        TextListboxWidgetClass spawnPoints {
          position 0.00003 0
          size 0.96605 0.985
          halign center_ref
@@ -55,12 +55,12 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style Default
          "title visible" 1
-         colums "#Spawn"
+         colums "#SpawnPoints"
          lines 25
         }
        }
       }
-      MapWidgetClass MapWidget0 {
+      MapWidgetClass map {
        position 480.86398 8
        size 1415 929.54999
        hexactpos 1
@@ -92,7 +92,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          ButtonWidgetClass ButtonWidget0 {
+          ButtonWidgetClass spawnButton {
            color 0.251 0.502 0 1
            size 0.98 0.9
            halign center_ref
@@ -117,7 +117,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          ButtonWidgetClass ButtonWidget1 {
+          ButtonWidgetClass randomButton {
            color 0 0.1255 0.502 1
            position 0 0
            size 0.98 0.9

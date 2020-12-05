@@ -6,7 +6,10 @@ class DZLBaseMenu: UIScriptedMenu
     protected ButtonWidget closeButton;
     protected PlayerBase player;
     protected DZLPlayer dzlPlayer;
-	
+    protected bool hasCloseButton = true;
+    protected bool hideCourser = true;
+    protected bool showCourser = true;
+
 
     protected void Construct() {
         if(GetGame().IsClient()){
@@ -23,6 +26,7 @@ class DZLBaseMenu: UIScriptedMenu
         this.player = _player;
         this.dzlPlayer = _player.dzlPlayer;
     }
+
     void UpdatePlayer(PlayerBase player) {
         SetPlayer(player);
         UpdateGUI();
@@ -44,8 +48,12 @@ class DZLBaseMenu: UIScriptedMenu
 
     override Widget Init() {
         creator = new DZLUIItemCreator(layoutPath);
-        closeButton = creator.GetButtonWidget("Button_Closed");
-        closeButton.Show(true);
+
+        if (hasCloseButton) {
+            closeButton = creator.GetButtonWidget("Button_Closed");
+            closeButton.Show(true);
+        }
+
         layoutRoot = creator.GetLayoutRoot();
 
         layoutRoot.Show(false);
@@ -67,16 +75,23 @@ class DZLBaseMenu: UIScriptedMenu
     }
 
     override void OnShow() {
-        GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-        GetGame().GetUIManager().ShowCursor(true);
-        GetGame().GetInput().ChangeGameFocus(1);
+        super.OnShow();
+
+        if (showCourser) {
+            GetGame().GetUIManager().ShowCursor(true);
+            GetGame().GetInput().ChangeGameFocus(1);
+            GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
+        }
     }
 
     override void OnHide() {
         super.OnHide();
-        GetGame().GetUIManager().ShowCursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(true);
+
+        if (hideCourser) {
+            GetGame().GetUIManager().ShowCursor(false);
+            GetGame().GetInput().ResetGameFocus();
+            GetGame().GetMission().PlayerControlEnable(true);
+        }
         Close();
     }
 }

@@ -2,6 +2,7 @@ class DZLJobConfig
 {
     ref array<ref DZLWorkZone> workZones;
     string version = "1";
+    ref DZLJobSpawnPoints jobSpawnPoints;
 
     void DZLJobConfig() {
         if (!Load()) {
@@ -9,7 +10,6 @@ class DZLJobConfig
             array<ref DZLHarvestItemToolRelation> harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
             array<string> itemsThatCanHarvest = new array<string>;
             array<string> itemsThatNeededForHarvest = new array<string>;
-
 
 			if (DAY_Z_LIFE_DEBUG) {
                 //Harvest Stone
@@ -378,6 +378,8 @@ class DZLJobConfig
 			
 		    Save();
         }
+
+        jobSpawnPoints = new DZLJobSpawnPoints;
     }
 
     private bool Load(){
@@ -389,6 +391,7 @@ class DZLJobConfig
     }
 
     private void Save(){
+        jobSpawnPoints = null;
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLJobConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);

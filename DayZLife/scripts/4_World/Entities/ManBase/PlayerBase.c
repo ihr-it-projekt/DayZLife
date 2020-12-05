@@ -21,6 +21,7 @@ modded class PlayerBase
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
 	bool isOnHarvest = false;
+	bool isPolice = false;
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
@@ -32,6 +33,7 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsRealPlayer");
         RegisterNetSyncVariableBool("IsLicencePoint");
         RegisterNetSyncVariableBool("IsTrader");
+        RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 	}
 
