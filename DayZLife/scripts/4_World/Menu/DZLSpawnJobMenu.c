@@ -27,18 +27,18 @@ class DZLSpawnJobMenu : DZLBaseMenu
         if (super.OnClick(w, x, y, button)) return true;
 
         if (w == police) {
-           return openSpawnPositionMenu(DAY_Z_LIFE_JOB_COP);
+           return OpenSpawnPositionMenu(DAY_Z_LIFE_JOB_COP);
         } else if (w == medic) {
-            return openSpawnPositionMenu(DAY_Z_LIFE_JOB_MEDIC);
+            return OpenSpawnPositionMenu(DAY_Z_LIFE_JOB_MEDIC);
         } else if (w == civilian) {
-            return openSpawnPositionMenu(DAY_Z_LIFE_JOB_CIVIL);
+            return OpenSpawnPositionMenu(DAY_Z_LIFE_JOB_CIVIL);
         }
 
         return false;
     }
 
-    private bool OpenSpawnPositionMenu(string jobId) {
-        player.GetSpawnPositionMenu(jobId);
+    bool OpenSpawnPositionMenu(string jobId) {
+        GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(jobId), null);
 		OnHide();
 		return true;
     }

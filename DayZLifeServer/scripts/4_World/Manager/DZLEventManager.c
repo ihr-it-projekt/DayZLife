@@ -9,6 +9,7 @@ class DZLEventManager
     ref DZLLicenceListener licenceListener;
     ref DZLRaidListener raidListener;
     ref DZLTraderListener traderListener;
+    ref DZLPlayerSpawnListener spawnPointListener;
 
     void DZLEventManager() {
         buyHouse = new DZLBuyHouseListener;
@@ -20,5 +21,6 @@ class DZLEventManager
         licenceListener = new DZLLicenceListener;
         raidListener = new DZLRaidListener;
         traderListener = new DZLTraderListener;
+        spawnPointListener = new DZLPlayerSpawnListener;
     }
 }

@@ -40,7 +40,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 
     override bool OnClick(Widget w, int x, int y, int button) {
 		int index;
-		DZLSpawnPoint point
+		DZLSpawnPoint point;
 		
         if (super.OnClick(w, x, y, button)) return true;
 
@@ -49,10 +49,19 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 			
 			spawnPoints.GetItemData(index, 0, point);
 			
-			
+			SendSpawnLocation(point, player);
 
+			return true;
         } else if (w == spawn) {
+            index = spawnPoints.GetSelectedRow();
 
+            if (index != -1)return true;
+
+            spawnPoints.GetItemData(index, 0, point);
+
+            SendSpawnLocation(point, player);
+
+            return true;
         } else if (w == spawnPoints) {
 			index = spawnPoints.GetSelectedRow();
 			
@@ -61,9 +70,15 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 			spawnPoints.GetItemData(index, 0, point);
 			
 			DZLDisplayHelper.UpdateMap(spawnMap, point.point);
+
+			return true;
         }
 
         return false;
+    }
+
+    void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param3<string, PlayerBase, string>(point.id, player, jobId), true);
     }
 
 }

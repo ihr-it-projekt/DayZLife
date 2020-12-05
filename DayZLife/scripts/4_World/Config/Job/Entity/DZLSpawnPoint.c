@@ -1,4 +1,4 @@
-class DZLSpawnPoint
+class DZLSpawnPoint: DZLIdModel
 {
     string name;
     vector point;
@@ -10,5 +10,6 @@ class DZLSpawnPoint
         this.point = point;
         this.orientation = orientation;
         this.items = items;
+        SetId();
     }
 }

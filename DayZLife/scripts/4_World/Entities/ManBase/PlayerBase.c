@@ -24,6 +24,7 @@ modded class PlayerBase
 	bool IsRealPlayer = false;
 	bool isOnHarvest = false;
 	bool isPolice = false;
+	
 
 	void ~PlayerBase() {
 	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);

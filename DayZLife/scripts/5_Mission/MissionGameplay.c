@@ -1,9 +1,16 @@
-modded class MissionGameplay{
+modded class MissionGameplay
+{
     private bool holdRControl = false;
     private bool holdLControl = false;
 	private UIScriptedMenu almanac;
+	private ScriptCallQueue queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
 
-    PlayerBase player
+   	PlayerBase player
+	
+	override void OnInit() {
+		super.OnInit();
+		GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+	}
 
     override void OnKeyRelease(int key) {
         player = PlayerBaseHelper.GetPlayer();
@@ -23,6 +30,30 @@ modded class MissionGameplay{
             default:
                 super.OnKeyRelease(key);
                 break;
+        }
+    }
+
+    void CreateSpawnMenu() {
+        player = PlayerBaseHelper.GetPlayer();
+        if (!player) {
+            DebugMessageDZL("no player to spawn");
+            return;
+        }
+
+        GetGame().GetUIManager().ShowScriptedMenu(player.GetJobSpawnMenu(), null);
+        queue.Remove(CreateSpawnMenu);
+    }
+
+
+    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (rpc_type == DAY_Z_LIFE_NEW_SPAWN_CLIENT) {
+            player = PlayerBaseHelper.GetPlayer();
+            if (!player) {
+                DebugMessageDZL("no player to spawn");
+                return;
+            }
+
+            queue.CallLater(CreateSpawnMenu, 1750, true);
         }
     }
 
