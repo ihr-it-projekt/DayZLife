@@ -19,7 +19,10 @@ class DZLActionTransferMoney: ActionInteractBase
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 		if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
-        if (!EntityAI.Cast(target.GetObject()).IsDZLPlayer()) return false;
+		
+		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+		
+        if (!targetPlayer.IsDZLPlayer()) return false;
 
         return true;
     }
