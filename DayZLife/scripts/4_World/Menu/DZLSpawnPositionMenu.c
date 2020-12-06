@@ -5,37 +5,44 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 	private ButtonWidget randomSpawn;
 	private ButtonWidget spawn;
 	private string jobId;
+	private XComboBoxWidget jobSelection;
+	private ref array<string> activeJobIds;
 	
-	void DZLSpawnPositionMenu(string jobId) {
-		this.jobId = jobId;
+	void DZLSpawnPositionMenu() {
+		hasCloseButton = false;
 	}
 
     override Widget Init() {
         layoutPath = "DayZLife/layout/SpawnMenu/SpawnMenu.layout";
-        showCourser = false;
-        hasCloseButton = false;
+        activeJobIds = new array<string>;
 
+		DebugMessageDZL("6");
         super.Init();
-
+        DebugMessageDZL("7");
 		spawnMap = creator.GetMapWidget("map");
 		spawnPoints = creator.GetTextListboxWidget("spawnPoints");
         randomSpawn = creator.GetButtonWidget("randomButton");
         spawn = creator.GetButtonWidget("spawnButton");
+		jobSelection = creator.GetXComboBoxWidget("spawn");
+		
 		
 		spawn.Show(false);
-		
+		DebugMessageDZL("5");
 		return layoutRoot;
     }
 	
 	override void OnShow() {
+		DebugMessageDZL("1");
 	    super.OnShow();
+	    DebugMessageDZL("3");
+		jobId = config.jobIds.Get(0);
 		
-		DZLJobSpawnPoints spawnPointCollection = config.jobConfig.GetJobSpanwPointById(jobId);
-		
-		foreach(DZLSpawnPoint point: spawnPointCollection.spawnPoints) {
-			spawnPoints.AddItem(point.name, point, 0);
+		foreach(string configJobId: config.jobIds) {
+			activeJobIds.Insert(configJobId);
 		}
-
+		
+		UpdateSpawnPoints();
+		DebugMessageDZL("4");
 	}
 
     override bool OnClick(Widget w, int x, int y, int button) {
@@ -72,7 +79,15 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 			DZLDisplayHelper.UpdateMap(spawnMap, point.point);
 
 			return true;
-        }
+        } else if(jobSelection == w) {
+			index = jobSelection.GetCurrentItem();
+			
+			if (index != -1)return true;		
+			
+			jobId = activeJobIds.Get(index);
+			
+			UpdateSpawnPoints();
+		}
 
         return false;
     }
@@ -80,5 +95,16 @@ class DZLSpawnPositionMenu : DZLBaseMenu
     void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param3<string, PlayerBase, string>(point.id, player, jobId), true);
     }
-
+	
+	private void UpdateSpawnPoints() {
+	    DebugMessageDZL("9");
+		DZLJobSpawnPoints spawnPointCollection = config.GetJobSpanwPointById(jobId);
+		
+		spawnPoints.ClearItems();
+		foreach(DZLSpawnPoint point: spawnPointCollection.spawnPoints) {
+			spawnPoints.AddItem(point.name, point, 0);
+		}
+	    DebugMessageDZL("8");
+	}
+	
 }

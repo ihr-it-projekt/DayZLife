@@ -18,7 +18,7 @@ class DZLPlayerSpawnListener
                 PlayerBase player = param.param2;
                 player.RemoveAllItems();
 
-                DZLJobSpawnPoints points = config.jobConfig.GetJobSpanwPointById(param.param3);
+                DZLJobSpawnPoints points = config.GetJobSpanwPointById(param.param3);
 				
 				DZLSpawnPoint point = points.FindSpawnById(param.param1);
 				

@@ -14,7 +14,6 @@ modded class PlayerBase
 	ref DZLDoorRaidProgressBar progressBarRaid;
 	ref DZLMessageMenu messageMenu;
 	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
-	ref DZLSpawnJobMenu spanwJobMenu;
 	ref DZLSpawnPositionMenu spawnPositionMenu;
 
 	bool IsDZLBank = false;
@@ -25,11 +24,6 @@ modded class PlayerBase
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	
-
-	void ~PlayerBase() {
-	    GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-	}
-
 	override void Init() {
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
@@ -62,49 +56,16 @@ modded class PlayerBase
         AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
 
+        InitDZLPlayer();
+    }
+
+    void InitDZLPlayer() {
         if (GetGame().IsClient() && IsDZLPlayer()) {
-            GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
             Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
-        }
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE) {
-            Param1 <ref DZLConfig> configParam;
-            DebugMessageDZL("Initialize DZLConfig");
-            if (ctx.Read(configParam)){
-                this.config = configParam.param1;
-                IsRealPlayer = true;
-            }
-        } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {
-            Param1 <ref DZLPlayerHouse> houseParam;
-            DebugMessageDZL("Initialize DZLPlayerHouse");
-            if (ctx.Read(houseParam)){
-                this.house = houseParam.param1;
-            }
-        } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
-            Param1 <ref DZLPlayer> dzlPlayerParam;
-            DebugMessageDZL("Initialize DZLPlayer");
-            if (ctx.Read(dzlPlayerParam)){
-                this.dzlPlayer = dzlPlayerParam.param1;
-                UpdatePlayerAtDependencies();
-            }
-        } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
-            Param1 <ref DZLBank> dzlBankParam;
-            DebugMessageDZL("Initialize Bank");
-            if (ctx.Read(dzlBankParam)){
-                this.dzlBank = dzlBankParam.param1;
-            }
-        } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
-            Param1 <string> dzlMessage;
-            DebugMessageDZL("Receive Message");
-            if (ctx.Read(dzlMessage)){
-                DisplayMessage(dzlMessage.param1);
-            }
         }
     }
 
@@ -205,15 +166,8 @@ modded class PlayerBase
         return progressBarRaid;
     }
 	
-	
-	DZLSpawnJobMenu GetJobSpawnMenu() {
-		spanwJobMenu = new DZLSpawnJobMenu();
-		InitMenu(spanwJobMenu);
-		return spanwJobMenu;
-	}
-	
-	DZLSpawnPositionMenu GetSpawnPositionMenu(string jobId) {
-		spawnPositionMenu = new DZLSpawnPositionMenu(jobId);
+	DZLSpawnPositionMenu GetSpawnPositionMenu() {
+		spawnPositionMenu = new DZLSpawnPositionMenu();
 		InitMenu(spawnPositionMenu);
 		return spawnPositionMenu;
 	}
