@@ -58,6 +58,8 @@ class DZLBaseMenu: UIScriptedMenu
 
         layoutRoot.Show(false);
 
+        DebugMessageDZL("2");
+
         return layoutRoot;
     }
 
@@ -77,21 +79,17 @@ class DZLBaseMenu: UIScriptedMenu
     override void OnShow() {
         super.OnShow();
 
-        if (showCourser) {
-            GetGame().GetUIManager().ShowCursor(true);
-            GetGame().GetInput().ChangeGameFocus(1);
-            GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
-        }
+        GetGame().GetUIManager().ShowCursor(true);
+        GetGame().GetInput().ChangeGameFocus(1);
+        GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
     }
 
     override void OnHide() {
         super.OnHide();
 
-        if (hideCourser) {
-            GetGame().GetUIManager().ShowCursor(false);
-            GetGame().GetInput().ResetGameFocus();
-            GetGame().GetMission().PlayerControlEnable(true);
-        }
+        GetGame().GetUIManager().ShowCursor(false);
+        GetGame().GetInput().ResetGameFocus();
+        GetGame().GetMission().PlayerControlEnable(true);
         Close();
     }
 }

@@ -6,6 +6,10 @@ class DZLConfig
 	ref DZLJobConfig jobConfig;
 	ref DZLLicenceConfig licenceConfig;
 	ref DZLTraderConfig traderConfig;
+	ref DZLJobSpawnPoints copSpawnPoints;
+    ref DZLJobSpawnPoints medicSpawnPoints;
+    ref DZLJobSpawnPoints civilSpawnPoints;
+    ref array<string> jobIds;
 
     void DZLConfig() {
         houseConfig = new DZLHouseConfig;
@@ -14,7 +18,26 @@ class DZLConfig
         jobConfig = new DZLJobConfig;
 		licenceConfig = new DZLLicenceConfig;
 		traderConfig = new DZLTraderConfig;
+		copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
+        medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
+        civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
+
+        jobIds = new array<string>;
+        jobIds.Insert(DAY_Z_LIFE_JOB_CIVIL);
+        jobIds.Insert(DAY_Z_LIFE_JOB_MEDIC);
+        jobIds.Insert(DAY_Z_LIFE_JOB_COP);
     }
+
+    DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
+        if (searchJobId == DAY_Z_LIFE_JOB_COP) {
+            return copSpawnPoints;
+        } else if (searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
+            return medicSpawnPoints;
+        }
+
+        return civilSpawnPoints;
+    }
+
 	
 	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
 		return houseConfig.houseConfigs;
