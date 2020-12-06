@@ -108,7 +108,7 @@ FrameWidgetClass rootFrame {
        }
       }
       EditBoxWidgetClass input_of_money {
-       position -0 0.30025
+       position 0 0.30025
        size 0.9576 0.23
        halign center_ref
        valign bottom_ref
@@ -120,7 +120,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position -0 0.03569
+       position 0 0.03569
        size 0.9576 0.23
        halign center_ref
        valign bottom_ref
@@ -141,6 +141,7 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          text "#Give_Money"
+         text_proportion 0.7
         }
        }
       }
