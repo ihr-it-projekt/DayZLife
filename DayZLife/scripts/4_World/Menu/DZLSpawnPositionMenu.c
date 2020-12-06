@@ -114,6 +114,9 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 		foreach(DZLSpawnPoint point: spawnPointCollection.spawnPoints) {
 			spawnPoints.AddItem(point.name, point, 0);
 		}
+		
+		spawnMap.ClearUserMarks();
+        spawnMap.SetScale(0.1);
 	}
 	
 }
