@@ -10,46 +10,55 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 	
 	void DZLSpawnPositionMenu() {
 		hasCloseButton = false;
+		Construct();
+	}
+
+	void ~DZLSpawnPositionMenu() {
+	    Destruct();
+	}
+
+	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (rpc_type == DAY_Z_LIFE_NEW_SPAWN_RESPONSE) {
+            OnHide();
+        }
 	}
 
     override Widget Init() {
         layoutPath = "DayZLife/layout/SpawnMenu/SpawnMenu.layout";
         activeJobIds = new array<string>;
 
-		DebugMessageDZL("6");
         super.Init();
-        DebugMessageDZL("7");
 		spawnMap = creator.GetMapWidget("map");
 		spawnPoints = creator.GetTextListboxWidget("spawnPoints");
         randomSpawn = creator.GetButtonWidget("randomButton");
         spawn = creator.GetButtonWidget("spawnButton");
 		jobSelection = creator.GetXComboBoxWidget("spawn");
 		
-		
 		spawn.Show(false);
-		DebugMessageDZL("5");
 		return layoutRoot;
     }
 	
 	override void OnShow() {
-		DebugMessageDZL("1");
 	    super.OnShow();
-	    DebugMessageDZL("3");
 		jobId = config.jobIds.Get(0);
 		
 		foreach(string configJobId: config.jobIds) {
 			activeJobIds.Insert(configJobId);
 		}
 		
+		jobSelection.ClearAll();
+		jobSelection.AddItem("#Civ");
+		jobSelection.AddItem("#Medic");
+		jobSelection.AddItem("#Cop");
+		
 		UpdateSpawnPoints();
-		DebugMessageDZL("4");
 	}
 
     override bool OnClick(Widget w, int x, int y, int button) {
+		if (super.OnClick(w, x, y, button)) return true;
+		
 		int index;
 		DZLSpawnPoint point;
-		
-        if (super.OnClick(w, x, y, button)) return true;
 
         if (w == randomSpawn) {
 			index = Math.RandomIntInclusive(0, spawnPoints.GetNumItems() - 1);
@@ -62,7 +71,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu
         } else if (w == spawn) {
             index = spawnPoints.GetSelectedRow();
 
-            if (index != -1)return true;
+            if (index == -1)return true;
 
             spawnPoints.GetItemData(index, 0, point);
 
@@ -72,17 +81,19 @@ class DZLSpawnPositionMenu : DZLBaseMenu
         } else if (w == spawnPoints) {
 			index = spawnPoints.GetSelectedRow();
 			
-			if (index != -1)return true;				
+			if (index == -1)return true;				
 						
 			spawnPoints.GetItemData(index, 0, point);
 			
 			DZLDisplayHelper.UpdateMap(spawnMap, point.point);
+			
+			spawn.Show(true);
 
 			return true;
-        } else if(jobSelection == w) {
+        } else if(w == jobSelection) {
 			index = jobSelection.GetCurrentItem();
 			
-			if (index != -1)return true;		
+			if (index == -1) return true;
 			
 			jobId = activeJobIds.Get(index);
 			
@@ -97,14 +108,12 @@ class DZLSpawnPositionMenu : DZLBaseMenu
     }
 	
 	private void UpdateSpawnPoints() {
-	    DebugMessageDZL("9");
 		DZLJobSpawnPoints spawnPointCollection = config.GetJobSpanwPointById(jobId);
 		
 		spawnPoints.ClearItems();
 		foreach(DZLSpawnPoint point: spawnPointCollection.spawnPoints) {
 			spawnPoints.AddItem(point.name, point, 0);
 		}
-	    DebugMessageDZL("8");
 	}
 	
 }
