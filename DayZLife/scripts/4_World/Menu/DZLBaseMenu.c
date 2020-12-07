@@ -80,6 +80,7 @@ class DZLBaseMenu: UIScriptedMenu
         super.OnShow();
 
         GetGame().GetUIManager().ShowCursor(true);
+		
         GetGame().GetInput().ChangeGameFocus(1);
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
     }
