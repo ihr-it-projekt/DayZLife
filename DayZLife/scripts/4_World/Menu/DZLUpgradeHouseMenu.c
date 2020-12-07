@@ -159,7 +159,6 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
 		
 		if (house) {
 			extensionListTextWidget.ClearItems();
-			DebugMessageDZL("update menu");
 			if (house.HasAlarmSystem()) {
 				alarmLevel.SetText(house.GetHouseAlarm().level.ToString());
 			}
@@ -172,9 +171,7 @@ class DZLUpgradeHouseMenu : DZLBaseHouseMenu
                 } else if(extension.isHouseAlarm) {
                    	if (house.CanBuyAlarm(extension)) {
 						name = extension.type;
-                    } else if (!house.CanBuyAlarm(extension)){
-						DebugMessageDZL("can not buy");
-					}
+                    }
                 }
 
                 if (name) {

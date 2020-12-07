@@ -53,12 +53,7 @@ class DZLPlayerEventListener
 
     void CreateSpawnMenu() {
         player = PlayerBaseHelper.GetPlayer();
-        if (!player) {
-            DebugMessageDZL("no player to spawn");
-            return;
-        }
-        if (!player.config) {
-            DebugMessageDZL("no player config to spawn");
+        if (!player || !player.config) {
             return;
         }
 

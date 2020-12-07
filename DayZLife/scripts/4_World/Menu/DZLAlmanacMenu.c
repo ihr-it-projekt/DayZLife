@@ -20,8 +20,20 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private EntityAI workZobeToolPreviewItem;
 	private EntityAI workZobeYieldPreviewItem;
 	private TextListboxWidget workingZoneList;
+
+    private Widget copPanelWidget;
+	private TextListboxWidget copPanelOnlinePlayerList;
+	private TextListboxWidget copPanelCopsList;
+	private ButtonWidget copPanelSave;
 	
 	private XComboBoxWidget toggleViewWidget;
+
+	void DZLAlmanacMenu() {
+	    Construct();
+	}
+	void ~DZLAlmanacMenu() {
+	    Destruct();
+	}
 
     override Widget Init() {
 		layoutPath = "DayZLife/layout/Almanac/DZL_Almanac.layout";
@@ -43,6 +55,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 		workzoneYieldList = creator.GetTextListboxWidget("yield_listbox");
 		workzoneYieldPreview = creator.GetItemPreviewWidget("yield_preview");
 		workingZoneMap = creator.GetMapWidget("workzonemap");
+
+		copPanelWidget = creator.GetWidget("cop_panel");
+		copPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_CopPanel");
+		copPanelCopsList = creator.GetTextListboxWidget("coplist_CopPanel");
+		copPanelSave = creator.GetButtonWidget("safeButton_CopPanel");
 		
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 		
@@ -50,7 +67,12 @@ class DZLAlmanacMenu : DZLBaseMenu
     }
 	
 	override void OnShow() {
-	    super.OnShow();
+		super.OnShow();
+		
+		if (config.IsAdmin(player.GetIdentity())) {
+			toggleViewWidget.AddItem("#manage_cops");
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, new Param1<PlayerBase>(player), true);
+		}
 
 	    workzoneWidget.Show(true);
 		
@@ -68,6 +90,16 @@ class DZLAlmanacMenu : DZLBaseMenu
 		foreach(DZLLicence licence: licences.collection) {
 			licenceList.AddItem(licence.name, licence, 0);
 		}
+	}
+	
+	override bool OnDoubleClick(Widget w, int x, int y, int button) {
+		if (w == copPanelOnlinePlayerList) {
+		    MoveItemFromListWidgetToListWidget(copPanelOnlinePlayerList, copPanelCopsList);
+		} else if (w == copPanelCopsList) {
+		    MoveItemFromListWidgetToListWidget(copPanelCopsList, copPanelOnlinePlayerList);
+		}
+		
+		return false;
 	}
 	
 	override bool OnClick(Widget w, int x, int y, int button) {
@@ -198,14 +230,73 @@ class DZLAlmanacMenu : DZLBaseMenu
 			return true;
 		} else if(w == toggleViewWidget) {
 			int item = toggleViewWidget.GetCurrentItem();
-			
-		 	licenceWidget.Show(1== item);
+
 			workzoneWidget.Show(0 == item);
+		 	licenceWidget.Show(1 == item);
+			copPanelWidget.Show(2 == item);
+		} else if (w == copPanelSave) {
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, GetPlayerIdsFromList(copPanelCopsList)), true);
 		}
 		
 		return false;
 		
 	}
+	
+	private array<string> GetPlayerIdsFromList(TextListboxWidget listWidget) {
+		int count = listWidget.GetNumItems();
+		
+		array<string> list = new array<string>;
+		
+		if (count > 0) {
+			for (int i = 0; i < count; ++i) {
+				DZLOnlinePlayer _player;
+				listWidget.GetItemData(i, 0, _player);
+				
+				if (_player) {
+					list.Insert(_player.id);
+				}
+			}
+		}
+		
+		return list;
+	}
+
+	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
+            autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramAllPlayers;
+            if (ctx.Read(paramAllPlayers)){
+
+                copPanelOnlinePlayerList.ClearItems();
+				
+				array<ref DZLOnlinePlayer> onlinePlayers = paramAllPlayers.param1;
+				
+				foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
+					copPanelOnlinePlayerList.AddItem(onlinePlayer.name, onlinePlayer, 0);
+				}
+				array<ref DZLOnlinePlayer> copPlayers = paramAllPlayers.param2;
+				
+				foreach(DZLOnlinePlayer copPlayer: copPlayers) {
+					copPanelCopsList.AddItem(copPlayer.name, copPlayer, 0);
+				}
+            }
+        }
+	}
+
+	private void MoveItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
+        int pos = sourceWidget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        DZLOnlinePlayer itemType;
+        sourceWidget.GetItemData(pos, 0, itemType);
+
+        if (itemType) {
+            sourceWidget.RemoveRow(pos);
+            
+            targetWidget.AddItem(itemType.name, itemType, 0);
+            
+        }
+    }
 	
 	private void UpdaterPreview(string itemType, ItemPreviewWidget preview, EntityAI previewItem) {
 		if (itemType) {

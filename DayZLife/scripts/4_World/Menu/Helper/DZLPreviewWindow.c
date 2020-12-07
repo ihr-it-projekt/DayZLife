@@ -29,14 +29,6 @@ class DZLPreviewWindow extends Managed
 		widget.SetItem(previewItem);
 		widget.SetModelPosition(Vector(0,0,0.5));
 
-		//InventoryItem itemCast = InventoryItem.Cast(previewItem);
-
-//		if (itemCast) {
-//			this.description.SetText(item.GetTranslation() + " "+ itemCast.GetTooltip());
-//		} else {
-//			this.description.SetText("");
-//		}
-		
 		widget.Show(true);
 		if (description) description.Show(true);
     }
