@@ -205,8 +205,8 @@ FrameWidgetClass Housing {
          }
         }
         MapWidgetClass Map {
-         position 0 0.10333
-         size 0.97295 0.54811
+         position 0 0.10361
+         size 0.55 0.55
          halign center_ref
          valign center_ref
          hexactpos 0
