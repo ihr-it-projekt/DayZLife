@@ -1,7 +1,6 @@
 modded class PlayerBase
 {
-    ref DZLBuyHouseMenu houseBuyMenu;
-    ref DZLUpgradeHouseMenu houseUpgradeMenu;
+    ref DZLHouseMenu houseMenu;
     ref DZLBankingMenu bankingMenu;
     ref DZLTraderMenu traderMenu;
     ref DZLAlmanacMenu alamancMenu;
@@ -41,8 +40,7 @@ modded class PlayerBase
     override void SetActions(out TInputActionMap InputActionMap) {
         super.SetActions(InputActionMap);
 
-        AddAction(ActionOpenBuyHouseMenu, InputActionMap);
-        AddAction(ActionOpenUpgradeHouseMenu, InputActionMap);
+        AddAction(ActionOpenHouseMenu, InputActionMap);
         AddAction(ActionOpenTraderMenu, InputActionMap);
         AddAction(ActionOpenBankingMenu, InputActionMap);
         AddAction(ActionRobMoney, InputActionMap);
@@ -77,10 +75,8 @@ modded class PlayerBase
     }
 
     void UpdatePlayerAtDependencies() {
-        if (houseBuyMenu && houseBuyMenu.IsVisible()) {
-            houseBuyMenu.UpdatePlayer(this);;
-        } else if (houseUpgradeMenu && houseUpgradeMenu.IsVisible()) {
-            houseUpgradeMenu.UpdatePlayer(this);;
+        if (houseMenu && houseMenu.IsVisible()) {
+            houseMenu.UpdatePlayer(this);;
         } else if (bankingMenu && bankingMenu.IsVisible()) {
             bankingMenu.UpdatePlayer(this);;
         } else if (traderMenu && traderMenu.IsVisible()) {
@@ -92,26 +88,15 @@ modded class PlayerBase
         }
     }
 
-    DZLBuyHouseMenu GetHouseBuyMenu(DZLHouseDefinition definition, Building target) {
-        DebugMessageDZL("Initialize house buy menu");
-        houseBuyMenu = new DZLBuyHouseMenu;
-        InitMenu(houseBuyMenu);
+    DZLHouseMenu GetHouseMenu(DZLHouseDefinition definition, Building target) {
+        DebugMessageDZL("Initialize house menu");
+        houseMenu = new DZLHouseMenu;
+        InitMenu(houseMenu);
 
-		houseBuyMenu.SetHouseDefinition(definition);
-		houseBuyMenu.SetTarget(target);
+		houseMenu.SetHouseDefinition(definition);
+		houseMenu.SetTarget(target);
 
-        return houseBuyMenu;
-    }
-
-    DZLUpgradeHouseMenu GetHouseUpgradeMenu(DZLHouseDefinition definition, Building target) {
-        DebugMessageDZL("Initialize house upgrade menu");
-        houseUpgradeMenu = new DZLUpgradeHouseMenu;
-        InitMenu(houseUpgradeMenu);
-
-		houseUpgradeMenu.SetHouseDefinition(definition);
-		houseUpgradeMenu.SetTarget(target);
-
-        return houseUpgradeMenu;
+        return houseMenu;
     }
 
     private void InitMenu(DZLBaseMenu menu) {
@@ -173,10 +158,8 @@ modded class PlayerBase
 	}
 
 	void CloseMenu() {
-		if (houseBuyMenu && houseBuyMenu.IsVisible()) {
-			houseBuyMenu.OnHide();
-		} else if (houseUpgradeMenu && houseUpgradeMenu.IsVisible()) {
-			houseUpgradeMenu.OnHide();
+		if (houseMenu && houseMenu.IsVisible()) {
+			houseMenu.OnHide();
 		} else if (bankingMenu && bankingMenu.IsVisible()) {
 			bankingMenu.OnHide();
 		} else if (traderMenu && traderMenu.IsVisible()) {

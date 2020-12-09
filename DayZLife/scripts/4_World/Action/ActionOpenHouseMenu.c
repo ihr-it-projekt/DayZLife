@@ -1,6 +1,6 @@
-class ActionOpenUpgradeHouseMenu: ActionInteractBase
+class ActionOpenHouseMenu: ActionInteractBase
 {
-	void ActionOpenUpgradeHouseMenu()
+	void ActionOpenHouseMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
@@ -15,7 +15,7 @@ class ActionOpenUpgradeHouseMenu: ActionInteractBase
 
 	override string GetText()
 	{
-		return "#open_house_upgrade_menu";
+		return "#open_house_menu";
 	}
 
 	override void OnStartClient(ActionData action_data)
@@ -29,30 +29,42 @@ class ActionOpenUpgradeHouseMenu: ActionInteractBase
             if(!action_data.m_Target) return;
             if(!IsBuilding(action_data.m_Target)) return;
             if (!player.config) return;
-            if (!player.house) return;
 			
 			Building building = Building.Cast(action_data.m_Target.GetObject());
 
             DZLHouseDefinition definition = player.FindHouseDefinition(building);
-			
-			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseUpgradeMenu(definition, building), NULL);
+			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseMenu(definition, building), NULL);
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsClient()) {
-            if (!player.house) return false;
+        if(GetGame().IsClient()){
+            if(!target) return false;
             if(!IsBuilding(target)) return false;
+            if (!player.config) return false;
+
 
             Building _building = Building.Cast(target.GetObject());
             int doorIndex = _building.GetDoorIndex(target.GetComponentIndex());
             if (doorIndex == -1) return false;
 
             if(!IsInReach(player, target, UAMaxDistances.DEFAULT) ) return false;
+            
+            DZLHouseDefinition definition = player.FindHouseDefinition(Building.Cast(target.GetObject()));
 
-            return player.house.HasHouse(Building.Cast(target.GetObject()));
+            return !!definition;
         }
 
-        return true;
-	}
+		if (GetGame().IsServer()) {
+            DZLBuilding building = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
+
+            if (building && (!building.HasOwner() || (building.HasOwner() && building.IsOwner(player)))) {
+                return true;
+            } else {
+                DZLSendMessage(player.GetIdentity(), "#building_has_alrready_an_owner");
+            }
+        }
+
+		return false;
+    }
 }

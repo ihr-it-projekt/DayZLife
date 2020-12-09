@@ -4,8 +4,7 @@ modded class ActionConstructor
     {
         super.RegisterActions(actions);
 		
-		actions.Insert(ActionOpenBuyHouseMenu);
-		actions.Insert(ActionOpenUpgradeHouseMenu);
+		actions.Insert(ActionOpenHouseMenu);
 		actions.Insert(ActionOpenTraderMenu);
 		actions.Insert(ActionOpenBankingMenu);
 		actions.Insert(ActionRobMoney);
