@@ -73,17 +73,22 @@ class DZLHouse {
 	
 	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
 		array<vector> storagePositions = definition.storagePosition;
+		DebugMessageDZL("1 " + storagePositions.Count());
+
 		foreach(vector pos: storagePositions) {
 			bool notFound = true;
+			DebugMessageDZL("2 " + pos.ToString(true));
 			
 			foreach(DZLStorageTypeBought storageObject: storage) {
 				if (storageObject.relativePos == pos) {
+					DebugMessageDZL("3");
 					notFound = false;
 					break;
 				}
 			}
 			
 			if (notFound) {
+				DebugMessageDZL("4");
 				return pos;
 			}
 		} 

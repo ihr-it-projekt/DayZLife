@@ -80,7 +80,6 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          style Default
-         items "#Housing_Menu;#Housing_Upgrade_Menue;#Key_Menu"
         }
        }
       }
@@ -177,7 +176,7 @@ FrameWidgetClass rootFrame {
        }
       }
       PanelWidgetClass housingMenuPanel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0.09231
        size 1 0.81227

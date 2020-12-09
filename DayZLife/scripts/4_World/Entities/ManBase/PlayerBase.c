@@ -76,15 +76,15 @@ modded class PlayerBase
 
     void UpdatePlayerAtDependencies() {
         if (houseMenu && houseMenu.IsVisible()) {
-            houseMenu.UpdatePlayer(this);;
+            houseMenu.UpdatePlayer(this);
         } else if (bankingMenu && bankingMenu.IsVisible()) {
-            bankingMenu.UpdatePlayer(this);;
+            bankingMenu.UpdatePlayer(this);
         } else if (traderMenu && traderMenu.IsVisible()) {
-            traderMenu.UpdatePlayer(this);;
+            traderMenu.UpdatePlayer(this);
         } else if (licenceMenu && licenceMenu.IsVisible()) {
-            licenceMenu.UpdatePlayer(this);;
+            licenceMenu.UpdatePlayer(this);
         } else if (progressBarLicence && progressBarLicence.IsVisible()) {
-            progressBarLicence.UpdatePlayer(this);;
+            progressBarLicence.UpdatePlayer(this);
         }
     }
 
