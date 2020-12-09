@@ -1,16 +1,11 @@
 - medic
     - kann nur legale Jobs ausführen
 
-
-- Admin Job Menu
-    - nur für Cops
-
 - Inactive Tracker
     - wenn keine Activität länger als 10 minuten, dann muss Spieler innerhalb von 15 sec bestätigen das er Paycheck bekommt.
     - Button zum bestätigen immer an anderer position
 
-
-
+- Alarmanlage Cops benachrichtigen
 - Erweiterung Code Look fürs haus
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health / quantity

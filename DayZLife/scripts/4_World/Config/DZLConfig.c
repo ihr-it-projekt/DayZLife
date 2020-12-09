@@ -10,6 +10,7 @@ class DZLConfig
     ref DZLJobSpawnPoints medicSpawnPoints;
     ref DZLJobSpawnPoints civilSpawnPoints;
     ref array<string> jobIds;
+    ref DZLAdmin adminIds;
 
     void DZLConfig() {
         houseConfig = new DZLHouseConfig;
@@ -21,6 +22,7 @@ class DZLConfig
 		copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
         medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
         civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
+        adminIds = new DZLAdmin();
 
         jobIds = new array<string>;
         jobIds.Insert(DAY_Z_LIFE_JOB_CIVIL);
@@ -37,6 +39,16 @@ class DZLConfig
 
         return civilSpawnPoints;
     }
+	
+	bool IsAdmin(PlayerIdentity player) {
+		string playerId = player.GetId();
+		foreach(string id: adminIds.adminIds) {
+			if(playerId == id) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	
 	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {

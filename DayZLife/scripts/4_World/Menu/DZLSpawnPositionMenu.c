@@ -54,8 +54,11 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 		jobSelection.ClearAll();
 		jobSelection.AddItem("#Civ");
 		jobSelection.AddItem("#Medic");
-		jobSelection.AddItem("#Cop");
-		
+
+		if (player.dzlPlayer.isCop) {
+		    jobSelection.AddItem("#Cop");
+		}
+
 		UpdateSpawnPoints();
 	}
 

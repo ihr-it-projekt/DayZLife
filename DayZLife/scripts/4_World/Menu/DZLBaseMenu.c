@@ -58,8 +58,6 @@ class DZLBaseMenu: UIScriptedMenu
 
         layoutRoot.Show(false);
 
-        DebugMessageDZL("2");
-
         return layoutRoot;
     }
 

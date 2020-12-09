@@ -2,7 +2,9 @@ class DZLPlayer {
     string fileName;
     int money = 0;
     int bank = 0;
-	
+    bool isCop = false;
+    string playerName;
+
 	ref TStringArray licenceIds;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
@@ -19,6 +21,16 @@ class DZLPlayer {
 			
             Save();
         }
+    }
+
+    void UpdateCop(bool isCop) {
+        this.isCop = isCop;
+        Save();
+    }
+
+    void UpdateName(string playerName) {
+        this.playerName = playerName;
+        Save();
     }
 	
 	void AddMoneyToPlayer(int moneyCount) {
