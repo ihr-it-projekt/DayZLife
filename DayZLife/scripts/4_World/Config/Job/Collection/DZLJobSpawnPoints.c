@@ -2,7 +2,6 @@ class DZLJobSpawnPoints
 {
     string jobId;
     ref array<ref DZLSpawnPoint> spawnPoints;
-	
 
     void DZLJobSpawnPoints(string jobId) {
         this.jobId = jobId;
@@ -290,7 +289,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Hospital Elektrozavodsk", "10288.325195 12.781819 2265.676270", "174.492218 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -314,7 +313,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Hospital Berezino", "11913.635742 54.291801 9056.839844", "-131.009918 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -338,7 +337,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Hospital Pavlovo", "2184.552002 91.581612 3353.090332", "105.095566 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -362,7 +361,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Hospital Novodmitrovsk", "11394.348633 78.513062 14602.299805", "-54.714001 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -386,7 +385,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Hospital Severograd", "8019.276367 114.149002 12732.478516", "-178.702087 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -410,7 +409,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Solnichniy", "13391.141602 6.642958 6325.412109", "34.405697 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -434,7 +433,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Berezino", "12784.613281 6.546667 10056.283203", "132.671509 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -458,7 +457,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Svetlojarsk", "13869.391602 20.997799 13126.976563", "-34.106239 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -482,7 +481,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Novaya Petrovka", "3466.028809 196.958252 13164.150391", "83.904434 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -506,7 +505,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Vybor", "3752.554199 312.510742 9021.624023", "-24.320047 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -530,7 +529,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Stary Sobor", "5999.912598 307.862762 7686.959473", "52.903572 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -554,7 +553,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Gorka", "9470.009766 304.953186 8827.878906", "-162.231049 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -578,7 +577,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Medic Station Staroye", "10126.196289 246.007263 5505.813965", "123.815544 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("BandageDressing");
@@ -615,98 +614,97 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Train Station Elektrozavodsk", "10336.419922 6.144979 2120.515625", "-159.037292 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Kamyshovo", "11966.688477 6.357907 3556.739502", "-13.138873 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Solnichniy", "13359.731445 7.915360 6142.770508", "-87.118515 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Solnich", "13162.916992 6.358726 7100.083008", "68.426018 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Berezino", "12987.839844 6.166841 10240.698242", "-100.820023 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Svetlojarsk", "13984.972656 3.435675 13483.834961", "35.998260 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Novodmitrovsk", "11645.218750 58.210663 14112.760742", "161.405289 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Severograd", "7850.665039 140.101868 12413.544922", "-19.548033 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Novaya Petrovka", "3545.697998 220.242340 12561.092773", "-37.574173 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Vavilovo", "2008.193481 249.498199 11283.776367", "105.851578 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Zelenogorsk", "2478.369629 190.588913 5236.167969", "-32.896881 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Kamenka", "1884.486816 6.356084 2174.869629", "-14.907640 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Komarovo", "3664.931396 6.747039 2401.877197", "-18.534702 0 0", items);
 					spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");
 					point = new DZLSpawnPoint("Train Station Balota", "4407.020996 6.351238 2313.319336", "17.710466 0 0", items);
                     spawnPoints.Insert(point);
 			    }
-			    // TODO
 			}
             Save();
         }
