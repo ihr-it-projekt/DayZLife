@@ -1,0 +1,147 @@
+FrameWidgetClass rootFrame {
+ size 0.42561 0.49638
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   position 0 -0
+   size 0.98252 0.96918
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget2 {
+     ignorepointer 1
+     position 0.00904 0.0159
+     size 0.98192 0.9682
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget1 {
+       ignorepointer 1
+       position 0 0.01642
+       size 0.3 0.09252
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextWidgetClass loadoutMenu {
+         ignorepointer 1
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#Loadout"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget4 {
+       ignorepointer 1
+       position 0 0
+       size 0.5 0.87464
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget3 {
+         ignorepointer 1
+         position 0 0.01877
+         size 0.7 0.11
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          XComboBoxWidgetClass loadoutComboBox {
+           position 0 0
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           items "Loadout1;Loadout2"
+          }
+         }
+        }
+        TextListboxWidgetClass loadoutListbox {
+         position 0.01842 0.06439
+         size 0.96317 0.83368
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+        }
+       }
+      }
+      PlayerPreviewWidgetClass loadoutPlayerPreview {
+       ignorepointer 1
+       position 0.264 0.129
+       size 0.35 0.7
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+      }
+      PanelWidgetClass PanelWidget5 {
+       ignorepointer 1
+       position 0.087 0.01642
+       size 0.298 0.099
+       halign right_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass equipButton {
+         color 0.251 0.502 0 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#Equip"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
