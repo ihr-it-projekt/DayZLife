@@ -360,7 +360,7 @@ FrameWidgetClass rootFrame {
        }
       }
       PanelWidgetClass housingUpgradeMenuPanel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0.09085
        size 1 0.8123
@@ -460,7 +460,7 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass Sell_Storage_List {
-           position -0 0.15854
+           position 0 0.15854
            size 0.97195 0.64986
            halign center_ref
            valign center_ref
@@ -602,7 +602,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass housingKeyMenuPanel {
        visible 0
        ignorepointer 1
-       position 0 -0
+       position 0 0
        size 1 0.9031
        halign center_ref
        valign bottom_ref
@@ -612,54 +612,6 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        PanelWidgetClass PanelWidget12 {
-         ignorepointer 1
-         position 0 0
-         size 0.35269 1
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          PanelWidgetClass PanelWidget16 {
-           ignorepointer 1
-           position -0 0.01487
-           size 0.95324 0.089
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            XComboBoxWidgetClass XComboBoxWidget0 {
-             position 0 0
-             size 0.98 0.98
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             items "Hous 1;Hous 2;Hous 3"
-            }
-           }
-          }
-          ItemPreviewWidgetClass ItemPreviewWidget0 {
-           ignorepointer 1
-           position -0 0.05193
-           size 0.95324 0.8664
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-          }
-         }
-        }
         PanelWidgetClass PanelWidget18 {
          ignorepointer 1
          size 0.3 1
@@ -671,7 +623,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass TextListboxWidget0 {
+          TextListboxWidgetClass keyPlayerList {
            position 0 0
            size 0.953 0.97
            halign center_ref
@@ -698,8 +650,8 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass TextListboxWidget1 {
-           position -0 -0
+          TextListboxWidgetClass keyHasKeyList {
+           position 0 0
            size 0.96022 0.96623
            halign center_ref
            valign center_ref
@@ -725,7 +677,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          ButtonWidgetClass ButtonWidget0 {
+          ButtonWidgetClass keySaveButton {
            color 0.251 0.502 0 1
            position 0 0
            size 0.98 0.9
@@ -738,6 +690,17 @@ FrameWidgetClass rootFrame {
            text "#Safe"
           }
          }
+        }
+        PanelWidgetClass PanelWidget12 {
+         ignorepointer 1
+         position 0 0
+         size 0.35269 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
         }
        }
       }
