@@ -66,6 +66,20 @@ class DZLBuilding {
 			house.SetHouseAlarm(houseAlarm);
 		}
 	}
+
+	void UpdatePlayerAccess(array<string> playerAccess) {
+		if(!GetGame().IsClient()){
+			house.UpdatePlayerAccess(playerAccess);
+		}
+	}
+	
+	array<string> GetPlayerAccess() {
+		return house.playerAccess;
+	}
+	
+	bool HasPlayerAccess(string ident) {
+		return -1 != house.playerAccess.Find(ident);
+	}
 	
 	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
 		return house.GetNextFreeStoragePosition(definition);

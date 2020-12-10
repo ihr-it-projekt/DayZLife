@@ -10,6 +10,7 @@ class DZLHouse {
 	ref array<int> storagePositions;
 	int raidTime = 3;
 	ref array<int> lockedDoors;
+	ref array<string> playerAccess;
 
     void DZLHouse(Building building = null, string fileName = "") {
         if (building) {
@@ -25,6 +26,7 @@ class DZLHouse {
 			this.storage = new array<ref DZLStorageTypeBought>;
 			this.storagePositions = new array<int>;
 			this.lockedDoors = new array<int>;
+			this.playerAccess = new array<string>;
 			Save();
 		}
     }
@@ -46,6 +48,7 @@ class DZLHouse {
 		owner = "";
 		this.lockedDoors = new array<int>;
 		alarmSystem = null;
+		playerAccess = new array<string>;
 		Save();
 	}
 	
@@ -58,6 +61,15 @@ class DZLHouse {
 		storage.RemoveItem(storageItem);
 		Save();
 	}
+
+	void UpdatePlayerAccess(array<string> playerAccess) {
+	    this.playerAccess = playerAccess;
+	    Save();
+	}
+
+	bool HasPlayerAccess(string ident) {
+        return -1 != playerAccess.Find(ident);
+    }
 	
 	int GetCountStorage() {
 		return storage.Count();
@@ -119,18 +131,18 @@ class DZLHouse {
 	}
 	
 	bool CanUnLookDoor(PlayerBase player, int index) {
-		return IsDoorLooked(index) && IsOwner(player);
+		return IsDoorLooked(index) && (IsOwner(player) || HasPlayerAccess(player.GetIdentity().GetId()));
 	}
 
 	bool CanLookDoor(PlayerBase player, int index) {
-		return !IsDoorLooked(index) && IsOwner(player);
+		return !IsDoorLooked(index) && (IsOwner(player) || HasPlayerAccess(player.GetIdentity().GetId());
 	}
 
 	bool CanRaidDoor(PlayerBase player, int index) {
 	    if (DAY_Z_LIFE_DEBUG) {
 	        return true;
 	    }
-		return IsDoorLooked(index) && !IsOwner(player);
+		return IsDoorLooked(index) && !IsOwner(player) && !HasPlayerAccess(player.GetIdentity().GetId());
 	}
 	
 	bool HasAlarmSystem() {

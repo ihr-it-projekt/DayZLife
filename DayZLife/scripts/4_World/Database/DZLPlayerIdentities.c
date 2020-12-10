@@ -29,6 +29,20 @@ class DZLPlayerIdentities
 
         return collection;
     }
+	
+    array<ref DZLOnlinePlayer> GetPlayerCollection(array<string> exclude) {
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = new DZLPlayer(ident);
+
+            if (exclude.Find(ident) == -1) {
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
+            }
+        }
+
+        return collection;
+    }
 
     void UpdateCops(array<string> cops) {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;

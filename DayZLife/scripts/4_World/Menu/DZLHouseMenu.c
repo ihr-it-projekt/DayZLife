@@ -20,6 +20,11 @@ class DZLHouseMenu : DZLBaseMenu
     private TextListboxWidget sellStorageListTextWidget;
     private TextWidget alarmLevel;
     private MultilineTextWidget upgradeDescription;
+	
+	private TextListboxWidget keyPlayerList;
+	private TextListboxWidget keyPlayerAccessList;
+	private ButtonWidget keySaveButton;
+	
 	private Widget houseBuy;
 	private Widget houseUpgrade;
 	private Widget houseKey;
@@ -65,6 +70,12 @@ class DZLHouseMenu : DZLBaseMenu
         sellStorageListTextWidget = creator.GetTextListboxWidget("Sell_Storage_List");
         upgradeDescription = creator.GetMultilineTextWidget("discription_UpgradePanel");
         alarmLevel = creator.GetTextWidget("alarmsystemlvl");
+		
+		keySaveButton = creator.GetButtonWidget("keySaveButton");
+		keyPlayerList = creator.GetTextListboxWidget("keyPlayerList");
+		keyPlayerAccessList = creator.GetTextListboxWidget("keyHasKeyList");
+
+		GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param2<PlayerBase, Building>(player, target), true);
 
 	    return layoutRoot;
     }
@@ -104,7 +115,7 @@ class DZLHouseMenu : DZLBaseMenu
 
 			if (house && house.HasOwner() && house.IsOwner(player)) {
 				selectedPanel.AddItem("#Housing_Upgrade_Menu");
-				//selectedPanel.AddItem("#Key_Menu");
+				selectedPanel.AddItem("#Key_Menu");
 				if (0 == indexPanel) {
 				    buyButton.Show(false);
                     sellButton.Show(true);
@@ -132,7 +143,7 @@ class DZLHouseMenu : DZLBaseMenu
                 buyButton.Show(0 == indexPanel && (!house.HasOwner() || !house.IsOwner(player)));
                 houseUpgrade.Show(1 == indexPanel);
                 houseKey.Show(2 == indexPanel);
-			
+							
 				return true;
             case buyButton:
                 if (0 == indexPanel) {
@@ -247,11 +258,25 @@ class DZLHouseMenu : DZLBaseMenu
                 sellButton.Show(true);
 
                 return true;
+            case keySaveButton:
+				DebugMessageDZL("save");
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param3<PlayerBase, Building, ref array<string>>(player, target, DZLDisplayHelper.GetPlayerIdsFromList(keyPlayerAccessList)), true);
+                return true;
             default:
                 break;
 		}
 		return false;
 	}
+	
+	override bool OnDoubleClick(Widget w, int x, int y, int button) {
+        if (w == keyPlayerList) {
+            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerList, keyPlayerAccessList);
+        } else if (w == keyPlayerAccessList) {
+            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerAccessList, keyPlayerList);
+        }
+
+        return false;
+    }
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 	    super.HandleEventsDZL(sender, target, rpc_type, ctx);
@@ -273,6 +298,20 @@ class DZLHouseMenu : DZLBaseMenu
                 house = paramBuyStorageResponse.param1;
 
                 UpdateGUI(paramBuyStorageResponse.param2);
+            }
+        } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_RESPONSE) {
+            autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramPlayers;
+            if (ctx.Read(paramPlayers)){
+                array<ref DZLOnlinePlayer> noAccess = paramPlayers.param2;
+                array<ref DZLOnlinePlayer> access = paramPlayers.param1;
+				keyPlayerList.ClearItems();
+				keyPlayerAccessList.ClearItems();
+                foreach(DZLOnlinePlayer playerNoAccess: noAccess) {
+					keyPlayerList.AddItem(playerNoAccess.name, playerNoAccess, 0);
+				}
+				foreach(DZLOnlinePlayer playerAccess: access) {
+					keyPlayerAccessList.AddItem(playerAccess.name, playerAccess, 0);
+				}
             }
         }
     }
@@ -303,9 +342,9 @@ class DZLHouseMenu : DZLBaseMenu
 		if (house) {
 			if (house.HasOwner() && house.IsOwner(player) && selectedPanel.GetNumItems() == 1) {
 				selectedPanel.AddItem("#Housing_Upgrade_Menu");
-				//selectedPanel.AddItem("#Key_Menu");
+				selectedPanel.AddItem("#Key_Menu");
 			} else if(selectedPanel.GetNumItems() > 1 && (!house.HasOwner() || house.IsOwner(player))) {
-				//selectedPanel.RemoveItem(2);
+				selectedPanel.RemoveItem(2);
 				selectedPanel.RemoveItem(1);
 			}
 			

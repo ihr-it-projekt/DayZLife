@@ -94,9 +94,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {
 		if (w == copPanelOnlinePlayerList) {
-		    MoveItemFromListWidgetToListWidget(copPanelOnlinePlayerList, copPanelCopsList);
+		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelOnlinePlayerList, copPanelCopsList);
 		} else if (w == copPanelCopsList) {
-		    MoveItemFromListWidgetToListWidget(copPanelCopsList, copPanelOnlinePlayerList);
+		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelCopsList, copPanelOnlinePlayerList);
 		}
 		
 		return false;
@@ -235,31 +235,14 @@ class DZLAlmanacMenu : DZLBaseMenu
 		 	licenceWidget.Show(1 == item);
 			copPanelWidget.Show(2 == item);
 		} else if (w == copPanelSave) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, GetPlayerIdsFromList(copPanelCopsList)), true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
 		}
 		
 		return false;
 		
 	}
 	
-	private array<string> GetPlayerIdsFromList(TextListboxWidget listWidget) {
-		int count = listWidget.GetNumItems();
-		
-		array<string> list = new array<string>;
-		
-		if (count > 0) {
-			for (int i = 0; i < count; ++i) {
-				DZLOnlinePlayer _player;
-				listWidget.GetItemData(i, 0, _player);
-				
-				if (_player) {
-					list.Insert(_player.id);
-				}
-			}
-		}
-		
-		return list;
-	}
+
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
@@ -282,21 +265,7 @@ class DZLAlmanacMenu : DZLBaseMenu
         }
 	}
 
-	private void MoveItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
-        int pos = sourceWidget.GetSelectedRow();
-        if (pos == -1) {
-            return;
-        }
-        DZLOnlinePlayer itemType;
-        sourceWidget.GetItemData(pos, 0, itemType);
 
-        if (itemType) {
-            sourceWidget.RemoveRow(pos);
-            
-            targetWidget.AddItem(itemType.name, itemType, 0);
-            
-        }
-    }
 	
 	private void UpdaterPreview(string itemType, ItemPreviewWidget preview, EntityAI previewItem) {
 		if (itemType) {
