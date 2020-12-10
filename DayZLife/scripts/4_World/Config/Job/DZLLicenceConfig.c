@@ -73,12 +73,12 @@ class DZLLicenceConfig
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Sandpaper", 2, 50));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Diamond", 1, 10));
-                licences.collection.Insert(new DZLLicence(109, 150, "Diamond Licence", "7080.515625 355.850006 14572.783203", 5, "Gold Licence", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 150, "Diamond Licence", "7080.515625 355.850006 14572.783203", 5, "Gold Licence", new DZLLicenceCraftedItem("DZL_Diamond_Polished", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Gold", 2, 10));
                 craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Iron", 1, 10));
-                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Diamond", 1, 10));
+                craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Diamond_Polished", 1, 10));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Pliers", 1, 10));
                 licences.collection.Insert(new DZLLicence(109, 150, "Jewelry Licence", "5071.761719 175.170273 13092.766602", 5, "Diamond Licence", new DZLLicenceCraftedItem("DZL_Jewelry", 1, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;

@@ -27,22 +27,22 @@ class CfgVehicles
 	{
 		scope=2;
 		displayName="Cannabis";
-		descriptionShort="$STR_Cannabis1";
+		descriptionShort="20g Cannabis";
 		model="\dz\gear\food\cannabis_seedman.p3d";
 		rotationFlags=34;
-		weight=15;
-		itemSize[]={1,1};
+		weight=20;
+		itemSize[]={2,2};
 	};
 	class DZL_Cannabis_Brick: Container_Base
 	{	
 		scope=2;
 		displayName="Cannabis Brick";
-		descriptionShort="Model Platzhalter!";
+		descriptionShort="1Kg Cannabis";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";
-		weight=450;
-		itemSize[]={3,3};
+		weight=1200;
+		itemSize[]={4,4};
 		absorbency=0.2;
 		isMeleeWeapon=1;
 		hiddenSelections[]=

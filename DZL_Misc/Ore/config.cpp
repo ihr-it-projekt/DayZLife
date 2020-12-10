@@ -21,7 +21,7 @@ class CfgVehicles
 		displayName="Golderz";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Gold\DZL_Ore_Gold.p3d";
-		weight=4000;
+		weight=1000;
 		itemSize[]={2,2};
 	};
 	class DZL_Gold: SmallStone
@@ -31,7 +31,7 @@ class CfgVehicles
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Gold\DZL_Gold_Small.p3d";
 		animClass="NoFireClass";
-		weight=500;
+		weight=250;
 		itemSize[]={1,1};
 		rotationFlags=17;
 	};
@@ -41,7 +41,7 @@ class CfgVehicles
 		displayName="Copper";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Copper\DZL_Ore_Copper.p3d";
-		weight=4000;
+		weight=2000;
 		itemSize[]={2,2};
 	};
 	class DZL_Copper: SmallStone
@@ -51,7 +51,7 @@ class CfgVehicles
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Copper\DZL_Copper_Small.p3d";
 		animClass="NoFireClass";
-		weight=500;
+		weight=1000;
 		itemSize[]={1,1};
 		rotationFlags=17;
 	};
@@ -61,7 +61,7 @@ class CfgVehicles
 		displayName="Coal";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Coal\DZL_Ore_Coal.p3d";
-		weight=4000;
+		weight=500;
 		itemSize[]={2,2};
 	};
 	class DZL_Ore_Iron: Stone
@@ -70,7 +70,7 @@ class CfgVehicles
 		displayName="Iron";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Iron\DZL_Ore_Iron.p3d";
-		weight=4000;
+		weight=2000;
 		itemSize[]={2,2};
 	};
 	class DZL_Iron: SmallStone
@@ -80,17 +80,35 @@ class CfgVehicles
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Iron\DZL_Iron_Small.p3d";
 		animClass="NoFireClass";
-		weight=500;
+		weight=1000;
 		itemSize[]={1,1};
 		rotationFlags=17;
 	};
-	class DZL_Ore_Diamond: Stone
+	class DZL_Ore_Diamond: SmallStone
 	{
 		scope=2;
 		displayName="Diamond";
 		descriptionShort="Model Platzhalter!";
-		model="\DZL_Misc\Ore\Diamond\DZL_Ore_Diamond.p3d";
-		weight=4000;
+		model="\DZL_Misc\Ore\Diamond\DZL_Ore_Diamond_Small.p3d";
+		weight=500;
 		itemSize[]={2,2};
+	};
+	class DZL_Diamond_Polished: SmallStone
+	{
+		scope=2;
+		displayName="Diamond Polished";
+		descriptionShort="Model Platzhalter!";
+		model="\DZL_Misc\Ore\Diamond\DZL_Ore_Diamond_Small.p3d";
+		weight=100;
+		itemSize[]={1,1};
+	};
+	class DZL_Jewelry: SmallStone
+	{
+		scope=2;
+		displayName="Jewelry";
+		descriptionShort="Model Platzhalter!";
+		model="\DZL_Misc\Ore\Copper\DZL_Copper_Small.p3d";
+		weight=100;
+		itemSize[]={1,1};
 	};
 };

@@ -54,7 +54,7 @@ class CfgVehicles
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";
-		weight=450;
+		weight=500;
 		itemSize[]={3,3};
 		absorbency=0.2;
 		isMeleeWeapon=1;
@@ -71,12 +71,12 @@ class CfgVehicles
 	{	
 		scope=2;
 		displayName="Cocain";
-		descriptionShort="Model Platzhalter!";
+		descriptionShort="Ergibt 5g Cocain";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";
-		weight=450;
-		itemSize[]={3,3};
+		weight=20;
+		itemSize[]={2,2};
 		absorbency=0.2;
 		isMeleeWeapon=1;
 		hiddenSelections[]=
@@ -85,7 +85,7 @@ class CfgVehicles
 		};
 		hiddenSelectionsTextures[]=
 		{
-			"DZL_Misc\Drugs\Cocain\Data\Cocain_Brick.paa"
+			"DZL_Misc\Drugs\Cocain\Data\Cocain.paa"
 		};
 	};
 };

@@ -440,6 +440,7 @@ FrameWidgetClass rootFrame {
                "exact text" 1
                "size to text v" 0
                "text valign" center
+               wrap 1
               }
              }
             }
