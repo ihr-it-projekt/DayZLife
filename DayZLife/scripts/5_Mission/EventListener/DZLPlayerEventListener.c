@@ -48,6 +48,11 @@ class DZLPlayerEventListener
         } else if (rpc_type == DAY_Z_LIFE_NEW_SPAWN_CLIENT) {
             queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
             queue.CallLater(CreateSpawnMenu, 1750, true);
+        } else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {
+            Param2 <ref DZLHouse, PlayerBase> dzlAlarm;
+            if (ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param1.GetHouseAlarm()){
+                player.DisplayMessage(dzlAlarm.param1.GetHouseAlarm().GetMessage(dzlAlarm.param2, dzlAlarm.param1));
+            }
         }
     }
 
