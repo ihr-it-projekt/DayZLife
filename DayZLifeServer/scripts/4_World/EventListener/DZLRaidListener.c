@@ -22,7 +22,27 @@ class DZLRaidListener
         } else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
             autoptr Param2<PlayerBase, Building> paramRaidDoorDZLBuilding;
             if (ctx.Read(paramRaidDoorDZLBuilding)){
-                GetGame().RPCSingleParam(paramRaidDoorDZLBuilding.param1, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(new DZLHouse(paramRaidDoorDZLBuilding.param2)), true, sender);
+                PlayerBase raider = paramRaidDoorDZLBuilding.param1;
+                Building building = paramRaidDoorDZLBuilding.param2;
+                DZLHouse dzlHouseRaid = new DZLHouse(building);
+
+                if (dzlHouse.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {
+                    array<Man> players = new array<Man>;
+                    GetGame().GetPlayers(players);
+
+                    if (players) {
+                        foreach(Man player: players) {
+							PlayerBase currentPlayer = PlayerBase.Cast(player);
+                            if (raider == currentPlayer) continue;
+
+                            if (dzlHouseRaid.IsOwner(currentPlayer)) {
+                                DZLSendMessage(currentPlayer.GetIdentity(), dzlHouseRaid.GetHouseAlarm().GetMessage(raider, dzlHouseRaid));
+                            }
+                        }
+                    }
+                }
+
+                GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(new DZLHouse(building)), true, sender);
             }
         }
     }
