@@ -19,14 +19,14 @@ class DZLBuilding {
     void BuyOnServer(PlayerBase player) {
         if(!GetGame().IsClient()){
             house.AddOwner(player);
-            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player.GetIdentity());
+            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player.GetIdentity().GetId());
             playerHouse.AddHouse(house);
         }
     }
     void SellOnServer(PlayerBase player) {
         if(!GetGame().IsClient()){
             house.RemoveOwner();
-            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player.GetIdentity());
+            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player.GetIdentity().GetId());
             playerHouse.RemoveHouse(house);
         }
     }

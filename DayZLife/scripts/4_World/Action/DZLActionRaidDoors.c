@@ -76,10 +76,7 @@ class DZLActionRaidDoors: ActionInteractBase
 	    DZLHouse dzlHouse = new DZLHouse(building);
 		
 	    if (dzlHouse.HasAlarmSystem() && dzlHouse.GetHouseAlarm().message) {
-			if (DAY_Z_LIFE_DEBUG) {
-				DZLSendMessage(action_data.m_Player.GetIdentity(), dzlHouse.GetHouseAlarm().GetMessage(action_data.m_Player, dzlHouse));
-			}
-	        array<Man> _players = new array<Man>;
+			array<Man> _players = new array<Man>;
             GetGame().GetPlayers(_players);
 
             if (_players) {

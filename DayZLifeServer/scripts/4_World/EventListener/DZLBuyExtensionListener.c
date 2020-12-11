@@ -73,7 +73,7 @@ class DZLBuyExtensionListener
 				    }
 
 					GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_BUY_EXTENSION_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
-	                GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender)), true, sender);
+	                GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender.GetId())), true, sender);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_SELL_STORAGE) {
@@ -99,7 +99,7 @@ class DZLBuyExtensionListener
                     }
                 }
                 GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_SELL_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
-                GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender)), true, sender);
+                GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender.GetId())), true, sender);
             }
         }
     }

@@ -1,11 +1,13 @@
 class DZLPlayerHouse {
     private string fileName;
     ref array<string> playerHouseCollection;
+    ref array<string> playerHouseKeyCollection;
 
-    void DZLPlayerHouse(notnull PlayerIdentity player) {
-        fileName = player.GetId() + "house.json";
+    void DZLPlayerHouse(string playerId) {
+        fileName = playerId + "house.json";
         if (!Load()) {
             playerHouseCollection = new array<string>;
+            playerHouseKeyCollection = new array<string>;
             Save();
         }
     }
@@ -17,23 +19,34 @@ class DZLPlayerHouse {
 	}
 	
 	void RemoveHouse(notnull DZLHouse house) {
-		foreach(int index, string fileName: playerHouseCollection) {
-            if (house.fileName == fileName) {
-				playerHouseCollection.Remove(index);
-				Save();
-				break;
-			}
-        }
+		int index = playerHouseCollection.Find(house.fileName);
+		if (-1 != index) {
+			playerHouseCollection.Remove(index);
+			Save();
+		}
 	}
 	
 	bool HasHouse(notnull Building building) {
 		string houseFileName = DZLHouse.GetFileName(building);
-		foreach(string fileName: playerHouseCollection) {
-            if (houseFileName == fileName) {
-				return true;
-			}
-        }
-		return false;
+		return -1 != playerHouseCollection.Find(houseFileName);
+	}
+	
+	bool HasKey(notnull Building building) {
+		string houseFileName = DZLHouse.GetFileName(building);
+		return -1 != playerHouseKeyCollection.Find(houseFileName);
+	}
+	
+	void AddKey(notnull ref DZLHouse house) {
+        playerHouseKeyCollection.Insert(house.fileName);
+        Save();
+	}
+	
+	void RemoveKey(notnull ref DZLHouse house) {
+		int index = playerHouseKeyCollection.Find(house.fileName);
+		if (-1 != index) {
+			playerHouseKeyCollection.Remove(index);
+			Save();
+		}
 	}
 	
     private bool Load(){

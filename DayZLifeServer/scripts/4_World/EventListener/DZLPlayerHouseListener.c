@@ -15,7 +15,7 @@ class DZLPlayerHouseListener
             autoptr Param1<PlayerBase> paramGetConfig;
             if (ctx.Read(paramGetConfig)){
                 if (paramGetConfig.param1) {
-                    GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender)), true, sender);
+                    GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender.GetId())), true, sender);
                 }
             }
         } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS) {
@@ -33,6 +33,46 @@ class DZLPlayerHouseListener
 				array<string> playersAccess = paramSaveKeyLists.param3;
 				
 				if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
+
+				array<string> currentKeys = dzlBuilding.GetDZLHouse().playerAccess;
+				
+				array<string> playerMustUpdated = new array<string>;
+				
+				
+				foreach(string playerIdWithNewAccess: playersAccess) {
+					
+					if (currentKeys.Find(playerIdWithNewAccess)) continue;
+					
+					DZLPlayerHouse playerHouseAccess = new DZLPlayerHouse(playerIdWithNewAccess);
+					
+					playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
+					
+					playerMustUpdated.Insert(playerIdWithNewAccess);
+				}
+				
+				
+				foreach(string playerId: currentKeys) {
+					
+					if (playersAccess.Find(playerId)) continue;
+					
+					DZLPlayerHouse playerHouse = new DZLPlayerHouse(playerId);
+					
+					playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
+					
+					playerMustUpdated.Insert(playerId);
+				}
+				
+				
+				array<Man> onlinePlayers = new array<Man>;
+				
+				GetGame().GetPlayers(onlinePlayers);
+				
+				foreach(Man onlinePlayer: onlinePlayers) {
+					PlayerIdentity playerIdent = onlinePlayer.GetIdentity();
+					if (-1 != playerMustUpdated.Find(playerIdent.GetId())) {
+						GetGame().RPCSingleParam(onlinePlayer, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(playerIdent.GetId())), true, playerIdent);
+					}
+				}
 				
 				dzlBuilding.UpdatePlayerAccess(playersAccess);
 					

@@ -89,18 +89,15 @@ class DZLHouse {
 
 		foreach(vector pos: storagePositions) {
 			bool notFound = true;
-			DebugMessageDZL("2 " + pos.ToString(true));
-			
+
 			foreach(DZLStorageTypeBought storageObject: storage) {
 				if (storageObject.relativePos == pos) {
-					DebugMessageDZL("3");
 					notFound = false;
 					break;
 				}
 			}
 			
 			if (notFound) {
-				DebugMessageDZL("4");
 				return pos;
 			}
 		} 
@@ -139,10 +136,7 @@ class DZLHouse {
 	}
 
 	bool CanRaidDoor(PlayerBase player, int index) {
-	    if (DAY_Z_LIFE_DEBUG) {
-	        return true;
-	    }
-		return IsDoorLooked(index) && !IsOwner(player) && !HasPlayerAccess(player.GetIdentity().GetId());
+	    return IsDoorLooked(index) && !IsOwner(player) && !HasPlayerAccess(player.GetIdentity().GetId());
 	}
 	
 	bool HasAlarmSystem() {

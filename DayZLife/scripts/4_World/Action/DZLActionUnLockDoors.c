@@ -21,7 +21,7 @@ class DZLActionUnLockDoors: ActionInteractBase
 		if(GetGame().IsClient()){
 			house = player.house;
 		} else {
-			house = new DZLPlayerHouse(player.GetIdentity());
+			house = new DZLPlayerHouse(player.GetIdentity().GetId());
 		}
 
         if (!house) {
@@ -32,7 +32,7 @@ class DZLActionUnLockDoors: ActionInteractBase
 
 		if (!building) return false;
 
-		if(building.IsBuilding() && house.HasHouse(building)) {
+		if(building.IsBuilding() && (house.HasHouse(building) || house.HasKey(building))) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 			if (doorIndex != -1 ) {
 				if (GetGame().IsServer()) {
