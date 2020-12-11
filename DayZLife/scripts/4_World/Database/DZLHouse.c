@@ -175,30 +175,11 @@ class DZLHouse {
 		return alarmSystem;
 	}
 
-	DZLHouseExtension GetHouseAlarmCast() {
-		return DZLHouseAlarm.Cast(alarmSystem);
-	}
-	
 	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
 		alarmSystem = houseAlarm;
 		Save();
 	}
 
-	string GetAlarmMessage(PlayerBase player) {
-	    string alarmMessage = "";
-	    if (alarmSystem) {
-	        if (alarmSystem.level == 1) {
-	            alarmMessage = alarmSystem.message;
-	        } else if (alarmSystem.level == 2) {
-	            alarmMessage = alarmSystem.message + name;
-	        } else if (alarmSystem.level == 3) {
-	            alarmMessage = alarmSystem.message + name  + "/" + player.GetIdentity().GetName();
-	        }
-	    }
-
-	    return alarmMessage;
-	}
-	
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName)) {
 			JsonFileLoader<DZLHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);

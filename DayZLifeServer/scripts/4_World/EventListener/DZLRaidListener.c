@@ -36,7 +36,7 @@ class DZLRaidListener
                             if (raider == currentPlayer) continue;
 
                             if (dzlHouseRaid.IsOwner(currentPlayer)) {
-                                GetGame().RPCSingleParam(currentPlayer, DAY_Z_LIFE_HOUSE_RAID_ALARM, new Param2<ref DZLHouse, PlayerBase>(dzlHouseRaid, raider), true, currentPlayer.GetIdentity());
+                                GetGame().RPCSingleParam(currentPlayer, DAY_Z_LIFE_HOUSE_RAID_ALARM, new Param3<ref DZLHouseExtension, string, PlayerBase>(dzlHouseRaid.GetHouseAlarm(), dzlHouseRaid.GetName(), raider), true, currentPlayer.GetIdentity());
                             }
                         }
                     }
