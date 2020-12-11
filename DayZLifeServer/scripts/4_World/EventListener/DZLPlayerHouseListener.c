@@ -40,26 +40,23 @@ class DZLPlayerHouseListener
 				
 				
 				foreach(string playerIdWithNewAccess: playersAccess) {
-					
-					if (currentKeys.Find(playerIdWithNewAccess)) continue;
-					
-					DZLPlayerHouse playerHouseAccess = new DZLPlayerHouse(playerIdWithNewAccess);
-					
-					playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
-					
-					playerMustUpdated.Insert(playerIdWithNewAccess);
+					if (currentKeys.Find(playerIdWithNewAccess) == -1) {
+                        DZLPlayerHouse playerHouseAccess = new DZLPlayerHouse(playerIdWithNewAccess);
+
+                        playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
+
+                        playerMustUpdated.Insert(playerIdWithNewAccess);
+					}
 				}
-				
-				
+
 				foreach(string playerId: currentKeys) {
-					
-					if (playersAccess.Find(playerId)) continue;
-					
-					DZLPlayerHouse playerHouse = new DZLPlayerHouse(playerId);
-					
-					playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
-					
-					playerMustUpdated.Insert(playerId);
+					if (playersAccess.Find(playerId) != -1) {
+                        DZLPlayerHouse playerHouse = new DZLPlayerHouse(playerId);
+
+                        playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
+
+                        playerMustUpdated.Insert(playerId);
+					}
 				}
 				
 				

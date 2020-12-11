@@ -76,13 +76,15 @@ class DZLActionRaidDoors: ActionInteractBase
 	    DZLHouse dzlHouse = new DZLHouse(building);
 		
 	    if (dzlHouse.HasAlarmSystem() && dzlHouse.GetHouseAlarm().message) {
-			array<Man> _players = new array<Man>;
-            GetGame().GetPlayers(_players);
+			array<Man> players = new array<Man>;
+            GetGame().GetPlayers(players);
 
-            if (_players) {
-                foreach(Man _player: _players) {
-	                if (dzlHouse.IsOwner(PlayerBase.Cast(_player))) {
-	                    DZLSendMessage(_player.GetIdentity(), dzlHouse.GetHouseAlarm().GetMessage(action_data.m_Player, dzlHouse));
+            if (players) {
+                foreach(Man player: players) {
+                    if (action_data.m_Player == PlayerBase.Cast(player)) continue;
+                    
+	                if (dzlHouse.IsOwner(PlayerBase.Cast(player))) {
+	                    DZLSendMessage(player.GetIdentity(), dzlHouse.GetHouseAlarm().GetMessage(action_data.m_Player, dzlHouse));
 	                }
                 }
             }
