@@ -9,13 +9,13 @@ class DZLHouseExtension : DZLIdModel
     string message = "";
     int level;
 	
-	string GetMessage(PlayerBase raider, DZLHouse house) {
+	string GetMessage(PlayerBase raider, string name) {
         if (level == 1) {
             return message;
         } else if (level == 2) {
-            return message + " " + house.GetName();
+            return message + " " + name;
         } else if (level == 3) {
-            return message + " " + house.GetName() + " / " + raider.GetIdentity().GetName();
+            return message + " " + name + " / " + raider.GetIdentity().GetName();
         }
 
 		return message;
