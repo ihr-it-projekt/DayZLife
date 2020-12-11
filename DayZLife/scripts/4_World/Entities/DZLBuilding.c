@@ -9,11 +9,11 @@ class DZLBuilding {
     }
 
     bool HasOwner() {
-        return house.owner != "";
+        return house.HasOwner();
     }
 
     bool IsOwner(PlayerBase player) {
-        return house.owner == player.GetIdentity().GetId();
+        return house.IsOwner(player);
     }
 
     void BuyOnServer(PlayerBase player) {
@@ -48,7 +48,7 @@ class DZLBuilding {
 	}
 	
 	DZLHouseExtension GetHouseAlarm() {
-		return house.alarmSystem;
+		return house.GetHouseAlarm();
 	}
 
 	bool CanBuyAlarm(DZLHouseExtension alarm) {
@@ -74,11 +74,11 @@ class DZLBuilding {
 	}
 	
 	array<string> GetPlayerAccess() {
-		return house.playerAccess;
+		return house.GetPlayerAccess();
 	}
 	
 	bool HasPlayerAccess(string ident) {
-		return -1 != house.playerAccess.Find(ident);
+		return house.HasPlayerAccess(ident);
 	}
 	
 	vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {

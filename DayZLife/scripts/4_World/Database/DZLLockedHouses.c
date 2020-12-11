@@ -14,12 +14,12 @@ class DZLLockedHouses {
     }
 
     void Add(DZLHouse house) {
-        houseCollection.Insert(house.fileName);
+        houseCollection.Insert(house.GetFileName());
         Save();
     }
 	
 	void Remove(DZLHouse house) {
-	    houseCollection.RemoveItem(house.fileName);
+	    houseCollection.RemoveItem(house.GetFileName());
 		Save();
 	}
 
@@ -37,7 +37,7 @@ class DZLLockedHouses {
 
 			if (!building) continue;
 
-            foreach(int doorIndex: house.lockedDoors) {
+            foreach(int doorIndex: house.GetLockedDoors()) {
 				if (!building.IsDoorOpen(doorIndex)) {
 					building.CloseDoor(doorIndex);
 					building.LockDoor(doorIndex);

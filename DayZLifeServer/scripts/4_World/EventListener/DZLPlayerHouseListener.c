@@ -34,7 +34,7 @@ class DZLPlayerHouseListener
 				
 				if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
 
-				array<string> currentKeys = dzlBuilding.GetDZLHouse().playerAccess;
+				array<string> currentKeys = dzlBuilding.GetDZLHouse().GetPlayerAccess();
 				
 				array<string> playerMustUpdated = new array<string>;
 				

@@ -1,20 +1,20 @@
 class DZLHouse {
 
-    string fileName;
-    string owner = "";
-    string name = "";
-	vector position;
-	vector orientation;
-	ref array<ref DZLStorageTypeBought> storage;
-	ref DZLHouseExtension alarmSystem;
-	ref array<int> storagePositions;
-	int raidTime = 3;
-	ref array<int> lockedDoors;
-	ref array<string> playerAccess;
+    private string fileName;
+    private string owner = "";
+    private string name = "";
+    private vector position;
+    private vector orientation;
+    private ref array<ref DZLStorageTypeBought> storage;
+    private ref DZLHouseExtension alarmSystem;
+    private ref array<int> storagePositions;
+    private int raidTime = 3;
+    private ref array<int> lockedDoors;
+    private ref array<string> playerAccess;
 
     void DZLHouse(Building building = null, string fileName = "") {
         if (building) {
-            this.fileName = DZLHouse.GetFileName(building);;
+            this.fileName = DZLHouse.GetFileNameFromBuilding(building);;
         } else {
             this.fileName = fileName;
         }
@@ -31,8 +31,28 @@ class DZLHouse {
 		}
     }
 	
-	static string GetFileName(Building building) {
+	static string GetFileNameFromBuilding(Building building) {
 		return building.GetPosition().ToString(false) + ".json";
+	}
+	
+	string GetFileName() {
+		return fileName;
+	}
+
+	array<int> GetLockedDoors() {
+	    return lockedDoors;
+	}
+
+	vector GetPosition() {
+	    return position;
+	}
+
+	string GetName() {
+	    return name;
+	}
+	
+	int GetRaidTime() {
+		return raidTime;
 	}
 
     void AddOwner(PlayerBase player) {
@@ -69,6 +89,14 @@ class DZLHouse {
 
 	bool HasPlayerAccess(string ident) {
         return -1 != playerAccess.Find(ident);
+    }
+	
+	array<string> GetPlayerAccess() {
+		return playerAccess;
+	}
+	
+	bool HasOwner() {
+        return owner != "";
     }
 	
 	int GetCountStorage() {

@@ -14,12 +14,12 @@ class DZLPlayerHouse {
 
     void AddHouse(notnull ref DZLHouse house) {
 
-        playerHouseCollection.Insert(house.fileName);
+        playerHouseCollection.Insert(house.GetFileName());
         Save();
 	}
 	
 	void RemoveHouse(notnull DZLHouse house) {
-		int index = playerHouseCollection.Find(house.fileName);
+		int index = playerHouseCollection.Find(house.GetFileName());
 		if (-1 != index) {
 			playerHouseCollection.Remove(index);
 			Save();
@@ -27,22 +27,22 @@ class DZLPlayerHouse {
 	}
 	
 	bool HasHouse(notnull Building building) {
-		string houseFileName = DZLHouse.GetFileName(building);
+		string houseFileName = DZLHouse.GetFileNameFromBuilding(building);
 		return -1 != playerHouseCollection.Find(houseFileName);
 	}
 	
 	bool HasKey(notnull Building building) {
-		string houseFileName = DZLHouse.GetFileName(building);
+		string houseFileName = DZLHouse.GetFileNameFromBuilding(building);
 		return -1 != playerHouseKeyCollection.Find(houseFileName);
 	}
 	
 	void AddKey(notnull ref DZLHouse house) {
-        playerHouseKeyCollection.Insert(house.fileName);
+        playerHouseKeyCollection.Insert(house.GetFileName());
         Save();
 	}
 	
 	void RemoveKey(notnull ref DZLHouse house) {
-		int index = playerHouseKeyCollection.Find(house.fileName);
+		int index = playerHouseKeyCollection.Find(house.GetFileName());
 		if (-1 != index) {
 			playerHouseKeyCollection.Remove(index);
 			Save();

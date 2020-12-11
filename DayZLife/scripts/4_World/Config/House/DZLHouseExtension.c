@@ -13,9 +13,9 @@ class DZLHouseExtension : DZLIdModel
         if (level == 1) {
             return message;
         } else if (level == 2) {
-            return message + " " + house.name;
+            return message + " " + house.GetName();
         } else if (level == 3) {
-            return message + " " + house.name + " / " + raider.GetIdentity().GetName();
+            return message + " " + house.GetName() + " / " + raider.GetIdentity().GetName();
         }
 
 		return message;

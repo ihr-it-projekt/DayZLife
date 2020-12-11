@@ -20,10 +20,10 @@ class DZLBuildingHelper
         array<Object> objects = new array<Object>;
         array<CargoBase> proxyCargos = new array<CargoBase>;
 
-        GetGame().GetObjectsAtPosition(house.position, 2, objects, proxyCargos);
+        GetGame().GetObjectsAtPosition(house.GetPosition(), 2, objects, proxyCargos);
 		
         foreach (Object object: objects) {
-            if (object.GetType() == house.name) {
+            if (object.GetType() == house.GetName()) {
                 return Building.Cast(object);
             }
         }

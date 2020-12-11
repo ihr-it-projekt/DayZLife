@@ -3,6 +3,8 @@ Alarm Nachricht geht an einbrecher
 KeyOwner kann nicht öffnen oder abschließen kann aber raiden
 
 
+- message tür ist verschlossen
+
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 

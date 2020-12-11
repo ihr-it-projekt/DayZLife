@@ -81,7 +81,7 @@ class DZLActionRaidDoors: ActionInteractBase
 
             if (_players) {
                 foreach(Man _player: _players) {
-	                if (_player.GetIdentity().GetId() == dzlHouse.owner) {
+	                if (dzlHouse.IsOwner(PlayerBase.Cast(_player))) {
 	                    DZLSendMessage(_player.GetIdentity(), dzlHouse.GetHouseAlarm().GetMessage(action_data.m_Player, dzlHouse));
 	                }
                 }
