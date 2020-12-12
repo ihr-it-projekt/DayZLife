@@ -21,13 +21,15 @@ class CfgVehicles
 		scope=1;
 		model="DZ\gear\cultivation\Cannabis_plant.p3d";
 		physLayer="item_small";
+		displayName="#CannabisPlant";
+        descriptionShort="#Cannabis";
 		carveNavmesh=0;
 	};
 	class DZL_Cannabis: Inventory_Base
 	{
 		scope=2;
 		displayName="#Cannabis";
-		descriptionShort="20g Cannabis";
+		descriptionShort="#canabis_desc";
 		model="\dz\gear\food\cannabis_seedman.p3d";
 		rotationFlags=34;
 		weight=20;
@@ -36,8 +38,8 @@ class CfgVehicles
 	class DZL_Cannabis_Brick: Container_Base
 	{	
 		scope=2;
-		displayName="#Cannabis Brick";
-		descriptionShort="1Kg Cannabis";
+		displayName="#Cannabis_Brick";
+		descriptionShort="#Cannabis_Brick_desc";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";

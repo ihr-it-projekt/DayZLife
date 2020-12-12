@@ -22,6 +22,8 @@ class CfgVehicles
 		scope=1;
 		model="DZ\gear\cultivation\Cannabis_plant.p3d";
 		physLayer="item_small";
+		displayName="#Cocaine_plant";
+		descriptionShort="#Cocaine_plant";
 		carveNavmesh=0;
 		hiddenSelections[]=
 		{
@@ -49,8 +51,8 @@ class CfgVehicles
 	class DZL_Cocain_Brick: Container_Base
 	{	
 		scope=2;
-		displayName="#Cocain Brick";
-		descriptionShort="Model Platzhalter!";
+		displayName="#Cocain_Brick";
+		descriptionShort="#Cocain_Brick_desc";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";
@@ -70,8 +72,8 @@ class CfgVehicles
 	class DZL_Cocain: Paper
 	{	
 		scope=2;
-		displayName="#Cocaine plunder";
-		descriptionShort="Ergibt 5g Cocain";
+		displayName="#raw_Cocaine";
+		descriptionShort="#raw_Cocaine_desc";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";

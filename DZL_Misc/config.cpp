@@ -107,7 +107,7 @@ class CfgVehicles
 	{
 		scope=2;
 		displayName="#Sandpaper";
-		descriptionShort="";
+		descriptionShort="#Sandpaper";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;
 		lootCategory="Crafted";
@@ -201,7 +201,7 @@ class CfgVehicles
 	{
 		scope=1;
 		displayName="#Bucket";
-		descriptionShort="Bucket";
+		descriptionShort="#Bucket";
 		model="\DZ\structures\furniture\decoration\bucket\bucket.p3d";
 		weight=1000;
 		itemSize[]={2,3};
