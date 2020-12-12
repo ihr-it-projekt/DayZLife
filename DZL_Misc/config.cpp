@@ -222,17 +222,4 @@ class CfgVehicles
 	{
 		itemsCargoSize[]={10,10};
 	};
-	// Model Platzhalter!
-	class DZL_Jewelry: SmallStone
-	{
-		scope=2;
-		displayName="#Jewelry";
-		descriptionShort="Model Platzhalter!";
-		model="\dz\gear\consumables\SmallStone.p3d";
-		animClass="NoFireClass";
-		weight=500;
-		itemSize[]={1,1};
-		rotationFlags=17;
-	};
-	// Model Platzhalter Ende!
 };

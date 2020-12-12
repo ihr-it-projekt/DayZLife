@@ -49,7 +49,7 @@ class CfgVehicles
 	class DZL_Cocain_Brick: Container_Base
 	{	
 		scope=2;
-		displayName="Cocain Brick";
+		displayName="#Cocain Brick";
 		descriptionShort="Model Platzhalter!";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;
@@ -70,7 +70,7 @@ class CfgVehicles
 	class DZL_Cocain: Paper
 	{	
 		scope=2;
-		displayName="Cocain";
+		displayName="#Cocaine plunder";
 		descriptionShort="Ergibt 5g Cocain";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;

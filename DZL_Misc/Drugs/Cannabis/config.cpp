@@ -26,7 +26,7 @@ class CfgVehicles
 	class DZL_Cannabis: Inventory_Base
 	{
 		scope=2;
-		displayName="Cannabis";
+		displayName="#Cannabis";
 		descriptionShort="20g Cannabis";
 		model="\dz\gear\food\cannabis_seedman.p3d";
 		rotationFlags=34;
@@ -36,7 +36,7 @@ class CfgVehicles
 	class DZL_Cannabis_Brick: Container_Base
 	{	
 		scope=2;
-		displayName="Cannabis Brick";
+		displayName="#Cannabis Brick";
 		descriptionShort="1Kg Cannabis";
 		model="\dz\gear\containers\FirstAidKit.p3d";
 		rotationFlags=17;

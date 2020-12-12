@@ -18,7 +18,7 @@ class CfgVehicles
 	class DZL_Ore_Gold: Stone
 	{
 		scope=2;
-		displayName="Golderz";
+		displayName="#Gold ore";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Gold\DZL_Ore_Gold.p3d";
 		weight=1000;
@@ -27,7 +27,7 @@ class CfgVehicles
 	class DZL_Gold: SmallStone
 	{
 		scope=2;
-		displayName="Gold";
+		displayName="#Gold";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Gold\DZL_Gold_Small.p3d";
 		animClass="NoFireClass";
@@ -38,7 +38,7 @@ class CfgVehicles
 	class DZL_Ore_Copper: Stone
 	{
 		scope=2;
-		displayName="Copper";
+		displayName="#Copper ore";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Copper\DZL_Ore_Copper.p3d";
 		weight=2000;
@@ -47,7 +47,7 @@ class CfgVehicles
 	class DZL_Copper: SmallStone
 	{
 		scope=2;
-		displayName="Copper";
+		displayName="#Copper";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Copper\DZL_Copper_Small.p3d";
 		animClass="NoFireClass";
@@ -58,7 +58,7 @@ class CfgVehicles
 	class DZL_Ore_Coal: Stone
 	{
 		scope=2;
-		displayName="Coal";
+		displayName="#Coal";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Coal\DZL_Ore_Coal.p3d";
 		weight=500;
@@ -67,7 +67,7 @@ class CfgVehicles
 	class DZL_Ore_Iron: Stone
 	{
 		scope=2;
-		displayName="Iron";
+		displayName="#Iron ore";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Iron\DZL_Ore_Iron.p3d";
 		weight=2000;
@@ -76,7 +76,7 @@ class CfgVehicles
 	class DZL_Iron: SmallStone
 	{
 		scope=2;
-		displayName="Iron";
+		displayName="#Iron";
 		descriptionShort="";
 		model="\DZL_Misc\Ore\Iron\DZL_Iron_Small.p3d";
 		animClass="NoFireClass";
@@ -87,7 +87,7 @@ class CfgVehicles
 	class DZL_Ore_Diamond: SmallStone
 	{
 		scope=2;
-		displayName="Diamond";
+		displayName="#Diamond";
 		descriptionShort="Model Platzhalter!";
 		model="\DZL_Misc\Ore\Diamond\DZL_Ore_Diamond_Small.p3d";
 		weight=500;
@@ -96,7 +96,7 @@ class CfgVehicles
 	class DZL_Diamond_Polished: SmallStone
 	{
 		scope=2;
-		displayName="Diamond Polished";
+		displayName="#Diamond cut";
 		descriptionShort="Model Platzhalter!";
 		model="\DZL_Misc\Ore\Diamond\DZL_Ore_Diamond_Small.p3d";
 		weight=100;
@@ -105,7 +105,7 @@ class CfgVehicles
 	class DZL_Jewelry: SmallStone
 	{
 		scope=2;
-		displayName="Jewelry";
+		displayName="#Jewelry";
 		descriptionShort="Model Platzhalter!";
 		model="\DZL_Misc\Ore\Copper\DZL_Copper_Small.p3d";
 		weight=100;
