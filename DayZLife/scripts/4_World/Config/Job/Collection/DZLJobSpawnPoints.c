@@ -244,6 +244,7 @@ class DZLJobSpawnPoints
 			    } else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -268,6 +269,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -292,6 +294,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -316,6 +319,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -340,6 +344,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -364,6 +369,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -388,6 +394,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -412,6 +419,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -436,6 +444,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -460,6 +469,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -484,6 +494,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -508,6 +519,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -532,6 +544,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -556,6 +569,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
@@ -580,6 +594,7 @@ class DZLJobSpawnPoints
 					items = new array<string>;
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
+					items.Insert("Sneakers_White");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
 					items.Insert("BandageDressing");
