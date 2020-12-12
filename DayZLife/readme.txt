@@ -1,10 +1,6 @@
-Bugs:
-Alarm Nachricht geht an einbrecher
-KeyOwner kann nicht öffnen oder abschließen kann aber raiden
 
 
 - message tür ist verschlossen
-
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
@@ -87,3 +83,30 @@ KeyOwner kann nicht öffnen oder abschließen kann aber raiden
 
 Text
 - set car lifetime in types
+
+
+Feature list
+
+- Spawn Menu with job chose
+- money system
+- money can be stolen from other players
+- bank system
+    - pay in/pay out
+    - transfer money over bank
+    - transfer money directly to players
+- bank can be raided
+- several traders
+- player can buy standard houses
+- player can upgrade houses
+    - doors can be looked
+    - Storage
+    - Alarm systems
+    - house access control system (keys)
+    - houses can be raid by other players
+- harvest coal/iron/copper/cocaine/stones/apple
+- process harvest items with different licences
+- Jobs
+    - Admins can make player to cops
+    - player can be a medic
+    - player can be civil
+
