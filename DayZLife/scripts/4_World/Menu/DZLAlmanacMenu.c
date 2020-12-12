@@ -59,7 +59,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		copPanelWidget = creator.GetWidget("cop_panel");
 		copPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_CopPanel");
 		copPanelCopsList = creator.GetTextListboxWidget("coplist_CopPanel");
-		copPanelSave = creator.GetButtonWidget("safeButton_CopPanel");
+		copPanelSave = creator.GetButtonWidget("saveButton_CopPanel");
 		
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 		

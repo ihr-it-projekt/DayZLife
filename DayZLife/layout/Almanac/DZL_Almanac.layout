@@ -542,7 +542,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          ButtonWidgetClass safeButton_CopPanel {
+          ButtonWidgetClass saveButton_CopPanel {
            position 0 0
            size 0.98 0.9
            halign center_ref
@@ -551,7 +551,7 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           text "#Safe"
+           text "#Save"
           }
          }
         }
