@@ -60,7 +60,9 @@ class DZLBankListener
 					messageDeposit = "#bank_can_not_be_used_in_moment";
 				} else if ("" == messageDeposit) {
 					if(dzlPlayerSender.money + dzlPlayerSender.bank >= paramDepositPlayer.param3) {
-						dzlPlayerSender.DepositMoneyToOtherPlayer(dzlPlayerReciver, paramDepositPlayer.param3);
+						int moneyBankAdd = dzlPlayerSender.DepositMoneyToOtherPlayer(dzlPlayerReciver, paramDepositPlayer.param3);
+
+						bankTransfer.AddMoney(moneyBankAdd);
 						
 						GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bankTransfer), true);
                     	GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayer.param1.GetIdentity().GetId())), true, sender);

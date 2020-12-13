@@ -68,7 +68,9 @@ class DZLPlayer {
 		Save();
 	}
 	
-	void DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+	int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+	    int moneyBankAdd = moneyToTransfer;
+
 		playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
 		
 		if (money > 0) {
@@ -83,9 +85,11 @@ class DZLPlayer {
 		
 		if (moneyToTransfer > 0) {
 			bank -= moneyToTransfer;
+			moneyBankAdd -= moneyToTransfer;
 		}
 		
 		Save();
+		return moneyBankAdd;
 	}
 	
 	string CanBuyLicence(notnull DZLLicence licenceToBuy, DZLLicence depLicence){
