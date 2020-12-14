@@ -213,7 +213,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "8722 99 13264", 10, "#coal_mine", 10, 10, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "8722 99 13264", 10, "#coal_mine", 12, 10, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Coal end
 				
@@ -229,7 +229,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "8540 8 2978", 10, "#Copper_mine", 10, 10, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "8540 8 2978", 10, "#Copper_mine", 14, 10, harvestItemToolRelation);
 				workZones.Insert(zone);
 				// Harvest Copper end
 				
@@ -245,7 +245,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "919 180 6689", 10, "#Iron_mine", 10, 10, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "919 180 6689", 10, "#Iron_mine", 16, 10, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Iron end
 				
@@ -261,7 +261,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "14098 2 13406", 10, "#Gold_mine", 10, 10, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "14098 2 13406", 10, "#Gold_mine", 18, 10, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Gold end
 				
@@ -277,7 +277,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(109, "13672 49 12299", 10, "#Diamond_mine", 10, 10, harvestItemToolRelation);
+				zone = new DZLWorkZone(109, "13672 49 12299", 10, "#Diamond_mine", 20, 10, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest Diamond end
 				
@@ -294,7 +294,7 @@ class DZLJobConfig
                 relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
                 harvestItemToolRelation.Insert(relation);
 				
-				zone = new DZLWorkZone(86, "932 180 7723", 10, "#Sawmill", 10, 10, harvestItemToolRelation);
+				zone = new DZLWorkZone(86, "932 180 7723", 10, "#Sawmill", 10, 5, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Harvest WoodenLog end
 				
