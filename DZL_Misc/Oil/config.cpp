@@ -14,6 +14,7 @@ class CfgPatches
 class CfgVehicles
 {
 	class Barrel_ColorBase;
+	class Inventory_Base;
 	class DZL_Oil_Barrel: Barrel_ColorBase
 	{
 		displayName="Fass mit Ölschlamm";
@@ -33,5 +34,13 @@ class CfgVehicles
 			openable=0;
 			allowOwnedCargoManipulation=1;
 		};
+	};
+	class DZL_Oil: Inventory_Base
+	{
+		displayName="5L Oil";
+		descriptionShort="";
+		model="\dz\vehicles\parts\oil_bottle.p3d"
+		weight=5000;
+		itemSize[]={2,3};
 	};
 };

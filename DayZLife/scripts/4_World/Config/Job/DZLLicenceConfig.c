@@ -115,6 +115,18 @@ class DZLLicenceConfig
                 craftItems = new DZLLicenceCraftItemCollection;
                 toolItems = new DZLLicenceToolItemCollection;
 				
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Oil_Barrel", 1, 50));
+                toolItems.collection.Insert(new DZLLicenceToolItem("FieldShovel", 1, 10));
+                licences.collection.Insert(new DZLLicence(109, 150, "Oil Licence", "11809.800781 27.400000 14259.675781", 5, "", new DZLLicenceCraftedItem("DZL_Oil", 2, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+                toolItems = new DZLLicenceToolItemCollection;
+				
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Oil_Barrel", 2, 50));
+                toolItems.collection.Insert(new DZLLicenceToolItem("FieldShovel", 1, 10));
+                licences.collection.Insert(new DZLLicence(109, 150, "Plastik Licence", "12845.079102 5.980000 9919.536133", 5, "Oil Licence", new DZLLicenceCraftedItem("DZL_Stone", 1, 100), 5, toolItems, craftItems));
+                craftItems = new DZLLicenceCraftItemCollection;
+                toolItems = new DZLLicenceToolItemCollection;
+				
                 // Position of licence dealer
                 positionOfLicencePoints.Insert(new DZLLicencePosition("6566.056152 6.000000 2456.487061", "138 0 0", "SurvivorM_Boris", attachments));
                 // end position
