@@ -373,6 +373,23 @@ class DZLJobConfig
 				zone = new DZLWorkZone(74, "12538 55 13790", 10, "#Scrap_yard", 15, 5, harvestItemToolRelation);
 				workZones.Insert(zone);
 				//Gather Vehicle Parts end
+				
+				// Ölschlamm
+				itemsThatCanHarvest = new array<string>;
+                itemsThatNeededForHarvest = new array<string>;
+                harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
+				
+				itemsThatCanHarvest.Insert("DZL_Oil_Barrel");
+				
+                itemsThatNeededForHarvest.Insert("FieldShovel");
+				
+				relation = new DZLHarvestItemToolRelation(itemsThatCanHarvest, itemsThatNeededForHarvest);
+				
+                harvestItemToolRelation.Insert(relation);
+				
+				zone = new DZLWorkZone(90, "3765.302002 3.634198 2271.211914", 10, "Oilschlamm", 20, 10, harvestItemToolRelation, false);
+				workZones.Insert(zone);
+				// Ölschlamm ende
             }
 			
 		    Save();
