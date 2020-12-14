@@ -76,7 +76,7 @@ FrameWidgetClass Trader_Menu {
         PanelWidgetClass PanelWidget3 {
          ignorepointer 1
          position 0 0
-         size 0.32 0.9165
+         size 0.32 0.91239
          halign center_ref
          hexactpos 0
          vexactpos 0
@@ -84,24 +84,10 @@ FrameWidgetClass Trader_Menu {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass sell_card {
-           color 0.502 0 0 1
-           position -0.00002 0.01196
-           size 0.9669 0.26
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           "title visible" 1
-           colums "#sell_Shopping_Cart;50;#Sell;30;#Quantity;20"
-           lines 10
-          }
           PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           position 0 0
-           size 1 0.34688
+           position 0 -0
+           size 1 0.34388
            halign center_ref
            valign bottom_ref
            hexactpos 0
@@ -113,7 +99,7 @@ FrameWidgetClass Trader_Menu {
             ItemPreviewWidgetClass previewItem {
              ignorepointer 1
              position 0.00003 0.0299
-             size 0.967 0.92
+             size 0.967 0.93516
              halign center_ref
              hexactpos 0
              vexactpos 0
@@ -122,24 +108,10 @@ FrameWidgetClass Trader_Menu {
             }
            }
           }
-          TextListboxWidgetClass buy_card {
-           color 0.502 0 0 1
-           position -0.00002 0.28392
-           size 0.9669 0.26
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           "title visible" 1
-           colums "#buy_Shopping_Cart;75;#Buy;25;"
-           lines 10
-          }
           PanelWidgetClass PanelWidget10 {
            ignorepointer 1
-           position 0.00002 0.10626
-           size 1 0.09769
+           position 0.00002 0.1098
+           size 1 0.09876
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -150,8 +122,8 @@ FrameWidgetClass Trader_Menu {
            {
             TextWidgetClass sum {
              ignorepointer 1
-             position 0.20014 -0.01006
-             size 0.56615 0.735
+             position 0.20014 0.00039
+             size 0.56615 0.7559
              halign center_ref
              valign center_ref
              hexactpos 0
@@ -163,8 +135,8 @@ FrameWidgetClass Trader_Menu {
             }
             TextWidgetClass sumText {
              ignorepointer 1
-             position 0.01653 -0.01006
-             size 0.384 0.735
+             position 0.03711 0.00039
+             size 0.36342 0.7559
              valign center_ref
              hexactpos 0
              vexactpos 0
@@ -173,6 +145,73 @@ FrameWidgetClass Trader_Menu {
              text "#sum"
              text_proportion 0.7
              "text valign" center
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget13 {
+           ignorepointer 1
+           position 0 0
+           size 1 0.56293
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            PanelWidgetClass PanelWidget14 {
+             ignorepointer 1
+             size 1 0.502
+             halign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_quad_dark
+             {
+              TextListboxWidgetClass sell_card {
+               color 0.502 0 0 1
+               position 0.00205 0.04252
+               size 0.9669 0.91497
+               halign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               style Default
+               "title visible" 1
+               colums "#sell_Shopping_Cart;60;#Sell;20;#Quantity;20"
+               lines 10
+              }
+             }
+            }
+            PanelWidgetClass PanelWidget15 {
+             ignorepointer 1
+             size 1 0.502
+             halign center_ref
+             valign bottom_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_quad_dark
+             {
+              TextListboxWidgetClass buy_card {
+               color 0.502 0 0 1
+               position 0 0
+               size 0.9669 0.91497
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               style Default
+               "title visible" 1
+               colums "#buy_Shopping_Cart;75;#Buy;25;"
+               lines 10
+              }
+             }
             }
            }
           }
@@ -187,7 +226,7 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Inventory;50;#Sell;30;#Quantity;20"
+         colums "#Inventory;60;#Sell;20;#Quantity;20"
          lines 25
         }
         TextListboxWidgetClass Trader_Item_list {
@@ -200,7 +239,7 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Item;50;#Buy;25;#Sell;25"
+         colums "#Item;60;#Buy;20;#Sell;20"
          lines 15
         }
         PanelWidgetClass PanelWidget5 {
@@ -295,7 +334,7 @@ FrameWidgetClass Trader_Menu {
             TextWidgetClass Balance {
              ignorepointer 1
              position 0.02 0
-             size 0.4 0.95
+             size 0.43306 0.95
              valign center_ref
              hexactpos 0
              vexactpos 0
@@ -307,8 +346,8 @@ FrameWidgetClass Trader_Menu {
             }
             TextWidgetClass Cedits {
              ignorepointer 1
-             position 0.15039 0
-             size 0.5 0.9
+             position 0.17637 0
+             size 0.44805 0.9
              halign center_ref
              valign center_ref
              hexactpos 0
@@ -341,7 +380,7 @@ FrameWidgetClass Trader_Menu {
         PanelWidgetClass PanelWidget12 {
          ignorepointer 1
          position 0 0.08658
-         size 0.3413 0.31499
+         size 0.3413 0.31401
          halign right_ref
          valign bottom_ref
          hexactpos 0

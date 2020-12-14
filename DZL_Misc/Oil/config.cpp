@@ -37,6 +37,7 @@ class CfgVehicles
 	};
 	class DZL_Oil: Inventory_Base
 	{
+		scope=2;
 		displayName="5L Oil";
 		descriptionShort="";
 		model="\dz\vehicles\parts\oil_bottle.p3d"
