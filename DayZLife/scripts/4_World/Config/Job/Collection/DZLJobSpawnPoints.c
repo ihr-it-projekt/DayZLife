@@ -61,7 +61,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Station Elektrozavodsk", "10462.418945 10.105204 2271.804932", "68.419617 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -71,7 +71,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Station Svetlojarsk", "13848.695313 24.675764 13212.036133", "128.822388 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -81,7 +81,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Station Novodmitrovsk", "11486.428711 50.482922 14489.633789", "-70.562645 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -91,7 +91,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Station Severograd", "7741.420898 122.455505 12631.818359", "100.479248 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -101,7 +101,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Station Zelenogorsk", "2735.672607 210.621185 5377.391602", "28.748816 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -111,7 +111,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Station Berezino", "12065.640625 57.869034 9057.484375", "134.757706 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -121,7 +121,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Novoselki", "6195.730957 30.349514 2916.213135", "-153.080688 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -131,7 +131,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Kamyshovo", "12050.808594 10.327807 3603.478271", "-137.151077 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -141,7 +141,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Dolina", "11188.155273 80.861008 6598.448730", "-3.070054 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -151,7 +151,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Berezino", "12926.571289 10.578716 10174.988281", "157.502136 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -161,7 +161,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Novaya Petrovka", "3429.129395 197.304077 13016.505859", "85.535614 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -171,7 +171,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Vybor", "3717.876953 315.595245 8923.975586", "-106.192551 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -181,7 +181,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Novy Sobor", "7178.267090 297.714508 7672.066895", "60.293751 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -191,7 +191,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Komarovo", "3576.188232 10.873785 2436.571045", "25.535524 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -201,7 +201,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Nadezhdino", "5863.132813 142.545685 4684.122070", "-58.558037 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -211,7 +211,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Staroye", "10151.223633 248.154800 5525.236328", "-141.274200 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -221,7 +221,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Grishino", "6006.648438 271.538849 10356.491211", "-5.301322 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
@@ -231,7 +231,7 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Gorka", "9538.000000 307.313110 8800.126953", "53.449543 0 0", items);
                     spawnPoints.Insert(point);
 					
-					new array<string>;
+					items = new array<string>;
                     items.Insert("PoliceVest");
 					items.Insert("PoliceJacket");
 					items.Insert("PolicePants");
