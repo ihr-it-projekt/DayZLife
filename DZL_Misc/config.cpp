@@ -49,7 +49,6 @@ class CfgVehicles
 	class Paper;
 	class Stone;
 	class SmallStone;
-	class Spraycan_Black;
 	class Container_Base;
 	class Pot;
 	class HouseNoDestruct;
@@ -85,24 +84,6 @@ class CfgVehicles
 		varQuantityDestroyOnMin=1;
 		varStackMax=5;
 	};
-	class DZL_Paper: Paper
-	{
-		scope=2;
-		displayName="$STR_CfgVehicles_Paper0";
-		descriptionShort="$STR_CfgVehicles_Paper1";
-		model="\dz\gear\consumables\Paper.p3d";
-		isMeleeWeapon=1;
-		weight=2;
-		absorbency=1;
-		itemSize[]={1,1};
-		rotationFlags=16;
-		canBeSplit=1;
-		varQuantityInit=10;
-		varQuantityMin=0;
-		varQuantityMax=10;
-		varQuantityDestroyOnMin=1;
-		varStackMax=10;
-	};
 	class DZL_Sandpaper: Paper
 	{
 		scope=2;
@@ -127,32 +108,6 @@ class CfgVehicles
 		hiddenSelectionsTextures[]=
 		{
 			"DZL_Misc\Data\Sandpaper.paa"
-		};
-	};
-	class DZL_Stone: Stone
-	{
-		scope=2;
-		displayName="$STR_CfgVehicles_Stone0";
-		descriptionShort="$STR_CfgVehicles_Stone1";
-		model="\dz\gear\consumables\Stone.p3d";
-		weight=1500;
-		itemSize[]={2,2};
-		canBeSplit=1;
-		varQuantityDestroyOnMin=1;
-		varQuantityInit=1;
-		varQuantityMin=0;
-		varQuantityMax=1;
-		varStackMax=1;
-	};
-	class DZL_Color: Spraycan_Black
-	{
-		scope=2;
-		displayName="#Color";
-		descriptionShort="$STR_CfgVehicles_Spraycan_Black0";
-		color="Black";
-		hiddenSelectionsTextures[]=
-		{
-			"DZ\gear\consumables\data\spraycan_black_co.paa"
 		};
 	};
 	class DZL_Crate_Base: Container_Base

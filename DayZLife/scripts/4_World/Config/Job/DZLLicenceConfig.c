@@ -92,11 +92,11 @@ class DZLLicenceConfig
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_WoodenPlank", 1, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("HandSaw", 1, 10));
-                licences.collection.Insert(new DZLLicence(109, 150, "Papier Licence", "12906.038086 7.482306 6262.768555", 5, "Woodplank Licence", new DZLLicenceCraftedItem("DZL_Paper", 5, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(109, 150, "Papier Licence", "12906.038086 7.482306 6262.768555", 5, "Woodplank Licence", new DZLLicenceCraftedItem("DZL_Paper", 2, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
                 toolItems = new DZLLicenceToolItemCollection;
 				
-				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Paper", 10, 50));
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Paper", 5, 50));
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Color", 1, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Pen_Black", 1, 10));
                 licences.collection.Insert(new DZLLicence(109, 150, "Falschgeld Licence", "8886.539063 221.465805 11661.134766", 5, "Papier Licence", new DZLLicenceCraftedItem("DZL_Money", 5, 100), 5, toolItems, craftItems));
