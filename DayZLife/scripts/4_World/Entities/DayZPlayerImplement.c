@@ -5,12 +5,15 @@ modded class DayZPlayerImplement
 
         if (isDead && GetGame().IsServer()) {
             PlayerBase player = PlayerBase.Cast(this);
-            DZLPlayer dzlPlayer = new DZLPlayer(player.GetIdentity().GetId());
 
-            if (dzlPlayer.money > 0) {
-                player.SetMoneyPlayerIsDead(dzlPlayer.money);
-                dzlPlayer.PlayerHasDied();
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
+            if (player) {
+                DZLPlayer dzlPlayer = new DZLPlayer(player.GetIdentity().GetId());
+
+                if (dzlPlayer.money > 0) {
+                    player.SetMoneyPlayerIsDead(dzlPlayer.money);
+                    dzlPlayer.PlayerHasDied();
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
+                }
             }
         }
 		

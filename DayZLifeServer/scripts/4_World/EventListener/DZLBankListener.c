@@ -90,7 +90,7 @@ class DZLBankListener
                 } else {
                     messageDepositPP = "#error_not_enough_money_to_transfer";
                 }
-				GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_MONEY_TRANSFER_RESPONSE, new Param1<string>(messageDepositPP), true, sender);
+				GetGame().RPCSingleParam(paramDepositPlayerPlayer.param1, DAY_Z_LIFE_MONEY_TRANSFER_RESPONSE, new Param1<string>(messageDepositPP), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
             autoptr Param1<PlayerBase> paramGetBankData;

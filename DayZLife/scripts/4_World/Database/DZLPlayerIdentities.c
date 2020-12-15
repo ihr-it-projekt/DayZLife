@@ -44,7 +44,9 @@ class DZLPlayerIdentities
         return collection;
     }
 
-    void UpdateCops(array<string> cops) {
+    void UpdateCops(ref array<string> cops) {
+        if (!cops) return;
+
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         foreach(string ident: playerIdentities) {

@@ -26,7 +26,7 @@ class DZLRaidListener
                 Building building = paramRaidDoorDZLBuilding.param2;
                 DZLHouse dzlHouseRaid = new DZLHouse(building);
 
-                if (dzlHouse.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {
+                if (dzlHouseRaid.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {
                     array<Man> players = new array<Man>;
                     GetGame().GetPlayers(players);
 

@@ -36,6 +36,7 @@ class DZLLockedHouses {
             Building building = DZLBuildingHelper.GetBuilding(house);
 
 			if (!building) continue;
+			if (!house.GetLockedDoors() || !house.GetLockedDoors().Count() == 0) continue;
 
             foreach(int doorIndex: house.GetLockedDoors()) {
 				if (!building.IsDoorOpen(doorIndex)) {

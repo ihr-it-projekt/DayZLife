@@ -199,6 +199,7 @@ modded class PlayerBase
     void SetMoneyPlayerIsDead(float money) {
         IsRealPlayer = false;
         moneyPlayerIsDead = money;
+        money = 0;
     }
 	
 	DZLLicence GetLicenceByPosition() {

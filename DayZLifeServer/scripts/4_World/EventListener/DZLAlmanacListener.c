@@ -20,7 +20,7 @@ class DZLAlmanacListener
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS) {
             autoptr Param2<PlayerBase, ref array<string>> paramUpdateCops;
             if (ctx.Read(paramUpdateCops)){
-				PlayerIdentity ident = param.param1.GetIdentity();
+				PlayerIdentity ident = paramUpdateCops.param1.GetIdentity();
 				
                 if (!config.IsAdmin(ident)) return;
 
