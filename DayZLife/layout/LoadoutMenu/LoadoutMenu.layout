@@ -99,6 +99,8 @@ FrameWidgetClass rootFrame {
          vexactpos 0
          hexactsize 0
          vexactsize 0
+         "title visible" 0
+         lines 15
         }
        }
       }
