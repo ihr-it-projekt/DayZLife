@@ -7,7 +7,7 @@ class DZLBankRaidListener : Managed
     private PlayerBase playerWhoStartedRaid;
 
     void DZLBankRaidListener() {
-        config = new DZLBankingConfig;
+        config = DZLConfig.Get().bankConfig;
         time = config.raidTimeBankInSeconds;
         GetDayZGame().Event_OnRPC.Insert(Start);
         raidTimer = new Timer;

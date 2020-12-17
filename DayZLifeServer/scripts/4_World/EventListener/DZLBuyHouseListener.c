@@ -7,7 +7,7 @@ class DZLBuyHouseListener
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         inventory = new DZLPlayerInventory;
         houseFinder = new DZLHouseFinder;
-        DZLConfig config = new DZLConfig;
+        DZLConfig config = DZLConfig.Get();
 
         houseFinder.SetConfig(config);
     }

@@ -206,7 +206,7 @@ modded class PlayerBase
 		
 		if (GetGame().IsServer()) {
 			dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
-			config = new DZLConfig();
+			config = DZLConfig.Get();
 		}
 
 	    if(!dzlPlayer) return null;

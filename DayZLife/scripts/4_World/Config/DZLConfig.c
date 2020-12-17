@@ -1,5 +1,16 @@
 class DZLConfig
 {
+    private static ref DZLConfig config;
+
+    static DZLConfig Get() {
+        if (!config) {
+            config = new DZLConfig;
+            DebugMessageDZL("create new config");
+        }
+
+        return config;
+    }
+
     ref DZLHouseConfig houseConfig;
     ref DZLHouseExtensions houseExtensions;
 	ref DZLBankingConfig bankConfig;

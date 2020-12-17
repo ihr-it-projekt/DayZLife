@@ -3,7 +3,7 @@ class DZLLicenceListener
     ref DZLConfig config;
 
     void DZLLicenceListener() {
-        config = new DZLConfig;
+        config = DZLConfig.Get();
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
 

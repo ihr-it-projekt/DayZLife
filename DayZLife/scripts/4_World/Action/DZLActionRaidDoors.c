@@ -8,7 +8,7 @@ class DZLActionRaidDoors: ActionInteractBase
         m_HUDCursorIcon = CursorIcons.OpenDoors;
 
         if (GetGame().IsServer()) {
-            config = new DZLHouseConfig();
+            config = DZLConfig.Get().houseConfig;
         }
 	}
 

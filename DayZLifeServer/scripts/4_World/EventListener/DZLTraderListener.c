@@ -4,7 +4,7 @@ class DZLTraderListener
 
     void DZLTraderListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = new DZLTraderConfig;
+        config = DZLConfig.Get().traderConfig;
     }
 
     void ~DZLTraderListener() {

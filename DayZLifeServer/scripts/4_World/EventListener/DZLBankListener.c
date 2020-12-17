@@ -4,7 +4,7 @@ class DZLBankListener
 
     void DZLBankListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = new DZLBankingConfig;
+        config = DZLConfig.Get().bankConfig;
     }
 
     void ~DZLBankListener() {

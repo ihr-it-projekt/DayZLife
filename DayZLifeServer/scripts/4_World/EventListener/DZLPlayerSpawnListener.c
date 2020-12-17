@@ -3,7 +3,7 @@ class DZLPlayerSpawnListener
     ref DZLConfig config;
 
     void DZLPlayerSpawnListener() {
-        config = new DZLConfig;
+        config = DZLConfig.Get();
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
 

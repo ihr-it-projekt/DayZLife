@@ -4,7 +4,7 @@ class ActionRobBank: ActionInteractBase
 
     DZLBankingConfig GetConfig() {
         if (!config) {
-            config = new DZLBankingConfig;
+            config = DZLConfig.Get().bankConfig;
         }
 
         return config;

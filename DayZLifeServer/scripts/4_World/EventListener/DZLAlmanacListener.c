@@ -3,7 +3,7 @@ class DZLAlmanacListener
     ref DZLConfig config;
 
     void DZLAlmanacListener() {
-		config = new DZLConfig;
+		config = DZLConfig.Get();
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
 

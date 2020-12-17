@@ -9,7 +9,7 @@ class ActionHarvestItem: ActionContinuousBase
 
     DZLJobConfig GetConfig() {
         if (!config) {
-            config = new DZLJobConfig;
+            config = DZLConfig.Get().jobConfig;
         }
 
         return config;

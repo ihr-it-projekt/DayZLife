@@ -1,7 +1,7 @@
 class DZLLicenceLocationBuilder {
 
     static void Create() {
-        DZLLicenceConfig config = new DZLLicenceConfig;
+        DZLLicenceConfig config = DZLConfig.Get().licenceConfig;
 		array<ref DZLLicencePosition> positions = config.positionOfLicencePoints;
 		foreach(DZLLicencePosition position: positions) {
 		    DZLLicenceLocationBuilder.CreatePositions(position, false, true, false);

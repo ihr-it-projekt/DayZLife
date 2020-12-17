@@ -1,7 +1,7 @@
 class DZLBankingLocationBuilder: DZLLicenceLocationBuilder {
 
     override static void Create() {
-        DZLBankingConfig bankingConfig = new DZLBankingConfig;
+        DZLBankingConfig bankingConfig = DZLConfig.Get().bankConfig;
 		array<ref DZLBankingPosition> positions = bankingConfig.positionOfBankingPoints;
 		
 		foreach(DZLBankingPosition position: positions) {
