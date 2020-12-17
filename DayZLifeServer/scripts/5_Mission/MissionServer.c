@@ -21,6 +21,7 @@ modded class MissionServer {
         DZLBankingLocationBuilder.Create();
         DZLLicenceLocationBuilder.Create();
         DZLTraderLocationBuilder.Create();
+        DZLLoadOutLocationBuilder.Create();
 
         DZLLockedHouses.OnServerStart();
     }
