@@ -9,6 +9,13 @@
     - wenn keine Activität länger als 10 minuten, dann muss Spieler innerhalb von 15 sec bestätigen das er Paycheck bekommt.
     - Button zum bestätigen immer an anderer position
 
+- paychecks
+    - nach online zeit bezahlen
+    - counter paycheck konfigurierbar nach wieviel online minuten
+    - gehalt einstellbar
+
+
+
 - Alarmanlage Cops benachrichtigen
 - Erweiterung Code Look fürs haus
 - dynmaic price (Angebot/ Nachfrage)

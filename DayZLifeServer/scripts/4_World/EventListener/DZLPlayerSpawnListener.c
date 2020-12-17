@@ -22,6 +22,9 @@ class DZLPlayerSpawnListener
 				
 				DZLSpawnPoint point = points.FindSpawnById(param.param1);
 				
+				DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+				dzlPlayer.UpdateActiveJob(param.param3);
+				
 				if (point) {
 					foreach(string item: point.items) {
 						player.GetInventory().CreateInInventory(item);

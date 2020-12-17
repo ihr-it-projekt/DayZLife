@@ -2,14 +2,19 @@ modded class MissionServer {
 
     private ref DZLEventManager manager;
 	private ref Timer databaseTimer;
+	private ref Timer paycheckTimer;
+	private ref DZLPayCheckController paycheckController;
 
 	void MissionServer()
 	{
         DebugMessageDZL("Load DayZLifeServer");
         manager = new DZLEventManager;
+        paycheckController = new DZLPayCheckController;
 
 		databaseTimer = new Timer();
+		paycheckTimer = new Timer();
 		databaseTimer.Run(5, DZLDatabaseLayer.Get(), "Save", null, true);
+		paycheckTimer.Run(60, paycheckController, "Check", null, true);
 	}
 
 	void ~MissionServer() {

@@ -4,9 +4,11 @@ class DZLJobConfig
     string version = "1";
     ref array<ref DZLLoadOutPosition> loadOutPosition;
     ref array<ref DZLLoadOutCategory> loadOutCategories;
+    ref DZLPaycheckConfig paycheck;
 
     void DZLJobConfig() {
 		if (!Load()) {
+		    paycheck = new DZLPaycheckConfig;
             workZones = new array<ref DZLWorkZone>;
             array<ref DZLHarvestItemToolRelation> harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
             array<string> itemsThatCanHarvest = new array<string>;

@@ -5,6 +5,11 @@ class DZLPlayer: DZLSaveModel
     int bank = 0;
     bool isCop = false;
     string playerName;
+	int onlineTimeCivil = 0;
+	int onlineTimeMedic = 0;
+	int onlineTimeCop = 0;
+	
+	string activeJob;
 
 	ref TStringArray licenceIds;
 
@@ -23,10 +28,48 @@ class DZLPlayer: DZLSaveModel
             mustSave = true;;
         }
     }
+	
+	void UpdateActiveJob(string job) {
+		activeJob = job;
+		mustSave = true;
+	}
+	
+	void UpdateOnlineTime() {
+		if (activeJob == DAY_Z_LIFE_JOB_COP) {
+			onlineTimeCop++;
+		} else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+			onlineTimeMedic++;
+		} else {
+			onlineTimeCivil++;
+		}
+		
+		mustSave = true;
+	}
+	
+	void ResetOnlineTime() {
+		if (activeJob == DAY_Z_LIFE_JOB_COP) {
+			onlineTimeCop = 0;
+		} else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+			onlineTimeMedic = 0;
+		} else {
+			onlineTimeCivil = 0;
+		}
+		
+		mustSave = true;
+	}
+	
+	int GetActiveOnlineTime() {
+		if (activeJob == DAY_Z_LIFE_JOB_COP) {
+			return onlineTimeCop;
+		} else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+			return onlineTimeMedic;
+		}
+		return onlineTimeCivil;
+	}
 
     void UpdateCop(bool isCop) {
         this.isCop = isCop;
-        mustSave = true;;
+        mustSave = true;
     }
 
     void UpdateName(string playerName) {
