@@ -12,15 +12,14 @@ class DZLJobSpawnPoints
 						
 			if (DAY_Z_LIFE_DEBUG) {
 			    if (jobId == DAY_Z_LIFE_JOB_COP) {
-                    items.Insert("CombatKnife");
+                    items.Insert("PoliceVest");
+                    items.Insert("PoliceJacket");
+                    items.Insert("PolicePants");
+                    items.Insert("PoliceCap");
+                    items.Insert("DressShoes_Black");
+                    items.Insert("TelescopicBaton");
                     point = new DZLSpawnPoint("Cop", "4620 340 10350", "0 0 0", items);
                     spawnPoints.Insert(point);
-
-                    items = new array<string>;
-                    items.Insert("HuntingKnife");
-                    point = new DZLSpawnPoint("Military", "4620 340 10330", "0 0 0", items);
-                    spawnPoints.Insert(point);
-
 			    } else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
                     items.Insert("KitchenKnife");
                     point = new DZLSpawnPoint("Sanitäter1", "4620 340 10370", "0 0 0", items);

@@ -5,7 +5,7 @@ class DZLTraderLocationBuilder: DZLLicenceLocationBuilder {
 		array<ref DZLTraderPosition> positions = config.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
-           PlayerBase trader = DZLTraderLocationBuilder.CreatePositions(position, false, false, true);
+           PlayerBase trader = DZLTraderLocationBuilder.CreatePositions(position, false, false, true, false);
         }
 	}
 };

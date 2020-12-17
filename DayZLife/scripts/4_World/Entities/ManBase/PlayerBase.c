@@ -18,6 +18,7 @@ modded class PlayerBase
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
 	bool IsTrader = false;
+	bool IsLoadOut = false;
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayer = false;
 	bool isOnHarvest = false;
@@ -29,12 +30,13 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsRealPlayer");
         RegisterNetSyncVariableBool("IsLicencePoint");
         RegisterNetSyncVariableBool("IsTrader");
+        RegisterNetSyncVariableBool("IsLoadOut");
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 	}
 
 	bool IsDZLPlayer() {
-	    return !IsDZLBank && !IsLicencePoint && !IsTrader;
+	    return !IsDZLBank && !IsLicencePoint && !IsTrader && !IsLoadOut;
 	}
 
     override void SetActions(out TInputActionMap InputActionMap) {

@@ -24,12 +24,9 @@ class DZLBankingConfig
             if (DAY_Z_LIFE_DEBUG) {
                  // first Bank
                 positionOfBankingPoints.Insert(new DZLBankingPosition("4660.000000 339.282990 10305.000000", "0 0 0", "SurvivorM_Boris", attachments));
-                // second bank
-                positionOfBankingPoints.Insert(new DZLBankingPosition("12326.892578 140.493500 12659.409180", "0 0 0", "SurvivorM_Rolf", attachments));
 
                 itemsCanUsedToRaidBank.Insert("M4A1");
             } else {
-                //TODO normal base config add
 				positionOfBankingPoints.Insert(new DZLBankingPosition("6570.417969 6.000000 2449.841309", "-56 0 0", "SurvivorM_Rolf", attachments));
 
                 itemsCanUsedToRaidBank.Insert("M4A1");

@@ -2,6 +2,8 @@ class DZLJobConfig
 {
     ref array<ref DZLWorkZone> workZones;
     string version = "1";
+    ref array<ref DZLLoadOutPosition> loadOutPosition;
+    ref array<ref DZLLoadOutCategory> loadOutCategories;
 
     void DZLJobConfig() {
 		if (!Load()) {
@@ -9,6 +11,31 @@ class DZLJobConfig
             array<ref DZLHarvestItemToolRelation> harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
             array<string> itemsThatCanHarvest = new array<string>;
             array<string> itemsThatNeededForHarvest = new array<string>;
+
+
+            loadOutPosition = new array<ref DZLLoadOutPosition>;
+            loadOutCategories = new array<ref DZLLoadOutCategory>;
+
+            array<string> loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("Apple");
+            array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
+            loadOutTypes.Insert(new DZLLoadOutType("ManSuit_Black", loadOutAttachments));
+            loadOutCategories.Insert(new DZLLoadOutCategory("cat1", loadOutTypes));
+
+            loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("CombatKnife");
+            loadOutTypes = new array<ref DZLLoadOutType>;
+            loadOutTypes.Insert(new DZLLoadOutType("SlacksPants_Black", loadOutAttachments));
+            loadOutCategories.Insert(new DZLLoadOutCategory("cat2", loadOutTypes));
+
+
+            array<string> attachments = new array<string>;
+            attachments.Insert("ManSuit_Black");
+            attachments.Insert("SlacksPants_Black");
+            attachments.Insert("ThickFramesGlasses");
+            attachments.Insert("DressShoes_Black");
+
+            loadOutPosition.Insert(new DZLLoadOutPosition("4665.000000 339.282990 10305.000000", "0 0 0", "SurvivorM_Boris", attachments));
 
 			if (DAY_Z_LIFE_DEBUG) {
                 //Harvest Stone
