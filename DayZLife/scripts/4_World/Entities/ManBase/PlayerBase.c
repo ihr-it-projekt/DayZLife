@@ -205,7 +205,7 @@ modded class PlayerBase
 	DZLLicence GetLicenceByPosition() {
 		
 		if (GetGame().IsServer()) {
-			dzlPlayer = new DZLPlayer(GetIdentity().GetId());
+			dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
 			config = new DZLConfig();
 		}
 

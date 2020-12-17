@@ -15,7 +15,7 @@ class DZLPlayerHouseListener
             autoptr Param1<PlayerBase> paramGetConfig;
             if (ctx.Read(paramGetConfig)){
                 if (paramGetConfig.param1) {
-                    GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(sender.GetId())), true, sender);
+                    GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
                 }
             }
         } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS) {
@@ -41,7 +41,7 @@ class DZLPlayerHouseListener
 				
 				foreach(string playerIdWithNewAccess: playersAccess) {
 					if (currentKeys.Find(playerIdWithNewAccess) == -1) {
-                        DZLPlayerHouse playerHouseAccess = new DZLPlayerHouse(playerIdWithNewAccess);
+                        DZLPlayerHouse playerHouseAccess = DZLDatabaseLayer.Get().GetPlayerHouse(playerIdWithNewAccess);
 
                         playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
 
@@ -51,7 +51,7 @@ class DZLPlayerHouseListener
 
 				foreach(string playerId: currentKeys) {
 					if (playersAccess.Find(playerId) != -1) {
-                        DZLPlayerHouse playerHouse = new DZLPlayerHouse(playerId);
+                        DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(playerId);
 
                         playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
 
@@ -67,7 +67,7 @@ class DZLPlayerHouseListener
 				foreach(Man onlinePlayer: onlinePlayers) {
 					PlayerIdentity playerIdent = onlinePlayer.GetIdentity();
 					if (-1 != playerMustUpdated.Find(playerIdent.GetId())) {
-						GetGame().RPCSingleParam(onlinePlayer, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(new DZLPlayerHouse(playerIdent.GetId())), true, playerIdent);
+						GetGame().RPCSingleParam(onlinePlayer, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(playerIdent.GetId())), true, playerIdent);
 					}
 				}
 				
@@ -86,7 +86,7 @@ class DZLPlayerHouseListener
        
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
-        DZLPlayerIdentities dzlPlayerIdentities = new DZLPlayerIdentities;
+        DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
 		
 		array <string> accessPlayer = dzlBuilding.GetPlayerAccess();
 		
@@ -99,7 +99,7 @@ class DZLPlayerHouseListener
 		array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
 	    foreach(string ident: allPlayer) {
 			if (dzlBuilding.HasPlayerAccess(ident) && ident != playerIdent) {
-				DZLPlayer _player = new DZLPlayer(ident);
+				DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayer(ident);
 			    collection.Insert(new DZLOnlinePlayer(ident, _player.playerName));
 			}
 		}

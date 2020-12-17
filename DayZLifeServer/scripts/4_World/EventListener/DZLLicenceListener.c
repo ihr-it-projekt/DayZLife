@@ -15,7 +15,7 @@ class DZLLicenceListener
         if (rpc_type == DAY_Z_LIFE_BUY_LICENCE) {
             autoptr Param2<PlayerBase, string> paramBuyLicence;
             if (ctx.Read(paramBuyLicence)){
-                DZLPlayer dzlPlayer = new DZLPlayer(sender.GetId());
+                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
 				DZLLicence licence = config.licenceConfig.licences.FindById(paramBuyLicence.param2);
 				DZLLicence depLicence;
 
@@ -29,13 +29,13 @@ class DZLLicenceListener
                     dzlPlayer.BuyLicence(licence);
                 }
 				
-				GetGame().RPCSingleParam(paramBuyLicence.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(sender.GetId())), true, sender);
+				GetGame().RPCSingleParam(paramBuyLicence.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(sender.GetId())), true, sender);
 				GetGame().RPCSingleParam(paramBuyLicence.param1, DAY_Z_LIFE_BUY_LICENCE_RESPONSE, new Param1<string>(message), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_USE) {
             autoptr Param2<PlayerBase, string> paramUseLicence;
             if (ctx.Read(paramUseLicence)){
-                DZLPlayer dzlPlayerUse = new DZLPlayer(sender.GetId());
+                DZLPlayer dzlPlayerUse = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
                 DZLLicence licenceUse = config.licenceConfig.licences.FindById(paramUseLicence.param2);
 
                 if (!licenceUse) return;

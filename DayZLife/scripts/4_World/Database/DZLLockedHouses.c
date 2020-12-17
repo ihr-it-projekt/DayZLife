@@ -1,26 +1,27 @@
-class DZLLockedHouses {
+class DZLLockedHouses: DZLSaveModel
+{
 	private ref array<string> houseCollection;
 
 	static void OnServerStart() {
-	    DZLLockedHouses houses = new DZLLockedHouses();
+	    DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
         houses.LockDoors();
 	}
 
     void DZLLockedHouses() {
 		if (!Load()) {
 	        houseCollection = new array<string>;
-			Save();
+			mustSave = true;;
 		}
     }
 
     void Add(DZLHouse house) {
         houseCollection.Insert(house.GetFileName());
-        Save();
+        mustSave = true;;
     }
 	
 	void Remove(DZLHouse house) {
 	    houseCollection.RemoveItem(house.GetFileName());
-		Save();
+		mustSave = true;;
 	}
 
 
@@ -29,7 +30,7 @@ class DZLLockedHouses {
         if (houseCollection.Count() == 0) return;
 
         foreach(string fileName: houseCollection) {
-            DZLHouse house = new DZLHouse(null, fileName);
+            DZLHouse house = DZLDatabaseLayer.Get().GetHouse(null, fileName);
 
             if (!house) continue;
 			
@@ -56,7 +57,7 @@ class DZLLockedHouses {
 		return false;
     }
 
-    private void Save(){
+    override protected void DoSave(){
         if (GetGame().IsServer()) {
 			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
 			DZLJsonFileHandler<DZLLockedHouses>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + LOCKED_HOUSES_FILE_NAME, this);

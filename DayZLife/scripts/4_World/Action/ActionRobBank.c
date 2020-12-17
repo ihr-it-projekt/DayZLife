@@ -32,7 +32,7 @@ class ActionRobBank: ActionInteractBase
 			config = player.config.bankConfig;
 		} else {
 			GetConfig();
-			DZLBank bank = new DZLBank;
+			DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 			if (bank.raidRuns) {
 			    DZLSendMessage(player.GetIdentity(), "#raid_allready_started");
 			    return false;

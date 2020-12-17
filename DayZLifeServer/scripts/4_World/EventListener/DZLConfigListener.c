@@ -23,10 +23,10 @@ class DZLConfigListener
             if (ctx.Read(paramGetPlayerData)){
                 if (paramGetPlayerData.param1){
                     DebugMessageDZL("Send player data");
-                    DZLPlayer dzlPlayer = new DZLPlayer(sender.GetId(), config.bankConfig.startCapital);
+                    DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId(), config.bankConfig.startCapital);
                     dzlPlayer.UpdateName(sender.GetName());
 
-                    GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(sender.GetId())), true, sender);
+                    GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(sender.GetId())), true, sender);
                 }
 
             }

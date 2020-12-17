@@ -11,7 +11,7 @@ class DZLBuildingHelper
 	static ref DZLHouse ActionTargetToDZLHouse(ActionTarget target){
         Building building = Building.Cast(target.GetObject());
         if(building) {
-            return new DZLHouse(building);
+            return DZLDatabaseLayer.Get().GetHouse(building);
         }
         return null;
     }

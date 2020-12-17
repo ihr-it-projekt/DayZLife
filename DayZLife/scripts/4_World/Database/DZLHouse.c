@@ -1,4 +1,5 @@
-class DZLHouse {
+class DZLHouse: DZLSaveModel
+{
 
     private string fileName;
     private string owner = "";
@@ -19,7 +20,7 @@ class DZLHouse {
             this.fileName = fileName;
         }
 
-		if (!Load()) {
+		if (!Load() && building) {
 	        this.name = building.GetType();
 			this.position = building.GetPosition();
 			this.orientation = building.GetOrientation();
@@ -27,7 +28,7 @@ class DZLHouse {
 			this.storagePositions = new array<int>;
 			this.lockedDoors = new array<int>;
 			this.playerAccess = new array<string>;
-			Save();
+			mustSave = true;;
 		}
     }
 	
@@ -57,7 +58,7 @@ class DZLHouse {
 
     void AddOwner(PlayerBase player) {
         owner = player.GetIdentity().GetId();
-        Save();
+        mustSave = true;;
     }
 	
 	bool IsOwner(PlayerBase player) {
@@ -69,22 +70,22 @@ class DZLHouse {
 		this.lockedDoors = new array<int>;
 		alarmSystem = null;
 		playerAccess = new array<string>;
-		Save();
+		mustSave = true;;
 	}
 	
 	void AddStorage(ref DZLStorageTypeBought storageItem) {
 		storage.Insert(storageItem);
-		Save();
+		mustSave = true;;
 	}
 	
 	void RemoveStorage(DZLStorageTypeBought storageItem) {
 		storage.RemoveItem(storageItem);
-		Save();
+		mustSave = true;;
 	}
 
 	void UpdatePlayerAccess(array<string> playerAccess) {
 	    this.playerAccess = playerAccess;
-	    Save();
+	    mustSave = true;;
 	}
 
 	bool HasPlayerAccess(string ident) {
@@ -146,12 +147,12 @@ class DZLHouse {
 	
 	void UnLookDoor(int doorIndex) {
 		lockedDoors.RemoveItem(doorIndex);
-		Save();
+		mustSave = true;;
 	}
 	
 	void LockDoor(int doorIndex) {
 		lockedDoors.Insert(doorIndex);
-		Save();
+		mustSave = true;;
 	}
 	
 	bool CanUnLookDoor(PlayerBase player, int index) {
@@ -176,7 +177,7 @@ class DZLHouse {
 
 	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
 		alarmSystem = houseAlarm;
-		Save();
+		mustSave = true;;
 	}
 
     private bool Load(){
@@ -187,7 +188,7 @@ class DZLHouse {
 		return false;
     }
 
-    private void Save(){
+    override protected void DoSave(){
         if (GetGame().IsServer()) {
 			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
 			DZLJsonFileHandler<DZLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);

@@ -1,4 +1,5 @@
-class DZLPlayer {
+class DZLPlayer: DZLSaveModel
+{
     string fileName;
     int money = 0;
     int bank = 0;
@@ -15,34 +16,34 @@ class DZLPlayer {
                 money = 100000;
             }
 
-            DZLPlayerIdentities idents = new DZLPlayerIdentities;
+            DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
             idents.AddPlayer(playerId);
 			licenceIds = new TStringArray;
 			
-            Save();
+            mustSave = true;;
         }
     }
 
     void UpdateCop(bool isCop) {
         this.isCop = isCop;
-        Save();
+        mustSave = true;;
     }
 
     void UpdateName(string playerName) {
         this.playerName = playerName;
-        Save();
+        mustSave = true;;
     }
 	
 	void AddMoneyToPlayer(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			money += moneyCount;
-		    Save();
+		    mustSave = true;;
 		}
     }
 	void AddMoneyToPlayerBank(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			bank += moneyCount;
-		    Save();
+		    mustSave = true;;
 		}
     }
 
@@ -52,20 +53,20 @@ class DZLPlayer {
 
     void PlayerHasDied() {
         money = 0;
-        Save();
+        mustSave = true;;
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
-        Save();
+        mustSave = true;;
     }
 	
 	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
 		playerTarget.AddMoneyToPlayer(moneyToTransfer);
 		money -= moneyToTransfer;
 		
-		Save();
+		mustSave = true;;
 	}
 	
 	int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
@@ -88,7 +89,7 @@ class DZLPlayer {
 			moneyBankAdd -= moneyToTransfer;
 		}
 		
-		Save();
+		mustSave = true;;
 		return moneyBankAdd;
 	}
 	
@@ -119,7 +120,7 @@ class DZLPlayer {
 	void BuyLicence(DZLLicence licenceToBuy){
 		money -= licenceToBuy.price;
 		licenceIds.Insert(licenceToBuy.id);
-		Save();
+		mustSave = true;;
 	}
 
     private bool Load(){
@@ -130,7 +131,7 @@ class DZLPlayer {
         return false;
     }
 
-    private void Save(){
+    override protected void DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);

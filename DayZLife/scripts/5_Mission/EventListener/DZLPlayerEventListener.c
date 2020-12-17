@@ -52,7 +52,9 @@ class DZLPlayerEventListener
                      player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));
                 }
             }
-        }  else if (rpc_type == DAY_Z_LIFE_NEW_SPAWN_CLIENT) {
+        }
+
+        if (rpc_type == DAY_Z_LIFE_NEW_SPAWN_CLIENT) {
             queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
             queue.CallLater(CreateSpawnMenu, 1750, true);
         }

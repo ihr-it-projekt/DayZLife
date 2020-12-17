@@ -53,7 +53,7 @@ class DZLActionRaidDoors: ActionInteractBase
 					int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 					if (doorIndex != -1) {
 						if (GetGame().IsServer()) {
-							DZLHouse dzlHouse = new DZLHouse(building);
+							DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(building);
 							if (!building.IsDoorOpen(doorIndex) && dzlHouse && dzlHouse.CanRaidDoor(player, doorIndex)) {
 								return true;
 							} else {

@@ -1,4 +1,4 @@
-class DZLPlayerIdentities
+class DZLPlayerIdentities: DZLSaveModel
 {
     string fileName = "DZLPlayerIdentities.json";
     ref array<string> playerIdentities;
@@ -12,7 +12,7 @@ class DZLPlayerIdentities
     void AddPlayer(string playerId) {
         if (-1 == playerIdentities.Find(playerId)) {
             playerIdentities.Insert(playerId);
-            Save();
+            mustSave = true;;
         }
     }
 
@@ -20,7 +20,7 @@ class DZLPlayerIdentities
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         foreach(string ident: playerIdentities) {
-            DZLPlayer player = new DZLPlayer(ident);
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (player.isCop) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
@@ -34,7 +34,7 @@ class DZLPlayerIdentities
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         foreach(string ident: playerIdentities) {
-            DZLPlayer player = new DZLPlayer(ident);
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (exclude.Find(ident) == -1) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
@@ -50,7 +50,7 @@ class DZLPlayerIdentities
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         foreach(string ident: playerIdentities) {
-            DZLPlayer player = new DZLPlayer(ident);
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
             foreach(string newCop: cops) {
                 if (ident == newCop) {
@@ -70,7 +70,7 @@ class DZLPlayerIdentities
         return false;
     }
 
-    private void Save(){
+    override protected void DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayerIdentities>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);

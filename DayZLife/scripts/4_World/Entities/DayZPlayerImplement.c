@@ -7,7 +7,7 @@ modded class DayZPlayerImplement
             PlayerBase player = PlayerBase.Cast(this);
 
             if (player) {
-                DZLPlayer dzlPlayer = new DZLPlayer(player.GetIdentity().GetId());
+                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
                 if (dzlPlayer.money > 0) {
                     player.SetMoneyPlayerIsDead(dzlPlayer.money);

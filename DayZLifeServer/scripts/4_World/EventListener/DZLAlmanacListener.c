@@ -24,7 +24,7 @@ class DZLAlmanacListener
 				
                 if (!config.IsAdmin(ident)) return;
 
-                DZLPlayerIdentities dzlPlayerIdentities = new DZLPlayerIdentities;
+                DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
                 dzlPlayerIdentities.UpdateCops(paramUpdateCops.param2);
 				DZLSendMessage(ident, "#update_cop_list_successful");
             }
@@ -38,13 +38,13 @@ class DZLAlmanacListener
         GetGame().GetPlayers(_players);
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
-        DZLPlayerIdentities dzlPlayerIdentities = new DZLPlayerIdentities;
+        DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
         array<ref DZLOnlinePlayer> copIdents = dzlPlayerIdentities.GetCopPlayerCollection();
 
         if (_players) {
             foreach(Man _player: _players) {
 				string ident = _player.GetIdentity().GetId();
-               	DZLPlayer dzlPlayer = new DZLPlayer(ident);
+               	DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
 				
 				if (!dzlPlayer.isCop) {
 					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));

@@ -29,10 +29,10 @@ class ActionRobMoney: ActionInteractBase
     override void OnEndServer(ActionData action_data) {
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
-        DZLPlayer dzlPlayer = new DZLPlayer(player.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
         if (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious()) {
-            DZLPlayer dzlTargetPlayer = new DZLPlayer(targetPlayer.GetIdentity().GetId());
+            DZLPlayer dzlTargetPlayer = DZLDatabaseLayer.Get().GetPlayer(targetPlayer.GetIdentity().GetId());
             if (dzlTargetPlayer && dzlTargetPlayer.money > 0) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
 

@@ -21,7 +21,7 @@ class DZLActionUnLockDoors: ActionInteractBase
 		if(GetGame().IsClient()){
 			house = player.house;
 		} else {
-			house = new DZLPlayerHouse(player.GetIdentity().GetId());
+			house = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
 		}
 
         if (!house) {
@@ -56,7 +56,7 @@ class DZLActionUnLockDoors: ActionInteractBase
         DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(action_data.m_Target);
         if (dzlHouse && doorIndex != -1) {
             dzlHouse.UnLookDoor(doorIndex);
-            DZLLockedHouses houses = new DZLLockedHouses();
+            DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
             houses.Remove(dzlHouse);
         }
 	}

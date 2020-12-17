@@ -47,7 +47,7 @@ class DZLTraderListener
                     }
                 }
 
-                DZLPlayer dzlPlayer = new DZLPlayer(sender.GetId());
+                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
                 string message = "#error_not_enough_money";
 
                 if (typesToBuy.Count() == 0 &&  countSellItems == 0) {
@@ -82,7 +82,7 @@ class DZLTraderListener
                     dzlPlayer.AddMoneyToPlayer(sum * -1);
 
                     message = "#trade_was_successful";
-                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(sender.GetId())), true, sender);
+                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(sender.GetId())), true, sender);
                 }
 
 			    GetGame().RPCSingleParam(target, DAY_Z_LIFE_TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);

@@ -1,4 +1,4 @@
-class DZLBank
+class DZLBank: DZLSaveModel
 {
     int moneyAtBank = 0;
     bool raidRuns = false;
@@ -7,24 +7,24 @@ class DZLBank
 	
     void DZLBank() {
         if (!Load()) {
-            Save();
+            mustSave = true;;
         }
     }
 
     void AddMoney(int moneyToAdd) {
         if (GetGame().IsServer()) {
             moneyAtBank += moneyToAdd;
-            Save();
+            mustSave = true;
         }
     }
 	
 	int PlayerRaidBank(DZLPlayer player, int percentage) {
-		DZLPlayerIdentities identities = new DZLPlayerIdentities;
+		DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
 		array<string> playerIdentities = identities.playerIdentities;
 
 		int moneyToRaid = 0;
 		foreach(string ident: playerIdentities) {
-			DZLPlayer playerRobt = new DZLPlayer(ident);
+			DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
 		    if (playerRobt.bank == 0) continue;
 		    if (player.fileName == playerRobt.fileName) continue;
 
@@ -36,7 +36,7 @@ class DZLBank
 
         player.AddMoneyToPlayer(moneyToRaid);
         moneyAtBank -= moneyToRaid;
-        Save();
+        mustSave = true;;
 		
 		return moneyToRaid;
 	}
@@ -50,7 +50,7 @@ class DZLBank
 		
 		if (lastRaidTime) {
 			lastRaidTime = null;
-			Save();
+			mustSave = true;;
 		}
 		
 		return true;
@@ -58,20 +58,20 @@ class DZLBank
 
     void StartRaid() {
         raidRuns = true;
-		Save();
+		mustSave = true;;
     }
 
     void RaidIsFinished() {
         raidRuns = false;
         lastRaidTime = new DZLDate();
 		
-		Save();
+		mustSave = true;;
     }
 	
 	void CancelRaid() {
 		raidRuns = false;
 		
-		Save();
+		mustSave = true;;
 	}
 	
     private bool Load(){
@@ -82,7 +82,7 @@ class DZLBank
         return false;
     }
 
-    private void Save(){
+    override protected void DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLBank>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);

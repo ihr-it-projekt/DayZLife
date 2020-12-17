@@ -16,8 +16,8 @@ class DZLBankListener
             autoptr Param2<PlayerBase, int> paramDeposit;
             string message = "";
             if (ctx.Read(paramDeposit)){
-                DZLPlayer dzlPlayer = new DZLPlayer(paramDeposit.param1.GetIdentity().GetId());
-				DZLBank bank = new DZLBank;
+                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(paramDeposit.param1.GetIdentity().GetId());
+				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 				if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					message = "#bank_can_not_be_used_in_moment";
 				} else if(paramDeposit.param2 >= dzlPlayer.money || paramDeposit.param2 <= dzlPlayer.bank) {
@@ -37,8 +37,8 @@ class DZLBankListener
             autoptr Param3<PlayerBase, DZLPlayerBankInfo, int> paramDepositPlayer;
             string messageDeposit = "";
             if (ctx.Read(paramDepositPlayer)){
-                DZLPlayer dzlPlayerSender = new DZLPlayer(paramDepositPlayer.param1.GetIdentity().GetId());
-                DZLPlayer dzlPlayerReciver = new DZLPlayer(paramDepositPlayer.param2.id);
+                DZLPlayer dzlPlayerSender = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayer.param1.GetIdentity().GetId());
+                DZLPlayer dzlPlayerReciver = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayer.param2.id);
 				
 				array<Man> allPlayers = new array<Man>;
             	GetGame().GetPlayers(allPlayers);
@@ -55,7 +55,7 @@ class DZLBankListener
 					messageDeposit = "#reciver_for_deposit_is_not_longer_online";
 				}
 				
-				DZLBank bankTransfer = new DZLBank;
+				DZLBank bankTransfer = DZLDatabaseLayer.Get().GetBank();
 				if (!bankTransfer.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					messageDeposit = "#bank_can_not_be_used_in_moment";
 				} else if ("" == messageDeposit) {
@@ -65,8 +65,8 @@ class DZLBankListener
 						bankTransfer.AddMoney(moneyBankAdd);
 						
 						GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bankTransfer), true);
-                    	GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayer.param1.GetIdentity().GetId())), true, sender);
-                    	GetGame().RPCSingleParam(playerFound, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayer.param2.id)), true, playerFound.GetIdentity());
+                    	GetGame().RPCSingleParam(paramDepositPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayer.param1.GetIdentity().GetId())), true, sender);
+                    	GetGame().RPCSingleParam(playerFound, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayer.param2.id)), true, playerFound.GetIdentity());
 					} else {
 						messageDeposit = "#error_not_enough_money_to_transfer";
 					}
@@ -79,14 +79,14 @@ class DZLBankListener
             autoptr Param3<PlayerBase, PlayerBase, int> paramDepositPlayerPlayer;
             string messageDepositPP = "";
             if (ctx.Read(paramDepositPlayerPlayer)){
-                DZLPlayer dzlPlayerSenderPP = new DZLPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId());
-                DZLPlayer dzlPlayerReciverPP = new DZLPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId());
+                DZLPlayer dzlPlayerSenderPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId());
+                DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId());
 
 				if(dzlPlayerSenderPP.money >= paramDepositPlayerPlayer.param3) {
 				    messageDepositPP = "#money_transfer_successful";
                     dzlPlayerSenderPP.DepositMoneyFromPlayerToOtherPlayer(dzlPlayerReciverPP, paramDepositPlayerPlayer.param3);
-                    GetGame().RPCSingleParam(paramDepositPlayerPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId())), true, sender);
-                    GetGame().RPCSingleParam(paramDepositPlayerPlayer.param2, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId())), true, paramDepositPlayerPlayer.param2.GetIdentity());
+                    GetGame().RPCSingleParam(paramDepositPlayerPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId())), true, sender);
+                    GetGame().RPCSingleParam(paramDepositPlayerPlayer.param2, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId())), true, paramDepositPlayerPlayer.param2.GetIdentity());
                 } else {
                     messageDepositPP = "#error_not_enough_money_to_transfer";
                 }
@@ -95,7 +95,7 @@ class DZLBankListener
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
             autoptr Param1<PlayerBase> paramGetBankData;
             if (ctx.Read(paramGetBankData)){
-                GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(new DZLBank), true);
+                GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(DZLDatabaseLayer.Get().GetBank()), true);
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA) {
 			array<Man> _players = new array<Man>;

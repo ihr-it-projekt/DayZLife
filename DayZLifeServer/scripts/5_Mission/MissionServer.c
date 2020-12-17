@@ -1,11 +1,19 @@
 modded class MissionServer {
 
-    ref DZLEventManager manager;
+    private ref DZLEventManager manager;
+	private ref Timer databaseTimer;
 
 	void MissionServer()
 	{
         DebugMessageDZL("Load DayZLifeServer");
         manager = new DZLEventManager;
+
+		databaseTimer = new Timer();
+		databaseTimer.Run(5, DZLDatabaseLayer.Get(), "Save", null, true);
+	}
+
+	void ~MissionServer() {
+	    DZLDatabaseLayer.Get().Save();
 	}
 
 	override void OnInit() {

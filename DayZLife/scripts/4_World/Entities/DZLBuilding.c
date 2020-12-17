@@ -1,11 +1,12 @@
-class DZLBuilding {
+class DZLBuilding: DZLSaveModel
+{
 
     private Building building;
     private ref DZLHouse house;
 
     void DZLBuilding(Building building) {
         this.building = building;
-        house = new DZLHouse(building);
+        house = DZLDatabaseLayer.Get().GetHouse(building);
     }
 
     bool HasOwner() {
@@ -19,14 +20,14 @@ class DZLBuilding {
     void BuyOnServer(PlayerBase player) {
         if(!GetGame().IsClient()){
             house.AddOwner(player);
-            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player.GetIdentity().GetId());
+            DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
             playerHouse.AddHouse(house);
         }
     }
     void SellOnServer(PlayerBase player) {
         if(!GetGame().IsClient()){
             house.RemoveOwner();
-            ref DZLPlayerHouse playerHouse = new DZLPlayerHouse(player.GetIdentity().GetId());
+            ref DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
             playerHouse.RemoveHouse(house);
         }
     }

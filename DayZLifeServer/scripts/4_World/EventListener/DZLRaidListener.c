@@ -12,9 +12,9 @@ class DZLRaidListener
         if (rpc_type == DAY_Z_LIFE_RAID_DOOR) {
             autoptr Param4<PlayerBase, Building, int, EntityAI> paramRaidDoor;
             if (ctx.Read(paramRaidDoor)){
-                DZLHouse dzlHouse = new DZLHouse(paramRaidDoor.param2);
+                DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(paramRaidDoor.param2);
                 dzlHouse.UnLookDoor(paramRaidDoor.param3);
-                DZLLockedHouses houses = new DZLLockedHouses();
+                DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
                 houses.Remove(dzlHouse);
 
                 paramRaidDoor.param4.SetHealth(0);
@@ -24,7 +24,7 @@ class DZLRaidListener
             if (ctx.Read(paramRaidDoorDZLBuilding)){
                 PlayerBase raider = paramRaidDoorDZLBuilding.param1;
                 Building building = paramRaidDoorDZLBuilding.param2;
-                DZLHouse dzlHouseRaid = new DZLHouse(building);
+                DZLHouse dzlHouseRaid = DZLDatabaseLayer.Get().GetHouse(building);
 
                 if (dzlHouseRaid.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {
                     array<Man> players = new array<Man>;
@@ -42,7 +42,7 @@ class DZLRaidListener
                     }
                 }
 
-                GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(new DZLHouse(building)), true, sender);
+                GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(DZLDatabaseLayer.Get().GetHouse(building)), true, sender);
             }
         }
     }

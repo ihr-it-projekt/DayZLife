@@ -21,7 +21,7 @@ class DZLBankRaidListener : Managed
         if (rpc_type == DAY_Z_LIFE_START_BANK_RAID) {
             autoptr Param1<PlayerBase> param;
             if (ctx.Read(param)){
-				DZLBank bank = new DZLBank;
+				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 				if (!playerWhoStartedRaid) {
 					playerWhoStartedRaid = param.param1;
 					bank.StartRaid();
@@ -40,7 +40,7 @@ class DZLBankRaidListener : Managed
             if (!isInNearOfBankAndLocationIsEnabled()) {
                 playerWhoStartedRaid = null;
                 raidTimer.Stop();
-                DZLBank bank_cancel = new DZLBank;
+                DZLBank bank_cancel = DZLDatabaseLayer.Get().GetBank();
                 bank_cancel.CancelRaid();
                 DZLSendMessage(null, "#bank_rob_was_canceled");
                 return;
@@ -51,13 +51,13 @@ class DZLBankRaidListener : Managed
 		}
 
         raidTimer.Stop();
-		DZLBank bank = new DZLBank;
+		DZLBank bank = DZLDatabaseLayer.Get().GetBank();
         bank.RaidIsFinished();
-        DZLPlayer dzlPlayer = new DZLPlayer(playerWhoStartedRaid.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(playerWhoStartedRaid.GetIdentity().GetId());
 
-        int money = bank.PlayerRaidBank(new DZLPlayer(playerWhoStartedRaid.GetIdentity().GetId()), config.percentOfMoneyWhenRaid);
+        int money = bank.PlayerRaidBank(DZLDatabaseLayer.Get().GetPlayer(playerWhoStartedRaid.GetIdentity().GetId()), config.percentOfMoneyWhenRaid);
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
-		bank = new DZLBank;
+		bank = DZLDatabaseLayer.Get().GetBank();
         GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
         playerWhoStartedRaid = null;
         array<Man> _players = new array<Man>;
@@ -65,7 +65,7 @@ class DZLBankRaidListener : Managed
 
         if (_players) {
             foreach(Man _player: _players) {
-                GetGame().RPCSingleParam(_player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(new DZLPlayer(_player.GetIdentity().GetId())), true, _player.GetIdentity());
+                GetGame().RPCSingleParam(_player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(_player.GetIdentity().GetId())), true, _player.GetIdentity());
             }
         }
     }
