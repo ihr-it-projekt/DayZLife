@@ -16,44 +16,57 @@ class DZLJobConfig
             loadOutPosition = new array<ref DZLLoadOutPosition>;
             loadOutCategories = new array<ref DZLLoadOutCategory>;
 
-            array<string> loadOutAttachments = new array<string>;
-            loadOutAttachments.Insert("Apple");
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
-            loadOutTypes.Insert(new DZLLoadOutType("JungleBoots_Black", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("PolicePantsOrel", loadOutAttachments));
-            loadOutTypes.Insert(new DZLLoadOutType("PoliceJacketOrel", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("PoliceVest", new array<string>));
             loadOutTypes.Insert(new DZLLoadOutType("PoliceCap", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("Deagle", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
+            array<string> loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("Deagle");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceJacketOrel", loadOutAttachments));
+			loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("SodaCan_Cola");
+            loadOutAttachments.Insert("SodaCan_Cola");
+            loadOutAttachments.Insert("SpaghettiCan");
+            loadOutAttachments.Insert("Apple");
+            loadOutTypes.Insert(new DZLLoadOutType("PolicePantsOrel", loadOutAttachments));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceVest", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("JungleBoots_Black", new array<string>));
             loadOutCategories.Insert(new DZLLoadOutCategory("cat1", loadOutTypes));
 
-
             loadOutTypes = new array<ref DZLLoadOutType>;
-            loadOutTypes.Insert(new DZLLoadOutType("CombatBoots_Black", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmet", new array<string>));
-            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmetVisor", new array<string>));
+			loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("GorkaHelmetVisor");
+            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmet", loadOutAttachments));
             loadOutTypes.Insert(new DZLLoadOutType("BalaclavaMask_Green", new array<string>));
+			loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("Deagle");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutAttachments.Insert("Mag_Deagle_9rnd");
+            loadOutTypes.Insert(new DZLLoadOutType("M65Jacket_Tan", loadOutAttachments));
             loadOutAttachments = new array<string>;
             loadOutAttachments.Insert("CombatKnife");
+            loadOutAttachments.Insert("SodaCan_Cola");
+            loadOutAttachments.Insert("SodaCan_Cola");
+            loadOutAttachments.Insert("SpaghettiCan");
+            loadOutAttachments.Insert("Apple");
+            loadOutAttachments.Insert("Battery9V");
             loadOutTypes.Insert(new DZLLoadOutType("CargoPants_Green", loadOutAttachments));
-            loadOutTypes.Insert(new DZLLoadOutType("M65Jacket_Tan", new array<string>));
-
+            loadOutTypes.Insert(new DZLLoadOutType("CombatBoots_Black", new array<string>));
             loadOutAttachments = new array<string>;
-            loadOutAttachments.Insert("CombatKnife");
-            loadOutAttachments.Insert("CombatKnife");
+            loadOutAttachments.Insert("PlateCarrierPouches");
+            loadOutAttachments.Insert("PlateCarrierHolster");
             loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierVest", loadOutAttachments));
-
             loadOutAttachments = new array<string>;
-            loadOutAttachments.Insert("CombatKnife");
-            loadOutAttachments.Insert("CombatKnife");
-            loadOutAttachments.Insert("CombatKnife");
-            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierPouches", loadOutAttachments));
-
-            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierHolster", new array<string>));
+            loadOutAttachments.Insert("AK74_Hndgrd");
+            loadOutAttachments.Insert("AK74_WoodBttstck");
+            loadOutAttachments.Insert("PSO11Optic");
+            loadOutAttachments.Insert("Mag_AKM_Drum75Rnd");
+            loadOutAttachments.Insert("AK_Suppressor");
+            loadOutTypes.Insert(new DZLLoadOutType("AKM", loadOutAttachments));
             loadOutCategories.Insert(new DZLLoadOutCategory("cat2", loadOutTypes));
 
 
