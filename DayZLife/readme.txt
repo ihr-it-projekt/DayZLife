@@ -115,3 +115,13 @@ Feature list
     - player can be a medic
     - player can be civil
 
+
+(Cherno)
+Land_Village_PoliceStation
+Land_City_PoliceStation
+Land_Prison_Main
+Land_Prison_Side
+
+(Livonia)
+Land_Village_PoliceStation_Enoch
+Land_City_PoliceStation_Enoch
