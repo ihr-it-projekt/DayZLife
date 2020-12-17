@@ -73,6 +73,7 @@
 "you_can_not_raid_that_door", "You can't break down this door", "You can't break down this door", "Du kannst diese Tür nicht aufbrechen."
 "can_not_unlook_door", "You cannot break this door.", "You cannot break this door.", "Du kannst die Tür nicht aufschließen."
 "can_not_look_door", "You cannot lock the door.", "You cannot lock the door.", "Du kannst die Tür nicht abschließen."
+"door_is_looked", "Door is looked","Door is looked", "Tür ist verschlossen"
 "building_has_alrready_an_owner", "The building already has an owner.", "The building already has an owner.", "Das Gebäude hat schon einen Besitzer."
 "open_trader_menu", "Open dealer.", "Open dealer.", "Händler öffnen."
 "Trader", "Dealer", "Dealer", "Händler"

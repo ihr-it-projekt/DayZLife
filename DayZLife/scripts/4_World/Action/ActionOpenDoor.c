@@ -11,12 +11,18 @@ modded class ActionOpenDoors
 			if ( doorIndex != -1 ) {
 			    if (GetGame().IsServer()) {
                     DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
-                    return (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex));
+                    if (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex)) {
+						return true;
+					}
+					DZLSendMessage(player.GetIdentity(), "#door_is_looked");
+					
+					return false;
                 }
 				return (!building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex));
 			}
 		}
 		return false;
 	}
-
-};
+	
+	
+}

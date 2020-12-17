@@ -1,6 +1,5 @@
 
-
-- message tür ist verschlossen
+- Waffenschein
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
@@ -43,6 +42,9 @@
             - Fahndungsliste
                 - Spieler hinzufügen mit Strafe
                 - lebendig / bezahlung
+            - Lizensenkontrolle
+            - Ausweiß
+            - Waffenschein
 
         - Kopfgeld Jäger
             - Lizens kaufen
@@ -83,6 +85,9 @@
 
 Text
 - set car lifetime in types
+
+Known Bugs
+- Licence Crafting wont work with items that have a quantity fill
 
 
 Feature list
