@@ -19,30 +19,41 @@ class DZLJobConfig
             array<string> loadOutAttachments = new array<string>;
             loadOutAttachments.Insert("Apple");
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
-            loadOutTypes.Insert(new DZLLoadOutType("JungleBoots_Black"));
+            loadOutTypes.Insert(new DZLLoadOutType("JungleBoots_Black", new array<string>));
             loadOutTypes.Insert(new DZLLoadOutType("PolicePantsOrel", loadOutAttachments));
-            loadOutTypes.Insert(new DZLLoadOutType("PoliceJacketOrel"));
-            loadOutTypes.Insert(new DZLLoadOutType("PoliceVest"));
-            loadOutTypes.Insert(new DZLLoadOutType("PoliceCap"));
-            loadOutTypes.Insert(new DZLLoadOutType("Deagle"));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
-            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceJacketOrel", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceVest", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceCap", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("Deagle", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd", new array<string>));
             loadOutCategories.Insert(new DZLLoadOutCategory("cat1", loadOutTypes));
+
+
+            loadOutTypes = new array<ref DZLLoadOutType>;
+            loadOutTypes.Insert(new DZLLoadOutType("CombatBoots_Black", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmet", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmetVisor", new array<string>));
+            loadOutTypes.Insert(new DZLLoadOutType("BalaclavaMask_Green", new array<string>));
+            loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("CombatKnife");
+            loadOutTypes.Insert(new DZLLoadOutType("CargoPants_Green", loadOutAttachments));
+            loadOutTypes.Insert(new DZLLoadOutType("M65Jacket_Tan", new array<string>));
 
             loadOutAttachments = new array<string>;
             loadOutAttachments.Insert("CombatKnife");
-            loadOutTypes = new array<ref DZLLoadOutType>;
-            loadOutTypes.Insert(new DZLLoadOutType("CombatBoots_Black"));
-            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmet"));
-            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmetVisor"));
-            loadOutTypes.Insert(new DZLLoadOutType("BalaclavaMask_Green"));
-            loadOutTypes.Insert(new DZLLoadOutType("CargoPants_Green", loadOutAttachments));
-            loadOutTypes.Insert(new DZLLoadOutType("M65Jacket_Tan"));
-            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierVest"));
-            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierPouches"));
-            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierHolster"));
+            loadOutAttachments.Insert("CombatKnife");
+            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierVest", loadOutAttachments));
+
+            loadOutAttachments = new array<string>;
+            loadOutAttachments.Insert("CombatKnife");
+            loadOutAttachments.Insert("CombatKnife");
+            loadOutAttachments.Insert("CombatKnife");
+            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierPouches", loadOutAttachments));
+
+            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierHolster", new array<string>));
             loadOutCategories.Insert(new DZLLoadOutCategory("cat2", loadOutTypes));
 
 
