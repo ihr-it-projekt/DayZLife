@@ -130,9 +130,9 @@ FrameWidgetClass rootFrame {
         }
        }
       }
-      ItemPreviewWidgetClass ItemPreviewWidget0 {
+      ItemPreviewWidgetClass itemPreview {
        ignorepointer 1
-       position 0.02798 0
+       position 0.02798 -0.00313
        size 0.41605 0.67879
        halign right_ref
        valign center_ref

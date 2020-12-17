@@ -1,5 +1,4 @@
 
-- Waffenschein
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
@@ -114,6 +113,8 @@ Feature list
     - Admins can make player to cops
     - player can be a medic
     - player can be civil
+    - Cops
+        - can get load out at specific position
 
 
 (Cherno)
