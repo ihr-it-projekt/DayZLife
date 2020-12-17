@@ -19,13 +19,30 @@ class DZLJobConfig
             array<string> loadOutAttachments = new array<string>;
             loadOutAttachments.Insert("Apple");
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
-            loadOutTypes.Insert(new DZLLoadOutType("ManSuit_Black", loadOutAttachments));
+            loadOutTypes.Insert(new DZLLoadOutType("JungleBoots_Black"));
+            loadOutTypes.Insert(new DZLLoadOutType("PolicePantsOrel", loadOutAttachments));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceJacketOrel"));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceVest"));
+            loadOutTypes.Insert(new DZLLoadOutType("PoliceCap"));
+            loadOutTypes.Insert(new DZLLoadOutType("Deagle"));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
+            loadOutTypes.Insert(new DZLLoadOutType("Mag_Deagle_9rnd"));
             loadOutCategories.Insert(new DZLLoadOutCategory("cat1", loadOutTypes));
 
             loadOutAttachments = new array<string>;
             loadOutAttachments.Insert("CombatKnife");
             loadOutTypes = new array<ref DZLLoadOutType>;
-            loadOutTypes.Insert(new DZLLoadOutType("SlacksPants_Black", loadOutAttachments));
+            loadOutTypes.Insert(new DZLLoadOutType("CombatBoots_Black"));
+            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmet"));
+            loadOutTypes.Insert(new DZLLoadOutType("GorkaHelmetVisor"));
+            loadOutTypes.Insert(new DZLLoadOutType("BalaclavaMask_Green"));
+            loadOutTypes.Insert(new DZLLoadOutType("CargoPants_Green", loadOutAttachments));
+            loadOutTypes.Insert(new DZLLoadOutType("M65Jacket_Tan"));
+            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierVest"));
+            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierPouches"));
+            loadOutTypes.Insert(new DZLLoadOutType("PlateCarrierHolster"));
             loadOutCategories.Insert(new DZLLoadOutCategory("cat2", loadOutTypes));
 
 
