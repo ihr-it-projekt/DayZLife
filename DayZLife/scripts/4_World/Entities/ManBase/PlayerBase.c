@@ -14,6 +14,7 @@ modded class PlayerBase
 	ref DZLMessageMenu messageMenu;
 	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
 	ref DZLSpawnPositionMenu spawnPositionMenu;
+	ref DZLLoadOutMenu loadOutMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -55,6 +56,7 @@ modded class PlayerBase
         AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
+        AddAction(ActionOpenLoadOutMenu, InputActionMap);
 
         InitDZLPlayer();
     }
@@ -87,6 +89,8 @@ modded class PlayerBase
             licenceMenu.UpdatePlayer(this);
         } else if (progressBarLicence && progressBarLicence.IsVisible()) {
             progressBarLicence.UpdatePlayer(this);
+        } else if (loadOutMenu && loadOutMenu.IsVisible()) {
+            loadOutMenu.UpdatePlayer(this);
         }
     }
 
@@ -134,6 +138,11 @@ modded class PlayerBase
 		InitMenu(licenceMenu);
 		return licenceMenu;
 	}
+	DZLLoadOutMenu GetLoadOutMenu() {
+		loadOutMenu = new DZLLoadOutMenu();
+		InitMenu(loadOutMenu);
+		return loadOutMenu;
+	}
 	
 	DZLPlayerMoneyTransferMenu GetPlayerMoneyTransferMenu() {
 		moneyTransferMenu = new DZLPlayerMoneyTransferMenu();
@@ -168,6 +177,8 @@ modded class PlayerBase
 			traderMenu.OnHide();
 		} else if (licenceMenu && licenceMenu.IsVisible()) {
 			licenceMenu.OnHide();
+		} else if (loadOutMenu && loadOutMenu.IsVisible()) {
+			loadOutMenu.OnHide();
 		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
 			progressBarLicence.OnHide();
 		} else if (alamancMenu && alamancMenu.IsVisible()) {
