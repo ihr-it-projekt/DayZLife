@@ -10,7 +10,7 @@ FrameWidgetClass rootFrame {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0.6588 0.6588 0.6588 1
-   position 0 -0
+   position 0 0
    size 0.98252 0.96918
    halign center_ref
    valign center_ref
@@ -88,7 +88,6 @@ FrameWidgetClass rootFrame {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           items "Loadout1;Loadout2"
           }
          }
         }

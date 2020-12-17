@@ -1,15 +1,14 @@
 class DZLLicenceLocationBuilder {
 
     static void Create() {
-        DZLLicenceConfig config = DZLConfig.Get().licenceConfig;
-		array<ref DZLLicencePosition> positions = config.positionOfLicencePoints;
+		array<ref DZLLicencePosition> positions = DZLConfig.Get().licenceConfig.positionOfLicencePoints;
 		foreach(DZLLicencePosition position: positions) {
 		    DZLLicenceLocationBuilder.CreatePositions(position, false, true, false, false);
 		}
 	}
 
 	static PlayerBase CreatePositions(DZLLicencePosition position, bool isBanking, bool isLicence, bool isTrader, bool IsLoadOut) {
-        PlayerBase player = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, position.survivor, isBanking, isLicence, isTrader);
+        PlayerBase player = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, position.survivor, isBanking, isLicence, isTrader, IsLoadOut);
 
         if (!player) {
             return null;
