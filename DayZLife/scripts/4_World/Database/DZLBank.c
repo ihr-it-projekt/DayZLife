@@ -7,7 +7,7 @@ class DZLBank: DZLSaveModel
 	
     void DZLBank() {
         if (!Load()) {
-            mustSave = true;;
+            mustSave = true;
         }
     }
 
@@ -36,7 +36,7 @@ class DZLBank: DZLSaveModel
 
         player.AddMoneyToPlayer(moneyToRaid);
         moneyAtBank -= moneyToRaid;
-        mustSave = true;;
+        mustSave = true;
 		
 		return moneyToRaid;
 	}
@@ -50,7 +50,7 @@ class DZLBank: DZLSaveModel
 		
 		if (lastRaidTime) {
 			lastRaidTime = null;
-			mustSave = true;;
+			mustSave = true;
 		}
 		
 		return true;
@@ -58,20 +58,20 @@ class DZLBank: DZLSaveModel
 
     void StartRaid() {
         raidRuns = true;
-		mustSave = true;;
+		mustSave = true;
     }
 
     void RaidIsFinished() {
         raidRuns = false;
         lastRaidTime = new DZLDate();
 		
-		mustSave = true;;
+		mustSave = true;
     }
 	
 	void CancelRaid() {
 		raidRuns = false;
 		
-		mustSave = true;;
+		mustSave = true;
 	}
 	
     private bool Load(){

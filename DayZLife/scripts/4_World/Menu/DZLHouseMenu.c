@@ -103,7 +103,7 @@ class DZLHouseMenu : DZLBaseMenu
 			preview.UpdatePreview(actualHouseDef.houseType);
 			
 			if(player && !player.GetLastMapInfo(scale, mapPos)) {
-                mapPos = GetGame().GetCurrentCameraPosition();;
+                mapPos = GetGame().GetCurrentCameraPosition();
 			}
 			
 			houseBuy.Show(true);

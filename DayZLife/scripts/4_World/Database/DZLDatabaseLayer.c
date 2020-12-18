@@ -70,7 +70,7 @@ class DZLDatabaseLayer
     DZLHouse GetHouse(Building building = null, string fileNameParam = "") {
         string fileName;
         if (building) {
-            fileName = DZLHouse.GetFileNameFromBuilding(building);;
+            fileName = DZLHouse.GetFileNameFromBuilding(building);
         } else {
             fileName = fileNameParam;
         }

@@ -9,21 +9,21 @@ class DZLPlayerHouse: DZLSaveModel
         if (!Load()) {
             playerHouseCollection = new array<string>;
             playerHouseKeyCollection = new array<string>;
-            mustSave = true;;
+            mustSave = true;
         }
     }
 
     void AddHouse(notnull ref DZLHouse house) {
 
         playerHouseCollection.Insert(house.GetFileName());
-        mustSave = true;;
+        mustSave = true;
 	}
 	
 	void RemoveHouse(notnull DZLHouse house) {
 		int index = playerHouseCollection.Find(house.GetFileName());
 		if (-1 != index) {
 			playerHouseCollection.Remove(index);
-			mustSave = true;;
+			mustSave = true;
 		}
 	}
 	
@@ -39,14 +39,14 @@ class DZLPlayerHouse: DZLSaveModel
 	
 	void AddKey(notnull ref DZLHouse house) {
         playerHouseKeyCollection.Insert(house.GetFileName());
-        mustSave = true;;
+        mustSave = true;
 	}
 	
 	void RemoveKey(notnull ref DZLHouse house) {
 		int index = playerHouseKeyCollection.Find(house.GetFileName());
 		if (-1 != index) {
 			playerHouseKeyCollection.Remove(index);
-			mustSave = true;;
+			mustSave = true;
 		}
 	}
 	

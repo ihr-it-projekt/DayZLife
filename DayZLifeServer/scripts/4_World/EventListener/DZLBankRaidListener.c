@@ -80,7 +80,7 @@ class DZLBankRaidListener : Managed
         }
         foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
             if (vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
-                return position.raidIsEnabled;;
+                return position.raidIsEnabled;
             }
         }
         return false;

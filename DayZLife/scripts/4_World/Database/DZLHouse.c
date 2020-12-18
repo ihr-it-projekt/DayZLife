@@ -15,7 +15,7 @@ class DZLHouse: DZLSaveModel
 
     void DZLHouse(Building building = null, string fileName = "") {
         if (building) {
-            this.fileName = DZLHouse.GetFileNameFromBuilding(building);;
+            this.fileName = DZLHouse.GetFileNameFromBuilding(building);
         } else {
             this.fileName = fileName;
         }
@@ -28,7 +28,7 @@ class DZLHouse: DZLSaveModel
 			this.storagePositions = new array<int>;
 			this.lockedDoors = new array<int>;
 			this.playerAccess = new array<string>;
-			mustSave = true;;
+			mustSave = true;
 		}
     }
 	
@@ -58,7 +58,7 @@ class DZLHouse: DZLSaveModel
 
     void AddOwner(PlayerBase player) {
         owner = player.GetIdentity().GetId();
-        mustSave = true;;
+        mustSave = true;
     }
 	
 	bool IsOwner(PlayerBase player) {
@@ -70,22 +70,22 @@ class DZLHouse: DZLSaveModel
 		this.lockedDoors = new array<int>;
 		alarmSystem = null;
 		playerAccess = new array<string>;
-		mustSave = true;;
+		mustSave = true;
 	}
 	
 	void AddStorage(ref DZLStorageTypeBought storageItem) {
 		storage.Insert(storageItem);
-		mustSave = true;;
+		mustSave = true;
 	}
 	
 	void RemoveStorage(DZLStorageTypeBought storageItem) {
 		storage.RemoveItem(storageItem);
-		mustSave = true;;
+		mustSave = true;
 	}
 
 	void UpdatePlayerAccess(array<string> playerAccess) {
 	    this.playerAccess = playerAccess;
-	    mustSave = true;;
+	    mustSave = true;
 	}
 
 	bool HasPlayerAccess(string ident) {
@@ -147,12 +147,12 @@ class DZLHouse: DZLSaveModel
 	
 	void UnLookDoor(int doorIndex) {
 		lockedDoors.RemoveItem(doorIndex);
-		mustSave = true;;
+		mustSave = true;
 	}
 	
 	void LockDoor(int doorIndex) {
 		lockedDoors.Insert(doorIndex);
-		mustSave = true;;
+		mustSave = true;
 	}
 	
 	bool CanUnLookDoor(PlayerBase player, int index) {
@@ -177,7 +177,7 @@ class DZLHouse: DZLSaveModel
 
 	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
 		alarmSystem = houseAlarm;
-		mustSave = true;;
+		mustSave = true;
 	}
 
     private bool Load(){

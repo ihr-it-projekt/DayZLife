@@ -12,7 +12,7 @@ class DZLPlayerIdentities: DZLSaveModel
     void AddPlayer(string playerId) {
         if (-1 == playerIdentities.Find(playerId)) {
             playerIdentities.Insert(playerId);
-            mustSave = true;;
+            mustSave = true;
         }
     }
 

@@ -12,6 +12,7 @@ class DZLEventManager
     ref DZLPlayerSpawnListener spawnPointListener;
     ref DZLAlmanacListener almanacListener;
     ref DZLLoadOutListener loadOutListener;
+    ref DZLPlayerArrestListener arrestListener;
 
     void DZLEventManager() {
         buyHouse = new DZLBuyHouseListener;
@@ -26,5 +27,6 @@ class DZLEventManager
         spawnPointListener = new DZLPlayerSpawnListener;
         almanacListener = new DZLAlmanacListener;
         loadOutListener = new DZLLoadOutListener;
+        arrestListener = new DZLPlayerArrestListener;
     }
 }
