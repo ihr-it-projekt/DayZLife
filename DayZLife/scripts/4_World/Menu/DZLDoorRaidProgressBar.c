@@ -21,9 +21,10 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE) {
-            autoptr Param1<DZLHouse> paramRaidDoorResponse;
+            autoptr Param1<int> paramRaidDoorResponse;
             if (ctx.Read(paramRaidDoorResponse)){
-                SetDuration(paramRaidDoorResponse.param1.GetRaidTime());
+				DebugMessageDZL("11" + paramRaidDoorResponse.param1);
+                SetDuration(paramRaidDoorResponse.param1);
             }
         }
     }

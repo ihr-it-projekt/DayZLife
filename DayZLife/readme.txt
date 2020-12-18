@@ -1,15 +1,4 @@
 
-(Cherno)
-Land_Village_PoliceStation
-Land_City_PoliceStation
-Land_Prison_Main
-Land_Prison_Side
-
-(Livonia)
-Land_Village_PoliceStation_Enoch
-Land_City_PoliceStation_Enoch
-
-
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
@@ -38,16 +27,13 @@ Land_City_PoliceStation_Enoch
     - Rollen Spieler Anzahl begrenzen pro Job
     - Actions
         - Gefängniss:
-            - Tür Index von Zellen bestimmen
             - Löschen von Equipment
             - Klamoten ändern
             - wenn frei dann Bambi Klamoten
             - //Was ist mit Mördern im Knast
-            - Befreien wie Raiden
             - Countdown für Zeit
         - Polizei
             - Automatische Meldung an Polizei von Verbrechen
-            - Gehalt
             - Strafzettel
                 - config Geld / länge Knast
             - Fahndungsliste
@@ -123,10 +109,16 @@ Feature list
 - process harvest items with different licences
 - Jobs
     - Admins can make player to cops
-    - player can be a medic
-    - player can be civil
+    - Medic
+        - can raid police stations and prisons
+        - Spawn with Medic Equipment
+    - Civil
+        - can raid police stations and prisons
+        - Spawn with Civil Equipment
     - Cops
+        - spawn with Cop Equipment
         - can get load out at specific position
+        - can open police stations and prisons
 
 
 

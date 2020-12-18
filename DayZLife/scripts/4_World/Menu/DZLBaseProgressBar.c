@@ -66,7 +66,7 @@ class DZLBaseProgressBar: UIScriptedMenu
 			float percent = iterations / duration  * 100;
 			
 			progressBar.SetCurrent(percent);
-			status.SetText(percent.ToString() + " %");
+			status.SetText(Math.Round(percent).ToString() + " %");
 		}
 	}
 

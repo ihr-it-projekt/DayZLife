@@ -1,11 +1,20 @@
 class DZLHouseConfig {
     ref array<ref DZLHouseDefinition> houseConfigs;
+    ref array<ref DZLCopHouseDefinition> copHouseConfigs;
     string version = "1";
 
     void DZLHouseConfig()
 	{
         if(!Load()) {
             houseConfigs = new array<ref DZLHouseDefinition>;
+            copHouseConfigs = new array<ref DZLCopHouseDefinition>;
+
+            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Village_PoliceStation"));
+            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_City_PoliceStation"));
+            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Prison_Main"));
+            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Prison_Side"));
+            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Village_PoliceStation_Enoch"));
+            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_City_PoliceStation_Enoch"));
 
 			array<vector> storagePosition = new array<vector>;
             houseConfigs.Insert(new DZLHouseDefinition("Land_Garage_Row_Small", 100, 50, storagePosition, 0.5, 10));
@@ -142,6 +151,16 @@ class DZLHouseConfig {
 	
 	DZLHouseDefinition GetHouseDefinitionByBuilding(notnull Building building) {
 		foreach(DZLHouseDefinition definition: houseConfigs) {
+			if (definition.houseType == building.GetType()) {
+				return definition;
+			}
+		}
+		
+		return null;
+	}
+	
+	DZLCopHouseDefinition GetCopHouseDefinition(notnull Building building) {
+		foreach(DZLCopHouseDefinition definition: copHouseConfigs) {
 			if (definition.houseType == building.GetType()) {
 				return definition;
 			}

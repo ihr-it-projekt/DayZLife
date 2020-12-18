@@ -8,16 +8,30 @@ modded class ActionOpenDoors
 		Building building = Building.Cast(target.GetObject());
 		if(building) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
-			if ( doorIndex != -1 ) {
+			if (doorIndex != -1) {
+			    DZLCopHouseDefinition definition;
+			    DZLPlayer dzlPlayer;
 			    if (GetGame().IsServer()) {
-                    DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
-                    if (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex)) {
-						return true;
-					}
-					DZLSendMessage(player.GetIdentity(), "#door_is_looked");
-					
-					return false;
+			       definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
+			       dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+			    } else {
+			       definition = player.config.houseConfig.GetCopHouseDefinition(building);
+			       dzlPlayer = player.dzlPlayer;
+			    }
+
+                if(definition) {
+                    return dzlPlayer.IsActiveAsCop();
                 }
+					
+				if (GetGame().IsServer()) {
+	                DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
+	                if (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex)) {
+	                    return true;
+	                }
+					return false;
+				}
+                DZLSendMessage(player.GetIdentity(), "#door_is_looked");
+
 				return (!building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex));
 			}
 		}

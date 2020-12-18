@@ -29,6 +29,10 @@ class DZLPlayer: DZLSaveModel
         }
     }
 	
+	bool IsActiveAsCop() {
+		return DAY_Z_LIFE_JOB_COP == activeJob;
+	}
+	
 	void UpdateActiveJob(string job) {
 		activeJob = job;
 		mustSave = true;
