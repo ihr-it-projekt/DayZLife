@@ -147,4 +147,7 @@
 "Give_Arrest_Menu","","",""
 "Give_Arrest","","",""
 "escapee_player","Escapee player","Escapee player","Ausgebrochene Spieler"
+"error_arrest_time_must_be_positiv","Arrest time must be positiv.","Arrest time must be positiv.","Arrestzeit muss positiv sein."
+"error_arrest_time_is_not_a_int","Arrest time must be an number value.","Arrest time must be an number value.","Arrestzeit muss eine Zahl sein.",""
+"give_arrest","Give arrest","Give arrest","Arrest geben"
 "","","",""

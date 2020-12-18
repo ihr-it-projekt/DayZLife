@@ -3,7 +3,7 @@ modded class PlayerBase
     ref DZLHouseMenu houseMenu;
     ref DZLBankingMenu bankingMenu;
     ref DZLTraderMenu traderMenu;
-    ref DZLAlmanacMenu alamancMenu;
+    ref DZLAlmanacMenu almanacMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
 	ref DZLPlayer dzlPlayer;
@@ -15,6 +15,7 @@ modded class PlayerBase
 	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
 	ref DZLSpawnPositionMenu spawnPositionMenu;
 	ref DZLLoadOutMenu loadOutMenu;
+	ref DZLPlayerArrestMenu arrestMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -57,6 +58,7 @@ modded class PlayerBase
         AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenLoadOutMenu, InputActionMap);
+        AddAction(ActionOpenArrestMenu, InputActionMap);
 
         InitDZLPlayer();
     }
@@ -91,6 +93,8 @@ modded class PlayerBase
             progressBarLicence.UpdatePlayer(this);
         } else if (loadOutMenu && loadOutMenu.IsVisible()) {
             loadOutMenu.UpdatePlayer(this);
+        } else if (arrestMenu && arrestMenu.IsVisible()) {
+            arrestMenu.UpdatePlayer(this);
         }
     }
 
@@ -116,9 +120,9 @@ modded class PlayerBase
 	}
 
 	DZLAlmanacMenu GetAlmanacMenu() {
-		alamancMenu = new DZLAlmanacMenu();
-		InitMenu(alamancMenu);
-		return alamancMenu;
+		almanacMenu = new DZLAlmanacMenu();
+		InitMenu(almanacMenu);
+		return almanacMenu;
 	}
 	
 	DZLTraderMenu GetTraderMenu() {
@@ -138,12 +142,19 @@ modded class PlayerBase
 		InitMenu(licenceMenu);
 		return licenceMenu;
 	}
+
 	DZLLoadOutMenu GetLoadOutMenu() {
 		loadOutMenu = new DZLLoadOutMenu();
 		InitMenu(loadOutMenu);
 		return loadOutMenu;
 	}
-	
+
+	DZLPlayerArrestMenu GetArrestMenu() {
+		arrestMenu = new DZLPlayerArrestMenu();
+		InitMenu(arrestMenu);
+		return arrestMenu;
+	}
+
 	DZLPlayerMoneyTransferMenu GetPlayerMoneyTransferMenu() {
 		moneyTransferMenu = new DZLPlayerMoneyTransferMenu();
 		InitMenu(moneyTransferMenu);
@@ -179,10 +190,12 @@ modded class PlayerBase
 			licenceMenu.OnHide();
 		} else if (loadOutMenu && loadOutMenu.IsVisible()) {
 			loadOutMenu.OnHide();
+		} else if (arrestMenu && arrestMenu.IsVisible()) {
+			arrestMenu.OnHide();
 		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
 			progressBarLicence.OnHide();
-		} else if (alamancMenu && alamancMenu.IsVisible()) {
-			alamancMenu.OnHide();
+		} else if (almanacMenu && almanacMenu.IsVisible()) {
+			almanacMenu.OnHide();
 		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
 			progressBarRaid.OnHide();
 		} else if (moneyTransferMenu && moneyTransferMenu.IsVisible()) {

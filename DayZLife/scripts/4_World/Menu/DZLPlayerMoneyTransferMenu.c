@@ -38,7 +38,7 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu
 					return false;
 				}
 				
-				if (-1 == receiver) {
+				if (!receiver) {
 					player.DisplayMessage("#error_no_player_was_selected");
 					return false;
 				}
