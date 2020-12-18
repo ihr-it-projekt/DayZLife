@@ -76,7 +76,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 
 	    workzoneWidget.Show(true);
 		
-		array<ref DZLWorkZone> workZones = config.jobConfig.workZones;
+		array<ref DZLWorkZone> workZones = config.jobConfig.workZones.workZones;
 		DZLLicenceCollection licences = config.licenceConfig.licences;
 		
 		int index;

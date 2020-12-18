@@ -26,7 +26,7 @@ class DZLConfigListener
                     DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId(), config.bankConfig.startCapital);
                     dzlPlayer.UpdateName(sender.GetName());
 
-                    GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(sender.GetId())), true, sender);
+                    GetGame().RPCSingleParam(paramGetPlayerData.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
                 }
 
             }

@@ -1,7 +1,7 @@
 class DZLTraderCategoryCollection
 {
-     ref array<ref DZLTraderCategory> categories;
      string version = "1";
+     ref array<ref DZLTraderCategory> categories;
 
      void DZLTraderCategoryCollection() {
         if (!Load()){

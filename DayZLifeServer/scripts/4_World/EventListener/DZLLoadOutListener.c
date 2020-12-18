@@ -22,7 +22,7 @@ class DZLLoadOutListener
 
                 if (dzlPlayer.isCop) {
 					message = "#error_category_not_found";
-					foreach(DZLLoadOutCategory category: config.loadOutCategories) {
+					foreach(DZLLoadOutCategory category: config.loadOutsCops.loadOutCategories) {
 						if (categoryName == category.name) {
 							player.RemoveAllItems();
 							foreach(DZLLoadOutType type: category.items) {
@@ -56,12 +56,40 @@ class DZLLoadOutListener
             item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
         }
 
-		if (item) {
-			foreach(string attachment: type.attachments) {
-				if (item.GetInventory()) {
-					item.GetInventory().CreateAttachment(attachment);
-				}
-			}
+		if (item && type.attachments) {
+			AddAttachments(type, item);
 		}
+		
+		if (!item) {
+			DebugMessageDZL("can not spawn human" + type.type);
+		}		
+
+        if (item && type.quickBarEntityShortcut != -1) {
+            player.SetQuickBarEntityShortcut(item, type.quickBarEntityShortcut, true);
+        }
+    }
+
+    private void AddAttachments(DZLLoadOutType type, EntityAI item) {
+		if (!item) return;
+		
+        foreach(DZLLoadOutType attachment: type.attachments) {
+            if (item.GetInventory()) {
+                EntityAI itemAttachment = item.GetInventory().CreateInInventory(attachment.type);
+
+                if (!itemAttachment) {
+                    itemAttachment = item.GetInventory().CreateEntityInCargo(attachment.type);
+					if (!itemAttachment) {
+						itemAttachment = item.GetInventory().CreateAttachment(attachment.type);
+						if (!itemAttachment) {
+                            DebugMessageDZL("can not spawn Attachment" + attachment.type);
+                        }
+					}
+                }
+
+				if(itemAttachment && attachment.attachments) {
+					AddAttachments(attachment, itemAttachment);
+				}
+            }
+        }
     }
 }

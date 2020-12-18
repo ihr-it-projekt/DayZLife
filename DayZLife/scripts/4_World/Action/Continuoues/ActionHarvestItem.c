@@ -156,7 +156,7 @@ class ActionHarvestItem: ActionContinuousBase
             return null;
         }
 
-	    foreach(DZLWorkZone zone: config.workZones) {
+	    foreach(DZLWorkZone zone: config.workZones.workZones) {
             if(vector.Distance(zone.position, playerPosition) <= zone.range) {
                 return zone;
             }

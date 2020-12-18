@@ -1,6 +1,7 @@
 class DZLAdmin
 {
     ref array<string> adminIds;
+	string version = "1";
 
     void DZLAdmin() {
         if (!Load()) {

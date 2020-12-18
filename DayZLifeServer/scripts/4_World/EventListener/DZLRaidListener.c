@@ -42,7 +42,7 @@ class DZLRaidListener
                     }
                 }
 
-                GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(DZLDatabaseLayer.Get().GetHouse(building)), true, sender);
+                GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<ref DZLHouse>(dzlHouseRaid), true, sender);
             }
         }
     }

@@ -1,4 +1,15 @@
 
+(Cherno)
+Land_Village_PoliceStation
+Land_City_PoliceStation
+Land_Prison_Main
+Land_Prison_Side
+
+(Livonia)
+Land_Village_PoliceStation_Enoch
+Land_City_PoliceStation_Enoch
+
+
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
@@ -8,12 +19,6 @@
 - Inactive Tracker
     - wenn keine Activität länger als 10 minuten, dann muss Spieler innerhalb von 15 sec bestätigen das er Paycheck bekommt.
     - Button zum bestätigen immer an anderer position
-
-- paychecks
-    - nach online zeit bezahlen
-    - counter paycheck konfigurierbar nach wieviel online minuten
-    - gehalt einstellbar
-
 
 
 - Alarmanlage Cops benachrichtigen
@@ -124,12 +129,4 @@ Feature list
         - can get load out at specific position
 
 
-(Cherno)
-Land_Village_PoliceStation
-Land_City_PoliceStation
-Land_Prison_Main
-Land_Prison_Side
 
-(Livonia)
-Land_Village_PoliceStation_Enoch
-Land_City_PoliceStation_Enoch

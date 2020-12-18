@@ -1,5 +1,6 @@
 class DZLBankingConfig
 {
+	string version = "1";
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
 	bool showSumOfStoredCashInBank = true;
 	int raidTimeBankInSeconds = 5;
@@ -8,7 +9,6 @@ class DZLBankingConfig
 	int raidCoolDownTimeInSeconds = 60;
 	int maximumRaidDistanceToBank = 5;
 	int startCapital = 50000;
-	string version = "1";
 
     void DZLBankingConfig() {
         if(!Load()) {

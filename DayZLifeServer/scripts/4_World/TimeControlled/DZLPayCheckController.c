@@ -23,7 +23,7 @@ class DZLPayCheckController
 			} else if (dzlPlayer && dzlPlayer.activeJob == DAY_Z_LIFE_JOB_MEDIC && config.medic.amount > 0) {
 			    amount = config.medic.amount;
                 onlineTime = config.medic.onlineMinutesForPay;
-			} else if (dzlPlayer && dzlPlayer.activeJob == DAY_Z_LIFE_JOB_CIVIL && config.civil.amount > 0) {
+			} else if (config.civil.amount > 0) {
 			    amount = config.civil.amount;
                 onlineTime = config.civil.onlineMinutesForPay;
 			}
@@ -33,6 +33,8 @@ class DZLPayCheckController
 			    if(dzlPlayer.GetActiveOnlineTime() >= onlineTime) {
                     dzlPlayer.ResetOnlineTime();
                     dzlPlayer.AddMoneyToPlayer(amount);
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
+                    DZLSendMessage(player.GetIdentity(), "#you_recive_a_paycheck: " + amount);
                 }
 			}
 		}

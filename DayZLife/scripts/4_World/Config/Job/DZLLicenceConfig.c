@@ -1,8 +1,8 @@
 class DZLLicenceConfig
 {
+	string version = "1";
 	ref DZLLicenceCollection licences;
 	ref array<ref DZLLicencePosition> positionOfLicencePoints;
-	string version = "1";
 
 	void DZLLicenceConfig() {
         if (!Load()) {

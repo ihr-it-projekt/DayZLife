@@ -1,10 +1,10 @@
 class DZLPaycheckConfig
 {
+	string version = "1";
     ref DZLPaycheck cop;
     ref DZLPaycheck medic;
     ref DZLPaycheck civil;
-	
-	string version = "1";
+
 
     void DZLPaycheckConfig() {
         if(!Load()) {
