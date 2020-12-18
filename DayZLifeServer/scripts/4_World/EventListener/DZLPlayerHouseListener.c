@@ -1,7 +1,5 @@
 class DZLPlayerHouseListener
 {
-    ref DZLConfig config;
-
     void DZLPlayerHouseListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }

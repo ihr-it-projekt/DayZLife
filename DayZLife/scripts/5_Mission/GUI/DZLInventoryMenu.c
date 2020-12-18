@@ -1,5 +1,6 @@
 modded class Inventory : LayoutHolder
 {
+    TextWidget playerArrest;
     TextWidget moneyAtBank;
     TextWidget moneyAtPlayer;
 	private ref DZLUIItemCreator creator;
@@ -7,14 +8,19 @@ modded class Inventory : LayoutHolder
     void Inventory(LayoutHolder parent) {
         moneyAtPlayer = TextWidget.Cast(GetMainWidget().FindAnyWidget("DZLCash"));
         moneyAtBank = TextWidget.Cast(GetMainWidget().FindAnyWidget("DZLBank"));
+        playerArrest = TextWidget.Cast(GetMainWidget().FindAnyWidget("playerArrest"));
     }
 
     override void OnShow() {
-         super.OnShow();
+        super.OnShow();
+		
+		DZLPlayer dzlPlayer = PlayerBaseHelper.GetPlayer().dzlPlayer;
 
-         if (PlayerBaseHelper.GetPlayer().dzlPlayer) {
-             moneyAtBank.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.bank.ToString());
-             moneyAtPlayer.SetText(PlayerBaseHelper.GetPlayer().dzlPlayer.money.ToString());
+         if (dzlPlayer) {
+             moneyAtBank.SetText(dzlPlayer.bank.ToString());
+             moneyAtPlayer.SetText(dzlPlayer.money.ToString());
+			 playerArrest.Show(dzlPlayer.IsPlayerInArrest());
+             playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());
          }
      }
 }

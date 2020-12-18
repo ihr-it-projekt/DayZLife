@@ -8,6 +8,7 @@ class DZLPlayer: DZLSaveModel
 	int onlineTimeCivil = 0;
 	int onlineTimeMedic = 0;
 	int onlineTimeCop = 0;
+	int arrestTimeInMinutes = 0;
 	
 	string activeJob;
 
@@ -25,8 +26,22 @@ class DZLPlayer: DZLSaveModel
             idents.AddPlayer(playerId);
 			licenceIds = new TStringArray;
 			
-            mustSave = true;;
+            mustSave = true;
         }
+    }
+
+    bool IsPlayerInArrest() {
+        return arrestTimeInMinutes == 0;
+    }
+	
+	void ArrestCountDown() {
+		--arrestTimeInMinutes;
+		mustSave = true;	
+	}
+
+    void ArrestPlayer(int time) {
+        arrestTimeInMinutes = time;
+		mustSave = true;
     }
 	
 	bool IsActiveAsCop() {
@@ -78,19 +93,19 @@ class DZLPlayer: DZLSaveModel
 
     void UpdateName(string playerName) {
         this.playerName = playerName;
-        mustSave = true;;
+        mustSave = true;
     }
 	
 	void AddMoneyToPlayer(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			money += moneyCount;
-		    mustSave = true;;
+		    mustSave = true;
 		}
     }
 	void AddMoneyToPlayerBank(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			bank += moneyCount;
-		    mustSave = true;;
+		    mustSave = true;
 		}
     }
 
@@ -100,20 +115,20 @@ class DZLPlayer: DZLSaveModel
 
     void PlayerHasDied() {
         money = 0;
-        mustSave = true;;
+        mustSave = true;
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
-        mustSave = true;;
+        mustSave = true;
     }
 	
 	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
 		playerTarget.AddMoneyToPlayer(moneyToTransfer);
 		money -= moneyToTransfer;
 		
-		mustSave = true;;
+		mustSave = true;
 	}
 	
 	int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
@@ -136,7 +151,7 @@ class DZLPlayer: DZLSaveModel
 			moneyBankAdd -= moneyToTransfer;
 		}
 		
-		mustSave = true;;
+		mustSave = true;
 		return moneyBankAdd;
 	}
 	
@@ -167,7 +182,7 @@ class DZLPlayer: DZLSaveModel
 	void BuyLicence(DZLLicence licenceToBuy){
 		money -= licenceToBuy.price;
 		licenceIds.Insert(licenceToBuy.id);
-		mustSave = true;;
+		mustSave = true;
 	}
 
     private bool Load(){
