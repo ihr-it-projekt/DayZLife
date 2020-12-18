@@ -454,6 +454,42 @@ FrameWidgetClass inventory_root {
       }
      }
     }
+    PanelWidgetClass prisonPanel {
+     ignorepointer 1
+     position 1249.87 93.49689
+     size 326.29202 60
+     hexactpos 1
+     vexactpos 1
+     hexactsize 1
+     vexactsize 1
+     {
+      ImageWidgetClass prisonImageWidget {
+       ignorepointer 1
+       position 8.26004 8.26004
+       size 43.48 43.48
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       imageTexture "{BA01A4394F203C2A}DayZLife/DayZLife/layout/Banking/Prison.edds"
+       mode blend
+       "src alpha" 1
+       "no wrap" 0
+       stretch 1
+      }
+      TextWidgetClass playerArrest {
+       ignorepointer 1
+       position 60.0001 8.26004
+       size 258.03201 43.4799
+       hexactpos 1
+       vexactpos 1
+       hexactsize 1
+       vexactsize 1
+       text_proportion 0.7
+       "text valign" center
+      }
+     }
+    }
    }
   }
  }
