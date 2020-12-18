@@ -130,7 +130,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass giveMoneyButton {
+        ButtonWidgetClass giveArrestButton {
          color 0.251 0.502 0 1
          position 0 0
          size 0.98 0.98
