@@ -30,7 +30,7 @@ class DZLPlayer: DZLSaveModel
     }
 
     bool IsPlayerInArrest() {
-        return arrestTimeInMinutes == 0;
+        return arrestTimeInMinutes != 0;
     }
 	
 	void ArrestCountDown() {
