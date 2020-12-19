@@ -60,10 +60,6 @@ class DZLLoadOutListener
 			AddAttachments(type, item);
 		}
 		
-		if (!item) {
-			DebugMessageDZL("can not spawn human" + type.type);
-		}		
-
         if (item && type.quickBarEntityShortcut != -1) {
             player.SetQuickBarEntityShortcut(item, type.quickBarEntityShortcut, true);
         }
@@ -80,9 +76,6 @@ class DZLLoadOutListener
                     itemAttachment = item.GetInventory().CreateEntityInCargo(attachment.type);
 					if (!itemAttachment) {
 						itemAttachment = item.GetInventory().CreateAttachment(attachment.type);
-						if (!itemAttachment) {
-                            DebugMessageDZL("can not spawn Attachment" + attachment.type);
-                        }
 					}
                 }
 

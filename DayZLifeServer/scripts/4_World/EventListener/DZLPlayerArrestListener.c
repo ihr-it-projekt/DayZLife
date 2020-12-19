@@ -43,36 +43,50 @@ class DZLPlayerArrestListener
     }
 	
 	void CheckPrisoners() {
+	    DebugMessageDZL("1");
 		array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
         escapeePlayers.Clear();
 
 		foreach(Man player: allPlayers) {
+			    DebugMessageDZL("2");
+
 			DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
 			if(dzlPlayer.IsActiveAsCop()) {
 				continue;
 			}
+            	    DebugMessageDZL("3");
 
 			if (dzlPlayer.IsPlayerInArrest()) {
+			    	    DebugMessageDZL("4");
+
 				vector playerPosition = player.GetPosition();
 	
 				bool isInPrison = false;
 				foreach(vector position: arrestConfig.arrestAreas) {
-				    if (vector.Distance(position, playerPosition) > arrestConfig.arrestAreaRadius){
+				    	    DebugMessageDZL("7");
+				    if (vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius){
+				        	    DebugMessageDZL("8");
+
 						dzlPlayer.ArrestCountDown();
 						GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
 						isInPrison = true;
 				        break;
 				    }
 				}
-				
+					    DebugMessageDZL("6");
+
 				if (!isInPrison) {
+				    	    DebugMessageDZL("9");
+
 				    escapeePlayers.Insert(player.GetIdentity().GetName());
 					continue;
 				}
 								
 				if (!dzlPlayer.IsPlayerInArrest()) {
+				    	    DebugMessageDZL("10");
+
 					ChangeItems(PlayerBase.Cast(player), arrestConfig.exPrisonerItems, arrestConfig.shouldDeleteAllItemsOnExPrissoner);
 					
 					vector randPosition = arrestConfig.exPrisonerAreas.GetRandomElement();

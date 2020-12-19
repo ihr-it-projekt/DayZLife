@@ -259,7 +259,6 @@ class DZLHouseMenu : DZLBaseMenu
 
                 return true;
             case keySaveButton:
-				DebugMessageDZL("save");
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param3<PlayerBase, Building, ref array<string>>(player, building, DZLDisplayHelper.GetPlayerIdsFromList(keyPlayerAccessList)), true);
                 return true;
             default:

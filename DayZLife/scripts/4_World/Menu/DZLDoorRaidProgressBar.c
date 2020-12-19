@@ -23,7 +23,6 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar
         if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE) {
             autoptr Param1<int> paramRaidDoorResponse;
             if (ctx.Read(paramRaidDoorResponse)){
-				DebugMessageDZL("11" + paramRaidDoorResponse.param1);
                 SetDuration(paramRaidDoorResponse.param1);
             }
         }
