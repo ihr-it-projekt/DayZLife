@@ -24,13 +24,13 @@ class DZLPlayerArrestMenu : DZLBaseMenu
 		setArrest = creator.GetButtonWidget("giveArrestButton");
 		inputArrest = creator.GetEditBoxWidget("input_arrest");
 		prisonerName = creator.GetTextWidget("prisonerName");
-
+        DebugMessageDZL("2");
 		return layoutRoot;
     }
 	
 	override void OnShow() {
 		super.OnShow();
-		
+		DebugMessageDZL("3");
 		prisonerName.SetText(receiver.GetIdentity().GetName());
 	}
 	

@@ -1,16 +1,15 @@
 class DZLPlayer: DZLSaveModel
 {
-    string fileName;
+    string fileName = "";
     int money = 0;
     int bank = 0;
     bool isCop = false;
-    string playerName;
+    string playerName = "";
 	int onlineTimeCivil = 0;
 	int onlineTimeMedic = 0;
 	int onlineTimeCop = 0;
 	int arrestTimeInMinutes = 0;
-	
-	string activeJob;
+	string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 
 	ref TStringArray licenceIds;
 
