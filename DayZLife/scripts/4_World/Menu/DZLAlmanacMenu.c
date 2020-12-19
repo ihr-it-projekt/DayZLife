@@ -23,6 +23,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 
     private Widget escapedWidget;
 	private TextListboxWidget escapedPlayers;
+	private PlayerPreviewWidget escapedPlayerPreview;
 
     private Widget copPanelWidget;
 	private TextListboxWidget copPanelOnlinePlayerList;
@@ -66,6 +67,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		
 		escapedWidget = creator.GetWidget("escaped_panel");
         escapedPlayers = creator.GetTextListboxWidget("escaped_TextListbox");
+		escapedPlayerPreview = creator.GetPlayerPreview("escaped_PlayerPreview");
 
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 
@@ -244,7 +246,22 @@ class DZLAlmanacMenu : DZLBaseMenu
 			copPanelWidget.Show(3 == item);
 		} else if (w == copPanelSave) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
+		} else if (w == escapedPlayers) {
+			int posEscaped = escapedPlayers.GetSelectedRow();
+	   		if (posEscaped == -1) {
+	   			return true;
+	   		}
+			
+	   		DayZPlayer escaped;
+	   		escapedPlayers.GetItemData(posEscaped, 0, escaped);
+			
+			if (escaped) {
+				escapedPlayerPreview.SetPlayer(escaped);
+			}
+			
+			return true;
 		}
+		
 		
 		return false;
 		
@@ -271,14 +288,14 @@ class DZLAlmanacMenu : DZLBaseMenu
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
-            autoptr Param1<ref array<string>> paramEscaped;
+            autoptr Param1<ref array<DayZPlayer>> paramEscaped;
             if (ctx.Read(paramEscaped)){
                 escapedPlayers.ClearItems();
 
-				array<string> escapedPlayersParam = paramEscaped.param1;
+				array<DayZPlayer> escapedPlayersParam = paramEscaped.param1;
 
-				foreach(string escapedPlayer: escapedPlayersParam) {
-					escapedPlayers.AddItem(escapedPlayer, player, 0);
+				foreach(DayZPlayer escapedPlayer: escapedPlayersParam) {
+					escapedPlayers.AddItem(escapedPlayer.GetIdentity().GetName(), escapedPlayer, 0);
 				}
             }
         }

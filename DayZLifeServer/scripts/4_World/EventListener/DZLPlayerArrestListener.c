@@ -2,7 +2,7 @@ class DZLPlayerArrestListener
 {
 	DZLArrestConfig arrestConfig;
 	ref Timer timerArrest;
-	ref array<string> escapeePlayers = new array<string>;
+	ref array<DayZPlayer> escapeePlayers = new array<DayZPlayer>;
 	
     void DZLPlayerArrestListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -42,7 +42,7 @@ class DZLPlayerArrestListener
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
             autoptr Param1<PlayerBase> paramEscapedPlayer;
             if (ctx.Read(paramEscapedPlayer)){
-                GetGame().RPCSingleParam(paramEscapedPlayer.param1, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param1<ref array<string>>(escapeePlayers), true, sender);
+                GetGame().RPCSingleParam(paramEscapedPlayer.param1, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param1<ref array<DayZPlayer>>(escapeePlayers), true, sender);
             }
         }
     }
@@ -72,7 +72,7 @@ class DZLPlayerArrestListener
 				    }
 				}
 				if (!isInPrison) {
-				    escapeePlayers.Insert(player.GetIdentity().GetName());
+				    escapeePlayers.Insert(DayZPlayer.Cast(player));
 					continue;
 				}
 								

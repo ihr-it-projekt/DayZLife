@@ -53,4 +53,8 @@ class DZLUIItemCreator
         return ProgressBarWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
 	
+    PlayerPreviewWidget GetPlayerPreview(string name) {
+        return PlayerPreviewWidget.Cast(layoutRoot.FindAnyWidget(name));
+    }
+	
 }
