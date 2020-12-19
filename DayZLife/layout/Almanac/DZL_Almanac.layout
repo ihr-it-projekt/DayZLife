@@ -557,7 +557,47 @@ FrameWidgetClass Almanac {
         }
        }
       }
+      PanelWidgetClass escaped_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.91076
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget20 {
+         ignorepointer 1
+         position 0 0
+         size 0.4 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass escaped_TextListbox {
+           position 0 0
+           size 0.97643 0.97886
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+       }
+      }
       PanelWidgetClass PanelWidget16 {
+       visible 1
        ignorepointer 1
        position 0.00452 0.00994
        size 0.04 0.07
