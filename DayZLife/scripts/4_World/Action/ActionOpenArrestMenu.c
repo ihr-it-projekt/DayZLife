@@ -2,7 +2,7 @@ class ActionOpenArrestMenu: ActionInteractBase
 {
     void ActionOpenArrestMenu() {
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
-        m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
+        m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
         m_HUDCursorIcon = CursorIcons.None;
         m_FullBody = true;
     }
@@ -28,7 +28,7 @@ class ActionOpenArrestMenu: ActionInteractBase
 			dzlPlayerCop = player.dzlPlayer;
 		}
 
-        if (dzlPlayerCop.IsActiveAsCop()) return false;
+        if (!dzlPlayerCop.IsActiveAsCop()) return false;
 
 		if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;

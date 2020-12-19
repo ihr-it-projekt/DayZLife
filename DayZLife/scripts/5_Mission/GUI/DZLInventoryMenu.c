@@ -6,7 +6,6 @@ modded class Inventory : LayoutHolder
 	private ref DZLUIItemCreator creator;
     private Widget prisonPanel;
 
-	
     void Inventory(LayoutHolder parent) {
         moneyAtPlayer = TextWidget.Cast(GetMainWidget().FindAnyWidget("DZLCash"));
         moneyAtBank = TextWidget.Cast(GetMainWidget().FindAnyWidget("DZLBank"));

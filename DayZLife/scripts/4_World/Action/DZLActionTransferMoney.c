@@ -2,7 +2,7 @@ class DZLActionTransferMoney: ActionInteractBase
 {
     void DZLActionTransferMoney() {
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
-        m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
+        m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
         m_HUDCursorIcon = CursorIcons.None;
         m_FullBody = true;
     }

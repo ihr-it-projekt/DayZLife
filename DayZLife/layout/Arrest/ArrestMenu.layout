@@ -142,7 +142,7 @@ FrameWidgetClass rootFrame {
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         text "#Give_Arrest"
+         text "#give_arrest"
          text_proportion 0.7
         }
        }
