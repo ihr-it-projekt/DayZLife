@@ -19,10 +19,10 @@ class DZLArrestConfig
             exPrisonerItems.Insert("Crowbar");
 
             arrestAreas = new array<vector>;
-			
-			
+			arrestAreas.Insert("4665.000000 339.282990 10305.000000");
+
             exPrisonerAreas = new array<vector>;
-            
+			exPrisonerAreas.Insert("4645.000000 339.282990 10305.000000");
 
             Save();
         }

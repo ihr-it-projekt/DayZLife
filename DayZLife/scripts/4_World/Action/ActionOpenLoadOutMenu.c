@@ -32,13 +32,14 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+	    DZLPlayer dzlPlayer;
 	    if (GetGame().IsServer()) {
-			if (!DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId()).isCop) {
-				DZLSendMessage(player.GetIdentity(), "#error_not_a_cop");
-	        	return false;
-			}
-			return true;
+	        dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+	    } else {
+	        dzlPlayer = player.dzlPlayer;
 	    }
+
+	    if (!dzlPlayer.IsActiveAsCop()) return false;
 
         if(!target.GetObject()) return false;
 
