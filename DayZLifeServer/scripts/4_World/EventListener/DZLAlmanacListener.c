@@ -21,7 +21,7 @@ class DZLAlmanacListener
             autoptr Param2<PlayerBase, ref array<string>> paramUpdateCops;
             if (ctx.Read(paramUpdateCops)){
 				PlayerIdentity ident = paramUpdateCops.param1.GetIdentity();
-				
+
                 if (!config.IsAdmin(ident)) return;
 
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -53,7 +53,6 @@ class DZLAlmanacListener
             }
         }
 
-		
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
     }
 }

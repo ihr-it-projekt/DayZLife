@@ -21,6 +21,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private EntityAI workZobeYieldPreviewItem;
 	private TextListboxWidget workingZoneList;
 
+    private Widget escapedWidget;
+	private TextListboxWidget escapedPlayers;
+
     private Widget copPanelWidget;
 	private TextListboxWidget copPanelOnlinePlayerList;
 	private TextListboxWidget copPanelCopsList;
@@ -61,8 +64,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 		copPanelCopsList = creator.GetTextListboxWidget("coplist_CopPanel");
 		copPanelSave = creator.GetButtonWidget("saveButton_CopPanel");
 		
+		escapedWidget = creator.GetWidget("escaped_panel");
+        escapedPlayers = creator.GetTextListboxWidget("escaped_TextListbox");
+
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
-		
+
 		return layoutRoot;
     }
 	
@@ -73,6 +79,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 			toggleViewWidget.AddItem("#manage_cops");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, new Param1<PlayerBase>(player), true);
 		}
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, new Param1<PlayerBase>(player), true);
 
 	    workzoneWidget.Show(true);
 		
@@ -233,7 +240,8 @@ class DZLAlmanacMenu : DZLBaseMenu
 
 			workzoneWidget.Show(0 == item);
 		 	licenceWidget.Show(1 == item);
-			copPanelWidget.Show(2 == item);
+		 	escapedWidget.Show(2 == item);
+			copPanelWidget.Show(3 == item);
 		} else if (w == copPanelSave) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
 		}
@@ -260,6 +268,17 @@ class DZLAlmanacMenu : DZLBaseMenu
 				
 				foreach(DZLOnlinePlayer copPlayer: copPlayers) {
 					copPanelCopsList.AddItem(copPlayer.name, copPlayer, 0);
+				}
+            }
+        } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
+            autoptr Param1<ref array<string>> paramEscaped;
+            if (ctx.Read(paramEscaped)){
+                escapedPlayers.ClearItems();
+
+				array<string> escapedPlayersParam = paramEscaped.param1;
+
+				foreach(string escapedPlayer: escapedPlayersParam) {
+					escapedPlayers.AddItem(escapedPlayer, player, 0);
 				}
             }
         }

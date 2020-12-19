@@ -148,4 +148,5 @@
 "error_arrest_time_must_be_positiv","Arrest time must be positiv.","Arrest time must be positiv.","Arrestzeit muss positiv sein."
 "error_arrest_time_is_not_a_int","Arrest time must be an number value.","Arrest time must be an number value.","Arrestzeit muss eine Zahl sein.",""
 "give_arrest","Give arrest","Give arrest","Arrest geben"
-"","","",""
+"wanted_list","Wanted List","Wanted List","Gesuchte Spiele"
+"","",""

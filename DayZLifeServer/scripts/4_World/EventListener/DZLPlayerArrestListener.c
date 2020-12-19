@@ -39,54 +39,44 @@ class DZLPlayerArrestListener
 				DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
 				DZLSendMessage(cop.GetIdentity(), "#you_set_arrest_to_player_in_minutes: " + arrestTime.ToString());
             }
+        } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
+            autoptr Param1<PlayerBase> paramEscapedPlayer;
+            if (ctx.Read(paramEscapedPlayer)){
+                GetGame().RPCSingleParam(paramEscapedPlayer.param1, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param1<ref array<string>>(escapeePlayers), true, sender);
+            }
         }
     }
 	
 	void CheckPrisoners() {
-	    DebugMessageDZL("1");
 		array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
         escapeePlayers.Clear();
 
 		foreach(Man player: allPlayers) {
-			    DebugMessageDZL("2");
-
 			DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
 			if(dzlPlayer.IsActiveAsCop()) {
 				continue;
 			}
-            	    DebugMessageDZL("3");
 
 			if (dzlPlayer.IsPlayerInArrest()) {
-			    	    DebugMessageDZL("4");
-
 				vector playerPosition = player.GetPosition();
 	
 				bool isInPrison = false;
 				foreach(vector position: arrestConfig.arrestAreas) {
-				    	    DebugMessageDZL("7");
 				    if (vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius){
-				        	    DebugMessageDZL("8");
-
 						dzlPlayer.ArrestCountDown();
 						GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
 						isInPrison = true;
 				        break;
 				    }
 				}
-					    DebugMessageDZL("6");
-
 				if (!isInPrison) {
-				    	    DebugMessageDZL("9");
-
 				    escapeePlayers.Insert(player.GetIdentity().GetName());
 					continue;
 				}
 								
 				if (!dzlPlayer.IsPlayerInArrest()) {
-				    	    DebugMessageDZL("10");
-
 					ChangeItems(PlayerBase.Cast(player), arrestConfig.exPrisonerItems, arrestConfig.shouldDeleteAllItemsOnExPrissoner);
 					
 					vector randPosition = arrestConfig.exPrisonerAreas.GetRandomElement();

@@ -52,7 +52,7 @@ FrameWidgetClass Almanac {
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         items "#Workzone;#Licence"
+         items "#Workzone;#Licence;#wanted_list"
         }
        }
       }
