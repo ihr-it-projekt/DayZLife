@@ -21,7 +21,6 @@ modded class Inventory : LayoutHolder
          if (dzlPlayer) {
              moneyAtBank.SetText(dzlPlayer.bank.ToString());
              moneyAtPlayer.SetText(dzlPlayer.money.ToString());
-			 prisonPanel.Show(dzlPlayer.IsPlayerInArrest());
              playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());
          }
      }

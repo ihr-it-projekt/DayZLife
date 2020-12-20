@@ -396,7 +396,7 @@ FrameWidgetClass inventory_root {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       imageTexture "{BA01A4394F203C2A}DayZLife/DayZLife/layout/Banking/Prison.edds"
+       imageTexture "{BA01A4394F203C2A}DayZLife/layout/Banking/Prison.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0

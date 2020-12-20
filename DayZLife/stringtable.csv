@@ -149,4 +149,6 @@
 "error_arrest_time_is_not_a_int","Arrest time must be an number value.","Arrest time must be an number value.","Arrestzeit muss eine Zahl sein.",""
 "give_arrest","Give arrest","Give arrest","Arrest geben"
 "wanted_list","Wanted List","Wanted List","Gesuchte Spiele"
+"ArrestTime","Arrest Time","Arrest Time", "Arrest Zeit"
+"only_for_cops","Only for cops","Only for cops","Nur für Polizei"
 "","",""

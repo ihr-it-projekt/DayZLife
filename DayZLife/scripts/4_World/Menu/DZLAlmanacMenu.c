@@ -261,10 +261,8 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			return true;
 		}
-		
-		
+
 		return false;
-		
 	}
 	
 
@@ -288,14 +286,20 @@ class DZLAlmanacMenu : DZLBaseMenu
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
-            autoptr Param1<ref array<DayZPlayer>> paramEscaped;
+            autoptr Param1<ref array<ref DZLEscapedPlayer>> paramEscaped;
             if (ctx.Read(paramEscaped)){
                 escapedPlayers.ClearItems();
 
-				array<DayZPlayer> escapedPlayersParam = paramEscaped.param1;
+				array<ref DZLEscapedPlayer> escapedPlayersParam = paramEscaped.param1;
 
-				foreach(DayZPlayer escapedPlayer: escapedPlayersParam) {
-					escapedPlayers.AddItem(escapedPlayer.GetIdentity().GetName(), escapedPlayer, 0);
+				foreach(DZLEscapedPlayer escapedPlayer: escapedPlayersParam) {
+					int indexOfRow = escapedPlayers.AddItem(escapedPlayer.name, escapedPlayer.player, 0);
+					if (player.dzlPlayer.IsActiveAsCop()) {
+						escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 1);
+					} else {
+						escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 1);
+					}
+					
 				}
             }
         }
