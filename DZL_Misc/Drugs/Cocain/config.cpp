@@ -15,7 +15,7 @@ class CfgVehicles
 {
 	class HouseNoDestruct;
 	class Inventory_Base;
-	class Container_Base;
+	class FirstAidKit;
 	class Paper;
 	class DZL_Coca_Plant: HouseNoDestruct
 	{
@@ -48,7 +48,7 @@ class CfgVehicles
 			"dz\gear\cultivation\data\Cannabis_plant.rvmat"
 		};
 	};
-	class DZL_Cocain_Brick: Container_Base
+	class DZL_Cocain_Brick: FirstAidKit
 	{	
 		scope=2;
 		displayName="#Cocain_Brick";
@@ -57,7 +57,8 @@ class CfgVehicles
 		rotationFlags=17;
 		lootCategory="Crafted";
 		weight=500;
-		itemSize[]={3,3};
+		itemSize[]={4,4};
+		itemsCargoSize[]={0,0};
 		absorbency=0.2;
 		isMeleeWeapon=1;
 		hiddenSelections[]=
@@ -72,7 +73,7 @@ class CfgVehicles
 	class DZL_Cocain: Paper
 	{	
 		scope=2;
-		displayName="#raw_Cocaine";
+		displayName="#Cocaine_plunder";
 		descriptionShort="#raw_Cocaine_desc";
 		model="\dz\gear\consumables\Paper.p3d";
 		rotationFlags=17;
