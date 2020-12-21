@@ -15,7 +15,7 @@ class CfgVehicles
 {
 	class HouseNoDestruct;
 	class Inventory_Base;
-	class Container_Base;
+	class FirstAidKit;
 	class DZL_Cannabis_Plant: HouseNoDestruct
 	{
 		scope=1;
@@ -35,7 +35,7 @@ class CfgVehicles
 		weight=20;
 		itemSize[]={2,2};
 	};
-	class DZL_Cannabis_Brick: Container_Base
+	class DZL_Cannabis_Brick: FirstAidKit
 	{	
 		scope=2;
 		displayName="#Cannabis_Brick";
@@ -45,6 +45,7 @@ class CfgVehicles
 		lootCategory="Crafted";
 		weight=1200;
 		itemSize[]={4,4};
+		itemsCargoSize[]={0,0};
 		absorbency=0.2;
 		isMeleeWeapon=1;
 		hiddenSelections[]=
