@@ -45,6 +45,8 @@ class DZLAlmanacListener
                         }
 
                         house.RemoveOwner();
+
+                        DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.bank * -1);
                     }
 
                     DZLDatabaseLayer.Get().RemovePlayer(identString);
