@@ -52,7 +52,6 @@ class CfgVehicles
 	class Container_Base;
 	class Pot;
 	class HouseNoDestruct;
-	class M65Jacket_Black;
 	class DZL_WoodenLog: WoodenLog
 	{
 		scope=2;
@@ -172,9 +171,5 @@ class CfgVehicles
 	{
 		scope=1;
 		model="\DZ\structures\signs\traffic\sign_parking.p3d";
-	};
-	class DZL_M65Jacket_Black: M65Jacket_Black
-	{
-		itemsCargoSize[]={10,10};
 	};
 };

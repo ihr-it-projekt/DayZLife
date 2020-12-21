@@ -582,7 +582,7 @@ FrameWidgetClass Almanac {
          style editor_quad_dark
          {
           TextListboxWidgetClass escaped_TextListbox {
-           position -0 0
+           position 0 0
            size 0.9736 0.9789
            halign center_ref
            valign center_ref
