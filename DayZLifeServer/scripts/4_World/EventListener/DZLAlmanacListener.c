@@ -31,23 +31,27 @@ class DZLAlmanacListener
                 if (DZLDatabaseLayer.Get().HasPlayer(identString)) {
                     DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identString);
                     DZLPlayerHouse dzlPlayerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(identString);
-
+	
+					DZLHouse house;
                     foreach(string fileNameHouse: dzlPlayerHouse.playerHouseCollection) {
-                        DZLHouse house = DZLDatabaseLayer.Get().GetHouse(null, fileNameHouse);
+                        house = DZLDatabaseLayer.Get().GetHouse(null, fileNameHouse);
 
                         array<ref DZLStorageTypeBought> storages = house.GetStorage();
                         foreach(DZLStorageTypeBought storage: storages) {
                             if (!storage) continue;
-                            Container_Base itemToDestroy = houseFinder.objectFinder.GetContainerAt(storage.position, storage.position, storage.type);
-
-                            if (!itemToDestroy) continue;
-                            GetGame().ObjectDelete(itemToDestroy);
+                            houseFinder.objectFinder.DeleteContainerAt(storage.position, storage.position, storage.type);
                         }
 
                         house.RemoveOwner();
 
                         DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.bank * -1);
+                        DZLDatabaseLayer.Get().RemoveHouse(house.GetFileName());
                     }
+
+                    foreach(string fileHouseAccess: dzlPlayerHouse.playerHouseKeyCollection) {
+						house = DZLDatabaseLayer.Get().GetHouse(null, fileHouseAccess);
+						if (house) house.RemovePlayerAccess(identString);
+					}
 
                     DZLDatabaseLayer.Get().RemovePlayer(identString);
                     DZLDatabaseLayer.Get().RemovePlayerHouse(identString);
@@ -89,7 +93,6 @@ class DZLAlmanacListener
 				if (!dzlPlayer.isCop) {
 					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
 				}
-                
             }
         }
 

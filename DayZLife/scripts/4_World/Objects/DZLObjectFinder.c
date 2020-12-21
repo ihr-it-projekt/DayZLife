@@ -22,8 +22,7 @@ class DZLObjectFinder
         return obj;
     }
 
-
-    Container_Base GetContainerAt(vector from, vector to, string typeToSearch, Object ignore = NULL, float radius = 0.1, Object with = NULL){
+    void DeleteContainerAt(vector from, vector to, string typeToSearch, Object ignore = NULL, float radius = 0, Object with = NULL,int tries = 0){
         vector contact_pos;
         vector contact_dir;
         int contact_component;
@@ -32,22 +31,20 @@ class DZLObjectFinder
 
         DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius);
 
-        Object obj = CheckForContainer(geom, typeToSearch);
-        if (!obj) return null;
-
-        return Container_Base.Cast(obj);
-    }
-
-    private Object CheckForContainer(set< Object > geom, string typeToSearch) {
+		Object obj;
         for (int newObject = 0; newObject < geom.Count(); ++newObject){
-           Object obj = geom.Get(newObject);
-           if (obj.GetType() == typeToSearch) {
-               return obj;
-               break;
-           }
-       }
-        
-       return null;
+            obj = geom.Get(newObject);
+            if (obj.GetType() == typeToSearch) {
+               GetGame().ObjectDelete(obj);
+               return;
+            } else {
+               if (tries == 3) {
+                    return;
+               }
+               DeleteContainerAt(from, to, typeToSearch, obj, radius + 0.5, null, tries + 1);
+			   return;
+            }
+        }
     }
 
     private Object CheckForObject(set< Object > geom) {

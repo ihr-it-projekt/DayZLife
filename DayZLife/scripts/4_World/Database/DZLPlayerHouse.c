@@ -19,14 +19,6 @@ class DZLPlayerHouse: DZLSaveModel
         mustSave = true;
 	}
 	
-	void RemoveHouse(notnull DZLHouse house) {
-		int index = playerHouseCollection.Find(house.GetFileName());
-		if (-1 != index) {
-			playerHouseCollection.Remove(index);
-			mustSave = true;
-		}
-	}
-	
 	bool HasHouse(notnull Building building) {
 		string houseFileName = DZLHouse.GetFileNameFromBuilding(building);
 		return -1 != playerHouseCollection.Find(houseFileName);

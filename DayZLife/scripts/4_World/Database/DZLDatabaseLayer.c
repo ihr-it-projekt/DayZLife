@@ -28,6 +28,7 @@ class DZLDatabaseLayer
         foreach(DZLHouse house: dzlHouses) {
             house.Save();
         }
+		
         foreach(DZLPlayer player: dzlPlayers) {
             player.Save();
         }
@@ -87,6 +88,14 @@ class DZLDatabaseLayer
         }
 
         return house;
+    }
+
+    void RemoveHouse(string fileName) {
+        DZLHouse house;
+        if(dzlHouses.Find(fileName, house)) {
+            dzlHouses.Remove(fileName);
+            DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName);
+        }
     }
 
     DZLPlayerHouse GetPlayerHouse(string playerId) {

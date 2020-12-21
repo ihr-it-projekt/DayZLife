@@ -58,6 +58,10 @@ class DZLHouse: DZLSaveModel
 
     void AddOwner(PlayerBase player) {
         owner = player.GetIdentity().GetId();
+        lockedDoors = new array<int>;
+        alarmSystem = null;
+        storagePositions = new array<int>;
+        playerAccess = new array<string>;
         mustSave = true;
     }
 	
@@ -69,6 +73,7 @@ class DZLHouse: DZLSaveModel
 		owner = "";
 		this.lockedDoors = new array<int>;
 		alarmSystem = null;
+		storagePositions = new array<int>;
 		playerAccess = new array<string>;
 		mustSave = true;
 	}
@@ -90,6 +95,14 @@ class DZLHouse: DZLSaveModel
 
 	bool HasPlayerAccess(string ident) {
         return -1 != playerAccess.Find(ident);
+    }
+	
+	void RemovePlayerAccess(string ident) {
+        int index = playerAccess.Find(ident);
+		if (index != -1) {
+			playerAccess.Remove(index);
+			mustSave = true;
+		}
     }
 	
 	array<string> GetPlayerAccess() {
