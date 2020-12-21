@@ -608,6 +608,74 @@ FrameWidgetClass Almanac {
         }
        }
       }
+      PanelWidgetClass admin_Panel {
+       visible 0
+       ignorepointer 1
+       position 0 -0
+       size 1 0.91076
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget21 {
+         ignorepointer 1
+         position 0 0
+         size 0.3586 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass players {
+           position 0 0
+           size 0.97371 0.97887
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_Name;65;#last_log_in_day;35"
+           lines 30
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget22 {
+         ignorepointer 1
+         position 0 0.011
+         size 0.17 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass delete_Button {
+           color 0.502 0 0 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "#Delete_player"
+          }
+         }
+        }
+       }
+      }
       PanelWidgetClass PanelWidget16 {
        visible 1
        ignorepointer 1
