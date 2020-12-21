@@ -1,9 +1,14 @@
 class DZLAlmanacListener
 {
     ref DZLConfig config;
+	private ref DZLHouseFinder houseFinder;
+	
 
     void DZLAlmanacListener() {
 		config = DZLConfig.Get();
+		houseFinder = new DZLHouseFinder;
+		houseFinder.SetConfig(config);
+		
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
 
@@ -16,6 +21,39 @@ class DZLAlmanacListener
             autoptr Param1<PlayerBase> param;
             if (ctx.Read(param)){
 				SendUpdateList(param.param1);
+            }
+        } else if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS) {
+            SendAllPlayerList(sender);
+        } else if (rpc_type == DAY_Z_LIFE_DELETE_PLAYER) {
+            autoptr Param1<string> paramDeletePlayer;
+            if (ctx.Read(paramDeletePlayer)){
+				string identString = paramDeletePlayer.param1;
+                if (DZLDatabaseLayer.Get().HasPlayer(identString)) {
+                    DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identString);
+                    DZLPlayerHouse dzlPlayerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(identString);
+
+                    foreach(string fileNameHouse: dzlPlayerHouse.playerHouseCollection) {
+                        DZLHouse house = DZLDatabaseLayer.Get().GetHouse(null, fileNameHouse);
+
+                        array<ref DZLStorageTypeBought> storages = house.GetStorage();
+                        foreach(DZLStorageTypeBought storage: storages) {
+                            if (!storage) continue;
+                            Container_Base itemToDestroy = houseFinder.objectFinder.GetContainerAt(storage.position, storage.position, storage.type);
+
+                            if (!itemToDestroy) continue;
+                            GetGame().ObjectDelete(itemToDestroy);
+                        }
+
+                        house.RemoveOwner();
+                    }
+
+                    DZLDatabaseLayer.Get().RemovePlayer(identString);
+                    DZLDatabaseLayer.Get().RemovePlayerHouse(identString);
+                    DZLDatabaseLayer.Get().GetPlayerIds().RemovePlayer(identString);
+				}
+				DZLSendMessage(sender, "#player_data_was_deleted");
+				SendAllPlayerList(sender);
+				
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS) {
             autoptr Param2<PlayerBase, ref array<string>> paramUpdateCops;
@@ -54,5 +92,20 @@ class DZLAlmanacListener
         }
 
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
+    }
+
+    void SendAllPlayerList(PlayerIdentity player) {
+        if (!DZLConfig.Get().IsAdmin(player)) return;
+
+        array<ref DZLPlayer> collection = new array<ref DZLPlayer>;
+        DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
+
+		array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
+	    foreach(string ident: allPlayer) {
+            DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayer(ident);
+            collection.Insert(_player);
+		}
+
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE, new Param1<ref array<ref DZLPlayer>>(collection), true, player);
     }
 }

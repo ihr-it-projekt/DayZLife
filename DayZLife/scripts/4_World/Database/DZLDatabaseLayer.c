@@ -57,6 +57,11 @@ class DZLDatabaseLayer
         return dzlPlayerIdentities;
     }
 
+    bool HasPlayer(string playerId) {
+        DZLPlayer player;
+        return dzlPlayers.Find(playerId, player);
+    }
+
     DZLPlayer GetPlayer(string playerId, int moneyToAdd = 0) {
 		DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
@@ -93,6 +98,20 @@ class DZLDatabaseLayer
         return house;
     }
 
+    void RemovePlayerHouse(string playerId) {
+        DZLPlayerHouse house;
+        if (dzlPlayerHouses.Find(playerId, house)) {
+            dzlPlayerHouses.Remove(playerId);
+			DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + house.fileName);
+        }
+    }
 
+    void RemovePlayer(string playerId) {
+        DZLPlayer player;
+        if (dzlPlayers.Find(playerId, player)) {
+            dzlPlayers.Remove(playerId);
+			DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + player.fileName);
+		}
+    }
 
 }

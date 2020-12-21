@@ -1,6 +1,7 @@
 class DZLPlayer: DZLSaveModel
 {
     string fileName = "";
+    string dayZPlayerId = "";
     int money = 0;
     int bank = 0;
     bool isCop = false;
@@ -10,6 +11,7 @@ class DZLPlayer: DZLSaveModel
 	int onlineTimeCop = 0;
 	int arrestTimeInMinutes = 0;
 	string activeJob = DAY_Z_LIFE_JOB_CIVIL;
+	ref DZLDate lastLoginDate;
 
 	ref TStringArray licenceIds;
 
@@ -20,6 +22,7 @@ class DZLPlayer: DZLSaveModel
             if (DAY_Z_LIFE_DEBUG) {
                 money = 100000;
             }
+            this.dayZPlayerId = playerId;
 
             DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
             idents.AddPlayer(playerId);
@@ -92,6 +95,7 @@ class DZLPlayer: DZLSaveModel
 
     void UpdateName(string playerName) {
         this.playerName = playerName;
+        lastLoginDate = new DZLDate();
         mustSave = true;
     }
 	

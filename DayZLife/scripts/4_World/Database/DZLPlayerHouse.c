@@ -1,6 +1,6 @@
 class DZLPlayerHouse: DZLSaveModel
 {
-    private string fileName;
+    string fileName;
     ref array<string> playerHouseCollection;
     ref array<string> playerHouseKeyCollection;
 

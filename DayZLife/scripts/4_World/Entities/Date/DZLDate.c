@@ -19,4 +19,8 @@ class DZLDate
         GetHourMinuteSecondUTC(hour, minute, second);
         inSeconds = month * MONTH_IN_SECONDS + day * DAY_IN_SECONDS + hour * HOUR_IN_SECONDS + minute * MINUTE_IN_SECONDS + second;
     }
+
+    string ToDateString() {
+        return year.ToString() + "-" + month.ToString() + "-" + day.ToString() + " " + hour.ToString() + ":" + minute.ToString() + ":" + second.ToString();
+    }
 }

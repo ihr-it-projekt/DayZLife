@@ -53,6 +53,15 @@ class DZLDisplayHelper
 
         return list;
     }
+    static DZLPlayer GetDZLPlayerFromList(TextListboxWidget sourceWidget) {
+        int pos = sourceWidget.GetSelectedRow();
+        if (pos == -1) {
+            return null;
+        }
+        DZLPlayer itemType;
+        sourceWidget.GetItemData(pos, 0, itemType);
+        return itemType;
+    }
 	
 	
 

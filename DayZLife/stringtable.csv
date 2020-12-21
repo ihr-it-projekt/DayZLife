@@ -154,3 +154,7 @@
 "Player_Name","Player Name","Player Name","Spieler Name"
 "last_log_in_day","last log in day","last log in day","Zuletzt Online"
 "Delete_player","Delete Player","Delete Player","Spieler Löschen"
+"admin_Panel", "Admin Panel", "Admin Panel", "Admin Panel"
+"player_data_was_deleted","Player was deleted. Player must relog, if he wants to play again.","Player was deleted.  Player must relog, if he wants to play again", "Spieler wurden gelöscht. Spieler muss sich neu einloggen."
+"no_player_selected","no player selected","no player selected","kein Spieler ausgewählt."
+"","",""

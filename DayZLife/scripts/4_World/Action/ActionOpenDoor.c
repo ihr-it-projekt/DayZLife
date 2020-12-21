@@ -14,9 +14,11 @@ modded class ActionOpenDoors
 			    if (GetGame().IsServer()) {
 			       definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
 			       dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
-			    } else {
+			    } else if (player.config && player.dzlPlayer) {
 			       definition = player.config.houseConfig.GetCopHouseDefinition(building);
 			       dzlPlayer = player.dzlPlayer;
+			    } else {
+			        return false;
 			    }
 
                 if(definition) {

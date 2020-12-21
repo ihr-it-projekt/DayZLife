@@ -39,7 +39,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 	        dzlPlayer = player.dzlPlayer;
 	    }
 
-	    if (!dzlPlayer.IsActiveAsCop()) return false;
+	    if (!dzlPlayer || !dzlPlayer.IsActiveAsCop()) return false;
 
         if(!target.GetObject()) return false;
 

@@ -15,6 +15,13 @@ class DZLPlayerIdentities: DZLSaveModel
             mustSave = true;
         }
     }
+    void RemovePlayer(string playerId) {
+		int index = playerIdentities.Find(playerId);
+        if (-1 != index) {
+            playerIdentities.Remove(index);
+            mustSave = true;
+        }
+    }
 
     array<ref DZLOnlinePlayer> GetCopPlayerCollection() {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
