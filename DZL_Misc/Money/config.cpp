@@ -51,10 +51,10 @@ class CfgVehicles
 		itemSize[]={1,2};
 		rotationFlags=16;
 		canBeSplit=1;
-		varQuantityInit=10;
+		varQuantityInit=1;
 		varQuantityMin=0;
-		varQuantityMax=10;
+		varQuantityMax=1;
 		varQuantityDestroyOnMin=1;
-		varStackMax=10;
+		varStackMax=1;
 	};
 };

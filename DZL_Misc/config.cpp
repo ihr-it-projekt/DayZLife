@@ -92,7 +92,7 @@ class CfgVehicles
 		rotationFlags=17;
 		lootCategory="Crafted";
 		weight=450;
-		itemSize[]={3,3};
+		itemSize[]={1,1};
 		absorbency=0.2;
 		canBeSplit=1;
 		varQuantityInit=1;
