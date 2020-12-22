@@ -10,12 +10,8 @@ modded class MissionServer {
         DebugMessageDZL("Load DayZLifeServer");
         manager = new DZLEventManager;
         paycheckController = new DZLPayCheckController;
-
 		databaseTimer = new Timer();
 		paycheckTimer = new Timer();
-		databaseTimer.Run(20, DZLDatabaseLayer.Get(), "Save", null, true);
-		paycheckTimer.Run(60, paycheckController, "Check", null, true);
-		DZLLicenceCheck.Get();
 	}
 
 	void ~MissionServer() {
@@ -28,8 +24,11 @@ modded class MissionServer {
         DZLLicenceLocationBuilder.Create();
         DZLTraderLocationBuilder.Create();
         DZLLoadOutLocationBuilder.Create();
-
         DZLLockedHouses.OnServerStart();
+
+        databaseTimer.Run(20, DZLDatabaseLayer.Get(), "Save", null, true);
+        paycheckTimer.Run(60, paycheckController, "Check", null, true);
+        DZLLicenceCheck.Get();
     }
 	
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
