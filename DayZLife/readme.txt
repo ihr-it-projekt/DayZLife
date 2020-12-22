@@ -1,4 +1,8 @@
-
+- Playerliste mit Rollen anzeige
+- Hausdurchsuchung über Richterfunktion
+- Journalistenrolle
+- Fahrzeuge in Garage einstoren
+- Polizei Globalnachrichten senden
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
