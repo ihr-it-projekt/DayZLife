@@ -1,0 +1,53 @@
+Welcome to DayZLife.
+
+Attention: This Mod needs also a Serverside Mod and will be published in near future. We are running currently a beta phase at rasselbande (https://discord.gg/YQswRNnjPB).
+
+If you are interested to have it on your own server, please watch at https://dayz-life.net/ or this mod page.
+
+Feature list
+
+- Spawn Menu with Job chose
+- own Moneysystem
+- money can be stolen from other players and dead players
+- bank system
+    - pay in/pay out
+    - transfer money over bank
+    - transfer money directly to players
+- bank can be raided
+- if player dies, money at the player will stay at the dead character, money at bank will not touched
+- own Tradersystem
+- several trader locations
+- Players can buy default DayZ Buildings
+- Player can upgrade houses with extensions
+    - Doors can be looked
+    - Storage
+    - Alarm systems in different levels
+    - House access control system (Give other Players Access to your house)
+    - Houses can be raid by other players
+    - ... there will come more
+- legal and Illegal harvest  of goods
+    - coal
+    - iron
+    - copper
+    - cocaine
+    - stones
+    - apple
+- process harvest items with different licences
+- implemented Almanac to figure out what you need/what you can do and how
+- Admins can in game delete/reset player data related to our mod
+- Admins can give players the role "Cop"
+- Jobs
+    - Medic
+        - can raid police stations and prisons
+        - Spawn with Medic Equipment
+    - Civil
+        - can raid police stations and prisons
+        - Spawn with Civil Equipment
+    - Cops
+        - spawn with Cop Equipment
+        - can get load out at specific position
+        - can open police stations and prisons
+        - can give player arrest
+
+
+This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.

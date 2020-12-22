@@ -9,6 +9,7 @@ class DZLPlayerHouseListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING) {
             autoptr Param1<PlayerBase> paramGetConfig;
             if (ctx.Read(paramGetConfig)){

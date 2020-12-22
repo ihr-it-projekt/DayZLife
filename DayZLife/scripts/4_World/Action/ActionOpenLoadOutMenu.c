@@ -34,6 +34,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    DZLPlayer dzlPlayer;
 	    if (GetGame().IsServer()) {
+	        if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 	        dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 	    } else {
 	        dzlPlayer = player.dzlPlayer;

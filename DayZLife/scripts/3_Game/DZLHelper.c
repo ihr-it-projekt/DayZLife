@@ -11,6 +11,19 @@ static void DebugMessageDZL(string message) {
     }
 }
 
+static void LogMessageDZL(string message) {
+	if (DAY_Z_LIFE_DEBUG) {
+		int hour;
+	    int minute;
+	    int second;
+		int inSeconds;
+
+		GetHourMinuteSecondUTC(hour, minute, second);
+		Print("[DayZLife] " + hour.ToString() + ":" + minute.ToString() + ":" + second.ToString() + ": " + message);
+        GetGame().AdminLog("[DayZLife] " + hour.ToString() + ":" + minute.ToString() + ":" + second.ToString() + ": " + message);
+    }
+}
+
 static void CheckDZLBasePath() {
     if (!FileExist(DAY_Z_LIFE_SERVER_FOLDER_BASE)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_BASE);

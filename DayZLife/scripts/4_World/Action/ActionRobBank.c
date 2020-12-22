@@ -31,6 +31,7 @@ class ActionRobBank: ActionInteractBase
 		    if (!player.config) return false;
 			config = player.config.bankConfig;
 		} else {
+		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			GetConfig();
 			DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 			if (bank.raidRuns) {

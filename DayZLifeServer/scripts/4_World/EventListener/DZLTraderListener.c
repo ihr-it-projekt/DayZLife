@@ -12,6 +12,7 @@ class DZLTraderListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_TRADE_ACTION) {
             autoptr Param4<ref array<string>,ref array<EntityAI>, ref DZLTraderPosition, PlayerBase> paramTrade;
             if (ctx.Read(paramTrade)){

@@ -21,6 +21,7 @@ class DZLActionLockDoors: ActionInteractBase
 		if(GetGame().IsClient()){
 			house = player.house;
 		} else {
+		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			house = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
 		}
 		

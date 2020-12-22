@@ -157,4 +157,5 @@
 "admin_Panel", "Admin Panel", "Admin Panel", "Admin Panel"
 "player_data_was_deleted","Player was deleted. Player must relog, if he wants to play again.","Player was deleted.  Player must relog, if he wants to play again", "Spieler wurden gelöscht. Spieler muss sich neu einloggen."
 "no_player_selected","no player selected","no player selected","kein Spieler ausgewählt."
+"server_admin_must_upgrade_licences_dayZ_life_mod_deactivate","Server Admin must upgrade licence, DayZ Life was deactivated.","Server Admin must upgrade licence, DayZ Life was deactivated.","Server Admin muss die License hoch stufen. DayZLife Mod wurde deaktiviert."
 "","",""

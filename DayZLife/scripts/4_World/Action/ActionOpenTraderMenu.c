@@ -32,7 +32,7 @@ class ActionOpenTraderMenu: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-	    if (GetGame().IsServer()) return true;
+	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 
         if(!target.GetObject()) return false;
 

@@ -5,7 +5,6 @@ class DZLConfig
     static DZLConfig Get() {
         if (!config) {
             config = new DZLConfig;
-            DebugMessageDZL("create new config");
         }
 
         return config;
@@ -33,7 +32,7 @@ class DZLConfig
 		copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
         medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
         civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
-        adminIds = new DZLAdmin();
+        adminIds = new DZLAdmin;
 
         jobIds = new array<string>;
         jobIds.Insert(DAY_Z_LIFE_JOB_CIVIL);
