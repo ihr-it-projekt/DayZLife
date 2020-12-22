@@ -7,6 +7,7 @@ class DZLPayCheckController
     }
 	
 	void Check() {
+	    if (!DZLLicenceCheck.Get().HasActiveLicence(null)) return;
 		array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
 		

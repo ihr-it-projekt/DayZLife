@@ -21,11 +21,13 @@ class DZLActionRaidDoors: ActionInteractBase
 		m_ConditionTarget = new CCTCursor;
 	}
 
-	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item){
+	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsClient() && (!player.config || !player.config.houseConfig)) return false;
 
 		if(GetGame().IsClient()){
 			config = player.config.houseConfig;
+		} else {
+		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 		}
 
 		Building building = Building.Cast(target.GetObject());

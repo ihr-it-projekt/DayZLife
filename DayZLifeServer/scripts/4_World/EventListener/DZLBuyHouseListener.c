@@ -17,6 +17,7 @@ class DZLBuyHouseListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
             autoptr Param2<PlayerBase, ref Building> paramGetBuildingProperties;
             if (ctx.Read(paramGetBuildingProperties)){

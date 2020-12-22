@@ -3,7 +3,6 @@ class DZLAlmanacListener
     ref DZLConfig config;
 	private ref DZLHouseFinder houseFinder;
 	
-
     void DZLAlmanacListener() {
 		config = DZLConfig.Get();
 		houseFinder = new DZLHouseFinder;
@@ -37,9 +36,11 @@ class DZLAlmanacListener
                         house = DZLDatabaseLayer.Get().GetHouse(null, fileNameHouse);
 
                         array<ref DZLStorageTypeBought> storages = house.GetStorage();
-                        foreach(DZLStorageTypeBought storage: storages) {
-                            if (!storage) continue;
-                            houseFinder.objectFinder.DeleteContainerAt(storage.position, storage.position, storage.type);
+                        if (storages && storages.Count() > 0) {
+                            foreach(DZLStorageTypeBought storage: storages) {
+                                if (!storage) continue;
+                                houseFinder.objectFinder.DeleteContainerAt(storage.position, storage.position, storage.type);
+                            }
                         }
 
                         house.RemoveOwner();

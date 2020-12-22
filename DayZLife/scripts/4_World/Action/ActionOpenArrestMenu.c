@@ -25,6 +25,7 @@ class ActionOpenArrestMenu: ActionInteractBase
 		
 		DZLPlayer dzlPlayerCop;
         if (GetGame().IsServer()) {
+            if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
             dzlPlayerCop = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
             DZLPlayer dzlPlayerPrisoner = DZLDatabaseLayer.Get().GetPlayer(targetPlayer.GetIdentity().GetId());
             if (dzlPlayerPrisoner.IsActiveAsCop()) return false;

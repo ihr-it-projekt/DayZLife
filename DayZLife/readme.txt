@@ -123,6 +123,7 @@ Feature list
         - spawn with Cop Equipment
         - can get load out at specific position
         - can open police stations and prisons
+        - can give player arrest
 
 
 

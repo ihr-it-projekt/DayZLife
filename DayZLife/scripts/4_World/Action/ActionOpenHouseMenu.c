@@ -38,7 +38,7 @@ class ActionOpenHouseMenu: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if(GetGame().IsClient()){
+        if (GetGame().IsClient()){
             if(!target) return false;
             if(!IsBuilding(target)) return false;
             if (!player.config) return false;
@@ -56,6 +56,7 @@ class ActionOpenHouseMenu: ActionInteractBase
         }
 
 		if (GetGame().IsServer()) {
+		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
             DZLBuilding building = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
 
             if (building && (!building.HasOwner() || (building.HasOwner() && building.IsOwner(player)))) {

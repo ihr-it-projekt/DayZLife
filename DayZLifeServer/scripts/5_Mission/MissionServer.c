@@ -15,6 +15,7 @@ modded class MissionServer {
 		paycheckTimer = new Timer();
 		databaseTimer.Run(20, DZLDatabaseLayer.Get(), "Save", null, true);
 		paycheckTimer.Run(60, paycheckController, "Check", null, true);
+		DZLLicenceCheck.Get();
 	}
 
 	void ~MissionServer() {
