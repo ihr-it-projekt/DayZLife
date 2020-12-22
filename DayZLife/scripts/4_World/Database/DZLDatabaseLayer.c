@@ -32,6 +32,7 @@ class DZLDatabaseLayer
         foreach(DZLPlayer player: dzlPlayers) {
             player.Save();
         }
+        
         foreach(DZLPlayerHouse playerHouse: dzlPlayerHouses) {
             playerHouse.Save();
         }

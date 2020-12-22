@@ -159,6 +159,16 @@ class DZLHouseConfig {
 		return null;
 	}
 	
+	bool HasHouseDefinition(string type) {
+		foreach(DZLHouseDefinition definition: houseConfigs) {
+			if (definition.houseType == type) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	DZLCopHouseDefinition GetCopHouseDefinition(notnull Building building) {
 		foreach(DZLCopHouseDefinition definition: copHouseConfigs) {
 			if (definition.houseType == building.GetType()) {

@@ -30,21 +30,33 @@ class DZLObjectFinder
         set< Object > geom = new set< Object >;
 
         DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius);
-
+        DebugMessageDZL(" geom.Count() " +  geom.Count().ToString());
 		Object obj;
-        for (int newObject = 0; newObject < geom.Count(); ++newObject){
-            obj = geom.Get(newObject);
-            if (obj.GetType() == typeToSearch) {
-               GetGame().ObjectDelete(obj);
-               return;
-            } else {
-               if (tries == 3) {
-                    return;
-               }
-               DeleteContainerAt(from, to, typeToSearch, obj, radius + 0.5, null, tries + 1);
-			   return;
+        
+		if (0 == geom.Count()) {
+           if (tries == 3) {
+                return;
+           }
+           DeleteContainerAt(from, to, typeToSearch, obj, radius + 0.5, null, tries + 1);
+           return;
+        } else {
+            for (int newObject = 0; newObject < geom.Count(); ++newObject){
+                obj = geom.Get(newObject);
+                DebugMessageDZL("obj.GetType() " + obj.GetType());
+                DebugMessageDZL("typeToSearch " + typeToSearch);
+                if (obj.GetType() == typeToSearch) {
+                   GetGame().ObjectDelete(obj);
+                   return;
+                } else {
+                   if (tries == 3) {
+                        return;
+                   }
+                   DeleteContainerAt(from, to, typeToSearch, obj, radius + 0.5, null, tries + 1);
+                   return;
+                }
             }
         }
+
     }
 
     private Object CheckForObject(set< Object > geom) {

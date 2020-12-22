@@ -24,5 +24,4 @@ class DZLHouseDefinition {
     int GetMaxStorage() {
         return storagePosition.Count();
     }
-	
 }

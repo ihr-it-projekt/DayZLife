@@ -202,7 +202,7 @@ class DZLHouse: DZLSaveModel
     }
 
     override protected void DoSave(){
-        if (GetGame().IsServer()) {
+        if (GetGame().IsServer() && DZLConfig.Get().houseConfig.HasHouseDefinition(name)) {
 			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
 			DZLJsonFileHandler<DZLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);
 		}
