@@ -87,15 +87,13 @@ class DZLBuyExtensionListener
                 if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(paramSellStorage.param1)) {
                     DZLStorageTypeBought positionToSell = dzlBuildingSell.FindStorageByPosition(paramSellStorage.param3);
                     if (positionToSell) {
-                        Container_Base itemToDestroy = houseFinder.objectFinder.GetContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param2);
+                        houseFinder.objectFinder.DeleteContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param2);
 
-                        if (itemToDestroy) {
-                            inventory.AddMoneyToPlayer(paramSellStorage.param1, positionToSell.sellPrice);
-                            dzlBuildingSell.SellStorageOnServer(positionToSell);
+                        inventory.AddMoneyToPlayer(paramSellStorage.param1, positionToSell.sellPrice);
+                        dzlBuildingSell.SellStorageOnServer(positionToSell);
 
-                            GetGame().ObjectDelete(itemToDestroy);
-                            messageSell = "#successfully_sell_house";
-                        }
+                        messageSell = "#successfully_sell_house";
+                       
                     }
                 }
                 GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_SELL_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);

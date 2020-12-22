@@ -28,7 +28,7 @@ class DZLBuilding: DZLSaveModel
         if(!GetGame().IsClient()){
             house.RemoveOwner();
             ref DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
-            playerHouse.RemoveHouse(house);
+            playerHouse.RemoveKey(house);
         }
     }
 	

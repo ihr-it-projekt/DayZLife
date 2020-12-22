@@ -53,11 +53,9 @@ class DZLBuyHouseListener
                     array<ref DZLStorageTypeBought> storages = dzlBuildingSell.GetStorage();
                     foreach(DZLStorageTypeBought storage: storages) {
                         if (!storage) continue;
-                        Container_Base itemToDestroy = houseFinder.objectFinder.GetContainerAt(storage.position, storage.position, storage.type, paramSellHouse.param2);
+                        houseFinder.objectFinder.DeleteContainerAt(storage.position, storage.position, storage.type, paramSellHouse.param2);
 
-                        if (!itemToDestroy) continue;
                         sellPrice += storage.sellPrice;
-                        GetGame().ObjectDelete(itemToDestroy);
                     }
 
                     dzlBuildingSell.GetStorage().Clear();

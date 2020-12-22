@@ -96,8 +96,8 @@ class DZLPlayerHouseListener
 		
 		array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
 	    foreach(string ident: allPlayer) {
+	        DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayer(ident);
 			if (dzlBuilding.HasPlayerAccess(ident) && ident != playerIdent) {
-				DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayer(ident);
 			    collection.Insert(new DZLOnlinePlayer(ident, _player.playerName));
 			}
 		}
