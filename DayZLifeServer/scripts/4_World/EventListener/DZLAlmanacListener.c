@@ -46,6 +46,7 @@ class DZLAlmanacListener
 
                         DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.bank * -1);
                         DZLDatabaseLayer.Get().RemoveHouse(house.GetFileName());
+						DZLDatabaseLayer.Get().GetLockedHouses().Remove(house);
                     }
 
                     foreach(string fileHouseAccess: dzlPlayerHouse.playerHouseKeyCollection) {

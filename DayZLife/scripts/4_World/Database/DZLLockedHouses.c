@@ -15,13 +15,18 @@ class DZLLockedHouses: DZLSaveModel
     }
 
     void Add(DZLHouse house) {
-        houseCollection.Insert(house.GetFileName());
-        mustSave = true;
+        if (-1 == houseCollection.Find(house.GetFileName())) {
+			houseCollection.Insert(house.GetFileName());
+        	mustSave = true;
+		}
     }
 	
 	void Remove(DZLHouse house) {
-	    houseCollection.RemoveItem(house.GetFileName());
-		mustSave = true;
+		int index = houseCollection.Find(house.GetFileName());
+		if (index != -1) {
+	    	houseCollection.Remove(index);
+			mustSave = true;
+		}
 	}
 
 
