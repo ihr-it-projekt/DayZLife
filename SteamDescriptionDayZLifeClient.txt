@@ -14,6 +14,7 @@ Feature list
     - pay in/pay out
     - transfer money over bank
     - transfer money directly to players
+    - time and player count controlled raids
 - bank can be raided
 - if player dies, money will stay at the dead character, money at bank will not touched
 - own Tradersystem
