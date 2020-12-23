@@ -1,6 +1,5 @@
 class DZLLicence: DZLIdModel
 {
-    int m_CommandUID;
 	int price;
 	string name;
 	vector position;
@@ -12,8 +11,7 @@ class DZLLicence: DZLIdModel
 	int durationForCrafting;
 
 
-	void DZLLicence(int m_CommandUID, int price, string name, vector position, int range, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
-		this.m_CommandUID = m_CommandUID;
+	void DZLLicence(int price, string name, vector position, int range, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
 		this.price = price;
 		this.name = name;
 		this.position = position;
