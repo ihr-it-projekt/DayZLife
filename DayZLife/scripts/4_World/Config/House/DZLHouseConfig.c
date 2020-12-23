@@ -1,7 +1,8 @@
-class DZLHouseConfig {
+class DZLHouseConfig
+ {
+    string version = "1";
     ref array<ref DZLHouseDefinition> houseConfigs;
     ref array<ref DZLCopHouseDefinition> copHouseConfigs;
-    string version = "1";
 
     void DZLHouseConfig()
 	{
