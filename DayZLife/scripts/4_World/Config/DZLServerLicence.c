@@ -24,8 +24,8 @@ class DZLServerLicence
     }
 
     private bool Load(){
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licenceFile.json")) {
-            JsonFileLoader<DZLServerLicence>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licenceFile.json", this);
+        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "ServerLicenceFile.json")) {
+            JsonFileLoader<DZLServerLicence>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "ServerLicenceFile.json", this);
             return true;
         }
         return false;
@@ -34,7 +34,7 @@ class DZLServerLicence
     private void Save(){
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
-            JsonFileLoader<DZLServerLicence>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licenceFile.json", this);
+            JsonFileLoader<DZLServerLicence>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "ServerLicenceFile.json", this);
         }
     }
 }
