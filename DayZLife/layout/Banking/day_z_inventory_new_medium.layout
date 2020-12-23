@@ -414,7 +414,7 @@ FrameWidgetClass inventory_root {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       imageTexture "{152656A82774FE46}DayZLife/Layout/Banking/DZLBank.edds"
+       imageTexture "{63429AE7A994ECE2}DayZLife/layout/Banking/DZLBank.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
@@ -444,7 +444,7 @@ FrameWidgetClass inventory_root {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       imageTexture "{04FECE97191D024E}DayZLife/Layout/Banking/DZLCash.edds"
+       imageTexture "{729A02D897FD10EA}DayZLife/layout/Banking/DZLCash.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
@@ -469,7 +469,7 @@ FrameWidgetClass inventory_root {
        vexactpos 1
        hexactsize 1
        vexactsize 1
-       imageTexture "{BA01A4394F203C2A}DayZLife/DayZLife/layout/Banking/Prison.edds"
+       imageTexture "{BA01A4394F203C2A}DayZLife/layout/Banking/Prison.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
