@@ -22,7 +22,30 @@ class DZLBankRaidListener : Managed
         if (rpc_type == DAY_Z_LIFE_START_BANK_RAID) {
             autoptr Param1<PlayerBase> param;
             if (ctx.Read(param)){
+				array<Man> players = new array<Man>;
+                GetGame().GetPlayers(players);
+
+                if (config.raidIsPlayerControlled && config.minCountPlayerForRaid > 0) {
+                    if (players.Count() < config.minCountPlayerForRaid) {
+                        DZLSendMessage(sender, "#raid_can_not_start_to_less_players");
+                        return;
+                    }
+                }
+
+                if (config.raidTimeControlled) {
+                    DZLDate date = new DZLDate;
+
+                    if (date.hour < config.raidStartTimeHour || date.hour > config.raidEndTimeHour) {
+                        DZLSendMessage(sender, "#raid_can_not_start_wrong_time");
+                        return;
+                    } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
+                        DZLSendMessage(sender, "#raid_can_not_start_wrong_time");
+                        return;
+                    }
+                }
+
 				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+
 				if (!playerWhoStartedRaid) {
 					playerWhoStartedRaid = param.param1;
 					bank.StartRaid();

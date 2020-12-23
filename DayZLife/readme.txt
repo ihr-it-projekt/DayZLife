@@ -20,17 +20,15 @@
 - Alarmanlage Cops benachrichtigen
 - Erweiterung Code Look fürs haus
 - dynmaic price (Angebot/ Nachfrage)
-- trader preise nach health / quantity
+- trader preise nach health
 - nicht füttern von NPC
 - Waffen für NPC
-- paywall
 - Autos verkaufen über Timer und wer auf Fahrer Sitz saß
 - bankraub zeiten einstellbar machen, mindest anzahl spieler für banckraub
 - telefon mod
     - nur anrufen wenn bekannt
     - blocken von spielern
 - Rollen
-    - Rollen Klamoten
     - Rollen Spieler Anzahl begrenzen pro Job
     - Actions
         - Polizei
