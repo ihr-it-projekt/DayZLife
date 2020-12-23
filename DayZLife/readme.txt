@@ -33,12 +33,6 @@
     - Rollen Klamoten
     - Rollen Spieler Anzahl begrenzen pro Job
     - Actions
-        - Gefängniss:
-            - Löschen von Equipment
-            - Klamoten ändern
-            - wenn frei dann Bambi Klamoten
-            - //Was ist mit Mördern im Knast
-            - Countdown für Zeit
         - Polizei
             - Automatische Meldung an Polizei von Verbrechen
             - Strafzettel
@@ -86,7 +80,6 @@
          - Löhne steuern
          - Steuern bezahlen
 
-
 Text
 - set car lifetime in types
 
@@ -94,39 +87,6 @@ Known Bugs
 - Licence Crafting wont work with items that have a quantity fill
 
 
-Feature list
-
-- Spawn Menu with job chose
-- money system
-- money can be stolen from other players
-- bank system
-    - pay in/pay out
-    - transfer money over bank
-    - transfer money directly to players
-- bank can be raided
-- several traders
-- player can buy standard houses
-- player can upgrade houses
-    - doors can be looked
-    - Storage
-    - Alarm systems
-    - house access control system (keys)
-    - houses can be raid by other players
-- harvest coal/iron/copper/cocaine/stones/apple
-- process harvest items with different licences
-- Jobs
-    - Admins can make player to cops
-    - Medic
-        - can raid police stations and prisons
-        - Spawn with Medic Equipment
-    - Civil
-        - can raid police stations and prisons
-        - Spawn with Civil Equipment
-    - Cops
-        - spawn with Cop Equipment
-        - can get load out at specific position
-        - can open police stations and prisons
-        - can give player arrest
 
 
 

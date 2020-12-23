@@ -1,8 +1,10 @@
 Welcome to DayZLife.
 
-Attention: This Mod needs also a Serverside Mod and will be published in near future. We are running currently a beta phase at rasselbande (https://discord.gg/YQswRNnjPB).
+Attention: This Mod needs also a Clientside Mod, you will find here: https://steamcommunity.com/sharedfiles/filedetails/?id=2330029738.
 
-If you are interested to have it on your own server, please watch at https://dayz-life.net/ or this mod page.
+This Mod came with lees configuration work for admin. Only thing that must be configured is the trader but you will find some example trader config in this mod. You also can use our tool https://tools.dayz-life.net/category-editor/add-items for creating the trader configuration.
+
+After first start of the server, you will find in your Server Profil Folder every config. There you will also find a data folder. NEVER touch the files in the data folder. Explanation for the config files you will find here https://dayz-life.net/en/help.
 
 [code]
 Feature list
