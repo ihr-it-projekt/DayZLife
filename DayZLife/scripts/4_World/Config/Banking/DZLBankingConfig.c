@@ -3,12 +3,12 @@ class DZLBankingConfig
 	string version = "1";
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
 	bool showSumOfStoredCashInBank = true;
-	int raidTimeBankInSeconds = 5;
+	int raidTimeBankInSeconds = 3600;
 	ref array<string> itemsCanUsedToRaidBank;
-    int percentOfMoneyWhenRaid = 50;
-	int raidCoolDownTimeInSeconds = 60;
-	int maximumRaidDistanceToBank = 5;
-	int startCapital = 50000;
+    int percentOfMoneyWhenRaid = 15;
+	int raidCoolDownTimeInSeconds = 300;
+	int maximumRaidDistanceToBank = 7;
+	int startCapital = 5000;
 
     void DZLBankingConfig() {
         if(!Load()) {
@@ -25,11 +25,11 @@ class DZLBankingConfig
                  // first Bank
                 positionOfBankingPoints.Insert(new DZLBankingPosition("4660.000000 339.282990 10305.000000", "0 0 0", "SurvivorM_Boris", attachments));
 
-                itemsCanUsedToRaidBank.Insert("M4A1");
+                itemsCanUsedToRaidBank.Insert("Deagle_Gold");
             } else {
 				positionOfBankingPoints.Insert(new DZLBankingPosition("6570.417969 6.000000 2449.841309", "-56 0 0", "SurvivorM_Rolf", attachments));
 
-                itemsCanUsedToRaidBank.Insert("M4A1");
+                itemsCanUsedToRaidBank.Insert("Deagle_Gold");
             }
 
             Save();

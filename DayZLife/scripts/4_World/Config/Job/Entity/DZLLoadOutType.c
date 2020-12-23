@@ -1,4 +1,4 @@
-class DZLLoadOutType: DZLIdModel
+class DZLLoadOutType
 {
     string type;
     string displayName = "";
@@ -9,7 +9,5 @@ class DZLLoadOutType: DZLIdModel
         this.type = type;
 		this.attachments = attachments;
 		this.quickBarEntityShortcut = quickBarEntityShortcut;
-
-        SetId();
     }
 }
