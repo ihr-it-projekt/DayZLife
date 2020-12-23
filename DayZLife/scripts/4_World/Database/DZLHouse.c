@@ -9,7 +9,7 @@ class DZLHouse: DZLSaveModel
     private ref array<ref DZLStorageTypeBought> storage;
     private ref DZLHouseExtension alarmSystem;
     private ref array<int> storagePositions;
-    private int raidTime = 3;
+    private int raidTime = 1200;
     private ref array<int> lockedDoors;
     private ref array<string> playerAccess;
 

@@ -40,7 +40,16 @@ class DZLTraderListener
                         if (paramTrade.param2.Count() > 0) {
                             foreach(EntityAI item: itemsToSell) {
                                 if (item.GetType() == type.type) {
-                                    sum -= type.sellPrice;
+                                    int maxQuantity = item.GetQuantityMax();
+                                    int quantity = item.GetQuantity();
+
+                                    if (quantity == 0) {
+                                        quantity = 1;
+                                        maxQuantity = 1;
+                                    }
+
+                                    sum -= Math.Round(quantity/maxQuantity * type.sellPrice);
+
                                     countSellItems++;
                                 }
                             }

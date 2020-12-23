@@ -86,7 +86,7 @@ FrameWidgetClass Trader_Menu {
          {
           PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           position 0 -0
+           position 0 0
            size 1 0.34388
            halign center_ref
            valign bottom_ref
@@ -130,6 +130,7 @@ FrameWidgetClass Trader_Menu {
              vexactpos 0
              hexactsize 0
              vexactsize 0
+             text_proportion 0.7
              "text halign" center
              "text valign" center
             }

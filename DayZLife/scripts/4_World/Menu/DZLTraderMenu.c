@@ -20,8 +20,7 @@ class DZLTraderMenu: DZLBaseMenu
 
 	private ref map<string, ref array<ref DZLTraderType>> displayCategories;
 	private ref array<string> addedCats;
-	
-	
+
     void DZLTraderMenu() {
         layoutPath = "DayZLife/layout/Trader/Trader_Menu.layout";
 		displayCategories = new map<string, ref array<ref DZLTraderType>>;
@@ -79,6 +78,7 @@ class DZLTraderMenu: DZLBaseMenu
             if (!category) continue;
 
             foreach(DZLTraderType type: category.items) {
+                if (type.sellPrice <= 0) continue;
                 if (-1 != addInventoryTypes.Find(type.type)) continue;
                 addInventoryTypes.Insert(type.type);
 
@@ -109,7 +109,13 @@ class DZLTraderMenu: DZLBaseMenu
 		position = player.GetTraderByPosition();
 
 		if (!position) {
-		    position = player.GetTraderByPosition();
+		    position = player.GetTraderByPosition(4);
+		}
+
+		if (!position) {
+		    OnHide();
+		    LogMessageDZL("No Trader position found.");
+		    return;
 		}
 		
 		int index;
@@ -138,7 +144,7 @@ class DZLTraderMenu: DZLBaseMenu
 			foreach(DZLTraderType type: category.items) {
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);
 				type.displayName = name;
-				if(!hasAddFirstCategory) {
+				if(!hasAddFirstCategory && type.sellPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
                     traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
                     traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
@@ -147,23 +153,28 @@ class DZLTraderMenu: DZLBaseMenu
 				if (-1 != addInventoryTypes.Find(type.type)) continue;
 				
 				addInventoryTypes.Insert(type.type);
-			
+
+			    if (type.buyPrice <= 0) continue
 				foreach(EntityAI item: playerItems) {
 					if (item.GetType() != type.type) {
 						continue;
 					}
 					
 					GetGame().ObjectGetDisplayName(item, name);
+
+					int maxQuantity = item.GetQuantityMax();
+					int quantity = item.GetQuantity();
 					
-					string quant = item.GetQuantity().ToString();
-					
-					if (quant == "0") {
-						quant = "1";
-					}
+					if (quantity == 0) {
+						quantity = 1;
+						maxQuantity = 1;
+					} 
+
+					int sumItem = Math.Round(quantity/maxQuantity * type.sellPrice);
 					
 					index = inventory.AddItem(name, item, 0);
-					inventory.SetItem(index, type.sellPrice.ToString(), item, 1);
-					inventory.SetItem(index, quant, item, 2);
+					inventory.SetItem(index, sumItem.ToString(), item, 1);
+					inventory.SetItem(index, quantity.ToString(), item, 2);
 				}
 			}
 			hasAddFirstCategory = true;
@@ -199,6 +210,7 @@ class DZLTraderMenu: DZLBaseMenu
 
 		if (items) {
 			foreach(DZLTraderType type: items) {
+			    if (type.sellPrice <= 0) continue
 				int index = traderItemList.AddItem(type.displayName, type, 0);
 				traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
                 traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);

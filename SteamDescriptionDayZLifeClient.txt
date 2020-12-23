@@ -4,17 +4,18 @@ Attention: This Mod needs also a Serverside Mod and will be published in near fu
 
 If you are interested to have it on your own server, please watch at https://dayz-life.net/ or this mod page.
 
+[code]
 Feature list
 
 - Spawn Menu with Job chose
 - own Moneysystem
-- money can be stolen from other players and dead players
+- money can be stolen from other and dead players
 - bank system
     - pay in/pay out
     - transfer money over bank
     - transfer money directly to players
 - bank can be raided
-- if player dies, money at the player will stay at the dead character, money at bank will not touched
+- if player dies, money will stay at the dead character, money at bank will not touched
 - own Tradersystem
 - several trader locations
 - Players can buy default DayZ Buildings
@@ -33,7 +34,7 @@ Feature list
     - stones
     - apple
 - process harvest items with different licences
-- implemented Almanac to figure out what you need/what you can do and how
+- implemented Almanac to figure out what you need/what you can do and how, short key to open is STRGL + STRGR
 - Admins can in game delete/reset player data related to our mod
 - Admins can give players the role "Cop"
 - Jobs
@@ -48,6 +49,6 @@ Feature list
         - can get load out at specific position
         - can open police stations and prisons
         - can give player arrest
-
+[/code]
 
 This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.
