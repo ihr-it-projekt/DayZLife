@@ -717,7 +717,7 @@ FrameWidgetClass Almanac {
        "no wrap" 0
        stretch 1
       }
-      TextWidgetClass TextWidget1 {
+      TextWidgetClass countCop {
        ignorepointer 1
        position 0.04273 0.00962
        size 0.04243 0.07
@@ -743,7 +743,7 @@ FrameWidgetClass Almanac {
        stretch 1
        "flip u" 0
       }
-      TextWidgetClass TextWidget2 {
+      TextWidgetClass countMedic {
        ignorepointer 1
        position 0.147 0.01
        size 0.0424 0.07
@@ -767,7 +767,7 @@ FrameWidgetClass Almanac {
        "src alpha" 1
        stretch 1
       }
-      TextWidgetClass TextWidget3 {
+      TextWidgetClass countCivil {
        ignorepointer 1
        position 0.251 0.01
        size 0.0424 0.07

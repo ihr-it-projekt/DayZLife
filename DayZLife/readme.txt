@@ -1,7 +1,7 @@
 
 - Alamach
     - Bank infos Raidwerkzeug ...
-- Playerliste mit Rollen anzeige
+
 - Hausdurchsuchung über Richterfunktion
 - Journalistenrolle
 - Fahrzeuge in Garage einstoren

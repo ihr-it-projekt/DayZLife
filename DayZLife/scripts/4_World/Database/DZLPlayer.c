@@ -10,7 +10,7 @@ class DZLPlayer: DZLSaveModel
 	int onlineTimeMedic = 0;
 	int onlineTimeCop = 0;
 	int arrestTimeInMinutes = 0;
-	string activeJob = DAY_Z_LIFE_JOB_CIVIL;
+	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
 
 	ref TStringArray licenceIds;
@@ -45,9 +45,30 @@ class DZLPlayer: DZLSaveModel
         arrestTimeInMinutes = time;
 		mustSave = true;
     }
+
+    void SetActiveJob(string job) {
+        activeJob = job;
+        mustSave = true;
+    }
+
+    string GetActiveJob() {
+        if (activeJob == "") {
+            activeJob = DAY_Z_LIFE_JOB_CIVIL;
+            mustSave = true;
+        }
+        return activeJob;
+    }
 	
 	bool IsActiveAsCop() {
 		return DAY_Z_LIFE_JOB_COP == activeJob;
+	}
+
+	bool IsActiveAsMedic() {
+		return DAY_Z_LIFE_JOB_MEDIC == activeJob;
+	}
+
+	bool IsActiveAsCivil() {
+		return DAY_Z_LIFE_JOB_CIVIL == activeJob || activeJob == "";
 	}
 	
 	void UpdateActiveJob(string job) {

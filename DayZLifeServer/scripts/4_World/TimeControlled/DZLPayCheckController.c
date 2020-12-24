@@ -18,13 +18,13 @@ class DZLPayCheckController
 			int amount = 0;
 			int onlineTime = 100000000;
 			
-			if (dzlPlayer && dzlPlayer.activeJob == DAY_Z_LIFE_JOB_COP && config.cop.amount > 0) {
+			if (dzlPlayer && dzlPlayer.IsActiveAsCop() && config.cop.amount > 0) {
 			    amount = config.cop.amount;
                 onlineTime = config.cop.onlineMinutesForPay;
-			} else if (dzlPlayer && dzlPlayer.activeJob == DAY_Z_LIFE_JOB_MEDIC && config.medic.amount > 0) {
+			} else if (dzlPlayer && dzlPlayer.IsActiveAsMedic() && config.medic.amount > 0) {
 			    amount = config.medic.amount;
                 onlineTime = config.medic.onlineMinutesForPay;
-			} else if (config.civil.amount > 0) {
+			} else if (dzlPlayer && dzlPlayer.IsActiveAsCivil() && config.civil.amount > 0) {
 			    amount = config.civil.amount;
                 onlineTime = config.civil.onlineMinutesForPay;
 			}

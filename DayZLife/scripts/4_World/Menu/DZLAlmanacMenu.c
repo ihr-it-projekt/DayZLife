@@ -34,6 +34,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private TextListboxWidget adminPlayers;
 	private ButtonWidget adminDeletePlayerButton;
 
+    private TextWidget countCivil;
+    private TextWidget countMedic;
+    private TextWidget countCop;
 
 	private XComboBoxWidget toggleViewWidget;
 
@@ -79,6 +82,10 @@ class DZLAlmanacMenu : DZLBaseMenu
 		adminDeletePlayerButton = creator.GetButtonWidget("delete_Button");
 
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
+
+		countCivil = creator.GetTextWidget("countCivil");
+		countMedic = creator.GetTextWidget("countMedic");
+		countCop = creator.GetTextWidget("countCop");
 
 		return layoutRoot;
     }
@@ -320,8 +327,12 @@ class DZLAlmanacMenu : DZLBaseMenu
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
-            autoptr Param1<ref array<ref DZLEscapedPlayer>> paramEscaped;
+            autoptr Param4<ref array<ref DZLEscapedPlayer>, int, int, int> paramEscaped;
             if (ctx.Read(paramEscaped)){
+				countCop.SetText(paramEscaped.param2.ToString());
+				countMedic.SetText(paramEscaped.param3.ToString());
+				countCivil.SetText(paramEscaped.param4.ToString());
+				
                 escapedPlayers.ClearItems();
 
 				array<ref DZLEscapedPlayer> escapedPlayersParam = paramEscaped.param1;
