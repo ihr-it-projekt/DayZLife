@@ -48,7 +48,7 @@ class CfgVehicles
 			"dz\gear\cultivation\data\Cannabis_plant.rvmat"
 		};
 	};
-	class DZL_Cocain_Brick: FirstAidKit
+	class DZL_Cocaine_Brick: FirstAidKit
 	{	
 		scope=2;
 		displayName="#Cocain_Brick";
@@ -70,7 +70,7 @@ class CfgVehicles
 			"DZL_Misc\Drugs\Cocain\Data\Cocain_Brick.paa"
 		};
 	};
-	class DZL_Cocain: Paper
+	class DZL_Cocaine: Paper
 	{	
 		scope=2;
 		displayName="#Cocaine_plunder";
