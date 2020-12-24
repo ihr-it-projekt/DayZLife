@@ -10,9 +10,9 @@ class DZLBankingConfig
 	int maximumRaidDistanceToBank = 7;
 	int startCapital = 5000;
 	bool raidIsPlayerControlled = true;
-	int minCountPlayerForRaid = 10;
+	int minCountPlayerForRaid = 30;
 	bool raidTimeControlled = true;
-	int raidStartTimeHour = 16;
+	int raidStartTimeHour = 14;
 	int raidEndTimeHour = 22;
 	int raidStartTimeMinute = 0;
 	int raidEndTimeMinute = 59;

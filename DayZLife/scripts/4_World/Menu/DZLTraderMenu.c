@@ -144,7 +144,7 @@ class DZLTraderMenu: DZLBaseMenu
 			foreach(DZLTraderType type: category.items) {
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);
 				type.displayName = name;
-				if(!hasAddFirstCategory && type.sellPrice > 0) {
+				if(!hasAddFirstCategory && type.buyPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
                     traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
                     traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
@@ -154,7 +154,7 @@ class DZLTraderMenu: DZLBaseMenu
 				
 				addInventoryTypes.Insert(type.type);
 
-			    if (type.buyPrice <= 0) continue
+			    if (type.sellPrice <= 0) continue
 				foreach(EntityAI item: playerItems) {
 					if (item.GetType() != type.type) {
 						continue;
@@ -210,7 +210,7 @@ class DZLTraderMenu: DZLBaseMenu
 
 		if (items) {
 			foreach(DZLTraderType type: items) {
-			    if (type.sellPrice <= 0) continue
+			    if (type.buyPrice <= 0) continue
 				int index = traderItemList.AddItem(type.displayName, type, 0);
 				traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
                 traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
