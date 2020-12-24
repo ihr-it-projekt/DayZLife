@@ -611,7 +611,7 @@ FrameWidgetClass Almanac {
       PanelWidgetClass admin_Panel {
        visible 0
        ignorepointer 1
-       position 0 -0
+       position 0 0
        size 1 0.91076
        halign center_ref
        valign bottom_ref
@@ -702,6 +702,81 @@ FrameWidgetClass Almanac {
          text "X"
         }
        }
+      }
+      ImageWidgetClass ImageWidget0 {
+       ignorepointer 1
+       position 0.00471 0.00962
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{2B34C7CA0DE7341A}DayZLife/layout/Almanac/Police.edds"
+       mode blend
+       "src alpha" 1
+       "no wrap" 0
+       stretch 1
+      }
+      TextWidgetClass TextWidget1 {
+       ignorepointer 1
+       position 0.04273 0.00962
+       size 0.04243 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      ImageWidgetClass ImageWidget1 {
+       ignorepointer 1
+       position 0.109 0.01
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
+       mode additive
+       "src alpha" 1
+       "no wrap" 0
+       stretch 1
+       "flip u" 0
+      }
+      TextWidgetClass TextWidget2 {
+       ignorepointer 1
+       position 0.147 0.01
+       size 0.0424 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      ImageWidgetClass ImageWidget2 {
+       ignorepointer 1
+       position 0.21313 0.00962
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{19676136A428B8E7}DayZLife/layout/Almanac/Personal.edds"
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       position 0.251 0.01
+       size 0.0424 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
       }
      }
     }
