@@ -11,6 +11,7 @@ modded class PlayerBase
 	ref DZLLicenceMenu licenceMenu;
 	ref DZLLicenceProgressBar progressBarLicence;
 	ref DZLDoorRaidProgressBar progressBarRaid;
+	ref DZLHarvestProgressBar progressBarHarvest;
 	ref DZLMessageMenu messageMenu;
 	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
 	ref DZLSpawnPositionMenu spawnPositionMenu;
@@ -50,7 +51,7 @@ modded class PlayerBase
         AddAction(ActionRobMoney, InputActionMap);
         AddAction(ActionRobMoneyFromDead, InputActionMap);
         AddAction(ActionRobBank, InputActionMap);
-        AddAction(ActionHarvestItem, InputActionMap);
+        AddAction(DZLActionHarvestItem, InputActionMap);
         AddAction(ActionOpenLicenseMenu, InputActionMap);
         AddAction(ActionLicenceCrafting, InputActionMap);
         AddAction(DZLActionLockDoors, InputActionMap);
@@ -165,6 +166,12 @@ modded class PlayerBase
         progressBarLicence = new DZLLicenceProgressBar();
         progressBarLicence.SetPlayer(this);
         return progressBarLicence;
+    }
+
+    DZLHarvestProgressBar GetHarvestProgressBar() {
+        progressBarHarvest = new DZLHarvestProgressBar();
+        progressBarHarvest.SetPlayer(this);
+        return progressBarHarvest;
     }
 
     DZLDoorRaidProgressBar GetRaidProgressBar() {

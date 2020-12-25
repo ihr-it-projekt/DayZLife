@@ -10,7 +10,7 @@ modded class ActionConstructor
 		actions.Insert(ActionRobMoney);
 		actions.Insert(ActionRobMoneyFromDead);
 		actions.Insert(ActionRobBank);
-		actions.Insert(ActionHarvestItem);
+		actions.Insert(DZLActionHarvestItem);
 		actions.Insert(ActionOpenLicenseMenu);
 		actions.Insert(ActionLicenceCrafting);
 		actions.Insert(DZLActionLockDoors);

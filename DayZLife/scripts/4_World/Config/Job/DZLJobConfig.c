@@ -12,4 +12,17 @@ class DZLJobConfig
         arrestConfig = new DZLArrestConfig;
 	}
 
+    DZLWorkZone FindZone(vector playerPosition) {
+        if (!playerPosition) {
+            return null;
+        }
+
+        foreach(DZLWorkZone zone: workZones.workZones) {
+            if(vector.Distance(zone.position, playerPosition) <= zone.range) {
+                return zone;
+            }
+        }
+        return null;
+    }
+
 }
