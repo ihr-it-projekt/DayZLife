@@ -39,7 +39,7 @@ class DZLLoadOutMenu: DZLBaseMenu
 			
 			preview = creator.GetItemPreviewWidget("itemPreview");
 			
-			categories = DZLConfig.Get().jobConfig.loadOutsCops.loadOutCategories;
+			categories = player.config.jobConfig.loadOutsCops.loadOutCategories;
 			
 			foreach(DZLLoadOutCategory category: categories) {
 				loadoutComboBox.AddItem(category.name);
