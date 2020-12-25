@@ -27,6 +27,8 @@ class DZLPlayer: DZLSaveModel
             DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
             idents.AddPlayer(playerId);
 			licenceIds = new TStringArray;
+
+			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
 			
             mustSave = true;
         }

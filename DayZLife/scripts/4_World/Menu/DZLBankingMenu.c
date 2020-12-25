@@ -150,8 +150,9 @@ class DZLBankingMenu : DZLBaseMenu
 
     private void SendDeposit(int factor) {
         if (inputDeposit.GetText().ToInt() >= 1) {
-			int deposit = factor * inputDeposit.GetText().ToInt();
-            if ((deposit >= dzlPlayer.money && factor == -1) || (deposit <= dzlPlayer.bank && factor == 1)) {
+            int deposit = inputDeposit.GetText().ToInt();
+            if ((deposit <= dzlPlayer.money && factor == -1) || (deposit <= dzlPlayer.bank && factor == 1)) {
+			    deposit = factor * deposit;
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, int>(player, deposit), true);
                 inputDeposit.SetText("");
             } else {
