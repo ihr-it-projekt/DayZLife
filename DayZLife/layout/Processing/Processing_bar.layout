@@ -1,5 +1,4 @@
 FrameWidgetClass Processing_bar {
- position 0 0
  size 1 1
  halign center_ref
  valign center_ref
@@ -11,9 +10,10 @@ FrameWidgetClass Processing_bar {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0.6588 0.6588 0.6588 1
-   position 0 0.08148
+   position 0 0.01
    size 0.3 0.05352
    halign center_ref
+   valign bottom_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
