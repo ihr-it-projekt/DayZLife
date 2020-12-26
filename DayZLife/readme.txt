@@ -1,8 +1,43 @@
 
 - Alamach
     - Bank infos Raidwerkzeug ...
+    - Sync Button für Player Daten
+
+- Wohnung mieten
+    - key management
+    - miete im vorrausbezahlen
+    - wenn geld alle dann alles offen
+    - pro Realtimetag
+    Menü:
+    - Eingabefeld Anzahl Tage
+    - Miete bezahlen
+    - Anzeige Miete 24 h
+    -
+
+- Lagersystem wie P2PTrader
+    - Erweiterbar
+    - Raidbar machen
+    Menu ähnlich wie Trader
+
+Trader
+    - wenn was auf spawn steht dann nix spawnen und nix abziehen
+    - Autos verkaufen
+
+- Autos
+    - eigenen Schlüsselsytem wie Haus
 
 - Hausdurchsuchung über Richterfunktion
+    - zwei Menüs, eins für Cops, eins für Richter
+    Cop:
+    - Eingabefeld: Warum?
+    - Beatragen Button
+    Richter:
+    - Text Feld
+    - Koordinate
+    - zwei buttons bestätigen/ablehnen
+
+Führerschein
+
 - Journalistenrolle
 - Fahrzeuge in Garage einstoren
 - Polizei Globalnachrichten senden
