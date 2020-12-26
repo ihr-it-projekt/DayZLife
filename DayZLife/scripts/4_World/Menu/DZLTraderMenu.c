@@ -211,9 +211,16 @@ class DZLTraderMenu: DZLBaseMenu
 		if (items) {
 			foreach(DZLTraderType type: items) {
 			    if (type.buyPrice <= 0) continue
+
+			    string sellPriceText = "";
+
+			    if (type.sellPrice > 0) {
+			        sellPriceText = type.sellPrice.ToString();
+			    }
+
 				int index = traderItemList.AddItem(type.displayName, type, 0);
 				traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
-                traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
+                traderItemList.SetItem(index, sellPriceText, type, 2);
 			}
 		}
 	}
