@@ -64,10 +64,11 @@ class DZLDatabaseLayer
         return dzlPlayers.Find(playerId, player);
     }
 
-    DZLPlayer GetPlayer(string playerId, int moneyToAdd = 0) {
+    DZLPlayer GetPlayer(string playerId) {
+        ;
 		DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
-			player = new DZLPlayer(playerId, moneyToAdd);
+			player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
 			dzlPlayers.Insert(playerId, player);
 		}
 		

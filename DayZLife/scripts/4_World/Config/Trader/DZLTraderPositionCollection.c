@@ -1,6 +1,6 @@
 class DZLTraderPositionCollection
 {
-    string version = "1";
+    string version = "2";
     ref array<ref DZLTraderPosition> positions;
 
     void DZLTraderPositionCollection() {
@@ -141,6 +141,12 @@ class DZLTraderPositionCollection
 				positions.Insert(new DZLTraderPosition("6573.415527 5.991199 2453.483154", "-25 0 0", "SurvivorM_Rolf", attachments, catNames, "6577.331543 6.198332 2469.446777"));
                 
             }
+
+            Save();
+        }
+
+        if (version == "1") {
+            version = "2";
             Save();
         }
     }

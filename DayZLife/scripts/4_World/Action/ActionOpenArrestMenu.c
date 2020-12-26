@@ -39,6 +39,7 @@ class ActionOpenArrestMenu: ActionInteractBase
     }
 
     override void OnStartClient(ActionData action_data) {
+        if (g_Game.GetUIManager().GetMenu() != NULL) return;
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
         DZLPlayerArrestMenu menu = player.GetArrestMenu();

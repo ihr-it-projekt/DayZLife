@@ -18,7 +18,8 @@ Feature list
 - bank can be raided
 - if player dies, money will stay at the dead character, money at bank will not touched
 - own Tradersystem
-- several trader locations
+    - several trader locations
+    - trader can be configured that they can only used by a job group Cop/Medic/Civil or by all
 - Players can buy default DayZ Buildings
 - Player can upgrade houses with extensions
     - Doors can be looked

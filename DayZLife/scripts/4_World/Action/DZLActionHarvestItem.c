@@ -33,6 +33,7 @@ class DZLActionHarvestItem: ActionInteractBase
         vector playerPosition = player.GetPosition();
         DZLWorkZone zone = config.FindZone(playerPosition);
         if (zone) {
+            m_CommandUID = zone.m_CommandUID;
             EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
             if (item_in_hands_source) {
@@ -61,6 +62,7 @@ class DZLActionHarvestItem: ActionInteractBase
 	}
 
 	override void OnEndClient(ActionData action_data) {
+	    if (g_Game.GetUIManager().GetMenu() != NULL) return;
 		DZLHarvestProgressBar bar = action_data.m_Player.GetHarvestProgressBar();
         GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
 	}

@@ -360,7 +360,13 @@ modded class PlayerBase
         array<EntityAI> items = GetPlayerItems();
         map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
         map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
-
+		
+		array<DZLLicenceToolItem> tools = new array<DZLLicenceToolItem>;
+		
+		foreach(DZLLicenceToolItem tool: licence.toolItems.collection) {
+			tools.Insert(tool);
+		}
+		
         foreach(EntityAI item: items) {
 			if (craftMap.Count() == 0 && toolMap.Count() == 0) break;
 			
@@ -403,11 +409,12 @@ modded class PlayerBase
 
 			if(isCraft) continue;
 
-			foreach(DZLLicenceToolItem toolItem: licence.toolItems.collection) {
+			foreach(int index, DZLLicenceToolItem toolItem: tools) {
 				if (toolMap.Count() == 0) break;
 				
                 if(IsNeededItem(toolItem, item, itemType)) {
 					int countFoundTool = 0;
+
 					if(toolMap.Find(itemType, countFoundTool)) {
 					    int health = item.GetHealth();
 						
@@ -420,6 +427,7 @@ modded class PlayerBase
 
 							item.SetHealth(health - toolItem.health);
 						}
+						tools.Remove(index);
 						break;
 					}
 				}

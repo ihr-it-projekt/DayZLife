@@ -114,6 +114,7 @@
 "SpawnPoints","Spawn Points","Spawn Points","Spawn Punkte"
 "Random","Random","Random","Zufällig"
 "Civ","Civilian","Civilian","Zivilist"
+"Civil","Civilian","Civilian","Zivilist"
 "Cop","Police","Police","Polizist"
 "Medic","Paramedic","Paramedic","Sanitäter"
 "Player_list","Player list","Player list","Spielerliste"
@@ -160,4 +161,5 @@
 "server_admin_must_upgrade_licences_dayZ_life_mod_deactivate","Server Admin must upgrade licence, DayZ Life was deactivated.","Server Admin must upgrade licence, DayZ Life was deactivated.","Server Admin muss die License hoch stufen. DayZLife Mod wurde deaktiviert."
 "raid_can_not_start_to_less_players","Raid can not start, to less player on server","Raid can not start, to less player on server","Überfall kann nicht gestartet werden, zu wenig Spieler auf dem Server."
 "raid_can_not_start_wrong_time","Raid can not start, wrong time.","Raid can not start, wrong time.","Überfall kann nicht gestartet werden, falsche Uhrzeit."
+"You_can_only_open_when_you_are_a","You can only open the trader when you are a","You can only open the trader when you are a","Du kannst den Händler nur öffnen wenn du den folgenden Job hast"
 "","",""

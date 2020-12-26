@@ -90,6 +90,7 @@ class DZLActionRaidDoors: ActionInteractBase
 	}
 
 	override void OnEndClient(ActionData action_data) {
+	    if (g_Game.GetUIManager().GetMenu() != NULL) return;
 		Building buildingClient = Building.Cast(action_data.m_Target.GetObject());
 		DZLDoorRaidProgressBar bar = action_data.m_Player.GetRaidProgressBar();
 		

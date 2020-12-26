@@ -65,6 +65,7 @@ class ActionRobBank: ActionInteractBase
 	}
 
 	override void OnStartClient(ActionData action_data) {
+	    if (g_Game.GetUIManager().GetMenu() != NULL) return;
 	    super.OnStartClient(action_data);
         GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_START_BANK_RAID, new Param1<ref PlayerBase>(action_data.m_Player), true, action_data.m_Player.GetIdentity());
     }

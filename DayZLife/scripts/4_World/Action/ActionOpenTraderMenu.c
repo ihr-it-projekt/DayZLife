@@ -20,6 +20,15 @@ class ActionOpenTraderMenu: ActionInteractBase
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
+		DZLTraderPosition position = action_data.m_Player.GetTraderByPosition();
+
+		if (!position) return;
+
+		if (!position.CanOpenWithJob(action_data.m_Player.dzlPlayer.GetActiveJob())) {
+		    action_data.m_Player.DisplayMessage("#You_can_only_open_when_you_are_a: " + "#" + position.forJob);
+		    return;
+		}
+
 		if (g_Game.GetUIManager().GetMenu() == NULL){
             if(!action_data) return;
             if(!action_data.m_Target) return;
