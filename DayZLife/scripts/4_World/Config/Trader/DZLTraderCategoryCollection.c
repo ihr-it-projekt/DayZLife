@@ -271,14 +271,32 @@ class DZLTraderCategoryCollection
             
             Save();
         } else {
+            bool mustSave = false;
+            array<string> ids = new array<string>;
             foreach(DZLTraderCategory category: categories) {
                 foreach(DZLTraderType _items: category.items) {
                     if (!_items.HasCorrectId()) {
                         _items.SetId();
+                        mustSave = true;
                     }
+
+                    if(-1 != ids.Find(_items.id)) {
+                        _items.SetId();
+                        mustSave = true;
+                    }
+
+                    ids.Insert(_items.id);
                 }
             }
-            Save();
+			
+			if (version == "") {
+				version = "1";
+				mustSave = true;
+			}
+
+            if (mustSave) {
+               	Save();
+            }
         }
     }
 	
