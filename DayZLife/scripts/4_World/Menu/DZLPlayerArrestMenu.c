@@ -39,8 +39,8 @@ class DZLPlayerArrestMenu : DZLBaseMenu
             case setArrest:
             	int arrestTime = inputArrest.GetText().ToInt();
 		
-				if (arrestTime < 1) {
-				    player.DisplayMessage("#error_arrest_time_must_be_positiv");
+				if (arrestTime < 0) {
+				    player.DisplayMessage("#error_arrest_time_must_be_positiv_or_null");
 					return false;
 				}
 				

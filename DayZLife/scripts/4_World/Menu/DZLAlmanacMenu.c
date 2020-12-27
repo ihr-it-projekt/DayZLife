@@ -37,6 +37,7 @@ class DZLAlmanacMenu : DZLBaseMenu
     private TextWidget countCivil;
     private TextWidget countMedic;
     private TextWidget countCop;
+	private ButtonWidget syncButton;
 
 	private XComboBoxWidget toggleViewWidget;
 
@@ -86,6 +87,8 @@ class DZLAlmanacMenu : DZLBaseMenu
 		countCivil = creator.GetTextWidget("countCivil");
 		countMedic = creator.GetTextWidget("countMedic");
 		countCop = creator.GetTextWidget("countCop");
+		
+		syncButton = creator.GetButtonWidget("syncButton");
 
 		return layoutRoot;
     }
@@ -287,6 +290,15 @@ class DZLAlmanacMenu : DZLBaseMenu
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
+		} else if (w == syncButton) {
+			
+			Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(player);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
+            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
+			player.DisplayMessage("#player_was_manuel_synced");
+			syncButton.Show(false);
 		}
 
 		return false;

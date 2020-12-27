@@ -79,11 +79,13 @@ class DZLPlayerArrestListener
 				vector playerPosition = player.GetPosition();
 	
 				bool isInPrison = false;
-				foreach(vector position: arrestConfig.arrestAreas) {
+				int prisonArea = -1;
+				foreach(int index, vector position: arrestConfig.arrestAreas) {
 				    if (vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius){
 						dzlPlayer.ArrestCountDown();
 						GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
 						isInPrison = true;
+						prisonArea = index;
 				        break;
 				    }
 				}
@@ -92,10 +94,11 @@ class DZLPlayerArrestListener
 					continue;
 				}
 								
-				if (!dzlPlayer.IsPlayerInArrest()) {
+				if (isInPrison && !dzlPlayer.IsPlayerInArrest()) {
 					ChangeItems(PlayerBase.Cast(player), arrestConfig.exPrisonerItems, arrestConfig.shouldDeleteAllItemsOnExPrissoner);
 					
-					vector randPosition = arrestConfig.exPrisonerAreas.GetRandomElement();
+					
+					vector randPosition = arrestConfig.exPrisonerAreas.Get(prisonArea);
 					
 					if(randPosition) {
 						player.SetPosition(randPosition);
