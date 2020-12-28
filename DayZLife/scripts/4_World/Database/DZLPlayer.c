@@ -12,7 +12,7 @@ class DZLPlayer: DZLSaveModel
 	int arrestTimeInMinutes = 0;
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
-
+	ref TIntArray cars;
 	ref TStringArray licenceIds;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
@@ -27,6 +27,7 @@ class DZLPlayer: DZLSaveModel
             DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
             idents.AddPlayer(playerId);
 			licenceIds = new TStringArray;
+			cars = new TIntArray;
 
 			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
 			
@@ -211,6 +212,20 @@ class DZLPlayer: DZLSaveModel
 		mustSave = true;
 	}
 
+	void BuyCar(CarScript car) {
+	    cars.Insert(car.dzlCarId);
+        mustSave = true;
+	}
+
+	void SellCar(CarScript car) {
+	    cars.RemoveItem(car.dzlCarId);
+        mustSave = true;
+	}
+
+	bool IsCarOwner(int carId) {
+	    return -1 != cars.Find(carId);
+	}
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayer>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
@@ -219,10 +234,12 @@ class DZLPlayer: DZLSaveModel
         return false;
     }
 
-    override protected void DoSave(){
+    override protected bool DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
+			return true;
         }
+		return false;
     }
 }

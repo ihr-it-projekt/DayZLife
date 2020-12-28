@@ -1,4 +1,4 @@
-static bool DAY_Z_LIFE_DEBUG = false;
+static bool DAY_Z_LIFE_DEBUG = true;
 static int DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE = 2222218;
 static int DAY_Z_LIFE_EVENT_GET_CONFIG = 2222219;
 static int DAY_Z_LIFE_OPEN_GET_BUILDING_DATA = 222220;
@@ -57,12 +57,16 @@ static int DAY_Z_LIFE_GET_ALL_PLAYERS = 222272;
 static int DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE = 222273;
 static int DAY_Z_LIFE_DELETE_PLAYER = 222274;
 static int DAY_Z_LIFE_HARVEST = 222275;
+static int DAY_Z_LIFE_GET_CAR_KEYS = 222276;
+static int DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE = 222277;
+static int DAY_Z_LIFE_GET_UPDATE_CAR_KEYS = 222278;
 
 
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE = "$profile:DayZLife\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA = "$profile:DayZLife\\Data\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_CONFIG = "$profile:DayZLife\\Config\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE = "$profile:DayZLife\\Data\\House\\";
+static string DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR = "$profile:DayZLife\\Data\\Car\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER = "$profile:DayZLife\\Data\\Player\\";
 static string LOCKED_HOUSES_FILE_NAME = "housesLocked.json";
 

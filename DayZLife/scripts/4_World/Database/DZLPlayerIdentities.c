@@ -69,6 +69,16 @@ class DZLPlayerIdentities: DZLSaveModel
         }
     }
 
+    void UpdateCarKeys(PlayerIdentity player, CarScript car, ref array<string> players) {
+        if (!players) return;
+
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+        
+        if (!car.IsOwner(player)) return;
+
+        car.UpdatePlayerAccess(players);
+    }
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayerIdentities>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
@@ -77,11 +87,13 @@ class DZLPlayerIdentities: DZLSaveModel
         return false;
     }
 
-    override protected void DoSave(){
+    override protected bool DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayerIdentities>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
+			return true;
         }
+		return false;
     }
 
 }

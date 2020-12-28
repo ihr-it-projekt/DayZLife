@@ -45,10 +45,11 @@ class DZLAlmanacListener
 
                         house.RemoveOwner();
 
-                        DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.bank * -1);
                         DZLDatabaseLayer.Get().RemoveHouse(house.GetFileName());
 						DZLDatabaseLayer.Get().GetLockedHouses().Remove(house);
                     }
+
+                    DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.bank * -1);
 
                     foreach(string fileHouseAccess: dzlPlayerHouse.playerHouseKeyCollection) {
 						house = DZLDatabaseLayer.Get().GetHouse(null, fileHouseAccess);
@@ -61,7 +62,6 @@ class DZLAlmanacListener
 				}
 				DZLSendMessage(sender, "#player_data_was_deleted");
 				SendAllPlayerList(sender);
-				
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS) {
             autoptr Param2<PlayerBase, ref array<string>> paramUpdateCops;

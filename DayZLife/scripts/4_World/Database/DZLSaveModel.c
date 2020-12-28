@@ -2,13 +2,14 @@ class DZLSaveModel
 {
 	protected bool mustSave = false;
 
-	protected void DoSave() {}
+	protected bool DoSave() {
+
+	    return false;
+	}
 
 	void Save() {
-	    if (mustSave) {
-	        mustSave = false;
-
-	        DoSave();
+	    if (mustSave && DoSave()) {
+            mustSave = false;
 	    }
 	}
 }

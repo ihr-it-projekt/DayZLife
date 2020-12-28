@@ -3,6 +3,7 @@ modded class ActionOpenDoors
 	override bool ActionCondition( PlayerBase player, ActionTarget target, ItemBase item )
 	{
 		if(!target) return false;
+
 		if(!IsBuilding(target)) return false;
 
 		Building building = Building.Cast(target.GetObject());
