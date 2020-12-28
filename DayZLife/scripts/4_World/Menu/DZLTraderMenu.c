@@ -272,6 +272,15 @@ class DZLTraderMenu: DZLBaseMenu
                     if (!carsScript) {
                         sellItems.Insert(sellItem);
                     } else if (!carsScript.isSold && carsScript.lastDriverId == player.GetIdentity().GetId()) {
+				
+						bool carIsEmpty = true;
+	                    for (int seat = 0; seat < carsScript.CrewSize(); seat++){
+		                	if (carsScript.CrewMember(seat)) {
+								player.DisplayMessage("#car_is_not_empty");
+								return true;
+							}
+		                }
+						
                         sellItems.Insert(sellItem);
                         carsScript.isSold = true;
                     }
@@ -295,6 +304,7 @@ class DZLTraderMenu: DZLBaseMenu
 							player.DisplayMessage("#you_can_only_buy_one_car_per_trade");
 							return true;
 						}
+						
 						
 						carBuy = true;
 					}

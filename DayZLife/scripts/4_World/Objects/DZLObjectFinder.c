@@ -62,22 +62,6 @@ class DZLObjectFinder
         if (GetGame().IsBoxColliding(carSpawnPosition, orientation, "3 5 9", excludedObjects, nearbyObjects)){
             foreach (Object object: nearbyObjects){
                 if (object.GetType() == carType){
-                    bool carIsEmpty = true;
-
-                    Transport transport;
-                    Class.CastTo(transport, object);
-					
-					if (!transport) continue;
-
-                    for (int seat = 0; seat < transport.CrewSize(); seat++){
-	                	if (transport.CrewMember(seat)) {
-							carIsEmpty = false;
-							break;
-						}
-	                }
-                    
-                    if (!carIsEmpty) continue;
-
                     CarScript carsScript = CarScript.Cast(object);
                     if(!carsScript) continue;
                     if(carsScript.lastDriverId != playerId) continue;
