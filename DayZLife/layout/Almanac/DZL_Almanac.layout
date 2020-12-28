@@ -679,7 +679,7 @@ FrameWidgetClass Almanac {
       PanelWidgetClass PanelWidget16 {
        visible 1
        ignorepointer 1
-       position 0.00452 0.01515
+       position 0.00471 0.00962
        size 0.04 0.07
        halign right_ref
        hexactpos 0
@@ -781,8 +781,8 @@ FrameWidgetClass Almanac {
       PanelWidgetClass PanelWidget110 {
        visible 1
        ignorepointer 1
-       position 0.04923 0.01515
-       size 0.17656 0.07
+       position 0.16881 0.00962
+       size 0.04 0.07
        halign right_ref
        hexactpos 0
        vexactpos 0
@@ -790,8 +790,8 @@ FrameWidgetClass Almanac {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass syncButton {
-         color 0.502 0 0 1
+        ButtonWidgetClass sync_Button {
+         color 0.251 0.502 0 0.1961
          position 0 0
          size 0.9 0.9
          halign center_ref
@@ -801,7 +801,23 @@ FrameWidgetClass Almanac {
          hexactsize 0
          vexactsize 0
          style OldStyle
-         text "#manual_player_sync"
+         {
+          ImageWidgetClass ImageWidget3 {
+           ignorepointer 1
+           position 0 0
+           size 0.8 0.8
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{35E83651B6E3321F}DayZLife/layout/Almanac/sync.edds"
+           mode blend
+           "src alpha" 1
+           stretch 1
+          }
+         }
         }
        }
       }
