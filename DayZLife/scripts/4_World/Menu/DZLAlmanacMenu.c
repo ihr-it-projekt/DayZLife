@@ -293,10 +293,10 @@ class DZLAlmanacMenu : DZLBaseMenu
 		} else if (w == syncButton) {
 			
 			Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(player);
-            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
-            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
-            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
-            GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
 			player.DisplayMessage("#player_was_manuel_synced");
 			syncButton.Show(false);
 		}

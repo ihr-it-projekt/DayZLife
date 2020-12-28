@@ -96,7 +96,7 @@ class DZLBankListener
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
             autoptr Param1<PlayerBase> paramGetBankData;
             if (ctx.Read(paramGetBankData)){
-                GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(DZLDatabaseLayer.Get().GetBank()), true);
+                GetGame().RPCSingleParam(paramGetBankData.param1, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(DZLDatabaseLayer.Get().GetBank()), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA) {
 			array<Man> _players = new array<Man>;
