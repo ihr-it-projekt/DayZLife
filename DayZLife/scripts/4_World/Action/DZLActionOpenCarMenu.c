@@ -28,7 +28,7 @@ class DZLActionOpenCarMenu: ActionInteractBase
             if(!action_data.m_Target) return;
             if(!IsTransport(action_data.m_Target)) return;
 			
-			CarScript car = CarScript.Cast(action_data.m_Target.GetObject());
+			CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
 			
 			if (car && player.dzlPlayer.IsCarOwner(car.dzlCarId)) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
@@ -38,10 +38,9 @@ class DZLActionOpenCarMenu: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         if (g_Game.GetUIManager().GetMenu() == NULL){
-            
             if(!IsTransport(target)) return false;
 			
-			CarScript car = CarScript.Cast(target.GetObject());
+			CarScript car = CarScript.Cast(target.GetParent());
 			
 			if (car && player.dzlPlayer.IsCarOwner(car.dzlCarId)) {
 				return true;

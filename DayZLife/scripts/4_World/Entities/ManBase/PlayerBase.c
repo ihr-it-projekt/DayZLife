@@ -61,7 +61,6 @@ modded class PlayerBase
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenLoadOutMenu, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
-        AddAction(DZLActionOpenCarMenu, InputActionMap);
 
         InitDZLPlayer();
     }

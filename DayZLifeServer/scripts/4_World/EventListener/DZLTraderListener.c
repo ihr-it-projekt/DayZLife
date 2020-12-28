@@ -43,7 +43,10 @@ class DZLTraderListener
 
                                 if (carsScript && carsScript.lastDriverId != sender.GetId()) {
                                     continue;
-                                }
+                                } else if (carsScript) {
+									DZLPlayer dzlPlayerCar = DZLDatabaseLayer.Get().GetPlayer(carsScript.owner.GetId());
+									dzlPlayerCar.SellCar(carsScript);
+								}
 
                                 if (item.GetType() == type.type) {
                                     sum -= GetPrice(item, type.sellPrice);
@@ -144,6 +147,8 @@ class DZLTraderListener
 			
 			if (_car) {
 				_car.AddOwner(player.GetIdentity());
+				DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+				dzlPlayer.BuyCar(_car);
 			}
 		}
 

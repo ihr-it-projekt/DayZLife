@@ -15,6 +15,12 @@ modded class CarScript
         }
 	}
 
+	override void SetActions(){
+	    super.SetActions();
+
+        AddAction(DZLActionOpenCarMenu);
+	}
+
 	void RemoveOwner() {
         owner = null;
         playerAccess = new array<string>;
@@ -49,7 +55,7 @@ modded class CarScript
     bool HasPlayerAccess(string ident) {
     	DebugMessageDZL("owner" + owner);
     	DebugMessageDZL("ident" + ident);
-        return ident == owner || -1 != playerAccess.Find(ident);
+        return ident == owner.GetId() || -1 != playerAccess.Find(ident);
     }
 
     void RemovePlayerAccess(string ident) {
