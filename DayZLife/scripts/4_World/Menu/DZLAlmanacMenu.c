@@ -88,7 +88,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		countMedic = creator.GetTextWidget("countMedic");
 		countCop = creator.GetTextWidget("countCop");
 		
-		syncButton = creator.GetButtonWidget("syncButton");
+		syncButton = creator.GetButtonWidget("sync_Button");
 
 		return layoutRoot;
     }

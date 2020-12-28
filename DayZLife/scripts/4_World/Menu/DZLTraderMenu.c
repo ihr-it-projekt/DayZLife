@@ -61,6 +61,7 @@ class DZLTraderMenu: DZLBaseMenu
 		
 		array<EntityAI> playerItems = player.GetPlayerItems();
 		credits.SetText(dzlPlayer.money.ToString());
+		position = player.GetTraderByPosition();
 		
 		inventory.ClearItems();
 		sellCard.ClearItems();
@@ -69,10 +70,11 @@ class DZLTraderMenu: DZLBaseMenu
 		UpdateSum();
 		string name = "";
 		int index;
+		string quant;
 		
-	   array<string> addInventoryTypes = new array<string>;
+	   	array<string> addInventoryTypes = new array<string>;
 
-       foreach(string categoryName: position.categoryNames) {
+       	foreach(string categoryName: position.categoryNames) {
             DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
 			
             if (!category) continue;
@@ -81,7 +83,21 @@ class DZLTraderMenu: DZLBaseMenu
                 if (type.sellPrice <= 0) continue;
                 if (-1 != addInventoryTypes.Find(type.type)) continue;
                 addInventoryTypes.Insert(type.type);
-
+				
+				if (type.isCar) {
+					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetIdentity().GetId());
+					
+					if (playerCar && !playerCar.isSold) {
+						quant = playerCar.GetQuantity().ToString();
+						GetGame().ObjectGetDisplayName(playerCar, name);
+						index = inventory.AddItem(name, playerCar, 0);
+	                   	inventory.SetItem(index, type.sellPrice.ToString(), playerCar, 1);
+	                   	inventory.SetItem(index, quant, playerCar, 2);
+						
+					}
+					continue;
+				}
+				
                 foreach(EntityAI item: playerItems) {
                     if (item.GetType() != type.type) {
                         continue;
@@ -89,7 +105,7 @@ class DZLTraderMenu: DZLBaseMenu
 
                     GetGame().ObjectGetDisplayName(item, name);
 
-                    string quant = item.GetQuantity().ToString();
+                    quant = item.GetQuantity().ToString();
 
                     if (quant == "0") {
                         quant = "1";
@@ -106,7 +122,6 @@ class DZLTraderMenu: DZLBaseMenu
     override void OnShow() {
         super.OnShow();
         sumInt = 0;
-		position = player.GetTraderByPosition();
 
 		if (!position) {
 		    position = player.GetTraderByPosition(4);
@@ -120,6 +135,7 @@ class DZLTraderMenu: DZLBaseMenu
 		
 		int index;
 		string name = "";
+		int quantity;
 		
 		credits.SetText(dzlPlayer.money.ToString());
 		
@@ -155,6 +171,19 @@ class DZLTraderMenu: DZLBaseMenu
 				addInventoryTypes.Insert(type.type);
 
 			    if (type.sellPrice <= 0) continue
+				
+				if (type.isCar) {
+					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetIdentity().GetId());
+					
+					if (playerCar && !playerCar.isSold) {
+						GetGame().ObjectGetDisplayName(playerCar, name);
+						index = inventory.AddItem(name, playerCar, 0);
+	                   	inventory.SetItem(index, type.sellPrice.ToString(), playerCar, 1);
+	                   	inventory.SetItem(index, "1", playerCar, 2);
+					}
+					continue;
+				}
+				
 				foreach(EntityAI item: playerItems) {
 					if (item.GetType() != type.type) {
 						continue;
@@ -163,7 +192,7 @@ class DZLTraderMenu: DZLBaseMenu
 					GetGame().ObjectGetDisplayName(item, name);
 
 					int maxQuantity = item.GetQuantityMax();
-					int quantity = item.GetQuantity();
+					quantity = item.GetQuantity();
 					
 					if (quantity == 0) {
 						quantity = 1;
@@ -239,14 +268,37 @@ class DZLTraderMenu: DZLBaseMenu
                 sellItem = null;
                 sellCard.GetItemData(x, 0, sellItem);
                 if (sellItem) {
-                    sellItems.Insert(sellItem);
+                    CarScript carsScript = CarScript.Cast(sellItem);
+                    if (!carsScript) {
+                        sellItems.Insert(sellItem);
+                    } else if (!carsScript.isSold && carsScript.lastDriverId == player.GetIdentity().GetId()) {
+                        sellItems.Insert(sellItem);
+                        carsScript.isSold = true;
+                    }
                 }
             }
 
+			bool carBuy = false;
             for(x = 0; x < countBuyItems; x++) {
                 buyItem = null;
                 buyCard.GetItemData(x, 0, buyItem);
                 if (buyItem) {
+					if (buyItem.isCar) {
+						array<Object> excludedObjects = new array<Object>;
+				        array<Object> nearbyObjects = new array<Object>;
+				        if (GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)){
+							player.DisplayMessage("#you_can_not_buy_a_car_spwan_place_is_blocked");
+							return true;
+						}
+						
+						if (carBuy) {
+							player.DisplayMessage("#you_can_only_buy_one_car_per_trade");
+							return true;
+						}
+						
+						carBuy = true;
+					}
+					
                     buyItems.Insert(buyItem.id);
                 }
             }

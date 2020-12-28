@@ -37,19 +37,16 @@ class DZLTraderListener
                                 }
                             }
                         }
-                        if (paramTrade.param2.Count() > 0) {
+                        if (itemsToSell.Count() > 0) {
                             foreach(EntityAI item: itemsToSell) {
+                                CarScript carsScript = CarScript.Cast(item);
+
+                                if (carsScript && carsScript.lastDriverId != sender.GetId()) {
+                                    continue;
+                                }
+
                                 if (item.GetType() == type.type) {
-                                    int maxQuantity = item.GetQuantityMax();
-                                    int quantity = item.GetQuantity();
-
-                                    if (quantity == 0) {
-                                        quantity = 1;
-                                        maxQuantity = 1;
-                                    }
-
-                                    sum -= Math.Round(quantity/maxQuantity * type.sellPrice);
-
+                                    sum -= GetPrice(item, type.sellPrice);
                                     countSellItems++;
                                 }
                             }
@@ -71,9 +68,9 @@ class DZLTraderListener
 
                     int index = itemsToSell.Count() - 1;
 					if (index > -1) {
-						item = itemsToSell.Get(index);
-						while (item) {
-	                        GetGame().ObjectDelete(item);
+						EntityAI itemSell = itemsToSell.Get(index);
+						while (itemSell) {
+	                        GetGame().ObjectDelete(itemSell);
 							
 							int tmpIndex = itemsToSell.Count() - 1;
 
@@ -85,7 +82,7 @@ class DZLTraderListener
 							if (index == -1) {
 								break;
 							}
-							item = itemsToSell.Get(index);
+							itemSell = itemsToSell.Get(index);
 	                    }
 					}
 
@@ -101,7 +98,7 @@ class DZLTraderListener
     }
 
 
-    private void Add(PlayerBase player, DZLTraderType type, DZLTraderPosition position) {
+    private bool Add(PlayerBase player, DZLTraderType type, DZLTraderPosition position) {
         EntityAI item;
         InventoryLocation inventoryLocation = new InventoryLocation;
 		
@@ -143,5 +140,19 @@ class DZLTraderListener
             car.Fill(CarFluid.USER3, car.GetFluidCapacity(CarFluid.USER3));
             car.Fill(CarFluid.USER4, car.GetFluidCapacity(CarFluid.USER4));
 		}
+
+		return !!item;
+    }
+
+    private int GetPrice(EntityAI item, int sellPrice) {
+        int maxQuantity = item.GetQuantityMax();
+        int quantity = item.GetQuantity();
+
+        if (quantity == 0) {
+            quantity = 1;
+            maxQuantity = 1;
+        }
+
+        return Math.Round(quantity/maxQuantity * sellPrice);
     }
 }

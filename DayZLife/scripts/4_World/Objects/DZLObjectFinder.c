@@ -42,8 +42,6 @@ class DZLObjectFinder
         } else {
             for (int newObject = 0; newObject < geom.Count(); ++newObject){
                 obj = geom.Get(newObject);
-                DebugMessageDZL("obj.GetType() " + obj.GetType());
-                DebugMessageDZL("typeToSearch " + typeToSearch);
                 if (obj.GetType() == typeToSearch) {
                    GetGame().ObjectDelete(obj);
                    return;
@@ -56,7 +54,40 @@ class DZLObjectFinder
                 }
             }
         }
+    }
 
+    static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, string playerId) {
+        array<Object> excludedObjects = new array<Object>;
+        array<Object> nearbyObjects = new array<Object>;
+        if (GetGame().IsBoxColliding(carSpawnPosition, orientation, "3 5 9", excludedObjects, nearbyObjects)){
+            foreach (Object object: nearbyObjects){
+                if (object.GetType() == carType){
+                    bool carIsEmpty = true;
+
+                    Transport transport;
+                    Class.CastTo(transport, object);
+					
+					if (!transport) continue;
+
+                    for (int seat = 0; seat < transport.CrewSize(); seat++){
+	                	if (transport.CrewMember(seat)) {
+							carIsEmpty = false;
+							break;
+						}
+	                }
+                    
+                    if (!carIsEmpty) continue;
+
+                    CarScript carsScript = CarScript.Cast(object);
+                    if(!carsScript) continue;
+                    if(carsScript.lastDriverId != playerId) continue;
+
+                    return carsScript;
+                }
+            }
+        }
+
+        return null;
     }
 
     private Object CheckForObject(set< Object > geom) {

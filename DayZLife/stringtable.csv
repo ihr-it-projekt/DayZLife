@@ -162,6 +162,7 @@
 "raid_can_not_start_to_less_players","Raid can not start, to less player on server","Raid can not start, to less player on server","Überfall kann nicht gestartet werden, zu wenig Spieler auf dem Server."
 "raid_can_not_start_wrong_time","Raid can not start, wrong time.","Raid can not start, wrong time.","Überfall kann nicht gestartet werden, falsche Uhrzeit."
 "You_can_only_open_when_you_are_a","You can only open the trader when you are a","You can only open the trader when you are a","Du kannst den Händler nur öffnen wenn du den folgenden Job hast"
-"manual_player_sync","player data sync","player data sync","Spielerdaten synchronisieren"
 "player_was_manuel_synced","Player data was manual synced","Player data was manual synced","Spielerdaten wurde manuel synchronisiert"
+"you_can_not_buy_a_car_spwan_place_is_blocked","You can not buy a car. Spawn position is currently blocked by other Item.","You can not buy a car. Spawn position is currently blocked by other Item.","Du kannst gerade kein Auto kaufen. Spawn Position ist gerade blockiert."
+"you_can_only_buy_one_car_per_trade","You can only buy one car per trade.","You can only buy one car per trade.","Du kannst nur ein Auto pro Handel kaufen."
 "","",""
