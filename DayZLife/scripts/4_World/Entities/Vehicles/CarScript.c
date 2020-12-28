@@ -28,7 +28,7 @@ modded class CarScript
     }
 
     bool IsOwner(PlayerIdentity playerId) {
-        return owner == playerId;
+        return owner.GetId() == playerId;
     }
 
 	override void EEInit() {
