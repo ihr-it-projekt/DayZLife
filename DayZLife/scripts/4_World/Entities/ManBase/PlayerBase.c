@@ -103,7 +103,6 @@ modded class PlayerBase
     }
 
     DZLHouseMenu GetHouseMenu(DZLHouseDefinition definition, Building target) {
-        DebugMessageDZL("Initialize house menu");
         houseMenu = new DZLHouseMenu;
         InitMenu(houseMenu);
 

@@ -24,7 +24,7 @@ class DZLLicenceCheck: RestCallback
 		checkTimer = new Timer();
 		checkTimer.Run(6000, this, "Check", null, true);
 		restApi = CreateRestApi();
-		restApi.EnableDebug(DAY_Z_LIFE_DEBUG);
+//		restApi.EnableDebug(DAY_Z_LIFE_DEBUG);
 
 		string server = serverUrl;
 //        if (DAY_Z_LIFE_DEBUG) {

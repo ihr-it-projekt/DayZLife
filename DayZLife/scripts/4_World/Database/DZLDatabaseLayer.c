@@ -41,7 +41,6 @@ class DZLDatabaseLayer
     static DZLDatabaseLayer Get() {
         if (!databaseLayer) {
             databaseLayer = new DZLDatabaseLayer;
-			DebugMessageDZL("create new databaseLayer");
         }
 
         return databaseLayer;

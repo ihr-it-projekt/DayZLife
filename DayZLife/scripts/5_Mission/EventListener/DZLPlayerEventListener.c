@@ -24,26 +24,22 @@ class DZLPlayerEventListener
             } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {
                 Param1 <ref DZLPlayerHouse> houseParam;
                 if (ctx.Read(houseParam) && houseParam.param1){
-                    DebugMessageDZL("Initialize DZLPlayerHouse");
                     player.house = houseParam.param1;
                 }
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
                 Param1 <ref DZLPlayer> dzlPlayerParam;
                 if (ctx.Read(dzlPlayerParam) && dzlPlayerParam.param1){
-                    DebugMessageDZL("Initialize DZLPlayer");
                     player.dzlPlayer = dzlPlayerParam.param1;
                     player.UpdatePlayerAtDependencies();
                 }
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
                 Param1 <ref DZLBank> dzlBankParam;
                 if (ctx.Read(dzlBankParam) && dzlBankParam.param1){
-                    DebugMessageDZL("Initialize Bank");
                     player.dzlBank = dzlBankParam.param1;
                 }
             } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
                 Param1 <string> dzlMessage;
                 if (ctx.Read(dzlMessage) && dzlMessage.param1){
-                    DebugMessageDZL("Receive Message");
                     player.DisplayMessage(dzlMessage.param1);
                 }
             }else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {

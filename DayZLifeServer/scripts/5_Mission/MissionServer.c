@@ -26,7 +26,7 @@ modded class MissionServer {
         DZLLoadOutLocationBuilder.Create();
         DZLLockedHouses.OnServerStart();
 
-        databaseTimer.Run(60, DZLDatabaseLayer.Get(), "Save", null, true);
+        databaseTimer.Run(5, DZLDatabaseLayer.Get(), "Save", null, true);
         paycheckTimer.Run(60, paycheckController, "Check", null, true);
         DZLLicenceCheck.Get();
     }

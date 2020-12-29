@@ -18,9 +18,9 @@ class DZLPlayer: DZLSaveModel
         fileName = playerId + ".json";
         if (!Load()) {
             bank = moneyToAdd;
-            if (DAY_Z_LIFE_DEBUG) {
-                money = 100000;
-            }
+//            if (DAY_Z_LIFE_DEBUG) {
+//                money = 100000;
+//            }
             this.dayZPlayerId = playerId;
 
             DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();

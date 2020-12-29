@@ -22,7 +22,6 @@ class DZLConfigListener
             autoptr Param1<PlayerBase> paramGetPlayerData;
             if (ctx.Read(paramGetPlayerData)){
                 if (paramGetPlayerData.param1){
-                    DebugMessageDZL("Send player data");
                     DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
                     dzlPlayer.UpdateName(sender.GetName());
 
