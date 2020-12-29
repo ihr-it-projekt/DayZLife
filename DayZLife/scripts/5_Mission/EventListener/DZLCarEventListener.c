@@ -12,7 +12,6 @@ class DZLCarEventListener
         if (rpc_type == DAY_Z_LIFE_UPDATE_CAR) {
             Param4<CarScript, int, ref array<string>, string> carParam;
             if (ctx.Read(carParam) && carParam.param1) {
-                DebugMessageDZL("Update car");
                 carParam.param1.dzlCarId = carParam.param2;
                 carParam.param1.playerAccess = carParam.param3;
                 carParam.param1.ownerId = carParam.param4;

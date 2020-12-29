@@ -24,19 +24,19 @@ modded class CarScript
 	void RemoveOwner() {
         ownerId = "";
         playerAccess = new array<string>;
-        SynchronizeValues();
+        SynchronizeValues(null);
     }
 
     void AddOwner(PlayerIdentity player) {
         ownerId = player.GetId();
         playerAccess = new array<string>;
-        SynchronizeValues();
+        SynchronizeValues(null);
     }
 
     bool IsOwner(PlayerIdentity player) {
         if(GetGame().IsServer() && ownerId == "") {
             ownerId = player.GetId();
-            SynchronizeValues();
+            SynchronizeValues(null);
         }
         
         return ownerId == player.GetId();
@@ -50,12 +50,12 @@ modded class CarScript
         }
         playerAccess = new array<string>;
 
-        SynchronizeValues();
+        SynchronizeValues(null);
     }
 
     void UpdatePlayerAccess(array<string> playerAccess) {
         this.playerAccess = playerAccess;
-        SynchronizeValues();
+        SynchronizeValues(null);
     }
 
     bool HasPlayerAccess(string ident) {
@@ -68,7 +68,7 @@ modded class CarScript
         int index = playerAccess.Find(ident);
         if (index != -1) {
             playerAccess.Remove(index);
-            SynchronizeValues();
+            SynchronizeValues(null);
         }
     }
 
@@ -110,11 +110,11 @@ modded class CarScript
             ownerId = store.param3;
         }
 
-        SynchronizeValues();
+        SynchronizeValues(null);
 		return true;
 	}
 
-	void SynchronizeValues() {
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param4<CarScript, int, ref array<string>, string>(this, dzlCarId, playerAccess, ownerId), true);
+	void SynchronizeValues(PlayerIdentity sender) {
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param4<CarScript, int, ref array<string>, string>(this, dzlCarId, playerAccess, ownerId), true, sender);
     }
 }
