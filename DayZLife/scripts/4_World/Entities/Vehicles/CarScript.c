@@ -6,6 +6,7 @@ modded class CarScript
 	int dzlCarId = 0;
     ref array<string> playerAccess;
     string ownerId;
+    bool isSync = false;
 
     override void OnEngineStart() {
         super.OnEngineStart();
@@ -59,8 +60,11 @@ modded class CarScript
     }
 
     bool HasPlayerAccess(string ident) {
-    	DebugMessageDZL("ownerId" + ownerId);
-    	DebugMessageDZL("ident" + ident);
+    	if (GetGame().IsClient() && !isSync) {
+    	    GetGame().RPCSingleParam(GetGame().GetPlayer(), DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE, new Param1<CarScript>(this), true);
+    	    isSync = true;
+    	}
+
         return ident == ownerId || -1 != playerAccess.Find(ident);
     }
 

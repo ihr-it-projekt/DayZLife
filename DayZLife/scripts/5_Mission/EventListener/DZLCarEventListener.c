@@ -15,6 +15,7 @@ class DZLCarEventListener
                 carParam.param1.dzlCarId = carParam.param2;
                 carParam.param1.playerAccess = carParam.param3;
                 carParam.param1.ownerId = carParam.param4;
+                carParam.param1.isSync = true;
             }
         }
     }

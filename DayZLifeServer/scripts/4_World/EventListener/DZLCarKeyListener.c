@@ -23,8 +23,8 @@ class DZLCarKeyListener
                 CarScript car = paramGetKeys.param1;
 
 				array<ref DZLOnlinePlayer> keyOwner = new array<ref DZLOnlinePlayer>;
-				
-                foreach(string playerId: car.GetPlayerAccess()) {
+				array<string> keys = car.GetPlayerAccess();
+                foreach(string playerId: keys) {
 					DZLPlayer dPlayer = DZLDatabaseLayer.Get().GetPlayer(playerId);
 				
 					keyOwner.Insert(new DZLOnlinePlayer(dPlayer.dayZPlayerId, dPlayer.playerName));
@@ -40,7 +40,8 @@ class DZLCarKeyListener
             }
         } else if (rpc_type == DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE) {
             Param1<CarScript> carUpdateParam;
-            if (ctx.Read(carUpdateParam) && carUpdateParam.param1) {
+            if (ctx.Read(carUpdateParam)) {
+                DebugMessageDZL("send update");
                 carUpdateParam.param1.SynchronizeValues(sender);
             }
         }
