@@ -65,7 +65,6 @@ class DZLDatabaseLayer
     }
 
     DZLPlayer GetPlayer(string playerId) {
-        ;
 		DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
 			player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);

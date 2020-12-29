@@ -19,33 +19,42 @@ class DZLActionOpenCarMenu: ActionInteractBase
 	
 	override void OnStartClient(ActionData action_data)
 	{
-		super.OnStartClient(action_data);
-
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-            PlayerBase player = PlayerBaseHelper.GetPlayer();
+		    PlayerBase player = action_data.m_Player;
+            CarScript car;
+            if (player && player.GetCommand_Vehicle()){
+                car = CarScript.Cast(player.GetCommand_Vehicle().GetTransport());
+            } else {
+                car = CarScript.Cast(action_data.m_Target.GetParent());
+            }
 			
-			if(!action_data) return;
-            if(!action_data.m_Target) return;
-            if(!IsTransport(action_data.m_Target)) return;
-			
-			CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
-			
-			if (car && player.dzlPlayer.IsCarOwner(car.dzlCarId)) {
+			if (car) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
 			}
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (g_Game.GetUIManager().GetMenu() == NULL){
-            if(!IsTransport(target)) return false;
-			
-			CarScript car = CarScript.Cast(target.GetParent());
-			
-			if (car && player.dzlPlayer.IsCarOwner(car.dzlCarId)) {
-				return true;
-			}
+        if (!GetGame().IsServer() && g_Game.GetUIManager().GetMenu() != NULL){
+			return false;
+		}
+        CarScript car;
+        if (player && player.GetCommand_Vehicle()){
+            car = CarScript.Cast(player.GetCommand_Vehicle().GetTransport());
+        } else {
+            car = CarScript.Cast(target.GetParent());
         }
+
+        if (!car) {
+            car = CarScript.Cast(target.GetObject());
+        }
+
+		if (car) {
+		    if (GetGame().IsServer()) {
+		        return car.IsOwner(player.GetIdentity());
+		    }
+			return true;
+		}
 
 		return false;
     }

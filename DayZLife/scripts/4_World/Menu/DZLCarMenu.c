@@ -57,13 +57,15 @@ class DZLCarMenu : DZLBaseMenu
 	}
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
+        if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {
+            DebugMessageDZL("DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE");
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramOnlinePlayers;
             if (ctx.Read(paramOnlinePlayers)){
                 onlinePlayers = paramOnlinePlayers.param1;
                 UpdateList();
             }
-        } if (rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
+        } else if (rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
+            DebugMessageDZL("DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE");
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramAllPlayers;
             if (ctx.Read(paramAllPlayers)){
                 keyOwner = paramAllPlayers.param1;
@@ -73,27 +75,33 @@ class DZLCarMenu : DZLBaseMenu
 	}
 
 	private void UpdateList() {
+	    DebugMessageDZL("1");
 	    if (keyOwner && onlinePlayers) {
+	        DebugMessageDZL("2");
             carPanelKeyOwnerList.ClearItems();
             carPanelOnlinePlayerList.ClearItems();
 
             foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
+                DebugMessageDZL("3");
                 if (player.GetIdentity().GetId() == onlinePlayer.id) continue;
-
+                DebugMessageDZL("4");
                 bool hasKey = false;
                 foreach(DZLOnlinePlayer keyPlayer: keyOwner) {
                     if (onlinePlayer.id == keyPlayer.id) {
                         hasKey = true;
+                        DebugMessageDZL("5");
                         break;
                     }
                 }
 
                 if (!hasKey) {
+                    DebugMessageDZL("6");
                     carPanelOnlinePlayerList.AddItem(onlinePlayer.name, onlinePlayer, 0);
                 }
             }
 
             foreach(DZLOnlinePlayer _keyPlayer: keyOwner) {
+                DebugMessageDZL("7");
                 carPanelKeyOwnerList.AddItem(_keyPlayer.name, _keyPlayer, 0);
             }
 	    }

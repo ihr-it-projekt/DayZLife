@@ -5,7 +5,7 @@ modded class CarScript
     bool isSold = false;
 	int dzlCarId = 0;
     ref array<string> playerAccess;
-    PlayerIdentity owner;
+    string ownerId;
    
     override void OnEngineStart() {
         super.OnEngineStart();
@@ -22,19 +22,23 @@ modded class CarScript
 	}
 
 	void RemoveOwner() {
-        owner = null;
+        ownerId = "";
         playerAccess = new array<string>;
         SynchronizeValues();
     }
 
     void AddOwner(PlayerIdentity player) {
-        owner = player;
+        ownerId = player.GetId();
         playerAccess = new array<string>;
         SynchronizeValues();
     }
 
-    bool IsOwner(PlayerIdentity playerId) {
-        return owner.GetId() == playerId;
+    bool IsOwner(PlayerIdentity player) {
+        if(GetGame().IsServer() && ownerId == "") {
+            ownerId = player.GetId();
+        }
+        
+        return ownerId == player.GetId();
     }
 
 	override void EEInit() {
@@ -43,6 +47,8 @@ modded class CarScript
         if(dzlCarId == 0) {
             dzlCarId = Math.RandomIntInclusive(1, int.MAX - 1);
         }
+
+        playerAccess = new array<string>;
 
         SynchronizeValues();
     }
@@ -53,9 +59,9 @@ modded class CarScript
     }
 
     bool HasPlayerAccess(string ident) {
-    	DebugMessageDZL("owner" + owner);
+    	DebugMessageDZL("ownerId" + ownerId);
     	DebugMessageDZL("ident" + ident);
-        return ident == owner.GetId() || -1 != playerAccess.Find(ident);
+        return ident == ownerId || -1 != playerAccess.Find(ident);
     }
 
     void RemovePlayerAccess(string ident) {
@@ -85,7 +91,7 @@ modded class CarScript
     override void OnStoreSave(ParamsWriteContext ctx){
 		super.OnStoreSave(ctx);
 
-        Param3<int, ref array<string>, PlayerIdentity> store = new Param3<int, ref array<string>, PlayerIdentity>(dzlCarId, playerAccess, owner);
+        Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(dzlCarId, playerAccess, ownerId);
         ctx.Write(store);
 	}
 
@@ -97,12 +103,14 @@ modded class CarScript
 		if (!super.OnStoreLoad( ctx, version))
 			return false;
 
-        Param3<int, ref array<string>, PlayerIdentity> store = new Param3<int, ref array<string>, PlayerIdentity>(0, new array<string>, null);
+        Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(0, new array<string>, "");
         if (ctx.Read(store)){
             dzlCarId = store.param1;
             playerAccess = store.param2;
-            owner = store.param3;
+            ownerId = store.param3;
         }
+        DebugMessageDZL("load ownerId" + ownerId);
+        DebugMessageDZL("load dzlCarId" + dzlCarId);
 
         SynchronizeValues();
 

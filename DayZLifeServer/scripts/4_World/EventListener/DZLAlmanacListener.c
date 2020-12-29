@@ -102,8 +102,6 @@ class DZLAlmanacListener
     }
 
     void SendAllPlayerList(PlayerIdentity player) {
-        if (!DZLConfig.Get().IsAdmin(player)) return;
-
         array<ref DZLPlayer> collection = new array<ref DZLPlayer>;
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
 
