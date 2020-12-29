@@ -12,7 +12,6 @@ class DZLPlayer: DZLSaveModel
 	int arrestTimeInMinutes = 0;
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
-
 	ref TStringArray licenceIds;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
@@ -219,10 +218,12 @@ class DZLPlayer: DZLSaveModel
         return false;
     }
 
-    override protected void DoSave(){
+    override protected bool DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
+			return true;
         }
+		return false;
     }
 }

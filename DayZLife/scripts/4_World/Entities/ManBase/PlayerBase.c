@@ -17,6 +17,7 @@ modded class PlayerBase
 	ref DZLSpawnPositionMenu spawnPositionMenu;
 	ref DZLLoadOutMenu loadOutMenu;
 	ref DZLPlayerArrestMenu arrestMenu;
+	ref DZLCarMenu carMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -96,6 +97,8 @@ modded class PlayerBase
             loadOutMenu.UpdatePlayer(this);
         } else if (arrestMenu && arrestMenu.IsVisible()) {
             arrestMenu.UpdatePlayer(this);
+        } else if (carMenu && carMenu.IsVisible()) {
+            carMenu.UpdatePlayer(this);
         }
     }
 
@@ -109,7 +112,15 @@ modded class PlayerBase
 
         return houseMenu;
     }
-
+	
+    DZLCarMenu GetCarMenu(CarScript car) {
+        carMenu = new DZLCarMenu;
+        InitMenu(carMenu);
+		carMenu.SetCar(car);
+		
+        return carMenu;
+    }
+	
     private void InitMenu(DZLBaseMenu menu) {
         menu.SetConfig(config);
         menu.SetPlayer(this);
@@ -207,6 +218,8 @@ modded class PlayerBase
 			progressBarRaid.OnHide();
 		} else if (moneyTransferMenu && moneyTransferMenu.IsVisible()) {
 			moneyTransferMenu.OnHide();
+		} else if (carMenu && carMenu.IsVisible()) {
+			carMenu.OnHide();
 		}
 	}
 

@@ -82,10 +82,12 @@ class DZLBank: DZLSaveModel
         return false;
     }
 
-    override protected void DoSave(){
+    override protected bool DoSave(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLBank>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
+			return true;
         }
+		return false;
     }
 }

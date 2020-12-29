@@ -62,10 +62,12 @@ class DZLLockedHouses: DZLSaveModel
 		return false;
     }
 
-    override protected void DoSave(){
+    override protected bool DoSave(){
         if (GetGame().IsServer()) {
 			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
 			DZLJsonFileHandler<DZLLockedHouses>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + LOCKED_HOUSES_FILE_NAME, this);
+			return true;
 		}
+		return false;
     }
 }

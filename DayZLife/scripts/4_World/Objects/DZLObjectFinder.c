@@ -30,7 +30,6 @@ class DZLObjectFinder
         set< Object > geom = new set< Object >;
 
         DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius);
-        DebugMessageDZL(" geom.Count() " +  geom.Count().ToString());
 		Object obj;
         
 		if (0 == geom.Count()) {

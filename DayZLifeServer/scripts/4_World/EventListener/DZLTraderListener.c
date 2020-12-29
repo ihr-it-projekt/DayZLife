@@ -139,6 +139,13 @@ class DZLTraderListener
             car.Fill(CarFluid.USER2, car.GetFluidCapacity(CarFluid.USER2));
             car.Fill(CarFluid.USER3, car.GetFluidCapacity(CarFluid.USER3));
             car.Fill(CarFluid.USER4, car.GetFluidCapacity(CarFluid.USER4));
+
+			CarScript _car = CarScript.Cast(car);
+			
+			if (_car) {
+				_car.AddOwner(player.GetIdentity());
+				DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+			}
 		}
 
 		return !!item;

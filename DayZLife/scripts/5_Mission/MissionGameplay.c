@@ -4,12 +4,14 @@ modded class MissionGameplay
     private bool holdLControl = false;
 	private UIScriptedMenu almanac;
 	private ref DZLPlayerEventListener playerEventListener;
+	private ref DZLCarEventListener carEventListener;
 
    	PlayerBase player
 	
 	override void OnInit() {
 		super.OnInit();
 		playerEventListener = new DZLPlayerEventListener;
+		carEventListener = new DZLCarEventListener;
 	}
 
     override void OnKeyRelease(int key) {

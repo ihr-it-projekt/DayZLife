@@ -157,7 +157,7 @@ FrameWidgetClass License_Menu {
              hexactsize 0
              vexactsize 0
              style Default
-             text "#Safe"
+             text "#save"
             }
            }
           }

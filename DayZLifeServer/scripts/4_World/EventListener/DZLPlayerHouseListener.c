@@ -43,7 +43,6 @@ class DZLPlayerHouseListener
                         DZLPlayerHouse playerHouseAccess = DZLDatabaseLayer.Get().GetPlayerHouse(playerIdWithNewAccess);
 
                         playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
-
                         playerMustUpdated.Insert(playerIdWithNewAccess);
 					}
 				}
@@ -53,7 +52,6 @@ class DZLPlayerHouseListener
                         DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(playerId);
 
                         playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
-
                         playerMustUpdated.Insert(playerId);
 					}
 				}
