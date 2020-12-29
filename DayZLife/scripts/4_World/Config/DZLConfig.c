@@ -28,7 +28,7 @@ class DZLConfig
         bankConfig = new DZLBankingConfig;
         jobConfig = new DZLJobConfig;
 		licenceConfig = new DZLLicenceConfig;
-		traderConfig = new DZLTraderConfig;
+		traderConfig = null;
 		copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
         medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
         civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
