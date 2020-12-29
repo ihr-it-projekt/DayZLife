@@ -33,7 +33,7 @@ class DZLCarMenu : DZLBaseMenu
 		super.OnShow();
 		
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_CAR_KEYS, new Param1<CarScript>(car), true);
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ALL_PLAYERS, new Param1<PlayerBase>(player), true);
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL, new Param1<PlayerBase>(player), true);
 	}
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {
@@ -64,8 +64,8 @@ class DZLCarMenu : DZLBaseMenu
                 onlinePlayers = paramOnlinePlayers.param1;
                 UpdateList();
             }
-        } else if (rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
-            DebugMessageDZL("DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE");
+        } else if (rpc_type == DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE) {
+            DebugMessageDZL("DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE");
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramAllPlayers;
             if (ctx.Read(paramAllPlayers)){
                 keyOwner = paramAllPlayers.param1;

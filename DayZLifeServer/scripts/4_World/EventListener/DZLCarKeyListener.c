@@ -32,6 +32,12 @@ class DZLCarKeyListener
 
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(keyOwner), true, sender);
             }
+        } else if (rpc_type == DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL) {
+            autoptr Param1<PlayerBase> paramGetAllPlayers;
+            if (ctx.Read(paramGetAllPlayers)){
+                array<ref DZLOnlinePlayer> players = dzlPlayerIdentities.GetPlayerCollection(new array<string>);
+                GetGame().RPCSingleParam(paramGetAllPlayers.param1, DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(players), true, sender);
+            }
         }
     }
 }
