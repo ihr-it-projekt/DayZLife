@@ -1,0 +1,22 @@
+class DZLCarEventListener
+{
+    void DZLCarEventListener() {
+        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+    }
+
+    void ~DZLCarEventListener() {
+        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
+    }
+
+    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (rpc_type == DAY_Z_LIFE_UPDATE_CAR) {
+            Param4<CarScript, int, ref array<string>, string> carParam;
+            if (ctx.Read(carParam) && carParam.param1) {
+                DebugMessageDZL("Update car");
+                carParam.param1.dzlCarId = carParam.param2;
+                carParam.param1.playerAccess = carParam.param3;
+                carParam.param1.ownerId = carParam.param4;
+            }
+        }
+    }
+}

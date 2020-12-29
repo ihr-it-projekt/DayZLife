@@ -6,7 +6,7 @@ modded class CarScript
 	int dzlCarId = 0;
     ref array<string> playerAccess;
     string ownerId;
-   
+
     override void OnEngineStart() {
         super.OnEngineStart();
         Human player = CrewMember(DayZPlayerConstants.VEHICLESEAT_DRIVER);
@@ -36,6 +36,7 @@ modded class CarScript
     bool IsOwner(PlayerIdentity player) {
         if(GetGame().IsServer() && ownerId == "") {
             ownerId = player.GetId();
+            SynchronizeValues();
         }
         
         return ownerId == player.GetId();
@@ -47,7 +48,6 @@ modded class CarScript
         if(dzlCarId == 0) {
             dzlCarId = Math.RandomIntInclusive(1, int.MAX - 1);
         }
-
         playerAccess = new array<string>;
 
         SynchronizeValues();
@@ -95,8 +95,8 @@ modded class CarScript
         ctx.Write(store);
 	}
 
-	override bool IsInventoryVisible(){
-        return (GetGame().GetPlayer() && (!GetGame().GetPlayer().GetCommand_Vehicle() || GetGame().GetPlayer().GetCommand_Vehicle().GetTransport() == this)) && HasPlayerAccess(GetGame().GetPlayer().GetIdentity().GetId());
+	override bool IsInventoryVisible() {
+	    return super.IsInventoryVisible() && HasPlayerAccess(GetGame().GetPlayer().GetIdentity().GetId());
     }
 
 	override bool OnStoreLoad(ParamsReadContext ctx, int version){
@@ -109,19 +109,12 @@ modded class CarScript
             playerAccess = store.param2;
             ownerId = store.param3;
         }
-        DebugMessageDZL("load ownerId" + ownerId);
-        DebugMessageDZL("load dzlCarId" + dzlCarId);
 
         SynchronizeValues();
-
 		return true;
 	}
 
-
-
 	void SynchronizeValues() {
-        if (GetGame().IsServer()) {
-            SetSynchDirty();
-        }
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param4<CarScript, int, ref array<string>, string>(this, dzlCarId, playerAccess, ownerId), true);
     }
 }
