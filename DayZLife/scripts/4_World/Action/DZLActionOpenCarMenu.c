@@ -21,12 +21,8 @@ class DZLActionOpenCarMenu: ActionInteractBase
 	{
 		if (g_Game.GetUIManager().GetMenu() == NULL){
 		    PlayerBase player = action_data.m_Player;
-            CarScript car;
-            if (player && player.GetCommand_Vehicle()){
-                car = CarScript.Cast(player.GetCommand_Vehicle().GetTransport());
-            } else {
-                car = CarScript.Cast(action_data.m_Target.GetParent());
-            }
+            CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
+
 			
 			if (car) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
@@ -38,22 +34,10 @@ class DZLActionOpenCarMenu: ActionInteractBase
         if (!GetGame().IsServer() && g_Game.GetUIManager().GetMenu() != NULL){
 			return false;
 		}
-        CarScript car;
-        if (player && player.GetCommand_Vehicle()){
-            car = CarScript.Cast(player.GetCommand_Vehicle().GetTransport());
-        } else {
-            car = CarScript.Cast(target.GetParent());
-        }
-
-        if (!car) {
-            car = CarScript.Cast(target.GetObject());
-        }
+        CarScript car = CarScript.Cast(target.GetParent());
 
 		if (car) {
-		    if (GetGame().IsServer()) {
-		        return car.IsOwner(player.GetIdentity());
-		    }
-			return true;
+            return car.IsOwner(player.GetIdentity());
 		}
 
 		return false;
