@@ -6,7 +6,7 @@ modded class ActionOpenCarDoors
         if (carScript && carScript.HasPlayerAccess(player.GetIdentity().GetId())) {
             return super.ActionCondition(player, target, item);
         } else if (carScript) {
-            return false
+            return false;
         }
 		
 		return super.ActionCondition(player, target, item);

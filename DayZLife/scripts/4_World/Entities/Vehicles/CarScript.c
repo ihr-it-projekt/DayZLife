@@ -100,7 +100,9 @@ modded class CarScript
 	}
 
 	override bool IsInventoryVisible() {
-	    return super.IsInventoryVisible() && HasPlayerAccess(GetGame().GetPlayer().GetIdentity().GetId());
+	    PlayerBase player = PlayerBaseHelper.GetPlayer();
+	    
+	    return super.IsInventoryVisible() && (HasPlayerAccess(player.GetIdentity().GetId()) || player.dzlPlayer.IsActiveAsCop());
     }
 
 	override bool OnStoreLoad(ParamsReadContext ctx, int version){
