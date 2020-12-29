@@ -7,6 +7,7 @@ modded class ActionDetach
 			if (carScript && carScript.HasPlayerAccess(player.GetIdentity().GetId())) {
                 return super.ActionCondition(player, target, item);
 			}
+			return false;
 		}
 
         return super.ActionCondition(player, target, item);
