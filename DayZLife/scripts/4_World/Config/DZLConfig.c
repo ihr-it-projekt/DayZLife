@@ -27,7 +27,7 @@ class DZLConfig
 //        houseExtensions = new DZLHouseExtensions;
 //        bankConfig = new DZLBankingConfig;
 //        jobConfig = new DZLJobConfig;
-//		licenceConfig = new DZLLicenceConfig;
+		licenceConfig = new DZLLicenceConfig;
 //		traderConfig = null;
 //		copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
 //        medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
