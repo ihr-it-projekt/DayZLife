@@ -57,18 +57,18 @@ class DZLCarMenu : DZLBaseMenu
 	}
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {
-            DebugMessageDZL("DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE");
+        if (rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
+            DebugMessageDZL("DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE");
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramOnlinePlayers;
             if (ctx.Read(paramOnlinePlayers)){
-                onlinePlayers = paramOnlinePlayers.param1;
+                keyOwner = paramOnlinePlayers.param1;
                 UpdateList();
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE) {
             DebugMessageDZL("DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE");
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramAllPlayers;
             if (ctx.Read(paramAllPlayers)){
-                keyOwner = paramAllPlayers.param1;
+                onlinePlayers = paramAllPlayers.param1;
                 UpdateList();
             }
         }
