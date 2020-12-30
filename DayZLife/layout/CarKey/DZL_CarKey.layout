@@ -87,7 +87,7 @@ FrameWidgetClass License_Menu {
       }
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
-       position 0 0
+       position -0.00042 0
        size 1 0.89898
        halign center_ref
        valign bottom_ref
@@ -98,8 +98,8 @@ FrameWidgetClass License_Menu {
        style editor_quad_dark
        {
         TextListboxWidgetClass playerList {
-         position 0.00708 0
-         size 0.31 0.9676
+         position 0.00708 0.05248
+         size 0.31 0.86263
          valign center_ref
          hexactpos 0
          vexactpos 0
@@ -110,7 +110,7 @@ FrameWidgetClass License_Menu {
          lines 20
         }
         TextListboxWidgetClass playerhaveKeylist {
-         position 0.00708 -0
+         position 0.00708 0
          size 0.31 0.9676
          halign right_ref
          valign center_ref
@@ -124,7 +124,7 @@ FrameWidgetClass License_Menu {
         }
         PanelWidgetClass PanelWidget4 {
          ignorepointer 1
-         position -0 0
+         position 0 0
          size 0.35167 1
          halign center_ref
          valign center_ref
@@ -136,7 +136,7 @@ FrameWidgetClass License_Menu {
          {
           PanelWidgetClass PanelWidget8 {
            ignorepointer 1
-           position -0 0.01619
+           position 0 0.01619
            size 0.66 0.1
            halign center_ref
            valign bottom_ref
@@ -162,6 +162,44 @@ FrameWidgetClass License_Menu {
            }
           }
          }
+        }
+        PanelWidgetClass PanelWidget5 {
+         ignorepointer 1
+         position -0.21259 0.89078
+         size 0.06255 0.1
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass searchButton {
+           color 0.251 0.502 0 1
+           position -0.00355 -0.02697
+           size 0.98949 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#search"
+          }
+         }
+        }
+        EditBoxWidgetClass search_input {
+         position -0.36921 0.89246
+         size 0.24444 0.09149
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
         }
        }
       }
