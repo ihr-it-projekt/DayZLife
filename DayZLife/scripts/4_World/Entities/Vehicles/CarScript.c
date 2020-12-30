@@ -116,6 +116,10 @@ modded class CarScript
             ownerId = store.param3;
         }
 
+        DebugMessageDZL("playerAccess " + playerAccess.Count());
+        DebugMessageDZL("dzlCarId " + dzlCarId);
+        DebugMessageDZL("ownerId " + ownerId);
+
         SynchronizeValues(null);
 		return true;
 	}
