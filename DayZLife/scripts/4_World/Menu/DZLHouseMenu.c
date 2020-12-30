@@ -24,11 +24,15 @@ class DZLHouseMenu : DZLBaseMenu
 	private TextListboxWidget keyPlayerList;
 	private TextListboxWidget keyPlayerAccessList;
 	private ButtonWidget keySaveButton;
+	private ButtonWidget searchButton;
+	private EditBoxWidget searchInput;
 	
 	private Widget houseBuy;
 	private Widget houseUpgrade;
 	private Widget houseKey;
 	private int indexPanel;
+
+	private ref array<ref DZLOnlinePlayer> noAccess;
 
 	void DZLHouseMenu(){
 	    layoutPath = "DayZLife/layout/Housing/HouseMenu.layout";
@@ -74,6 +78,8 @@ class DZLHouseMenu : DZLBaseMenu
 		keySaveButton = creator.GetButtonWidget("keySaveButton");
 		keyPlayerList = creator.GetTextListboxWidget("keyPlayerList");
 		keyPlayerAccessList = creator.GetTextListboxWidget("keyHasKeyList");
+		searchButton = creator.GetButtonWidget("searchButton");
+		searchInput = creator.GetEditBoxWidget("search_input");
 
 		GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param2<PlayerBase, Building>(player, building), true);
 
@@ -260,7 +266,11 @@ class DZLHouseMenu : DZLBaseMenu
                 return true;
             case keySaveButton:
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param3<PlayerBase, Building, ref array<string>>(player, building, DZLDisplayHelper.GetPlayerIdsFromList(keyPlayerAccessList)), true);
+                searchInput.SetText("");
                 return true;
+			case searchButton:
+				DZLDisplayHelper.SearchOnlinePlayers(searchInput.GetText(), keyPlayerList, keyPlayerAccessList, noAccess, player);
+				return true;
             default:
                 break;
 		}
@@ -302,13 +312,14 @@ class DZLHouseMenu : DZLBaseMenu
         } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramPlayers;
             if (ctx.Read(paramPlayers)){
-                array<ref DZLOnlinePlayer> noAccess = paramPlayers.param2;
+                noAccess = paramPlayers.param2;
                 array<ref DZLOnlinePlayer> access = paramPlayers.param1;
 				keyPlayerList.ClearItems();
 				keyPlayerAccessList.ClearItems();
                 foreach(DZLOnlinePlayer playerNoAccess: noAccess) {
 					keyPlayerList.AddItem(playerNoAccess.name, playerNoAccess, 0);
 				}
+				
 				foreach(DZLOnlinePlayer playerAccess: access) {
 					keyPlayerAccessList.AddItem(playerAccess.name, playerAccess, 0);
 				}

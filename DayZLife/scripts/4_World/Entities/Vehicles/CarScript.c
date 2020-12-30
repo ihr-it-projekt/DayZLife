@@ -7,6 +7,7 @@ modded class CarScript
     ref array<string> playerAccess;
     string ownerId;
     bool isSync = false;
+    private int timeAskForDataSync;
 
     override void OnEngineStart() {
         super.OnEngineStart();
@@ -60,9 +61,10 @@ modded class CarScript
     }
 
     bool HasPlayerAccess(string ident) {
-    	if (GetGame().IsClient() && !isSync) {
+        DZLDate currentDate = new DZLDate();
+    	if (GetGame().IsClient() && currentDate.inSeconds - timeAskForDataSync > 5) {
     	    GetGame().RPCSingleParam(GetGame().GetPlayer(), DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE, new Param1<CarScript>(this), true);
-    	    isSync = true;
+			timeAskForDataSync = currentDate.inSeconds;
     	}
 
         return ident == ownerId || -1 != playerAccess.Find(ident);
@@ -119,12 +121,18 @@ modded class CarScript
         DebugMessageDZL("playerAccess " + playerAccess.Count());
         DebugMessageDZL("dzlCarId " + dzlCarId);
         DebugMessageDZL("ownerId " + ownerId);
+        DebugMessageDZL("position " + GetPosition().ToString(true));
+
 
         SynchronizeValues(null);
 		return true;
 	}
 
 	void SynchronizeValues(PlayerIdentity sender) {
+	    if (sender && ownerId == "") {
+	        ownerId = sender.GetId();
+	    }
+	    
         GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param4<CarScript, int, ref array<string>, string>(this, dzlCarId, playerAccess, ownerId), true, sender);
     }
 }

@@ -57,7 +57,7 @@ class DZLCarMenu : DZLBaseMenu
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<string>>(car, DZLDisplayHelper.GetPlayerIdsFromList(carPanelKeyOwnerList)), true);
 			carKeySearchInput.SetText("");
 		} else if (w == carKeySearchButton) {
-			SearchOnlinePlayers(carKeySearchInput.GetText());
+			DZLDisplayHelper.SearchOnlinePlayers(carKeySearchInput.GetText(), carPanelOnlinePlayerList, carPanelKeyOwnerList, onlinePlayers, player);
 		}
 
 		return false;
@@ -79,28 +79,6 @@ class DZLCarMenu : DZLBaseMenu
         }
 	}
 
-	private void SearchOnlinePlayers(string search) {
-        carPanelOnlinePlayerList.ClearItems();
-
-        search.ToLower();
-
-        foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
-
-            if (player.GetIdentity().GetId() == onlinePlayer.id) continue;
-            bool hasKey = false;
-            foreach(DZLOnlinePlayer keyPlayer: keyOwner) {
-                if (onlinePlayer.id == keyPlayer.id) {
-                    hasKey = true;
-                    break;
-                }
-            }
-			string playerNameLow = onlinePlayer.name;
-			playerNameLow.ToLower();
-            if (!hasKey && (search == "" || playerNameLow.Contains(search))) {
-                carPanelOnlinePlayerList.AddItem(onlinePlayer.name, onlinePlayer, 0);
-            }
-        }
-	}
 
 	private void UpdateList() {
 	    if (keyOwner && onlinePlayers) {

@@ -41,7 +41,6 @@ class DZLCarKeyListener
         } else if (rpc_type == DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE) {
             Param1<CarScript> carUpdateParam;
             if (ctx.Read(carUpdateParam)) {
-                DebugMessageDZL("send update");
                 carUpdateParam.param1.SynchronizeValues(sender);
             }
         }

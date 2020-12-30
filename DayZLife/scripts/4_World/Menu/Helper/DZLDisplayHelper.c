@@ -77,7 +77,37 @@ class DZLDisplayHelper
         sourceWidget.GetItemData(pos, 0, itemType);
         return itemType;
     }
-	
+
+
+	static void SearchOnlinePlayers(string search, TextListboxWidget target, TextListboxWidget exclude, array<ref DZLOnlinePlayer> onlinePlayers, PlayerBase player) {
+	    if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        target.ClearItems();
+        search.ToLower();
+        int countPlayers = exclude.GetNumItems();
+
+        foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
+            if (player.GetIdentity().GetId() == onlinePlayer.id) continue;
+            bool hasKey = false;
+
+            for(int i = 0; i < countPlayers; i ++) {
+                DZLOnlinePlayer keyPlayer;
+                exclude.GetItemData(i, 0, keyPlayer);
+                if (!keyPlayer) continue;
+
+                if (onlinePlayer.id == keyPlayer.id) {
+                    hasKey = true;
+                    break;
+                }
+            }
+            if (hasKey) continue;
+
+            string playerNameLow = onlinePlayer.name;
+            playerNameLow.ToLower();
+            if (search == "" || playerNameLow.Contains(search)) {
+                target.AddItem(onlinePlayer.name, onlinePlayer, 0);
+            }
+        }
+    }
 	
 
 }
