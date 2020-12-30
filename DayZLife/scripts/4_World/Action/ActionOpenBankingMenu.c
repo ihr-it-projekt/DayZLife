@@ -40,6 +40,17 @@ class ActionOpenBankingMenu: ActionInteractBase
 
         if (!npc) return false;
 
-        return npc.IsDZLBank;
+        if (npc.IsDZLBank) {
+            DZLDate currentDate = new DZLDate();
+
+            if(!player.hasBankingConfig && currentDate.inSeconds - player.timeAskForBankingConfig > 5) {
+                player.timeAskForBankingConfig = currentDate.inSeconds;
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING, new Param1<ref PlayerBase>(player), true);
+            }
+
+            return player.hasBankingConfig;
+        }
+
+        return false;
 	}
 }

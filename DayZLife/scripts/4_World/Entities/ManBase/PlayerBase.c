@@ -28,6 +28,11 @@ modded class PlayerBase
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	
+	int timeAskForTraderConfig = 0;
+	bool hasTraderConfig = false;
+	int timeAskForBankingConfig = 0;
+	bool hasBankingConfig = false;
+
 	override void Init() {
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
@@ -68,6 +73,7 @@ modded class PlayerBase
     void InitDZLPlayer() {
         if (GetGame().IsClient() && IsDZLPlayer()) {
             Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
+            config = new DZLConfig();
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
