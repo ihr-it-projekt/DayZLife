@@ -165,8 +165,8 @@ FrameWidgetClass License_Menu {
         }
         PanelWidgetClass PanelWidget5 {
          ignorepointer 1
-         position -0.21259 0.89078
-         size 0.06255 0.1
+         position -0.20457 0.89502
+         size 0.0433 0.08879
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -177,8 +177,7 @@ FrameWidgetClass License_Menu {
          {
           ButtonWidgetClass searchButton {
            color 0.251 0.502 0 1
-           position -0.00355 -0.02697
-           size 0.98949 0.9
+           size 0.9 0.9
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -186,13 +185,28 @@ FrameWidgetClass License_Menu {
            hexactsize 0
            vexactsize 0
            style Default
-           text "#search"
+           {
+            ImageWidgetClass ImageWidget0 {
+             ignorepointer 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             mode blend
+             "src alpha" 1
+             stretch 1
+            }
+           }
           }
          }
         }
         EditBoxWidgetClass search_input {
-         position -0.36921 0.89246
-         size 0.24444 0.09149
+         position -0.36311 0.89502
+         size 0.25962 0.08879
          halign center_ref
          valign bottom_ref
          hexactpos 0
