@@ -33,6 +33,11 @@ class DZLAlmanacMenu : DZLBaseMenu
     private Widget adminPanelWidget;
 	private TextListboxWidget adminPlayers;
 	private ButtonWidget adminDeletePlayerButton;
+	private EditBoxWidget adminAddMoneyToPlayerInput;
+	private ButtonWidget adminAddMoneyToPlayerButton;
+	private ButtonWidget adminAddMoneyToPlayerButtonBank;
+	private ButtonWidget adminSearchPlayer;
+	private EditBoxWidget adminSearchPlayerInput;
 
     private TextWidget countCivil;
     private TextWidget countMedic;
@@ -40,6 +45,8 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private ButtonWidget syncButton;
 
 	private XComboBoxWidget toggleViewWidget;
+
+	private ref array<ref DZLPlayer> allPlayers;
 
 	void DZLAlmanacMenu() {
 	    Construct();
@@ -81,6 +88,12 @@ class DZLAlmanacMenu : DZLBaseMenu
 		adminPanelWidget = creator.GetWidget("admin_Panel");
 		adminPlayers = creator.GetTextListboxWidget("players");
 		adminDeletePlayerButton = creator.GetButtonWidget("delete_Button");
+		adminAddMoneyToPlayerButton = creator.GetButtonWidget("giveMoneyButton");
+		adminAddMoneyToPlayerButtonBank = creator.GetButtonWidget("giveMoneyButtonBank");
+		adminSearchPlayer = creator.GetButtonWidget("searchButton");
+		adminAddMoneyToPlayerInput = creator.GetEditBoxWidget("moneyInput");
+		adminSearchPlayerInput = creator.GetEditBoxWidget("search_input");
+		
 
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 
@@ -290,6 +303,24 @@ class DZLAlmanacMenu : DZLBaseMenu
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
+		} else if (w == adminAddMoneyToPlayerButton) {
+		    DZLPlayer __dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
+
+            if (__dzlPlayer) {
+                int deposit = adminAddMoneyToPlayerInput.GetText().ToInt();
+		        GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param4<PlayerBase, string, int, bool>(player, __dzlPlayer.dayZPlayerId, deposit, false), true);
+            } else {
+                player.DisplayMessage("#no_player_selected");
+            }
+		} else if (w == adminAddMoneyToPlayerButtonBank) {
+		    DZLPlayer ___dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
+
+            if (___dzlPlayer) {
+                int depositBank = adminAddMoneyToPlayerInput.GetText().ToInt();
+		        GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param4<PlayerBase, string, int, bool>(player, ___dzlPlayer.dayZPlayerId, depositBank, true), true);
+            } else {
+                player.DisplayMessage("#no_player_selected");
+            }
 		} else if (w == syncButton) {
 			
 			Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(player);
@@ -299,6 +330,8 @@ class DZLAlmanacMenu : DZLBaseMenu
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
 			player.DisplayMessage("#player_was_manuel_synced");
 			syncButton.Show(false);
+		} else if (w == adminSearchPlayer) {
+            DZLDisplayHelper.SearchOnlinePlayersSingleWiget(adminSearchPlayerInput.GetText(), adminPlayers, allPlayers);
 		}
 
 		return false;
@@ -329,7 +362,7 @@ class DZLAlmanacMenu : DZLBaseMenu
             if (ctx.Read(paramAllPlayers)){
                 adminPlayers.ClearItems();
 
-				array<ref DZLPlayer> allPlayers = paramAllPlayers.param1;
+				allPlayers = paramAllPlayers.param1;
 
 				foreach(DZLPlayer _player: allPlayers) {
 				    if (_player) {

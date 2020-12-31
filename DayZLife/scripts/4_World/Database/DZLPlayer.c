@@ -127,6 +127,7 @@ class DZLPlayer: DZLSaveModel
 		    mustSave = true;
 		}
     }
+
 	void AddMoneyToPlayerBank(int moneyCount) {
         if (!DayZGame().IsClient()) {
 			bank += moneyCount;

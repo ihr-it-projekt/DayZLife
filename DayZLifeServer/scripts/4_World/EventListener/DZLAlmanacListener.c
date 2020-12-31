@@ -74,6 +74,23 @@ class DZLAlmanacListener
                 dzlPlayerIdentities.UpdateCops(paramUpdateCops.param2);
 				DZLSendMessage(ident, "#update_cop_list_successful");
             }
+        } else if (rpc_type == DAY_Z_LIFE_MONEY_TRANSFER_ADMIN) {
+            autoptr Param4<PlayerBase, string, int, bool> paramDepositAdminPlayer;
+            string messageDepositPP = "";
+            if (ctx.Read(paramDepositAdminPlayer)){
+                PlayerIdentity identMoney = paramDepositAdminPlayer.param1.GetIdentity();
+                if (!config.IsAdmin(identMoney)) return;
+
+                DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositAdminPlayer.param2);
+
+                if (paramDepositAdminPlayer.param4) {
+                    dzlPlayerReciverPP.AddMoneyToPlayer(paramDepositAdminPlayer.param3);
+                } else {
+                    DZLDatabaseLayer.Get().GetBank().AddMoney(paramDepositAdminPlayer.param3);
+                    dzlPlayerReciverPP.AddMoneyToPlayerBank(paramDepositAdminPlayer.param3);
+                }
+                DZLSendMessage(identMoney, "#money_transfer_successful");
+            }
         }
     }
 

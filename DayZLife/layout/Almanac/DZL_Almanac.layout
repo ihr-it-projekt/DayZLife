@@ -633,8 +633,8 @@ FrameWidgetClass Almanac {
          style editor_quad_dark
          {
           TextListboxWidgetClass players {
-           position 0 0
-           size 0.97371 0.97887
+           position 0 0.03946
+           size 0.97371 0.89996
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -645,11 +645,63 @@ FrameWidgetClass Almanac {
            colums "#Player_Name;65;#last_log_in_day;35"
            lines 30
           }
+          PanelWidgetClass PanelWidget25 {
+           ignorepointer 1
+           position 0.4199 0.91371
+           size 0.13707 0.0701
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass searchButton {
+             color 0.251 0.502 0 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             {
+              ImageWidgetClass ImageWidget4 {
+               ignorepointer 1
+               size 0.9 0.9
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+               mode blend
+               "src alpha" 1
+               stretch 1
+              }
+             }
+            }
+           }
+          }
+          EditBoxWidgetClass search_input {
+           position -0.08199 0.91371
+           size 0.82187 0.0701
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
+          }
          }
         }
         PanelWidgetClass PanelWidget22 {
          ignorepointer 1
-         position 0 0.011
+         position 0.40889 0.01545
          size 0.17 0.07
          halign center_ref
          valign bottom_ref
@@ -671,6 +723,71 @@ FrameWidgetClass Almanac {
            vexactsize 0
            style OldStyle
            text "#Delete_player"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget23 {
+         ignorepointer 1
+         position 0.18122 0.87089
+         size 0.12494 0.1
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass giveMoneyButton {
+           color 0.251 0.502 0 1
+           position -0.00572 -0.02697
+           size 0.98514 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#Deposit"
+          }
+         }
+        }
+        EditBoxWidgetClass moneyInput {
+         position -0.00954 0.87465
+         size 0.24444 0.09149
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
+        }
+        PanelWidgetClass PanelWidget24 {
+         ignorepointer 1
+         position 0.30984 0.87089
+         size 0.12318 0.1
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass giveMoneyButtonBank {
+           color 0.251 0.502 0 1
+           position -0.00355 -0.02697
+           size 0.98949 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#Deposit"
           }
          }
         }

@@ -108,6 +108,19 @@ class DZLDisplayHelper
             }
         }
     }
+	static void SearchOnlinePlayersSingleWiget(string search, TextListboxWidget target, array<ref DZLPlayer> onlinePlayers) {
+	    if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        target.ClearItems();
+        search.ToLower();
+
+        foreach(DZLPlayer onlinePlayer: onlinePlayers) {
+            string playerNameLow = onlinePlayer.playerName;
+            playerNameLow.ToLower();
+            if (search == "" || playerNameLow.Contains(search)) {
+                target.AddItem(onlinePlayer.playerName, onlinePlayer, 0);
+            }
+        }
+    }
 	
 
 }

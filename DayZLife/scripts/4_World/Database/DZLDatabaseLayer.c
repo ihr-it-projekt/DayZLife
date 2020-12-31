@@ -20,6 +20,11 @@ class DZLDatabaseLayer
         bank = new DZLBank;
     }
 
+    void ~ DZLDatabaseLayer() {
+        DebugMessageDZL("Save data at shutdown");
+        Save();
+    }
+
     void Save() {
         dzlPlayerIdentities.Save();
         dzlLockedHouses.Save();
