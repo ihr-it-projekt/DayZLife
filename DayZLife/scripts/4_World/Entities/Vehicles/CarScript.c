@@ -1,4 +1,3 @@
-
 modded class CarScript
 {
     string lastDriverId = "";
@@ -107,6 +106,8 @@ modded class CarScript
 
         Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(dzlCarId, playerAccess, ownerId);
         ctx.Write(store);
+        Param1<string> store2 = new Param1<string>(ownerName);
+        ctx.Write(store2);
 	}
 
 	override bool IsInventoryVisible() {
@@ -119,12 +120,16 @@ modded class CarScript
 		if (!super.OnStoreLoad( ctx, version))
 			return false;
 
-        Param4<int, ref array<string>, string, string> store = new Param4<int, ref array<string>, string, string>(0, new array<string>, "", "");
+        Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(0, new array<string>, "");
         if (ctx.Read(store)){
             dzlCarId = store.param1;
             playerAccess = store.param2;
             ownerId = store.param3;
-            ownerName = store.param4;
+        }
+
+        Param1<string> store2 = new Param1<string>("");
+        if (ctx.Read(store2)){
+            ownerName = store2.param1;
         }
 
         DebugMessageDZL("playerAccess " + playerAccess.Count());
