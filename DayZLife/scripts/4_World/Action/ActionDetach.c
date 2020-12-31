@@ -4,7 +4,7 @@ modded class ActionDetach
     {
 		if (target) {
             CarScript carScript = CarScript.Cast(target.GetParent());
-			if (carScript && carScript.HasPlayerAccess(player.GetIdentity().GetId())) {
+			if (carScript && carScript.HasPlayerAccess(player)) {
                 return super.ActionCondition(player, target, item);
 			}
 			return false;

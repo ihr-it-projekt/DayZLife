@@ -60,15 +60,16 @@ modded class CarScript
         SynchronizeValues(null);
     }
 
-    bool HasPlayerAccess(string ident) {
+    bool HasPlayerAccess(PlayerBase player) {
         DZLDate currentDate = new DZLDate();
-    	if (GetGame().IsClient() && currentDate.inSeconds - timeAskForDataSync > 5) {
+    	if (GetGame().IsClient() && currentDate.inSeconds - timeAskForDataSync > 5 && !isSync) {
     	    GetGame().RPCSingleParam(GetGame().GetPlayer(), DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE, new Param1<CarScript>(this), true);
 			timeAskForDataSync = currentDate.inSeconds;
     	}
-        PlayerBase player = PlayerBaseHelper.GetPlayer();
 
-        return ident == ownerId || -1 != playerAccess.Find(ident) || (player && player.dzlPlayer && player.dzlPlayer.IsActiveAsCop()));
+    	string ident = player.GetIdentity().GetId();
+
+        return ident == ownerId || -1 != playerAccess.Find(ident) || player.dzlPlayer.IsActiveAsCop();
     }
 
     void RemovePlayerAccess(string ident) {
@@ -84,15 +85,15 @@ modded class CarScript
     }
 
     bool CanOpenDoor(PlayerBase player) {
-        return HasPlayerAccess(player.GetIdentity().GetId());
+        return HasPlayerAccess(player);
     }
 
     bool CanLookDoor(PlayerBase player, int index) {
-        return HasPlayerAccess(player.GetIdentity().GetId());
+        return HasPlayerAccess(player);
     }
 
     bool CanRaidDoor(PlayerBase player, int index) {
-        return !HasPlayerAccess(player.GetIdentity().GetId());
+        return !HasPlayerAccess(player);
     }
 
     override void OnStoreSave(ParamsWriteContext ctx){
@@ -105,7 +106,7 @@ modded class CarScript
 	override bool IsInventoryVisible() {
 	    PlayerBase player = PlayerBaseHelper.GetPlayer();
 	    
-	    return super.IsInventoryVisible() && (HasPlayerAccess(player.GetIdentity().GetId()) || (player && player.dzlPlayer && player.dzlPlayer.IsActiveAsCop()));
+	    return super.IsInventoryVisible() && HasPlayerAccess(player);
     }
 
 	override bool OnStoreLoad(ParamsReadContext ctx, int version){
