@@ -13,25 +13,17 @@
     - Eingabefeld Anzahl Tage
     - Miete bezahlen
     - Anzeige Miete 24 h
-    -
 
 - Lagersystem wie P2PTrader
     - Erweiterbar
     - Raidbar machen
     Menu ähnlich wie Trader
 
-Trader
-    - wenn was auf spawn steht dann nix spawnen und nix abziehen
-    - Autos verkaufen
-
-- Autos
-    - eigenen Schlüsselsytem wie Haus
-
 - Hausdurchsuchung über Richterfunktion
     - zwei Menüs, eins für Cops, eins für Richter
     Cop:
     - Eingabefeld: Warum?
-    - Beatragen Button
+    - Beantragen Button
     Richter:
     - Text Feld
     - Koordinate
@@ -52,15 +44,11 @@ Führerschein
     - wenn keine Activität länger als 10 minuten, dann muss Spieler innerhalb von 15 sec bestätigen das er Paycheck bekommt.
     - Button zum bestätigen immer an anderer position
 
-
 - Alarmanlage Cops benachrichtigen
-- Erweiterung Code Look fürs haus
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health
 - nicht füttern von NPC
 - Waffen für NPC
-- Autos verkaufen über Timer und wer auf Fahrer Sitz saß
-- bankraub zeiten einstellbar machen, mindest anzahl spieler für banckraub
 - telefon mod
     - nur anrufen wenn bekannt
     - blocken von spielern
@@ -116,6 +104,7 @@ Führerschein
 
 Text
 - set car lifetime in types
+- storeHouseStateDisabled = 0;
 
 Known Bugs
 - Licence Crafting wont work with items that have a quantity fill

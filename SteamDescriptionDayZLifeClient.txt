@@ -10,6 +10,12 @@ Feature list
 - Spawn Menu with Job chose
 - own Moneysystem
 - money can be stolen from other and dead players
+- Cars
+    - Key System
+    - last driver can sale cars
+    - every car a one owner
+    - every player who have access to car can see the owner of the car
+
 - bank system
     - pay in/pay out
     - transfer money over bank
@@ -38,8 +44,10 @@ Feature list
 - process harvest items with different licences
 - implemented Almanac to figure out what you need/what you can do and how, short key to open is STRGL + STRGR
 - display online players per role in Almanac
-- Admins can in game delete/reset player data related to our mod
-- Admins can give players the role "Cop"
+- Admins can
+    - in game delete/reset player data related to our mod
+    - can give players the role "Cop"
+    - can give players money to player or bank
 - Arrestsystem
     - Prisoners must stay in a range, to reduce his arrest time
 - Player can get a Paycheck
@@ -55,6 +63,8 @@ Feature list
         - can get load out at specific position
         - can open police stations and prisons
         - can give player arrest
+        - can open every car
+        - can see owner of cars
 [/code]
 
 This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.
