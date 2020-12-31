@@ -106,8 +106,8 @@ modded class CarScript
 
         Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(dzlCarId, playerAccess, ownerId);
         ctx.Write(store);
-//        Param1<string> store2 = new Param1<string>(ownerName);
-//        ctx.Write(store2);
+        Param1<string> store2 = new Param1<string>(ownerName);
+        ctx.Write(store2);
 	}
 
 	override bool IsInventoryVisible() {
@@ -127,15 +127,15 @@ modded class CarScript
             ownerId = store.param3;
         }
 
-//        Param1<string> store2 = new Param1<string>("");
-//        if (ctx.Read(store2)){
-//            ownerName = store2.param1;
-//        }
+        Param1<string> store2 = new Param1<string>("");
+        if (ctx.Read(store2)){
+            ownerName = store2.param1;
+        }
 
         DebugMessageDZL("playerAccess " + playerAccess.Count());
         DebugMessageDZL("dzlCarId " + dzlCarId);
         DebugMessageDZL("ownerId " + ownerId);
-//        DebugMessageDZL("ownerName " + ownerName);
+        DebugMessageDZL("ownerName " + ownerName);
         DebugMessageDZL("position " + GetPosition().ToString(true));
 
         SynchronizeValues(null);
@@ -147,10 +147,10 @@ modded class CarScript
 	        ownerId = sender.GetId();
 	        ownerName = sender.GetName();
 	    }
-//
-//        if (sender && ownerName == "" && ownerId == sender.GetId()) {
-//	        ownerName = sender.GetName();
-//	    }
+
+        if (sender && ownerName == "" && ownerId == sender.GetId()) {
+	        ownerName = sender.GetName();
+	    }
 
         GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param5<CarScript, int, ref array<string>, string, string>(this, dzlCarId, playerAccess, ownerId, ownerName), true, sender);
     }
