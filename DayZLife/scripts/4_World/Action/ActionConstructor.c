@@ -20,5 +20,6 @@ modded class ActionConstructor
 		actions.Insert(ActionOpenLoadOutMenu);
 		actions.Insert(ActionOpenArrestMenu);
 		actions.Insert(DZLActionOpenCarMenu);
+		actions.Insert(ActionGetOwnerName);
     }
 }

@@ -6,6 +6,7 @@ modded class CarScript
 	int dzlCarId = 0;
     ref array<string> playerAccess;
     string ownerId;
+    string ownerName;
     bool isSync = false;
     private int timeAskForDataSync;
 
@@ -21,16 +22,20 @@ modded class CarScript
 	    super.SetActions();
 
         AddAction(DZLActionOpenCarMenu);
+        AddAction(ActionGetOwnerName);
 	}
 
 	void RemoveOwner() {
         ownerId = "";
+        ownerName = "";
+
         playerAccess = new array<string>;
         SynchronizeValues(null);
     }
 
     void AddOwner(PlayerIdentity player) {
         ownerId = player.GetId();
+        ownerName = player.GetName();
         playerAccess = new array<string>;
         SynchronizeValues(null);
     }
@@ -38,6 +43,7 @@ modded class CarScript
     bool IsOwner(PlayerIdentity player) {
         if(GetGame().IsServer() && ownerId == "") {
             ownerId = player.GetId();
+            ownerName = player.GetName();
             SynchronizeValues(null);
         }
         
@@ -113,16 +119,18 @@ modded class CarScript
 		if (!super.OnStoreLoad( ctx, version))
 			return false;
 
-        Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(0, new array<string>, "");
+        Param4<int, ref array<string>, string, string> store = new Param4<int, ref array<string>, string, string>(0, new array<string>, "", "");
         if (ctx.Read(store)){
             dzlCarId = store.param1;
             playerAccess = store.param2;
             ownerId = store.param3;
+            ownerName = store.param4;
         }
 
         DebugMessageDZL("playerAccess " + playerAccess.Count());
         DebugMessageDZL("dzlCarId " + dzlCarId);
         DebugMessageDZL("ownerId " + ownerId);
+        DebugMessageDZL("ownerName " + ownerName);
         DebugMessageDZL("position " + GetPosition().ToString(true));
 
         SynchronizeValues(null);
@@ -132,8 +140,9 @@ modded class CarScript
 	void SynchronizeValues(PlayerIdentity sender) {
 	    if (sender && ownerId == "") {
 	        ownerId = sender.GetId();
+	        ownerName = sender.GetName();
 	    }
 	    
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param4<CarScript, int, ref array<string>, string>(this, dzlCarId, playerAccess, ownerId), true, sender);
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param5<CarScript, int, ref array<string>, string, string>(this, dzlCarId, playerAccess, ownerId, ownerName), true, sender);
     }
 }

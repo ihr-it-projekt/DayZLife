@@ -83,7 +83,7 @@ class DZLAlmanacListener
 
                 DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositAdminPlayer.param2);
 
-                if (paramDepositAdminPlayer.param4) {
+                if (!paramDepositAdminPlayer.param4) {
                     dzlPlayerReciverPP.AddMoneyToPlayer(paramDepositAdminPlayer.param3);
                 } else {
                     DZLDatabaseLayer.Get().GetBank().AddMoney(paramDepositAdminPlayer.param3);
