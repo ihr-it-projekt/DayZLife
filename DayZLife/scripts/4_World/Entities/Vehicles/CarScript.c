@@ -99,11 +99,6 @@ modded class CarScript
 
         Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(dzlCarId, playerAccess, ownerId);
         ctx.Write(store);
-
-        DebugMessageDZL("playerAccess " + playerAccess.Count());
-        DebugMessageDZL("dzlCarId " + dzlCarId);
-        DebugMessageDZL("ownerId " + ownerId);
-        DebugMessageDZL("position " + GetPosition().ToString(true));
 	}
 
 	override bool IsInventoryVisible() {
@@ -127,7 +122,6 @@ modded class CarScript
         DebugMessageDZL("dzlCarId " + dzlCarId);
         DebugMessageDZL("ownerId " + ownerId);
         DebugMessageDZL("position " + GetPosition().ToString(true));
-
 
         SynchronizeValues(null);
 		return true;
