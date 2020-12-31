@@ -66,8 +66,9 @@ modded class CarScript
     	    GetGame().RPCSingleParam(GetGame().GetPlayer(), DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE, new Param1<CarScript>(this), true);
 			timeAskForDataSync = currentDate.inSeconds;
     	}
+        PlayerBase player = PlayerBaseHelper.GetPlayer();
 
-        return ident == ownerId || -1 != playerAccess.Find(ident);
+        return ident == ownerId || -1 != playerAccess.Find(ident) || (player && player.dzlPlayer && player.dzlPlayer.IsActiveAsCop()));
     }
 
     void RemovePlayerAccess(string ident) {
