@@ -1,14 +1,34 @@
 class DZLHouseExtensions
 {
+    string version = "1";
     ref array<ref DZLHouseExtension> extensions;
 
     void DZLHouseExtensions() {
-        extensions = new array<ref DZLHouseExtension>;
-        extensions.Insert(new DZLStorageType("1", "DZL_Wooden_Crate_1", "#desc_storage_1", 50));
-        extensions.Insert(new DZLStorageType("2", "DZL_Wooden_Crate_3", "#desc_storage_2", 150));
-        extensions.Insert(new DZLStorageType("3", "DZL_Wooden_Crate_5", "#desc_storage_3", 250));
-        extensions.Insert(new DZLHouseAlarm("4", "#Alarm_system", "#Alarm_system_desc_1", 1250, 1, "#Alarm_system_message_1"));
-        extensions.Insert(new DZLHouseAlarm("5", "#Alarm_system", "#Alarm_system_desc_2", 2500, 2, "#Alarm_system_message_2"));
-        extensions.Insert(new DZLHouseAlarm("6", "#Alarm_system", "#Alarm_system_desc_3", 5000, 3, "#Alarm_system_message_3"));
+        if (!Load()) {
+            version = "1"
+            extensions = new array<ref DZLHouseExtension>;
+            extensions.Insert(new DZLStorageType("1", "DZL_Wooden_Crate_1", "#desc_storage_1", 15000));
+            extensions.Insert(new DZLStorageType("2", "DZL_Wooden_Crate_3", "#desc_storage_2", 30000));
+            extensions.Insert(new DZLStorageType("3", "DZL_Wooden_Crate_5", "#desc_storage_3", 60000));
+            extensions.Insert(new DZLHouseAlarm("4", "#Alarm_system", "#Alarm_system_desc_1", 10000, 1, "#Alarm_system_message_1"));
+            extensions.Insert(new DZLHouseAlarm("5", "#Alarm_system", "#Alarm_system_desc_2", 20000, 2, "#Alarm_system_message_2"));
+            extensions.Insert(new DZLHouseAlarm("6", "#Alarm_system", "#Alarm_system_desc_3", 40000, 3, "#Alarm_system_message_3"));
+            Save();
+        }
+    }
+
+    private bool Load(){
+        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json")) {
+            JsonFileLoader<DZLHouseExtensions>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json", this);
+            return true;
+        }
+        return false;
+    }
+
+    private void Save(){
+        if (GetGame().IsServer()) {
+            CheckDZLConfigPath();
+            JsonFileLoader<DZLHouseExtensions>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json", this);
+        }
     }
 }

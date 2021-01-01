@@ -41,10 +41,19 @@ class DZLLockedHouses: DZLSaveModel
 			
             Building building = DZLBuildingHelper.GetBuilding(house);
 
-			if (!building) continue;
-			if (!house.GetLockedDoors() || !house.GetLockedDoors().Count() == 0) continue;
+			if (!building) {
+			    continue;
+			}
 
-            foreach(int doorIndex: house.GetLockedDoors()) {
+			if (!house.GetLockedDoors()){
+				continue;
+			}
+
+            if (house.GetLockedDoors().Count() == 0) {
+				continue;
+			}
+            array<int> doors = house.GetLockedDoors();
+            foreach(int doorIndex: doors) {
 				if (!building.IsDoorOpen(doorIndex)) {
 					building.CloseDoor(doorIndex);
 					building.LockDoor(doorIndex);

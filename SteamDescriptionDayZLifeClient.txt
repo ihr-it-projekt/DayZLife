@@ -1,8 +1,6 @@
 Welcome to DayZLife.
 
-Attention: This Mod needs also a Serverside Mod and will be published in near future. We are running currently a beta phase at rasselbande (https://discord.gg/YQswRNnjPB).
-
-If you are interested to have it on your own server, please watch at https://dayz-life.net/ or this mod page.
+Attention: This Mod needs also a Serverside Mod and is published here: https://steamcommunity.com/sharedfiles/filedetails/?id=2344834877.
 
 [code]
 Feature list
