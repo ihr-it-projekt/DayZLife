@@ -11,20 +11,20 @@ Feature list
 
 - Spawn Menu with Job chose
 - own Moneysystem
-- money can be stolen from other and dead players
 - Cars
     - Key System
     - last driver can sale cars
-    - every car a one owner
+    - every car has a one owner
     - every player who have access to car can see the owner of the car
 
+- money can be stolen from other and dead players
 - bank system
     - pay in/pay out
     - transfer money over bank
     - transfer money directly to players
     - time and player count controlled raids
-- bank can be raided
-- if player dies, money will stay at the dead character, money at bank will not touched
+    - bank can be raided
+    - if player dies, money will stay at the dead character, money at bank will not touched
 - own Tradersystem
     - several trader locations
     - trader can be configured that they can only used by a job group Cop/Medic/Civil or by all
@@ -52,7 +52,7 @@ Feature list
     - can give players money to player or bank
 - Arrestsystem
     - Prisoners must stay in a range, to reduce his arrest time
-- Player can get a Paycheck
+- Player can get a Paycheck, role related configurable
 - Jobs
     - Medic
         - can raid police stations and prisons
