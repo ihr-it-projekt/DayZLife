@@ -72,9 +72,23 @@ modded class CarScript
 			timeAskForDataSync = currentDate.inSeconds;
     	}
 
-    	string ident = player.GetIdentity().GetId();
+        if (!player) return false;
+		
+		string ident = player.GetIdentity().GetId();
+		
+		DZLPlayer dzlPlayer;
+		
+        if (!player.dzlPlayer) {
+            if (GetGame().IsServer()) {
+                dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
+            } else {
+				return false;
+			}
+        } else {
+			dzlPlayer = player.dzlPlayer;
+		}
 
-        return ident == ownerId || -1 != playerAccess.Find(ident) || player.dzlPlayer.IsActiveAsCop();
+        return ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop();
     }
 
     void RemovePlayerAccess(string ident) {
