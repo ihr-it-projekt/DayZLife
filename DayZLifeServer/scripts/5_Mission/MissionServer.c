@@ -30,7 +30,7 @@ modded class MissionServer {
         paycheckTimer.Run(60, paycheckController, "Check", null, true);
         DZLLicenceCheck.Get();
     }
-	
+
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		PlayerBase player = super.OnClientNewEvent(identity, pos, ctx);
 		

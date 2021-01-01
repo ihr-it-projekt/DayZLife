@@ -5,7 +5,7 @@ class DZLHouseExtensions
 
     void DZLHouseExtensions() {
         if (!Load()) {
-            version = "1"
+            version = "1";
             extensions = new array<ref DZLHouseExtension>;
             extensions.Insert(new DZLStorageType("1", "DZL_Wooden_Crate_1", "#desc_storage_1", 15000));
             extensions.Insert(new DZLStorageType("2", "DZL_Wooden_Crate_3", "#desc_storage_2", 30000));
