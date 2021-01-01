@@ -750,6 +750,7 @@ FrameWidgetClass Almanac {
            vexactsize 0
            style Default
            text "#Deposit_to_player"
+           text_proportion 0.6
           }
          }
         }
@@ -788,6 +789,7 @@ FrameWidgetClass Almanac {
            vexactsize 0
            style Default
            text "#Deposit_to_bank"
+           text_proportion 0.6
           }
          }
         }
