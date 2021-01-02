@@ -51,18 +51,7 @@ class DZLConfig
 
         return civilSpawnPoints;
     }
-	
-	bool IsAdmin(PlayerIdentity player) {
-		string playerId = player.GetId();
-		foreach(string id: adminIds.adminIds) {
-			if(playerId == id) {
-				return true;
-			}
-		}
-		return false;
-	}
 
-	
 	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
 		return houseConfig.houseConfigs;
 	}

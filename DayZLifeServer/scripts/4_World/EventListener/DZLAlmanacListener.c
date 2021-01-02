@@ -68,7 +68,7 @@ class DZLAlmanacListener
             if (ctx.Read(paramUpdateCops)){
 				PlayerIdentity ident = paramUpdateCops.param1.GetIdentity();
 
-                if (!config.IsAdmin(ident)) return;
+                if (!config.adminIds.CanManageCops(ident.GetId())) return;
 
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
                 dzlPlayerIdentities.UpdateCops(paramUpdateCops.param2);
@@ -79,7 +79,7 @@ class DZLAlmanacListener
             string messageDepositPP = "";
             if (ctx.Read(paramDepositAdminPlayer)){
                 PlayerIdentity identMoney = paramDepositAdminPlayer.param1.GetIdentity();
-                if (!config.IsAdmin(identMoney)) return;
+                if (!config.adminIds.CanManagePlayers(identMoney.GetId())) return;
 
                 DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositAdminPlayer.param2);
 
@@ -95,7 +95,7 @@ class DZLAlmanacListener
     }
 
     void SendUpdateList(PlayerBase player) {
-        if (!config.IsAdmin(player.GetIdentity())) return;
+        if (!config.adminIds.CanManageCops(player.GetIdentity().GetId())) return;
 
         array<Man> _players = new array<Man>;
         GetGame().GetPlayers(_players);
@@ -119,7 +119,7 @@ class DZLAlmanacListener
     }
 
     void SendAllPlayerList(PlayerIdentity player) {
-        if (!DZLConfig.Get().IsAdmin(player)) return;
+        if (!config.adminIds.CanManagePlayers(player.GetId())) return;
 
         array<ref DZLPlayer> collection = new array<ref DZLPlayer>;
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();

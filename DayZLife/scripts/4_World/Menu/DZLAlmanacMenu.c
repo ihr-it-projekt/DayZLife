@@ -45,6 +45,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private ButtonWidget syncButton;
 
 	private XComboBoxWidget toggleViewWidget;
+	
+	private int copPaneId = -1;
+	private int adminPanelId = -1;
 
 	private ref array<ref DZLPlayer> allPlayers;
 
@@ -94,7 +97,6 @@ class DZLAlmanacMenu : DZLBaseMenu
 		adminAddMoneyToPlayerInput = creator.GetEditBoxWidget("moneyInput");
 		adminSearchPlayerInput = creator.GetEditBoxWidget("search_input");
 		
-
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 
 		countCivil = creator.GetTextWidget("countCivil");
@@ -108,13 +110,20 @@ class DZLAlmanacMenu : DZLBaseMenu
 	
 	override void OnShow() {
 		super.OnShow();
+		string ident = player.GetIdentity().GetId();
 		
-		if (config.IsAdmin(player.GetIdentity())) {
+		if (config.adminIds.CanManageCops(ident)) {
 			toggleViewWidget.AddItem("#manage_cops");
-			toggleViewWidget.AddItem("#admin_Panel");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, new Param1<PlayerBase>(player), true);
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ALL_PLAYERS, new Param1<PlayerBase>(player), true);
+			copPaneId = toggleViewWidget.GetNumItems() - 1;
 		}
+
+		if (config.adminIds.CanManagePlayers(ident)) {
+			toggleViewWidget.AddItem("#admin_Panel");
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ALL_PLAYERS, new Param1<PlayerBase>(player), true);
+			adminPanelId = toggleViewWidget.GetNumItems() - 1;
+		}
+
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, new Param1<PlayerBase>(player), true);
 
 	    workzoneWidget.Show(true);
@@ -277,8 +286,8 @@ class DZLAlmanacMenu : DZLBaseMenu
 			workzoneWidget.Show(0 == item);
 		 	licenceWidget.Show(1 == item);
 		 	escapedWidget.Show(2 == item);
-			copPanelWidget.Show(3 == item);
-			adminPanelWidget.Show(4 == item);
+			copPanelWidget.Show(copPaneId == item);
+			adminPanelWidget.Show(adminPanelId == item);
 		} else if (w == copPanelSave) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
 		} else if (w == escapedPlayers) {

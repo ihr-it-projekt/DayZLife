@@ -1,21 +1,49 @@
 class DZLAdmin
 {
     ref array<string> adminIds;
-	string version = "1";
+    ref array<ref DZLPlayerAccess> access;
+	string version = "2";
 
     void DZLAdmin() {
         if (!Load()) {
+            access = new array<ref DZLPlayerAccess>;
             adminIds = new array<string>;
+            version = "2";
 
-            if (DAY_Z_LIFE_DEBUG) {
-                adminIds.Insert("yWqfOC-DbZMpRXQ8NHEL1VPSTG2elJWrU1pMdqSGrN0=");
-                adminIds.Insert("f2Yt_of2vfE9XksMJEFwhMiLI1o95ZOTFvt7bKRiwuU=");
+            Save();
+        }
+
+        if (version == "1") {
+            access = new array<ref DZLPlayerAccess>;
+            if (adminIds && adminIds.Count() > 0) {
+                foreach(string id: adminIds) {
+                    access.Insert(new DZLPlayerAccess(id));
+                }
             }
 
+            adminIds.Clear();
+            version = "2";
             Save();
         }
     }
 
+    bool CanManagePlayers(string ident) {
+		foreach(DZLPlayerAccess playerAccess: access) {
+        	if (playerAccess && playerAccess.GetIdent() == ident) {
+				return playerAccess.CanManagePlayers();
+			}
+		}
+        return false;
+    }
+
+    bool CanManageCops(string ident) {
+        foreach(DZLPlayerAccess playerAccess: access) {
+        	if (playerAccess && playerAccess.GetIdent() == ident) {
+				return playerAccess.CanManageCops();
+			}
+		}
+        return false;
+    }
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json")) {
