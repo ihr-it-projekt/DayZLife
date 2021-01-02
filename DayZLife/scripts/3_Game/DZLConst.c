@@ -85,6 +85,7 @@ static string DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE = "$profile:DayZLife\\Data\\Ho
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR = "$profile:DayZLife\\Data\\Car\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER = "$profile:DayZLife\\Data\\Player\\";
 static string LOCKED_HOUSES_FILE_NAME = "housesLocked.json";
+static string DAY_Z_LIFE_LOGS = "$profile:DayZLife\\Logs\\";
 
 static string DAY_Z_LIFE_JOB_COP = "Cop";
 static string DAY_Z_LIFE_JOB_MEDIC = "Medic";

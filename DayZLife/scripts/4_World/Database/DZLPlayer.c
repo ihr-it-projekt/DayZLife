@@ -18,9 +18,6 @@ class DZLPlayer: DZLSaveModel
         fileName = playerId + ".json";
         if (!Load()) {
             bank = moneyToAdd;
-//            if (DAY_Z_LIFE_DEBUG) {
-//                money = 100000;
-//            }
             this.dayZPlayerId = playerId;
 
             DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -123,6 +120,7 @@ class DZLPlayer: DZLSaveModel
 	
 	void AddMoneyToPlayer(int moneyCount) {
         if (!DayZGame().IsClient()) {
+            LogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 			money += moneyCount;
 		    mustSave = true;
 		}
@@ -130,6 +128,7 @@ class DZLPlayer: DZLSaveModel
 
 	void AddMoneyToPlayerBank(int moneyCount) {
         if (!DayZGame().IsClient()) {
+            LogMoneyTransaction(dayZPlayerId, "bank", money, money + moneyCount, moneyCount);
 			bank += moneyCount;
 		    mustSave = true;
 		}
@@ -145,12 +144,14 @@ class DZLPlayer: DZLSaveModel
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
+        LogMoneyTransaction(dayZPlayerId, "player", money, 0, money);
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
         mustSave = true;
     }
 	
 	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+		LogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 		playerTarget.AddMoneyToPlayer(moneyToTransfer);
 		money -= moneyToTransfer;
 		
@@ -164,15 +165,18 @@ class DZLPlayer: DZLSaveModel
 		
 		if (money > 0) {
 			if (money < moneyToTransfer) {
+			    LogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
 				moneyToTransfer -= money;
 				money = 0;
 			} else {
+			    LogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 				money -= moneyToTransfer;
 				moneyToTransfer = 0;
 			}
 		}
 		
 		if (moneyToTransfer > 0) {
+		    LogMoneyTransaction(dayZPlayerId, "bank", bank, bank - moneyToTransfer, moneyToTransfer * -1);
 			bank -= moneyToTransfer;
 			moneyBankAdd -= moneyToTransfer;
 		}
