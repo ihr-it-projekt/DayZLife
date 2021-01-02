@@ -146,12 +146,6 @@ modded class CarScript
             ownerName = store2.param1;
         }
 
-        DebugMessageDZL("playerAccess " + playerAccess.Count());
-        DebugMessageDZL("dzlCarId " + dzlCarId);
-        DebugMessageDZL("ownerId " + ownerId);
-        DebugMessageDZL("ownerName " + ownerName);
-        DebugMessageDZL("position " + GetPosition().ToString(true));
-
         SynchronizeValues(null);
 		return true;
 	}
