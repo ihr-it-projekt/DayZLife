@@ -24,7 +24,7 @@ modded class PlayerBase
 	bool IsTrader = false;
 	bool IsLoadOut = false;
 	int moneyPlayerIsDead = 0;
-	bool IsRealPlayer = false;
+	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	
@@ -36,7 +36,7 @@ modded class PlayerBase
 	override void Init() {
         super.Init();
         RegisterNetSyncVariableBool("IsDZLBank");
-        RegisterNetSyncVariableBool("IsRealPlayer");
+        RegisterNetSyncVariableBool("IsRealPlayerDZL");
         RegisterNetSyncVariableBool("IsLicencePoint");
         RegisterNetSyncVariableBool("IsTrader");
         RegisterNetSyncVariableBool("IsLoadOut");
@@ -248,7 +248,7 @@ modded class PlayerBase
     }
 
     void SetMoneyPlayerIsDead(float money) {
-        IsRealPlayer = false;
+        IsRealPlayerDZL = false;
         moneyPlayerIsDead = money;
         money = 0;
     }

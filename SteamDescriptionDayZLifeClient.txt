@@ -1,10 +1,11 @@
-Welcome to DayZLife.
+Welcome to DayZLife Role Play Mod (Client).
 
 Attention: This Mod needs also a Serverside Mod and is published here: https://steamcommunity.com/sharedfiles/filedetails/?id=2344834877.
 
 [code]
 Feature list
 
+- Supported language English, German, Chinese, Chinese Simple, more will come
 - Spawn Menu with Job chose
 - own Moneysystem
 - Cars
@@ -66,3 +67,7 @@ Feature list
 [/code]
 
 This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.
+
+Credits
+
+@GuguguBear: Thank you for translation into Chinese Simple and Chinese

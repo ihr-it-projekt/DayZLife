@@ -1,14 +1,17 @@
-Welcome to DayZLife.
+Welcome to DayZLife Role Play Mod (Server).
 
 Attention: This Mod needs also a Clientside Mod, you will find here: https://steamcommunity.com/sharedfiles/filedetails/?id=2330029738.
 
 This Mod came with lees configuration work for admin. Only thing that must be configured is the trader but you will find some example trader config in this mod. You also can use our tool https://tools.dayz-life.net/category-editor/add-items for creating the trader configuration.
+
+How to setup this mod? Take a look here: https://dayz-life.net/en/help
 
 After first start of the server, you will find in your Server Profil Folder every config. There you will also find a data folder. NEVER touch the files in the data folder. Explanation for the config files you will find here https://dayz-life.net/en/help.
 
 [code]
 Feature list
 
+- Supported language English, German, Chinese, Chinese Simple, more will come
 - Spawn Menu with Job chose
 - own Moneysystem
 - Cars
@@ -70,3 +73,7 @@ Feature list
 [/code]
 
 This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.
+
+Credits
+
+@GuguguBear: Thank you for translation into Chinese Simple and Chinese
