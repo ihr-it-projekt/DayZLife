@@ -172,4 +172,9 @@ Deposit_to_bank,deposit bank,deposit bank,Zum Konto,存款银行,存款銀行
 Deposit_to_player,deposit player,deposit player,Zum Spieler,存款玩家,存款玩家
 owner_is,Owner is,Owner is,Besitzer ist,所有者为,所有者為
 show_owner,show owner,show owner,Zeige Besitzer,显示所有者,顯示所有者
+Garge,Garge,Garge,Garge,Garge
+Car_to_Stored,Car to Stored,Car to Stored,Fahrzeug einparken,Car to Stored
+Cars_in_Sored,Cars in Sored,Cars in Sored,Fahrzeuge in der Garage,Cars in Sored
+Store_in,Store in,Store in,Einparken,Store in
+Store_out,Store out,Store out,Ausparken,Store out
 ,,,,,,,,,,,,,,
