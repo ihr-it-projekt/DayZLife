@@ -19,6 +19,7 @@ Feature list
     - last driver can sale cars
     - every car has a one owner
     - every player who have access to car can see the owner of the car
+    - configurable no car collision damage
 
 - money can be stolen from other and dead players
 - bank system

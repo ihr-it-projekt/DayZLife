@@ -51,6 +51,8 @@ modded class CarScript
 
 	override void EEInit() {
         super.EEInit();
+		
+		SetAllowDamage(true);
 
         if(dzlCarId == 0) {
             dzlCarId = Math.RandomIntInclusive(1, int.MAX - 1);
@@ -147,6 +149,7 @@ modded class CarScript
         }
 
         SynchronizeValues(null);
+		
 		return true;
 	}
 
@@ -162,4 +165,19 @@ modded class CarScript
 
         GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param5<CarScript, int, ref array<string>, string, string>(this, dzlCarId, playerAccess, ownerId, ownerName), true, sender);
     }
+
+	override void OnContact( string zoneName, vector localPos, IEntity other, Contact data ){
+	    bool carCollisionDamage = true;
+	    if (GetGame().IsServer()) {
+			carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
+	    } else {
+	        PlayerBase player = PlayerBaseHelper.GetPlayer();
+			carCollisionDamage = player.config.carConfig.carCollisionDamage;
+	    }
+		
+		if (carCollisionDamage) {
+			super.OnContact(zoneName, localPos, other, data);
+		}
+    }
+
 }

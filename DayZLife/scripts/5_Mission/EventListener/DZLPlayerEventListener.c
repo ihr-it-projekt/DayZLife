@@ -76,6 +76,12 @@ class DZLPlayerEventListener
                     player.config.adminIds = configParamAdmin.param1;
                     player.IsRealPlayerDZL = true;
                 }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_CAR_RESPONSE) {
+                Param1 <ref DZLCarConfig> configParamCar;
+                if (ctx.Read(configParamCar) && configParamCar.param1) {
+                    player.config.carConfig = configParamCar.param1;
+                    player.IsRealPlayerDZL = true;
+                }
             } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {
                 Param1 <ref DZLPlayerHouse> houseParam;
                 if (ctx.Read(houseParam) && houseParam.param1){
@@ -97,7 +103,7 @@ class DZLPlayerEventListener
                 if (ctx.Read(dzlMessage) && dzlMessage.param1){
                     player.DisplayMessage(dzlMessage.param1);
                 }
-            }else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {
+            } else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {
                 Param3<ref DZLHouseExtension, string, PlayerBase> dzlAlarm;
                 if (ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param3){
                      player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));

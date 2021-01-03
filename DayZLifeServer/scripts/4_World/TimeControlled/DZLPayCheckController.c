@@ -33,7 +33,7 @@ class DZLPayCheckController
 			    dzlPlayer.UpdateOnlineTime();
 			    if(dzlPlayer.GetActiveOnlineTime() >= onlineTime) {
                     dzlPlayer.ResetOnlineTime();
-                    dzlPlayer.AddMoneyToPlayer(amount);
+                    dzlPlayer.AddMoneyToPlayerBank(amount);
                     GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
                     DZLSendMessage(player.GetIdentity(), "#you_recive_a_paycheck: " + amount);
                 }
