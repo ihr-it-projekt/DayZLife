@@ -1,28 +1,18 @@
 class DZLAdmin
 {
-    ref array<string> adminIds;
     ref array<ref DZLPlayerAccess> access;
-	string version = "2";
+	string version = "3";
 
     void DZLAdmin() {
         if (!Load()) {
             access = new array<ref DZLPlayerAccess>;
-            adminIds = new array<string>;
-            version = "2";
+            version = "3";
 
             Save();
         }
 
-        if (version == "1") {
-            access = new array<ref DZLPlayerAccess>;
-            if (adminIds && adminIds.Count() > 0) {
-                foreach(string id: adminIds) {
-                    access.Insert(new DZLPlayerAccess(id));
-                }
-            }
-
-            adminIds.Clear();
-            version = "2";
+        if (version == "2") {
+            version = "3";
             Save();
         }
     }

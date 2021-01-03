@@ -1,4 +1,4 @@
-- Cops Fahrzeugbesitzer überprüfen
+- Wenn spieler sterben dann wieder in der Zelle spawnen
 
 - Alamach
     - Bank infos Raidwerkzeug ...
