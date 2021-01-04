@@ -62,6 +62,7 @@ class DZLCarKeyListener
 				}
 
                 DZLSendMessage(sender, "#car_raid_has_failed");
+                paramRaidCar.param3.SetHealth(0);
             }
         }
     }

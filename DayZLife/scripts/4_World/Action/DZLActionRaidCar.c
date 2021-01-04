@@ -68,7 +68,5 @@ class DZLActionRaidCar: ActionInteractBase
 		bar.SetRaidItem(item);
 		bar.SetDuration(action_data.m_Player.config.carConfig.carRaidTimeInSeconds);
 		GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
-	
 	}
-	
 };
