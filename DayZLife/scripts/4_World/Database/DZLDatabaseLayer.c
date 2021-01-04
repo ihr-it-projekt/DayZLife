@@ -10,6 +10,7 @@ class DZLDatabaseLayer
     private ref DZLPlayerIdentities dzlPlayerIdentities;
     private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
+    private ref map<string, ref DZLCarStorage> storageCars;
 
     void DZLDatabaseLayer() {
         dzlHouses = new map<string, ref DZLHouse>;
@@ -17,6 +18,7 @@ class DZLDatabaseLayer
         dzlPlayerHouses = new map<string, ref DZLPlayerHouse>;
         dzlPlayerIdentities = new DZLPlayerIdentities;
         dzlLockedHouses = new DZLLockedHouses;
+        storageCars = new map<string, ref DZLCarStorage>;
         bank = new DZLBank;
     }
 
@@ -40,6 +42,10 @@ class DZLDatabaseLayer
         
         foreach(DZLPlayerHouse playerHouse: dzlPlayerHouses) {
             playerHouse.Save();
+        }
+
+        foreach(DZLCarStorage storageCar: storageCars) {
+            storageCar.Save();
         }
     }
 
@@ -112,7 +118,17 @@ class DZLDatabaseLayer
         return house;
     }
 
+    DZLCarStorage GetPlayerCarStorage(string playerId) {
+        DZLCarStorage storageCar;
+        if (!storageCars.Find(playerId, storageCar)) {
+            storageCar = new DZLCarStorage(playerId);
+            storageCars.Insert(playerId, storageCar);
+        }
+        return storageCar;
+    }
+
     void RemovePlayerHouse(string playerId) {
+        GetPlayerHouse(playerId);
         DZLPlayerHouse house;
         if (dzlPlayerHouses.Find(playerId, house)) {
             dzlPlayerHouses.Remove(playerId);
@@ -120,7 +136,20 @@ class DZLDatabaseLayer
         }
     }
 
+    void RemovePlayerCars(string playerId) {
+        GetPlayerCarStorage(playerId);
+
+        DZLCarStorage storageCar;
+        if (storageCars.Find(playerId, storageCar)) {
+            storageCars.Remove(playerId);
+        }
+
+        DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + storageCar.fileName);
+    }
+
     void RemovePlayer(string playerId) {
+        GetPlayer(playerId);
+
         DZLPlayer player;
         if (dzlPlayers.Find(playerId, player)) {
             dzlPlayers.Remove(playerId);

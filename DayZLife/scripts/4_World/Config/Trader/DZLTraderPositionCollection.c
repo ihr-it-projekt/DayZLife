@@ -9,7 +9,6 @@ class DZLTraderPositionCollection
             array<string> catNames = new array<string>;
             array<string> attachments = new array<string>;
 
-
             if (DAY_Z_LIFE_DEBUG) {
                 attachments.Insert("ManSuit_Black");
                 attachments.Insert("SlacksPants_Black");
@@ -139,7 +138,6 @@ class DZLTraderPositionCollection
                 catNames.Insert("Ammo");
                 catNames.Insert("Cars");
 				positions.Insert(new DZLTraderPosition("6573.415527 5.991199 2453.483154", "-25 0 0", "SurvivorM_Rolf", attachments, catNames, "6577.331543 6.198332 2469.446777"));
-                
             }
 
             Save();

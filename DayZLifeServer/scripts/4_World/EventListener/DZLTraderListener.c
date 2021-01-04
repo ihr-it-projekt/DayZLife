@@ -119,7 +119,6 @@ class DZLTraderListener
 		}
 
 		if (item) {
-			
 			foreach(string attachment: type.attachments) {
 				if (item.GetInventory()) {
 					item.GetInventory().CreateAttachment(attachment);

@@ -13,7 +13,7 @@ class DZLSpawnHelper
 		return true;
     }
 
-    static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence, bool isTrader, bool IsLoadOut) {
+    static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence, bool isTrader, bool isLoadOut, bool isGarage) {
         //pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true);
         if (!game_obj) {
@@ -27,7 +27,8 @@ class DZLSpawnHelper
         character.IsDZLBank = isBanking;
         character.IsLicencePoint = isLicence;
         character.IsTrader = isTrader;
-        character.IsLoadOut = IsLoadOut;
+        character.IsLoadOut = isLoadOut;
+        character.IsGarage = isGarage;
 
         return character;
     }

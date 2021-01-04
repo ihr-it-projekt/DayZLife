@@ -1,4 +1,6 @@
-Welcome to DayZLife Role Play Mod (Server).
+[h1]Welcome to DayZLife Role Play Mod (Server).[/h1]
+
+[h2]It is not allowed to publish the mod in any other way without my permission.[/h2]
 
 Attention: This Mod needs also a Clientside Mod, you will find here: https://steamcommunity.com/sharedfiles/filedetails/?id=2330029738.
 

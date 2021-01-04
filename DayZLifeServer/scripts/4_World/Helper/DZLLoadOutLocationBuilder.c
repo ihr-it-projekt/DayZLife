@@ -4,7 +4,7 @@ class DZLLoadOutLocationBuilder: DZLLicenceLocationBuilder {
 		array<ref DZLLoadOutPosition> positions = DZLConfig.Get().jobConfig.loadOutsCops.loadOutPosition;
 		
 		foreach(DZLLoadOutPosition position: positions) {
-           PlayerBase trader = DZLLoadOutLocationBuilder.CreatePositions(position, false, false, false, true);
+           PlayerBase trader = DZLLoadOutLocationBuilder.CreatePositions(position, false, false, false, true, false);
         }
 	}
 };

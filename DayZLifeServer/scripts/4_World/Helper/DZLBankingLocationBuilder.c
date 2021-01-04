@@ -4,7 +4,7 @@ class DZLBankingLocationBuilder: DZLLicenceLocationBuilder {
 		array<ref DZLBankingPosition> positions = DZLConfig.Get().bankConfig.positionOfBankingPoints;
 		
 		foreach(DZLBankingPosition position: positions) {
-            DZLBankingLocationBuilder.CreatePositions(position, true, false, false, false);
+            DZLBankingLocationBuilder.CreatePositions(position, true, false, false, false, false);
         }
 	}
 };

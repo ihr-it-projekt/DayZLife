@@ -93,7 +93,6 @@ class DZLTraderMenu: DZLBaseMenu
 						index = inventory.AddItem(name, playerCar, 0);
 	                   	inventory.SetItem(index, type.sellPrice.ToString(), playerCar, 1);
 	                   	inventory.SetItem(index, quant, playerCar, 2);
-						
 					}
 					continue;
 				}
@@ -304,8 +303,7 @@ class DZLTraderMenu: DZLBaseMenu
 							player.DisplayMessage("#you_can_only_buy_one_car_per_trade");
 							return true;
 						}
-						
-						
+
 						carBuy = true;
 					}
 					

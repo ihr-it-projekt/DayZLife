@@ -58,6 +58,7 @@ class DZLAlmanacListener
 
                     DZLDatabaseLayer.Get().RemovePlayer(identString);
                     DZLDatabaseLayer.Get().RemovePlayerHouse(identString);
+                    DZLDatabaseLayer.Get().RemovePlayerCars(identString);
                     DZLDatabaseLayer.Get().GetPlayerIds().RemovePlayer(identString);
 				}
 				DZLSendMessage(sender, "#player_data_was_deleted");

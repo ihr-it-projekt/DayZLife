@@ -18,11 +18,13 @@ modded class PlayerBase
 	ref DZLLoadOutMenu loadOutMenu;
 	ref DZLPlayerArrestMenu arrestMenu;
 	ref DZLCarMenu carMenu;
+	ref DZLCarStorageMenu carStorageMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
 	bool IsTrader = false;
 	bool IsLoadOut = false;
+	bool IsGarage = false;
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
@@ -41,11 +43,12 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsTrader");
         RegisterNetSyncVariableBool("IsLoadOut");
         RegisterNetSyncVariableBool("isPolice");
+        RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 	}
 
 	bool IsDZLPlayer() {
-	    return !IsDZLBank && !IsLicencePoint && !IsTrader && !IsLoadOut;
+	    return !IsDZLBank && !IsLicencePoint && !IsTrader && !IsLoadOut && !IsGarage;
 	}
 
     override void SetActions(out TInputActionMap InputActionMap) {
@@ -66,6 +69,7 @@ modded class PlayerBase
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenLoadOutMenu, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
+        AddAction(ActionOpenCarStorageMenu, InputActionMap);
 
         InitDZLPlayer();
     }
@@ -105,6 +109,8 @@ modded class PlayerBase
             arrestMenu.UpdatePlayer(this);
         } else if (carMenu && carMenu.IsVisible()) {
             carMenu.UpdatePlayer(this);
+        } else if (carStorageMenu && carStorageMenu.IsVisible()) {
+            carStorageMenu.UpdatePlayer(this);
         }
     }
 
@@ -124,6 +130,13 @@ modded class PlayerBase
 		carMenu.SetCar(car);
 		
         return carMenu;
+    }
+
+    DZLCarStorageMenu GetCarStorageMenu() {
+        carStorageMenu = new DZLCarStorageMenu;
+        InitMenu(carStorageMenu);
+
+        return carStorageMenu;
     }
 	
     private void InitMenu(DZLBaseMenu menu) {
@@ -225,6 +238,8 @@ modded class PlayerBase
 			moneyTransferMenu.OnHide();
 		} else if (carMenu && carMenu.IsVisible()) {
 			carMenu.OnHide();
+		} else if (carStorageMenu && carStorageMenu.IsVisible()) {
+			carStorageMenu.OnHide();
 		}
 	}
 
@@ -295,9 +310,8 @@ modded class PlayerBase
 		}
 		
 		return null;
-        
     }
-	
+
 	string CanUseLicence(notnull DZLLicence licence) {
         array<EntityAI> items = GetPlayerItems();
         map<string, int> craft = new map<string, int>;

@@ -24,6 +24,7 @@ modded class MissionServer {
         DZLLicenceLocationBuilder.Create();
         DZLTraderLocationBuilder.Create();
         DZLLoadOutLocationBuilder.Create();
+        DZLGarageLocationBuilder.Create();
         DZLLockedHouses.OnServerStart();
 
         databaseTimer.Run(120, DZLDatabaseLayer.Get(), "Save", null, true);

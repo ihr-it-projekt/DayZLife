@@ -55,7 +55,7 @@ class DZLObjectFinder
         }
     }
 
-    static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, string playerId) {
+    static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, string playerId, bool byOwner = false) {
         array<Object> excludedObjects = new array<Object>;
         array<Object> nearbyObjects = new array<Object>;
         if (GetGame().IsBoxColliding(carSpawnPosition, orientation, "3 5 9", excludedObjects, nearbyObjects)){
@@ -63,7 +63,13 @@ class DZLObjectFinder
                 if (object.GetType() == carType){
                     CarScript carsScript = CarScript.Cast(object);
                     if(!carsScript) continue;
-                    if(carsScript.lastDriverId != playerId) continue;
+					
+					if (!byOwner) {
+						if(carsScript.lastDriverId != playerId) continue;
+					} else {
+						if(carsScript.ownerId != playerId) continue;
+					}
+                    
 
                     return carsScript;
                 }
