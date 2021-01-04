@@ -62,8 +62,8 @@ class DZLActionRaidCar: ActionInteractBase
 		bar.SetCar(car);
 		bar.SetMaxRange(2);
 
-		item = player.GetItemInHands();
-        if (!item) return false;
+		EntityAI item = action_data.m_Player.GetItemInHands();
+        if (!item) return;
 
 		bar.SetRaidItem(item);
 		bar.SetDuration(action_data.m_Player.config.carConfig.carRaidTimeInSeconds);
