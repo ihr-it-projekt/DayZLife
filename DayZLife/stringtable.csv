@@ -184,3 +184,4 @@ car_spwan_place_is_blocked, car spawn place is blocked, car spawn place is block
 car_is_not_empty, Car is not empty, Car is not empty, Auto ist nicht leer,
 no_car_selected, no car selected, no car selected, kein Auto ausgewählt,
 car_was_successful_raided, car was successful raided,car was successful raided, Auto wurde erfolgreich geknackt
+car_raid_has_failed, car raid failed, car raid failed, Auto konnte nicht geknackt werden
