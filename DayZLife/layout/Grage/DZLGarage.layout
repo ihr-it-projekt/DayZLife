@@ -1,5 +1,5 @@
 FrameWidgetClass rootFrame {
- size 0.66033 0.63559
+ size 0.4067 0.4919
  halign center_ref
  valign center_ref
  hexactpos 0
@@ -35,7 +35,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
        position 0 0.01222
-       size 0.27 0.09
+       size 0.22954 0.08222
        halign center_ref
        hexactpos 0
        vexactpos 0
@@ -73,7 +73,7 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass PanelWidget5 {
          ignorepointer 1
          position 0 0
-         size 0.3641 1
+         size 0.5 1
          valign center_ref
          hexactpos 0
          vexactpos 0
@@ -82,8 +82,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass tostoreTextListbox {
-           position 0 0
-           size 0.964 0.972
+           position 0 -0.0648
+           size 0.964 0.8424
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -94,12 +94,53 @@ FrameWidgetClass rootFrame {
            colums "#Car_to_Stored"
            lines 20
           }
+          PanelWidgetClass PanelWidget10 {
+           ignorepointer 1
+           position 0 0
+           size 1 0.1298
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            PanelWidgetClass PanelWidget7 {
+             ignorepointer 1
+             position 0 0.17885
+             size 0.6 0.6423
+             halign center_ref
+             valign bottom_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_quad_dark
+             {
+              ButtonWidgetClass storeinButton {
+               color 0.251 0.502 0 1
+               position 0 0
+               size 0.98 0.9
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               style OldStyle
+               text "#Store_in"
+              }
+             }
+            }
+           }
+          }
          }
         }
         PanelWidgetClass PanelWidget6 {
          ignorepointer 1
          position 0 0
-         size 0.3641 1
+         size 0.5 1
          halign right_ref
          valign center_ref
          hexactpos 0
@@ -109,8 +150,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass isstoredTextListbox {
-           position 0 0
-           size 0.964 0.972
+           position -0 -0.0648
+           size 0.9491 0.8424
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -121,59 +162,46 @@ FrameWidgetClass rootFrame {
            colums "#Cars_in_Sored"
            lines 20
           }
-         }
-        }
-        PanelWidgetClass PanelWidget7 {
-         ignorepointer 1
-         position 0 0.0138
-         size 0.23951 0.08838
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass storeinButton {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 0.98 0.9
+          PanelWidgetClass PanelWidget9 {
+           ignorepointer 1
+           position 0 -0
+           size 1 0.1298
            halign center_ref
-           valign center_ref
+           valign bottom_ref
            hexactpos 0
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           style OldStyle
-           text "#Store_in"
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget8 {
-         ignorepointer 1
-         position 0 0.14494
-         size 0.23951 0.08838
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass storeoutButton {
-           color 0 0.1255 0.502 1
-           position 0 0
-           size 0.98 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style OldStyle
-           text "#Store_out"
+           style editor_quad_dark
+           {
+            PanelWidgetClass PanelWidget8 {
+             ignorepointer 1
+             position 0 0.17885
+             size 0.6 0.6423
+             halign center_ref
+             valign bottom_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_quad_dark
+             {
+              ButtonWidgetClass storeoutButton {
+               color 0 0.1255 0.502 1
+               position 0 0
+               size 0.98 0.9
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               style OldStyle
+               text "#Store_out"
+              }
+             }
+            }
+           }
           }
          }
         }
@@ -182,8 +210,8 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass PanelWidget4 {
        visible 1
        ignorepointer 1
-       position 0.00647 0.01222
-       size 0.04 0.07
+       position 0.01051 0.01579
+       size 0.04842 0.07
        halign right_ref
        hexactpos 0
        vexactpos 0
