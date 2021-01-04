@@ -172,12 +172,12 @@ Deposit_to_bank,deposit bank,deposit bank,Zum Konto,存款银行,存款銀行
 Deposit_to_player,deposit player,deposit player,Zum Spieler,存款玩家,存款玩家
 owner_is,Owner is,Owner is,Besitzer ist,所有者为,所有者為
 show_owner,show owner,show owner,Zeige Besitzer,显示所有者,顯示所有者
-Garage,Garage,Garage,Garge
-Car_to_Stored,Car to park,Car to park,Fahrzeug einparken
-Cars_in_Sored,Parked cars,Parked cars,Fahrzeuge in der Garage
-Store_in,park in,park in,Einparken
-Store_out,park out,park out,Ausparken
-car_was_parked,Car was parked,Car was parked,Auto wurde geparkt,
-car_was_parked_out,Car was parked out,Car was parked out,Auto wurde ausgeparkt
-open_car_garage_menu, Open car garage menu, Open car garage menu, Garagenmenü öffnen
-car_spwan_place_is_blocked, car spawn place is blocked, car spawn place is blocked, Auto spawn Platz ist nicht frei.
+Garage,Garage,Garage,Garge,,,
+Car_to_Stored,Car to park,Car to park,Fahrzeug einparken,,,
+Cars_in_Sored,Parked cars,Parked cars,Fahrzeuge in der Garage,,,
+Store_in,park in,park in,Einparken,,,
+Store_out,park out,park out,Ausparken,,,
+car_was_parked,Car was parked,Car was parked,Auto wurde geparkt,,,,
+car_was_parked_out,Car was parked out,Car was parked out,Auto wurde ausgeparkt,,,
+open_car_garage_menu, Open car garage menu, Open car garage menu, Garagenmenü öffnen,,,
+car_spwan_place_is_blocked, car spawn place is blocked, car spawn place is blocked, Auto spawn Platz ist nicht frei.,,,

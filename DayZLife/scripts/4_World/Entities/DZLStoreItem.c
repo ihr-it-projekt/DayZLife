@@ -4,11 +4,13 @@ class DZLStoreItem: DZLIdModel
 	string type;
 	float quantity;
 	ref array<ref DZLStoreItem> attached;
+	ref array<ref DZLStoreItem> cargo;
 	bool isCar = false;
 	vector positionOfStore;
 	
 	void DZLStoreItem() {
 		attached = new array<ref DZLStoreItem>;
+		cargo = new array<ref DZLStoreItem>;
 	}
 
 	void Init(EntityAI item, vector positionOfStore, bool isAttached = false) {
@@ -31,15 +33,12 @@ class DZLStoreItem: DZLIdModel
 		if(item.IsMagazine()) {
 			Magazine mag = Magazine.Cast(item);
 			
-			if (!mag)
-				return;
+			if (!mag) return;
 			quantity = mag.GetAmmoCount();
 		} else if(item.IsAmmoPile()) {
 			Ammunition_Base ammo = Ammunition_Base.Cast(item);
 			
-			if (!ammo) {
-				return;
-			}
+			if (!ammo)  return;
 			
 			quantity = ammo.GetAmmoCount();
 		}
@@ -47,7 +46,6 @@ class DZLStoreItem: DZLIdModel
 		if (!isAttached) {
 			array<EntityAI> itemsArray = new array<EntityAI>;
 	        item.GetInventory().EnumerateInventory(InventoryTraversalType.INORDER, itemsArray);
-
 			foreach(EntityAI itemAttached: itemsArray) {
 				if (itemAttached != item) {
 					DZLStoreItem storeItem = new DZLStoreItem();

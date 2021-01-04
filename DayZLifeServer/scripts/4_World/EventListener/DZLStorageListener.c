@@ -75,6 +75,15 @@ class DZLStorageListener
 			
 			car.AddOwner(player.GetIdentity());
 			car.UpdatePlayerAccess(itemInStock.playerAccess);
+
+			car.Fill(CarFluid.FUEL, itemInStock.fuel);
+            car.Fill(CarFluid.OIL, itemInStock.oil);
+            car.Fill(CarFluid.BRAKE, itemInStock.brake);
+            car.Fill(CarFluid.COOLANT, itemInStock.coolant);
+            car.Fill(CarFluid.USER1, itemInStock.user1);
+            car.Fill(CarFluid.USER2, itemInStock.user2);
+            car.Fill(CarFluid.USER3, itemInStock.user3);
+            car.Fill(CarFluid.USER4, itemInStock.user4);
         }
 
         return car;
@@ -111,7 +120,7 @@ class DZLStorageListener
         } else if (ItemBase.CastTo(castItem, item)) {
             castItem.SetQuantity(itemInStock.GetQuantity(), true, true);
         }
-		
+
         if(itemInStock.attached.Count() > 0) {
             foreach(DZLStoreItem itemAttached: itemInStock.attached) {
                 this.Add(item, itemAttached, inventoryLocation);
