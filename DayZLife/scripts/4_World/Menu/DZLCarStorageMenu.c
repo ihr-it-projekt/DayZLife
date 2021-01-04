@@ -80,8 +80,9 @@ class DZLCarStorageMenu: DZLBaseMenu
                 }
 
                 CargoBase cargo = car.GetInventory().GetCargo();
-                if (!player.config.carConfig.canStoreCarsWithGoods && cargo && cargo.GetItemCount() > 0) {
+                if (!player.config.carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
                     player.DisplayMessage("#car_is_not_empty");
+                    return true;
                 }
 
 				GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<CarScript, PlayerBase>(car, player), true);
@@ -105,7 +106,6 @@ class DZLCarStorageMenu: DZLBaseMenu
                     player.DisplayMessage("#car_spwan_place_is_blocked");
                     return true;
                 }
-
 
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param2<PlayerBase, string>(player, carOut.id), true);
             }

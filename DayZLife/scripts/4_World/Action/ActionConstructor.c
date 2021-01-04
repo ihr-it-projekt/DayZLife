@@ -22,5 +22,6 @@ modded class ActionConstructor
 		actions.Insert(DZLActionOpenCarMenu);
 		actions.Insert(ActionGetOwnerName);
 		actions.Insert(ActionOpenCarStorageMenu);
+		actions.Insert(DZLActionRaidCar);
     }
 }

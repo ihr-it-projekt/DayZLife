@@ -43,6 +43,16 @@ class DZLCarKeyListener
             if (ctx.Read(carUpdateParam)) {
                 carUpdateParam.param1.SynchronizeValues(sender);
             }
+        } else if (rpc_type == DAY_Z_LIFE_EVENT_CAR_RAID) {
+            Param3<PlayerBase, CarScript, EntityAI> paramRaidCar;
+            if (ctx.Read(paramRaidCar)){
+                CarScript raidedCar = paramRaidCar.param2;
+                raidedCar.isRaided = true;
+                raidedCar.SynchronizeValues(null);
+                paramRaidCar.param3.SetHealth(0);
+
+                DZLSendMessage(sender, "#car_was_successful_raided");
+            }
         }
     }
 }

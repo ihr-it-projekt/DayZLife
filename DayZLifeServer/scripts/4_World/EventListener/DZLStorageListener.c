@@ -26,6 +26,7 @@ class DZLStorageListener
 				CargoBase cargo = car.GetInventory().GetCargo();
                 if (!config.canStoreCarsWithGoods && cargo && cargo.GetItemCount() > 0) {
                     DZLSendMessage(sender, "#car_is_not_empty");
+                    return;
                 }
 				
                 DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
@@ -47,8 +48,6 @@ class DZLStorageListener
 
                 if (!storedCar || storedCar.positionOfStore != storagePositionCar.position) return;
 
-
-				
 				CarScript carSpawned = SpawnCar(player, storedCar,storagePositionCar);
 
                 if (carSpawned) {
@@ -81,6 +80,7 @@ class DZLStorageListener
 			
 			car.AddOwner(player.GetIdentity());
 			car.UpdatePlayerAccess(itemInStock.playerAccess);
+			car.SetOrientation(storagePositionCar.spawnOrientationOfVehicles);
 
 			FillFluid(car, CarFluid.FUEL, itemInStock.fuel);
             FillFluid(car, CarFluid.OIL, itemInStock.oil);

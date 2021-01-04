@@ -1,9 +1,12 @@
 class DZLCarConfig
 {
     bool carCollisionDamage = false;
+	bool canStoreCarsWithGoods = false;
+	int carRaidTimeInSeconds = 60;
+	int chanceToRaid = 2;
     ref array<ref DZLStoragePosition> garages;
 	ref array<string> carTypesToStore;
-	bool canStoreCarsWithGoods = false;
+	ref array<string> carRaidTools;
 
     string version = "2";
 
@@ -12,12 +15,14 @@ class DZLCarConfig
         if (!Load()) {
             carCollisionDamage = false;
             garages = new array<ref DZLStoragePosition>;
+            carRaidTools = new array<string>;
+            carRaidTools.Insert("Lockpick");
             attachments = new array<string>;
             attachments.Insert("SlacksPants_White");
             attachments.Insert("DressShoes_White");
             attachments.Insert("ManSuit_White");
             attachments.Insert("AviatorGlasses");
-            garages.Insert(new DZLStoragePosition("6342.443359 8.952032 2733.456299", "121.344437 0.0 0.0", "SurvivorM_Mirek", attachments, "6348.307129 8.771828 2722.534668", "0 0 0"));
+            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "SurvivorM_Mirek", attachments, "6365.0 9.1 2648.0", "180 0 0"));
 
 			carTypesToStore = new array<string>;
 			carTypesToStore.Insert("OffroadHatchback");
@@ -37,19 +42,22 @@ class DZLCarConfig
             carTypesToStore.Insert("Truck_01_Covered_Orange");
 
 	        canStoreCarsWithGoods = false;
+	        carRaidTimeInSeconds = 60;
 
             version = "2";
             Save();
         }
 
         if (version == "1") {
+            carRaidTools = new array<string>;
+            carRaidTools.Insert("Lockpick");
             attachments = new array<string>;
             attachments.Insert("SlacksPants_White");
             attachments.Insert("DressShoes_White");
             attachments.Insert("ManSuit_White");
             attachments.Insert("AviatorGlasses");
             garages = new array<ref DZLStoragePosition>;
-            garages.Insert(new DZLStoragePosition("6342.443359 8.952032 2733.456299", "121.344437 0.0 0.0", "SurvivorM_Mirek", attachments, "6348.307129 8.771828 2722.534668", "0 0 0"));
+            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "SurvivorM_Mirek", attachments, "6365.0 9.1 2648.0", "180 0 0"));
 
 			carTypesToStore = new array<string>;
 			carTypesToStore.Insert("OffroadHatchback");
@@ -69,6 +77,7 @@ class DZLCarConfig
             carTypesToStore.Insert("Truck_01_Covered_Orange");
 
             canStoreCarsWithGoods = false;
+            carRaidTimeInSeconds = 60;
             version = "2";
             Save();
         }

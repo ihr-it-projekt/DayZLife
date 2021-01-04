@@ -7,6 +7,8 @@ modded class CarScript
     string ownerId = "";
     string ownerName = "";
     bool isSync = false;
+    bool isRaided = false;
+
     private int timeAskForDataSync;
 
     override void OnEngineStart() {
@@ -22,6 +24,7 @@ modded class CarScript
 
         AddAction(DZLActionOpenCarMenu);
         AddAction(ActionGetOwnerName);
+        AddAction(DZLActionRaidCar);
 	}
 
 	void RemoveOwner() {
@@ -90,7 +93,7 @@ modded class CarScript
 			dzlPlayer = player.dzlPlayer;
 		}
 
-        return ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop();
+        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop();
     }
 
     void RemovePlayerAccess(string ident) {
@@ -109,11 +112,7 @@ modded class CarScript
         return HasPlayerAccess(player);
     }
 
-    bool CanLookDoor(PlayerBase player, int index) {
-        return HasPlayerAccess(player);
-    }
-
-    bool CanRaidDoor(PlayerBase player, int index) {
+    bool CanRaidDoor(PlayerBase player) {
         return !HasPlayerAccess(player);
     }
 
@@ -163,7 +162,7 @@ modded class CarScript
 	        ownerName = sender.GetName();
 	    }
 
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param5<CarScript, int, ref array<string>, string, string>(this, dzlCarId, playerAccess, ownerId, ownerName), true, sender);
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param6<CarScript, int, ref array<string>, string, string, bool>(this, dzlCarId, playerAccess, ownerId, ownerName, isRaided), true, sender);
     }
 
 	override void OnContact( string zoneName, vector localPos, IEntity other, Contact data ){

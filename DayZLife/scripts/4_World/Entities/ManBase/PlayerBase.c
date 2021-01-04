@@ -11,6 +11,7 @@ modded class PlayerBase
 	ref DZLLicenceMenu licenceMenu;
 	ref DZLLicenceProgressBar progressBarLicence;
 	ref DZLDoorRaidProgressBar progressBarRaid;
+	ref DZLCarRaidProgressBar progressBarRaidCar;
 	ref DZLHarvestProgressBar progressBarHarvest;
 	ref DZLMessageMenu messageMenu;
 	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
@@ -208,6 +209,12 @@ modded class PlayerBase
         progressBarRaid.SetPlayer(this);
         return progressBarRaid;
     }
+
+    DZLCarRaidProgressBar GetRaidCarProgressBar() {
+        progressBarRaidCar = new DZLCarRaidProgressBar();
+        progressBarRaidCar.SetPlayer(this);
+        return progressBarRaidCar;
+    }
 	
 	DZLSpawnPositionMenu GetSpawnPositionMenu() {
 		spawnPositionMenu = new DZLSpawnPositionMenu();
@@ -234,6 +241,8 @@ modded class PlayerBase
 			almanacMenu.OnHide();
 		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
 			progressBarRaid.OnHide();
+		} else if (progressBarRaidCar && progressBarRaidCar.IsVisible()) {
+			progressBarRaidCar.OnHide();
 		} else if (moneyTransferMenu && moneyTransferMenu.IsVisible()) {
 			moneyTransferMenu.OnHide();
 		} else if (carMenu && carMenu.IsVisible()) {
