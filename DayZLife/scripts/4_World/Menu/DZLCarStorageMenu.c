@@ -72,8 +72,8 @@ class DZLCarStorageMenu: DZLBaseMenu
 			
 			if (car) {
 			    bool carIsEmpty = true;
-                for (int seat = 0; seat < carsScript.CrewSize(); seat++){
-                    if (carsScript.CrewMember(seat)) {
+                for (int seat = 0; seat < car.CrewSize(); seat++){
+                    if (car.CrewMember(seat)) {
                         player.DisplayMessage("#car_is_not_empty");
                         return true;
                     }
