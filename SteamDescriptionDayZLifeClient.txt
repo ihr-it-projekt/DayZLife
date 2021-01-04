@@ -16,6 +16,8 @@ Feature list
     - every car has a one owner
     - every player who have access to car can see the owner of the car
     - configurable no car collision damage
+    - can be parked in virtual garage
+    - can be raided
 
 - money can be stolen from other and dead players
 - bank system
