@@ -61,7 +61,11 @@ class DZLActionRaidCar: ActionInteractBase
 		
 		bar.SetCar(car);
 		bar.SetMaxRange(2);
-		bar.SetRaidItem(car);
+
+		item = player.GetItemInHands();
+        if (!item) return false;
+
+		bar.SetRaidItem(item);
 		bar.SetDuration(action_data.m_Player.config.carConfig.carRaidTimeInSeconds);
 		GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
 	
