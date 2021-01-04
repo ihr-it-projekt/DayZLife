@@ -22,6 +22,11 @@ class DZLStorageListener
 				DZLStoragePosition storagePosition = config.GetStorageByPosition(paramStoreCar.param2);
 				
 				if (!storagePosition) return;
+
+				CargoBase cargo = car.GetInventory().GetCargo();
+                if (!config.canStoreCarsWithGoods && cargo && cargo.GetItemCount() > 0) {
+                    DZLSendMessage(sender, "#car_is_not_empty");
+                }
 				
                 DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
                 storageIn.Add(car, storagePosition.position);
@@ -69,25 +74,32 @@ class DZLStorageListener
 
         if (car) {
 			array<ref DZLStoreItem> attached = itemInStock.attached;
-            foreach(DZLStoreItem attach: attached) {
+			
+			foreach(DZLStoreItem attach: attached) {
 				Add(car, attach);
 			}
 			
 			car.AddOwner(player.GetIdentity());
 			car.UpdatePlayerAccess(itemInStock.playerAccess);
 
-			car.Fill(CarFluid.FUEL, itemInStock.fuel);
-            car.Fill(CarFluid.OIL, itemInStock.oil);
-            car.Fill(CarFluid.BRAKE, itemInStock.brake);
-            car.Fill(CarFluid.COOLANT, itemInStock.coolant);
-            car.Fill(CarFluid.USER1, itemInStock.user1);
-            car.Fill(CarFluid.USER2, itemInStock.user2);
-            car.Fill(CarFluid.USER3, itemInStock.user3);
-            car.Fill(CarFluid.USER4, itemInStock.user4);
+			FillFluid(car, CarFluid.FUEL, itemInStock.fuel);
+            FillFluid(car, CarFluid.OIL, itemInStock.oil);
+            FillFluid(car, CarFluid.BRAKE, itemInStock.brake);
+            FillFluid(car, CarFluid.COOLANT, itemInStock.coolant);
+            FillFluid(car, CarFluid.USER1, itemInStock.user1);
+            FillFluid(car, CarFluid.USER2, itemInStock.user2);
+            FillFluid(car, CarFluid.USER3, itemInStock.user3);
+            FillFluid(car, CarFluid.USER4, itemInStock.user4);
         }
 
         return car;
     }
+
+    private void FillFluid(CarScript car, int type, float inPercent) {
+		if (inPercent > 0) {
+			car.Fill(type, car.GetFluidCapacity(type) / inPercent);
+		}
+	}
 	
 	 private EntityAI Add(EntityAI parent, DZLStoreItem itemInStock, ref InventoryLocation inventoryLocation = null) {
         EntityAI item;
@@ -98,6 +110,14 @@ class DZLStorageListener
 
         if (parent.GetInventory().FindFirstFreeLocationForNewEntity(itemInStock.type, FindInventoryLocationType.ANY, inventoryLocation)) {
             item = parent.GetInventory().CreateInInventory(itemInStock.type);
+        }
+
+        if(!item) {
+            item = parent.GetInventory().CreateAttachment(itemInStock.type);
+        }
+
+        if(!item) {
+			item = parent.GetInventory().CreateEntityInCargo(itemInStock.type);
         }
 
 		item.SetHealth(itemInStock.health);

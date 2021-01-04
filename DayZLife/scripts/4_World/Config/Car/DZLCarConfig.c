@@ -3,6 +3,7 @@ class DZLCarConfig
     bool carCollisionDamage = false;
     ref array<ref DZLStoragePosition> garages;
 	ref array<string> carTypesToStore;
+	bool canStoreCarsWithGoods = false;
 
     string version = "2";
 
@@ -35,6 +36,8 @@ class DZLCarConfig
             carTypesToStore.Insert("Truck_01_Covered_Blue");
             carTypesToStore.Insert("Truck_01_Covered_Orange");
 
+	        canStoreCarsWithGoods = false;
+
             version = "2";
             Save();
         }
@@ -65,6 +68,7 @@ class DZLCarConfig
             carTypesToStore.Insert("Truck_01_Covered_Blue");
             carTypesToStore.Insert("Truck_01_Covered_Orange");
 
+            canStoreCarsWithGoods = false;
             version = "2";
             Save();
         }

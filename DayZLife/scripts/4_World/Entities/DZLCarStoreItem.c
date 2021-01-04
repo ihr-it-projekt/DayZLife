@@ -12,7 +12,7 @@ class DZLCarStoreItem: DZLStoreItem
 	float user4;
 
 	void DZLCarStoreItem(CarScript item, vector storagePosition) {
-		Init(item, storagePosition, false);
+		Init(item, storagePosition);
 		isCar = true;
 		this.playerAccess = item.playerAccess;
 

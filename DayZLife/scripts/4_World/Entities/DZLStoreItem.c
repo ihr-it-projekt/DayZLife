@@ -4,27 +4,26 @@ class DZLStoreItem: DZLIdModel
 	string type;
 	float quantity;
 	ref array<ref DZLStoreItem> attached;
-	ref array<ref DZLStoreItem> cargo;
 	bool isCar = false;
 	vector positionOfStore;
+	string parentId = "";
+	
 	
 	void DZLStoreItem() {
 		attached = new array<ref DZLStoreItem>;
-		cargo = new array<ref DZLStoreItem>;
 	}
 
-	void Init(EntityAI item, vector positionOfStore, bool isAttached = false) {
-	    SetItem(item, isAttached);
+	void Init(EntityAI item, vector positionOfStore) {
+	    SetItem(item);
 	    this.positionOfStore = positionOfStore;
         SetId();
 	}
 
-	private void SetItem(EntityAI item, bool isAttached = false) {
+	private void SetItem(EntityAI item) {
 		health = item.GetHealth();
 		SetType(item.GetType());
 		
-		ItemBase itemCast;
-        ItemBase.CastTo(itemCast, item);
+		ItemBase itemCast = ItemBase.Cast(item);
 		
 		if (itemCast) {
 			quantity = itemCast.GetQuantity();
@@ -43,17 +42,28 @@ class DZLStoreItem: DZLIdModel
 			quantity = ammo.GetAmmoCount();
 		}
 
-		if (!isAttached) {
-			array<EntityAI> itemsArray = new array<EntityAI>;
-	        item.GetInventory().EnumerateInventory(InventoryTraversalType.INORDER, itemsArray);
-			foreach(EntityAI itemAttached: itemsArray) {
-				if (itemAttached != item) {
-					DZLStoreItem storeItem = new DZLStoreItem();
-					storeItem.Init(itemAttached, positionOfStore, true);
-					attached.Insert(storeItem);
+		for(int i = 0; i < item.GetInventory().AttachmentCount(); i++ ) {
+			EntityAI attachment = item.GetInventory().GetAttachmentFromIndex(i);
+			if(attachment){
+				DZLStoreItem storeItem = new DZLStoreItem();
+				storeItem.Init(attachment, positionOfStore);
+				attached.Insert(storeItem);
+			}
+		}
+
+		
+		CargoBase cargo = item.GetInventory().GetCargo();
+		if (cargo) {
+			for(int z = 0; z < cargo.GetItemCount(); z++) {
+				EntityAI inventoryItem = cargo.GetItem(z);
+				if(inventoryItem){
+					DZLStoreItem storeItemCargo = new DZLStoreItem();
+					storeItemCargo.Init(inventoryItem, positionOfStore);
+					attached.Insert(storeItemCargo);
 				}
 			}
 		}
+		
 	}
 		
 	float GetHealth() {

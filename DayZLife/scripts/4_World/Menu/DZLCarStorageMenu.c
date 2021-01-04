@@ -79,6 +79,11 @@ class DZLCarStorageMenu: DZLBaseMenu
                     }
                 }
 
+                CargoBase cargo = car.GetInventory().GetCargo();
+                if (!player.config.carConfig.canStoreCarsWithGoods && cargo && cargo.GetItemCount() > 0) {
+                    player.DisplayMessage("#car_is_not_empty");
+                }
+
 				GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<CarScript, PlayerBase>(car, player), true);
 			    car.isSold = true;
 			}
