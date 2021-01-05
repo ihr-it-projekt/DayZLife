@@ -495,6 +495,25 @@ modded class PlayerBase
 		
 	}
 
+    override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
+        super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
+
+        if (GetGame().IsServer() && IsAlive()) {
+			if(GetHealth(dmgZone, "") < 10) {
+				SetHealth(dmgZone, "", 10);
+			}
+			
+			if (GetHealth("", "Shock") < 10) {
+				SetHealth("", "Shock", 10);
+			}
+			
+			if (GetHealth() < 100) {
+				SetHealth(100);
+			}
+		}
+    }
+
+
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
         if(item.GetLowerCaseType() == ItemSearchType) {
             if(GetGame().IsServer()) {
