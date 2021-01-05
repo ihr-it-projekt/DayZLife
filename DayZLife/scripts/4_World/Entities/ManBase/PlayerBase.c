@@ -34,7 +34,8 @@ modded class PlayerBase
 	bool wasHit = false;
 	bool hasShock = false;
 	bool willDie = false;
-	bool willHeal = false;
+	bool willHealByMedic = false;
+	bool willHealByHospital = false;
 	bool willHospital = false;
 
 	int timeAskForTraderConfig = 0;
@@ -52,7 +53,8 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableBool("wasHit");
-        RegisterNetSyncVariableBool("willHeal");
+        RegisterNetSyncVariableBool("willHealByMedic");
+        RegisterNetSyncVariableBool("willHealByHospital");
         RegisterNetSyncVariableBool("willDie");
         RegisterNetSyncVariableBool("willHospital");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
@@ -522,8 +524,8 @@ modded class PlayerBase
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 
         if (GetGame().IsServer()) {
-			if(GetHealth(dmgZone, "") < 5) {
-				SetHealth(dmgZone, "", 5);
+			if(GetHealth() < 5) {
+				SetHealth(5);
 				wasHit = true;
 			}
 
@@ -535,20 +537,40 @@ modded class PlayerBase
     }
 
     bool HasChooseMedicAction() {
-        return willDie || willHeal || willHospital;
+        return willDie || willHealByMedic || willHospital;
     }
 	
 	override void OnScheduledTick(float deltaTime) {
-
 		if (GetGame().IsServer()) {
-			if(!willDie && GetHealth("", "Blood") < 5) {
-				SetHealth("", "Blood", 5);
-			}
+			if(!willDie) {
+			    if (GetHealth("", "Blood") < 5) {
+				    SetHealth("", "Blood", 5);
+			    }
 			
-			if (!willDie && hasShock) {
-				SetHealth(5);
-				SetHealth("", "Shock", 5);
-			}
+			    if (hasShock) {
+				    SetHealth(5);
+				    SetHealth("", "Shock", 5);
+			    }
+            } else if (willHealByMedic) {
+                SetHealth(50);
+                SetHealth("", "Shock", 50);
+                SetHealth("", "Blood", 2500);
+                hasShock = false;
+                willHealByMedic = false;
+            } else if (willHealByHospital) {
+                SetHealth(100);
+                SetHealth("", "Shock", 100);
+                SetHealth("", "Blood", 5000);
+                hasShock = false;
+                willHealByHospital = false;
+                DZLBaseSpawnPoint point = DZLConfig.Get().medicConfig.hospitalSpawnPoints.GetRandomElement();
+				
+				SetPosition(point.point);
+				SetOrientation(point.orientation);
+            } else if(willDie) {
+                SetCanBeDestroyed(true);
+                SetHealth(0);
+            }
 		} else {
 		    if (!HasChooseMedicAction() && g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5 && wasHit){
 		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
@@ -556,11 +578,14 @@ modded class PlayerBase
 		}
 
         super.OnScheduledTick(deltaTime);
-//		NotifiersManager manager = player.GetNotifiersManager();
-//		if(player.GetNotifiersManager()){
-//			manager.TickNotifiers();
-//		}
-		
+	}
+
+	override void EEKilled(Object killer) {
+	    if (killer == this) {
+	        SetCanBeDestroyed(true);
+	    }
+
+	    super.EEKilled(killer);
 	}
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {

@@ -2,6 +2,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 {
 	private ButtonWidget killButton;
 	private ButtonWidget healButton;
+	private ButtonWidget hospitalButton;
 
     void DZLMedicHelpMenu() {
         Construct();
@@ -16,6 +17,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 
         killButton = creator.GetButtonWidget("KillButton");
         healButton = creator.GetButtonWidget("HealButton");
+        hospitalButton = creator.GetButtonWidget("HealButton");
 
         return layoutRoot;
     }
@@ -29,7 +31,11 @@ class DZLMedicHelpMenu : DZLBaseMenu
             OnHide();
         } else if (w == healButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
-			player.willHeal = true;
+			player.willHealByMedic = true;
+			OnHide();
+		} else if (w == hospitalButton) {
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
+			player.willHealByHospital = true;
 			OnHide();
 		}
 

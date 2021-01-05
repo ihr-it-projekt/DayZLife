@@ -14,13 +14,16 @@ class DZLMedicHelpListener
             autoptr Param1<PlayerBase>paramKill;
             if (ctx.Read(paramKill)){
                 paramKill.param1.willDie = true;
-                paramKill.param1.SetCanBeDestroyed(true);
             }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_HEAL_PLAYER) {
             autoptr Param1<PlayerBase>paramHeal;
             if (ctx.Read(paramHeal)){
-                paramHeal.param1.willHeal = false;
-                paramHeal.param1.SetHealth(100);
+                paramHeal.param1.willHealByMedic = true;
+            }
+        } else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
+            autoptr Param1<PlayerBase>paramHealHospital;
+            if (ctx.Read(paramHealHospital)){
+                paramHealHospital.param1.willHealByHospital = true;
             }
         }
     }

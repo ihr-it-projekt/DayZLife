@@ -22,6 +22,7 @@ class DZLConfig
     ref array<string> jobIds;
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
+    ref DZLMedicConfig medicConfig;
 
     void DZLConfig() {
         if (GetGame().IsServer()) {
@@ -36,6 +37,7 @@ class DZLConfig
             civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
             adminIds = new DZLAdmin;
             carConfig = new DZLCarConfig;
+            medicConfig = new DZLMedicConfig;
         }
 
         jobIds = new array<string>;

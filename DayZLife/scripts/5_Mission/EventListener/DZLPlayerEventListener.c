@@ -59,9 +59,9 @@ class DZLPlayerEventListener
                     player.IsRealPlayerDZL = true;
                 }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_MEDIC) {
-                Param1 <ref DZLJobSpawnPoints> configParamMedic;
-                if (ctx.Read(configParamMedic) && configParamMedic.param1) {
-                    player.config.medicSpawnPoints = configParamMedic.param1;
+                Param1 <ref DZLJobSpawnPoints> configParamMedicSpawn;
+                if (ctx.Read(configParamMedicSpawn) && configParamMedicSpawn.param1) {
+                    player.config.medicSpawnPoints = configParamMedicSpawn.param1;
                     player.IsRealPlayerDZL = true;
                 }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CIV) {
@@ -80,6 +80,12 @@ class DZLPlayerEventListener
                 Param1 <ref DZLCarConfig> configParamCar;
                 if (ctx.Read(configParamCar) && configParamCar.param1) {
                     player.config.carConfig = configParamCar.param1;
+                    player.IsRealPlayerDZL = true;
+                }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_MEDIC_RESPONSE) {
+                Param1 <ref DZLMedicConfig> configParamMedic;
+                if (ctx.Read(configParamMedic) && configParamMedic.param1) {
+                    player.config.medicConfig = configParamMedic.param1;
                     player.IsRealPlayerDZL = true;
                 }
             } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {

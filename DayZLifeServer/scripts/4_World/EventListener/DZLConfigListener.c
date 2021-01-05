@@ -25,6 +25,7 @@ class DZLConfigListener
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CIV, new Param1<ref DZLJobSpawnPoints>(config.civilSpawnPoints), true, sender);
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ADMIN_IDS, new Param1<ref DZLAdmin>(config.adminIds), true, sender);
                 GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_CAR_RESPONSE, new Param1<ref DZLCarConfig>(config.carConfig), true, sender);
+                GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_EVENT_GET_CONFIG_MEDIC_RESPONSE, new Param1<ref DZLMedicConfig>(config.medicConfig), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER) {
             autoptr Param1<PlayerBase> paramGetConfigTrader;
