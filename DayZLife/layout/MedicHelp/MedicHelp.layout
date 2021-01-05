@@ -23,7 +23,7 @@ FrameWidgetClass rootFrame {
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     position 0 -0
+     position 0 0
      size 0.95885 0.93338
      halign center_ref
      valign center_ref
@@ -135,7 +135,7 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          style OldStyle
-         text "Heal"
+         text "Hospital"
         }
        }
       }
