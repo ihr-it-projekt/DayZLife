@@ -86,6 +86,33 @@ FrameWidgetClass rootFrame {
         }
        }
       }
+      PanelWidgetClass PanelWidget16 {
+       visible 1
+       ignorepointer 1
+       position 0.0144 0.0532
+       size 0.06879 0.22335
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "X"
+        }
+       }
+      }
      }
     }
    }
