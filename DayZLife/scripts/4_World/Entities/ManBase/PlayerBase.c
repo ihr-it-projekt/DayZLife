@@ -32,6 +32,7 @@ modded class PlayerBase
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	bool wasHit = false;
+	bool hasShock = false;
 	bool willDie = false;
 	bool willHeal = false;
 	bool willHospital = false;
@@ -51,6 +52,9 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableBool("wasHit");
+        RegisterNetSyncVariableBool("willHeal");
+        RegisterNetSyncVariableBool("willDie");
+        RegisterNetSyncVariableBool("willHospital");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
 	}
@@ -525,7 +529,7 @@ modded class PlayerBase
 
 			if (GetHealth("", "Shock") < 5) {
 				SetHealth("", "Shock", 5);
-				wasHit = true;
+				hasShock = true;
 			}
 		}
     }
@@ -535,12 +539,13 @@ modded class PlayerBase
     }
 	
 	override void OnScheduledTick(float deltaTime) {
+
 		if (GetGame().IsServer()) {
 			if(!willDie && GetHealth("", "Blood") < 5) {
 				SetHealth("", "Blood", 5);
 			}
 			
-			if (!willDie && wasHit) {
+			if (!willDie && hasShock) {
 				SetHealth(5);
 				SetHealth("", "Shock", 5);
 			}
@@ -549,6 +554,13 @@ modded class PlayerBase
 		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
             }
 		}
+
+        super.OnScheduledTick(deltaTime);
+//		NotifiersManager manager = player.GetNotifiersManager();
+//		if(player.GetNotifiersManager()){
+//			manager.TickNotifiers();
+//		}
+		
 	}
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
