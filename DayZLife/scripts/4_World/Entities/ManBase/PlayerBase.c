@@ -32,7 +32,10 @@ modded class PlayerBase
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	bool wasHit = false;
-	
+	bool willDie = false;
+	bool willHeal = false;
+	bool willHospital = false;
+
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;
@@ -526,6 +529,10 @@ modded class PlayerBase
 			}
 		}
     }
+
+    bool HasChooseMedicAction() {
+        return willDie || willHeal || willHospital;
+    }
 	
 	override void OnScheduledTick(float deltaTime) {
 		if (GetGame().IsServer()) {
@@ -538,7 +545,7 @@ modded class PlayerBase
 				SetHealth("", "Shock", 5);
 			}
 		} else {
-		    if (g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5 && wasHit){
+		    if (!HasChooseMedicAction() && g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5 && wasHit){
 		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
             }
 		}
