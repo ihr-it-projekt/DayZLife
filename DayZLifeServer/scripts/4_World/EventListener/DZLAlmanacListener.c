@@ -49,7 +49,7 @@ class DZLAlmanacListener
 						DZLDatabaseLayer.Get().GetLockedHouses().Remove(house);
                     }
 
-                    DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.bank * -1);
+                    DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.GetBankMoney() * -1);
 
                     foreach(string fileHouseAccess: dzlPlayerHouse.playerHouseKeyCollection) {
 						house = DZLDatabaseLayer.Get().GetHouse(null, fileHouseAccess);
@@ -110,7 +110,7 @@ class DZLAlmanacListener
 				string ident = _player.GetIdentity().GetId();
                	DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
 				
-				if (!dzlPlayer.isCop) {
+				if (!dzlPlayer.IsCop()) {
 					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
 				}
             }

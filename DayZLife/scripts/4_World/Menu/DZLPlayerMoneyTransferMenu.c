@@ -44,7 +44,7 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu
 				}
 				
 				if (deposit != 0) {
-		            if (deposit <= dzlPlayer.money) {
+		            if (deposit <= dzlPlayer.GetMoney()) {
 		                GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER, new Param3<PlayerBase, PlayerBase, int>(player, receiver, deposit), true);
 		                inputDeposit.SetText("");
 		            } else {

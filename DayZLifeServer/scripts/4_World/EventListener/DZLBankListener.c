@@ -21,7 +21,7 @@ class DZLBankListener
 				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 				if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					message = "#bank_can_not_be_used_in_moment";
-				} else if(paramDeposit.param2 >= dzlPlayer.money || paramDeposit.param2 <= dzlPlayer.bank) {
+				} else if(paramDeposit.param2 >= dzlPlayer.GetMoney() || paramDeposit.param2 <= dzlPlayer.GetBankMoney()) {
                     bank.AddMoney(paramDeposit.param2 * -1);
                     dzlPlayer.AddMoneyToPlayer(paramDeposit.param2);
                     dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param2 * -1);
@@ -60,7 +60,7 @@ class DZLBankListener
 				if (!bankTransfer.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					messageDeposit = "#bank_can_not_be_used_in_moment";
 				} else if ("" == messageDeposit) {
-					if(dzlPlayerSender.money + dzlPlayerSender.bank >= paramDepositPlayer.param3) {
+					if(dzlPlayerSender.GetAllMoney() >= paramDepositPlayer.param3) {
 						int moneyBankAdd = dzlPlayerSender.DepositMoneyToOtherPlayer(dzlPlayerReciver, paramDepositPlayer.param3);
 
 						bankTransfer.AddMoney(moneyBankAdd);
@@ -83,7 +83,7 @@ class DZLBankListener
                 DZLPlayer dzlPlayerSenderPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayerPlayer.param1.GetIdentity().GetId());
                 DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayerPlayer.param2.GetIdentity().GetId());
 
-				if(dzlPlayerSenderPP.money >= paramDepositPlayerPlayer.param3) {
+				if(dzlPlayerSenderPP.GetMoney() >= paramDepositPlayerPlayer.param3) {
 				    messageDepositPP = "#money_transfer_successful";
                     dzlPlayerSenderPP.DepositMoneyFromPlayerToOtherPlayer(dzlPlayerReciverPP, paramDepositPlayerPlayer.param3);
                     GetGame().RPCSingleParam(paramDepositPlayerPlayer.param1, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerSenderPP), true, sender);

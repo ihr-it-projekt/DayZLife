@@ -18,8 +18,8 @@ modded class Inventory : LayoutHolder
 		DZLPlayer dzlPlayer = PlayerBaseHelper.GetPlayer().dzlPlayer;
 
          if (dzlPlayer) {
-             moneyAtBank.SetText(dzlPlayer.bank.ToString());
-             moneyAtPlayer.SetText(dzlPlayer.money.ToString());
+             moneyAtBank.SetText(dzlPlayer.GetBankMoney().ToString());
+             moneyAtPlayer.SetText(dzlPlayer.GetMoney().ToString());
              playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());
          }
      }

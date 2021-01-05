@@ -2,7 +2,6 @@
 
 - Alamach
     - Bank infos Raidwerkzeug ...
-    - Sync Button für Player Daten
 
 - Wohnung mieten
     - key management
@@ -71,10 +70,23 @@ Führerschein
             - Zugriff auf Fahndungslisten
 
         - Medic
-            - Wiederbelebung dafür Geld
-            - Preise Configurierbar
-            - Gehalt
-
+            - Wiederbelebung
+                - dafür Geld an Medic
+                - nur mit Item die der Medic hat (Defrie)
+            - Spiele kann auswählen zwischen
+                - medic rufen
+                    - Geldbetrag eingeben
+                - Sterben
+                - Krankenhaus
+            - Heilung
+                - 50 % vor Ort
+                - 100 % mit Medic am Krankenhaus
+                - 75 % nur Krankenhaus
+            - Spieler kann medic mit Geldangebot rufen
+            - Spieler muss feedback bekommen das ein medic kommt
+            - medic braucht mini map wo Spieler angezeigt wird
+            - medic kann Auftrag im Almanc annehmen
+            - Einsatzcentrale (Krankenhäuse) nur durch medics betretbar
         - Jäger
             - Tiere jagen
 

@@ -60,7 +60,7 @@ class DZLTraderMenu: DZLBaseMenu
 		super.UpdateGUI(message);
 		
 		array<EntityAI> playerItems = player.GetPlayerItems();
-		credits.SetText(dzlPlayer.money.ToString());
+		credits.SetText(dzlPlayer.GetMoney().ToString());
 		position = player.GetTraderByPosition();
 		
 		inventory.ClearItems();
@@ -136,7 +136,7 @@ class DZLTraderMenu: DZLBaseMenu
 		string name = "";
 		int quantity;
 		
-		credits.SetText(dzlPlayer.money.ToString());
+		credits.SetText(dzlPlayer.GetMoney().ToString());
 		
 		traderItemList.ClearItems();
 		inventory.ClearItems();
@@ -316,7 +316,7 @@ class DZLTraderMenu: DZLBaseMenu
                 return true;
             }
 
-            if (sumInt > player.dzlPlayer.money) {
+            if (sumInt > player.dzlPlayer.GetMoney()) {
 				UpdateGUI("#error_not_enough_money");
 				return true;
 			}

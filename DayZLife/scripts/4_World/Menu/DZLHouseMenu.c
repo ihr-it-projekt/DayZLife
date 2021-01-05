@@ -97,7 +97,7 @@ class DZLHouseMenu : DZLBaseMenu
 		if (actualHouseDef) {
 	        super.OnShow();
 		   
-            balanceTextWidget.SetText(dzlPlayer.money.ToString());
+            balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
         
 	        priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
@@ -330,7 +330,7 @@ class DZLHouseMenu : DZLBaseMenu
 	override void UpdateGUI(string message = "") {
 	    super.UpdateGUI(message);
 		
-		balanceTextWidget.SetText(dzlPlayer.money.ToString());
+		balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
 		
 		if (indexPanel == 0 && house && house.HasOwner() && house.IsOwner(player)) {
 			sellButton.Show(true);

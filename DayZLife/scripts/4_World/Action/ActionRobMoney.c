@@ -36,7 +36,7 @@ class ActionRobMoney: ActionInteractBase
 
         if (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious()) {
             DZLPlayer dzlTargetPlayer = DZLDatabaseLayer.Get().GetPlayer(targetPlayer.GetIdentity().GetId());
-            if (dzlTargetPlayer && dzlTargetPlayer.money > 0) {
+            if (dzlTargetPlayer && dzlTargetPlayer.HasMoney()) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
 
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());

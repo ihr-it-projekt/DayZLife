@@ -10,7 +10,7 @@ class DZLPlayerInventory
             return 0;
         }
         DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
-        return dzlPlayer.money;
+        return dzlPlayer.GetMoney();
 	}
 
     void AddMoneyToPlayer(PlayerBase player, float moneyCount) {

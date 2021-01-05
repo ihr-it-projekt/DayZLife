@@ -29,7 +29,7 @@ class DZLPlayerIdentities: DZLSaveModel
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if (player.isCop) {
+            if (player.IsCop()) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
             }
         }

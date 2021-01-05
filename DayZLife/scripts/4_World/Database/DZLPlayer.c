@@ -2,9 +2,9 @@ class DZLPlayer: DZLSaveModel
 {
     string fileName = "";
     string dayZPlayerId = "";
-    int money = 0;
-    int bank = 0;
-    bool isCop = false;
+    private int money = 0;
+    private int bank = 0;
+    private bool isCop = false;
     string playerName = "";
 	int onlineTimeCivil = 0;
 	int onlineTimeMedic = 0;
@@ -112,6 +112,10 @@ class DZLPlayer: DZLSaveModel
         mustSave = true;
     }
 
+    bool IsCop() {
+        return isCop;
+    }
+
     void UpdateName(string playerName) {
         this.playerName = playerName;
         lastLoginDate = new DZLDate();
@@ -136,6 +140,26 @@ class DZLPlayer: DZLSaveModel
 
     bool HasEnoughMoney(int amount) {
         return money >= amount;
+    }
+
+    bool HasMoney() {
+        return money > 0;
+    }
+
+    bool HasBankMoney() {
+        return bank > 0;
+    }
+
+    int GetBankMoney() {
+        return bank;
+    }
+
+    int GetMoney() {
+        return money;
+    }
+
+    int GetAllMoney() {
+        return money + bank;
     }
 
     void PlayerHasDied() {

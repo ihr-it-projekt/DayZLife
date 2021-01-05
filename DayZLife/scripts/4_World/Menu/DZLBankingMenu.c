@@ -27,8 +27,8 @@ class DZLBankingMenu : DZLBaseMenu
            autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
                 bankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
-                playerBalanceTextWidget.SetText(paramGetResponse.param1.money.ToString());
-                playerBankBalanceTextWidget.SetText(paramGetResponse.param1.bank.ToString());
+                playerBalanceTextWidget.SetText(paramGetResponse.param1.GetMoney().ToString());
+                playerBankBalanceTextWidget.SetText(paramGetResponse.param1.GetBankMoney().ToString());
                 player.DisplayMessage(paramGetResponse.param3);
            }
        	} else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE) {
@@ -75,8 +75,8 @@ class DZLBankingMenu : DZLBaseMenu
         if (config) {
             super.OnShow();
 
-            playerBalanceTextWidget.SetText(dzlPlayer.money.ToString());
-            playerBankBalanceTextWidget.SetText(dzlPlayer.bank.ToString());
+            playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
+            playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
 
 			balanceTextLabelWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
 			bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
@@ -136,7 +136,7 @@ class DZLBankingMenu : DZLBaseMenu
 		}
 		
 		if (deposit != 0) {
-            if (deposit <= dzlPlayer.money + dzlPlayer.bank) {
+            if (deposit <= dzlPlayer.GetAllMoney()) {
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER, new Param3<PlayerBase, DZLPlayerBankInfo, int>(player, playerBankInfo, deposit), true);
                 inputDeposit.SetText("");
             } else {
@@ -151,7 +151,7 @@ class DZLBankingMenu : DZLBaseMenu
     private void SendDeposit(int factor) {
         if (inputDeposit.GetText().ToInt() >= 1) {
             int deposit = inputDeposit.GetText().ToInt();
-            if ((deposit <= dzlPlayer.money && factor == -1) || (deposit <= dzlPlayer.bank && factor == 1)) {
+            if ((deposit <= dzlPlayer.GetMoney() && factor == -1) || (deposit <= dzlPlayer.GetBankMoney() && factor == 1)) {
 			    deposit = factor * deposit;
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, int>(player, deposit), true);
                 inputDeposit.SetText("");

@@ -21,7 +21,7 @@ class DZLLoadOutListener
 				string categoryName = paramLoadOut.param2;
                 string message = "#error_not_a_cop";
 
-                if (dzlPlayer.isCop) {
+                if (dzlPlayer.IsCop()) {
 					message = "#error_category_not_found";
 					foreach(DZLLoadOutCategory category: config.loadOutsCops.loadOutCategories) {
 						if (categoryName == category.name) {

@@ -25,10 +25,10 @@ class DZLBank: DZLSaveModel
 		int moneyToRaid = 0;
 		foreach(string ident: playerIdentities) {
 			DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
-		    if (playerRobt.bank == 0) continue;
+		    if (!playerRobt.HasBankMoney()) continue;
 		    if (player.fileName == playerRobt.fileName) continue;
 
-			float moneyToSteal = Math.Round(playerRobt.bank * percentage / 100);
+			float moneyToSteal = Math.Round(playerRobt.GetBankMoney() * percentage / 100);
 			
 		    playerRobt.AddMoneyToPlayerBank(moneyToSteal * -1);
 		    moneyToRaid += moneyToSteal;

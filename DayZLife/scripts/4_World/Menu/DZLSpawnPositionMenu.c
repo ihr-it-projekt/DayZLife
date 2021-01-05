@@ -55,7 +55,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 		jobSelection.AddItem("#Civ");
 		jobSelection.AddItem("#Medic");
 
-		if (player.dzlPlayer.isCop) {
+		if (player.dzlPlayer.IsCop()) {
 		    jobSelection.AddItem("#Cop");
 		}
 
