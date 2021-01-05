@@ -25,8 +25,10 @@ class DZLMedicHelpMenu : DZLBaseMenu
 
         if (w == killButton) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER, new Param1<PlayerBase>(player), true);
+            OnHide();
         } else if (w == healButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
+			OnHide();
 		}
 
         return false;
