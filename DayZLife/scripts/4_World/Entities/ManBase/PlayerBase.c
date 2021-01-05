@@ -46,6 +46,7 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
+		SetCanBeDestroyed(false);
 	}
 
 
@@ -500,24 +501,28 @@ modded class PlayerBase
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 
         if (GetGame().IsServer()) {
-			if(GetHealth(dmgZone, "") < 10) {
-				SetHealth(dmgZone, "", 10);
+			if(GetHealth(dmgZone, "") < 5) {
+				SetHealth(dmgZone, "", 5);
+				SetAllowDamage(false);
 			}
 			
-			if (GetHealth("", "Shock") < 10) {
-				SetHealth("", "Shock", 10);
+			if (GetHealth("", "Shock") < 5) {
+				SetHealth("", "Shock", 5);
+				SetAllowDamage(false);
 			}
 			
 			if (GetHealth() < 5) {
 				SetHealth(5);
+				SetAllowDamage(false);
 			}
 		}
     }
 	
 	override void OnScheduledTick(float deltaTime) {
 		if (GetGame().IsServer()) {
-			if(GetHealth("", "Blood") < 100) {
-				SetHealth("", "Blood", 100);
+			if(GetHealth("", "Blood") < 5) {
+				SetHealth("", "Blood", 5);
+				SetAllowDamage(false);
 			}
 		}
 	}	
