@@ -546,16 +546,7 @@ modded class PlayerBase
 	
 	override void OnScheduledTick(float deltaTime) {
 		if (GetGame().IsServer()) {
-			if(!willDie) {
-			    if (GetHealth("", "Blood") < 5) {
-				    SetHealth("", "Blood", 5);
-			    }
-			
-			    if (hasShock) {
-				    SetHealth(5);
-				    SetHealth("", "Shock", 5);
-			    }
-            } else if (willHealByMedic) {
+            if (willHealByMedic) {
                 SetHealth(50);
                 SetHealth("", "Shock", 50);
                 SetHealth("", "Blood", 2500);
@@ -574,9 +565,18 @@ modded class PlayerBase
             } else if(willDie) {
                 SetCanBeDestroyed(true);
                 SetHealth(0);
+            } else if(!willDie) {
+                if (GetHealth("", "Blood") < 5) {
+                    SetHealth("", "Blood", 5);
+                }
+
+                if (hasShock) {
+                    SetHealth(5);
+                    SetHealth("", "Shock", 5);
+                }
             }
 		} else {
-		    if (!HasChooseMedicAction() && g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5 && wasHit){
+		    if (!HasChooseMedicAction() && g_Game.GetUIManager().GetMenu() == NULL && !healMenu && wasHit){
 		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
             }
 		}
