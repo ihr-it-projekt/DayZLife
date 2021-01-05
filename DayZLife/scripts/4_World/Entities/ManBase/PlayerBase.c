@@ -35,7 +35,6 @@ modded class PlayerBase
 	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;
 	bool hasBankingConfig = false;
-	ref Timer healthTimer;
 
 	override void Init() {
         super.Init();
@@ -47,13 +46,6 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-		
-		if (GetGame().IsServer()) {
-			healthTimer = new Timer();
-			healthTimer.Run(0.1, this, "CheckBlood", null, true);
-		}
-		
-		
 	}
 
 
@@ -505,9 +497,9 @@ modded class PlayerBase
 	}
 
     override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
-        super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
+		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 
-        if (GetGame().IsServer() && IsAlive()) {
+        if (GetGame().IsServer()) {
 			if(GetHealth(dmgZone, "") < 10) {
 				SetHealth(dmgZone, "", 10);
 			}
@@ -522,8 +514,8 @@ modded class PlayerBase
 		}
     }
 	
-	void CheckBlood() {
-		if (GetGame().IsServer() && IsAlive()) {
+	override void OnScheduledTick(float deltaTime) {
+		if (GetGame().IsServer()) {
 			if(GetHealth("", "Blood") < 100) {
 				SetHealth("", "Blood", 100);
 			}
