@@ -35,6 +35,7 @@ modded class PlayerBase
 	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;
 	bool hasBankingConfig = false;
+	ref Timer healthTimer;
 
 	override void Init() {
         super.Init();
@@ -46,7 +47,15 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
+		
+		if (GetGame().IsServer()) {
+			healthTimer = new Timer();
+			healthTimer.Run(0.1, this, "CheckBlood", null, true);
+		}
+		
+		
 	}
+
 
 	bool IsDZLPlayer() {
 	    return !IsDZLBank && !IsLicencePoint && !IsTrader && !IsLoadOut && !IsGarage;
@@ -507,11 +516,19 @@ modded class PlayerBase
 				SetHealth("", "Shock", 10);
 			}
 			
-			if (GetHealth() < 100) {
-				SetHealth(100);
+			if (GetHealth() < 5) {
+				SetHealth(5);
 			}
 		}
     }
+	
+	void CheckBlood() {
+		if (GetGame().IsServer() && IsAlive()) {
+			if(GetHealth("", "Blood") < 100) {
+				SetHealth("", "Blood", 100);
+			}
+		}
+	}	
 
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
