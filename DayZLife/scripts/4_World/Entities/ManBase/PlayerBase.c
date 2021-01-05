@@ -538,7 +538,7 @@ modded class PlayerBase
 				SetHealth("", "Shock", 5);
 			}
 		} else {
-		    if (g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5){
+		    if (g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5 && wasHit){
 		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
             }
 		}
