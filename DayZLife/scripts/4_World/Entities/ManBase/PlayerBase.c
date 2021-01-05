@@ -37,6 +37,7 @@ modded class PlayerBase
 	bool willHealByMedic = false;
 	bool willHealByHospital = false;
 	bool willHospital = false;
+	int medicHealPrice = 100;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -52,13 +53,11 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsLoadOut");
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
+        RegisterNetSyncVariableBool("hasShock");
         RegisterNetSyncVariableBool("wasHit");
-        RegisterNetSyncVariableBool("willHealByMedic");
-        RegisterNetSyncVariableBool("willHealByHospital");
-        RegisterNetSyncVariableBool("willDie");
-        RegisterNetSyncVariableBool("willHospital");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
+		
 	}
 
 
@@ -97,7 +96,12 @@ modded class PlayerBase
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
-        }
+        } else if (GetGame().IsServer() && IsDZLPlayer()) {
+			if (!dzlPlayer || !config) {
+				dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+				config = DZLConfig.Get();
+			}
+		}
     }
 
     void DisplayMessage(string message) {
@@ -303,12 +307,6 @@ modded class PlayerBase
     }
 	
 	DZLLicence GetLicenceByPosition() {
-		
-		if (GetGame().IsServer()) {
-			dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
-			config = DZLConfig.Get();
-		}
-
 	    if(!dzlPlayer) return null;
 
         vector playerPosition = GetPosition();
@@ -521,10 +519,6 @@ modded class PlayerBase
 	}
 
     override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
-		if (m_Suicide) {
-			SetCanBeDestroyed(true);
-		}
-		
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 
         if (GetGame().IsServer()) {
@@ -552,13 +546,18 @@ modded class PlayerBase
                 SetHealth("", "Blood", 2500);
                 hasShock = false;
                 willHealByMedic = false;
-            } else if (willHealByHospital) {
+				wasHit = false;
+			} else if (willHealByHospital) {
                 SetHealth(100);
                 SetHealth("", "Shock", 100);
                 SetHealth("", "Blood", 5000);
                 hasShock = false;
                 willHealByHospital = false;
+				wasHit = false;
                 DZLBaseSpawnPoint point = DZLConfig.Get().medicConfig.hospitalSpawnPoints.GetRandomElement();
+				m_BleedingManagerServer.RemoveAllSources();
+				
+				dzlPlayer.AddMoneyToPlayerBank(config.medicConfig.priceHospitalHeal * -1);
 				
 				SetPosition(point.point);
 				SetOrientation(point.orientation);
@@ -568,16 +567,28 @@ modded class PlayerBase
             } else if(!willDie) {
                 if (GetHealth("", "Blood") < 5) {
                     SetHealth("", "Blood", 5);
+                    wasHit = true;
                 }
 
-                if (hasShock) {
+                if (GetHealth("", "Shock") < 5) {
                     SetHealth(5);
                     SetHealth("", "Shock", 5);
+                    hasShock = true;
                 }
             }
 		} else {
-		    if (!HasChooseMedicAction() && g_Game.GetUIManager().GetMenu() == NULL && !healMenu && wasHit){
+		    if (!HasChooseMedicAction() && g_Game.GetUIManager().GetMenu() == NULL && !healMenu && !willDie){
 		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
+            }
+			
+			if (willHealByMedic) {
+                hasShock = false;
+                willHealByMedic = false;
+				wasHit = false;
+			} else if (willHealByHospital) {
+                hasShock = false;
+                willHealByHospital = false;
+				wasHit = false;    
             }
 		}
 

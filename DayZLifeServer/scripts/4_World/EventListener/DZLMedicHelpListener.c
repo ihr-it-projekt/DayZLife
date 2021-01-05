@@ -1,6 +1,5 @@
 class DZLMedicHelpListener
 {
-
     void DZLMedicHelpListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
@@ -19,11 +18,12 @@ class DZLMedicHelpListener
             autoptr Param1<PlayerBase>paramHeal;
             if (ctx.Read(paramHeal)){
                 paramHeal.param1.willHealByMedic = true;
-            }
+			}
         } else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
             autoptr Param1<PlayerBase>paramHealHospital;
             if (ctx.Read(paramHealHospital)){
-                paramHealHospital.param1.willHealByHospital = true;
+				PlayerBase player = paramHealHospital.param1;
+                player.willHealByHospital = true;
             }
         }
     }

@@ -2,8 +2,9 @@ class DZLMedicConfig
 {
 	string version = "1";
     ref array<ref DZLBaseSpawnPoint> hospitalSpawnPoints;
+    int priceHospitalHeal = 400;
 
-    void DZLPaycheckConfig() {
+    void DZLMedicConfig() {
         if(!Load()) {
             hospitalSpawnPoints = new array<ref DZLBaseSpawnPoint>;
 			DZLBaseSpawnPoint point = new DZLBaseSpawnPoint();

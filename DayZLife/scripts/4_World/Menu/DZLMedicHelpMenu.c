@@ -14,10 +14,15 @@ class DZLMedicHelpMenu : DZLBaseMenu
     override Widget Init() {
         layoutPath = "DayZLife/layout/MedicHelp/MedicHelp.layout";
         super.Init();
+		
+		closeButton.Show(false);
 
         killButton = creator.GetButtonWidget("KillButton");
+
         healButton = creator.GetButtonWidget("HealButton");
+        healButton.SetText("#call_a_medic (" + player.medicHealPrice.ToString() + ")");
         hospitalButton = creator.GetButtonWidget("HospitalButton");
+        hospitalButton.SetText("#go_to_hospital (" + config.medicConfig.priceHospitalHeal.ToString() + ")");
 
         return layoutRoot;
     }

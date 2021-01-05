@@ -123,7 +123,7 @@ class DZLPlayer: DZLSaveModel
     }
 	
 	void AddMoneyToPlayer(int moneyCount) {
-        if (!DayZGame().IsClient()) {
+        if (DayZGame().IsServer()) {
             LogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 			money += moneyCount;
 		    mustSave = true;
@@ -131,7 +131,7 @@ class DZLPlayer: DZLSaveModel
     }
 
 	void AddMoneyToPlayerBank(int moneyCount) {
-        if (!DayZGame().IsClient()) {
+        if (DayZGame().IsServer()) {
             LogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
 			bank += moneyCount;
 		    mustSave = true;
