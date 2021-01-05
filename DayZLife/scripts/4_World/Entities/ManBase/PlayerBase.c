@@ -536,11 +536,11 @@ modded class PlayerBase
 	
 	override void OnScheduledTick(float deltaTime) {
 		if (GetGame().IsServer()) {
-			if(GetHealth("", "Blood") < 5) {
+			if(!willDie && GetHealth("", "Blood") < 5) {
 				SetHealth("", "Blood", 5);
 			}
 			
-			if (wasHit) {
+			if (!willDie && wasHit) {
 				SetHealth(5);
 				SetHealth("", "Shock", 5);
 			}

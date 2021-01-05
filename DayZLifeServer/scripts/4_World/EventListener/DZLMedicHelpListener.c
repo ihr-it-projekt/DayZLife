@@ -19,7 +19,7 @@ class DZLMedicHelpListener
         } else if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_HEAL_PLAYER) {
             autoptr Param1<PlayerBase>paramHeal;
             if (ctx.Read(paramHeal)){
-                paramHeal.param1.willHeal = true;
+                //paramHeal.param1.willHeal = true;
                 paramHeal.param1.SetHealth(100);
             }
         }
