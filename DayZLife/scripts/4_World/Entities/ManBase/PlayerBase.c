@@ -30,6 +30,7 @@ modded class PlayerBase
 	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
 	bool isPolice = false;
+	bool wasHit = false;
 	
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -45,6 +46,7 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsLoadOut");
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
+        RegisterNetSyncVariableBool("wasHit");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
 	}
@@ -503,26 +505,25 @@ modded class PlayerBase
         if (GetGame().IsServer()) {
 			if(GetHealth(dmgZone, "") < 5) {
 				SetHealth(dmgZone, "", 5);
-				SetAllowDamage(false);
+				wasHit = true;
 			}
-			
+
 			if (GetHealth("", "Shock") < 5) {
 				SetHealth("", "Shock", 5);
-				SetAllowDamage(false);
-			}
-			
-			if (GetHealth() < 5) {
-				SetHealth(5);
-				SetAllowDamage(false);
+				wasHit = true;
 			}
 		}
     }
 	
 	override void OnScheduledTick(float deltaTime) {
 		if (GetGame().IsServer()) {
-			if(GetHealth("", "Blood") < 5) {
-				SetHealth("", "Blood", 5);
-				SetAllowDamage(false);
+			if(GetHealth("", "Blood") < 1) {
+				SetHealth("", "Blood", 1);
+			}
+			
+			if (wasHit) {
+				SetHealth(5);
+				SetHealth("", "Shock", 5);
 			}
 		}
 	}	
