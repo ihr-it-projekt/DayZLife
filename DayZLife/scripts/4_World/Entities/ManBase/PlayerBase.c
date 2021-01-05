@@ -20,6 +20,7 @@ modded class PlayerBase
 	ref DZLPlayerArrestMenu arrestMenu;
 	ref DZLCarMenu carMenu;
 	ref DZLCarStorageMenu carStorageMenu;
+	ref DZLMedicHelpMenu healMenu;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -116,6 +117,8 @@ modded class PlayerBase
             carMenu.UpdatePlayer(this);
         } else if (carStorageMenu && carStorageMenu.IsVisible()) {
             carStorageMenu.UpdatePlayer(this);
+        } else if (healMenu && healMenu.IsVisible()) {
+            healMenu.UpdatePlayer(this);
         }
     }
 
@@ -135,6 +138,13 @@ modded class PlayerBase
 		carMenu.SetCar(car);
 		
         return carMenu;
+    }
+
+    DZLMedicHelpMenu GetMedicHealMenu() {
+        healMenu = new DZLMedicHelpMenu;
+        InitMenu(healMenu);
+
+        return healMenu;
     }
 
     DZLCarStorageMenu GetCarStorageMenu() {
@@ -251,6 +261,8 @@ modded class PlayerBase
 			moneyTransferMenu.OnHide();
 		} else if (carMenu && carMenu.IsVisible()) {
 			carMenu.OnHide();
+		} else if (healMenu && healMenu.IsVisible()) {
+			healMenu.OnHide();
 		} else if (carStorageMenu && carStorageMenu.IsVisible()) {
 			carStorageMenu.OnHide();
 		}
@@ -517,17 +529,20 @@ modded class PlayerBase
 	
 	override void OnScheduledTick(float deltaTime) {
 		if (GetGame().IsServer()) {
-			if(GetHealth("", "Blood") < 1) {
-				SetHealth("", "Blood", 1);
+			if(GetHealth("", "Blood") < 5) {
+				SetHealth("", "Blood", 5);
 			}
 			
 			if (wasHit) {
 				SetHealth(5);
 				SetHealth("", "Shock", 5);
 			}
+		} else {
+		    if (g_Game.GetUIManager().GetMenu() == NULL && !healMenu && GetHealth() < 5){
+		        GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
+            }
 		}
-	}	
-
+	}
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
         if(item.GetLowerCaseType() == ItemSearchType) {
