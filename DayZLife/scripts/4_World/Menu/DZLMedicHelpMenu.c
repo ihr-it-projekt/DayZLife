@@ -17,7 +17,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 
         killButton = creator.GetButtonWidget("KillButton");
         healButton = creator.GetButtonWidget("HealButton");
-        hospitalButton = creator.GetButtonWidget("HealButton");
+        hospitalButton = creator.GetButtonWidget("HospitalButton");
 
         return layoutRoot;
     }

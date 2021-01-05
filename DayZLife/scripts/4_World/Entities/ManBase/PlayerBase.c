@@ -521,6 +521,10 @@ modded class PlayerBase
 	}
 
     override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
+		if (m_Suicide) {
+			SetCanBeDestroyed(true);
+		}
+		
 		super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
 
         if (GetGame().IsServer()) {
@@ -578,14 +582,6 @@ modded class PlayerBase
 		}
 
         super.OnScheduledTick(deltaTime);
-	}
-
-	override void EEKilled(Object killer) {
-	    if (killer == this) {
-	        SetCanBeDestroyed(true);
-	    }
-
-	    super.EEKilled(killer);
 	}
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
