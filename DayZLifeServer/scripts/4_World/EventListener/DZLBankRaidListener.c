@@ -61,7 +61,7 @@ class DZLBankRaidListener : Managed
 
     void Finish() {
 		if (time > timeHappened) {
-            if (!isInNearOfBankAndLocationIsEnabled()) {
+            if (!isInNearOfBankAndLocationIsEnabled() || !playerWhoStartedRaid) {
                 playerWhoStartedRaid = null;
                 raidTimer.Stop();
                 DZLBank bank_cancel = DZLDatabaseLayer.Get().GetBank();
