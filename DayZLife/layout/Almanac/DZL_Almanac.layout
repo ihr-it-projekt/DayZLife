@@ -613,7 +613,7 @@ FrameWidgetClass Almanac {
        visible 0
        ignorepointer 1
        position 0 0
-       size 1 0.91076
+       size 1 0.9108
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -648,7 +648,7 @@ FrameWidgetClass Almanac {
           }
           PanelWidgetClass PanelWidget25 {
            ignorepointer 1
-           position 0.4199 0.91371
+           position 0.4167 0.91933
            size 0.13707 0.0701
            halign center_ref
            valign bottom_ref
@@ -667,7 +667,7 @@ FrameWidgetClass Almanac {
              vexactpos 0
              hexactsize 0
              vexactsize 0
-             style Default
+             style OldStyle
              {
               ImageWidgetClass ImageWidget4 {
                ignorepointer 1
@@ -678,7 +678,7 @@ FrameWidgetClass Almanac {
                vexactpos 0
                hexactsize 0
                vexactsize 0
-               imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
+               imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
                mode blend
                "src alpha" 1
                stretch 1
@@ -688,7 +688,7 @@ FrameWidgetClass Almanac {
            }
           }
           EditBoxWidgetClass search_input {
-           position -0.08199 0.91371
+           position -0.07592 0.91933
            size 0.82187 0.0701
            halign center_ref
            valign bottom_ref
@@ -702,7 +702,7 @@ FrameWidgetClass Almanac {
         }
         PanelWidgetClass PanelWidget22 {
          ignorepointer 1
-         position 0.40889 0.01545
+         position 0.41029 0.00856
          size 0.17 0.07
          halign center_ref
          valign bottom_ref
@@ -729,8 +729,8 @@ FrameWidgetClass Almanac {
         }
         PanelWidgetClass PanelWidget23 {
          ignorepointer 1
-         position 0.18122 0.87089
-         size 0.12494 0.1
+         position 0.10488 0.00903
+         size 0.1249 0.07
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -742,7 +742,7 @@ FrameWidgetClass Almanac {
           ButtonWidgetClass giveMoneyButton {
            color 0.251 0.502 0 1
            position -0.00572 -0.02697
-           size 0.98514 0.9
+           size 0.98 0.9
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -756,8 +756,8 @@ FrameWidgetClass Almanac {
          }
         }
         EditBoxWidgetClass moneyInput {
-         position -0.00954 0.87465
-         size 0.24444 0.09149
+         position -0.04949 0.00903
+         size 0.1744 0.07
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -768,8 +768,8 @@ FrameWidgetClass Almanac {
         }
         PanelWidgetClass PanelWidget24 {
          ignorepointer 1
-         position 0.30984 0.87089
-         size 0.12318 0.1
+         position 0.23364 0.00903
+         size 0.1232 0.07
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -781,7 +781,7 @@ FrameWidgetClass Almanac {
           ButtonWidgetClass giveMoneyButtonBank {
            color 0.251 0.502 0 1
            position -0.00355 -0.02697
-           size 0.98949 0.9
+           size 0.98 0.9
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -791,6 +791,318 @@ FrameWidgetClass Almanac {
            style Default
            text "#Deposit_to_bank"
            text_proportion 0.6
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget27 {
+         ignorepointer 1
+         position 0.1793 0.01057
+         size 0.63197 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass playerID {
+           ignorepointer 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "wgvdsklHJBNCKJDNFVW_EIUNCLKXJM_Cdsikfjvnikvm"
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget28 {
+         ignorepointer 1
+         position -0.0495 0.09113
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ImageWidgetClass ImageCash {
+           ignorepointer 1
+           position 0.01 0
+           size 0.17901 0.85
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{729A02D897FD10EA}DayZLife/layout/Banking/DZLCash.edds"
+           mode blend
+           "src alpha" 1
+           stretch 1
+          }
+          TextWidgetClass moneyCash {
+           ignorepointer 1
+           position 0.02 0
+           size 0.73692 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "1232456878646"
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget29 {
+         ignorepointer 1
+         position -0.0495 0.1717
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ImageWidgetClass ImageBank {
+           ignorepointer 1
+           position 0.01 0
+           size 0.17901 0.85
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{63429AE7A994ECE2}DayZLife/layout/Banking/DZLBank.edds"
+           mode blend
+           "src alpha" 1
+           stretch 1
+          }
+          TextWidgetClass moneyBank {
+           ignorepointer 1
+           position 0.02 0
+           size 0.73692 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "1232456878646"
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget210 {
+         ignorepointer 1
+         position -0.0495 0.25227
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass job {
+           ignorepointer 1
+           position 0.02 0
+           size 0.48 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "Zivilist"
+           "text halign" center
+           "text valign" center
+          }
+          TextWidgetClass active_job {
+           ignorepointer 1
+           position 0.01 0
+           size 0.46297 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Active_Job"
+           text_proportion 0.6
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget211 {
+         ignorepointer 1
+         position -0.0495 0.33284
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ImageWidgetClass ImageArrest {
+           ignorepointer 1
+           position 0.01 0
+           size 0.17901 0.85
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{BA01A4394F203C2A}DayZLife/layout/Banking/Prison.edds"
+           mode blend
+           "src alpha" 1
+           stretch 1
+          }
+          TextWidgetClass arrestTime {
+           ignorepointer 1
+           position 0.2433 0
+           size 0.37847 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "999"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass arrestmin {
+           ignorepointer 1
+           position -0 0
+           size 0.21625 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "min."
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget30 {
+         ignorepointer 1
+         position -0.04949 0.24247
+         size 0.1744 0.33587
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass licenseTextListbox {
+           position -0 -0
+           size 0.94594 0.93708
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#License"
+           lines 10
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget212 {
+         ignorepointer 1
+         position -0.0495 0.4134
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass canbejobCop {
+           ignorepointer 1
+           position 0.01 0
+           size 0.70263 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Can_be_Job_Cop"
+           text_proportion 0.6
+           "text valign" center
+          }
+          TextWidgetClass copValue {
+           ignorepointer 1
+           position 0.02 0
+           size 0.24034 0.906
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#yes"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget213 {
+         ignorepointer 1
+         position -0.0495 0.49397
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass canbejobMedic {
+           ignorepointer 1
+           position 0.01 0
+           size 0.70263 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Can_be_Job_Medic"
+           text_proportion 0.6
+           "text valign" center
+          }
+          TextWidgetClass medicValue {
+           ignorepointer 1
+           position 0.02 0
+           size 0.24034 0.906
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#yes"
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
           }
          }
         }
@@ -831,7 +1143,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{2B34C7CA0DE7341A}DayZLife/DayZLife/layout/Almanac/Police.edds"
+       imageTexture "{2B34C7CA0DE7341A}DayZLife/layout/Almanac/Police.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
@@ -856,7 +1168,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{33316A6E1BD778B9}DayZLife/DayZLife/layout/Almanac/Medic.edds"
+       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
        mode additive
        "src alpha" 1
        "no wrap" 0
@@ -882,7 +1194,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{19676136A428B8E7}DayZLife/DayZLife/layout/Almanac/Personal.edds"
+       imageTexture "{19676136A428B8E7}DayZLife/layout/Almanac/Personal.edds"
        mode blend
        "src alpha" 1
        stretch 1
@@ -911,7 +1223,7 @@ FrameWidgetClass Almanac {
        style editor_quad_dark
        {
         ButtonWidgetClass sync_Button {
-         color 0.251 0.502 0 0.1961
+         color 0.251 0.502 0 1
          position 0 0
          size 0.9 0.9
          halign center_ref
@@ -932,7 +1244,7 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{35E83651B6E3321F}DayZLife/DayZLife/layout/Almanac/sync.edds"
+           imageTexture "{35E83651B6E3321F}DayZLife/layout/Almanac/sync.edds"
            mode blend
            "src alpha" 1
            stretch 1

@@ -187,4 +187,7 @@ car_was_successful_raided, car was successful raided,car was successful raided, 
 car_raid_has_failed, car raid failed, car raid failed, Auto konnte nicht geknackt werden
 go_to_the_light, go to the lights, go to the lights, ins Licht gehen
 go_to_hospital, to hospital, to hospital, zum Krankenhaus
-call_a_medic, call a medic,  call a medic, Arzt rufen
+call_a_medic, call a medic, call a medic, Arzt rufen
+Active_Job,Active Job,Active Job,Aktive Arbeit
+Can_be_Job_Cop,Can be Job Cop,Can be Job Cop,Kann Cop werden
+Can_be_Job_Medic,Can be Job Medic,Can be Job Medic,Kann Medic werden
