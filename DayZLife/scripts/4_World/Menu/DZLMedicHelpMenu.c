@@ -3,6 +3,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 	private ButtonWidget killButton;
 	private ButtonWidget healButton;
 	private ButtonWidget hospitalButton;
+	private bool hasRequestForMedic = false;
 
     void DZLMedicHelpMenu() {
         Construct();
@@ -15,33 +16,44 @@ class DZLMedicHelpMenu : DZLBaseMenu
         layoutPath = "DayZLife/layout/MedicHelp/MedicHelp.layout";
         super.Init();
 		
-		closeButton.Show(false);
-
         killButton = creator.GetButtonWidget("KillButton");
-
         healButton = creator.GetButtonWidget("HealButton");
-        healButton.SetText("#call_a_medic (" + player.medicHealPrice.ToString() + ")");
+        healButton.SetText("#call_a_medic (" + config.medicConfig.priceMedicHeal.ToString() + ")");
         hospitalButton = creator.GetButtonWidget("HospitalButton");
         hospitalButton.SetText("#go_to_hospital (" + config.medicConfig.priceHospitalHeal.ToString() + ")");
 
         return layoutRoot;
     }
 
+    override void OnShow() {
+        super.OnShow();
+        healButton.Show(!player.hasRequestForMedicClient);
+    }
+
     override bool OnClick(Widget w, int x, int y, int button) {
         if (super.OnClick(w, x, y, button)) return true;
 
         if (w == killButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER, new Param1<PlayerBase>(player), true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER, new Param2<PlayerBase, bool>(player, player.hasRequestForMedicClient), true);
             player.willDie = true;
-            OnHide();
+            player.hasRequestForMedicClient = false;
+
+			healButton.Show(false);
+			killButton.Show(false);
+			hospitalButton.Show(false);
         } else if (w == healButton) {
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_MEDIC_CALL, new Param1<PlayerBase>(player), true);
 			player.willHealByMedic = true;
-			OnHide();
+			healButton.Show(false);
+			player.hasRequestForMedicClient = true;
 		} else if (w == hospitalButton) {
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, new Param2<PlayerBase, bool>(player, player.hasRequestForMedicClient), true);
 			player.willHealByHospital = true;
-			OnHide();
+			player.hasRequestForMedicClient = false;
+
+			healButton.Show(false);
+			killButton.Show(false);
+			hospitalButton.Show(false);
 		}
 
         return false;
