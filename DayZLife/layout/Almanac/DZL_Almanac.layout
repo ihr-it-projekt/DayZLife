@@ -677,7 +677,7 @@ FrameWidgetClass Almanac {
                vexactpos 0
                hexactsize 0
                vexactsize 0
-               imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+               imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
                mode blend
                "src alpha" 1
                stretch 1
@@ -830,7 +830,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{2B34C7CA0DE7341A}DayZLife/layout/Almanac/Police.edds"
+       imageTexture "{2B34C7CA0DE7341A}DayZLife/DayZLife/layout/Almanac/Police.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
@@ -855,7 +855,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
+       imageTexture "{33316A6E1BD778B9}DayZLife/DayZLife/layout/Almanac/Medic.edds"
        mode additive
        "src alpha" 1
        "no wrap" 0
@@ -881,7 +881,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{19676136A428B8E7}DayZLife/layout/Almanac/Personal.edds"
+       imageTexture "{19676136A428B8E7}DayZLife/DayZLife/layout/Almanac/Personal.edds"
        mode blend
        "src alpha" 1
        stretch 1
@@ -931,12 +931,62 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{35E83651B6E3321F}DayZLife/layout/Almanac/sync.edds"
+           imageTexture "{35E83651B6E3321F}DayZLife/DayZLife/layout/Almanac/sync.edds"
            mode blend
            "src alpha" 1
            stretch 1
           }
          }
+        }
+       }
+      }
+      PanelWidgetClass medic_Panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9108
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget26 {
+         ignorepointer 1
+         position 0 0
+         size 0.35856 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass player_Listbox {
+           position 0.00043 0
+           size 0.97286 0.97887
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 0
+           lines 20
+          }
+         }
+        }
+        MapWidgetClass medic_Map {
+         position 0.192 0
+         size 0.412 0.925
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
         }
        }
       }
