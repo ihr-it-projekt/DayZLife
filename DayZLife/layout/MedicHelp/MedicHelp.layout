@@ -87,7 +87,7 @@ FrameWidgetClass rootFrame {
        }
       }
       PanelWidgetClass PanelWidget16 {
-       visible 1
+       visible 0
        ignorepointer 1
        position 0.02146 0.03569
        size 0.12083 0.22335
