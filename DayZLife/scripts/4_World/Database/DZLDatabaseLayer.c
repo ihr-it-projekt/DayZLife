@@ -11,6 +11,7 @@ class DZLDatabaseLayer
     private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
     private ref map<string, ref DZLCarStorage> storageCars;
+    private ref DZLEmergencies emergencies;
 
     void DZLDatabaseLayer() {
         dzlHouses = new map<string, ref DZLHouse>;
@@ -20,6 +21,7 @@ class DZLDatabaseLayer
         dzlLockedHouses = new DZLLockedHouses;
         storageCars = new map<string, ref DZLCarStorage>;
         bank = new DZLBank;
+        emergencies = new DZLEmergencies;
     }
 
     void ~ DZLDatabaseLayer() {
@@ -47,6 +49,8 @@ class DZLDatabaseLayer
         foreach(DZLCarStorage storageCar: storageCars) {
             storageCar.Save();
         }
+
+        emergencies.Save();
     }
 
     static DZLDatabaseLayer Get() {
@@ -59,6 +63,10 @@ class DZLDatabaseLayer
 
 	DZLBank GetBank() {
 	    return bank;
+	}
+
+	DZLEmergencies GetEmergencies() {
+	    return emergencies;
 	}
 
     DZLLockedHouses GetLockedHouses() {

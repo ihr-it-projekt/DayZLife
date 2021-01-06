@@ -172,7 +172,7 @@ Deposit_to_bank,deposit bank,deposit bank,Zum Konto,存款银行,存款銀行
 Deposit_to_player,deposit player,deposit player,Zum Spieler,存款玩家,存款玩家
 owner_is,Owner is,Owner is,Besitzer ist,所有者为,所有者為
 show_owner,show owner,show owner,Zeige Besitzer,显示所有者,顯示所有者
-Garage,Garage,Garage,Garge
+Garage,Garage,Garage,Garage
 Car_to_Stored,Car to park,Car to park,Fahrzeug einparken
 Cars_in_Sored,Parked cars,Parked cars,Fahrzeuge in der Garage
 Store_in,park in,park in,Einparken
@@ -191,3 +191,7 @@ call_a_medic, call a medic, call a medic, Arzt rufen
 Active_Job,Active Job,Active Job,Aktive Arbeit
 Can_be_Job_Cop,Can be Job Cop,Can be Job Cop,Kann Cop werden
 Can_be_Job_Medic,Can be Job Medic,Can be Job Medic,Kann Medic werden
+call_a_medic, call a medic,  call a medic, Arzt rufen
+emergencies, Emergencies, Emergencies, Notfälle
+medics_was_called, Medic was called, medic was called, Notarzt wurde gerufen
+there_is_a_new_emergency, There is a new emergency. Open the Almanac, There is a new emergency. Open the Almanac., Neuer Notfall. Schaue in den Almanach.

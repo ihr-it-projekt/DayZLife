@@ -39,6 +39,10 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private ButtonWidget adminSearchPlayer;
 	private EditBoxWidget adminSearchPlayerInput;
 
+	private Widget medicWidget;
+	private TextListboxWidget playerNeedMedicList;
+	private MapWidget medicMap;
+
     private TextWidget countCivil;
     private TextWidget countMedic;
     private TextWidget countCop;
@@ -48,6 +52,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 	
 	private int copPaneId = -1;
 	private int adminPanelId = -1;
+	private int medicPanelId = -1;
 
 	private ref array<ref DZLPlayer> allPlayers;
 
@@ -97,6 +102,10 @@ class DZLAlmanacMenu : DZLBaseMenu
 		adminAddMoneyToPlayerInput = creator.GetEditBoxWidget("moneyInput");
 		adminSearchPlayerInput = creator.GetEditBoxWidget("search_input");
 		
+		medicWidget = creator.GetWidget("medic_Panel");
+		playerNeedMedicList = creator.GetTextListboxWidget("player_Listbox");
+		medicMap = creator.GetMapWidget("medic_Map");
+		
 		toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 
 		countCivil = creator.GetTextWidget("countCivil");
@@ -111,6 +120,12 @@ class DZLAlmanacMenu : DZLBaseMenu
 	override void OnShow() {
 		super.OnShow();
 		string ident = player.GetIdentity().GetId();
+		
+		if (player.dzlPlayer.IsActiveAsMedic()) {
+			toggleViewWidget.AddItem("#emergencies");
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, new Param1<PlayerBase>(null), true);
+			copPaneId = toggleViewWidget.GetNumItems() - 1;
+		}
 		
 		if (config.adminIds.CanManageCops(ident)) {
 			toggleViewWidget.AddItem("#manage_cops");
@@ -288,6 +303,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		 	escapedWidget.Show(2 == item);
 			copPanelWidget.Show(copPaneId == item);
 			adminPanelWidget.Show(adminPanelId == item);
+			medicWidget.Show(medicPanelId == item);
 		} else if (w == copPanelSave) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
 		} else if (w == escapedPlayers) {
@@ -341,6 +357,18 @@ class DZLAlmanacMenu : DZLBaseMenu
 			syncButton.Show(false);
 		} else if (w == adminSearchPlayer) {
             DZLDisplayHelper.SearchOnlinePlayersSingleWiget(adminSearchPlayerInput.GetText(), adminPlayers, allPlayers);
+		} else if (w == playerNeedMedicList) {
+			int indexNeedHelp = playerNeedMedicList.GetSelectedRow();
+			
+			if (-1 != indexNeedHelp) {
+				DZLOnlinePlayer emergencyPlayer;
+				playerNeedMedicList.GetItemData(indexNeedHelp, 0, emergencyPlayer);
+				
+				if (emergencyPlayer) {
+					DZLDisplayHelper.UpdateMap(medicMap, emergencyPlayer.position);
+				}
+				
+			}
 		}
 
 		return false;
@@ -401,7 +429,17 @@ class DZLAlmanacMenu : DZLBaseMenu
 					
 				}
             }
-        }
+        } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE) {
+			autoptr Param1<ref array<ref DZLOnlinePlayer>> paramEmergencies;
+            if (ctx.Read(paramEmergencies)){
+				playerNeedMedicList.ClearItems();
+				array<ref DZLOnlinePlayer> emergencies = paramEmergencies.param1;
+
+				foreach(DZLOnlinePlayer emergency: emergencies) {
+					playerNeedMedicList.AddItem(emergency.name, emergency, 0);
+				}
+			}
+		}
 	}
 
 	private void UpdaterPreview(string itemType, ItemPreviewWidget preview, EntityAI previewItem) {

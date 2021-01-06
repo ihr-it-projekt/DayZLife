@@ -109,10 +109,22 @@ class DZLPlayerEventListener
                 if (ctx.Read(dzlMessage) && dzlMessage.param1){
                     player.DisplayMessage(dzlMessage.param1);
                 }
+            } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MEDIC_MESSAGE) {
+                Param1 <string> dzlMessageMedic;
+                if (ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1){
+                    if (player && player.dzlPlayer && player.dzlPlayer.IsActiveAsMedic()) {
+						player.DisplayMessage(dzlMessageMedic.param1);
+					}
+                }
             } else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {
                 Param3<ref DZLHouseExtension, string, PlayerBase> dzlAlarm;
                 if (ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param3){
                      player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));
+                }
+            } else if(rpc_type == DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER) {
+                Param1<bool> paramDzlMedicPlayerSync
+                if (ctx.Read(paramDzlMedicPlayerSync) && paramDzlMedicPlayerSync.param1){
+                     player.ToggleHealMenu(paramDzlMedicPlayerSync.param1);
                 }
             }
         }
