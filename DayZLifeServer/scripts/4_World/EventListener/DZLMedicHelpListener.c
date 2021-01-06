@@ -16,11 +16,6 @@ class DZLMedicHelpListener
                 paramKill.param1.willDie = true;
                 DeleteMedicRequest(sender, paramKill.param2);
             }
-        } else if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_HEAL_PLAYER) {
-            autoptr Param1<PlayerBase>paramHeal;
-            if (ctx.Read(paramHeal)){
-                paramHeal.param1.willHealByMedic = true;
-			}
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
             autoptr Param1<PlayerBase>paramCallMedic;
             if (ctx.Read(paramCallMedic)){

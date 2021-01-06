@@ -7,4 +7,9 @@ modded class ActionDefibrilateBase
 		
 		return false;
     }
+	
+	override void DefibrillateServer(PlayerBase player, Defibrillator defib) {
+		super.DefibrillateServer(player, defib);
+		player.willHealByMedic = true;
+	}
 }
