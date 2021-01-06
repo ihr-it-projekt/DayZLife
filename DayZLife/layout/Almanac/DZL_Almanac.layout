@@ -518,12 +518,13 @@ FrameWidgetClass Almanac {
          style editor_quad_dark
          {
           TextListboxWidgetClass coplist_CopPanel {
-           position 8 8
-           size 577.98706 740.48303
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
            "title visible" 1
            colums "#Cop_list"
            lines 20
@@ -987,6 +988,95 @@ FrameWidgetClass Almanac {
          vexactpos 0
          hexactsize 0
          vexactsize 0
+        }
+       }
+      }
+      PanelWidgetClass medicjob_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget111 {
+         ignorepointer 1
+         position 0 0
+         size 0.35 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_MedicPanel {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget112 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass medicListbox {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Medic_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget113 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_MedicPanel {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
         }
        }
       }
