@@ -124,7 +124,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		if (player.dzlPlayer.IsActiveAsMedic()) {
 			toggleViewWidget.AddItem("#emergencies");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, new Param1<PlayerBase>(null), true);
-			copPaneId = toggleViewWidget.GetNumItems() - 1;
+			medicPanelId = toggleViewWidget.GetNumItems() - 1;
 		}
 		
 		if (config.adminIds.CanManageCops(ident)) {
