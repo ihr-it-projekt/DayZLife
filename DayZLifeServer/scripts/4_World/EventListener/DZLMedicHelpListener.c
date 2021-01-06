@@ -10,11 +10,10 @@ class DZLMedicHelpListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
-            autoptr Param2<PlayerBase, bool>paramKill;
+            autoptr Param1<PlayerBase>paramKill;
             if (ctx.Read(paramKill)){
-                paramKill.param1.showMedicHelpMenu = false;
-                paramKill.param1.willDie = true;
-                DeleteMedicRequest(sender, paramKill.param2);
+                paramKill.param1.KillPlayer();
+                DeleteMedicRequest(sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
             autoptr Param1<PlayerBase>paramCallMedic;
@@ -24,12 +23,11 @@ class DZLMedicHelpListener
 				DZLSendMedicMessage("#there_is_a_new_emergency");
 			}
         } else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
-            autoptr Param2<PlayerBase, bool>paramHealHospital;
+            autoptr Param1<PlayerBase>paramHealHospital;
             if (ctx.Read(paramHealHospital)){
 				PlayerBase player = paramHealHospital.param1;
-                player.willHealByHospital = true;
-                player.showMedicHelpMenu = false;
-                DeleteMedicRequest(sender, paramHealHospital.param2);
+                player.HealByHospital();
+                DeleteMedicRequest(sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS) {
             array<Man> players = new array<Man>;
@@ -48,7 +46,7 @@ class DZLMedicHelpListener
         }
     }
 
-    private void DeleteMedicRequest(PlayerIdentity sender, bool hasRequestForMedic) {
+    private void DeleteMedicRequest(PlayerIdentity sender) {
 		DZLDatabaseLayer.Get().GetEmergencies().Remove(sender.GetId());
 	}
 }

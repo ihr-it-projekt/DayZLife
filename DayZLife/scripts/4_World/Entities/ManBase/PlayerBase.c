@@ -32,11 +32,14 @@ modded class PlayerBase
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	bool willDie = false;
-	bool willHealByMedic = false;
+	bool isHealedByMedic = false;
 	bool willHealByHospital = false;
 	bool willHospital = false;
 	bool showMedicHelpMenu = false;
 	bool hasRequestForMedicClient = false;
+	bool freezeBlood = false;
+	bool freezeShock = false;
+	int counterMedicMenu = 0;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -92,12 +95,7 @@ modded class PlayerBase
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
             GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
-        } else if (GetGame().IsServer() && IsDZLPlayer()) {
-			if (!dzlPlayer || !config) {
-				dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
-				config = DZLConfig.Get();
-			}
-		}
+        }
     }
 
     void DisplayMessage(string message) {
@@ -164,7 +162,7 @@ modded class PlayerBase
     }
 	
     private void InitMenu(DZLBaseMenu menu) {
-        menu.SetConfig(config);
+        menu.SetConfig(GetConfig());
         menu.SetPlayer(this);
     }
 
@@ -278,7 +276,7 @@ modded class PlayerBase
 	}
 
 	DZLHouseDefinition FindHouseDefinition(Building building) {
-		array<ref DZLHouseDefinition> houseConfigs = config.GetHouseDefinitions();
+		array<ref DZLHouseDefinition> houseConfigs = GetConfig().GetHouseDefinitions();
 		foreach(DZLHouseDefinition definition: houseConfigs) {
                 if (definition.houseType == building.GetType()) {
 					return definition;
@@ -303,15 +301,15 @@ modded class PlayerBase
     }
 	
 	DZLLicence GetLicenceByPosition() {
-	    if(!dzlPlayer) return null;
+	    if(!GetDZLPlayer() || !GetConfig() || !GetConfig().licenceConfig) return null;
 
         vector playerPosition = GetPosition();
         if (!playerPosition) {
             return null;
         }
 		
-        foreach(string licenceId: dzlPlayer.licenceIds) {
-			DZLLicence licence = config.licenceConfig.licences.FindById(licenceId);
+        foreach(string licenceId: GetDZLPlayer().licenceIds) {
+			DZLLicence licence = GetConfig().licenceConfig.licences.FindById(licenceId);
 			
 			if(!licence) continue;
 			
@@ -328,7 +326,7 @@ modded class PlayerBase
             return null;
         }
 		
-		array<ref DZLTraderPosition> positions = config.traderConfig.positions.positions;
+		array<ref DZLTraderPosition> positions = GetConfig().traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
 			float distanceToPos = vector.Distance(position.position, playerPosition);
@@ -513,61 +511,112 @@ modded class PlayerBase
 		}
 	}
 
-    bool HasChooseMedicAction() {
-        return willDie || willHealByMedic || willHospital;
+    override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
+        super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
+        CheckHealth();
     }
-	
+
 	override void OnScheduledTick(float deltaTime) {
-		if (GetGame().IsServer()) {
-		    bool showMedicHelpMenuBefore = showMedicHelpMenu;
-            if (willHealByMedic) {
-                SetHealth(50);
-                SetHealth("", "Shock", 50);
-                SetHealth("", "Blood", 2500);
-                willHealByMedic = false;
-                showMedicHelpMenu = false;
-			} else if (willHealByHospital) {
-                SetHealth(100);
-                SetHealth("", "Shock", 100);
-                SetHealth("", "Blood", 5000);
-				UpdateBrokenLegs(eBrokenLegs.NO_BROKEN_LEGS);
-                willHealByHospital = false;
-                DZLBaseSpawnPoint point = DZLConfig.Get().medicConfig.hospitalSpawnPoints.GetRandomElement();
-				m_BleedingManagerServer.RemoveAllSources();
-				dzlPlayer.AddMoneyToPlayerBank(config.medicConfig.priceHospitalHeal * -1);
-				SetPosition(point.point);
-				SetOrientation(point.orientation);
-				showMedicHelpMenu = false;
-            } else if(willDie) {
-                SetCanBeDestroyed(true);
-                SetHealth(0);
-                showMedicHelpMenu = false;
-            } else if(!willDie) {
-                if (GetHealth("", "Blood") < 5) {
-                    SetHealth("", "Blood", 5);
-                    showMedicHelpMenu = true;
-                }
-
-                if (GetHealth("", "Shock") < 5) {
-                    SetHealth(5);
-                    SetHealth("", "Shock", 5);
-                    showMedicHelpMenu = true;
-                }
-            }
-
-            if (showMedicHelpMenu != showMedicHelpMenuBefore) {
-                GetGame().RPCSingleParam(this, DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER, new Param1<bool>(showMedicHelpMenu), true, GetIdentity());
-            }
-		}
+		CheckHealth();
 
         super.OnScheduledTick(deltaTime);
 	}
 
-	void ToggleHealMenu(bool showMedicHelpMenu) {
-	    this.showMedicHelpMenu = showMedicHelpMenu;
-        if (g_Game.GetUIManager().GetMenu() == NULL && !healMenu && showMedicHelpMenu){
-            GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
-        } else if (g_Game.GetUIManager().GetMenu() != NULL && !showMedicHelpMenu && healMenu) {
+	void HealByHospital() {
+        counterMedicMenu = 5000;
+        SetHealth(100);
+        SetHealth("", "Shock", 100);
+        SetHealth("", "Blood", 5000);
+        UpdateBrokenLegs(eBrokenLegs.NO_BROKEN_LEGS);
+        DZLBaseSpawnPoint point = GetConfig().medicConfig.hospitalSpawnPoints.GetRandomElement();
+        m_BleedingManagerServer.RemoveAllSources();
+        GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceHospitalHeal * -1);
+        SetPosition(point.point);
+        SetOrientation(point.orientation);
+        SyncMedicPlayer();
+	}
+
+	void HealByMedic() {
+        counterMedicMenu = 5000;
+	    SetHealth(50);
+        SetHealth("", "Shock", 50);
+        SetHealth("", "Blood", 2500);
+        SyncMedicPlayer();
+	}
+
+	void KillPlayer() {
+        counterMedicMenu = 5000;
+	    SetCanBeDestroyed(true);
+        SetHealth(0);
+        SyncMedicPlayer();
+	}
+
+	private void CheckHealth() {
+	    if (GetGame().IsServer()) {
+	        if (counterMedicMenu != 0) {
+	            counterMedicMenu--;
+	            showMedicHelpMenu = false;
+	            freezeShock = false;
+                freezeBlood = false;
+	        } else {
+                bool showMedicHelpMenuBefore = showMedicHelpMenu;
+                if(!willDie) {
+                    if (GetHealth("", "Blood") <= 1) {
+                        SetHealth("", "Blood", 1);
+                        freezeBlood = true;
+                    }
+
+                    if (GetHealth("", "Shock") <= 1) {
+                        showMedicHelpMenu = true;
+                        SetHealth(1);
+                        SetHealth("", "Shock", 1);
+                        freezeShock = true;
+                    }
+
+                    if (freezeShock) {
+                        SetHealth(1);
+                        showMedicHelpMenu = true;
+                        SetHealth("", "Shock", 1);
+                    }
+
+                    if (freezeBlood) {
+                        SetHealth("", "Blood", 1);
+                        SetHealth(1);
+                        showMedicHelpMenu = true;
+                    }
+                }
+            }
+            if (showMedicHelpMenu != showMedicHelpMenuBefore) {
+                DebugMessageDZL("send showMedicHelpMenu " + showMedicHelpMenu.ToString());
+                SyncMedicPlayer();
+            }
+        }
+	}
+	
+	void SyncMedicPlayer() {
+		GetGame().RPCSingleParam(this, DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER, new Param1<bool>(showMedicHelpMenu), true, GetIdentity());
+	}
+
+	void ToggleHealMenu(bool showMedicHelpMenuExt) {
+	    this.showMedicHelpMenu = showMedicHelpMenuExt;
+		DebugMessageDZL("showMedicHelpMenu recive" + showMedicHelpMenu.ToString());
+		
+        if (!healMenu && showMedicHelpMenu){
+			if (g_Game.GetUIManager().GetMenu()) {
+				DebugMessageDZL("showMedicHelpMenu close" + showMedicHelpMenu.ToString());
+				g_Game.GetUIManager().GetMenu().Close();
+			}
+			DebugMessageDZL("showMedicHelpMenu show" + showMedicHelpMenu.ToString());
+
+            if (!config || !config.medicConfig) {
+			    GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(ToggleHealMenu, 2, false, showMedicHelpMenu);
+            } else {
+                GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(ToggleHealMenu);
+				GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
+			}
+
+        } else if (!showMedicHelpMenu && healMenu) {
+			DebugMessageDZL("showMedicHelpMenu hide" + showMedicHelpMenu.ToString());
             healMenu.OnHide();
         }
 	}
@@ -591,5 +640,19 @@ modded class PlayerBase
         GetInventory().EnumerateInventory(InventoryTraversalType.INORDER, itemsArray);
 
         return itemsArray;
+    }
+
+    private DZLConfig GetConfig() {
+        if (!config && GetGame().IsServer()) {
+            config = DZLConfig.Get();
+        }
+        return config;
+    }
+
+    private DZLPlayer GetDZLPlayer() {
+        if (!dzlPlayer && GetGame().IsServer()) {
+            dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+        }
+        return dzlPlayer;
     }
 }
