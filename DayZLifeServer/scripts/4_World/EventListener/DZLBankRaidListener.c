@@ -89,7 +89,7 @@ class DZLBankRaidListener : Managed
 
         if (_players) {
             foreach(Man _player: _players) {
-                GetGame().RPCSingleParam(_player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(DZLDatabaseLayer.Get().GetPlayer(_player.GetIdentity().GetId())), true, _player.GetIdentity());
+                GetGame().RPCSingleParam(_player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, _player.GetIdentity());
             }
         }
     }

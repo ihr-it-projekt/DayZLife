@@ -12,7 +12,6 @@ modded class DayZPlayerImplement
                 if (dzlPlayer.HasMoney()) {
                     player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
                     dzlPlayer.PlayerHasDied();
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
                 }
             }
         }

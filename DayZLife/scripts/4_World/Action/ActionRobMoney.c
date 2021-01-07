@@ -39,8 +39,8 @@ class ActionRobMoney: ActionInteractBase
             if (dzlTargetPlayer && dzlTargetPlayer.HasMoney()) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
-                GetGame().RPCSingleParam(targetPlayer, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlTargetPlayer), true, targetPlayer.GetIdentity());
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, player.GetIdentity());
+                GetGame().RPCSingleParam(targetPlayer, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, targetPlayer.GetIdentity());
             }
         }
     }

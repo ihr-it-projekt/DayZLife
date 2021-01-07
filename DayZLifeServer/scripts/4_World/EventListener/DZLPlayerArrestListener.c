@@ -38,7 +38,7 @@ class DZLPlayerArrestListener
 
 				ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
 
-				GetGame().RPCSingleParam(prisoner, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(prisonerDzl), true, prisoner.GetIdentity());
+				GetGame().RPCSingleParam(prisoner, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, prisoner.GetIdentity());
                 GetGame().RPCSingleParam(cop, DAY_Z_LIFE_ARREST_PLAYER_RESPONSE, new Param1<bool>(true), true, sender);
 				DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
 				DZLSendMessage(cop.GetIdentity(), "#you_set_arrest_to_player_in_minutes: " + arrestTime.ToString());
@@ -83,7 +83,7 @@ class DZLPlayerArrestListener
 				foreach(int index, vector position: arrestConfig.arrestAreas) {
 				    if (vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius){
 						dzlPlayer.ArrestCountDown();
-						GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
+						GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, player.GetIdentity());
 						isInPrison = true;
 						prisonArea = index;
 				        break;

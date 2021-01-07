@@ -16,6 +16,6 @@ class DZLPlayerInventory
     void AddMoneyToPlayer(PlayerBase player, float moneyCount) {
         DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
         dzlPlayer.AddMoneyToPlayer(moneyCount);
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, player.GetIdentity());
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, player.GetIdentity());
     }
 };
