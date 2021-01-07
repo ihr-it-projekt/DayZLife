@@ -1,4 +1,4 @@
-class DZLPlayer: DZLSaveModel
+class DZLPlayer
 {
     string fileName = "";
     string dayZPlayerId = "";
@@ -26,7 +26,7 @@ class DZLPlayer: DZLSaveModel
 
 			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
 			
-            mustSave = true;
+            Save();
         }
     }
 
@@ -36,23 +36,23 @@ class DZLPlayer: DZLSaveModel
 	
 	void ArrestCountDown() {
 		--arrestTimeInMinutes;
-		mustSave = true;	
+		Save();
 	}
 
     void ArrestPlayer(int time) {
         arrestTimeInMinutes = time;
-		mustSave = true;
+		Save();
     }
 
     void SetActiveJob(string job) {
         activeJob = job;
-        mustSave = true;
+        Save();
     }
 
     string GetActiveJob() {
         if (activeJob == "") {
             activeJob = DAY_Z_LIFE_JOB_CIVIL;
-            mustSave = true;
+            Save();
         }
         return activeJob;
     }
@@ -71,7 +71,7 @@ class DZLPlayer: DZLSaveModel
 	
 	void UpdateActiveJob(string job) {
 		activeJob = job;
-		mustSave = true;
+		Save();
 	}
 	
 	void UpdateOnlineTime() {
@@ -83,7 +83,7 @@ class DZLPlayer: DZLSaveModel
 			onlineTimeCivil++;
 		}
 		
-		mustSave = true;
+		Save();
 	}
 	
 	void ResetOnlineTime() {
@@ -95,7 +95,7 @@ class DZLPlayer: DZLSaveModel
 			onlineTimeCivil = 0;
 		}
 		
-		mustSave = true;
+		Save();
 	}
 	
 	int GetActiveOnlineTime() {
@@ -109,7 +109,7 @@ class DZLPlayer: DZLSaveModel
 
     void UpdateCop(bool isCop) {
         this.isCop = isCop;
-        mustSave = true;
+        Save();
     }
 
     bool IsCop() {
@@ -119,14 +119,14 @@ class DZLPlayer: DZLSaveModel
     void UpdateName(string playerName) {
         this.playerName = playerName;
         lastLoginDate = new DZLDate();
-        mustSave = true;
+        Save();
     }
 	
 	void AddMoneyToPlayer(int moneyCount) {
         if (!DayZGame().IsClient()) {
             LogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 			money += moneyCount;
-		    mustSave = true;
+		    Save();
 		}
     }
 
@@ -134,7 +134,7 @@ class DZLPlayer: DZLSaveModel
         if (!DayZGame().IsClient()) {
             LogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
 			bank += moneyCount;
-		    mustSave = true;
+		    Save();
 		}
     }
 
@@ -164,14 +164,14 @@ class DZLPlayer: DZLSaveModel
 
     void PlayerHasDied() {
         money = 0;
-        mustSave = true;
+        Save();
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
         LogMoneyTransaction(dayZPlayerId, "player", money, 0, money);
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
-        mustSave = true;
+        Save();
     }
 	
 	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
@@ -179,7 +179,7 @@ class DZLPlayer: DZLSaveModel
 		playerTarget.AddMoneyToPlayer(moneyToTransfer);
 		money -= moneyToTransfer;
 		
-		mustSave = true;
+		Save();
 	}
 	
 	int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
@@ -205,7 +205,7 @@ class DZLPlayer: DZLSaveModel
 			moneyBankAdd -= moneyToTransfer;
 		}
 		
-		mustSave = true;
+		Save();
 		return moneyBankAdd;
 	}
 	
@@ -236,7 +236,7 @@ class DZLPlayer: DZLSaveModel
 	void BuyLicence(DZLLicence licenceToBuy){
 		money -= licenceToBuy.price;
 		licenceIds.Insert(licenceToBuy.id);
-		mustSave = true;
+		Save();
 	}
 
     private bool Load(){
@@ -247,7 +247,7 @@ class DZLPlayer: DZLSaveModel
         return false;
     }
 
-    override protected bool DoSave(){
+    private bool Save(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);

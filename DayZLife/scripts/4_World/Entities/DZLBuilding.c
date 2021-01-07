@@ -1,4 +1,4 @@
-class DZLBuilding: DZLSaveModel
+class DZLBuilding
 {
 
     private Building building;

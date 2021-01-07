@@ -1,4 +1,4 @@
-class DZLCarStorage: DZLSaveModel
+class DZLCarStorage
 {
 	string fileName = "";
     ref array<ref DZLCarStoreItem> items;
@@ -7,13 +7,13 @@ class DZLCarStorage: DZLSaveModel
         fileName = "car_" + playerId + ".json";
         if (!Load()) {
             items = new array<ref DZLCarStoreItem>;
-            mustSave = true;
+            Save();
         }
     }
 
     void Add(CarScript entity, vector storagePosition){
 		items.Insert(new DZLCarStoreItem(entity, storagePosition));
-		mustSave = true;
+		Save();
 	}
 
 	DZLCarStoreItem GetById(string id) {
@@ -28,7 +28,7 @@ class DZLCarStorage: DZLSaveModel
 	
 	void RemoveItem(DZLCarStoreItem item) {
 		items.RemoveItem(item);
-		mustSave = true;
+		Save();
 	}
 
     private bool Load(){
@@ -39,7 +39,7 @@ class DZLCarStorage: DZLSaveModel
         return false;
     }
 
-    override protected bool DoSave(){
+    private bool Save(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR);
             DZLJsonFileHandler<DZLCarStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + fileName, this);

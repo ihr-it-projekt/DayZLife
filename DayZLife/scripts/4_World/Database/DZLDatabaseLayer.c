@@ -1,5 +1,3 @@
-
-
 class DZLDatabaseLayer
 {
     private static ref DZLDatabaseLayer databaseLayer;
@@ -20,33 +18,6 @@ class DZLDatabaseLayer
         dzlLockedHouses = new DZLLockedHouses;
         storageCars = new map<string, ref DZLCarStorage>;
         bank = new DZLBank;
-    }
-
-    void ~ DZLDatabaseLayer() {
-        DebugMessageDZL("Save data at shutdown");
-        Save();
-    }
-
-    void Save() {
-        dzlPlayerIdentities.Save();
-        dzlLockedHouses.Save();
-        bank.Save();
-
-        foreach(DZLHouse house: dzlHouses) {
-            house.Save();
-        }
-		
-        foreach(DZLPlayer player: dzlPlayers) {
-            player.Save();
-        }
-        
-        foreach(DZLPlayerHouse playerHouse: dzlPlayerHouses) {
-            playerHouse.Save();
-        }
-
-        foreach(DZLCarStorage storageCar: storageCars) {
-            storageCar.Save();
-        }
     }
 
     static DZLDatabaseLayer Get() {
