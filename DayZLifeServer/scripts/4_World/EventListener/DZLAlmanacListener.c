@@ -21,7 +21,7 @@ class DZLAlmanacListener
             if (ctx.Read(param)){
 				SendUpdateList(param.param1);
             }
-        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS) {
+        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS) {
             autoptr Param1<PlayerBase> paramMedicList;
             if (ctx.Read(paramMedicList)){
 				SendUpdateListMedic(paramMedicList.param1);

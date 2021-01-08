@@ -61,7 +61,7 @@ modded class PlayerBase
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
 		healthTimer = new Timer;
-		healthTimer.Run(1, this, "CheckHealth", null, true);;
+		healthTimer.Run(5, this, "CheckHealth", null, true);;
 	}
 
 	bool IsDZLPlayer() {
@@ -529,7 +529,9 @@ modded class PlayerBase
         SetHealth("", "Shock", 100);
         SetHealth("", "Blood", 5000);
         DZLBaseSpawnPoint point = GetConfig().medicConfig.hospitalSpawnPoints.GetRandomElement();
-        m_BleedingManagerServer.RemoveAllSources();
+        if (m_BleedingManagerServer) {
+            m_BleedingManagerServer.RemoveAllSources();
+        }
         GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceHospitalHeal * -1);
 
         //Double check to not enter splinted state if legs are not broken
@@ -564,10 +566,12 @@ modded class PlayerBase
 	}
 
 	void KillPlayer() {
-		showMedicHelpMenu = false;
+	    willDie = true;
 	    SetCanBeDestroyed(true);
         SetHealth(0);
-        SyncMedicPlayer();
+        freezeHealth = false;
+        freezeBlood = false;
+        freezeShock = false;
 	}
 
 	void CheckHealth() {
@@ -590,24 +594,23 @@ modded class PlayerBase
                     freezeShock = true;
                 }
 
-                if (freezeShock) {
+                if (freezeShock && GetHealth("", "Shock") > 5) {
                     showMedicHelpMenu = true;
                     SetHealth("", "Shock", 5);
                 }
 
-                if (freezeBlood) {
+                if (freezeBlood && GetHealth("", "Blood") > 5) {
                     SetHealth("", "Blood", 5);
                     showMedicHelpMenu = true;
                 }
 
-                if (freezeHealth) {
+                if (freezeHealth && GetHealth("", "Health") > 5) {
                     SetHealth("", "Health",5);
                     showMedicHelpMenu = true;
                 }
             }
 			
             if (showMedicHelpMenu != showMedicHelpMenuBefore) {
-                DebugMessageDZL("send showMedicHelpMenu " + showMedicHelpMenu.ToString());
                 SyncMedicPlayer();
             }
         }
@@ -619,14 +622,11 @@ modded class PlayerBase
 
 	void ToggleHealMenu(bool showMedicHelpMenuExt) {
 	    this.showMedicHelpMenu = showMedicHelpMenuExt;
-		DebugMessageDZL("showMedicHelpMenu recive" + showMedicHelpMenu.ToString());
-		
+
         if (!healMenu && showMedicHelpMenu){
 			if (g_Game.GetUIManager().GetMenu()) {
-				DebugMessageDZL("showMedicHelpMenu close" + showMedicHelpMenu.ToString());
 				g_Game.GetUIManager().GetMenu().Close();
 			}
-			DebugMessageDZL("showMedicHelpMenu show" + showMedicHelpMenu.ToString());
 
             if (!config || !config.medicConfig) {
 			    GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(ToggleHealMenu, 2, false, showMedicHelpMenu);
