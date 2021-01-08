@@ -1,4 +1,4 @@
-class DZLPlayerIdentities: DZLSaveModel
+class DZLPlayerIdentities
 {
     string fileName = "DZLPlayerIdentities.json";
     ref array<string> playerIdentities;
@@ -12,14 +12,14 @@ class DZLPlayerIdentities: DZLSaveModel
     void AddPlayer(string playerId) {
         if (-1 == playerIdentities.Find(playerId)) {
             playerIdentities.Insert(playerId);
-            mustSave = true;
+            Save();
         }
     }
     void RemovePlayer(string playerId) {
 		int index = playerIdentities.Find(playerId);
         if (-1 != index) {
             playerIdentities.Remove(index);
-            mustSave = true;
+            Save();
         }
     }
 
@@ -88,7 +88,7 @@ class DZLPlayerIdentities: DZLSaveModel
         return false;
     }
 
-    override protected bool DoSave(){
+    private bool Save(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayerIdentities>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);

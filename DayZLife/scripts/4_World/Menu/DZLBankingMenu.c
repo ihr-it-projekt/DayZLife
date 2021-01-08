@@ -23,7 +23,7 @@ class DZLBankingMenu : DZLBaseMenu
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA_RESPONSE || rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE) {
+        if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE) {
            autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
            if (ctx.Read(paramGetResponse)){
                 bankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
@@ -74,18 +74,19 @@ class DZLBankingMenu : DZLBaseMenu
 	override void OnShow() {
         if (config) {
             super.OnShow();
-
-            playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
-            playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
-
-			balanceTextLabelWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
-			bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
-
-			if (player.dzlBank) bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
-			
+            balanceTextLabelWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
+            bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
+            UpdateGUI();
         } else {
             OnHide();
         }
+    }
+
+    override void UpdateGUI(string message = "") {
+        playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
+        playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
+
+        if (player.dzlBank) bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {

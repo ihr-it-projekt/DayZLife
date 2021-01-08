@@ -1,35 +1,24 @@
 modded class MissionServer {
 
     private ref DZLEventManager manager;
-	private ref Timer databaseTimer;
+    private ref DZLBuilderManager builderManager;
 	private ref Timer paycheckTimer;
 	private ref DZLPayCheckController paycheckController;
 
-	void MissionServer()
-	{
+	void MissionServer() {
         DebugMessageDZL("Load DayZLifeServer");
         manager = new DZLEventManager;
+        builderManager = new DZLBuilderManager;
         paycheckController = new DZLPayCheckController;
-		databaseTimer = new Timer();
-		paycheckTimer = new Timer();
-	}
-
-	void ~MissionServer() {
-	    DZLDatabaseLayer.Get().Save();
+		paycheckTimer = new Timer;
 	}
 
 	override void OnInit() {
         super.OnInit();
-        DZLBankingLocationBuilder.Create();
-        DZLLicenceLocationBuilder.Create();
-        DZLTraderLocationBuilder.Create();
-        DZLLoadOutLocationBuilder.Create();
-        DZLGarageLocationBuilder.Create();
         DZLLockedHouses.OnServerStart();
-
-        databaseTimer.Run(120, DZLDatabaseLayer.Get(), "Save", null, true);
         paycheckTimer.Run(60, paycheckController, "Check", null, true);
         DZLLicenceCheck.Get();
+        builderManager.Create();
     }
 
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){

@@ -1,4 +1,4 @@
-class DZLBank: DZLSaveModel
+class DZLBank
 {
     int moneyAtBank = 0;
     bool raidRuns = false;
@@ -7,14 +7,14 @@ class DZLBank: DZLSaveModel
 	
     void DZLBank() {
         if (!Load()) {
-            mustSave = true;
+            Save();
         }
     }
 
     void AddMoney(int moneyToAdd) {
         if (GetGame().IsServer()) {
             moneyAtBank += moneyToAdd;
-            mustSave = true;
+            Save();
         }
     }
 	
@@ -36,7 +36,7 @@ class DZLBank: DZLSaveModel
 
         player.AddMoneyToPlayer(moneyToRaid);
         moneyAtBank -= moneyToRaid;
-        mustSave = true;
+        Save();
 		
 		return moneyToRaid;
 	}
@@ -50,7 +50,7 @@ class DZLBank: DZLSaveModel
 		
 		if (lastRaidTime) {
 			lastRaidTime = null;
-			mustSave = true;
+			Save();
 		}
 		
 		return true;
@@ -58,20 +58,20 @@ class DZLBank: DZLSaveModel
 
     void StartRaid() {
         raidRuns = true;
-		mustSave = true;
+		Save();
     }
 
     void RaidIsFinished() {
         raidRuns = false;
         lastRaidTime = new DZLDate();
 		
-		mustSave = true;
+		Save();
     }
 	
 	void CancelRaid() {
 		raidRuns = false;
 		
-		mustSave = true;
+		Save();
 	}
 	
     private bool Load(){
@@ -82,7 +82,7 @@ class DZLBank: DZLSaveModel
         return false;
     }
 
-    override protected bool DoSave(){
+    private bool Save(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLBank>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);

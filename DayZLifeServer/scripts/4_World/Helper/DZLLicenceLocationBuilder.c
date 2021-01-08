@@ -1,13 +1,23 @@
-class DZLLicenceLocationBuilder {
+class DZLLicenceLocationBuilder
+ {
+    protected ref array<ref DZLNPCKeepPosition> npcs;
 
-    static void Create() {
+    void DZLLicenceLocationBuilder() {
+        Init();
+    }
+
+    void Init() {
+        npcs = new array<ref DZLNPCKeepPosition>;
+    }
+
+    void Create() {
 		array<ref DZLLicencePosition> positions = DZLConfig.Get().licenceConfig.positionOfLicencePoints;
 		foreach(DZLLicencePosition position: positions) {
-		    DZLLicenceLocationBuilder.CreatePositions(position, false, true, false, false, false);
+		    npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position, false, true, false, false, false)));
 		}
 	}
 
-	static PlayerBase CreatePositions(DZLLicencePosition position, bool isBanking, bool isLicence, bool isTrader, bool isLoadOut, bool isGarage) {
+	PlayerBase CreatePositions(DZLLicencePosition position, bool isBanking, bool isLicence, bool isTrader, bool isLoadOut, bool isGarage) {
         PlayerBase player = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, position.survivor, isBanking, isLicence, isTrader, isLoadOut, isGarage);
 
         if (!player) {
@@ -21,5 +31,11 @@ class DZLLicenceLocationBuilder {
         }
 
         return player;
+	}
+
+	void CheckPosition() {
+        foreach(DZLNPCKeepPosition npc: npcs) {
+            npc.FixPosition();
+        }
 	}
 };

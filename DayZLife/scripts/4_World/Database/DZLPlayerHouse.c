@@ -1,4 +1,4 @@
-class DZLPlayerHouse: DZLSaveModel
+class DZLPlayerHouse
 {
     string fileName;
     ref array<string> playerHouseCollection;
@@ -9,14 +9,14 @@ class DZLPlayerHouse: DZLSaveModel
         if (!Load()) {
             playerHouseCollection = new array<string>;
             playerHouseKeyCollection = new array<string>;
-            mustSave = true;
+            Save();
         }
     }
 
     void AddHouse(notnull ref DZLHouse house) {
 
         playerHouseCollection.Insert(house.GetFileName());
-        mustSave = true;
+        Save();
 	}
 	
 	bool HasHouse(notnull Building building) {
@@ -31,14 +31,14 @@ class DZLPlayerHouse: DZLSaveModel
 	
 	void AddKey(notnull ref DZLHouse house) {
         playerHouseKeyCollection.Insert(house.GetFileName());
-        mustSave = true;
+        Save();
 	}
 	
 	void RemoveKey(notnull ref DZLHouse house) {
 		int index = playerHouseKeyCollection.Find(house.GetFileName());
 		if (-1 != index) {
 			playerHouseKeyCollection.Remove(index);
-			mustSave = true;
+			Save();
 		}
 	}
 	
@@ -50,7 +50,7 @@ class DZLPlayerHouse: DZLSaveModel
         return false;
     }
 
-    override protected bool DoSave(){
+    private bool Save(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayerHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
