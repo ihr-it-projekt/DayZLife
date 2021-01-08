@@ -5,6 +5,7 @@ class DZLPlayer
     private int money = 0;
     private int bank = 0;
     private bool isCop = false;
+    private bool isMedic = false;
     string playerName = "";
 	int onlineTimeCivil = 0;
 	int onlineTimeMedic = 0;
@@ -111,9 +112,18 @@ class DZLPlayer
         this.isCop = isCop;
         Save();
     }
+	
+    void UpdateMedic(bool isMedic) {
+        this.isMedic = isMedic;
+        Save();
+    }
 
     bool IsCop() {
         return isCop;
+    }
+	
+    bool IsMedic() {
+        return isMedic;
     }
 
     void UpdateName(string playerName) {

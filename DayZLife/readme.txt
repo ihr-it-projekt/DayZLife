@@ -1,6 +1,9 @@
 
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
+- Cops wollen spielern über liste strafe hinzufügen
+- Medics müssen player in Krankenhaus bringen um sie auf 100% zu bringen.
+
 - Alamach
     - Bank infos Raidwerkzeug ...
 

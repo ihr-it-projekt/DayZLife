@@ -21,6 +21,11 @@ class DZLAlmanacListener
             if (ctx.Read(param)){
 				SendUpdateList(param.param1);
             }
+        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS) {
+            autoptr Param1<PlayerBase> paramMedicList;
+            if (ctx.Read(paramMedicList)){
+				SendUpdateListMedic(paramMedicList.param1);
+            }
         } else if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
         } else if (rpc_type == DAY_Z_LIFE_DELETE_PLAYER) {
@@ -75,6 +80,17 @@ class DZLAlmanacListener
                 dzlPlayerIdentities.UpdateCops(paramUpdateCops.param2);
 				DZLSendMessage(ident, "#update_cop_list_successful");
             }
+        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS) {
+            autoptr Param2<PlayerBase, ref array<string>> paramUpdateMedics;
+            if (ctx.Read(paramUpdateMedics)){
+				PlayerIdentity identMedic = paramUpdateMedics.param1.GetIdentity();
+
+                if (!config.adminIds.CanManageMedic(identMedic.GetId())) return;
+
+                DZLPlayerIdentities dzlPlayerIdentitiesMedic = DZLDatabaseLayer.Get().GetPlayerIds();
+                dzlPlayerIdentitiesMedic.UpdateMedics(paramUpdateMedics.param2);
+				DZLSendMessage(identMedic, "#update_medic_list_successful");
+            }
         } else if (rpc_type == DAY_Z_LIFE_MONEY_TRANSFER_ADMIN) {
             autoptr Param4<PlayerBase, string, int, bool> paramDepositAdminPlayer;
             string messageDepositPP = "";
@@ -117,6 +133,30 @@ class DZLAlmanacListener
         }
 
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
+    }
+	
+    void SendUpdateListMedic(PlayerBase player) {
+        if (!config.adminIds.CanManageMedic(player.GetIdentity().GetId())) return;
+
+        array<Man> _players = new array<Man>;
+        GetGame().GetPlayers(_players);
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
+        array<ref DZLOnlinePlayer> medicIdents = dzlPlayerIdentities.GetMedicPlayerCollection();
+
+        if (_players) {
+            foreach(Man _player: _players) {
+				string ident = _player.GetIdentity().GetId();
+               	DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
+				
+				if (!dzlPlayer.IsMedic()) {
+					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
+				}
+            }
+        }
+
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_NOT_MEDIC_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, medicIdents), true, player.GetIdentity());
     }
 
     void SendAllPlayerList(PlayerIdentity player) {

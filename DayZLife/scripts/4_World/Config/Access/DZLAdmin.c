@@ -1,18 +1,26 @@
 class DZLAdmin
 {
     ref array<ref DZLPlayerAccess> access;
-	string version = "3";
+	string version = "4";
 
     void DZLAdmin() {
         if (!Load()) {
             access = new array<ref DZLPlayerAccess>;
-            version = "3";
+			
+			access.Insert(new DZLPlayerAccess("example Id"));
+			
+            version = "4";
 
             Save();
         }
 
         if (version == "2") {
             version = "3";
+            Save();
+        }
+		
+        if (version == "3") {
+            version = "4";
             Save();
         }
     }
@@ -30,6 +38,15 @@ class DZLAdmin
         foreach(DZLPlayerAccess playerAccess: access) {
         	if (playerAccess && playerAccess.GetIdent() == ident) {
 				return playerAccess.CanManageCops();
+			}
+		}
+        return false;
+    }
+	
+    bool CanManageMedic(string ident) {
+        foreach(DZLPlayerAccess playerAccess: access) {
+        	if (playerAccess && playerAccess.GetIdent() == ident) {
+				return playerAccess.CanManageMedic();
 			}
 		}
         return false;

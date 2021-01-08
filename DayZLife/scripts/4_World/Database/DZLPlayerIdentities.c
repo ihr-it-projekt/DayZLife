@@ -37,6 +37,20 @@ class DZLPlayerIdentities
         return collection;
     }
 	
+    array<ref DZLOnlinePlayer> GetMedicPlayerCollection() {
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
+
+            if (player.IsMedic()) {
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
+            }
+        }
+
+        return collection;
+    }
+	
     array<ref DZLOnlinePlayer> GetPlayerCollection(array<string> exclude) {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
@@ -67,6 +81,23 @@ class DZLPlayerIdentities
                 }
             }
             player.UpdateCop(hasFound);
+        }
+    }
+    void UpdateMedics(ref array<string> medics) {
+        if (!medics) return;
+
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
+            bool hasFound = false;
+            foreach(string newMedic: medics) {
+                if (ident == newMedic) {
+                    hasFound = true;
+                    break;
+                }
+            }
+            player.UpdateMedic(hasFound);
         }
     }
 
