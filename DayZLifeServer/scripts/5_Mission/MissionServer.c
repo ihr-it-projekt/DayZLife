@@ -12,12 +12,8 @@ modded class MissionServer {
 
 	override void OnInit() {
 	    super.OnInit();
-		Object databaseObject = DZLObjectFinder.GetObjectsAtStatic(DZLDatabase.POSITION, DZLDatabase.POSITION);
-		DZLDatabase database;
-		if (databaseObject) {
-			DZLDatabase database = DZLDatabase.Cast(databaseObject);
-			DZLDatabaseLayer.Get().SetDatabase(database);
-
+		DZLDatabase database = DZLSpawnHelper.SpawnDataBase();
+		if (database) {
             manager = new DZLEventManager;
             builderManager = new DZLBuilderManager;
             paycheckController = new DZLPayCheckController;
