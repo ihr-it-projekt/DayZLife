@@ -1,11 +1,14 @@
 class DZLTraderLocationBuilder: DZLLicenceLocationBuilder 
 {
+    void DZLTraderLocationBuilder() {
+        Init();
+    }
 
-    override static void Create() {
+    override void Create() {
 		array<ref DZLTraderPosition> positions = DZLConfig.Get().traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
-           PlayerBase trader = DZLTraderLocationBuilder.CreatePositions(position, false, false, true, false, false);
+           npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position, false, false, true, false, false)));
         }
 	}
 };

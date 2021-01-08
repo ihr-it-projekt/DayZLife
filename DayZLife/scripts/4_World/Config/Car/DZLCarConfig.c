@@ -2,13 +2,14 @@ class DZLCarConfig
 {
     bool carCollisionDamage = false;
 	bool canStoreCarsWithGoods = false;
+	bool canGetCarsFromEveryGarage = true;
 	int carRaidTimeInSeconds = 60;
 	int chanceToRaid = 2;
     ref array<ref DZLStoragePosition> garages;
 	ref array<string> carTypesToStore;
 	ref array<string> carRaidTools;
 
-    string version = "2";
+    string version = "3";
 
     void DZLCarConfig() {
 		array<string> attachments;
@@ -44,7 +45,7 @@ class DZLCarConfig
 	        canStoreCarsWithGoods = false;
 	        carRaidTimeInSeconds = 60;
 
-            version = "2";
+            version = "3";
             Save();
         }
 
@@ -79,6 +80,12 @@ class DZLCarConfig
             canStoreCarsWithGoods = false;
             carRaidTimeInSeconds = 60;
             version = "2";
+            Save();
+        }
+
+        if (version == "2") {
+            canGetCarsFromEveryGarage = true;
+            version = "3";
             Save();
         }
     }

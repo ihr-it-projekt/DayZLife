@@ -46,7 +46,9 @@ class DZLStorageListener
 				
                 DZLCarStoreItem storedCar = storage.GetById(itemId);
 
-                if (!storedCar || storedCar.positionOfStore != storagePositionCar.position) return;
+                if (!storedCar) return;
+
+                if (!config.canGetCarsFromEveryGarage && storedCar.positionOfStore != storagePositionCar.position) return;
 
 				CarScript carSpawned = SpawnCar(player, storedCar,storagePositionCar);
 
