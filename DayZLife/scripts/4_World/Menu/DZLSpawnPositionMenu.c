@@ -7,6 +7,10 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 	private string jobId;
 	private XComboBoxWidget jobSelection;
 	private ref array<string> activeJobIds;
+
+	private int medicIndex = -1;
+	private int copIndex = -1;
+
 	
 	void DZLSpawnPositionMenu() {
 		hasCloseButton = false;
@@ -53,10 +57,13 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 		
 		jobSelection.ClearAll();
 		jobSelection.AddItem("#Civ");
-		jobSelection.AddItem("#Medic");
+
+		if (player.dzlPlayer.IsMedic()) {
+		    medicIndex = jobSelection.AddItem("#Medic");
+		}
 
 		if (player.dzlPlayer.IsCop()) {
-		    jobSelection.AddItem("#Cop");
+		    copIndex = jobSelection.AddItem("#Cop");
 		}
 
 		UpdateSpawnPoints();
@@ -102,6 +109,12 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 			index = jobSelection.GetCurrentItem();
 			
 			if (index == -1) return true;
+
+			if (medicIndex == index) {
+			    index = 1;
+			} else if (copIndex == index) {
+			    index = 2;
+			}
 			
 			jobId = activeJobIds.Get(index);
 			
