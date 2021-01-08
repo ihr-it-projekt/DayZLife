@@ -1,4 +1,3 @@
-check position of npc
 
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
