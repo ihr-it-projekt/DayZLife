@@ -99,7 +99,7 @@ class DZLStorageListener
 
     private void FillFluid(CarScript car, int type, float inPercent) {
 		if (inPercent > 0) {
-			car.Fill(type, car.GetFluidCapacity(type) / inPercent);
+			car.Fill(type, car.GetFluidCapacity(type) * inPercent);
 		}
 	}
 	
