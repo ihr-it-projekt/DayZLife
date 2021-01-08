@@ -6,7 +6,7 @@ class DZLObjectFinder
         this.houseDefinitions = houseDefinitions;
     }
 
-    Object GetObjectsAt(vector from, vector to, Object ignore = NULL, float radius = 0.5, Object with = NULL){
+	Object GetObjectsAt(vector from, vector to, Object ignore = NULL, float radius = 0.5, Object with = NULL){
         vector contact_pos;
         vector contact_dir;
         int contact_component;

@@ -69,3 +69,24 @@ class CfgMods
 		};
 	};
 };
+
+class CfgVehicles
+{
+    class Container_Base;
+    class DZLDatabase: Container_Base
+	{
+		scope=2;
+		autocenter = false;
+		canBeDigged=0;
+		displayName="The Database";
+        descriptionShort="";
+        model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate_5x.p3d";
+        class Cargo
+        {
+            itemsCargoSize[]={0,0};
+            openable=0;
+            allowOwnedCargoManipulation=0;
+        };
+	};
+
+}

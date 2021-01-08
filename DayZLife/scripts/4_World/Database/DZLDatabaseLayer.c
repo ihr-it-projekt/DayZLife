@@ -10,6 +10,7 @@ class DZLDatabaseLayer
     private ref DZLBank bank;
     private ref map<string, ref DZLCarStorage> storageCars;
     private ref DZLEmergencies emergencies;
+	private DZLDatabase database;
 
     void DZLDatabaseLayer() {
         dzlHouses = new map<string, ref DZLHouse>;
@@ -29,6 +30,10 @@ class DZLDatabaseLayer
 
         return databaseLayer;
     }
+	
+	void SetDatabase(DZLDatabase database) {
+		this.database = database;
+	}
 
 	DZLBank GetBank() {
 	    return bank;
@@ -47,11 +52,10 @@ class DZLDatabaseLayer
     }
 
     bool HasPlayer(string playerId) {
-        DZLPlayer player;
-        return dzlPlayers.Find(playerId, player);
+        return database.HasPlayer(playerId);
     }
 
-    DZLPlayer GetPlayer(string playerId) {
+    DZLPlayer GetPlayerFromFiles(string playerId) {
 		DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
 			player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
@@ -59,6 +63,10 @@ class DZLDatabaseLayer
 		}
 		
 		return player;
+    }
+
+    DZLPlayer GetPlayer(string playerId) {
+		return database.GetPlayer(playerId);
     }
 
     DZLHouse GetHouse(Building building = null, string fileNameParam = "") {
@@ -125,13 +133,7 @@ class DZLDatabaseLayer
     }
 
     void RemovePlayer(string playerId) {
-        GetPlayer(playerId);
-
-        DZLPlayer player;
-        if (dzlPlayers.Find(playerId, player)) {
-            dzlPlayers.Remove(playerId);
-			DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + player.fileName);
-		}
+        database.RemovePlayer(playerId);
     }
 
 }

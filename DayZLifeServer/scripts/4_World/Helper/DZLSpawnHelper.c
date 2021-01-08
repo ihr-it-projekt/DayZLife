@@ -13,6 +13,27 @@ class DZLSpawnHelper
 		return true;
     }
 
+    static DZLDatabase SpawnDataBase() {
+		InventoryLocation il = new InventoryLocation;
+        vector mat[4];
+        Math3D.MatrixIdentity4(mat);
+        mat[3] = DZLDatabase.POSITION;
+        il.SetGround(NULL, mat);
+         
+        DZLDatabase obj = DZLDatabase.Cast(SpawnEntity("DZLDatabase", il, ECE_PLACE_ON_SURFACE, RF_DEFAULT));
+		
+        if (!obj) {
+            DebugMessageDZL("Can not spawn db object");
+            return null;
+        }
+
+        obj.SetFlags(EntityFlags.STATIC, false);
+		DebugMessageDZL("Has spawned DB object");
+        DZLSpawnHelper.SetPositionAndOrientation(obj, DZLDatabase.POSITION, "0 0 0");
+        
+		return obj;
+    }
+
     static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence, bool isTrader, bool isLoadOut, bool isGarage) {
         //pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true);
