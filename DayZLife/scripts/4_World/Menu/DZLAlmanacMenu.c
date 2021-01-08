@@ -38,6 +38,13 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private ButtonWidget adminAddMoneyToPlayerButtonBank;
 	private ButtonWidget adminSearchPlayer;
 	private EditBoxWidget adminSearchPlayerInput;
+	private TextWidget adminPlayerId;
+	private TextWidget adminMoneyCash;
+	private TextWidget adminMoneyBank;
+	private TextWidget adminJob;
+	private TextWidget adminArrestTime;
+	private TextWidget adminCanCop;
+	private TextListboxWidget adminLicenseTextListbox
 
 	private Widget medicWidget;
 	private TextListboxWidget playerNeedMedicList;
@@ -101,6 +108,14 @@ class DZLAlmanacMenu : DZLBaseMenu
 		adminSearchPlayer = creator.GetButtonWidget("searchButton");
 		adminAddMoneyToPlayerInput = creator.GetEditBoxWidget("moneyInput");
 		adminSearchPlayerInput = creator.GetEditBoxWidget("search_input");
+		adminPlayerId = creator.GetTextWidget("playerID");
+		adminMoneyCash = creator.GetTextWidget("moneyCash");
+		adminMoneyBank = creator.GetTextWidget("moneyBank");
+		adminJob = creator.GetTextWidget("job");
+		adminArrestTime = creator.GetTextWidget("arrestTime");
+		adminCanCop = creator.GetTextWidget("copValue");
+		adminLicenseTextListbox = creator.GetTextListboxWidget("licenseTextListbox");
+		
 		
 		medicWidget = creator.GetWidget("medic_Panel");
 		playerNeedMedicList = creator.GetTextListboxWidget("player_Listbox");
@@ -121,7 +136,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		super.OnShow();
 		string ident = player.GetIdentity().GetId();
 		
-		if (player.dzlPlayer.IsActiveAsMedic()) {
+		if (false && player.dzlPlayer.IsActiveAsMedic()) {
 			toggleViewWidget.AddItem("#emergencies");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, new Param1<PlayerBase>(null), true);
 			medicPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -343,6 +358,33 @@ class DZLAlmanacMenu : DZLBaseMenu
             if (___dzlPlayer) {
                 int depositBank = adminAddMoneyToPlayerInput.GetText().ToInt();
 		        GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param4<PlayerBase, string, int, bool>(player, ___dzlPlayer.dayZPlayerId, depositBank, true), true);
+            } else {
+                player.DisplayMessage("#no_player_selected");
+            }
+		} else if (w == adminPlayers) {
+		    DZLPlayer selectedAdminPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
+
+            if (selectedAdminPlayer) {
+                adminPlayerId.SetText(selectedAdminPlayer.dayZPlayerId);
+				adminMoneyCash.SetText(selectedAdminPlayer.GetMoney().ToString());
+				adminMoneyBank.SetText(selectedAdminPlayer.GetBankMoney().ToString());
+				adminJob.SetText(selectedAdminPlayer.GetActiveJob());
+				adminArrestTime.SetText(selectedAdminPlayer.arrestTimeInMinutes.ToString());
+				adminCanCop.SetText(selectedAdminPlayer.IsCop().ToString());
+				adminLicenseTextListbox.ClearItems();
+				TStringArray licenceIds = selectedAdminPlayer.licenceIds;
+
+				if (licenceIds.Count() > 0) {
+					array<ref DZLLicence> licences = player.config.licenceConfig.licences.collection;
+					foreach(DZLLicence configLicence: licences) {
+						foreach(string licenceId: licenceIds) {
+							if (licenceId == configLicence.id) {
+								adminLicenseTextListbox.AddItem(configLicence.name, configLicence, 0);
+							}
+						}
+					}
+				}
+				
             } else {
                 player.DisplayMessage("#no_player_selected");
             }

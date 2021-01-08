@@ -1,16 +1,16 @@
-class DZLEmergencies: DZLSaveModel
+class DZLEmergencies
 {
     ref array<string> emergencies;
 	string fileName = "emergencies.json";
 
     void DZLEmergencies() {
         emergencies = new array<string>;
-        mustSave = true;
+        Save();
     }
 
     void Add(string playerId) {
         emergencies.Insert(playerId);
-        mustSave = true;
+        Save();
     }
 
     void Remove(string playerId) {
@@ -25,7 +25,7 @@ class DZLEmergencies: DZLSaveModel
         return false;
     }
 
-    override protected bool DoSave(){
+    private bool Save(){
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLEmergencies>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);

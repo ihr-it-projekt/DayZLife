@@ -57,7 +57,7 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableBool("showMedicHelpMenu");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-		SetCanBeDestroyed(false);
+		//SetCanBeDestroyed(false);
 	}
 
 	bool IsDZLPlayer() {
@@ -518,11 +518,11 @@ modded class PlayerBase
 
     override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
         super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
-        CheckHealth();
+        //CheckHealth();
     }
 
 	override void OnScheduledTick(float deltaTime) {
-		CheckHealth();
+		//CheckHealth();
 
         super.OnScheduledTick(deltaTime);
 	}
