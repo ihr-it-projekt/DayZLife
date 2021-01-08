@@ -21,6 +21,7 @@ modded class PlayerBase
 	ref DZLCarMenu carMenu;
 	ref DZLCarStorageMenu carStorageMenu;
 	ref DZLMedicHelpMenu healMenu;
+	ref Timer healthTimer;
 
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
@@ -39,12 +40,13 @@ modded class PlayerBase
 	bool hasRequestForMedicClient = false;
 	bool freezeBlood = false;
 	bool freezeShock = false;
-	int counterMedicMenu = 0;
+	bool freezeHealth = false;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;
 	bool hasBankingConfig = false;
+	float deltaTimeLastUpdate = 0;
 
 	override void Init() {
         super.Init();
@@ -57,7 +59,9 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableBool("showMedicHelpMenu");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-		//SetCanBeDestroyed(false);
+		SetCanBeDestroyed(false);
+		healthTimer = new Timer;
+		healthTimer.Run(1, this, "CheckHealth", null, true);;
 	}
 
 	bool IsDZLPlayer() {
@@ -273,8 +277,6 @@ modded class PlayerBase
 			moneyTransferMenu.OnHide();
 		} else if (carMenu && carMenu.IsVisible()) {
 			carMenu.OnHide();
-		} else if (healMenu && healMenu.IsVisible()) {
-			healMenu.OnHide();
 		} else if (carStorageMenu && carStorageMenu.IsVisible()) {
 			carStorageMenu.OnHide();
 		}
@@ -518,79 +520,92 @@ modded class PlayerBase
 
     override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
         super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
-        //CheckHealth();
+        CheckHealth();
     }
 
-	override void OnScheduledTick(float deltaTime) {
-		//CheckHealth();
-
-        super.OnScheduledTick(deltaTime);
-	}
-
 	void HealByHospital() {
-        counterMedicMenu = 5000;
+	    showMedicHelpMenu = false;
         SetHealth(100);
         SetHealth("", "Shock", 100);
         SetHealth("", "Blood", 5000);
-        UpdateBrokenLegs(eBrokenLegs.NO_BROKEN_LEGS);
         DZLBaseSpawnPoint point = GetConfig().medicConfig.hospitalSpawnPoints.GetRandomElement();
         m_BleedingManagerServer.RemoveAllSources();
         GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceHospitalHeal * -1);
+
+        //Double check to not enter splinted state if legs are not broken
+        if (m_BrokenLegState == eBrokenLegs.BROKEN_LEGS) {
+            ItemBase splint = ItemBase.Cast(GetInventory().CreateInInventory("Splint"));
+            ApplySplint();
+            m_BrokenLegState = eBrokenLegs.BROKEN_LEGS_SPLINT;
+            ItemBase new_item = ItemBase.Cast(GetInventory().CreateInInventory("Splint_Applied"));
+            MiscGameplayFunctions.TransferItemProperties(splint, new_item, true, false, true);
+            splint.Delete();
+        }
+
+        GetInventory().CreateInInventory("Splint");
         SetPosition(point.point);
         SetOrientation(point.orientation);
+        freezeBlood = false;
+        freezeHealth = false;
+        freezeShock = false;
         SyncMedicPlayer();
 	}
 
 	void HealByMedic() {
-        counterMedicMenu = 5000;
-	    SetHealth(50);
         SetHealth("", "Shock", 50);
         SetHealth("", "Blood", 2500);
+        GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceMedicHeal * -1);
+	    SetHealth(50);
+		showMedicHelpMenu = false;
+        freezeHealth = false;
+        freezeShock = false;
         SyncMedicPlayer();
+        freezeBlood = false;
 	}
 
 	void KillPlayer() {
-        counterMedicMenu = 5000;
+		showMedicHelpMenu = false;
 	    SetCanBeDestroyed(true);
         SetHealth(0);
         SyncMedicPlayer();
 	}
 
-	private void CheckHealth() {
+	void CheckHealth() {
 	    if (GetGame().IsServer()) {
-	        if (counterMedicMenu != 0) {
-	            counterMedicMenu--;
-	            showMedicHelpMenu = false;
-	            freezeShock = false;
-                freezeBlood = false;
-	        } else {
-                bool showMedicHelpMenuBefore = showMedicHelpMenu;
-                if(!willDie) {
-                    if (GetHealth("", "Blood") <= 1) {
-                        SetHealth("", "Blood", 1);
-                        freezeBlood = true;
-                    }
+	        bool showMedicHelpMenuBefore = showMedicHelpMenu;
+            if(!willDie) {
+                if (GetHealth("", "Health") <= 5) {
+					showMedicHelpMenu = true;
+                    SetHealth("", "Health", 5);
+                    freezeHealth = true;
+                    SetHealth("", "Shock", 5);
+                    freezeShock = true;
+                }
+				
+				if (GetHealth("", "Blood") <= 5) {
+					showMedicHelpMenu = true;
+                    SetHealth("", "Blood", 5);
+                    freezeBlood = true;
+                    SetHealth("", "Shock", 5);
+                    freezeShock = true;
+                }
 
-                    if (GetHealth("", "Shock") <= 1) {
-                        showMedicHelpMenu = true;
-                        SetHealth(1);
-                        SetHealth("", "Shock", 1);
-                        freezeShock = true;
-                    }
+                if (freezeShock) {
+                    showMedicHelpMenu = true;
+                    SetHealth("", "Shock", 5);
+                }
 
-                    if (freezeShock) {
-                        SetHealth(1);
-                        showMedicHelpMenu = true;
-                        SetHealth("", "Shock", 1);
-                    }
+                if (freezeBlood) {
+                    SetHealth("", "Blood", 5);
+                    showMedicHelpMenu = true;
+                }
 
-                    if (freezeBlood) {
-                        SetHealth("", "Blood", 1);
-                        SetHealth(1);
-                        showMedicHelpMenu = true;
-                    }
+                if (freezeHealth) {
+                    SetHealth("", "Health",5);
+                    showMedicHelpMenu = true;
                 }
             }
+			
             if (showMedicHelpMenu != showMedicHelpMenuBefore) {
                 DebugMessageDZL("send showMedicHelpMenu " + showMedicHelpMenu.ToString());
                 SyncMedicPlayer();
@@ -620,9 +635,6 @@ modded class PlayerBase
 				GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
 			}
 
-        } else if (!showMedicHelpMenu && healMenu) {
-			DebugMessageDZL("showMedicHelpMenu hide" + showMedicHelpMenu.ToString());
-            healMenu.OnHide();
         }
 	}
 

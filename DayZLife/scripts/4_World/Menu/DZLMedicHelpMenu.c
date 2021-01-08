@@ -36,10 +36,6 @@ class DZLMedicHelpMenu : DZLBaseMenu
         if (w == killButton) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER, new Param1<PlayerBase>(player), true);
             player.hasRequestForMedicClient = false;
-
-			healButton.Show(false);
-			killButton.Show(false);
-			hospitalButton.Show(false);
         } else if (w == healButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_MEDIC_CALL, new Param1<PlayerBase>(player), true);
 			player.isHealedByMedic = true;
@@ -48,9 +44,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 		} else if (w == hospitalButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
 			player.hasRequestForMedicClient = false;
-			healButton.Show(false);
-			killButton.Show(false);
-			hospitalButton.Show(false);
+			OnHide();
 		}
 
         return false;

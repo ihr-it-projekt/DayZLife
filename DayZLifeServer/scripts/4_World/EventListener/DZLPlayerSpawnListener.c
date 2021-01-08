@@ -14,7 +14,7 @@ class DZLPlayerSpawnListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_NEW_SPAWN) {
             autoptr Param3<string, PlayerBase, string> param;
-            if (ctx.Read(param)){
+            if (ctx.Read(param) && param.param1 && param.param2 && param.param3){
                 PlayerBase player = param.param2;
                 player.RemoveAllItems();
 

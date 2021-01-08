@@ -29,6 +29,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private TextListboxWidget copPanelOnlinePlayerList;
 	private TextListboxWidget copPanelCopsList;
 	private ButtonWidget copPanelSave;
+	
+    private Widget medicPanelWidget;
+	private TextListboxWidget medicPanelOnlinePlayerList;
+	private TextListboxWidget medicPanelCopsList;
+	private ButtonWidget medicPanelSave;
 
     private Widget adminPanelWidget;
 	private TextListboxWidget adminPlayers;
@@ -60,6 +65,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private int copPaneId = -1;
 	private int adminPanelId = -1;
 	private int medicPanelId = -1;
+	private int medicManagePanelId = -1;
 
 	private ref array<ref DZLPlayer> allPlayers;
 
@@ -95,6 +101,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 		copPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_CopPanel");
 		copPanelCopsList = creator.GetTextListboxWidget("coplist_CopPanel");
 		copPanelSave = creator.GetButtonWidget("saveButton_CopPanel");
+		
+		medicPanelWidget = creator.GetWidget("medicjob_panel");
+		medicPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_MedicPanel");
+		medicPanelCopsList = creator.GetTextListboxWidget("medicListbox");
+		medicPanelSave = creator.GetButtonWidget("saveButton_MedicPanel");
 		
 		escapedWidget = creator.GetWidget("escaped_panel");
         escapedPlayers = creator.GetTextListboxWidget("escaped_TextListbox");
@@ -136,7 +147,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		super.OnShow();
 		string ident = player.GetIdentity().GetId();
 		
-		if (false && player.dzlPlayer.IsActiveAsMedic()) {
+		if (player.dzlPlayer.IsActiveAsMedic()) {
 			toggleViewWidget.AddItem("#emergencies");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, new Param1<PlayerBase>(null), true);
 			medicPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -146,6 +157,12 @@ class DZLAlmanacMenu : DZLBaseMenu
 			toggleViewWidget.AddItem("#manage_cops");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, new Param1<PlayerBase>(player), true);
 			copPaneId = toggleViewWidget.GetNumItems() - 1;
+		}
+		
+		if (config.adminIds.CanManageMedic(ident)) {
+			toggleViewWidget.AddItem("#manage_medics");
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS, new Param1<PlayerBase>(player), true);
+			medicManagePanelId = toggleViewWidget.GetNumItems() - 1;
 		}
 
 		if (config.adminIds.CanManagePlayers(ident)) {
@@ -179,6 +196,10 @@ class DZLAlmanacMenu : DZLBaseMenu
 		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelOnlinePlayerList, copPanelCopsList);
 		} else if (w == copPanelCopsList) {
 		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelCopsList, copPanelOnlinePlayerList);
+		} else if (w == medicPanelOnlinePlayerList) {
+		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(medicPanelOnlinePlayerList, medicPanelCopsList);
+		} else if (w == medicPanelCopsList) {
+		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(medicPanelCopsList, medicPanelOnlinePlayerList);
 		}
 		
 		return false;
@@ -319,8 +340,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 			copPanelWidget.Show(copPaneId == item);
 			adminPanelWidget.Show(adminPanelId == item);
 			medicWidget.Show(medicPanelId == item);
+			medicPanelWidget.Show(medicManagePanelId == item);
 		} else if (w == copPanelSave) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
+		} else if (w == medicPanelSave) {
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(medicPanelCopsList)), true);
 		} else if (w == escapedPlayers) {
 			int posEscaped = escapedPlayers.GetSelectedRow();
 	   		if (posEscaped == -1) {
@@ -415,8 +439,6 @@ class DZLAlmanacMenu : DZLBaseMenu
 
 		return false;
 	}
-	
-
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
@@ -434,6 +456,23 @@ class DZLAlmanacMenu : DZLBaseMenu
 				
 				foreach(DZLOnlinePlayer copPlayer: copPlayers) {
 					copPanelCopsList.AddItem(copPlayer.name, copPlayer, 0);
+				}
+            }
+        } else if (rpc_type == DAY_Z_LIFE_ALL_NOT_MEDIC_PLAYER_ONLINE_PLAYERS_RESPONSE) {
+            autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramMedicPlayers;
+            if (ctx.Read(paramMedicPlayers)){
+
+                medicPanelOnlinePlayerList.ClearItems();
+				
+				array<ref DZLOnlinePlayer> onlinePlayersNotMedic = paramMedicPlayers.param1;
+				
+				foreach(DZLOnlinePlayer onlinePlayerMedic: onlinePlayersNotMedic) {
+					medicPanelOnlinePlayerList.AddItem(onlinePlayerMedic.name, onlinePlayerMedic, 0);
+				}
+				array<ref DZLOnlinePlayer> medicPlayers = paramMedicPlayers.param2;
+				
+				foreach(DZLOnlinePlayer medicPlayer: medicPlayers) {
+					medicPanelCopsList.AddItem(medicPlayer.name, medicPlayer, 0);
 				}
             }
         } if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {
