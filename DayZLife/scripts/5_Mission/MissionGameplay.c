@@ -3,7 +3,9 @@ modded class MissionGameplay
     private bool holdRControl = false;
     private bool holdLControl = false;
 	private bool holdOne = false;
-	
+	private bool holdTow = false;
+
+
 	private UIScriptedMenu almanac;
 	private ref DZLPlayerEventListener playerEventListener;
 	private ref DZLCarEventListener carEventListener;
@@ -34,6 +36,9 @@ modded class MissionGameplay
 			case KeyCode.KC_1:
                 holdOne = false;
                 break;
+			case KeyCode.KC_2:
+                holdTow = false;
+                break;
             default:
                 super.OnKeyRelease(key);
                 break;
@@ -58,6 +63,9 @@ modded class MissionGameplay
                 if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
 					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
+                if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
+                    player.ShowHealMenu();
+                }
 
                 break;
 			case KeyCode.KC_1:
@@ -65,8 +73,13 @@ modded class MissionGameplay
 				if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
 					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
+			case KeyCode.KC_2:
+				holdTow = true;
+				if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
+					player.ShowHealMenu();
+                }
 
-			
+
             default:
                 super.OnKeyPress(key);
                 break;

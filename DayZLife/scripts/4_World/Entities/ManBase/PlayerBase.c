@@ -279,6 +279,8 @@ modded class PlayerBase
 			carMenu.OnHide();
 		} else if (carStorageMenu && carStorageMenu.IsVisible()) {
 			carStorageMenu.OnHide();
+		} else if (healMenu && healMenu.IsVisible()) {
+			healMenu.OnHide();
 		}
 	}
 
@@ -529,6 +531,9 @@ modded class PlayerBase
 
 	void HealByHospital() {
 	    showMedicHelpMenu = false;
+        freezeBlood = false;
+        freezeHealth = false;
+        freezeShock = false;
         SetHealth(100);
         SetHealth("", "Shock", 100);
         SetHealth("", "Blood", 5000);
@@ -551,27 +556,26 @@ modded class PlayerBase
         GetInventory().CreateInInventory("Splint");
         SetPosition(point.point);
         SetOrientation(point.orientation);
-        freezeBlood = false;
-        freezeHealth = false;
-        freezeShock = false;
         SyncMedicPlayer();
 	}
 
 	void HealByMedic() {
-        SetHealth("", "Shock", 50);
-        SetHealth("", "Blood", 2500);
-        SetHealth(50);
 		showMedicHelpMenu = false;
         freezeHealth = false;
         freezeShock = false;
         freezeBlood = false;
+        SetHealth("", "Shock", 50);
+        SetHealth("", "Blood", 2500);
+        SetHealth(50);
         SyncMedicPlayer();
 	}
 
 	void KillPlayer() {
 	    willDie = true;
 	    SetCanBeDestroyed(true);
-        SetHealth(0);
+	    if (GetGame().IsServer()) {
+            SetHealth(0);
+	    }
         freezeHealth = false;
         freezeBlood = false;
         freezeShock = false;
@@ -580,7 +584,7 @@ modded class PlayerBase
 	void CheckHealth() {
 	    if (GetGame().IsServer()) {
 	        bool showMedicHelpMenuBefore = showMedicHelpMenu;
-            if(!willDie) {
+            if(!willDie && !willHeal) {
                 if (GetHealth("", "Health") <= 5) {
 					showMedicHelpMenu = true;
                     SetHealth("", "Health", 5);
@@ -625,7 +629,10 @@ modded class PlayerBase
 
 	void ToggleHealMenu(bool showMedicHelpMenuExt) {
 	    this.showMedicHelpMenu = showMedicHelpMenuExt;
+	    ShowHealMenu();
+	}
 
+	void ShowHealMenu() {
         if (!healMenu && showMedicHelpMenu){
 			if (g_Game.GetUIManager().GetMenu()) {
 				g_Game.GetUIManager().GetMenu().Close();
@@ -637,7 +644,7 @@ modded class PlayerBase
                 GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(ToggleHealMenu);
 				GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
 			}
-        } else if (!showMedicHelpMenuExt && healMenu) {
+        } else if (!showMedicHelpMenu && healMenu) {
             healMenu.OnHide();
         }
 	}

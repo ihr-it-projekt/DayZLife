@@ -42,6 +42,8 @@ class DZLMedicHelpMenu : DZLBaseMenu
 			player.isHealedByMedic = true;
 			healButton.Show(false);
 			player.hasRequestForMedicClient = true;
+			player.DisplayMessage("#Heal_menu_can_be_open_with:" + KeyCode.KC_2 + " + " +  KeyCode.KC_LCONTROL);
+			OnHide();
 		} else if (w == hospitalButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, new Param1<PlayerBase>(player), true);
 			player.hasRequestForMedicClient = false;

@@ -136,7 +136,7 @@ static void DZLCSVLog(string playerId, string fileName, array<string> head, arra
         MakeDirectory(DAY_Z_LIFE_LOGS);
     }
 
-    string path = DAY_Z_LIFE_LOGS + playerId + "\\"
+    string path = DAY_Z_LIFE_LOGS + playerId + "\\";
 
     if (!FileExist(path)) {
         MakeDirectory(path);

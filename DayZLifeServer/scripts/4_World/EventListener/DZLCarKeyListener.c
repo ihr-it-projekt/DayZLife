@@ -58,6 +58,7 @@ class DZLCarKeyListener
 	               	paramRaidCar.param3.SetHealth(0);
 	
 	               	DZLSendMessage(sender, "#car_was_successful_raided");
+	               	DZLLogRaid(sender.GetId(), "raid car", raidedCar.GetType(), raidedCar.GetPosition());
 					return;
 				}
 
