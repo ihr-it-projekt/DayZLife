@@ -561,6 +561,7 @@ modded class PlayerBase
         SetPosition(point.point);
         SetOrientation(point.orientation);
         SyncMedicPlayer();
+        resetHealTimer.Run(60, this, "ResetHeal", null, false);
 	}
 
 	void HealByMedic() {
