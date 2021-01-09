@@ -22,6 +22,7 @@ modded class PlayerBase
 	ref DZLCarStorageMenu carStorageMenu;
 	ref DZLMedicHelpMenu healMenu;
 	ref Timer healthTimer;
+	ref Timer resetHealTimer;
 
 	bool willHeal = false;
 	bool IsDZLBank = false;
@@ -62,7 +63,8 @@ modded class PlayerBase
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
 		healthTimer = new Timer;
-		healthTimer.Run(5, this, "CheckHealth", null, true);;
+		resetHealTimer = new Timer;
+		healthTimer.Run(5, this, "CheckHealth", null, true);
 	}
 
 	bool IsDZLPlayer() {
@@ -559,7 +561,6 @@ modded class PlayerBase
         SetPosition(point.point);
         SetOrientation(point.orientation);
         SyncMedicPlayer();
-        willHeal = false;
 	}
 
 	void HealByMedic() {
@@ -572,7 +573,7 @@ modded class PlayerBase
         SetHealth("", "Blood", 2500);
         SetHealth(50);
         SyncMedicPlayer();
-        willHeal = false;
+        resetHealTimer.Run(60, this, "ResetHeal", null, false);
 	}
 
 	void KillPlayer() {
@@ -584,6 +585,11 @@ modded class PlayerBase
         freezeHealth = false;
         freezeBlood = false;
         freezeShock = false;
+	}
+
+	void ResetHeal() {
+	    willHeal = false;
+	    resetHealTimer.Stop();
 	}
 
 	void CheckHealth() {

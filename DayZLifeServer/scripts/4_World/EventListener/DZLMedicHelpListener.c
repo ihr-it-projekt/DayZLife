@@ -19,7 +19,7 @@ class DZLMedicHelpListener
             autoptr Param1<PlayerBase>paramCallMedic;
             if (ctx.Read(paramCallMedic)){
                 DZLDatabaseLayer.Get().GetEmergencies().Add(sender.GetId());
-                DZLSendMessage(sender, "#medics_was_called #Heal_menu_can_be_open_with: 2 + LCTRL");
+                DZLSendMessage(sender, "#medics_was_called. #Heal_menu_can_be_open_with: 2 + LCTRL");
 				DZLSendMedicMessage("#there_is_a_new_emergency");
 			}
         } else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
