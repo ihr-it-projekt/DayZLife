@@ -23,6 +23,7 @@ modded class PlayerBase
 	ref DZLMedicHelpMenu healMenu;
 	ref Timer healthTimer;
 
+	bool willHeal = false;
 	bool IsDZLBank = false;
 	bool IsLicencePoint = false;
 	bool IsTrader = false;
@@ -530,6 +531,7 @@ modded class PlayerBase
     }
 
 	void HealByHospital() {
+	    willHeal = true;
 	    showMedicHelpMenu = false;
         freezeBlood = false;
         freezeHealth = false;
@@ -557,9 +559,11 @@ modded class PlayerBase
         SetPosition(point.point);
         SetOrientation(point.orientation);
         SyncMedicPlayer();
+        willHeal = false;
 	}
 
 	void HealByMedic() {
+	    willHeal = true;
 		showMedicHelpMenu = false;
         freezeHealth = false;
         freezeShock = false;
@@ -568,6 +572,7 @@ modded class PlayerBase
         SetHealth("", "Blood", 2500);
         SetHealth(50);
         SyncMedicPlayer();
+        willHeal = false;
 	}
 
 	void KillPlayer() {
