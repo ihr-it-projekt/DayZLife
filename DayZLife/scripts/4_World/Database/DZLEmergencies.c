@@ -1,6 +1,6 @@
 class DZLEmergencies
 {
-    ref array<string> emergencies;
+    private ref array<string> emergencies;
 	string fileName = "emergencies.json";
 
     void DZLEmergencies() {
@@ -12,6 +12,10 @@ class DZLEmergencies
         emergencies.Insert(playerId);
         Save();
     }
+	
+	bool HasEmergency(string playerId) {
+		return -1 != emergencies.Find(playerId);
+	}
 
     void Remove(string playerId) {
         emergencies.RemoveItem(playerId);

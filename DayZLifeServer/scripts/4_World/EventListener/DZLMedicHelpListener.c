@@ -33,12 +33,13 @@ class DZLMedicHelpListener
             array<Man> players = new array<Man>;
             GetGame().GetPlayers(players);
 
-			array<string> emergencyIds = DZLDatabaseLayer.Get().GetEmergencies().emergencies;
+			DZLEmergencies emergencies = DZLDatabaseLayer.Get().GetEmergencies();
+			
             array<ref DZLOnlinePlayer> onlineEmergencies = new array<ref DZLOnlinePlayer>;
             foreach(Man _player: players) {
                 string ident = _player.GetIdentity().GetId();
                 
-				if (-1 == emergencyIds.Find(ident)) {
+				if (emergencies.HasEmergency(ident)) {
 					onlineEmergencies.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), _player.GetPosition()));
 				}
             }

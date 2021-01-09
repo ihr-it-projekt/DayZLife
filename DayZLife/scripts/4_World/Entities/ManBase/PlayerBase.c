@@ -556,13 +556,12 @@ modded class PlayerBase
 	void HealByMedic() {
         SetHealth("", "Shock", 50);
         SetHealth("", "Blood", 2500);
-        GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceMedicHeal * -1);
-	    SetHealth(50);
+        SetHealth(50);
 		showMedicHelpMenu = false;
         freezeHealth = false;
         freezeShock = false;
-        SyncMedicPlayer();
         freezeBlood = false;
+        SyncMedicPlayer();
 	}
 
 	void KillPlayer() {
@@ -634,7 +633,8 @@ modded class PlayerBase
                 GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(ToggleHealMenu);
 				GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
 			}
-
+        } else if (!showMedicHelpMenuExt && healMenu) {
+            healMenu.OnHide();
         }
 	}
 
