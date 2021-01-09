@@ -52,17 +52,23 @@ class DZLHarvestListener
                     InventoryLocation inventoryLocation = new InventoryLocation;
                     EntityAI item;
 
+                    bool spaceLeft = true;
+
                     if (player.GetInventory().FindFirstFreeLocationForNewEntity(randomItemType, FindInventoryLocationType.ANY, inventoryLocation)) {
                         item = player.GetHumanInventory().CreateInInventory(randomItemType);
                     } else if (!player.GetHumanInventory().GetEntityInHands()) {
                         item = player.GetHumanInventory().CreateInHands(randomItemType);
                     } else {
+                        spaceLeft = false;
                         DZLSendMessage(player.GetIdentity(), "#no_space_left_in_inventory");
                     }
 
                     if (item) {
                         DZLSendMessage(player.GetIdentity(), "#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType));
+                        DZLLogCrafting(sender.GetId(), "harvest get item", randomItemType);
                         player.isOnHarvest = false;
+                    } else if (!item && spaceLeft) {
+                        DZLLogCrafting(sender.GetId(), "harvest get NO item but has space", randomItemType);
                     }
 
                     if (item_in_hands_source) {

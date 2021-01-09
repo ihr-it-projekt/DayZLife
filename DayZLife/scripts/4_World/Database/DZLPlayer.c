@@ -134,7 +134,7 @@ class DZLPlayer
 	
 	void AddMoneyToPlayer(int moneyCount) {
         if (DayZGame().IsServer()) {
-            LogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
+            DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 			money += moneyCount;
 		    Save();
 		}
@@ -142,7 +142,7 @@ class DZLPlayer
 
 	void AddMoneyToPlayerBank(int moneyCount) {
         if (DayZGame().IsServer()) {
-            LogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
+            DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
 			bank += moneyCount;
 		    Save();
 		}
@@ -178,14 +178,14 @@ class DZLPlayer
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
-        LogMoneyTransaction(dayZPlayerId, "player", money, 0, money);
+        DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money);
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
         Save();
     }
 	
 	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
-		LogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
+		DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 		playerTarget.AddMoneyToPlayer(moneyToTransfer);
 		money -= moneyToTransfer;
 		
@@ -199,18 +199,18 @@ class DZLPlayer
 		
 		if (money > 0) {
 			if (money < moneyToTransfer) {
-			    LogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
+			    DZLLogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
 				moneyToTransfer -= money;
 				money = 0;
 			} else {
-			    LogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
+			    DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 				money -= moneyToTransfer;
 				moneyToTransfer = 0;
 			}
 		}
 		
 		if (moneyToTransfer > 0) {
-		    LogMoneyTransaction(dayZPlayerId, "bank", bank, bank - moneyToTransfer, moneyToTransfer * -1);
+		    DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank - moneyToTransfer, moneyToTransfer * -1);
 			bank -= moneyToTransfer;
 			moneyBankAdd -= moneyToTransfer;
 		}

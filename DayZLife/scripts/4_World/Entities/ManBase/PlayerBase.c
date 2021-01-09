@@ -451,6 +451,7 @@ modded class PlayerBase
 					if(craftMap.Find(itemType, countFoundCraft)) {
 						if (quantity == 1) {
 							GetGame().ObjectDelete(item);
+							DZLLogCrafting(GetIdentity().GetId(), "licence crafting delete resource", item.GetType());
 							countFoundCraft -= 1;
 							craftMap.Set(itemType, countFoundCraft);
 						} else if (quantity > countFoundCraft) {
@@ -459,6 +460,7 @@ modded class PlayerBase
 						} else {
 							countFoundCraft -= quantity;
 							GetGame().ObjectDelete(item);
+							DZLLogCrafting(GetIdentity().GetId(), "licence crafting delete resource", item.GetType());
 							craftMap.Set(itemType, countFoundCraft);
 						}
 
@@ -491,6 +493,7 @@ modded class PlayerBase
 						    }
 
 							item.SetHealth(health - toolItem.health);
+							DZLLogCrafting(GetIdentity().GetId(), "licence crafting tool reduce health", item.GetType());
 						}
 						tools.Remove(index);
 						break;
@@ -513,6 +516,7 @@ modded class PlayerBase
         }
 		
 		if (itemSpawn) {
+		    DZLLogCrafting(GetIdentity().GetId(), "licence crafting get item", itemToCraft.type);
 			itemSpawn.SetHealth(itemToCraft.health);
 			ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
 		}

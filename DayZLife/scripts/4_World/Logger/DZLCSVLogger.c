@@ -1,29 +1,168 @@
-static void LogMoneyTransaction(string playerId, string type, int oldMoney, int newMoney, int addMoney) {
+static void DZLLogMoneyTransaction(string playerId, string type, int oldMoney, int newMoney, int addMoney) {
+	string fileName = DAY_Z_LIFE_LOGS + "money_log.csv";
+
+	array<string> head = new array<string>;
+	head.Insert("type");
+	head.Insert("oldMoney");
+	head.Insert("newMoney");
+	head.Insert("addMoney");
+
+	array<string> data = new array<string>;
+	data.Insert(type);
+	data.Insert(oldMoney.ToString());
+	data.Insert(newMoney.ToString());
+	data.Insert(addMoney.ToString());
+
+	DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogTraderTransaction(string playerId, string tradeType, string itemType, int price) {
+	string fileName = DAY_Z_LIFE_LOGS + "trader_log_" + playerId + ".csv";
+
+    array<string> head = new array<string>;
+    head.Insert("tradeType");
+    head.Insert("itemType");
+    head.Insert("price");
+
+    array<string> data = new array<string>;
+    data.Insert(tradeType);
+    data.Insert(itemType);
+    data.Insert(price.ToString());
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogCrafting(string playerId, string craftType, string itemType) {
+	string fileName = DAY_Z_LIFE_LOGS + "crafting_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("craftType");
+    head.Insert("itemType");
+
+    array<string> data = new array<string>;
+    data.Insert(craftType);
+    data.Insert(itemType);
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogLoadOut(string playerId, string categoryName) {
+	string fileName = DAY_Z_LIFE_LOGS + "load_out_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("categoryName");
+
+    array<string> data = new array<string>;
+    data.Insert(categoryName);
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogRaid(string playerId, string info, string target, vector position) {
+	string fileName = DAY_Z_LIFE_LOGS + "raid_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("info");
+    head.Insert("target");
+    head.Insert("position");
+
+    array<string> data = new array<string>;
+    data.Insert(info);
+    data.Insert(target);
+    data.Insert(position.ToString(true));
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogStore(string playerId, string info, string target, vector position) {
+	string fileName = DAY_Z_LIFE_LOGS + "store_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("info");
+    head.Insert("target");
+    head.Insert("position");
+
+    array<string> data = new array<string>;
+    data.Insert(info);
+    data.Insert(target);
+    data.Insert(position.ToString(true));
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogArrest(string playerId, string info, string source,int duration) {
+	string fileName = DAY_Z_LIFE_LOGS + "arrest_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("info");
+    head.Insert("source");
+    head.Insert("duration");
+
+    array<string> data = new array<string>;
+    data.Insert(info);
+    data.Insert(source);
+    data.Insert(duration.ToString());
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+static void DZLLogHouseTrade(string playerId, string info, int price, vector position) {
+	string fileName = DAY_Z_LIFE_LOGS + "houseTrade_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("info");
+    head.Insert("price");
+    head.Insert("duration");
+
+    array<string> data = new array<string>;
+    data.Insert(info);
+    data.Insert(price.ToString());
+    data.Insert(position.ToString(true));
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
+
+
+static void DZLCSVLog(string playerId, string fileName, array<string> head, array<string> data) {
     if (!FileExist(DAY_Z_LIFE_LOGS)) {
         MakeDirectory(DAY_Z_LIFE_LOGS);
     }
-	
-	FileHandle handle;
 
-	string fileName = DAY_Z_LIFE_LOGS + "money_log_" + playerId + ".csv";
-	
-	if (!FileExist(fileName)) {
-		handle = OpenFile(fileName , FileMode.APPEND);
-		if ( handle == 0 )
-        	return;
-		
-		FPrintln(handle, "time;type;oldMoney;newMoney;addMoney");
-	}
+    if (!FileExist(DAY_Z_LIFE_LOGS + playerId + "\\")) {
+        MakeDirectory(DAY_Z_LIFE_LOGS + playerId + "\\");
+    }
 
-	if (handle == 0) {
-		handle = OpenFile(fileName , FileMode.APPEND);
-	}
-    
+    FileHandle handle;
+    if (!FileExist(fileName)) {
+        handle = OpenFile(fileName , FileMode.APPEND);
+        if ( handle == 0 )
+            return;
+
+        string headLine = "time;";
+
+        foreach(string headPart: head) {
+            headLine += headPart + ";";
+        }
+
+        FPrintln(handle, headLine);
+    }
+
+    if (handle == 0) {
+        handle = OpenFile(fileName , FileMode.APPEND);
+    }
+
     if (handle == 0) return;
 
     DZLDate date = new DZLDate;
 
-    FPrintln(handle, date.ToDateString() + ";" + type + ";" + oldMoney.ToString() + ";"+ newMoney.ToString() + ";"+ addMoney.ToString() + ";");
+    string dataLine = date.ToDateString() + ";";
+
+    foreach(string dataPart: data) {
+        dataLine += dataPart + ";";
+    }
+
+    FPrintln(handle, dataLine);
 
     CloseFile(handle);
 }
+

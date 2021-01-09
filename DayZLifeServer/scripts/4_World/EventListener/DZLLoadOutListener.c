@@ -25,11 +25,11 @@ class DZLLoadOutListener
 					message = "#error_category_not_found";
 					foreach(DZLLoadOutCategory category: config.loadOutsCops.loadOutCategories) {
 						if (categoryName == category.name) {
+							DZLLogLoadOut(sender.GetId(), categoryName);
 							player.RemoveAllItems();
 							foreach(DZLLoadOutType type: category.items) {
 								Add(player, type);
 							}
-							
 							GetGame().RPCSingleParam(target, DAY_Z_LIFE_LOAD_OUT_RESPONSE, new Param1<bool>(true), true, sender);
 							return;
 						}

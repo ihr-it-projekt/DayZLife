@@ -30,6 +30,7 @@ class DZLRaidListener
 				raidedBuilding.OpenDoor(paramRaidDoor.param3);
 				
                 paramRaidDoor.param4.SetHealth(0);
+                DZLLogRaid(sender.GetId(), "end raid", raidedBuilding.GetType(), raidedBuilding.GetPosition());
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
             autoptr Param2<PlayerBase, Building> paramRaidDoorDZLBuilding;
@@ -63,7 +64,7 @@ class DZLRaidListener
 	                }
 					raidTime = dzlHouseRaid.GetRaidTime();
 				}
-
+                DZLLogRaid(sender.GetId(), "start raid", building.GetType(), building.GetPosition());
                 GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<int>(raidTime), true, sender);
             }
         }

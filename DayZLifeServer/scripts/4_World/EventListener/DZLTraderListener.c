@@ -21,6 +21,7 @@ class DZLTraderListener
                 int countSellItems = 0;
 				array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
                 array<EntityAI> itemsToSell = paramTrade.param2;
+                array<int> itemsToSellPrice = new array<int>;
                 array<string> itemsToBuyParam = paramTrade.param1;
 
                 foreach(string categoryName: paramTrade.param3.categoryNames) {
@@ -48,6 +49,7 @@ class DZLTraderListener
                                 if (item.GetType() == type.type) {
                                     sum -= GetPrice(item, type.sellPrice);
                                     countSellItems++;
+                                    itemsToSellPrice.Insert(type.sellPrice);
                                 }
                             }
                         }
@@ -63,13 +65,16 @@ class DZLTraderListener
                     message = "#not_all_items_found_that_you_want_to_trade";
                 } else if (dzlPlayer.HasEnoughMoney(sum)) {
                     foreach(DZLTraderType _traderType: typesToBuy) {
+                        DZLLogTraderTransaction(sender.GetId(), "buy", _traderType.type, _traderType.buyPrice);
                         Add(paramTrade.param4, _traderType, paramTrade.param3);
                     }
 
                     int index = itemsToSell.Count() - 1;
 					if (index > -1) {
 						EntityAI itemSell = itemsToSell.Get(index);
+						int itemSellPrice = itemsToSellPrice.Get(index);
 						while (itemSell) {
+                            DZLLogTraderTransaction(sender.GetId(), "sell", itemSell.GetType(), itemSellPrice);
 	                        GetGame().ObjectDelete(itemSell);
 							
 							int tmpIndex = itemsToSell.Count() - 1;

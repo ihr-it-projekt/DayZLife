@@ -37,6 +37,7 @@ class DZLBuyHouseListener
                     dzlBuilding.BuyOnServer(paramBuyHouse.param1);
 
                     message = "#successfully_buy_house";
+                    DZLLogHouseTrade(sender.GetId(), "buy house", actualHouseDef.buyPrice, dzlBuilding.GetDZLHouse().GetPosition());
                 }
                 GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
                 GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
@@ -65,6 +66,7 @@ class DZLBuyHouseListener
                     dzlBuildingSell.SellOnServer(paramSellHouse.param1);
 
                     messageSell = "#successfully_sell_house";
+                    DZLLogHouseTrade(sender.GetId(), "sell house", sellPrice, dzlBuildingSell.GetDZLHouse().GetPosition());
                 }
                 GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
                 GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
