@@ -1,4 +1,5 @@
 static void DZLLogMoneyTransaction(string playerId, string type, int oldMoney, int newMoney, int addMoney) {
+    if (!DZLLoggerConfig.Get().logMoneyTransfer) return;
 	string fileName = DAY_Z_LIFE_LOGS + "money_log.csv";
 
 	array<string> head = new array<string>;
@@ -17,6 +18,7 @@ static void DZLLogMoneyTransaction(string playerId, string type, int oldMoney, i
 }
 
 static void DZLLogTraderTransaction(string playerId, string tradeType, string itemType, int price) {
+    if (!DZLLoggerConfig.Get().logTraderTransactions) return;
 	string fileName = DAY_Z_LIFE_LOGS + "trader_log_" + playerId + ".csv";
 
     array<string> head = new array<string>;
@@ -33,6 +35,7 @@ static void DZLLogTraderTransaction(string playerId, string tradeType, string it
 }
 
 static void DZLLogCrafting(string playerId, string craftType, string itemType) {
+    if (!DZLLoggerConfig.Get().logCrafting) return;
 	string fileName = DAY_Z_LIFE_LOGS + "crafting_log.csv";
 
     array<string> head = new array<string>;
@@ -47,6 +50,7 @@ static void DZLLogCrafting(string playerId, string craftType, string itemType) {
 }
 
 static void DZLLogLoadOut(string playerId, string categoryName) {
+    if (!DZLLoggerConfig.Get().logLoadOut) return;
 	string fileName = DAY_Z_LIFE_LOGS + "load_out_log.csv";
 
     array<string> head = new array<string>;
@@ -59,6 +63,7 @@ static void DZLLogLoadOut(string playerId, string categoryName) {
 }
 
 static void DZLLogRaid(string playerId, string info, string target, vector position) {
+    if (!DZLLoggerConfig.Get().logRaid) return;
 	string fileName = DAY_Z_LIFE_LOGS + "raid_log.csv";
 
     array<string> head = new array<string>;
@@ -75,6 +80,7 @@ static void DZLLogRaid(string playerId, string info, string target, vector posit
 }
 
 static void DZLLogStore(string playerId, string info, string target, vector position) {
+    if (!DZLLoggerConfig.Get().logStore) return;
 	string fileName = DAY_Z_LIFE_LOGS + "store_log.csv";
 
     array<string> head = new array<string>;
@@ -91,6 +97,7 @@ static void DZLLogStore(string playerId, string info, string target, vector posi
 }
 
 static void DZLLogArrest(string playerId, string info, string source,int duration) {
+    if (!DZLLoggerConfig.Get().logArrest) return;
 	string fileName = DAY_Z_LIFE_LOGS + "arrest_log.csv";
 
     array<string> head = new array<string>;
@@ -107,6 +114,7 @@ static void DZLLogArrest(string playerId, string info, string source,int duratio
 }
 
 static void DZLLogHouseTrade(string playerId, string info, int price, vector position) {
+    if (!DZLLoggerConfig.Get().logHouseTrade) return;
 	string fileName = DAY_Z_LIFE_LOGS + "houseTrade_log.csv";
 
     array<string> head = new array<string>;
