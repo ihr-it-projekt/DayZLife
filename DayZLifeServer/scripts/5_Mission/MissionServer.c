@@ -21,7 +21,6 @@ modded class MissionServer {
 
             DZLLockedHouses.OnServerStart();
             paycheckTimer.Run(60, paycheckController, "Check", null, true);
-            DZLLicenceCheck.Get();
             builderManager.Create();
         }
     }
