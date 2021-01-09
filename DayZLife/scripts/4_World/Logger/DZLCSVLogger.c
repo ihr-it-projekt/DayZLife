@@ -19,7 +19,7 @@ static void DZLLogMoneyTransaction(string playerId, string type, int oldMoney, i
 
 static void DZLLogTraderTransaction(string playerId, string tradeType, string itemType, int price) {
     if (!DZLLoggerConfig.Get().logTraderTransactions) return;
-	string fileName = "trader_log_" + playerId + ".csv";
+	string fileName = "trader_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("tradeType");
