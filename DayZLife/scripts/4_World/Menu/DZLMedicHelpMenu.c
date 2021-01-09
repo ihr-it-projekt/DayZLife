@@ -25,11 +25,6 @@ class DZLMedicHelpMenu : DZLBaseMenu
         return layoutRoot;
     }
 
-    override void OnShow() {
-        super.OnShow();
-        healButton.Show(!player.hasRequestForMedicClient);
-    }
-
     override bool OnClick(Widget w, int x, int y, int button) {
         if (super.OnClick(w, x, y, button)) return true;
 
