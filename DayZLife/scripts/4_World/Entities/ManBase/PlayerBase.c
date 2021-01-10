@@ -528,19 +528,17 @@ modded class PlayerBase
 	}
 
 	void HealByHospital() {
-		healthTimer.Stop();
-	    willHeal = true;
-	    showMedicHelpMenu = false;
-        freezeBlood = false;
-        freezeHealth = false;
-        freezeShock = false;
-        SetHealth(100);
-        SetHealth("", "Shock", 100);
-        SetHealth("", "Blood", 5000);
+		HealAll();
+
+        SetHealth( "GlobalHealth", "Health", GetMaxHealth( "GlobalHealth", "Health" ) );
+        SetHealth( "GlobalHealth", "Blood", GetMaxHealth( "GlobalHealth", "Blood" ) );
+        SetHealth( "GlobalHealth", "Shock", GetMaxHealth( "GlobalHealth", "Shock" ) );
+		
         DZLBaseSpawnPoint point = GetConfig().medicConfig.hospitalSpawnPoints.GetRandomElement();
         if (m_BleedingManagerServer) {
             m_BleedingManagerServer.RemoveAllSources();
         }
+		
         GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceHospitalHeal * -1);
 
         //Double check to not enter splinted state if legs are not broken
@@ -556,22 +554,31 @@ modded class PlayerBase
         GetInventory().CreateInInventory("Splint");
         SetPosition(point.point);
         SetOrientation(point.orientation);
-        SyncMedicPlayer();
-        resetHealTimer.Run(10, this, "ResetHeal");
 	}
 
 	void HealByMedic() {
+		HealAll();
+		SetHealth( "GlobalHealth", "Health", GetMaxHealth( "GlobalHealth", "Health" ) / 2);
+        SetHealth( "GlobalHealth", "Blood", GetMaxHealth( "GlobalHealth", "Blood" ) / 2 );
+        SetHealth( "GlobalHealth", "Shock", GetMaxHealth( "GlobalHealth", "Shock" ) / 2);
+    }
+	
+	void HealAll() {
+		healthTimer.Stop();
+	    willHeal = true;
+	    showMedicHelpMenu = false;
+        freezeBlood = false;
+        freezeHealth = false;
+        freezeShock = false;
+
 		healthTimer.Stop();
 	    willHeal = true;
 		showMedicHelpMenu = false;
         freezeHealth = false;
         freezeShock = false;
         freezeBlood = false;
-        SetHealth("", "Shock", 50);
-        SetHealth("", "Blood", 2500);
-        SetHealth(50);
-        SyncMedicPlayer();
-        resetHealTimer.Run(10, this, "ResetHeal");
+		resetHealTimer.Run(10, this, "ResetHeal");
+		SyncMedicPlayer();
 	}
 
 	void KillPlayer() {
