@@ -15,6 +15,7 @@ class DZLPlayer
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
 	ref TStringArray licenceIds;
+	private string version = "1";
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -30,6 +31,13 @@ class DZLPlayer
 			
             Save();
         }
+		
+		if (!version) {
+			arrestReason = "";
+			version = "1";
+			Save(); 
+		}
+		
     }
 
     bool IsPlayerInArrest() {
