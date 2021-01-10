@@ -681,6 +681,19 @@ modded class PlayerBase
 
         return itemsArray;
     }
+	
+	override void RemoveAllItems() {
+		array<EntityAI> itemsArray = new array<EntityAI>;
+		ItemBase item;
+		GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, itemsArray);
+		
+		for (int i = 0; i < itemsArray.Count(); i++) {
+			Class.CastTo(item, itemsArray.Get(i));
+			if (item && !item.IsInherited(SurvivorBase)) {
+				GetGame().ObjectDelete(item);
+			}	
+		}
+	}
 
     private DZLConfig GetConfig() {
         if (!config && GetGame().IsServer()) {

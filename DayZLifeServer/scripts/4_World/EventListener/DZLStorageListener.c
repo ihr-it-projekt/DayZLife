@@ -56,7 +56,7 @@ class DZLStorageListener
                 if (carSpawned) {
                     storage.RemoveItem(storedCar);
                     GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storage), true, sender);
-                    DZLLogStore(sender.GetId(), "store out", carSpawned.GetType(), storagePosition.position);
+                    DZLLogStore(sender.GetId(), "store out", carSpawned.GetType(), storagePositionCar.position);
                     DZLSendMessage(sender, "#car_was_parked_out");
                 }
             }
