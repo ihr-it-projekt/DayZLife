@@ -533,6 +533,7 @@ modded class PlayerBase
     }
 
 	void HealByHospital() {
+		healthTimer.Stop();
 	    willHeal = true;
 	    showMedicHelpMenu = false;
         freezeBlood = false;
@@ -561,10 +562,11 @@ modded class PlayerBase
         SetPosition(point.point);
         SetOrientation(point.orientation);
         SyncMedicPlayer();
-        resetHealTimer.Run(15, this, "ResetHeal");
+        resetHealTimer.Run(10, this, "ResetHeal");
 	}
 
 	void HealByMedic() {
+		healthTimer.Stop();
 	    willHeal = true;
 		showMedicHelpMenu = false;
         freezeHealth = false;
@@ -574,10 +576,11 @@ modded class PlayerBase
         SetHealth("", "Blood", 2500);
         SetHealth("", "Health", 50);
         SyncMedicPlayer();
-        resetHealTimer.Run(15, this, "ResetHeal");
+        resetHealTimer.Run(10, this, "ResetHeal");
 	}
 
 	void KillPlayer() {
+		healthTimer.Stop();
 	    willDie = true;
 	    SetCanBeDestroyed(true);
 	    if (GetGame().IsServer()) {
@@ -588,9 +591,11 @@ modded class PlayerBase
         freezeShock = false;
 	}
 
-	void ResetHeal() {
+	void ResetHeal(bool isHospital) {
+		showMedicHelpMenu = false;
 	    willHeal = false;
 	    resetHealTimer.Stop();
+		healthTimer.Run(5, this, "CheckHealth", null, true);
 	}
 
 	void CheckHealth() {
