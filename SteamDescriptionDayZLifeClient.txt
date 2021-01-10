@@ -7,58 +7,68 @@ Attention: This Mod needs also a Serverside Mod and is published here: https://s
 [code]
 Feature list
 
-- Supported language English, German, Chinese, Chinese Simple, more will come
-- Spawn Menu with Job chose
-- own Moneysystem
+- Supported languages: English, German, Chinese, Chinese Simple, more will come
+- Spawn Menu with Job choice
+- own Money-System
 - Cars
     - Key System
-    - last driver can sale cars
-    - every car has a one owner
-    - every player who have access to car can see the owner of the car
+    - last driver can sell cars
+    - every car has one owner
+    - every player, who has access to car, can see the owner of the car
     - configurable no car collision damage
-    - can be parked in virtual garage
+    - can be parked in a virtual garage
     - can be raided
 
 - money can be stolen from other and dead players
 - bank system
-    - pay in/pay out
+    - pay in / pay out
     - transfer money over bank
     - transfer money directly to players
     - time and player count controlled raids
     - bank can be raided
-    - if player dies, money will stay at the dead character, money at bank will not touched
-- own Tradersystem
+    - if a player dies, the money will stay at the dead character. The money at bank will not be touched
+- own trader-system
     - several trader locations
-    - trader can be configured that they can only used by a job group Cop/Medic/Civil or by all
+    - trader can be configured, so that they can only used by a job group Cop/Medic/Civil or by all
 - Players can buy default DayZ Buildings
 - Player can upgrade houses with extensions
     - Doors can be looked
     - Storage
-    - Alarm systems in different levels
+    - Alarm systems with different levels
     - House access control system (Give other Players Access to your house)
     - Houses can be raid by other players
     - ... there will come more
-- legal and Illegal harvest  of goods
+- legal and illegal harvest of resources.
     - coal
     - iron
     - copper
     - cocaine
     - stones
     - apple
-- process harvest items with different licences
-- implemented Almanac to figure out what you need/what you can do and how, short key to open is STRGL + STRGR
+- (some) resources can be further proccessed into goods.
+- License-System
+    - Players require a license to harvest certain resources (can be changed)
+    - Players require a license for the further processing of resources (can be changed)
+- implemented Almanac to figure out what you need/what you can do and how, short key to open is RCTRL and LCTRL or LCTRL and 1
 - display online players per role in Almanac
-- Admins can
+- Admins can (There are Panels in Almanac)
     - in game delete/reset player data related to our mod
     - can give players the role "Cop"
+    - can give players the role "Medic"
     - can give players money to player or bank
-- Arrestsystem
-    - Prisoners must stay in a range, to reduce his arrest time
-- Player can get a Paycheck, role related configurable
+    - can see details of players in game
+    - many logs to make the admin life easy
+- Arrest-system
+    - Prisoners must stay in range of a specific point (can be manually set in the config), to reduce his arrest time
+- Player can get a paycheck, role related configurable
+- When before a player dies, he got a menu to decide for heal by medic, heal by hospital or die.
 - Jobs
     - Medic
         - can raid police stations and prisons
         - Spawn with Medic Equipment
+        - can heal other players
+        - have a panel in almanac where they can see player emergency
+        - get a message, when there is a new emergency
     - Civil
         - can raid police stations and prisons
         - Spawn with Civil Equipment
