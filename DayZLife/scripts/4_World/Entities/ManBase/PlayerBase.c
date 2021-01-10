@@ -575,10 +575,10 @@ modded class PlayerBase
 	}
 
 	void KillPlayer() {
-		healthTimer.Stop();
-	    willDie = true;
+	 	willDie = true;
 	    SetCanBeDestroyed(true);
 	    if (GetGame().IsServer()) {
+			healthTimer.Stop();
             SetHealth(0);
 	    }
         freezeHealth = false;
@@ -594,7 +594,7 @@ modded class PlayerBase
 	}
 
 	void CheckHealth() {
-	    if (GetGame().IsServer()) {
+	    if (GetGame().IsServer() && !healthTimer.IsRunning()) {
 	        bool showMedicHelpMenuBefore = showMedicHelpMenu;
             if(!willDie && !willHeal) {
                 if (GetHealth("", "Health") <= 5) {
