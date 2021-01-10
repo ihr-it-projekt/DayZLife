@@ -502,10 +502,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 
 				foreach(DZLEscapedPlayer escapedPlayer: escapedPlayersParam) {
 					int indexOfRow = escapedPlayers.AddItem(escapedPlayer.name, escapedPlayer.player, 0);
+					escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestReason, escapedPlayer.player, 2);
 					if (player.dzlPlayer.IsActiveAsCop()) {
-						escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 1);
+						escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
 					} else {
-						escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 1);
+						escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 2);
 					}
 					
 				}

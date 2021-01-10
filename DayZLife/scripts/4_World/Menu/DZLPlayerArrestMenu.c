@@ -3,6 +3,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu
     private PlayerBase receiver;
 	private ButtonWidget setArrest;
 	private EditBoxWidget inputArrest;
+	private EditBoxWidget inputArrestReason;
 	private TextWidget prisonerName;
 
     void DZLPlayerArrestMenu() {
@@ -23,6 +24,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu
 		
 		setArrest = creator.GetButtonWidget("giveArrestButton");
 		inputArrest = creator.GetEditBoxWidget("input_arrest");
+		inputArrestReason = creator.GetEditBoxWidget("arrest_reason");
 		prisonerName = creator.GetTextWidget("prisonerName");
 		return layoutRoot;
     }
@@ -38,6 +40,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu
         switch(w){
             case setArrest:
             	int arrestTime = inputArrest.GetText().ToInt();
+            	string arrestReason = inputArrestReason.GetText();
 		
 				if (arrestTime < 0) {
 				    player.DisplayMessage("#error_arrest_time_must_be_positiv_or_null");
@@ -50,7 +53,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu
 				}
 				
 				if (arrestTime != 0) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_ARREST_PLAYER, new Param3<PlayerBase, PlayerBase, int>(player, receiver, arrestTime), true);
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_ARREST_PLAYER, new Param4<PlayerBase, PlayerBase, int, string>(player, receiver, arrestTime, arrestReason), true);
                     inputArrest.SetText("");
 		        } else {
 		            player.DisplayMessage("#error_arrest_time_is_not_a_int");

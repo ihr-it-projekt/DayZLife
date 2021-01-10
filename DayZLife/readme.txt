@@ -1,3 +1,7 @@
+Bugs:
+- dublizieren von itmes bei der Lizensverabeitung
+- duplizieren von playern
+
 
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
@@ -35,7 +39,6 @@
 Führerschein
 
 - Journalistenrolle
-- Fahrzeuge in Garage einstoren
 - Polizei Globalnachrichten senden
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
@@ -74,22 +77,10 @@ Führerschein
             - Zugriff auf Fahndungslisten
 
         - Medic
-            - Wiederbelebung
-                - dafür Geld an Medic
-                - nur mit Item die der Medic hat (Defrie)
-            - Spiele kann auswählen zwischen
-                - medic rufen
-                    - Geldbetrag eingeben
-                - Sterben
-                - Krankenhaus
+
             - Heilung
-                - 50 % vor Ort
                 - 100 % mit Medic am Krankenhaus
                 - 75 % nur Krankenhaus
-            - Spieler kann medic mit Geldangebot rufen
-            - Spieler muss feedback bekommen das ein medic kommt
-            - medic braucht mini map wo Spieler angezeigt wird
-            - medic kann Auftrag im Almanc annehmen
             - Einsatzcentrale (Krankenhäuse) nur durch medics betretbar
         - Jäger
             - Tiere jagen

@@ -592,7 +592,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#escapee_player;70;#ArrestTime;30"
+           colums "#escapee_player;40;#arrestReason;30;#ArrestTime;30"
            lines 20
           }
          }

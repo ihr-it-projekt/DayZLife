@@ -11,6 +11,7 @@ class DZLPlayer
 	int onlineTimeMedic = 0;
 	int onlineTimeCop = 0;
 	int arrestTimeInMinutes = 0;
+	string arrestReason = "";
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
 	ref TStringArray licenceIds;
@@ -40,8 +41,9 @@ class DZLPlayer
 		Save();
 	}
 
-    void ArrestPlayer(int time) {
+    void ArrestPlayer(string reason, int time) {
         arrestTimeInMinutes = time;
+		arrestReason = reason;
 		Save();
     }
 

@@ -22,11 +22,12 @@ class DZLPlayerArrestListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_ARREST_PLAYER) {
-            autoptr Param3<PlayerBase, PlayerBase, int> paramArrestPlayer;
+            autoptr Param4<PlayerBase, PlayerBase, int, string> paramArrestPlayer;
             if (ctx.Read(paramArrestPlayer)){
                 PlayerBase cop = paramArrestPlayer.param1;
                 PlayerBase prisoner = paramArrestPlayer.param2;
                 int arrestTime = paramArrestPlayer.param3;
+                string arrestReason = paramArrestPlayer.param4;
 				
 				DZLPlayer copDzl = DZLDatabaseLayer.Get().GetPlayer(cop.GetIdentity().GetId());
 				DZLPlayer prisonerDzl = DZLDatabaseLayer.Get().GetPlayer(prisoner.GetIdentity().GetId());
@@ -34,7 +35,7 @@ class DZLPlayerArrestListener
 				if(!copDzl.IsActiveAsCop()) return;
 				if(prisonerDzl.IsActiveAsCop()) return;
 				
-				prisonerDzl.ArrestPlayer(arrestTime);
+				prisonerDzl.ArrestPlayer(arrestReason, arrestTime);
 
 				ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
 
@@ -91,7 +92,7 @@ class DZLPlayerArrestListener
 				    }
 				}
 				if (!isInPrison) {
-				    escapeePlayers.Insert(new DZLEscapedPlayer(DayZPlayer.Cast(player), dzlPlayer.arrestTimeInMinutes));
+				    escapeePlayers.Insert(new DZLEscapedPlayer(DayZPlayer.Cast(player), dzlPlayer.arrestReason, dzlPlayer.arrestTimeInMinutes));
 					continue;
 				}
 								
