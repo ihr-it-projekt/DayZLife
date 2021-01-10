@@ -96,18 +96,16 @@ static void DZLLogStore(string playerId, string info, string target, vector posi
     DZLCSVLog(playerId, fileName, head, data);
 }
 
-static void DZLLogArrest(string playerId, string info, string source,int duration) {
+static void DZLLogArrest(string playerId, string info, int duration) {
     if (!DZLLoggerConfig.Get().logArrest) return;
 	string fileName = "arrest_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("info");
-    head.Insert("source");
     head.Insert("duration");
 
     array<string> data = new array<string>;
     data.Insert(info);
-    data.Insert(source);
     data.Insert(duration.ToString());
 
     DZLCSVLog(playerId, fileName, head, data);
