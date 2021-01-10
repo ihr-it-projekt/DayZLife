@@ -539,7 +539,7 @@ modded class PlayerBase
         freezeBlood = false;
         freezeHealth = false;
         freezeShock = false;
-        SetHealth("", "Health", 100);
+        SetHealth(100);
         SetHealth("", "Shock", 100);
         SetHealth("", "Blood", 5000);
         DZLBaseSpawnPoint point = GetConfig().medicConfig.hospitalSpawnPoints.GetRandomElement();
@@ -574,7 +574,7 @@ modded class PlayerBase
         freezeBlood = false;
         SetHealth("", "Shock", 50);
         SetHealth("", "Blood", 2500);
-        SetHealth("", "Health", 50);
+        SetHealth(50);
         SyncMedicPlayer();
         resetHealTimer.Run(10, this, "ResetHeal");
 	}
