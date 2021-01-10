@@ -627,10 +627,9 @@ modded class PlayerBase
                     SetHealth("", "Health",5);
                     showMedicHelpMenu = true;
                 }
-            }
-			
-            if (showMedicHelpMenu != showMedicHelpMenuBefore) {
-                SyncMedicPlayer();
+                if (showMedicHelpMenu != showMedicHelpMenuBefore) {
+                    SyncMedicPlayer();
+                }
             }
         }
 	}

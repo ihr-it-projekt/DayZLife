@@ -1,5 +1,4 @@
 Bugs:
-- dublizieren von itmes bei der Lizensverabeitung
 - duplizieren von playern
 
 
