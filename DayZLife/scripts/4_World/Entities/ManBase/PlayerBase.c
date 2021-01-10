@@ -594,7 +594,7 @@ modded class PlayerBase
 	}
 
 	void CheckHealth() {
-	    if (GetGame().IsServer() && !healthTimer.IsRunning()) {
+	    if (GetGame().IsServer() && !resetHealTimer.IsRunning()) {
 	        bool showMedicHelpMenuBefore = showMedicHelpMenu;
             if(!willDie && !willHeal) {
                 if (GetHealth("", "Health") <= 5) {
