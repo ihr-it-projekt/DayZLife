@@ -12,7 +12,7 @@ class DZLMedicHelpListener
         if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
             autoptr Param1<PlayerBase>paramKill;
             if (ctx.Read(paramKill)){
-                paramKill.param1.KillPlayer();
+                //paramKill.param1.KillPlayer();
                 DeleteMedicRequest(sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
@@ -26,7 +26,7 @@ class DZLMedicHelpListener
             autoptr Param1<PlayerBase>paramHealHospital;
             if (ctx.Read(paramHealHospital)){
 				PlayerBase player = paramHealHospital.param1;
-                player.HealByHospital();
+               // player.HealByHospital();
                 DeleteMedicRequest(sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS) {

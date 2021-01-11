@@ -124,7 +124,7 @@ class DZLPlayerEventListener
             } else if(rpc_type == DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER) {
                 Param1<bool> paramDzlMedicPlayerSync
                 if (ctx.Read(paramDzlMedicPlayerSync) && paramDzlMedicPlayerSync.param1){
-                     player.ToggleHealMenu(paramDzlMedicPlayerSync.param1);
+                     //player.ToggleHealMenu(paramDzlMedicPlayerSync.param1);
                 }
             } else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 player.RequestUpdateDZLPlayer();

@@ -64,7 +64,7 @@ modded class MissionGameplay
 					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
                 if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
-                    player.ShowHealMenu();
+                    //player.ShowHealMenu();
                 }
 
                 break;
@@ -76,7 +76,7 @@ modded class MissionGameplay
 			case KeyCode.KC_2:
 				holdTow = true;
 				if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
-					player.ShowHealMenu();
+					//player.ShowHealMenu();
                 }
 
 

@@ -12,6 +12,6 @@ modded class ActionDefibrilateBase
 	
 	override void DefibrillateServer(PlayerBase player, Defibrillator defib) {
 		super.DefibrillateServer(player, defib);
-		player.HealByMedic();
+		//player.HealByMedic();
 	}
 }

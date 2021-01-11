@@ -21,7 +21,7 @@ modded class InGameMenu
 	    DebugMessageDZL("GameRespawn");
 	    PlayerBase player = PlayerBaseHelper.GetPlayer();
 	    player.SetAllowDamage(true);
-	    player.KillPlayer();
+	   // player.KillPlayer();
 	    super.GameRespawn(random);
 	}
 };
