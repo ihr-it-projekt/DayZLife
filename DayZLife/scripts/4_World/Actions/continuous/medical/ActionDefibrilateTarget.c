@@ -8,8 +8,9 @@ modded class ActionDefibrilateTarget
 		PlayerIdentity targetIdent = target.GetIdentity();
 		string targetId = targetIdent.GetId();
 
+        HealByMedic(target);
+
 		if(target && emergencies.HasEmergency(targetId)) {
-		    HealByMedic(target);
 		    emergencies.Remove(targetId);
 		    DZLDatabaseLayer.Get().GetPlayer(targetId).AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal * -1);
 		    DZLDatabaseLayer.Get().GetPlayer(action_data.m_Player.GetIdentity().GetId()).AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal);
