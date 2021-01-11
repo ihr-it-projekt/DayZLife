@@ -21,8 +21,6 @@ modded class PlayerBase
 	ref DZLCarMenu carMenu;
 	ref DZLCarStorageMenu carStorageMenu;
 	ref DZLMedicHelpMenu healMenu;
-	ref Timer healthTimer;
-	ref Timer resetHealTimer;
 
 	bool willHeal = false;
 	bool IsDZLBank = false;
@@ -34,15 +32,7 @@ modded class PlayerBase
 	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
 	bool isPolice = false;
-	bool willDie = false;
-	bool isHealedByMedic = false;
-	bool willHealByHospital = false;
-	bool willHospital = false;
-	bool showMedicHelpMenu = false;
-	bool hasRequestForMedicClient = false;
-	bool freezeBlood = false;
-	bool freezeShock = false;
-	bool freezeHealth = false;
+	bool medicHelpMenuWasShown = false;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -59,12 +49,8 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsLoadOut");
         RegisterNetSyncVariableBool("isPolice");
         RegisterNetSyncVariableBool("IsGarage");
-        RegisterNetSyncVariableBool("showMedicHelpMenu");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-//		SetCanBeDestroyed(false);
-		healthTimer = new Timer;
-		resetHealTimer = new Timer;
-		//healthTimer.Run(5, this, "CheckHealth", null, true);
+		SetCanBeDestroyed(false);
 	}
 
 	bool IsDZLPlayer() {
@@ -526,139 +512,7 @@ modded class PlayerBase
 			ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
 		}
 	}
-//
-//	void HealByHospital() {
-//		HealAll();
-//
-//        SetHealth( "GlobalHealth", "Health", GetMaxHealth( "GlobalHealth", "Health" ) );
-//        SetHealth( "GlobalHealth", "Blood", GetMaxHealth( "GlobalHealth", "Blood" ) );
-//        SetHealth( "GlobalHealth", "Shock", GetMaxHealth( "GlobalHealth", "Shock" ) );
-//
-//        DZLBaseSpawnPoint point = GetConfig().medicConfig.hospitalSpawnPoints.GetRandomElement();
-//        if (m_BleedingManagerServer) {
-//            m_BleedingManagerServer.RemoveAllSources();
-//        }
-//
-//        GetDZLPlayer().AddMoneyToPlayerBank(GetConfig().medicConfig.priceHospitalHeal * -1);
-//
-//        //Double check to not enter splinted state if legs are not broken
-//        if (m_BrokenLegState == eBrokenLegs.BROKEN_LEGS) {
-//            ItemBase splint = ItemBase.Cast(GetInventory().CreateInInventory("Splint"));
-//            ApplySplint();
-//            m_BrokenLegState = eBrokenLegs.BROKEN_LEGS_SPLINT;
-//            ItemBase new_item = ItemBase.Cast(GetInventory().CreateInInventory("Splint_Applied"));
-//            MiscGameplayFunctions.TransferItemProperties(splint, new_item, true, false, true);
-//            splint.Delete();
-//        }
-//
-//        GetInventory().CreateInInventory("Splint");
-//        SetPosition(point.point);
-//        SetOrientation(point.orientation);
-//	}
 
-//	void HealByMedic() {
-//		HealAll();
-//		SetHealth( "GlobalHealth", "Health", GetMaxHealth( "GlobalHealth", "Health" ) / 2);
-//        SetHealth( "GlobalHealth", "Blood", GetMaxHealth( "GlobalHealth", "Blood" ) / 2 );
-//        SetHealth( "GlobalHealth", "Shock", GetMaxHealth( "GlobalHealth", "Shock" ) / 2);
-//    }
-//
-//	void HealAll() {
-//		healthTimer.Stop();
-//	    willHeal = true;
-//		showMedicHelpMenu = false;
-//        freezeHealth = false;
-//        freezeShock = false;
-//        freezeBlood = false;
-//		resetHealTimer.Run(10, this, "ResetHeal");
-//		SyncMedicPlayer();
-//	}
-//
-//	void KillPlayer() {
-//	 	willDie = true;
-//	    SetCanBeDestroyed(true);
-//	    if (GetGame().IsServer()) {
-//			healthTimer.Stop();
-//            SetHealth(0);
-//	    }
-//        freezeHealth = false;
-//        freezeBlood = false;
-//        freezeShock = false;
-//	}
-//
-//	void ResetHeal(bool isHospital) {
-//		showMedicHelpMenu = false;
-//	    willHeal = false;
-//	    resetHealTimer.Stop();
-//		//healthTimer.Run(5, this, "CheckHealth", null, true);
-//	}
-
-//	void CheckHealth() {
-//	    if (GetGame().IsServer() && !resetHealTimer.IsRunning()) {
-//	        bool showMedicHelpMenuBefore = showMedicHelpMenu;
-//            if(!willDie && !willHeal) {
-//                if (GetHealth("", "Health") <= 5) {
-//					showMedicHelpMenu = true;
-//                    SetHealth("", "Health", 5);
-//                    freezeHealth = true;
-//                    SetHealth("", "Shock", 5);
-//                    freezeShock = true;
-//                }
-//
-//				if (GetHealth("", "Blood") <= 5) {
-//					showMedicHelpMenu = true;
-//                    SetHealth("", "Blood", 5);
-//                    freezeBlood = true;
-//                    SetHealth("", "Shock", 5);
-//                    freezeShock = true;
-//                }
-//
-//                if (freezeShock && GetHealth("", "Shock") > 5) {
-//                    showMedicHelpMenu = true;
-//                    SetHealth("", "Shock", 5);
-//                }
-//
-//                if (freezeBlood && GetHealth("", "Blood") > 5) {
-//                    SetHealth("", "Blood", 5);
-//                    showMedicHelpMenu = true;
-//                }
-//
-//                if (freezeHealth && GetHealth("", "Health") > 5) {
-//                    SetHealth("", "Health",5);
-//                    showMedicHelpMenu = true;
-//                }
-//                if (showMedicHelpMenu != showMedicHelpMenuBefore) {
-//                    SyncMedicPlayer();
-//                }
-//            }
-//        }
-//	}
-	
-//	void SyncMedicPlayer() {
-//		GetGame().RPCSingleParam(this, DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER, new Param1<bool>(showMedicHelpMenu), true, GetIdentity());
-//	}
-//
-//	void ToggleHealMenu(bool showMedicHelpMenuExt) {
-//	    this.showMedicHelpMenu = showMedicHelpMenuExt;
-//	    ShowHealMenu();
-//	}
-//
-//	void ShowHealMenu() {
-//        if (!healMenu && showMedicHelpMenu){
-//			if (g_Game.GetUIManager().GetMenu()) {
-//				g_Game.GetUIManager().GetMenu().Close();
-//			}
-//
-//            if (!config || !config.medicConfig) {
-//			    GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(ToggleHealMenu, 2, false, showMedicHelpMenu);
-//            } else {
-//                GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(ToggleHealMenu);
-//				GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
-//			}
-//        } else if (!showMedicHelpMenu && healMenu) {
-//            healMenu.OnHide();
-//        }
-//	}
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
         if(item.GetLowerCaseType() == ItemSearchType) {
@@ -692,6 +546,27 @@ modded class PlayerBase
 				GetGame().ObjectDelete(item);
 			}	
 		}
+	}
+	
+	void ShowHealMenu(bool showMedicHelpMenu) {
+        if (GetGame().IsClient()){
+            if (!healMenu && showMedicHelpMenu && medicHelpMenuWasShown == false){
+                if (g_Game.GetUIManager().GetMenu()) {
+                    g_Game.GetUIManager().GetMenu().Close();
+                }
+
+                if (!config || !config.medicConfig) {
+                    GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(ShowHealMenu, 2, false, showMedicHelpMenu);
+                } else if (medicHelpMenuWasShown == false) {
+                    GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(ShowHealMenu);
+                    GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
+                    medicHelpMenuWasShown = true;
+                }
+            }
+            if (showMedicHelpMenu == false) {
+                medicHelpMenuWasShown = false;
+            }
+        }
 	}
 
     private DZLConfig GetConfig() {

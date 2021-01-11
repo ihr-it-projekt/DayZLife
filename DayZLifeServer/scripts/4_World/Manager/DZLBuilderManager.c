@@ -1,6 +1,5 @@
 class DZLBuilderManager
 {
-	private ref DZLPayCheckController paycheckController;
 	private ref DZLBankingLocationBuilder bankingBuilder;
 	private ref DZLLicenceLocationBuilder licenceBuilder;
 	private ref DZLTraderLocationBuilder traderBuilder;

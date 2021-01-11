@@ -1,6 +1,9 @@
 class DZLMedicHelpListener
 {
+	DZLMedicConfig config;
+	
     void DZLMedicHelpListener() {
+		config = DZLConfig.Get().medicConfig;
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
 
@@ -10,25 +13,15 @@ class DZLMedicHelpListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
-            autoptr Param1<PlayerBase>paramKill;
-            if (ctx.Read(paramKill)){
-                //paramKill.param1.KillPlayer();
-                DeleteMedicRequest(sender);
-            }
+           KillPlayer(PlayerBase.Cast(target));
+           DeleteMedicRequest(sender);
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
-            autoptr Param1<PlayerBase>paramCallMedic;
-            if (ctx.Read(paramCallMedic)){
-                DZLDatabaseLayer.Get().GetEmergencies().Add(sender.GetId());
-                DZLSendMessage(sender, "#medics_was_called. #Heal_menu_can_be_open_with: 2 + LCTRL");
-				DZLSendMedicMessage("#there_is_a_new_emergency");
-			}
-        } else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
-            autoptr Param1<PlayerBase>paramHealHospital;
-            if (ctx.Read(paramHealHospital)){
-				PlayerBase player = paramHealHospital.param1;
-               // player.HealByHospital();
-                DeleteMedicRequest(sender);
-            }
+            DZLDatabaseLayer.Get().GetEmergencies().Add(sender.GetId());
+            DZLSendMessage(sender, "#medics_was_called. #Heal_menu_can_be_open_with: 2 + LCTRL");
+			DZLSendMedicMessage("#there_is_a_new_emergency");
+		} else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
+           HealByHospital(PlayerBase.Cast(target));
+           DeleteMedicRequest(sender);
         } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS) {
             array<Man> players = new array<Man>;
             GetGame().GetPlayers(players);
@@ -50,4 +43,37 @@ class DZLMedicHelpListener
     private void DeleteMedicRequest(PlayerIdentity sender) {
 		DZLDatabaseLayer.Get().GetEmergencies().Remove(sender.GetId());
 	}
+
+	private void HealByHospital(PlayerBase player) {
+	    if (!player) return;
+        player.SetHealth("GlobalHealth", "Health", player.GetMaxHealth( "GlobalHealth", "Health"));
+        player.SetHealth("GlobalHealth", "Blood", player.GetMaxHealth( "GlobalHealth", "Blood"));
+        player.SetHealth("GlobalHealth", "Shock", player.GetMaxHealth( "GlobalHealth", "Shock"));
+
+        DZLBaseSpawnPoint point = config.hospitalSpawnPoints.GetRandomElement();
+        if (player.m_BleedingManagerServer) {
+            player.m_BleedingManagerServer.RemoveAllSources();
+        }
+
+        DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId()).AddMoneyToPlayerBank(config.priceHospitalHeal * -1);
+
+        if (player.m_BrokenLegState == eBrokenLegs.BROKEN_LEGS) {
+            ItemBase splint = ItemBase.Cast(player.GetInventory().CreateInInventory("Splint"));
+            player.ApplySplint();
+            player.m_BrokenLegState = eBrokenLegs.BROKEN_LEGS_SPLINT;
+            ItemBase new_item = ItemBase.Cast(player.GetInventory().CreateInInventory("Splint_Applied"));
+            MiscGameplayFunctions.TransferItemProperties(splint, new_item, true, false, true);
+            GetGame().ObjectDelete(splint);
+        }
+
+        player.SetPosition(point.point);
+        player.SetOrientation(point.orientation);
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, player.GetIdentity());
+    }
+
+    void KillPlayer(PlayerBase player) {
+        if (!player) return;
+        player.SetCanBeDestroyed(true);
+        player.SetHealth(0);
+    }
 }
