@@ -569,6 +569,13 @@ modded class PlayerBase
         }
 	}
 
+	void ShowHealMenuFromMission() {
+	    if (GetGame().IsClient() && medicHelpMenuWasShown){
+	        medicHelpMenuWasShown = false;
+	        ShowHealMenu(true);
+	    }
+	}
+
     private DZLConfig GetConfig() {
         if (!config && GetGame().IsServer()) {
             config = DZLConfig.Get();
