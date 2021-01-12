@@ -46,9 +46,9 @@ class DZLMedicHelpListener
 
 	private void HealByHospital(PlayerBase player) {
 	    if (!player) return;
-        player.SetHealth("GlobalHealth", "Health", player.GetMaxHealth( "GlobalHealth", "Health"));
-        player.SetHealth("GlobalHealth", "Blood", player.GetMaxHealth( "GlobalHealth", "Blood"));
-        player.SetHealth("GlobalHealth", "Shock", player.GetMaxHealth( "GlobalHealth", "Shock"));
+        player.healByMedic = false;
+        player.healByHospital = true;
+        player.noHealthDecrease = 10;
 
         DZLBaseSpawnPoint point = config.hospitalSpawnPoints.GetRandomElement();
         if (player.m_BleedingManagerServer) {

@@ -34,6 +34,10 @@ modded class PlayerBase
 	bool isPolice = false;
 	bool medicHelpMenuWasShown = false;
 
+	int noHealthDecrease = 0;
+	bool healByMedic = false;
+	bool healByHospital = false;
+
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;
@@ -512,6 +516,11 @@ modded class PlayerBase
 			ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
 		}
 	}
+
+	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
+        //super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
+
+    }
 
 
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
