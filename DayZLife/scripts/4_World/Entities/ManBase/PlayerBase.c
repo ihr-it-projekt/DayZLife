@@ -34,10 +34,6 @@ modded class PlayerBase
 	bool isPolice = false;
 	bool medicHelpMenuWasShown = false;
 
-	int noHealthDecrease = 0;
-	bool healByMedic = false;
-	bool healByHospital = false;
-
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;

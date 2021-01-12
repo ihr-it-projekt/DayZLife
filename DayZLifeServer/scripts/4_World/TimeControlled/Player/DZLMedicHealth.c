@@ -2,8 +2,6 @@ class DZLMedicHealth
 {
 	static void CheckHealth(PlayerBase player, PlayerIdentity playerIdentity) {
 	    bool showMedicHelpMenu = false;
-        player.healByMedic = false;
-        player.healByHospital = false;
         if (100 > player.GetHealth("GlobalHealth", "Blood")) {
             player.SetHealth("GlobalHealth", "Blood", 50);
             player.SetHealth("GlobalHealth", "Shock", 0);
