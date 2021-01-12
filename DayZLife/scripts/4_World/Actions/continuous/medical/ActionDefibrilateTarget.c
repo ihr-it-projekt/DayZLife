@@ -19,8 +19,8 @@ modded class ActionDefibrilateTarget
 	}
 
 	private void HealByMedic(PlayerBase player) {
-        player.SetHealth("GlobalHealth", "Health", player.GetMaxHealth( "GlobalHealth", "Health" ) / 2);
-        player.SetHealth("GlobalHealth", "Blood", player.GetMaxHealth( "GlobalHealth", "Blood" ) / 2);
-        player.SetHealth("GlobalHealth", "Shock",player.GetMaxHealth( "GlobalHealth", "Shock" ) / 2);
+        player.healByMedic = true;
+        player.healByHospital = false;
+        player.noHealthDecrease = 10;
     }
 }

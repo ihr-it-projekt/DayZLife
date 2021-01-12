@@ -2,6 +2,9 @@ Bugs:
 - duplizieren von playern
 
 
+Nur mal so Interesseweise, kann man sich später auch bei seinem Dienst anmelden und abmelden? Oder geht das nur mit Respawn? z.B. als Cop das man zu einem NPC geht und da seinen dienst antreten kann.
+
+
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
 - Cops wollen spielern über liste strafe hinzufügen
