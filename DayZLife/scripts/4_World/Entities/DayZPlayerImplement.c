@@ -9,7 +9,7 @@ modded class DayZPlayerImplement
             if (player && player.GetIdentity() && DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId())) {
                 DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
-                if (dzlPlayer.HasMoney()) {
+                if (dzlPlayer.WillDie() && dzlPlayer.HasMoney()) {
                     player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
                     dzlPlayer.PlayerHasDied();
                 }

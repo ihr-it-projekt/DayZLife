@@ -26,9 +26,15 @@ modded class MissionServer {
 
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		PlayerBase player = super.OnClientNewEvent(identity, pos, ctx);
-		
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, new Param1<string>(""), true, identity);
-		
+
+		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
+
+        if (dzlPlayer.WillDie()) {
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
+        } else if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
+
+        }
+
 		return player;
 	}
 }

@@ -15,7 +15,9 @@ class DZLPlayer
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
 	ref TStringArray licenceIds;
-	private string version = "1";
+	private string version = "2";
+	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
+	private ref DZLStoreItem itemsWhenDie;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -36,6 +38,14 @@ class DZLPlayer
 			arrestReason = "";
 			version = "1";
 			Save(); 
+		}
+
+		if (version == "1") {
+            deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
+            itemsWhenDie = new DZLStoreItem;
+            version = "2";
+
+            Save();
 		}
 		
     }
@@ -185,6 +195,45 @@ class DZLPlayer
     void PlayerHasDied() {
         money = 0;
         Save();
+    }
+
+    void SetDieState() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
+        Save();
+    }
+
+    void SetWillHealByMedic() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
+        Save();
+    }
+
+    void SetWillHealByHospital() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
+        Save();
+    }
+
+    void ResetDeadState() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
+        itemsWhenDie = new DZLStoreItem;
+        Save();
+    }
+
+    void SaveItems(PlayerBase player) {
+        itemsWhenDie = new DZLStoreItem;
+		itemsWhenDie.Init(player, player.GetPosition());
+        Save();
+    }
+
+    bool WillDie() {
+        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_DEAD;
+    }
+
+    bool WillHealByMedic() {
+        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
+    }
+
+    bool WillHealByHospital() {
+        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {

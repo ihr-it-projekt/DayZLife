@@ -111,4 +111,10 @@ static string DAY_Z_LIFE_JOB_COP = "Cop";
 static string DAY_Z_LIFE_JOB_MEDIC = "Medic";
 static string DAY_Z_LIFE_JOB_CIVIL = "Civil";
 
+
+static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE = "none";
+static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_DEAD = "DEAD";
+static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC = "MEDIC";
+static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL = "HOSPITAL";
+
 //static bool DEVELOPER = true;
