@@ -25,16 +25,16 @@ modded class MissionServer {
     }
 
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
-		PlayerBase player = super.OnClientNewEvent(identity, pos, ctx);
-
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
+		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
+		    DZLStoreItem playerData = dzlPlayer.GetPlayerData();
+		    CreateCharacter(identity, playerData.positionOfStore, ctx, playerData.type);
+		} else {
+		    super.OnClientNewEvent(identity, pos, ctx);
+		    GetGame().RPCSingleParam(m_player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
+		}
 
-        if (dzlPlayer.WillDie()) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
-        } else if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
 
-        }
-
-		return player;
+		return m_player;
 	}
 }

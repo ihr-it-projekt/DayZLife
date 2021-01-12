@@ -15,9 +15,9 @@ class DZLPlayer
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
 	ref DZLDate lastLoginDate;
 	ref TStringArray licenceIds;
-	private string version = "2";
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-	private ref DZLStoreItem itemsWhenDie;
+	ref array<ref DZLStoreItem> itemsStore;
+	private string version = "2";
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -42,9 +42,8 @@ class DZLPlayer
 
 		if (version == "1") {
             deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-            itemsWhenDie = new DZLStoreItem;
+            itemsStore = new array<ref DZLStoreItem>;
             version = "2";
-
             Save();
 		}
 		
@@ -214,14 +213,21 @@ class DZLPlayer
 
     void ResetDeadState() {
         deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-        itemsWhenDie = new DZLStoreItem;
+        //itemsWhenDie = null;
         Save();
     }
 
     void SaveItems(PlayerBase player) {
-        itemsWhenDie = new DZLStoreItem;
-		itemsWhenDie.Init(player, player.GetPosition());
+        itemsStore = new array<ref DZLStoreItem>;
+        DZLStoreItem items = new DZLStoreItem;
+		items.Init(player, player.GetPosition());
+
+		itemsStore.Insert(items);
         Save();
+    }
+
+    DZLStoreItem GetPlayerData() {
+        return itemsStore.Get(0);
     }
 
     bool WillDie() {
