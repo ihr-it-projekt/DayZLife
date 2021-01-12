@@ -125,8 +125,6 @@ class DZLPlayerEventListener
                  player.ShowHealMenu(true);
             } else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 player.RequestUpdateDZLPlayer();
-            } else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
-                player.ShowHealMenu(false);
             }
         }
 

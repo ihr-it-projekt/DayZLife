@@ -16,7 +16,6 @@ modded class ActionDefibrilateTarget
 		    dzlPlayer.SetWillHealByMedic();
 		    dzlPlayer.SaveItems(target);
 		    DZLDatabaseLayer.Get().GetPlayer(action_data.m_Player.GetIdentity().GetId()).AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal);
-		    GetGame().RPCSingleParam(target, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, targetIdent);
             target.SetCanBeDestroyed(true);
             target.SetHealth(0);
 		}

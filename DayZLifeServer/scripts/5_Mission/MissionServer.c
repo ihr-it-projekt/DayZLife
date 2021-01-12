@@ -28,12 +28,39 @@ modded class MissionServer {
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
 		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
 		    DZLStoreItem playerData = dzlPlayer.GetPlayerData();
-		    CreateCharacter(identity, playerData.positionOfStore, ctx, playerData.type);
+
+            string type = "SurvivorF_Judy";
+			if (playerData) {
+			    pos = playerData.positionOfStore;
+			    type = playerData.type;
+			}
+
+			if (dzlPlayer.WillHealByHospital()) {
+				DZLBaseSpawnPoint spawnPoint = DZLConfig.Get().medicConfig.hospitalSpawnPoints.GetRandomElement();
+				pos = spawnPoint.point;
+			}
+			
+		    CreateCharacter(identity, pos, ctx, type);
+
+			if (playerData) {
+                array<ref DZLStoreItem> items = playerData.GetAttached();
+                foreach(DZLStoreItem item: items) {
+                    DZLSpawnHelper.Add(m_player, item);
+                }
+			}
+			float factor = 1.0;
+			if (dzlPlayer.WillHealByMedic()) {
+			    factor = 0.5;
+			}
+			m_player.SetHealth01("GlobalHealth", "Health", factor);
+            m_player.SetHealth01("GlobalHealth", "Shock", factor);
+            m_player.SetHealth01("GlobalHealth", "Blood", factor);
 		} else {
 		    super.OnClientNewEvent(identity, pos, ctx);
 		    GetGame().RPCSingleParam(m_player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
 		}
-
+		
+        dzlPlayer.ResetDeadState();
 
 		return m_player;
 	}

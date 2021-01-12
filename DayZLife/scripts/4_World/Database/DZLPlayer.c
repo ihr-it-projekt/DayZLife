@@ -197,7 +197,7 @@ class DZLPlayer
     }
 
     void SetDieState() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_DEAD;
         Save();
     }
 
@@ -213,7 +213,7 @@ class DZLPlayer
 
     void ResetDeadState() {
         deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-        //itemsWhenDie = null;
+        itemsStore = new array<ref DZLStoreItem>;;
         Save();
     }
 
@@ -240,6 +240,10 @@ class DZLPlayer
 
     bool WillHealByHospital() {
         return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
+    }
+
+    bool HasNoDieState() {
+        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {

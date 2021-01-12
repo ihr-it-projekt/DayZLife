@@ -53,13 +53,13 @@ class DZLMedicHelpListener
         dzlPlayer.SetWillHealByHospital();
         dzlPlayer.SaveItems(player);
         KillPlayer(player);
-//        player.SetPosition(point.point);
-//        player.SetOrientation(point.orientation);
-//        GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, player.GetIdentity());
     }
 
     void KillPlayer(PlayerBase player) {
-        if (!player) return;
+        DebugMessageDZL("1");
+		if (!player) return;
+        
+        DebugMessageDZL("2");
         player.SetCanBeDestroyed(true);
         player.SetHealth(0);
     }

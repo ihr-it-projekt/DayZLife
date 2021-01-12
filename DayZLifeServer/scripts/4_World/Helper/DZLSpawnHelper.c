@@ -64,4 +64,53 @@ class DZLSpawnHelper
             GetGame().GetCallQueue( CALL_CATEGORY_SYSTEM ).CallLater( GetGame().UpdatePathgraphRegionByObject, 100, false, game_obj );
         }
     }
+
+    static EntityAI Add(EntityAI parent, DZLStoreItem itemInStock, ref InventoryLocation inventoryLocation = null) {
+        EntityAI item;
+
+        if (!inventoryLocation) {
+            inventoryLocation = new InventoryLocation;
+        }
+
+        if (parent.GetInventory().FindFirstFreeLocationForNewEntity(itemInStock.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+            item = parent.GetInventory().CreateInInventory(itemInStock.type);
+        }
+
+        if(!item) {
+            item = parent.GetInventory().CreateAttachment(itemInStock.type);
+        }
+
+        if(!item) {
+            item = parent.GetInventory().CreateEntityInCargo(itemInStock.type);
+        }
+
+        item.SetHealth(itemInStock.health);
+
+        ItemBase castItem;
+        if(item.IsMagazine()) {
+            Magazine mag = Magazine.Cast(item);
+
+            if (!mag) {
+                return item;
+            }
+            mag.ServerSetAmmoCount(itemInStock.GetQuantity());
+        } else if(item.IsAmmoPile()) {
+            Ammunition_Base ammo = Ammunition_Base.Cast(item);
+
+            if (!ammo) {
+                return item;
+            }
+            ammo.ServerSetAmmoCount(itemInStock.GetQuantity());
+        } else if (ItemBase.CastTo(castItem, item)) {
+            castItem.SetQuantity(itemInStock.GetQuantity(), true, true);
+        }
+
+        if(itemInStock.attached.Count() > 0) {
+            foreach(DZLStoreItem itemAttached: itemInStock.attached) {
+                DZLSpawnHelper.Add(item, itemAttached, inventoryLocation);
+            }
+        }
+
+        return item;
+    }
 }

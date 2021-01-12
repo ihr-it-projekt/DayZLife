@@ -14,9 +14,12 @@ modded class DayZPlayerImplement
                     dzlPlayer.PlayerHasDied();
                 }
             }
+            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLaterByName(GetGame(), "ObjectDelete", 3000, false, new Param1<DayZPlayerImplement>(this));
         }
 		
 		return isDead;
     }
+
+    
 
 }

@@ -26,7 +26,7 @@ class DZLCheckController
                 countRun = 0;
 			}
 
-			DZLMedicHealth.CheckHealth(player, playerIdent);
+			DZLMedicHealth.CheckHealth(dzlPlayer, player, playerIdent);
         }
 	}
 }
