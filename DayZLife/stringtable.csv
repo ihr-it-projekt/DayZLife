@@ -201,3 +201,5 @@ update_medic_list_successful,Medic list updated,Medic list updated,Medicliste wu
 Heal_menu_can_be_open_with, Menu can be open again with, Menu can be open again with, Menü kann geöffnet werden mit,,,,,,,,,,,
 arrestTime, Arrest time, Arrest time, Arrestzeit,,,,,,,,,,,
 arrestReason, Arrest reason,Arrest reason, Arrest Grund,,,,,,,,,,,
+you_will_healed, You will healed,You will healed, Du wirst geheilt
+you_will_healed_and_transport_to_hospital, You will healed and transported to hospital., You will healed and transported to hospital.,Du wirst geheilt und zum Krankenhaus gebracht.,

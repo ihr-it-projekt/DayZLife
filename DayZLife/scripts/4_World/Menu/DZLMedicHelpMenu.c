@@ -34,8 +34,10 @@ class DZLMedicHelpMenu : DZLBaseMenu
         } else if (w == healButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_MEDIC_CALL, null, true);
 			healButton.Show(false);
+			dzlPlayer.SetWillHealByMedic();
 			OnHide();
 		} else if (w == hospitalButton) {
+		    dzlPlayer.SetWillHealByHospital();
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, null, true);
 			OnHide();
 		}

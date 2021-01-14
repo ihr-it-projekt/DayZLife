@@ -57,10 +57,7 @@ class DZLMedicHelpListener
     }
 
     void KillPlayer(PlayerBase player) {
-        DebugMessageDZL("1");
 		if (!player) return;
-        
-        DebugMessageDZL("2");
         player.SetCanBeDestroyed(true);
         player.SetHealth(0);
     }
