@@ -125,8 +125,10 @@ class DZLPlayerEventListener
                  player.ShowHealMenu(true);
             } else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 player.RequestUpdateDZLPlayer();
-            }else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
+            } else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
                 PlayerRespawn();
+            } else if(rpc_type == DAY_Z_LIFE_ALL_DELETE_CHAR) {
+                GetGame().RemoteObjectDelete(target);
             }
         }
 

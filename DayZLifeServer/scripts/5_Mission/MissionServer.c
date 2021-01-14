@@ -49,12 +49,15 @@ modded class MissionServer {
                 }
 			}
 			float factor = 1.0;
+			float factorShock = 1.0;
 			if (dzlPlayer.WillHealByMedic()) {
 			    factor = 0.5;
+			    factorShock = 0;
 			}
 			m_player.SetHealth01("GlobalHealth", "Health", factor);
-            m_player.SetHealth01("GlobalHealth", "Shock", factor);
+            m_player.SetHealth01("GlobalHealth", "Shock", factorShock);
             m_player.SetHealth01("GlobalHealth", "Blood", factor);
+
 		} else {
 		    super.OnClientNewEvent(identity, pos, ctx);
 		    GetGame().RPCSingleParam(m_player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
