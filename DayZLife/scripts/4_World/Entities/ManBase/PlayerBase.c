@@ -513,12 +513,6 @@ modded class PlayerBase
 		}
 	}
 
-	override void EEHitBy(TotalDamageResult damageResult, int damageType, EntityAI source, int component, string dmgZone, string ammo, vector modelPos, float speedCoef) {
-        //super.EEHitBy(damageResult, damageType, source, component, dmgZone, ammo, modelPos, speedCoef);
-
-    }
-
-
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
         if(item.GetLowerCaseType() == ItemSearchType) {
             if(GetGame().IsServer()) {

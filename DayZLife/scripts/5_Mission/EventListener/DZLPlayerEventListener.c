@@ -125,6 +125,8 @@ class DZLPlayerEventListener
                  player.ShowHealMenu(true);
             } else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 player.RequestUpdateDZLPlayer();
+            }else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
+                PlayerRespawn();
             }
         }
 
@@ -146,5 +148,16 @@ class DZLPlayerEventListener
         GetGame().GetUIManager().CloseAll();
         GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), null);
     }
+
+    void PlayerRespawn() {
+   		GetGame().GetMenuDefaultCharacterData(false).SetRandomCharacterForced(true);
+   		GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().RespawnPlayer);
+
+   		MissionGameplay missionGP = MissionGameplay.Cast(GetGame().GetMission());
+   		missionGP.DestroyAllMenus();
+   		missionGP.SetPlayerRespawning(true);
+   		
+		GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().GetMission().Continue);
+   	}
 
 }
