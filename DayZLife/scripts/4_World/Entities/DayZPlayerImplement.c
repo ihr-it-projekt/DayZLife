@@ -14,7 +14,8 @@ modded class DayZPlayerImplement
                     dzlPlayer.PlayerHasDied();
                 }
             }
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_DELETE_CHAR, null, true);
+            player.Delete();
+            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
         }
 		
 		return isDead;
