@@ -15,7 +15,7 @@ modded class DayZPlayerImplement
                 }
 
                 if (dzlPlayer && (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital())) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 1000);
+                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
                 }
             }
         }
