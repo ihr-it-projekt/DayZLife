@@ -14,8 +14,6 @@ modded class DayZPlayerImplement
                     dzlPlayer.PlayerHasDied();
                 }
             }
-            DebugMessageDZL("222");
-            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
         }
 		
 		return isDead;
@@ -33,8 +31,10 @@ modded class DayZPlayerImplement
 			if (dzlPlayer) {
 				if (dzlPlayer.WillHealByMedic()) {
 					text = "#you_will_healed";
+					GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
 				} else if (dzlPlayer.WillHealByHospital()) {
 					text = "#you_will_healed_and_transport_to_hospital";
+					GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
 				}
 			}
 		}
