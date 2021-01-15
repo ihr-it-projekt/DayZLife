@@ -31,10 +31,10 @@ modded class DayZPlayerImplement
 			if (dzlPlayer) {
 				if (dzlPlayer.WillHealByMedic()) {
 					text = "#you_will_healed";
-					Delete();
+					DeleteOnClient();
 				} else if (dzlPlayer.WillHealByHospital()) {
 					text = "#you_will_healed_and_transport_to_hospital";
-					Delete();
+					DeleteOnClient();
 				}
 			}
 		}
