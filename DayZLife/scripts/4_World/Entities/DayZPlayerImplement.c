@@ -16,10 +16,10 @@ modded class DayZPlayerImplement
                 if (dzlPlayer) {
                     if (dzlPlayer.WillHealByMedic()) {
                         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, DZLConfig.Get().medicConfig.deleteDeadBodyTimeWhenHealedByMedic * 1000);
-					    RemoveAllItems();
-                    } else if (dzlPlayer.WillHealByHospital())) {
+					    player.RemoveAllItems();
+                    } else if (dzlPlayer.WillHealByHospital()) {
                         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
-					    RemoveAllItems();
+					    player.RemoveAllItems();
                     }
 
                 }
