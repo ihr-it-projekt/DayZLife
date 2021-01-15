@@ -7,6 +7,9 @@ modded class ActionDefibrilateTarget
 		
 		PlayerBase target = PlayerBase.Cast(action_data.m_Target.GetObject());
 		PlayerIdentity targetIdent = target.GetIdentity();
+
+		if (!targetIdent) return;
+
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(targetIdent.GetId());
 		string targetId = targetIdent.GetId();
 

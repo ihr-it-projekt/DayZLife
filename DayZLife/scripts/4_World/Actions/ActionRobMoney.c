@@ -35,6 +35,8 @@ class ActionRobMoney: ActionInteractBase
         DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
         if (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious()) {
+            if (!targetPlayer && !targetPlayer.GetIdentity()) return;
+
             DZLPlayer dzlTargetPlayer = DZLDatabaseLayer.Get().GetPlayer(targetPlayer.GetIdentity().GetId());
             if (dzlTargetPlayer && dzlTargetPlayer.HasMoney()) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);

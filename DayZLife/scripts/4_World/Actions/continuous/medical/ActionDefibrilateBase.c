@@ -4,14 +4,18 @@ modded class ActionDefibrilateBase
         if (GetGame().IsClient() && player.dzlPlayer && player.dzlPlayer.IsActiveAsMedic()) {
 			return super.ActionCondition(player, target, item);
 		} else if(GetGame().IsServer()) {
+		    PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+            PlayerIdentity targetIdent = targetPlayer.GetIdentity();
+
+            if (!targetIdent) return false;
+		    DZLEmergencies emergencies = DZLDatabaseLayer.Get().GetEmergencies();
+		    string targetId = targetIdent.GetId();
+		    
+		    if (!emergencies.HasEmergency(targetId)) return false;
+
 			return super.ActionCondition(player, target, item);
 		}
 		
 		return false;
     }
-	
-	override void DefibrillateServer(PlayerBase player, Defibrillator defib) {
-		super.DefibrillateServer(player, defib);
-		//player.HealByMedic();
-	}
 }
