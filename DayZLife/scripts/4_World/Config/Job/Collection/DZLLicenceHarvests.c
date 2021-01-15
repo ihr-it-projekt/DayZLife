@@ -324,7 +324,7 @@ class DZLWorkZones
                 itemsThatNeededForHarvest = new array<string>;
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 
-                itemsThatCanHarvest.Insert("DZL_Cocain");
+                itemsThatCanHarvest.Insert("DZL_Cocaine");
 
                 itemsThatNeededForHarvest.Insert("CombatKnife");
                 itemsThatNeededForHarvest.Insert("HuntingKnife");
