@@ -3,21 +3,24 @@ modded class DayZPlayerImplement
     override bool HandleDeath(int pCurrentCommandID) {
 		bool isDead = super.HandleDeath(pCurrentCommandID);
         DebugMessageDZL("is dead" + isDead.ToString());
-        if (isDead && GetGame().IsServer()) {
+        if (GetGame().IsServer()) {
             PlayerBase player = PlayerBase.Cast(this);
 
             if (player && player.GetIdentity() && DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId())) {
                 DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
-                if (dzlPlayer.WillDie() && dzlPlayer.HasMoney()) {
+                if (isDead && dzlPlayer.WillDie() && dzlPlayer.HasMoney()) {
                     player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
                     dzlPlayer.PlayerHasDied();
                 }
-            }
 
-            Delete();
+                if (dzlPlayer && (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital())) {
+                    Delete();
+                }
+            }
         }
-		
+
+
 		return isDead;
     }
 
