@@ -24,6 +24,17 @@ modded class MissionServer {
         }
     }
 
+    override void HandleBody(PlayerBase player) {
+        if (player.IsAlive() && !player.IsRestrained() && !player.IsUnconscious()) {
+            // remove the body
+            player.Delete();
+        } else if (player.IsUnconscious() || player.IsRestrained())  {
+            // kill character
+            player.SetCanBeDestroyed(true);
+            player.SetHealth("", "", 0.0);
+        }
+    }
+
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
 		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
