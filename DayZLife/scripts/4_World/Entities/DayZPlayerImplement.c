@@ -2,7 +2,7 @@ modded class DayZPlayerImplement
 {
     override bool HandleDeath(int pCurrentCommandID) {
 		bool isDead = super.HandleDeath(pCurrentCommandID);
-
+        DebugMessageDZL("is dead" + isDead.ToString());
         if (isDead && GetGame().IsServer()) {
             PlayerBase player = PlayerBase.Cast(this);
 
