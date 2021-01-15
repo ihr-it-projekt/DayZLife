@@ -14,7 +14,7 @@ modded class DayZPlayerImplement
                     dzlPlayer.PlayerHasDied();
                 }
             }
-            player.Delete();
+            DebugMessageDZL("222");
             GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
         }
 		

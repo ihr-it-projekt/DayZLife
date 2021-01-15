@@ -84,6 +84,8 @@ class DZLSpawnHelper
             item = parent.GetInventory().CreateEntityInCargo(itemInStock.type);
         }
 
+        if (!item) return null;
+
         item.SetHealth(itemInStock.health);
 
         ItemBase castItem;
