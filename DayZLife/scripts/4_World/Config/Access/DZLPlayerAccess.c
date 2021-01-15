@@ -25,6 +25,6 @@ class DZLPlayerAccess
     }
 	
     bool CanManageMedic() {
-        return canManageCops;
+        return canManageMedic;
     }
 }

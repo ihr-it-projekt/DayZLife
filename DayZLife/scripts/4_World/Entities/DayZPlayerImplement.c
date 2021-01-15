@@ -2,7 +2,6 @@ modded class DayZPlayerImplement
 {
     override bool HandleDeath(int pCurrentCommandID) {
 		bool isDead = super.HandleDeath(pCurrentCommandID);
-        DebugMessageDZL("is dead" + isDead.ToString());
         if (GetGame().IsServer()) {
             PlayerBase player = PlayerBase.Cast(this);
 
@@ -14,8 +13,15 @@ modded class DayZPlayerImplement
                     dzlPlayer.PlayerHasDied();
                 }
 
-                if (dzlPlayer && (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital())) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
+                if (dzlPlayer) {
+                    if (dzlPlayer.WillHealByMedic()) {
+                        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, DZLConfig.Get().medicConfig.deleteDeadBodyTimeWhenHealedByMedic * 1000);
+					    RemoveAllItems();
+                    } else if (dzlPlayer.WillHealByHospital())) {
+                        GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
+					    RemoveAllItems();
+                    }
+
                 }
             }
         }
