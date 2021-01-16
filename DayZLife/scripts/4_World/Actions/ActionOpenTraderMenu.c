@@ -24,7 +24,7 @@ class ActionOpenTraderMenu: ActionInteractBase
 
 		if (!position) return;
 
-		if (!position.CanOpenWithJob(action_data.m_Player.dzlPlayer.GetActiveJob())) {
+		if (!position.CanOpenWithJob(action_data.m_Player.GetDZLPlayer().GetActiveJob())) {
 		    action_data.m_Player.DisplayMessage("#You_can_only_open_when_you_are_a: " + "#" + position.forJob);
 		    return;
 		}

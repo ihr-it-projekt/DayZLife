@@ -14,11 +14,11 @@ class DZLLoadOutListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_LOAD_OUT) {
-            autoptr Param2<PlayerBase, string> paramLoadOut;
+            autoptr Param1<string> paramLoadOut;
             if (ctx.Read(paramLoadOut)){
-                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
-				PlayerBase player = paramLoadOut.param1;
-				string categoryName = paramLoadOut.param2;
+				PlayerBase player = PlayerBase.Cast(target);
+                DZLPlayer dzlPlayer = player.GetDZLPlayer();
+				string categoryName = paramLoadOut.param1;
                 string message = "#error_not_a_cop";
 
                 if (dzlPlayer.IsCop()) {

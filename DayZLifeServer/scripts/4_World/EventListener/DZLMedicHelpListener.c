@@ -13,7 +13,7 @@ class DZLMedicHelpListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
-            DZLPlayer dzlPlayerKill = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
+            DZLPlayer dzlPlayerKill = PlayerBase.Cast(target).GetDZLPlayer();
 			dzlPlayerKill.SetDieState();
             KillPlayer(PlayerBase.Cast(target));
             DeleteMedicRequest(sender);
@@ -48,7 +48,7 @@ class DZLMedicHelpListener
 
 	private void HealByHospital(PlayerBase player, PlayerIdentity sender) {
 	    if (!player) return;
-        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
         dzlPlayer.AddMoneyToPlayerBank(config.priceHospitalHeal * -1);
         dzlPlayer.SetWillHealByHospital();
         dzlPlayer.SaveItems(player);

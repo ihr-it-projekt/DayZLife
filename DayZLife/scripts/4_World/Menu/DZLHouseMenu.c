@@ -155,8 +155,7 @@ class DZLHouseMenu : DZLBaseMenu
                 if (0 == indexPanel) {
                     if (actualHouseDef) {
                         if (dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
-                            Param2<PlayerBase, ref Building> paramBuyHouse = new Param2<PlayerBase, ref Building>(player, building);
-                            GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING, paramBuyHouse, true);
+                            GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_BUY_BUILDING, new Param1<ref Building>(building), true);
                         } else {
                             player.DisplayMessage("#error_not_enough_money");
                         }

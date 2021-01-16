@@ -34,7 +34,7 @@ class ActionRobMoneyFromDead: ActionInteractBase
     override void OnEndServer(ActionData action_data) {
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
-        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
         if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             targetPlayer.TransferFromDeadPlayer(dzlPlayer);

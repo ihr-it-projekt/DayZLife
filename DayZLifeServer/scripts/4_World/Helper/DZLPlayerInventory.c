@@ -1,7 +1,7 @@
 class DZLPlayerInventory
 {
 	bool PlayerHasEnoughMoney(PlayerBase player, int money) {
-        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
         return dzlPlayer.HasEnoughMoney(money);
     }
 
@@ -9,12 +9,12 @@ class DZLPlayerInventory
         if (!player) {
             return 0;
         }
-        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
         return dzlPlayer.GetMoney();
 	}
 
     void AddMoneyToPlayer(PlayerBase player, float moneyCount) {
-        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
         dzlPlayer.AddMoneyToPlayer(moneyCount);
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, player.GetIdentity());
     }

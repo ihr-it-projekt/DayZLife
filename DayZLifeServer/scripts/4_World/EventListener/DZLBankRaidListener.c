@@ -78,12 +78,12 @@ class DZLBankRaidListener : Managed
         raidTimer.Stop();
 		DZLBank bank = DZLDatabaseLayer.Get().GetBank();
         bank.RaidIsFinished();
-        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(playerWhoStartedRaid.GetIdentity().GetId());
+        DZLPlayer dzlPlayer = playerWhoStartedRaid.GetDZLPlayer();
 
-        int money = bank.PlayerRaidBank(DZLDatabaseLayer.Get().GetPlayer(playerWhoStartedRaid.GetIdentity().GetId()), config.percentOfMoneyWhenRaid);
+        int money = bank.PlayerRaidBank(dzlPlayer, config.percentOfMoneyWhenRaid);
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
         DZLLogRaid(playerWhoStartedRaid.GetIdentity().GetId(), "bank raid finished", "bank", playerWhoStartedRaid.GetPosition());
-		bank = DZLDatabaseLayer.Get().GetBank();
+
         GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
         playerWhoStartedRaid = null;
         array<Man> _players = new array<Man>;

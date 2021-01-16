@@ -58,11 +58,11 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 		jobSelection.ClearAll();
 		jobSelection.AddItem("#Civ");
 
-		if (player.dzlPlayer.IsMedic()) {
+		if (player.GetDZLPlayer().IsMedic()) {
 		    medicIndex = jobSelection.AddItem("#Medic");
 		}
 
-		if (player.dzlPlayer.IsCop()) {
+		if (player.GetDZLPlayer().IsCop()) {
 		    copIndex = jobSelection.AddItem("#Cop");
 		}
 
@@ -125,7 +125,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu
     }
 
     void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param3<string, PlayerBase, string>(point.id, player, jobId), true);
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param2<string, string>(point.id, jobId), true);
     }
 	
 	private void UpdateSpawnPoints() {

@@ -18,15 +18,12 @@ class DZLCheckController
 			if (!player) continue;
 			PlayerIdentity playerIdent = player.GetIdentity();
 
-            DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(playerIdent.GetId());
-			if(!dzlPlayer) continue;
-
-			if (countRun == 60) {
-                DZLPayCheck.Check(dzlPlayer, player, config.jobConfig.paycheck);
+			if (countRun == 30) {
+                DZLPayCheck.Check(player, config.jobConfig.paycheck);
                 countRun = 0;
 			}
 
-			DZLMedicHealth.CheckHealth(dzlPlayer, player, playerIdent);
+			DZLMedicHealth.CheckHealth(player, playerIdent);
         }
 	}
 }

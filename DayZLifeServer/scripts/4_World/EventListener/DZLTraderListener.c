@@ -14,9 +14,9 @@ class DZLTraderListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_TRADE_ACTION) {
-            autoptr Param4<ref array<string>,ref array<EntityAI>, ref DZLTraderPosition, PlayerBase> paramTrade;
+            autoptr Param3<ref array<string>,ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
             if (ctx.Read(paramTrade)){
-                array<EntityAI> playerItems = paramTrade.param4.GetPlayerItems();
+                array<EntityAI> playerItems = PlayerBase.Cast(target).GetPlayerItems();
                 int sum = 0;
                 int countSellItems = 0;
 				array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
@@ -56,7 +56,8 @@ class DZLTraderListener
                     }
                 }
 
-                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
+                PlayerBase player = PlayerBase.Cast(target);
+                DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 string message = "#error_not_enough_money";
 
                 if (typesToBuy.Count() == 0 &&  countSellItems == 0) {
@@ -66,7 +67,7 @@ class DZLTraderListener
                 } else if (dzlPlayer.HasEnoughMoney(sum)) {
                     foreach(DZLTraderType _traderType: typesToBuy) {
                         DZLLogTraderTransaction(sender.GetId(), "buy", _traderType.type, _traderType.buyPrice);
-                        Add(paramTrade.param4, _traderType, paramTrade.param3);
+                        Add(player, _traderType, paramTrade.param3);
                     }
 
                     int index = itemsToSell.Count() - 1;
@@ -148,7 +149,6 @@ class DZLTraderListener
 			
 			if (_car) {
 				_car.AddOwner(player.GetIdentity());
-				DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 			}
 		}
 

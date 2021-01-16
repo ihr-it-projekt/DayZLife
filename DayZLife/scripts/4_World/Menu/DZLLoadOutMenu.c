@@ -70,7 +70,7 @@ class DZLLoadOutMenu: DZLBaseMenu
 		if(super.OnClick(w, x, y, button)) return true;
 		switch(w){
             case equipButton:
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param2<PlayerBase, string>(player, currentCat.name), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param1<string>(currentCat.name), true);
 				return true;
 			case loadoutComboBox:
 				int index = loadoutComboBox.GetCurrentItem();

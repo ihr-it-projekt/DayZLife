@@ -5,10 +5,10 @@ class DZLEscapedPlayer
     string arrestReason;
     DayZPlayer player;
 
-    void DZLEscapedPlayer(DayZPlayer player, string arrestReason, int arrestTime) {
+    void DZLEscapedPlayer(PlayerBase player) {
         this.name = player.GetIdentity().GetName();
         this.player = player;
-        this.arrestTime = arrestTime;
-		this.arrestReason = arrestReason;
+        this.arrestTime = player.GetDZLPlayer().arrestTimeInMinutes;
+		this.arrestReason = player.GetDZLPlayer().arrestReason;
     }
 }

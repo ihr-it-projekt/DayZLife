@@ -124,7 +124,7 @@ class DZLAlmanacListener
         if (_players) {
             foreach(Man _player: _players) {
 				string ident = _player.GetIdentity().GetId();
-               	DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
+               	DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
 				
 				if (!dzlPlayer.IsCop()) {
 					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
@@ -147,11 +147,9 @@ class DZLAlmanacListener
 
         if (_players) {
             foreach(Man _player: _players) {
-				string ident = _player.GetIdentity().GetId();
-               	DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
-				
+               	DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
 				if (!dzlPlayer.IsMedic()) {
-					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
+					collection.Insert(new DZLOnlinePlayer(_player.GetIdentity().GetId(), _player.GetIdentity().GetName()));
 				}
             }
         }

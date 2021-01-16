@@ -5,8 +5,8 @@ modded class DayZPlayerImplement
         if (GetGame().IsServer()) {
             PlayerBase player = PlayerBase.Cast(this);
 
-            if (player && player.GetIdentity() && DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId())) {
-                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+            if (player && player.GetIdentity() && player.GetDZLPlayer()) {
+                DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
                 if (isDead && dzlPlayer.WillDie() && dzlPlayer.HasMoney()) {
                     player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
@@ -37,7 +37,7 @@ modded class DayZPlayerImplement
 		string text = "#dayz_implement_dead";
 		
 		if (player) {
-			DZLPlayer dzlPlayer = player.dzlPlayer;
+			DZLPlayer dzlPlayer = player.GetDZLPlayer();
 			DebugMessageDZL("2");	
 			if (dzlPlayer) {
 				if (dzlPlayer.WillHealByMedic()) {

@@ -14,10 +14,11 @@ class DZLLicenceListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_BUY_LICENCE) {
-            autoptr Param2<PlayerBase, string> paramBuyLicence;
+            autoptr Param1<string> paramBuyLicence;
             if (ctx.Read(paramBuyLicence)){
-                DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
-				DZLLicence licence = config.licenceConfig.licences.FindById(paramBuyLicence.param2);
+                PlayerBase playerBuyLicence = PlayerBase.Cast(target);
+                DZLPlayer dzlPlayer = playerBuyLicence.GetDZLPlayer();
+				DZLLicence licence = config.licenceConfig.licences.FindById(paramBuyLicence.param1);
 				DZLLicence depLicence;
 
 				if (licence.dependencyLicence) {
@@ -30,20 +31,20 @@ class DZLLicenceListener
                     dzlPlayer.BuyLicence(licence);
                 }
 				
-				GetGame().RPCSingleParam(paramBuyLicence.param1, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, sender);
-				GetGame().RPCSingleParam(paramBuyLicence.param1, DAY_Z_LIFE_BUY_LICENCE_RESPONSE, new Param1<string>(message), true, sender);
+				GetGame().RPCSingleParam(playerBuyLicence, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+				GetGame().RPCSingleParam(playerBuyLicence, DAY_Z_LIFE_BUY_LICENCE_RESPONSE, new Param1<string>(message), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_USE) {
-            autoptr Param2<PlayerBase, string> paramUseLicence;
+            autoptr Param1<string> paramUseLicence;
             if (ctx.Read(paramUseLicence)){
-                DZLPlayer dzlPlayerUse = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
-                DZLLicence licenceUse = config.licenceConfig.licences.FindById(paramUseLicence.param2);
+                PlayerBase playerLicenceUse = PlayerBase.Cast(target);
+                DZLLicence licenceUse = config.licenceConfig.licences.FindById(paramUseLicence.param1);
 
                 if (!licenceUse) return;
 
-                string messageUse = paramUseLicence.param1.CanUseLicence(licenceUse);
+                string messageUse = playerLicenceUse.CanUseLicence(licenceUse);
                 if (!messageUse) {
-                    paramUseLicence.param1.UseLicence(licenceUse);
+                    playerLicenceUse.UseLicence(licenceUse);
                     messageUse = "#item_crafted";
                 }
                 DZLSendMessage(sender, messageUse);

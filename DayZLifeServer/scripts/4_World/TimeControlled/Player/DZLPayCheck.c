@@ -1,9 +1,9 @@
 class DZLPayCheck
 {
-    static void Check(DZLPlayer dzlPlayer, PlayerBase player, DZLPaycheckConfig config) {
+    static void Check(PlayerBase player, DZLPaycheckConfig config) {
         int amount = 0;
         int onlineTime = 100000000;
-
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
         if (dzlPlayer && dzlPlayer.IsActiveAsCop() && config.cop.amount > 0) {
             amount = config.cop.amount;
             onlineTime = config.cop.onlineMinutesForPay;

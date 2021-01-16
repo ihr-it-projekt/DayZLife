@@ -6,7 +6,7 @@ modded class PlayerBase
     ref DZLAlmanacMenu almanacMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
-	ref DZLPlayer dzlPlayer;
+	private ref DZLPlayer dzlPlayer;
 	ref DZLBank dzlBank;
 	ref DZLLicenceMenu licenceMenu;
 	ref DZLLicenceProgressBar progressBarLicence;
@@ -51,9 +51,6 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
-//		if (GetGame().IsServer() && GetIdentity() && GetIdentity().GetId()) {
-//		    dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
-//		}
 	}
 
 	bool IsDZLPlayer() {
@@ -94,9 +91,8 @@ modded class PlayerBase
     }
 
     void RequestUpdateDZLPlayer() {
-		Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(this);
-        GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
-        GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_DATA, null, true);
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
     }
 
     void DisplayMessage(string message) {
@@ -585,10 +581,14 @@ modded class PlayerBase
         return config;
     }
 
-    private DZLPlayer GetDZLPlayer() {
+    DZLPlayer GetDZLPlayer() {
         if (!dzlPlayer && GetGame().IsServer()) {
             dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
         }
         return dzlPlayer;
+    }
+
+    void SetDZLPlayer(DZLPlayer dzlPlayer) {
+        this.dzlPlayer = dzlPlayer;
     }
 }

@@ -29,8 +29,8 @@ class DZLPlayerArrestListener
                 int arrestTime = paramArrestPlayer.param3;
                 string arrestReason = paramArrestPlayer.param4;
 				
-				DZLPlayer copDzl = DZLDatabaseLayer.Get().GetPlayer(cop.GetIdentity().GetId());
-				DZLPlayer prisonerDzl = DZLDatabaseLayer.Get().GetPlayer(prisoner.GetIdentity().GetId());
+				DZLPlayer copDzl = cop.GetDZLPlayer();
+				DZLPlayer prisonerDzl = prisoner.GetDZLPlayer();
 				
 				if(!copDzl.IsActiveAsCop()) return;
 				if(prisonerDzl.IsActiveAsCop()) return;
@@ -61,8 +61,9 @@ class DZLPlayerArrestListener
         copCount = 0;
         medicCount = 0;
 
-		foreach(Man player: allPlayers) {
-			DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
+		foreach(Man playerMan: allPlayers) {
+		    PlayerBase player = PlayerBase.Cast(playerMan);
+			DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
 			if(dzlPlayer.IsActiveAsCop()) {
 			    copCount ++;
@@ -92,7 +93,7 @@ class DZLPlayerArrestListener
 				    }
 				}
 				if (!isInPrison) {
-				    escapeePlayers.Insert(new DZLEscapedPlayer(DayZPlayer.Cast(player), dzlPlayer.arrestReason, dzlPlayer.arrestTimeInMinutes));
+				    escapeePlayers.Insert(new DZLEscapedPlayer(player));
 					continue;
 				}
 								

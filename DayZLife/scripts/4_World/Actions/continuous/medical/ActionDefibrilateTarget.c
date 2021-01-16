@@ -10,7 +10,7 @@ modded class ActionDefibrilateTarget
 
 		if (!targetIdent) return;
 
-		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(targetIdent.GetId());
+		DZLPlayer dzlPlayer = target.GetDZLPlayer();
 		string targetId = targetIdent.GetId();
 
 		if(target && emergencies.HasEmergency(targetId)) {
@@ -18,7 +18,7 @@ modded class ActionDefibrilateTarget
 		    dzlPlayer.AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal * -1);
 		    dzlPlayer.SetWillHealByMedic();
 		    dzlPlayer.SaveItems(target);
-		    DZLDatabaseLayer.Get().GetPlayer(action_data.m_Player.GetIdentity().GetId()).AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal);
+		    action_data.m_Player.GetDZLPlayer().AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal);
             target.SetCanBeDestroyed(true);
             target.SetHealth(0);
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, targetIdent);

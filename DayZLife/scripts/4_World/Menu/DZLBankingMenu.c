@@ -138,7 +138,7 @@ class DZLBankingMenu : DZLBaseMenu
 		
 		if (deposit != 0) {
             if (deposit <= dzlPlayer.GetAllMoney()) {
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER, new Param3<PlayerBase, DZLPlayerBankInfo, int>(player, playerBankInfo, deposit), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER, new Param2<DZLPlayerBankInfo, int>(playerBankInfo, deposit), true);
                 inputDeposit.SetText("");
             } else {
                 player.DisplayMessage("#error_not_enough_money_to_transfer");
@@ -154,7 +154,7 @@ class DZLBankingMenu : DZLBaseMenu
             int deposit = inputDeposit.GetText().ToInt();
             if ((deposit <= dzlPlayer.GetMoney() && factor == -1) || (deposit <= dzlPlayer.GetBankMoney() && factor == 1)) {
 			    deposit = factor * deposit;
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<PlayerBase, int>(player, deposit), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param1<int>(deposit), true);
                 inputDeposit.SetText("");
             } else {
                 player.DisplayMessage("#error_not_enough_money_to_transfer");

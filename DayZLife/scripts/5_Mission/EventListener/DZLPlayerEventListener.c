@@ -96,7 +96,7 @@ class DZLPlayerEventListener
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
                 Param1 <ref DZLPlayer> dzlPlayerParam;
                 if (ctx.Read(dzlPlayerParam) && dzlPlayerParam.param1){
-                    player.dzlPlayer = dzlPlayerParam.param1;
+                    player.SetDZLPlayer(dzlPlayerParam.param1);
                     player.UpdatePlayerAtDependencies();
                 }
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
@@ -112,7 +112,7 @@ class DZLPlayerEventListener
             } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MEDIC_MESSAGE) {
                 Param1 <string> dzlMessageMedic;
                 if (ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1){
-                    if (player && player.dzlPlayer && player.dzlPlayer.IsActiveAsMedic()) {
+                    if (player && player.GetDZLPlayer() && player.GetDZLPlayer().IsActiveAsMedic()) {
 						player.DisplayMessage(dzlMessageMedic.param1);
 					}
                 }
@@ -140,7 +140,7 @@ class DZLPlayerEventListener
 
     void CreateSpawnMenu() {
         player = PlayerBaseHelper.GetPlayer();
-        if (!player || !player.config|| !player.dzlPlayer) {
+        if (!player || !player.config|| !player.GetDZLPlayer()) {
             return;
         }
 

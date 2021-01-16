@@ -1,6 +1,7 @@
 class DZLMedicHealth
 {
-	static void CheckHealth(DZLPlayer dzlPlayer, PlayerBase player, PlayerIdentity playerIdentity) {
+	static void CheckHealth(PlayerBase player, PlayerIdentity playerIdentity) {
+	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
 	    if (!dzlPlayer.HasNoDieState()) return;
 	    bool showMedicHelpMenu = false;
         if (100 > player.GetHealth("GlobalHealth", "Blood")) {

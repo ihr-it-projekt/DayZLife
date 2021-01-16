@@ -7,13 +7,11 @@ modded class ActionCloseDoors
 
         if (building && canClose) {
             DZLCopHouseDefinition definition;
-            DZLPlayer dzlPlayer;
+            DZLPlayer dzlPlayer =  player.GetDZLPlayer();
             if (GetGame().IsServer()) {
                definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
-               dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
             } else {
                definition = player.config.houseConfig.GetCopHouseDefinition(building);
-               dzlPlayer = player.dzlPlayer;
             }
 
             if(definition) {

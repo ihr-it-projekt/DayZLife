@@ -81,17 +81,9 @@ modded class CarScript
 		
 		string ident = player.GetIdentity().GetId();
 		
-		DZLPlayer dzlPlayer;
-		
-        if (!player.dzlPlayer) {
-            if (GetGame().IsServer()) {
-                dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(ident);
-            } else {
-				return false;
-			}
-        } else {
-			dzlPlayer = player.dzlPlayer;
-		}
+		DZLPlayer dzlPlayer = player.GetDZLPlayer();
+
+		if (!dzlPlayer) return false;
 
         return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop();
     }

@@ -13,7 +13,7 @@ class DZLBaseProgressBar: UIScriptedMenu
 
    void SetPlayer(PlayerBase player) {
         this.player = player;
-        this.dzlPlayer = player.dzlPlayer;
+        this.dzlPlayer = player.GetDZLPlayer();
     }
 
     void UpdatePlayer(PlayerBase player) {

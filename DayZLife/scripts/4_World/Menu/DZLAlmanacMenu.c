@@ -147,7 +147,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		super.OnShow();
 		string ident = player.GetIdentity().GetId();
 		
-		if (player.dzlPlayer.IsActiveAsMedic()) {
+		if (player.GetDZLPlayer().IsActiveAsMedic()) {
 			toggleViewWidget.AddItem("#emergencies");
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, new Param1<PlayerBase>(null), true);
 			medicPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -413,23 +413,19 @@ class DZLAlmanacMenu : DZLBaseMenu
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == syncButton) {
-			
-			Param1<PlayerBase> paramGetConfig = new Param1<PlayerBase>(player);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG, paramGetConfig, true);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING, paramGetConfig, true);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA, paramGetConfig, true);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_BANK_DATA, paramGetConfig, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA, null, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
 			player.DisplayMessage("#player_was_manuel_synced");
 			syncButton.Show(false);
 		} else if (w == adminSearchPlayer) {
             DZLDisplayHelper.SearchOnlinePlayersSingleWiget(adminSearchPlayerInput.GetText(), adminPlayers, allPlayers);
 		} else if (w == playerNeedMedicList) {
 			int indexNeedHelp = playerNeedMedicList.GetSelectedRow();
-			
 			if (-1 != indexNeedHelp) {
 				DZLOnlinePlayer emergencyPlayer;
 				playerNeedMedicList.GetItemData(indexNeedHelp, 0, emergencyPlayer);
-				
 				if (emergencyPlayer) {
 					DZLDisplayHelper.UpdateMap(medicMap, emergencyPlayer.position);
 				}
@@ -503,7 +499,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 				foreach(DZLEscapedPlayer escapedPlayer: escapedPlayersParam) {
 					int indexOfRow = escapedPlayers.AddItem(escapedPlayer.name, escapedPlayer.player, 0);
 					escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestReason, escapedPlayer.player, 2);
-					if (player.dzlPlayer.IsActiveAsCop()) {
+					if (player.GetDZLPlayer().IsActiveAsCop()) {
 						escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
 					} else {
 						escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 2);

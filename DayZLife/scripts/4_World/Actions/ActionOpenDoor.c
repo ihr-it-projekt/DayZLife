@@ -11,14 +11,12 @@ modded class ActionOpenDoors
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 			if (doorIndex != -1) {
 			    DZLCopHouseDefinition definition;
-			    DZLPlayer dzlPlayer;
+			    DZLPlayer dzlPlayer = player.GetDZLPlayer();
 			    if (GetGame().IsServer()) {
 			       if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			       definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
-			       dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
-			    } else if (player.config && player.dzlPlayer) {
+			    } else if (player.config && player.GetDZLPlayer()) {
 			       definition = player.config.houseConfig.GetCopHouseDefinition(building);
-			       dzlPlayer = player.dzlPlayer;
 			    } else {
 			        return false;
 			    }

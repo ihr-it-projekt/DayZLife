@@ -316,12 +316,12 @@ class DZLTraderMenu: DZLBaseMenu
                 return true;
             }
 
-            if (sumInt > player.dzlPlayer.GetMoney()) {
+            if (sumInt > player.GetDZLPlayer().GetMoney()) {
 				UpdateGUI("#error_not_enough_money");
 				return true;
 			}
 
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param4<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition, PlayerBase>(buyItems, sellItems, position, player), true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition>(buyItems, sellItems, position), true);
 		} else if (w == itemCategory) {
 			int categoryIndex = itemCategory.GetCurrentItem();
 			string name = addedCats.Get(categoryIndex);

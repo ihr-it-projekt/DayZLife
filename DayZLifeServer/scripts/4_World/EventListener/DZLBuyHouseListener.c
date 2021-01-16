@@ -24,23 +24,24 @@ class DZLBuyHouseListener
                 GetGame().RPCSingleParam(paramGetBuildingProperties.param1, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param2)), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
-            autoptr Param2<PlayerBase, ref Building> paramBuyHouse;
+            autoptr Param1<ref Building> paramBuyHouse;
             if (ctx.Read(paramBuyHouse)){
-				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param2);
-                DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param2);
-				DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(paramBuyHouse.param1.GetIdentity().GetId());
+				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param1);
+                DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param1);
+                PlayerBase playerOpenBuy = PlayerBase.Cast(target);
+				DZLPlayer dzlPlayer = playerOpenBuy.GetDZLPlayer();;
 
                 string message = "#error_buying_house";
 
                 if (actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
-                    inventory.AddMoneyToPlayer(paramBuyHouse.param1, actualHouseDef.buyPrice * -1);
-                    dzlBuilding.BuyOnServer(paramBuyHouse.param1);
+                    inventory.AddMoneyToPlayer(playerOpenBuy, actualHouseDef.buyPrice * -1);
+                    dzlBuilding.BuyOnServer(playerOpenBuy);
 
                     message = "#successfully_buy_house";
                     DZLLogHouseTrade(sender.GetId(), "buy house", actualHouseDef.buyPrice, dzlBuilding.GetDZLHouse().GetPosition());
                 }
-                GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
-                GetGame().RPCSingleParam(paramBuyHouse.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+                GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
             autoptr Param2<PlayerBase, ref Building> paramSellHouse;

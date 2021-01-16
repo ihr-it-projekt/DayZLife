@@ -23,18 +23,15 @@ class ActionOpenArrestMenu: ActionInteractBase
 		
 		if (!targetPlayer.IsDZLPlayer()) return false;
 		
-		DZLPlayer dzlPlayerCop;
+		DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
         if (GetGame().IsServer()) {
             if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-            dzlPlayerCop = DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId());
 
             if(!targetPlayer || !targetPlayer.GetIdentity()) return false;
 
-            DZLPlayer dzlPlayerPrisoner = DZLDatabaseLayer.Get().GetPlayer(targetPlayer.GetIdentity().GetId());
+            DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();
             if (dzlPlayerPrisoner.IsActiveAsCop()) return false;
-        } else {
-			dzlPlayerCop = player.dzlPlayer;
-		}
+        }
 
         if (!dzlPlayerCop.IsActiveAsCop()) return false;
 		

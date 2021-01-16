@@ -42,7 +42,7 @@ class DZLActionRaidDoors: ActionInteractBase
 				raidTools = copHouseDefinition.raidTools;
 				
 				if (GetGame().IsServer()) {
-					if(DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId()).IsActiveAsCop()) {
+					if(player.GetDZLPlayer().IsActiveAsCop()) {
 						DZLSendMessage(player.GetIdentity(), "#active_cops_can_not_raid_police_buildings");
 						return false;
 					}
