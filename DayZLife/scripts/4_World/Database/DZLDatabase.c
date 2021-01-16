@@ -33,6 +33,12 @@ class DZLDatabase: Container_Base
             dzlPlayers.Insert(playerId, player);
         }
 
+        if (player.dayZPlayerId != playerId) {
+            LogMessageDZL("there are inconsistent in your player database: Please check file:" + player.fileName);
+            player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
+            dzlPlayers.Insert(playerId, player);
+        }
+
         return player;
     }
 
