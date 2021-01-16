@@ -28,13 +28,13 @@ modded class MissionServer {
         if (player.IsAlive() && !player.IsRestrained() && !player.IsUnconscious()) {
             // remove the body
             player.Delete();
-        } else if (player.IsUnconscious() || player.IsRestrained())  {
+        } else if (player.IsUnconscious() || player.IsRestrained() || (100 >= player.GetHealth("GlobalHealth", "Blood") && 7 >= player.GetHealth("GlobalHealth", "Health")))  {
             // kill character
             player.SetCanBeDestroyed(true);
             player.SetHealth("", "", 0.0);
         }
     }
-
+	
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
 		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
