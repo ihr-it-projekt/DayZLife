@@ -51,6 +51,9 @@ modded class PlayerBase
         RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
+//		if (GetGame().IsServer() && GetIdentity() && GetIdentity().GetId()) {
+//		    dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+//		}
 	}
 
 	bool IsDZLPlayer() {

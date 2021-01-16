@@ -30,23 +30,19 @@ class DZLPlayer
 			licenceIds = new TStringArray;
 
 			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
-			
-            Save();
-        }
+		}
 		
 		if (!version) {
 			arrestReason = "";
 			version = "1";
-			Save(); 
 		}
 
 		if (version == "1") {
             deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
             itemsStore = new array<ref DZLStoreItem>;
             version = "2";
-            Save();
-		}
-		
+        }
+		Save();
     }
 
     bool IsPlayerInArrest() {
@@ -328,6 +324,10 @@ class DZLPlayer
 
     private bool Save(){
         if (GetGame().IsServer()) {
+            if (dayZPlayerId + ".json" != fileName) {
+                LogMessageDZL("Can not save PlayerData. There are inconsistent in your player database: Please check file:" + fileName);
+                return false;
+            }
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
 			return true;
