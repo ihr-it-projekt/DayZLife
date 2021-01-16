@@ -57,12 +57,13 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style OldStyle
          text "#go_to_the_light"
+         text_proportion 0.7
         }
        }
       }
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
-       position -0 0.11
+       position 0 0.11
        size 0.95229 0.22
        halign center_ref
        valign center_ref
@@ -74,7 +75,7 @@ FrameWidgetClass rootFrame {
        {
         ButtonWidgetClass HealButton {
          color 0.251 0.502 0 1
-         position -0 -0
+         position 0 0
          size 0.98 0.9
          halign center_ref
          valign center_ref
@@ -84,6 +85,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style OldStyle
          text "#call_a_medic"
+         text_proportion 0.7
         }
        }
       }
@@ -138,6 +140,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style OldStyle
          text "#go_to_hospital"
+         text_proportion 0.7
         }
        }
       }
