@@ -5,6 +5,7 @@ class DZLCheckController
 
     void DZLCheckController() {
         config = DZLConfig.Get();
+		countRun = 0;
     }
 	
 	void Check() {
@@ -15,13 +16,19 @@ class DZLCheckController
 
         foreach(Man playerMan: allPlayers) {
 			PlayerBase player = PlayerBase.Cast(playerMan);
-			if (!player) continue;
+			if (!player) {
+			    LogMessageDZL("Check player not casted");
+			    continue;
+			}
 			PlayerIdentity playerIdent = player.GetIdentity();
 
             DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(playerIdent.GetId());
-			if(!dzlPlayer) continue;
+			if(!dzlPlayer) {
+				LogMessageDZL("Check playerdzl not found");
+				continue;
+			}
 
-			if (countRun == 60) {
+			if (countRun > 29) {
                 DZLPayCheck.Check(dzlPlayer, player, config.jobConfig.paycheck);
                 countRun = 0;
 			}

@@ -19,7 +19,7 @@ modded class MissionServer {
             checkController = new DZLCheckController;
 
             DZLLockedHouses.OnServerStart();
-            paycheckTimer.Run(1, checkController, "Check", null, true);
+            paycheckTimer.Run(2, checkController, "Check", null, true);
             builderManager.Create();
         }
     }
