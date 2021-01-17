@@ -5,8 +5,9 @@ class DZLCheckController
 
     void DZLCheckController() {
         config = DZLConfig.Get();
+		countRun = 0;
     }
-	
+
 	void Check() {
 	    ++countRun;
 	    if (!DZLLicenceCheck.Get().HasActiveLicence(null)) return;
