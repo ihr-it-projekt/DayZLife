@@ -71,6 +71,7 @@ class DZLBuyHouseListener
                 }
                 GetGame().RPCSingleParam(playerSellHouse, DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
                 GetGame().RPCSingleParam(playerSellHouse, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerSellHouse, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerSellHouse), true, sender);
             }
         }
     }

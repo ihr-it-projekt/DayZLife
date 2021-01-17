@@ -33,7 +33,6 @@ class DZLConfigListener
             dzlPlayer.UpdateName(sender.GetName());
 
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
-
         }
     }
 }
