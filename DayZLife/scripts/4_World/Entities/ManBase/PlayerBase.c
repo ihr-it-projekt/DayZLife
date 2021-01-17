@@ -592,6 +592,8 @@ modded class PlayerBase
     }
 
     void SetDZLPlayer(DZLPlayer dzlPlayer) {
-        this.dzlPlayer = dzlPlayer;
+        if (dzlPlayer.dayZPlayerId == GetIdentity().GetId()) {
+            this.dzlPlayer = dzlPlayer;
+        }
     }
 }

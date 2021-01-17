@@ -232,7 +232,7 @@ class DZLHouseMenu : DZLBaseMenu
                     sellButton.Show(false);
                     showBuyButton = actualHouseDef.GetMaxStorage() > house.GetStorage().Count();
 
-                    if (actualHouseDef.GetMaxStorage() <= house.GetCountStorage()) {
+                    if (actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
                         player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
                     }
                 }
