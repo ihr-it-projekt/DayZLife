@@ -6,7 +6,8 @@ modded class PlayerBase
     ref DZLAlmanacMenu almanacMenu;
     ref DZLConfig config;
 	ref DZLPlayerHouse house;
-	private ref DZLPlayer dzlPlayer;
+	private DZLPlayer dzlPlayerServer;
+	private ref DZLPlayer dzlPlayerClient;
 	ref DZLBank dzlBank;
 	ref DZLLicenceMenu licenceMenu;
 	ref DZLLicenceProgressBar progressBarLicence;
@@ -585,15 +586,17 @@ modded class PlayerBase
     }
 
     DZLPlayer GetDZLPlayer() {
-        if (!dzlPlayer && GetGame().IsServer()) {
-            dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+        if (!dzlPlayerServer && GetGame().IsServer()) {
+            dzlPlayerServer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+        } else if (GetGame().IsClient()) {
+            return dzlPlayerClient;
         }
-        return dzlPlayer;
+        return dzlPlayerServer;
     }
 
     void SetDZLPlayer(DZLPlayer dzlPlayer) {
-        if (dzlPlayer.dayZPlayerId == GetIdentity().GetId()) {
-            this.dzlPlayer = dzlPlayer;
+        if (dzlPlayerClient.dayZPlayerId == GetIdentity().GetId()) {
+            this.dzlPlayerClient = dzlPlayer;
         }
     }
 }
