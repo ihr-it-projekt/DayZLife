@@ -586,12 +586,13 @@ modded class PlayerBase
     }
 
     DZLPlayer GetDZLPlayer() {
-        if (!dzlPlayerServer && GetGame().IsServer()) {
-            dzlPlayerServer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
-        } else if (GetGame().IsClient()) {
-            return dzlPlayerClient;
+        if (GetGame().IsServer()) {
+            if (!dzlPlayerServer) {
+                dzlPlayerServer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+            }
+            return dzlPlayerServer;
         }
-        return dzlPlayerServer;
+        return dzlPlayerClient;
     }
 
     void SetDZLPlayer(DZLPlayer dzlPlayer) {
