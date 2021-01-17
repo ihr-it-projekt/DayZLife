@@ -31,7 +31,7 @@ class DZLLicenceListener
                     dzlPlayer.BuyLicence(licence);
                 }
 				
-				GetGame().RPCSingleParam(playerBuyLicence, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+				GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
 				GetGame().RPCSingleParam(playerBuyLicence, DAY_Z_LIFE_BUY_LICENCE_RESPONSE, new Param1<string>(message), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_USE) {

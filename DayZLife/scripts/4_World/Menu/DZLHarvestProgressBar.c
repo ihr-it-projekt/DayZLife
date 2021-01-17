@@ -20,6 +20,6 @@ class DZLHarvestProgressBar: DZLBaseProgressBar
 	}
 	
 	override void SendFinishEvent() {
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_HARVEST, new Param1<PlayerBase>(player), true);
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_HARVEST, null, true);
     }
 }

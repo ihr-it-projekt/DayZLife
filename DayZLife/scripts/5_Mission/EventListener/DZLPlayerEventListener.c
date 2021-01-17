@@ -127,8 +127,6 @@ class DZLPlayerEventListener
                 player.RequestUpdateDZLPlayer();
             } else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
                 PlayerRespawn();
-            } else if(rpc_type == DAY_Z_LIFE_ALL_DELETE_CHAR) {
-                GetGame().RemoteObjectDelete(target);
             }
         }
 

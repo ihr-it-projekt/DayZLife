@@ -81,7 +81,7 @@ class DZLHouseMenu : DZLBaseMenu
 		searchButton = creator.GetButtonWidget("searchButton");
 		searchInput = creator.GetEditBoxWidget("search_input");
 
-		GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param2<PlayerBase, Building>(player, building), true);
+		GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
 
 	    return layoutRoot;
     }
@@ -184,14 +184,13 @@ class DZLHouseMenu : DZLBaseMenu
                     }
 
                     if (canBuy) {
-                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION, new Param3<PlayerBase, ref Building, string>(player, building, currentItemBuy.id), true);
+                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION, new Param2<ref Building, string>(building, currentItemBuy.id), true);
                     }
 				}
                 return true;
             case sellButton:
                 if (0 == indexPanel && house && house.HasOwner() && house.IsOwner(player)) {
-                    Param2<PlayerBase, ref Building> paramSellHouse = new Param2<PlayerBase, ref Building>(player, building);
-                    GetGame().RPCSingleParam(paramSellHouse.param1, DAY_Z_LIFE_OPEN_SELL_BUILDING, paramSellHouse, true);
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_SELL_BUILDING, new Param1<ref Building>(building), true);
                 } else if (1 == indexPanel) {
                     int itemPosStorageSell = sellStorageListTextWidget.GetSelectedRow();
                     DZLStorageTypeBought currentItemStorageSell;
@@ -201,7 +200,7 @@ class DZLHouseMenu : DZLBaseMenu
 
                     PlayerBase playerBaseSell = player;
                     if (house.IsOwner(playerBaseSell)) {
-                        GetGame().RPCSingleParam(playerBaseSell, DAY_Z_LIFE_SELL_STORAGE, new Param3<PlayerBase, ref Building, vector>(playerBaseSell, building, currentItemStorageSell.position), true);
+                        GetGame().RPCSingleParam(playerBaseSell, DAY_Z_LIFE_SELL_STORAGE, new Param2<ref Building, vector>(building, currentItemStorageSell.position), true);
                     }
                 }
                 return true;
@@ -264,7 +263,7 @@ class DZLHouseMenu : DZLBaseMenu
 
                 return true;
             case keySaveButton:
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param3<PlayerBase, Building, ref array<string>>(player, building, DZLDisplayHelper.GetPlayerIdsFromList(keyPlayerAccessList)), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param2<Building, ref array<string>>(building, DZLDisplayHelper.GetPlayerIdsFromList(keyPlayerAccessList)), true);
                 searchInput.SetText("");
                 return true;
 			case searchButton:
@@ -291,7 +290,7 @@ class DZLHouseMenu : DZLBaseMenu
         if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE || rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE) {
             autoptr Param2<ref DZLBuilding, string> paramBuyHouse;
             if (ctx.Read(paramBuyHouse)){
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param2<PlayerBase, Building>(player, building), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
 				house = paramBuyHouse.param1;
 				UpdateGUI(paramBuyHouse.param2);
 	        }
@@ -394,8 +393,7 @@ class DZLHouseMenu : DZLBaseMenu
 	
 	 void SetTarget(Building building) {
         this.building = building;
-        Param2<PlayerBase,ref Building> paramGetBuildingProperties = new Param2<PlayerBase,ref Building>(player, this.building);
-        GetGame().RPCSingleParam(paramGetBuildingProperties.param1, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA, paramGetBuildingProperties, true);
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA, new Param1<ref Building>(this.building), true);
     }
 
 	void SetHouseDefinition(DZLHouseDefinition definition) {

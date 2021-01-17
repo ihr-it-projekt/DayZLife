@@ -71,7 +71,7 @@ modded class MissionServer {
 
 		} else {
 		    super.OnClientNewEvent(identity, pos, ctx);
-		    GetGame().RPCSingleParam(m_player, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
+		    GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
 		}
 		
         dzlPlayer.ResetDeadState();

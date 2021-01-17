@@ -52,7 +52,7 @@ class DZLMedicHelpListener
         dzlPlayer.AddMoneyToPlayerBank(config.priceHospitalHeal * -1);
         dzlPlayer.SetWillHealByHospital();
         dzlPlayer.SaveItems(player);
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, sender);
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, sender);
         KillPlayer(player);
     }
 

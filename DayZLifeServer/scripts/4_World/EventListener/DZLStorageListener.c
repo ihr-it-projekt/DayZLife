@@ -14,12 +14,12 @@ class DZLStorageListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE) {
-			GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId())), true, sender);
+			GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId())), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_EVENT_STORE_CAR) {
-            autoptr Param2<CarScript, PlayerBase> paramStoreCar;
-            if (ctx.Read(paramStoreCar) && paramStoreCar.param1){
-				CarScript car = paramStoreCar.param1;
-				DZLStoragePosition storagePosition = config.GetStorageByPosition(paramStoreCar.param2);
+            autoptr Param1<vector> paramStoreCar;
+            CarScript car = CarScript.Cast(target);
+            if (ctx.Read(paramStoreCar) && paramStoreCar.param1 && car){
+				DZLStoragePosition storagePosition = config.GetStorageByPosition(paramStoreCar.param1);
 				
 				if (!storagePosition) return;
 
@@ -34,16 +34,16 @@ class DZLStorageListener
                 DZLLogStore(sender.GetId(), "store in", car.GetType(), storagePosition.position);
 				GetGame().ObjectDelete(car);
 				DZLSendMessage(sender, "#car_was_parked");
-				GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storageIn), true, sender);
+				GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storageIn), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE) {
-            autoptr Param2<PlayerBase, string> paramGetCar;
-            if (ctx.Read(paramGetCar) && paramGetCar.param1){
-                PlayerBase player = paramGetCar.param1;
-                string itemId = paramGetCar.param2;
+            autoptr Param1<string> paramGetCar;
+            PlayerBase player = PlayerBase.Cast(target);
+            if (ctx.Read(paramGetCar) && player){
+                string itemId = paramGetCar.param1;
 
                 DZLCarStorage storage = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
-				DZLStoragePosition storagePositionCar = config.GetStorageByPosition(player);
+				DZLStoragePosition storagePositionCar = config.GetStorageByPosition(player.GetPosition());
 				
                 DZLCarStoreItem storedCar = storage.GetById(itemId);
 
@@ -55,7 +55,7 @@ class DZLStorageListener
 
                 if (carSpawned) {
                     storage.RemoveItem(storedCar);
-                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storage), true, sender);
+                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storage), true, sender);
                     DZLLogStore(sender.GetId(), "store out", carSpawned.GetType(), storagePositionCar.position);
                     DZLSendMessage(sender, "#car_was_parked_out");
                 }

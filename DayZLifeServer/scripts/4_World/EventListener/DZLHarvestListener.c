@@ -13,67 +13,64 @@ class DZLHarvestListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_HARVEST) {
-            autoptr Param1<PlayerBase> paramHarvest;
-            if (ctx.Read(paramHarvest)){
-                PlayerBase player = paramHarvest.param1;
+            PlayerBase player = PlayerBase.Cast(target);
 
-                DZLWorkZone zone = config.FindZone(player.GetPosition());
-                if (zone) {
-                    EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
-                    array<DZLHarvestItemToolRelation> matchedRelations = new array<DZLHarvestItemToolRelation>;
-                    if(item_in_hands_source) {
-                        string handItemType = item_in_hands_source.GetType();
-                        handItemType.ToLower();
+            DZLWorkZone zone = config.FindZone(player.GetPosition());
+            if (zone) {
+                EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
+                array<DZLHarvestItemToolRelation> matchedRelations = new array<DZLHarvestItemToolRelation>;
+                if(item_in_hands_source) {
+                    string handItemType = item_in_hands_source.GetType();
+                    handItemType.ToLower();
+                }
+
+                foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
+                    if (0 == relation.itemsThatNeededForHarvest.Count()) {
+                        matchedRelations.Insert(relation);
+                        continue;
                     }
-
-                    foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
-                        if (0 == relation.itemsThatNeededForHarvest.Count()) {
-                            matchedRelations.Insert(relation);
-                            continue;
-                        }
-                        foreach(string _item: relation.itemsThatNeededForHarvest) {
-                            _item.ToLower();
-                             if (item_in_hands_source && handItemType == _item) {
-                                if (0 < item_in_hands_source.GetHealth()) {
-                                    matchedRelations.Insert(relation);
-                                }
+                    foreach(string _item: relation.itemsThatNeededForHarvest) {
+                        _item.ToLower();
+                         if (item_in_hands_source && handItemType == _item) {
+                            if (0 < item_in_hands_source.GetHealth()) {
+                                matchedRelations.Insert(relation);
                             }
                         }
                     }
+                }
 
-                    if (matchedRelations.Count() == 0) return;
+                if (matchedRelations.Count() == 0) return;
 
-                    DZLHarvestItemToolRelation randRelation = matchedRelations.GetRandomElement();
+                DZLHarvestItemToolRelation randRelation = matchedRelations.GetRandomElement();
 
-                    if (!randRelation) return;
+                if (!randRelation) return;
 
-                    string randomItemType = randRelation.itemsThatCanHarvest.GetRandomElement();
+                string randomItemType = randRelation.itemsThatCanHarvest.GetRandomElement();
 
-                    InventoryLocation inventoryLocation = new InventoryLocation;
-                    EntityAI item;
+                InventoryLocation inventoryLocation = new InventoryLocation;
+                EntityAI item;
 
-                    bool spaceLeft = true;
+                bool spaceLeft = true;
 
-                    if (player.GetInventory().FindFirstFreeLocationForNewEntity(randomItemType, FindInventoryLocationType.ANY, inventoryLocation)) {
-                        item = player.GetHumanInventory().CreateInInventory(randomItemType);
-                    } else if (!player.GetHumanInventory().GetEntityInHands()) {
-                        item = player.GetHumanInventory().CreateInHands(randomItemType);
-                    } else {
-                        spaceLeft = false;
-                        DZLSendMessage(player.GetIdentity(), "#no_space_left_in_inventory");
-                    }
+                if (player.GetInventory().FindFirstFreeLocationForNewEntity(randomItemType, FindInventoryLocationType.ANY, inventoryLocation)) {
+                    item = player.GetHumanInventory().CreateInInventory(randomItemType);
+                } else if (!player.GetHumanInventory().GetEntityInHands()) {
+                    item = player.GetHumanInventory().CreateInHands(randomItemType);
+                } else {
+                    spaceLeft = false;
+                    DZLSendMessage(player.GetIdentity(), "#no_space_left_in_inventory");
+                }
 
-                    if (item) {
-                        DZLSendMessage(player.GetIdentity(), "#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType));
-                        DZLLogCrafting(sender.GetId(), "harvest get item", randomItemType);
-                        player.isOnHarvest = false;
-                    } else if (!item && spaceLeft) {
-                        DZLLogCrafting(sender.GetId(), "harvest get NO item but has space", randomItemType);
-                    }
+                if (item) {
+                    DZLSendMessage(player.GetIdentity(), "#you_got: " + DZLDisplayHelper.GetItemDisplayName(randomItemType));
+                    DZLLogCrafting(sender.GetId(), "harvest get item", randomItemType);
+                    player.isOnHarvest = false;
+                } else if (!item && spaceLeft) {
+                    DZLLogCrafting(sender.GetId(), "harvest get NO item but has space", randomItemType);
+                }
 
-                    if (item_in_hands_source) {
-                        item_in_hands_source.SetHealth(item_in_hands_source.GetHealth() - zone.damagePerHarvestItem);
-                    }
+                if (item_in_hands_source) {
+                    item_in_hands_source.SetHealth(item_in_hands_source.GetHealth() - zone.damagePerHarvestItem);
                 }
             }
         }

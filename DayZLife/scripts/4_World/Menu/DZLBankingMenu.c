@@ -66,7 +66,7 @@ class DZLBankingMenu : DZLBaseMenu
 		
 		playerListbox = creator.GetTextListboxWidget("Player_list");
         
-		GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA, new Param1<string>(""), true);
+		GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA, null, true);
 
         return layoutRoot;
     }

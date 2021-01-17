@@ -8,7 +8,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 
     void DZLCarStorageMenu() {
         Construct();
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE, new Param1<PlayerBase>(player), true);
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
     }
 
     void ~DZLCarStorageMenu() {
@@ -46,7 +46,7 @@ class DZLCarStorageMenu: DZLBaseMenu
         super.OnShow();
        
 		if (!position) {
-		    position = player.config.carConfig.GetStorageByPosition(player);
+		    position = player.config.carConfig.GetStorageByPosition(player.GetPosition());
 		}
 
 		if (!position) {
@@ -85,7 +85,7 @@ class DZLCarStorageMenu: DZLBaseMenu
                     return true;
                 }
 
-				GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<CarScript, PlayerBase>(car, player), true);
+				GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_STORE_CAR, new Param1<vector>(player.GetPosition()), true);
 			    car.isSold = true;
 			}
 		} else if (w == outStoreButton) {
@@ -107,7 +107,7 @@ class DZLCarStorageMenu: DZLBaseMenu
                     return true;
                 }
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param2<PlayerBase, string>(player, carOut.id), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param1<string>(carOut.id), true);
             }
 		} else if (w == closeButton){
 		    OnHide();

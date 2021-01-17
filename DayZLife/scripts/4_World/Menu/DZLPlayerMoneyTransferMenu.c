@@ -6,11 +6,10 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu
 
     void DZLPlayerMoneyTransferMenu() {
 		layoutPath = "DayZLife/layout/GiveMoneyMenu/GiveMoneyMenu.layout";
-        Construct();
     }
 
     void ~DZLPlayerMoneyTransferMenu() {
-        Destruct();
+        OnHide();
     }
 
     void SetReceiver(PlayerBase receiver) {
@@ -45,7 +44,7 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu
 				
 				if (deposit != 0) {
 		            if (deposit <= dzlPlayer.GetMoney()) {
-		                GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER, new Param3<PlayerBase, PlayerBase, int>(player, receiver, deposit), true);
+		                GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER, new Param2<PlayerBase, int>(receiver, deposit), true);
 		                inputDeposit.SetText("");
 		            } else {
 		                player.DisplayMessage("#error_not_enough_money_to_transfer");
@@ -59,15 +58,5 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu
                 break;
         }
         return false;
-    }
-
-    override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_MONEY_TRANSFER_RESPONSE) {
-           autoptr Param1<string> paramGetResponse;
-           if (ctx.Read(paramGetResponse)){
-                player.DisplayMessage(paramGetResponse.param1);
-                OnHide();
-           }
-        }
     }
 }

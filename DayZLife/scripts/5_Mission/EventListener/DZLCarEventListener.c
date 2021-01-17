@@ -10,14 +10,15 @@ class DZLCarEventListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_UPDATE_CAR) {
-            Param6<CarScript, int, ref array<string>, string, string, bool> carParam;
-            if (ctx.Read(carParam) && carParam.param1) {
-                carParam.param1.dzlCarId = carParam.param2;
-                carParam.param1.playerAccess = carParam.param3;
-                carParam.param1.ownerId = carParam.param4;
-                carParam.param1.ownerName = carParam.param5;
-                carParam.param1.isRaided = carParam.param6;
-                carParam.param1.isSync = true;
+            Param5<int, ref array<string>, string, string, bool> carParam;
+            CarScript car = CarScript.Cast(target);
+            if (ctx.Read(carParam) && car) {
+                car.dzlCarId = carParam.param1;
+                car.playerAccess = carParam.param2;
+                car.ownerId = carParam.param3;
+                car.ownerName = carParam.param4;
+                car.isRaided = carParam.param5;
+                car.isSync = true;
             }
         }
     }

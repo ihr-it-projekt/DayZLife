@@ -21,7 +21,7 @@ class DZLPayCheck
                 dzlPlayer.ResetOnlineTime();
                 DZLDatabaseLayer.Get().GetBank().AddMoney(amount);
                 dzlPlayer.AddMoneyToPlayerBank(amount);
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
+                GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
                 DZLSendMessage(player.GetIdentity(), "#you_recive_a_paycheck: " + amount);
             }
         }

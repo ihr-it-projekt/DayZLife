@@ -11,32 +11,32 @@ class DZLRaidListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_RAID_DOOR) {
-            autoptr Param4<PlayerBase, Building, int, EntityAI> paramRaidDoor;
+            autoptr Param2<int, EntityAI> paramRaidDoor;
             if (ctx.Read(paramRaidDoor)){
-				Building raidedBuilding = paramRaidDoor.param2;
+				Building raidedBuilding = Building.Cast(target);
 				
 				DZLCopHouseDefinition definitionRaided = DZLConfig.Get().houseConfig.GetCopHouseDefinition(raidedBuilding);
 				if (!definitionRaided) {
 					DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(raidedBuilding);
-	                dzlHouse.UnLookDoor(paramRaidDoor.param3);
+	                dzlHouse.UnLookDoor(paramRaidDoor.param1);
 	                DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
 	                houses.Remove(dzlHouse);
 				}
 
-				if (raidedBuilding.IsDoorLocked(paramRaidDoor.param3)) {
-					raidedBuilding.UnlockDoor(paramRaidDoor.param3);
+				if (raidedBuilding.IsDoorLocked(paramRaidDoor.param1)) {
+					raidedBuilding.UnlockDoor(paramRaidDoor.param1);
 				}
 				
-				raidedBuilding.OpenDoor(paramRaidDoor.param3);
+				raidedBuilding.OpenDoor(paramRaidDoor.param1);
 				
-                paramRaidDoor.param4.SetHealth(0);
+                paramRaidDoor.param2.SetHealth(0);
                 DZLLogRaid(sender.GetId(), "end raid", raidedBuilding.GetType(), raidedBuilding.GetPosition());
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
-            autoptr Param2<PlayerBase, Building> paramRaidDoorDZLBuilding;
+            autoptr Param1<Building> paramRaidDoorDZLBuilding;
             if (ctx.Read(paramRaidDoorDZLBuilding)){
-                PlayerBase raider = paramRaidDoorDZLBuilding.param1;
-                Building building = paramRaidDoorDZLBuilding.param2;
+                PlayerBase raider = PlayerBase.Cast(target);
+                Building building = paramRaidDoorDZLBuilding.param1;
 				
 				DZLCopHouseDefinition definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
 				

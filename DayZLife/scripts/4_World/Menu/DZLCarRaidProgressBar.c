@@ -25,6 +25,6 @@ class DZLCarRaidProgressBar: DZLBaseProgressBar
 	
 	override void SendFinishEvent() {
 	    car.isRaided;
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_CAR_RAID, new Param3<PlayerBase, CarScript, EntityAI>(player, car, item), true);
+        GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_CAR_RAID, new Param1<EntityAI>(item), true);
     }
 }

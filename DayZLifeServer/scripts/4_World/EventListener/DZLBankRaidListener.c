@@ -20,44 +20,41 @@ class DZLBankRaidListener : Managed
 	void Start(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_START_BANK_RAID) {
-            autoptr Param1<PlayerBase> param;
-            if (ctx.Read(param)){
-				array<Man> players = new array<Man>;
-                GetGame().GetPlayers(players);
+            array<Man> players = new array<Man>;
+            GetGame().GetPlayers(players);
 
-                if (config.raidIsPlayerControlled && config.minCountPlayerForRaid > 0) {
-                    if (players.Count() < config.minCountPlayerForRaid) {
-                        DZLSendMessage(sender, "#raid_can_not_start_to_less_players");
-                        return;
-                    }
+            if (config.raidIsPlayerControlled && config.minCountPlayerForRaid > 0) {
+                if (players.Count() < config.minCountPlayerForRaid) {
+                    DZLSendMessage(sender, "#raid_can_not_start_to_less_players");
+                    return;
                 }
+            }
 
-                if (config.raidTimeControlled) {
-                    DZLDate date = new DZLDate;
+            if (config.raidTimeControlled) {
+                DZLDate date = new DZLDate;
 
-                    if (date.hour < config.raidStartTimeHour || date.hour > config.raidEndTimeHour) {
-                        DZLSendMessage(sender, "#raid_can_not_start_wrong_time");
-                        return;
-                    } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
-                        DZLSendMessage(sender, "#raid_can_not_start_wrong_time");
-                        return;
-                    }
+                if (date.hour < config.raidStartTimeHour || date.hour > config.raidEndTimeHour) {
+                    DZLSendMessage(sender, "#raid_can_not_start_wrong_time");
+                    return;
+                } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
+                    DZLSendMessage(sender, "#raid_can_not_start_wrong_time");
+                    return;
                 }
+            }
 
-				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+            DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
-				if (!playerWhoStartedRaid) {
-					playerWhoStartedRaid = param.param1;
-					bank.StartRaid();
-					timeHappened = 0;
-					DZLSendMessage(null, "#bank_rob_was_started");
-					DZLLogRaid(sender.GetId(), "start bank raid", "bank", playerWhoStartedRaid.GetPosition());
-			        raidTimer.Run(1, this, "Finish", null, true);
-				} else {
-				    DZLSendMessage(sender, "#raid_allready_started");
-				}
-			}
-		}
+            if (!playerWhoStartedRaid) {
+                playerWhoStartedRaid = PlayerBase.Cast(target);
+                bank.StartRaid();
+                timeHappened = 0;
+                DZLSendMessage(null, "#bank_rob_was_started");
+                DZLLogRaid(sender.GetId(), "start bank raid", "bank", playerWhoStartedRaid.GetPosition());
+                raidTimer.Run(1, this, "Finish", null, true);
+            } else {
+                DZLSendMessage(sender, "#raid_allready_started");
+            }
+        }
     }
 
     void Finish() {
@@ -91,7 +88,7 @@ class DZLBankRaidListener : Managed
 
         if (_players) {
             foreach(Man _player: _players) {
-                GetGame().RPCSingleParam(_player, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, new Param1<ref DZLPlayer>(null), true, _player.GetIdentity());
+                GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, _player.GetIdentity());
             }
         }
     }

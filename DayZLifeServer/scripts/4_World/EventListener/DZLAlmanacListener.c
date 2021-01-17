@@ -17,18 +17,13 @@ class DZLAlmanacListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS) {
-            autoptr Param1<PlayerBase> param;
-            if (ctx.Read(param)){
-				SendUpdateList(param.param1);
-            }
+            SendUpdateList(PlayerBase.Cast(target));
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS) {
-            autoptr Param1<PlayerBase> paramMedicList;
-            if (ctx.Read(paramMedicList)){
-				SendUpdateListMedic(paramMedicList.param1);
-            }
+            SendUpdateListMedic(PlayerBase.Cast(target));
         } else if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
         } else if (rpc_type == DAY_Z_LIFE_DELETE_PLAYER) {
+            if (!config.adminIds.CanManagePlayers(sender.GetId())) return;
             autoptr Param1<string> paramDeletePlayer;
             if (ctx.Read(paramDeletePlayer)){
 				string identString = paramDeletePlayer.param1;
@@ -70,41 +65,36 @@ class DZLAlmanacListener
 				SendAllPlayerList(sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS) {
-            autoptr Param2<PlayerBase, ref array<string>> paramUpdateCops;
+            if (!config.adminIds.CanManageCops(sender.GetId())) return;
+            autoptr Param1<ref array<string>> paramUpdateCops;
             if (ctx.Read(paramUpdateCops)){
-				PlayerIdentity ident = paramUpdateCops.param1.GetIdentity();
-
-                if (!config.adminIds.CanManageCops(ident.GetId())) return;
-
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
-                dzlPlayerIdentities.UpdateCops(paramUpdateCops.param2);
-				DZLSendMessage(ident, "#update_cop_list_successful");
+                dzlPlayerIdentities.UpdateCops(paramUpdateCops.param1);
+				DZLSendMessage(sender, "#update_cop_list_successful");
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS) {
-            autoptr Param2<PlayerBase, ref array<string>> paramUpdateMedics;
+            if (!config.adminIds.CanManageMedic(sender.GetId())) return;
+            autoptr Param1<ref array<string>> paramUpdateMedics;
             if (ctx.Read(paramUpdateMedics)){
-				PlayerIdentity identMedic = paramUpdateMedics.param1.GetIdentity();
-
-                if (!config.adminIds.CanManageMedic(identMedic.GetId())) return;
-
                 DZLPlayerIdentities dzlPlayerIdentitiesMedic = DZLDatabaseLayer.Get().GetPlayerIds();
-                dzlPlayerIdentitiesMedic.UpdateMedics(paramUpdateMedics.param2);
-				DZLSendMessage(identMedic, "#update_medic_list_successful");
+                dzlPlayerIdentitiesMedic.UpdateMedics(paramUpdateMedics.param1);
+				DZLSendMessage(sender, "#update_medic_list_successful");
             }
         } else if (rpc_type == DAY_Z_LIFE_MONEY_TRANSFER_ADMIN) {
-            autoptr Param4<PlayerBase, string, int, bool> paramDepositAdminPlayer;
+            if (!config.adminIds.CanManagePlayers(sender.GetId())) return;
+            autoptr Param3<string, int, bool> paramDepositAdminPlayer;
             string messageDepositPP = "";
             if (ctx.Read(paramDepositAdminPlayer)){
-                PlayerIdentity identMoney = paramDepositAdminPlayer.param1.GetIdentity();
+                PlayerIdentity identMoney = sender;
                 if (!config.adminIds.CanManagePlayers(identMoney.GetId())) return;
 
-                DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositAdminPlayer.param2);
+                DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositAdminPlayer.param1);
 
-                if (!paramDepositAdminPlayer.param4) {
-                    dzlPlayerReciverPP.AddMoneyToPlayer(paramDepositAdminPlayer.param3);
+                if (!paramDepositAdminPlayer.param3) {
+                    dzlPlayerReciverPP.AddMoneyToPlayer(paramDepositAdminPlayer.param2);
                 } else {
-                    DZLDatabaseLayer.Get().GetBank().AddMoney(paramDepositAdminPlayer.param3);
-                    dzlPlayerReciverPP.AddMoneyToPlayerBank(paramDepositAdminPlayer.param3);
+                    DZLDatabaseLayer.Get().GetBank().AddMoney(paramDepositAdminPlayer.param2);
+                    dzlPlayerReciverPP.AddMoneyToPlayerBank(paramDepositAdminPlayer.param2);
                 }
                 DZLSendMessage(identMoney, "#money_transfer_successful");
             }
@@ -132,7 +122,7 @@ class DZLAlmanacListener
             }
         }
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
     }
 	
     void SendUpdateListMedic(PlayerBase player) {

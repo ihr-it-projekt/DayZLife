@@ -90,8 +90,7 @@ class DZLCarConfig
         }
     }
 
-    DZLStoragePosition GetStorageByPosition(PlayerBase player, int distance = 2) {
-		vector playerPosition = player.GetPosition();
+    DZLStoragePosition GetStorageByPosition(vector playerPosition, int distance = 2) {
         if (!playerPosition) {
             return null;
         }

@@ -21,7 +21,7 @@ modded class ActionDefibrilateTarget
 		    action_data.m_Player.GetDZLPlayer().AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceMedicHeal);
             target.SetCanBeDestroyed(true);
             target.SetHealth(0);
-            GetGame().RPCSingleParam(target, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, targetIdent);
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, targetIdent);
             DZLSendMessage(action_data.m_Player.GetIdentity(), "#player_travels_between_worlds");
 		}
 	}

@@ -20,22 +20,20 @@ class DZLBuyExtensionListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
 		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
-			autoptr  Param3<PlayerBase, ref Building, string> paramBuyStorage;
+			autoptr  Param2<ref Building, string> paramBuyStorage;
             if (ctx.Read(paramBuyStorage)){
-				
-				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param2);
-                DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param2);
+				PlayerBase player = PlayerBase.Cast(target);
+				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param1);
+                DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param1);
 
 				DZLHouseExtension extension;
 				array<ref DZLHouseExtension> extensions = config.GetExtensions();
 				foreach(DZLHouseExtension _extension: extensions) {
-					if (_extension.id == paramBuyStorage.param3) {
+					if (_extension.id == paramBuyStorage.param2) {
 						extension = _extension;
 						break;
 					}
 				}
-
-                PlayerBase player = paramBuyStorage.param1;
 
 				if (extension && dzlBuilding.IsOwner(player)) {
 				    string message = "#error_buying_alarm_system";
@@ -50,11 +48,11 @@ class DZLBuyExtensionListener
 					        message = "#no_position_to_for_extension_found";
 					    } else if(actualHouseDef.GetMaxStorage() <= dzlBuilding.GetStorage().Count()) {
 					        message = "#max_storgage_is_allready_bought";
-					    } else if(!inventory.PlayerHasEnoughMoney(paramBuyStorage.param1, buyPriceBuy)) {
+					    } else if(!inventory.PlayerHasEnoughMoney(player, buyPriceBuy)) {
 	                        message = "#error_not_enough_money";
 					    } else {
-                            vector posToSpawn = paramBuyStorage.param2.ModelToWorld(posToSpawnRelavtiv);
-                            bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param2.GetOrientation(), extension.type);
+                            vector posToSpawn = paramBuyStorage.param1.ModelToWorld(posToSpawnRelavtiv);
+                            bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param1.GetOrientation(), extension.type);
 
                             if (hasSpawned) {
                                 inventory.AddMoneyToPlayer(player, buyPriceBuy * -1);
@@ -73,32 +71,33 @@ class DZLBuyExtensionListener
 				        }
 				    }
 
-					GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_BUY_EXTENSION_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
-	                GetGame().RPCSingleParam(paramBuyStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+	                GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_SELL_STORAGE) {
-            autoptr Param3<PlayerBase, ref Building, vector> paramSellStorage;
+            autoptr Param2<ref Building, vector> paramSellStorage;
             if (ctx.Read(paramSellStorage)){
-                DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellStorage.param2);
-                DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellStorage.param2);
+                PlayerBase playerSellStorage = PlayerBase.Cast(target);
+                DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellStorage.param1);
+                DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellStorage.param1);
 
                 string messageSell = "#error_sell_house";
 
-                if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(paramSellStorage.param1)) {
-                    DZLStorageTypeBought positionToSell = dzlBuildingSell.FindStorageByPosition(paramSellStorage.param3);
+                if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(playerSellStorage)) {
+                    DZLStorageTypeBought positionToSell = dzlBuildingSell.FindStorageByPosition(paramSellStorage.param2);
                     if (positionToSell) {
-                        houseFinder.objectFinder.DeleteContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param2);
+                        houseFinder.objectFinder.DeleteContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param1);
 
-                        inventory.AddMoneyToPlayer(paramSellStorage.param1, positionToSell.sellPrice);
+                        inventory.AddMoneyToPlayer(playerSellStorage, positionToSell.sellPrice);
                         dzlBuildingSell.SellStorageOnServer(positionToSell);
 
                         messageSell = "#successfully_sell_house";
                        
                     }
                 }
-                GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_SELL_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
-                GetGame().RPCSingleParam(paramSellStorage.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerSellStorage, DAY_Z_LIFE_SELL_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
+                GetGame().RPCSingleParam(playerSellStorage, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
             }
         }
     }

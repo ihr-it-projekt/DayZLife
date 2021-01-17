@@ -149,29 +149,29 @@ class DZLAlmanacMenu : DZLBaseMenu
 		
 		if (player.GetDZLPlayer().IsActiveAsMedic()) {
 			toggleViewWidget.AddItem("#emergencies");
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, new Param1<PlayerBase>(null), true);
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, null, true);
 			medicPanelId = toggleViewWidget.GetNumItems() - 1;
 		}
 		
 		if (config.adminIds.CanManageCops(ident)) {
 			toggleViewWidget.AddItem("#manage_cops");
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, new Param1<PlayerBase>(player), true);
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, null, true);
 			copPaneId = toggleViewWidget.GetNumItems() - 1;
 		}
 		
 		if (config.adminIds.CanManageMedic(ident)) {
 			toggleViewWidget.AddItem("#manage_medics");
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS, new Param1<PlayerBase>(player), true);
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS, null, true);
 			medicManagePanelId = toggleViewWidget.GetNumItems() - 1;
 		}
 
 		if (config.adminIds.CanManagePlayers(ident)) {
 			toggleViewWidget.AddItem("#admin_Panel");
-			GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ALL_PLAYERS, new Param1<PlayerBase>(player), true);
+			GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ALL_PLAYERS, null, true);
 			adminPanelId = toggleViewWidget.GetNumItems() - 1;
 		}
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, new Param1<PlayerBase>(player), true);
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, null, true);
 
 	    workzoneWidget.Show(true);
 		
@@ -342,9 +342,11 @@ class DZLAlmanacMenu : DZLBaseMenu
 			medicWidget.Show(medicPanelId == item);
 			medicPanelWidget.Show(medicManagePanelId == item);
 		} else if (w == copPanelSave) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
+		    if (!config.adminIds.CanManageCops(player.GetIdentity().GetId())) return true;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param1<ref array<string>>(DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
 		} else if (w == medicPanelSave) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS, new Param2<PlayerBase, ref array<string>>(player, DZLDisplayHelper.GetPlayerIdsFromList(medicPanelCopsList)), true);
+		    if (!config.adminIds.CanManageMedic(player.GetIdentity().GetId())) return true;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS, new Param1<ref array<string>>(DZLDisplayHelper.GetPlayerIdsFromList(medicPanelCopsList)), true);
 		} else if (w == escapedPlayers) {
 			int posEscaped = escapedPlayers.GetSelectedRow();
 	   		if (posEscaped == -1) {
@@ -360,32 +362,36 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			return true;
 		} else if (w == adminDeletePlayerButton) {
+		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
 		    DZLPlayer _dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (_dzlPlayer) {
-		        GetGame().RPCSingleParam(player, DAY_Z_LIFE_DELETE_PLAYER, new Param1<string>(_dzlPlayer.dayZPlayerId), true);
+		        GetGame().RPCSingleParam(null, DAY_Z_LIFE_DELETE_PLAYER, new Param1<string>(_dzlPlayer.dayZPlayerId), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == adminAddMoneyToPlayerButton) {
+		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
 		    DZLPlayer __dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (__dzlPlayer) {
                 int deposit = adminAddMoneyToPlayerInput.GetText().ToInt();
-		        GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param4<PlayerBase, string, int, bool>(player, __dzlPlayer.dayZPlayerId, deposit, false), true);
+		        GetGame().RPCSingleParam(null, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(__dzlPlayer.dayZPlayerId, deposit, false), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == adminAddMoneyToPlayerButtonBank) {
+		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
 		    DZLPlayer ___dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (___dzlPlayer) {
                 int depositBank = adminAddMoneyToPlayerInput.GetText().ToInt();
-		        GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param4<PlayerBase, string, int, bool>(player, ___dzlPlayer.dayZPlayerId, depositBank, true), true);
+		        GetGame().RPCSingleParam(null, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(___dzlPlayer.dayZPlayerId, depositBank, true), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == adminPlayers) {
+		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
 		    DZLPlayer selectedAdminPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (selectedAdminPlayer) {
@@ -440,7 +446,6 @@ class DZLAlmanacMenu : DZLBaseMenu
         if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramCopPlayers;
             if (ctx.Read(paramCopPlayers)){
-
                 copPanelOnlinePlayerList.ClearItems();
 				
 				array<ref DZLOnlinePlayer> onlinePlayers = paramCopPlayers.param1;
@@ -457,7 +462,6 @@ class DZLAlmanacMenu : DZLBaseMenu
         } else if (rpc_type == DAY_Z_LIFE_ALL_NOT_MEDIC_PLAYER_ONLINE_PLAYERS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramMedicPlayers;
             if (ctx.Read(paramMedicPlayers)){
-
                 medicPanelOnlinePlayerList.ClearItems();
 				
 				array<ref DZLOnlinePlayer> onlinePlayersNotMedic = paramMedicPlayers.param1;

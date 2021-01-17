@@ -36,8 +36,8 @@ class DZLCarMenu : DZLBaseMenu
 	override void OnShow() {
 		super.OnShow();
 		
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_CAR_KEYS, new Param1<CarScript>(car), true);
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL, new Param1<PlayerBase>(player), true);
+        GetGame().RPCSingleParam(car, DAY_Z_LIFE_GET_CAR_KEYS, null, true);
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL, null, true);
 	}
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {

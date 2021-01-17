@@ -39,6 +39,6 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar
 	}
 	
 	override void SendFinishEvent() {
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_RAID_DOOR, new Param4<PlayerBase, Building, int, EntityAI>(player, building, doorIndex, item), true);
+        GetGame().RPCSingleParam(building, DAY_Z_LIFE_RAID_DOOR, new Param2<int, EntityAI>(doorIndex, item), true);
     }
 }

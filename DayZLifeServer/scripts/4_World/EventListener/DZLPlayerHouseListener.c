@@ -11,25 +11,22 @@ class DZLPlayerHouseListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING) {
-            autoptr Param1<PlayerBase> paramGetConfig;
-            if (ctx.Read(paramGetConfig)){
-                if (paramGetConfig.param1) {
-                    GetGame().RPCSingleParam(paramGetConfig.param1, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
-                }
-            }
+            GetGame().RPCSingleParam(target, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS) {
-			autoptr Param2<PlayerBase, Building> paramGetKeyLists;
+			autoptr Param1<Building> paramGetKeyLists;
             if (ctx.Read(paramGetKeyLists)){
-                if (paramGetKeyLists.param1) {
-                    SendUpdateList(paramGetKeyLists.param1, paramGetKeyLists.param2);
+                PlayerBase playerGetPlayerBuilding = PlayerBase.Cast(target);
+                if (playerGetPlayerBuilding) {
+                    SendUpdateList(playerGetPlayerBuilding, paramGetKeyLists.param1);
                 }
             }
 		} else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE) {
-			autoptr Param3<PlayerBase, Building, ref array<string>> paramSaveKeyLists;
+			autoptr Param2<Building, ref array<string>> paramSaveKeyLists;
             if (ctx.Read(paramSaveKeyLists)){
-                DZLBuilding dzlBuilding = new DZLBuilding(paramSaveKeyLists.param2);
-				PlayerBase playerOwner = paramSaveKeyLists.param1;
-				array<string> playersAccess = paramSaveKeyLists.param3;
+                Building buildingUpdateKey = paramSaveKeyLists.param1;
+                DZLBuilding dzlBuilding = new DZLBuilding(buildingUpdateKey);
+				PlayerBase playerOwner = PlayerBase.Cast(target);
+				array<string> playersAccess = paramSaveKeyLists.param2;
 				
 				if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
 
@@ -70,7 +67,7 @@ class DZLPlayerHouseListener
 				
 				dzlBuilding.UpdatePlayerAccess(playersAccess);
 					
-                SendUpdateList(playerOwner, paramSaveKeyLists.param2);
+                SendUpdateList(playerOwner, buildingUpdateKey);
 				DZLSendMessage(sender, "#keys_was_updated");
             }
 		}

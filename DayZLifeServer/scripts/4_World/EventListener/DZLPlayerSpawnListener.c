@@ -33,7 +33,7 @@ class DZLPlayerSpawnListener
 				player.SetPosition(point.point);
 				player.SetOrientation(point.orientation);
 				
-				GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN_RESPONSE, null, true, sender);
+				GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_RESPONSE, null, true, sender);
             }
         }
     }

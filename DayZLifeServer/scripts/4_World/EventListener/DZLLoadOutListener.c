@@ -30,7 +30,7 @@ class DZLLoadOutListener
 							foreach(DZLLoadOutType type: category.items) {
 								Add(player, type);
 							}
-							GetGame().RPCSingleParam(target, DAY_Z_LIFE_LOAD_OUT_RESPONSE, new Param1<bool>(true), true, sender);
+							GetGame().RPCSingleParam(null, DAY_Z_LIFE_LOAD_OUT_RESPONSE, null, true, sender);
 							return;
 						}
 					}
