@@ -573,6 +573,10 @@ modded class PlayerBase
 	    }
 	}
 
+	bool IsPlayerInBetweenWorld() {
+	    return 100 > GetHealth("GlobalHealth", "Blood") || 7 > GetHealth("GlobalHealth", "Health");
+	}
+
     private DZLConfig GetConfig() {
         if (!config && GetGame().IsServer()) {
             config = DZLConfig.Get();

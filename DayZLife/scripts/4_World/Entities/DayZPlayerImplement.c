@@ -8,12 +8,12 @@ modded class DayZPlayerImplement
             if (player && player.GetIdentity() && player.GetDZLPlayer()) {
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-                if (isDead && dzlPlayer.WillDie() && dzlPlayer.HasMoney()) {
-                    player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
-                    dzlPlayer.PlayerHasDied();
-                }
-
                 if (dzlPlayer) {
+                    if (dzlPlayer.WillDie() && dzlPlayer.HasMoney()) {
+                        player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
+                        dzlPlayer.PlayerHasDied();
+                    }
+
                     if (dzlPlayer.WillHealByMedic()) {
                         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, DZLConfig.Get().medicConfig.deleteDeadBodyTimeWhenHealedByMedic * 1000);
 					    player.RemoveAllItems();
@@ -25,8 +25,6 @@ modded class DayZPlayerImplement
                 }
             }
         }
-
-
 		return isDead;
     }
 

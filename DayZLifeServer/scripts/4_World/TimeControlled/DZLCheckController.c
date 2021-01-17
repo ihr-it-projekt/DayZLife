@@ -15,15 +15,18 @@ class DZLCheckController
 
         foreach(Man playerMan: allPlayers) {
 			PlayerBase player = PlayerBase.Cast(playerMan);
-			if (!player) continue;
-			PlayerIdentity playerIdent = player.GetIdentity();
+			if (!player)   continue;
+            PlayerIdentity playerIdent = player.GetIdentity();
 
-			if (countRun == 30) {
+			if (countRun > 29) {
                 DZLPayCheck.Check(player, config.jobConfig.paycheck);
-                countRun = 0;
 			}
 
 			DZLMedicHealth.CheckHealth(player, playerIdent);
+        }
+
+        if (countRun > 29) {
+            countRun = 0;
         }
 	}
 }

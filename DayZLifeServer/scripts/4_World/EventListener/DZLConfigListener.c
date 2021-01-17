@@ -29,7 +29,7 @@ class DZLConfigListener
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING) {
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_BANKING, new Param1<ref DZLBankingConfig>(config.bankConfig), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA) {
-            DZLPlayer dzlPlayer = PlayerBase.Cast(target).GetDZLPlayer();
+            DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());;
             dzlPlayer.UpdateName(sender.GetName());
 
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);

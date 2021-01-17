@@ -5,6 +5,9 @@ modded class ActionDefibrilateBase
 			return super.ActionCondition(player, target, item);
 		} else if(GetGame().IsServer()) {
 		    PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+
+		    if (!targetPlayer) return false;
+
             PlayerIdentity targetIdent = targetPlayer.GetIdentity();
 
             if (!targetIdent) return false;

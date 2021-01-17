@@ -1,12 +1,10 @@
 class DZLBuyExtensionListener
 {
-    private ref DZLPlayerInventory inventory;
     private ref DZLHouseFinder houseFinder;
 	private ref DZLConfig config;
 
     void DZLBuyExtensionListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        inventory = new DZLPlayerInventory;
         houseFinder = new DZLHouseFinder;
         config = DZLConfig.Get();
 
@@ -23,6 +21,7 @@ class DZLBuyExtensionListener
 			autoptr  Param2<ref Building, string> paramBuyStorage;
             if (ctx.Read(paramBuyStorage)){
 				PlayerBase player = PlayerBase.Cast(target);
+				DZLPlayer dzlPlayer = player.GetDZLPlayer();
 				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param1);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param1);
 
@@ -41,31 +40,31 @@ class DZLBuyExtensionListener
 				    if (extension.isStorage) {
 	                    message = "#error_buying_storage";
 					    buyPriceBuy =  extension.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
-					    vector posToSpawnRelavtiv = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
-					    bool canNotSpawn = posToSpawnRelavtiv == "0 0 0";
+					    vector posToSpawnRelative = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
+					    bool canNotSpawn = posToSpawnRelative == "0 0 0";
 
 					    if (canNotSpawn) {
 					        message = "#no_position_to_for_extension_found";
 					    } else if(actualHouseDef.GetMaxStorage() <= dzlBuilding.GetStorage().Count()) {
 					        message = "#max_storgage_is_allready_bought";
-					    } else if(!inventory.PlayerHasEnoughMoney(player, buyPriceBuy)) {
+					    } else if(!dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
 	                        message = "#error_not_enough_money";
 					    } else {
-                            vector posToSpawn = paramBuyStorage.param1.ModelToWorld(posToSpawnRelavtiv);
+                            vector posToSpawn = paramBuyStorage.param1.ModelToWorld(posToSpawnRelative);
                             bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param1.GetOrientation(), extension.type);
 
                             if (hasSpawned) {
-                                inventory.AddMoneyToPlayer(player, buyPriceBuy * -1);
-                                dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(extension, posToSpawn, buyPriceBuy, posToSpawnRelavtiv));
+                                dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
+                                dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(extension, posToSpawn, buyPriceBuy, posToSpawnRelative));
                                 message = "#successfully_buy_storage";
                             } else {
                                message = "#strorage_can_not_spawn";
                             }
                         }
 				    } else {
-				        if (dzlBuilding.CanBuyAlarm(extension) && inventory.PlayerHasEnoughMoney(player, buyPriceBuy) ) {
+				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
 							buyPriceBuy = extension.price;
-                           	inventory.AddMoneyToPlayer(player, buyPriceBuy * -1);
+                           	dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
                            	dzlBuilding.SetHouseAlarm(extension);
                            	message = "#successfully_buy_alarm_system";
 				        }
@@ -79,6 +78,7 @@ class DZLBuyExtensionListener
             autoptr Param2<ref Building, vector> paramSellStorage;
             if (ctx.Read(paramSellStorage)){
                 PlayerBase playerSellStorage = PlayerBase.Cast(target);
+				DZLPlayer dzlPlayerSellStorage = playerSellStorage.GetDZLPlayer();
                 DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellStorage.param1);
                 DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellStorage.param1);
 
@@ -89,7 +89,7 @@ class DZLBuyExtensionListener
                     if (positionToSell) {
                         houseFinder.objectFinder.DeleteContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param1);
 
-                        inventory.AddMoneyToPlayer(playerSellStorage, positionToSell.sellPrice);
+                        dzlPlayerSellStorage.AddMoneyToPlayer(positionToSell.sellPrice);
                         dzlBuildingSell.SellStorageOnServer(positionToSell);
 
                         messageSell = "#successfully_sell_house";

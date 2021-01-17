@@ -46,6 +46,7 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu
 		            if (deposit <= dzlPlayer.GetMoney()) {
 		                GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER, new Param2<PlayerBase, int>(receiver, deposit), true);
 		                inputDeposit.SetText("");
+		                OnHide();
 		            } else {
 		                player.DisplayMessage("#error_not_enough_money_to_transfer");
 		            }

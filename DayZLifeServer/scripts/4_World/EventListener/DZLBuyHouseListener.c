@@ -1,11 +1,9 @@
 class DZLBuyHouseListener
 {
-    private ref DZLPlayerInventory inventory;
     private ref DZLHouseFinder houseFinder;
 
     void DZLBuyHouseListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        inventory = new DZLPlayerInventory;
         houseFinder = new DZLHouseFinder;
         DZLConfig config = DZLConfig.Get();
 
@@ -34,7 +32,7 @@ class DZLBuyHouseListener
                 string message = "#error_buying_house";
 
                 if (actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
-                    inventory.AddMoneyToPlayer(playerOpenBuy, actualHouseDef.buyPrice * -1);
+                    dzlPlayer.AddMoneyToPlayer(actualHouseDef.buyPrice * -1);
                     dzlBuilding.BuyOnServer(playerOpenBuy);
 
                     message = "#successfully_buy_house";
@@ -50,6 +48,7 @@ class DZLBuyHouseListener
                 DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellHouse.param1);
                 string messageSell = "#error_sell_house";
                 PlayerBase playerSellHouse = PlayerBase.Cast(target);
+                DZLPlayer dzlPlayerSellHouse = playerSellHouse.GetDZLPlayer();
 
                 if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(playerSellHouse)) {
                     float sellPrice = actualHouseDefSell.sellPrice;
@@ -64,7 +63,7 @@ class DZLBuyHouseListener
 
                     dzlBuildingSell.GetStorage().Clear();
 
-                    inventory.AddMoneyToPlayer(playerSellHouse, sellPrice);
+                    dzlPlayerSellHouse.AddMoneyToPlayer(sellPrice);
                     dzlBuildingSell.SellOnServer(playerSellHouse);
 
                     messageSell = "#successfully_sell_house";

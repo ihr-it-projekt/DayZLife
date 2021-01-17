@@ -30,32 +30,24 @@ class DZLPlayerHouseListener
 				
 				if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
 
+                array<string> playerMustUpdated = new array<string>;
+
 				array<string> currentKeys = dzlBuilding.GetDZLHouse().GetPlayerAccess();
-				
-				array<string> playerMustUpdated = new array<string>;
-				
+				foreach(string playerId: currentKeys) {
+                    DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(playerId);
+
+                    playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
+                    playerMustUpdated.Insert(playerId);
+                }
 				
 				foreach(string playerIdWithNewAccess: playersAccess) {
-					if (currentKeys.Find(playerIdWithNewAccess) == -1) {
-                        DZLPlayerHouse playerHouseAccess = DZLDatabaseLayer.Get().GetPlayerHouse(playerIdWithNewAccess);
+                    DZLPlayerHouse playerHouseAccess = DZLDatabaseLayer.Get().GetPlayerHouse(playerIdWithNewAccess);
 
-                        playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
-                        playerMustUpdated.Insert(playerIdWithNewAccess);
-					}
+                    playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
+                    playerMustUpdated.Insert(playerIdWithNewAccess);
 				}
 
-				foreach(string playerId: currentKeys) {
-					if (playersAccess.Find(playerId) != -1) {
-                        DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(playerId);
-
-                        playerHouse.RemoveKey(dzlBuilding.GetDZLHouse());
-                        playerMustUpdated.Insert(playerId);
-					}
-				}
-				
-				
 				array<Man> onlinePlayers = new array<Man>;
-				
 				GetGame().GetPlayers(onlinePlayers);
 				
 				foreach(Man onlinePlayer: onlinePlayers) {
