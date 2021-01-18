@@ -208,3 +208,5 @@ out_parking_with_insurance, out parking with insurance, out parking with insuran
 car_can_not_store_is_ruined, Car damage is to high. Can not stored in, Car damage is to high. Can not stored in, Auto ist zu stark beschädigt. Es kann nicht ein geparkt werden.,
 has_insurance, Has insurance, Has insurance, Hat Versicherung,
 check_insurance, Check insurance, Check insurance, Prüfe Versicherung,
+yes, yes, yes, ja
+no, no, no, nein
