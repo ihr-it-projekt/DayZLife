@@ -15,6 +15,7 @@ modded class CarScript
 	private bool hasInsurance = false;
 	private vector lastGaragePosition = "0 0 0";
 	private DZLStoragePosition storagePosition;
+	private ref DZLCarStoreItem storeItem;
 
     override void OnEngineStart() {
         super.OnEngineStart();
@@ -24,8 +25,13 @@ modded class CarScript
         }
 	}
 
-	void EnableInsurance(vector lastGaragePosition) {
+	DZLCarStoreItem GetCarStoreItem() {
+		return storeItem;
+	}
+
+	void EnableInsurance(vector lastGaragePosition, DZLCarStoreItem storeItem) {
 	    hasInsurance = true;
+	    this.storeItem = storeItem;
 	    carCheckTimer = new Timer;
         carCheckTimer.Run(1, this, "CheckHealth", null, true);
         this.lastGaragePosition = lastGaragePosition;
@@ -38,13 +44,22 @@ modded class CarScript
 	void DisableInsurance() {
 	    hasInsurance = false;
 	    carCheckTimer.Stop();
+	    storeItem = null;
 	}
 
 	void CheckHealth() {
         if (GetGame().IsServer()) {
+			if (!storeItem) {
+				DisableInsurance();
+				return;
+			}
+
 			if (!storagePosition) {
 				storagePosition = DZLConfig.Get().carConfig.GetStorageByPosition(lastGaragePosition);
 			}
+
+
+
 		}
 	}
 
@@ -144,8 +159,7 @@ modded class CarScript
         ctx.Write(store);
         Param1<string> store2 = new Param1<string>(ownerName);
         ctx.Write(store2);
-        Param2<bool, vector> store3 = new Param2<bool, vector>(hasInsurance, lastGaragePosition);
-        ctx.Write(store3);
+        ctx.Write(new Param3<bool, vector, ref DZLCarStoreItem>(hasInsurance, lastGaragePosition, storeItem));
 	}
 
 	override bool IsInventoryVisible() {
@@ -170,11 +184,11 @@ modded class CarScript
             ownerName = store2.param1;
         }
 
-        Param2<bool, vector> store3 = new Param2<bool, vector>(hasInsurance, lastGaragePosition);
+        Param3<bool, vector, ref DZLCarStoreItem> store3 = new Param3<bool, vector, ref DZLCarStoreItem>(hasInsurance, lastGaragePosition, null);
         if (ctx.Read(store3)){
             hasInsurance = store3.param1;
             if (hasInsurance) {
-                EnableInsurance(store3.param2);
+                EnableInsurance(store3.param2, store3.parma3);
             }
         }
 

@@ -10,6 +10,7 @@ class DZLCarStoreItem: DZLStoreItem
 	float user2;
 	float user3;
 	float user4;
+	bool isInsurance = false;
 
 	void DZLCarStoreItem(CarScript item, vector storagePosition) {
 		Init(item, storagePosition);
