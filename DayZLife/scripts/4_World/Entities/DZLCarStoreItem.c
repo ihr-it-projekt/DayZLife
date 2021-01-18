@@ -12,12 +12,12 @@ class DZLCarStoreItem: DZLStoreItem
 	float user4;
 	bool isInsurance = false;
 
-	void DZLCarStoreItem(CarScript item, vector storagePosition, bool withCargo = true) {
-		Init(item, storagePosition);
+	void DZLCarStoreItem(CarScript item, vector storagePosition, bool withInsurance) {
+		Init(item, storagePosition, withInsurance);
 		isCar = true;
 		this.playerAccess = item.playerAccess;
 
-		if (withCargo) {
+		if (!withInsurance) {
 			fuel = item.GetFluidFraction(CarFluid.FUEL);
 	        oil = item.GetFluidFraction(CarFluid.OIL);
 	        brake = item.GetFluidFraction(CarFluid.BRAKE);

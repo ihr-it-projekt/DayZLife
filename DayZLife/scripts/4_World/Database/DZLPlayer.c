@@ -216,7 +216,7 @@ class DZLPlayer
     void SaveItems(PlayerBase player) {
         itemsStore = new array<ref DZLStoreItem>;
         DZLStoreItem items = new DZLStoreItem;
-		items.Init(player, player.GetPosition());
+		items.Init(player, player.GetPosition(), false);
 
 		itemsStore.Insert(items);
         Save();

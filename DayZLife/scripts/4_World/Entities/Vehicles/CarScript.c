@@ -51,7 +51,7 @@ modded class CarScript
 				
 				DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(ownerId);
 				
-				storageIn.Add(this, storagePosition.position, false);
+				storageIn.Add(this, storagePosition.position, true);
                 DZLLogStore(ownerId, "insurance store in", GetType(), storagePosition.position);
 			}
 		}
