@@ -37,7 +37,7 @@ class DZLStorageListener
 				GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storageIn), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE) {
-            autoptr Param1<string> paramGetCar;
+            autoptr Param2<string, bool> paramGetCar;
             PlayerBase player = PlayerBase.Cast(target);
             if (ctx.Read(paramGetCar) && player){
                 string itemId = paramGetCar.param1;
@@ -51,7 +51,7 @@ class DZLStorageListener
 
                 if (!config.canGetCarsFromEveryGarage && storedCar.positionOfStore != storagePositionCar.position) return;
 
-				CarScript carSpawned = SpawnCar(player, storedCar,storagePositionCar);
+				CarScript carSpawned = SpawnCar(player, storedCar, storagePositionCar, paramGetCar.param2);
 
                 if (carSpawned) {
                     storage.RemoveItem(storedCar);
@@ -64,7 +64,7 @@ class DZLStorageListener
 
     }
 	
-    private CarScript SpawnCar(PlayerBase player, DZLCarStoreItem itemInStock, DZLStoragePosition storagePositionCar) {
+    private CarScript SpawnCar(PlayerBase player, DZLCarStoreItem itemInStock, DZLStoragePosition storagePositionCar, bool enableInsurance) {
 		EntityAI item;
 		CarScript car;
         item = player.SpawnEntityOnGroundPos(itemInStock.type, storagePositionCar.spawnPositionOfVehicles);
@@ -81,7 +81,11 @@ class DZLStorageListener
 			foreach(DZLStoreItem attach: attached) {
 				DZLSpawnHelper.Add(car, attach);
 			}
-			
+
+			if (enableInsurance) {
+			    car.EnableInsurance(storagePositionCar.position);
+			}
+
 			car.AddOwner(player.GetIdentity());
 			car.UpdatePlayerAccess(itemInStock.playerAccess);
 			car.SetOrientation(storagePositionCar.spawnOrientationOfVehicles);

@@ -57,4 +57,8 @@ class DZLUIItemCreator
         return PlayerPreviewWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
 	
+    CheckBoxWidget GetCheckBoxWidget(string name) {
+        return CheckBoxWidget.Cast(layoutRoot.FindAnyWidget(name));
+    }
+	
 }

@@ -11,12 +11,41 @@ modded class CarScript
 
     private int timeAskForDataSync;
 
+    private ref Timer carCheckTimer;
+	private bool hasInsurance = false;
+	private vector lastGaragePosition = "0 0 0";
+	private DZLStoragePosition storagePosition;
+
     override void OnEngineStart() {
         super.OnEngineStart();
         Human player = CrewMember(DayZPlayerConstants.VEHICLESEAT_DRIVER);
         if (player) {
             lastDriverId = player.GetIdentity().GetId();
         }
+	}
+
+	void EnableInsurance(vector lastGaragePosition) {
+	    hasInsurance = true;
+	    carCheckTimer = new Timer;
+        carCheckTimer.Run(1, this, "CheckHealth", null, true);
+        this.lastGaragePosition = lastGaragePosition;
+	}
+
+	void EnableInsuranceClient(bool hasInsurance) {
+	    this.hasInsurance = hasInsurance;
+	}
+
+	void DisableInsurance() {
+	    hasInsurance = false;
+	    carCheckTimer.Stop();
+	}
+
+	void CheckHealth() {
+        if (GetGame().IsServer()) {
+			if (!storagePosition) {
+				storagePosition = DZLConfig.Get().carConfig.GetStorageByPosition(lastGaragePosition);
+			}
+		}
 	}
 
 	override void SetActions(){
@@ -54,7 +83,7 @@ modded class CarScript
 
 	override void EEInit() {
         super.EEInit();
-		
+
 		SetAllowDamage(true);
 
         if(dzlCarId == 0) {
@@ -115,6 +144,8 @@ modded class CarScript
         ctx.Write(store);
         Param1<string> store2 = new Param1<string>(ownerName);
         ctx.Write(store2);
+        Param2<bool, vector> store3 = new Param2<bool, vector>(hasInsurance, lastGaragePosition);
+        ctx.Write(store3);
 	}
 
 	override bool IsInventoryVisible() {
@@ -139,6 +170,14 @@ modded class CarScript
             ownerName = store2.param1;
         }
 
+        Param2<bool, vector> store3 = new Param2<bool, vector>(hasInsurance, lastGaragePosition);
+        if (ctx.Read(store3)){
+            hasInsurance = store3.param1;
+            if (hasInsurance) {
+                EnableInsurance(store3.param2);
+            }
+        }
+
         SynchronizeValues(null);
 		
 		return true;
@@ -154,7 +193,7 @@ modded class CarScript
 	        ownerName = sender.GetName();
 	    }
 
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param5<int, ref array<string>, string, string, bool>(dzlCarId, playerAccess, ownerId, ownerName, isRaided), true, sender);
+        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param6<int, ref array<string>, string, string, bool, bool>(dzlCarId, playerAccess, ownerId, ownerName, isRaided, hasInsurance), true, sender);
     }
 
 	override void OnContact( string zoneName, vector localPos, IEntity other, Contact data ){

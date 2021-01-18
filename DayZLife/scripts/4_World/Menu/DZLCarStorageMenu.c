@@ -5,6 +5,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 	private ButtonWidget inStoreButton;
 	private ButtonWidget outStoreButton;
 	private DZLStoragePosition position;
+	private CheckBoxWidget hasInsuranceWidget;
 
     void DZLCarStorageMenu() {
         Construct();
@@ -24,6 +25,8 @@ class DZLCarStorageMenu: DZLBaseMenu
 		
 		inStoreButton = creator.GetButtonWidget("storeinButton");
 		outStoreButton = creator.GetButtonWidget("storeoutButton");
+		
+		hasInsuranceWidget = creator.GetCheckBoxWidget("insuranceCheckBox");
 
         return layoutRoot;
     }
@@ -102,12 +105,13 @@ class DZLCarStorageMenu: DZLBaseMenu
             if (carOut) {
                 array<Object> excludedObjects = new array<Object>;
                 array<Object> nearbyObjects = new array<Object>;
+				
                 if (GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)){
                     player.DisplayMessage("#car_spwan_place_is_blocked");
                     return true;
                 }
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param1<string>(carOut.id), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param2<string, bool>(carOut.id, hasInsuranceWidget.IsChecked()), true);
             }
 		} else if (w == closeButton){
 		    OnHide();
