@@ -12,18 +12,30 @@ class DZLCarStoreItem: DZLStoreItem
 	float user4;
 	bool isInsurance = false;
 
-	void DZLCarStoreItem(CarScript item, vector storagePosition) {
+	void DZLCarStoreItem(CarScript item, vector storagePosition, bool withCargo = true) {
 		Init(item, storagePosition);
 		isCar = true;
 		this.playerAccess = item.playerAccess;
 
-		fuel = item.GetFluidFraction(CarFluid.FUEL);
-        oil = item.GetFluidFraction(CarFluid.OIL);
-        brake = item.GetFluidFraction(CarFluid.BRAKE);
-        coolant = item.GetFluidFraction(CarFluid.COOLANT);
-        user1 = item.GetFluidFraction(CarFluid.USER1);
-        user2 = item.GetFluidFraction(CarFluid.USER2);
-        user3 = item.GetFluidFraction(CarFluid.USER3);
-        user4 = item.GetFluidFraction(CarFluid.USER4);
+		if (withCargo) {
+			fuel = item.GetFluidFraction(CarFluid.FUEL);
+	        oil = item.GetFluidFraction(CarFluid.OIL);
+	        brake = item.GetFluidFraction(CarFluid.BRAKE);
+	        coolant = item.GetFluidFraction(CarFluid.COOLANT);
+	        user1 = item.GetFluidFraction(CarFluid.USER1);
+	        user2 = item.GetFluidFraction(CarFluid.USER2);
+	        user3 = item.GetFluidFraction(CarFluid.USER3);
+	        user4 = item.GetFluidFraction(CarFluid.USER4);
+		} else {
+			fuel = item.GetFluidCapacity(CarFluid.FUEL);
+	        oil = item.GetFluidCapacity(CarFluid.OIL);
+	        brake = item.GetFluidCapacity(CarFluid.BRAKE);
+	        coolant = item.GetFluidCapacity(CarFluid.COOLANT);
+	        user1 = item.GetFluidCapacity(CarFluid.USER1);
+	        user2 = item.GetFluidCapacity(CarFluid.USER2);
+	        user3 = item.GetFluidCapacity(CarFluid.USER3);
+	        user4 = item.GetFluidCapacity(CarFluid.USER4);
+		}
+		
 	}
 }

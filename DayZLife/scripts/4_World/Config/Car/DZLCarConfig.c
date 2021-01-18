@@ -5,11 +5,12 @@ class DZLCarConfig
 	bool canGetCarsFromEveryGarage = true;
 	int carRaidTimeInSeconds = 60;
 	int chanceToRaid = 2;
+	int carInsurancePrice = 2000;
     ref array<ref DZLStoragePosition> garages;
 	ref array<string> carTypesToStore;
 	ref array<string> carRaidTools;
 
-    string version = "3";
+    string version = "4";
 
     void DZLCarConfig() {
 		array<string> attachments;
@@ -86,6 +87,13 @@ class DZLCarConfig
         if (version == "2") {
             canGetCarsFromEveryGarage = true;
             version = "3";
+            Save();
+        }
+
+        if (version == "3") {
+            carInsurancePrice = 2000;
+            version = "4";
+
             Save();
         }
     }

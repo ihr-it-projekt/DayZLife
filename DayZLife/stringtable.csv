@@ -205,3 +205,6 @@ you_will_healed, You will healed,You will healed, Du wirst geheilt
 you_will_healed_and_transport_to_hospital, You will healed and transported to hospital., You will healed and transported to hospital.,Du wirst geheilt und zum Krankenhaus gebracht.,
 player_travels_between_worlds, Player travels between worlds. Please stand by., Player travels between worlds. Please stand by., Spieler befindet sich zwischen den Welten. Bitte warte kurz.
 out_parking_with_insurance, out parking with insurance, out parking with insurance, Mit Versicherung ausparken
+car_can_not_store_is_ruined, Car damage is to high. Can not stored in, Car damage is to high. Can not stored in, Auto ist zu stark beschädigt. Es kann nicht ein geparkt werden.,
+has_insurance, Has insurance, Has insurance, Hat Versicherung,
+check_insurance, Check insurance, Check insurance, Prüfe Versicherung,

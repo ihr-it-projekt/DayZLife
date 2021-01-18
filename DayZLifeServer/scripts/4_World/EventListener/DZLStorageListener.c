@@ -18,7 +18,10 @@ class DZLStorageListener
         } else if (rpc_type == DAY_Z_LIFE_EVENT_STORE_CAR) {
             autoptr Param1<vector> paramStoreCar;
             CarScript car = CarScript.Cast(target);
-            if (ctx.Read(paramStoreCar) && paramStoreCar.param1 && car){
+			
+			if (car.IsRuined()) {
+				DZLSendMessage(sender, "#car_can_not_store_is_ruined");
+			} else if (ctx.Read(paramStoreCar) && paramStoreCar.param1 && car){
 				DZLStoragePosition storagePosition = config.GetStorageByPosition(paramStoreCar.param1);
 				
 				if (!storagePosition) return;
@@ -41,6 +44,13 @@ class DZLStorageListener
             PlayerBase player = PlayerBase.Cast(target);
             if (ctx.Read(paramGetCar) && player){
                 string itemId = paramGetCar.param1;
+                bool withInsurance = paramGetCar.param2;
+                DZLPlayer dzlPlayer = player.GetDZLPlayer();
+
+                if (withInsurance && !dzlPlayer.HasEnoughMoney(config.carInsurancePrice)) {
+                    DZLSendMessage(sender, "#error_not_enough_money");
+                    return;
+                }
 
                 DZLCarStorage storage = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
 				DZLStoragePosition storagePositionCar = config.GetStorageByPosition(player.GetPosition());
@@ -51,13 +61,17 @@ class DZLStorageListener
 
                 if (!config.canGetCarsFromEveryGarage && storedCar.positionOfStore != storagePositionCar.position) return;
 
-				CarScript carSpawned = SpawnCar(player, storedCar, storagePositionCar, paramGetCar.param2);
+				CarScript carSpawned = SpawnCar(player, storedCar, storagePositionCar, withInsurance);
 
                 if (carSpawned) {
                     storage.RemoveItem(storedCar);
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storage), true, sender);
                     DZLLogStore(sender.GetId(), "store out", carSpawned.GetType(), storagePositionCar.position);
                     DZLSendMessage(sender, "#car_was_parked_out");
+
+                    if (withInsurance) {
+                        dzlPlayer.AddMoneyToPlayer(config.carInsurancePrice * -1);
+                    }
                 }
             }
         }

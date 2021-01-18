@@ -13,14 +13,19 @@ class DZLStoreItem: DZLIdModel
 		attached = new array<ref DZLStoreItem>;
 	}
 
-	void Init(EntityAI item, vector positionOfStore) {
-	    SetItem(item);
+	void Init(EntityAI item, vector positionOfStore, bool withCargo = true) {
+	    SetItem(item, withCargo);
 	    this.positionOfStore = positionOfStore;
         SetId();
 	}
 
-	private void SetItem(EntityAI item) {
+	private void SetItem(EntityAI item, bool withCargo = true) {
 		health = item.GetHealth();
+		
+		if (!withCargo) {
+			health = item.GetMaxHealth();
+		}
+		
 		SetType(item.GetType());
 		
 		ItemBase itemCast = ItemBase.Cast(item);
@@ -46,14 +51,14 @@ class DZLStoreItem: DZLIdModel
 			EntityAI attachment = item.GetInventory().GetAttachmentFromIndex(i);
 			if(attachment){
 				DZLStoreItem storeItem = new DZLStoreItem();
-				storeItem.Init(attachment, positionOfStore);
+				storeItem.Init(attachment, positionOfStore, withCargo);
 				attached.Insert(storeItem);
 			}
 		}
 
 		
 		CargoBase cargo = item.GetInventory().GetCargo();
-		if (cargo) {
+		if (withCargo && cargo) {
 			for(int z = 0; z < cargo.GetItemCount(); z++) {
 				EntityAI inventoryItem = cargo.GetItem(z);
 				if(inventoryItem){
