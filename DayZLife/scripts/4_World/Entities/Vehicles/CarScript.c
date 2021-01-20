@@ -13,7 +13,9 @@ modded class CarScript
 
     private ref Timer carCheckTimer;
 	private bool hasInsurance = false;
+	private bool hasInsuranceServer = false;
 	private vector lastGaragePosition = "0 0 0";
+
 
     override void OnEngineStart() {
         super.OnEngineStart();
@@ -23,11 +25,17 @@ modded class CarScript
         }
 	}
 
+	vector GetLastStoragePosition() {
+	    return lastGaragePosition;
+	}
+
 	void EnableInsurance(vector lastGaragePosition) {
 	    hasInsurance = true;
+	    hasInsuranceServer = true;
 	    carCheckTimer = new Timer;
         carCheckTimer.Run(10, this, "CheckHealth", null, true);
         this.lastGaragePosition = lastGaragePosition;
+		DZLInsuranceManager.Get().AddCar(this);
 	}
 
 	void EnableInsuranceClient(bool hasInsurance) {
@@ -40,7 +48,9 @@ modded class CarScript
 
 	void DisableInsurance() {
 	    hasInsurance = false;
+	    hasInsuranceServer = false;
 	    carCheckTimer.Stop();
+		DZLInsuranceManager.Get().RemoveCar(this);
 	}
 
 	void CheckHealth() {
@@ -56,6 +66,7 @@ modded class CarScript
 			}
 		}
 	}
+
 
 	override void SetActions(){
 	    super.SetActions();
@@ -154,7 +165,8 @@ modded class CarScript
         ctx.Write(store);
         Param1<string> store2 = new Param1<string>(ownerName);
         ctx.Write(store2);
-        ctx.Write(new Param2<bool, vector>(hasInsurance, lastGaragePosition));
+        Param2<bool, vector> param3 = new Param2<bool, vector>(hasInsuranceServer, lastGaragePosition);
+        ctx.Write(param3);
 	}
 
 	override bool IsInventoryVisible() {
@@ -167,26 +179,28 @@ modded class CarScript
 		if (!super.OnStoreLoad( ctx, version))
 			return false;
 
-        Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(0, new array<string>, "");
+        autoptr Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(0, new array<string>, "");
         if (ctx.Read(store)){
             dzlCarId = store.param1;
             playerAccess = store.param2;
             ownerId = store.param3;
         }
 
-        Param1<string> store2 = new Param1<string>("");
+        autoptr Param1<string> store2 = new Param1<string>("");
         if (ctx.Read(store2)){
             ownerName = store2.param1;
         }
 
-        Param2<bool, vector> store3 = new Param2<bool, vector>(hasInsurance, lastGaragePosition);
+        autoptr Param2<bool, vector> store3 = new Param2<bool, vector>(false, "0 0 0");
         if (ctx.Read(store3)){
-            hasInsurance = store3.param1;
-            if (hasInsurance) {
+			hasInsuranceServer = store3.param1;
+            if (hasInsuranceServer) {
                 EnableInsurance(store3.param2);
+				DZLInsuranceManager.Get().AddCar(this);
             }
         }
 
+	
         SynchronizeValues(null);
 		
 		return true;

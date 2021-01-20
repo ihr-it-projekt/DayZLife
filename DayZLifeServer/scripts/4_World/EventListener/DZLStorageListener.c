@@ -34,6 +34,9 @@ class DZLStorageListener
 				
                 DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
                 storageIn.Add(car, storagePosition.position);
+				
+				DZLInsuranceManager.Get().RemoveCar(car);
+
                 DZLLogStore(sender.GetId(), "store in", car.GetType(), storagePosition.position);
 				GetGame().ObjectDelete(car);
 				DZLSendMessage(sender, "#car_was_parked");
@@ -71,6 +74,7 @@ class DZLStorageListener
 
                     if (withInsurance) {
                         dzlPlayer.AddMoneyToPlayer(config.carInsurancePrice * -1);
+                        DZLInsuranceManager.Get().AddCar(carSpawned);
                     }
                 }
             }

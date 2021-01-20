@@ -12,8 +12,12 @@ class DZLCarStorage
     }
 
     void Add(CarScript entity, vector storagePosition, bool withCargo = true){
-		items.Insert(new DZLCarStoreItem(entity, storagePosition, withCargo));
-		Save();
+		AddDZLCarStoreItem(new DZLCarStoreItem(entity, storagePosition, withCargo));
+	}
+
+	void AddDZLCarStoreItem(DZLCarStoreItem carStoreItem) {
+	    items.Insert(carStoreItem);
+        Save();
 	}
 
 	DZLCarStoreItem GetById(string id) {

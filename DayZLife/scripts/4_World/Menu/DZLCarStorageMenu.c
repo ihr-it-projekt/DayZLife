@@ -6,6 +6,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 	private ButtonWidget outStoreButton;
 	private DZLStoragePosition position;
 	private CheckBoxWidget hasInsuranceWidget;
+	private TextWidget insuranceText;
 
     void DZLCarStorageMenu() {
         Construct();
@@ -27,6 +28,8 @@ class DZLCarStorageMenu: DZLBaseMenu
 		outStoreButton = creator.GetButtonWidget("storeoutButton");
 		
 		hasInsuranceWidget = creator.GetCheckBoxWidget("insuranceCheckBox");
+		insuranceText = creator.GetTextWidget("insurranceTextBox");
+		insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + ")");
 
         return layoutRoot;
     }
@@ -110,6 +113,10 @@ class DZLCarStorageMenu: DZLBaseMenu
                     player.DisplayMessage("#car_spwan_place_is_blocked");
                     return true;
                 }
+				
+				if(hasInsuranceWidget.IsChecked() && !dzlPlayer.HasEnoughMoney(config.carConfig.carInsurancePrice)) {
+					player.DisplayMessage("#error_not_enough_money");
+				}
 
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param2<string, bool>(carOut.id, hasInsuranceWidget.IsChecked()), true);
             }

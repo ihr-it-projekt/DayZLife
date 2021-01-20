@@ -26,6 +26,8 @@ class DZLCheckController
 			DZLMedicHealth.CheckHealth(player, playerIdent);
         }
 
+        DZLInsuranceManager.Get().Check();
+
         if (countRun > 29) {
             countRun = 0;
         }

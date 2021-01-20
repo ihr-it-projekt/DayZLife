@@ -82,8 +82,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass tostoreTextListbox {
-           position 0 -0.06682
-           size 0.964 0.83836
+           position 0 -0.06628
+           size 0.964 0.83944
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -150,8 +150,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass isstoredTextListbox {
-           position 0 -0.1291
-           size 0.95796 0.71371
+           position 0 -0.12957
+           size 0.9491 0.71286
            halign center_ref
            valign center_ref
            hexactpos 0

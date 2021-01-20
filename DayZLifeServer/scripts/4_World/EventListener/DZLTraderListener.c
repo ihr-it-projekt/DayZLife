@@ -83,8 +83,13 @@ class DZLTraderListener
 							if (tmpIndex == index) {
 							    itemsToSell.Remove(index);
 							}
+
+                            CarScript car = CarScript.Cast(itemSell);
+							if (car) {
+							    DZLInsuranceManager.Get().RemoveCar(car);
+							}
+
 							index = itemsToSell.Count() - 1;
-							
 							if (index == -1) {
 								break;
 							}
