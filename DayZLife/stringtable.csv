@@ -210,3 +210,5 @@ has_insurance, Has insurance, Has insurance, Hat Versicherung,
 check_insurance, Check insurance, Check insurance, Prüfe Versicherung,
 yes, yes, yes, ja
 no, no, no, nein
+House_Storage, House Storage, House Storage, Hausinventar,
+Transfer, Transfer, Transfer, Transferieren,
