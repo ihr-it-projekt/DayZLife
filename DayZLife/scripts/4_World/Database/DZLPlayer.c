@@ -24,13 +24,13 @@ class DZLPlayer
         if (!Load()) {
             bank = moneyToAdd;
             this.dayZPlayerId = playerId;
-
-            DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
-            idents.AddPlayer(playerId);
 			licenceIds = new TStringArray;
 
 			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
 		}
+
+		DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
+        idents.AddPlayer(playerId);
 		
 		if (!version) {
 			arrestReason = "";

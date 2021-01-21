@@ -61,6 +61,19 @@ class DZLAlmanacListener
                     DZLDatabaseLayer.Get().RemovePlayerCars(identString);
                     DZLDatabaseLayer.Get().GetPlayerIds().RemovePlayer(identString);
 				}
+
+				array<Man> _players = new array<Man>;
+                GetGame().GetPlayers(_players);
+
+                if (_players) {
+                    foreach(Man _player: _players) {
+                        if (_player.GetIdentity().GetId() == identString) {
+                            PlayerBase.Cast(_player).ResetDZLPlayer();
+                            break;
+                        }
+                    }
+                }
+
 				DZLSendMessage(sender, "#player_data_was_deleted");
 				SendAllPlayerList(sender);
             }
