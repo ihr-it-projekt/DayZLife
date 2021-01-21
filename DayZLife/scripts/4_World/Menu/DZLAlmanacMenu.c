@@ -419,10 +419,7 @@ class DZLAlmanacMenu : DZLBaseMenu
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == syncButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA, null, true);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_SERVER_RESET_AT_PLAYER_BASE, null, true);
 			player.DisplayMessage("#player_was_manuel_synced");
 			syncButton.Show(false);
 		} else if (w == adminSearchPlayer) {

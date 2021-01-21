@@ -122,14 +122,12 @@ class DZLDatabaseLayer
     }
 
     void RemovePlayerCars(string playerId) {
-        GetPlayerCarStorage(playerId);
-
-        DZLCarStorage storageCar;
+        DZLCarStorage storageCar = GetPlayerCarStorage(playerId);;
         if (storageCars.Find(playerId, storageCar)) {
             storageCars.Remove(playerId);
         }
 
-        DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + storageCar.fileName);
+        DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + storageCar.fileName);
     }
 
     void RemovePlayer(string playerId) {

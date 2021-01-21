@@ -596,8 +596,10 @@ modded class PlayerBase
     }
 
     void ResetDZLPlayer() {
-        dzlPlayerServer = null;
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
+        if (GetGame().IsServer()) {
+            dzlPlayerServer = null;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
+        }
     }
 
     void SetDZLPlayer(DZLPlayer dzlPlayer) {

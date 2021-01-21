@@ -16,7 +16,9 @@ class DZLAlmanacListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS) {
+        if (rpc_type == DAY_Z_LIFE_PLAYER_SERVER_RESET_AT_PLAYER_BASE) {
+            PlayerBase.Cast(target).ResetDZLPlayer();
+        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS) {
             SendUpdateList(PlayerBase.Cast(target));
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS) {
             SendUpdateListMedic(PlayerBase.Cast(target));
