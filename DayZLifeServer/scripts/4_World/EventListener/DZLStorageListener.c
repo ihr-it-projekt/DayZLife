@@ -75,6 +75,7 @@ class DZLStorageListener
                     if (withInsurance) {
                         dzlPlayer.AddMoneyToPlayer(config.carInsurancePrice * -1);
                         DZLInsuranceManager.Get().AddCar(carSpawned);
+                        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                     }
                 }
             }
