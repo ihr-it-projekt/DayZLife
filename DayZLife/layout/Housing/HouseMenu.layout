@@ -827,7 +827,7 @@ FrameWidgetClass rootFrame {
        }
       }
       PanelWidgetClass housingStorageMenuPanel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0.04843
        size 1 0.90314
@@ -875,7 +875,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextListboxWidgetClass TextListboxWidget0 {
+            TextListboxWidgetClass houseStorageAddListbox {
              position 0 0
              size 0.96104 0.9386
              halign center_ref
@@ -928,7 +928,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextListboxWidgetClass TextListboxWidget1 {
+            TextListboxWidgetClass inventoryAddListbox {
              position 0 0
              size 0.96104 0.9386
              halign center_ref
