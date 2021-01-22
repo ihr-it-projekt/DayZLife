@@ -62,11 +62,31 @@ class DZLBuyExtensionListener
                             }
                         }
 				    } else if (extension.isHouseInventory) {
-				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
+				        DZLHouseInventory inventory;
+						int currentLevel = 0;
+						float factor = 1.0;
+				        if (dzlBuilding.HasInventory()) {
+				            inventory = DZLDatabaseLayer.Get().GetHouseInventory(dzlBuilding.GetDZLHouse().GetOwner(), dzlBuilding.GetDZLHouse().GetPosition());
+						}
+					
+				        if (inventory) {
+                            currentLevel = inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel);
+                            factor = currentLevel * 10 / 100 + 1;
+                        }
+
+				        buyPriceBuy = config.houseExtensions.pricePerLevelHouseInventory * factor;
+				        if (dzlBuilding.CanBuyInventoryExtensionServer(config.houseExtensions) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
 							buyPriceBuy = extension.price;
                            	dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
-                           	dzlBuilding.SetHouseAlarm(extension);
-                           	message = "#successfully_buy_alarm_system";
+
+                           	if (!inventory) {
+                           	    inventory = DZLDatabaseLayer.Get().GetHouseInventory(dzlBuilding.GetDZLHouse().GetOwner(), dzlBuilding.GetDZLHouse().GetPosition());
+                           	    dzlBuilding.GetDZLHouse().EnableInventory();
+                           	}
+
+                           	inventory.IncreaseStorage(config.houseExtensions.inventoryItemsPerLevel);
+
+                           	message = "#successfully_extend_storrage";
 				        }
 				    } else {
 				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {

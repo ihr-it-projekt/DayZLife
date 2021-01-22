@@ -1,5 +1,6 @@
 Bugs:
-- duplizieren von playern
+- player remove from help
+- hauskauf bargeld wird nicht aktualisiert
 
 
 Nur mal so Interesseweise, kann man sich später auch bei seinem Dienst anmelden und abmelden? Oder geht das nur mit Respawn? z.B. als Cop das man zu einem NPC geht und da seinen dienst antreten kann.

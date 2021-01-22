@@ -77,7 +77,7 @@ class DZLBuilding
 	bool CanBuyInventoryExtensionClient(DZLHouseExtensions config, DZLHouseInventory inventory) {
         if (house.HasInventory()) {
             if (GetGame().IsClient()) {
-                if (inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
+                if (inventory && inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
 					return false;
 				}
             }
