@@ -214,3 +214,6 @@ House_Storage, House Storage, House Storage, Hausinventar,
 Transfer, Transfer, Transfer, Transferieren,
 Storage_Item_Max, Storage Item Max, Storage Item Max, Gegenstände max.,
 Storage_lvl, Storage lvl, Storage lvl, Lager lvl,
+Total_Storage_Space, Total Storage Space, Total Storage Space, Lagerplatz,
+Storage_Space_Available, Storage Space Available, Storage Space Available, Lagerplatz Verfügbar,
+

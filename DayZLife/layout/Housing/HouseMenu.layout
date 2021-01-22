@@ -827,7 +827,7 @@ FrameWidgetClass rootFrame {
        }
       }
       PanelWidgetClass housingStorageMenuPanel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0.04843
        size 1 0.90314
@@ -894,8 +894,7 @@ FrameWidgetClass rootFrame {
         }
         ItemPreviewWidgetClass houseStoragePreview {
          ignorepointer 1
-         position 0 -0.14153
-         size 0.37877 0.68722
+         size 0.3788 0.61725
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -928,6 +927,84 @@ FrameWidgetClass rootFrame {
            style OldStyle
            text "#Transfer"
            text_proportion 0.7
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget23 {
+         ignorepointer 1
+         position 0 0
+         size 0.395 0.09
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass storageSpaceText {
+           ignorepointer 1
+           position 0.0178 0
+           size 0.71306 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Total_Storage_Space"
+           text_proportion 0.7
+           "text valign" center
+          }
+          TextWidgetClass totalStorageSpace {
+           ignorepointer 1
+           position 0.03 0
+           size 0.1956 1
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget24 {
+         ignorepointer 1
+         position 0 0.0855
+         size 0.395 0.09
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass storageSpaceAvailableText {
+           ignorepointer 1
+           position 0.0178 0
+           size 0.71306 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Storage_Space_Available"
+           text_proportion 0.7
+           "text valign" center
+          }
+          TextWidgetClass storageSpaceAvailable {
+           ignorepointer 1
+           position 0.03 0
+           size 0.1956 1
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "text halign" center
+           "text valign" center
           }
          }
         }
