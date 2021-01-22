@@ -460,8 +460,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass Sell_Storage_List {
-           position 0 0.15854
-           size 0.97195 0.64986
+           position 0 0.26084
+           size 0.97195 0.44526
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -591,6 +591,88 @@ FrameWidgetClass rootFrame {
              vexactsize 0
              style Bold
              text "#Alarm_System_Level"
+             "text valign" center
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget113 {
+           ignorepointer 1
+           position 0 0.31047
+           size 1 0.1079
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass soragelvlCount {
+             ignorepointer 1
+             position 0.01402 0.00923
+             size 0.477 0.71208
+             halign right_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Bold
+             text "123456789"
+             "text halign" right
+             "text valign" center
+            }
+            TextWidgetClass storagelvl {
+             ignorepointer 1
+             position 0.0152 0
+             size 0.47772 0.71208
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Bold
+             text "#Storage_lvl"
+             "text valign" center
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget114 {
+           ignorepointer 1
+           position 0 0.41378
+           size 1 0.1079
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass sorageItemCountMax {
+             ignorepointer 1
+             position 0.01402 0.00923
+             size 0.477 0.71208
+             halign right_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Bold
+             text "123456789"
+             "text halign" right
+             "text valign" center
+            }
+            TextWidgetClass storageItemMax {
+             ignorepointer 1
+             position 0.0152 0
+             size 0.47772 0.71208
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Bold
+             text "#Storage_Item_Max"
              "text valign" center
             }
            }
@@ -768,7 +850,7 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass inventoryListbox {
-           position 0 -0
+           position 0 0
            size 0.95379 0.97027
            halign center_ref
            valign center_ref
@@ -784,7 +866,7 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget21 {
          ignorepointer 1
-         position -0 0
+         position 0 0
          size 0.3036 1
          halign right_ref
          valign center_ref
