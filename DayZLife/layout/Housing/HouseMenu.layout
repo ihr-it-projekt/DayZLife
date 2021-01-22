@@ -606,7 +606,8 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextWidgetClass soragelvlCount {
+            TextWidgetClass storagelvlCount {
+             visible 1
              ignorepointer 1
              position 0.01402 0.00923
              size 0.477 0.71208
@@ -647,7 +648,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextWidgetClass sorageItemCountMax {
+            TextWidgetClass storageItemCountMax {
              ignorepointer 1
              position 0.01402 0.00923
              size 0.477 0.71208
