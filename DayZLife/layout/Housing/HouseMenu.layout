@@ -875,7 +875,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextListboxWidgetClass houseStorageAddListbox {
+            TextListboxWidgetClass inventoryAddListbox {
              position 0 0
              size 0.96104 0.9386
              halign center_ref
@@ -885,7 +885,7 @@ FrameWidgetClass rootFrame {
              hexactsize 0
              vexactsize 0
              "title visible" 1
-             colums "#add_to_House_Storage"
+             colums "#add_to_Player"
              lines 15
             }
            }
@@ -928,7 +928,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextListboxWidgetClass inventoryAddListbox {
+            TextListboxWidgetClass houseStorageAddListbox {
              position 0 0
              size 0.96104 0.9386
              halign center_ref
@@ -938,7 +938,7 @@ FrameWidgetClass rootFrame {
              hexactsize 0
              vexactsize 0
              "title visible" 1
-             colums "#add_to_Player"
+             colums "#add_to_House_Storage"
              lines 15
             }
            }
