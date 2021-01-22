@@ -27,12 +27,33 @@ class DZLHouseMenu : DZLBaseMenu
 	private ButtonWidget searchButton;
 	private EditBoxWidget searchInput;
 	
+	private TextListboxWidget playerInventoryList;
+	private TextListboxWidget playerInventoryAddList;
+	private TextListboxWidget houseInventoryList;
+	private TextListboxWidget houseInventoryAddList;
+	private ItemPreviewWidget inventoryPreview;
+	private ButtonWidget transferButton;
+	private TextWidget storagelvlCount;
+	private TextWidget storageItemCountMax;
+	private TextWidget totalStorageSpace;
+	private TextWidget storageSpaceAvailable;
+	
+	
 	private Widget houseBuy;
 	private Widget houseUpgrade;
 	private Widget houseKey;
+	private Widget houseInventoryWidget;
+	
 	private int indexPanel;
+	private int prevIndexPanel;
 
 	private ref array<ref DZLOnlinePlayer> noAccess;
+	private ref DZLHouseInventory inventory;
+
+	private int lastSelectedPlayerInventory;
+	private int lastSelectedPlayerAddInventory;
+	private int lastSelectedHouseInventory;
+	private int lastSelectedHouseAddInventory;
 
 	void DZLHouseMenu(){
 	    layoutPath = "DayZLife/layout/Housing/HouseMenu.layout";
@@ -40,6 +61,7 @@ class DZLHouseMenu : DZLBaseMenu
 	}
 	
 	void ~DZLHouseMenu(){
+	    DZLDisplayHelper.DeletePreviewItem();
         Destruct();
 	}
 
@@ -80,6 +102,20 @@ class DZLHouseMenu : DZLBaseMenu
 		keyPlayerAccessList = creator.GetTextListboxWidget("keyHasKeyList");
 		searchButton = creator.GetButtonWidget("searchButton");
 		searchInput = creator.GetEditBoxWidget("search_input");
+		
+		playerInventoryList = creator.GetTextListboxWidget("inventoryListbox");
+		playerInventoryAddList = creator.GetTextListboxWidget("inventoryAddListbox");
+		houseInventoryList = creator.GetTextListboxWidget("houseStorageListbox");
+		houseInventoryAddList = creator.GetTextListboxWidget("houseStorageAddListbox");
+		transferButton = creator.GetButtonWidget("transferButton");
+		inventoryPreview = creator.GetItemPreviewWidget("houseStoragePreview");
+		storageItemCountMax = creator.GetTextWidget("storageItemCountMax");
+		storagelvlCount = creator.GetTextWidget("storageItemCountMax");
+		totalStorageSpace = creator.GetTextWidget("totalStorageSpace");
+		storageSpaceAvailable = creator.GetTextWidget("storageSpaceAvailable");
+		
+		
+		houseInventoryWidget = creator.GetWidget("housingStorageMenuPanel");
 
 		GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
 
@@ -92,6 +128,11 @@ class DZLHouseMenu : DZLBaseMenu
 		upgardePriceBuyTextWidget.SetText("");
 	    upgradePriceSellTextWidget.SetText("");
 		alarmLevel.SetText("0");
+		storageItemCountMax.SetText(config.houseExtensions.maxHouseInventoryLevel.ToString());
+		storagelvlCount.SetText("0");
+		int maxSpace = config.houseExtensions.maxHouseInventoryLevel * config.houseExtensions.inventoryItemsPerLevel;
+		totalStorageSpace.SetText(maxSpace.ToString());
+		storageSpaceAvailable.SetText("0");
 		indexPanel = selectedPanel.GetCurrentItem();
 	    
 		if (actualHouseDef) {
@@ -138,17 +179,32 @@ class DZLHouseMenu : DZLBaseMenu
 	
 	override bool OnClick(Widget w, int x, int y, int button) {
 		if(super.OnClick(w, x, y, button)) return true;
-		
+		prevIndexPanel = indexPanel;
 		indexPanel = selectedPanel.GetCurrentItem();
 		int itemsHasBought = 0;
 	
 		switch(w){
 			case selectedPanel: 
-                houseBuy.Show(0 == indexPanel);
+				bool showInventory = false;
+                if (3 == indexPanel) {
+					showInventory = house.HasOwner() && house.IsOwner(player) && house.HasInventory();
+					if (!showInventory) {
+						if (prevIndexPanel == 2) {
+							indexPanel = 0;
+						} else {
+							indexPanel = 2;
+						}
+						selectedPanel.SetCurrentItem(indexPanel);
+					}
+				}
+				
+				houseInventoryWidget.Show(showInventory);
+				houseBuy.Show(0 == indexPanel);
                 sellButton.Show(0 == indexPanel && house.HasOwner() && house.IsOwner(player));
                 buyButton.Show(0 == indexPanel && (!house.HasOwner() || !house.IsOwner(player)));
                 houseUpgrade.Show(1 == indexPanel);
                 houseKey.Show(2 == indexPanel);
+				
 							
 				return true;
             case buyButton:
@@ -269,6 +325,40 @@ class DZLHouseMenu : DZLBaseMenu
 			case searchButton:
 				DZLDisplayHelper.SearchOnlinePlayers(searchInput.GetText(), keyPlayerList, keyPlayerAccessList, noAccess, player);
 				return true;
+		    case transferButton:
+		        array<string> storeOutItems = new array<string>;
+                int countStoreOutItems = playerInventoryAddList.GetNumItems();
+                array<EntityAI> storeInItems = new array<EntityAI>;
+                int countStoreInItems = houseInventoryAddList.GetNumItems();
+
+                DZLStoreItem outItem;
+                EntityAI inItem;
+                int z;
+
+                for(z = 0; z < countStoreOutItems; z++) {
+                    outItem = null;
+                    playerInventoryAddList.GetItemData(z, 0, outItem);
+
+					if (!outItem) continue;
+                    storeOutItems.Insert(outItem.id);
+                }
+
+
+                for(z = 0; z < countStoreInItems; z++) {
+                    inItem = null;
+                    houseInventoryAddList.GetItemData(z, 0, inItem);
+					
+					if (!inItem) continue;
+                    storeInItems.Insert(inItem);
+                }
+
+                if (storeOutItems.Count() == 0 && storeInItems.Count() == 0) {
+                    return true;
+                }
+
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_STORE_ITEMS, new Param4<string, vector, ref array<string>, ref array<EntityAI>>(house.GetDZLHouse().GetOwner(), building.GetPosition(), storeOutItems, storeInItems), true);
+
+		        return true;
             default:
                 break;
 		}
@@ -280,9 +370,39 @@ class DZLHouseMenu : DZLBaseMenu
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerList, keyPlayerAccessList);
         } else if (w == keyPlayerAccessList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerAccessList, keyPlayerList);
+        } else if (w == houseInventoryList) {
+            DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(houseInventoryList, houseInventoryAddList);
+        } else if (w == houseInventoryAddList) {
+            DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(houseInventoryAddList, houseInventoryList);
+        } else if (w == playerInventoryList) {
+            DZLDisplayHelper.MoveItemFromListWidgetToListWidget(playerInventoryList, playerInventoryAddList);
+        } else if (w == playerInventoryList) {
+            DZLDisplayHelper.MoveItemFromListWidgetToListWidget(playerInventoryAddList, playerInventoryList);
         }
 
         return false;
+    }
+
+    override void Update(float timeslice) {
+        super.Update(timeslice);
+        int currentSelectedPlayerInventory = playerInventoryList.GetSelectedRow();
+        int currentSelectedPlayerAddInventory = playerInventoryAddList.GetSelectedRow();
+        int currentSelectedHouseInventory = houseInventoryList.GetSelectedRow();
+        int currentSelectedHouseAddInventory = houseInventoryAddList.GetSelectedRow();
+
+        if (currentSelectedPlayerInventory != lastSelectedPlayerInventory) {
+            DZLDisplayHelper.UpdaterPreviewByEntityAI(playerInventoryList, inventoryPreview);
+            lastSelectedPlayerInventory = currentSelectedPlayerInventory;
+        } else if (currentSelectedPlayerAddInventory != lastSelectedPlayerAddInventory) {
+            DZLDisplayHelper.UpdaterPreviewByEntityAI(playerInventoryAddList, inventoryPreview);
+            lastSelectedPlayerAddInventory = currentSelectedPlayerAddInventory;
+        } else if (currentSelectedHouseInventory != lastSelectedHouseInventory) {
+            DZLDisplayHelper.UpdaterPreviewType(houseInventoryList, inventoryPreview);
+            lastSelectedHouseInventory = currentSelectedHouseInventory;
+        } else if (currentSelectedHouseAddInventory != lastSelectedHouseAddInventory) {
+            DZLDisplayHelper.UpdaterPreviewType(houseInventoryAddList, inventoryPreview);
+            lastSelectedHouseAddInventory = currentSelectedHouseAddInventory;
+        }
     }
 
 	override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
@@ -298,6 +418,11 @@ class DZLHouseMenu : DZLBaseMenu
             autoptr Param1<ref DZLBuilding> paramGetBuildingProperties;
             if (ctx.Read(paramGetBuildingProperties)){
                 house = paramGetBuildingProperties.param1;
+				
+				if (house && house.HasInventory()) {
+					GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), this.building.GetPosition()), true);
+				}
+				
                 UpdateGUI();
             }
         } else if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION_RESPONSE || rpc_type == DAY_Z_LIFE_SELL_STORAGE_RESPONSE) {
@@ -322,7 +447,38 @@ class DZLHouseMenu : DZLBaseMenu
 					keyPlayerAccessList.AddItem(playerAccess.name, playerAccess, 0);
 				}
             }
-        }
+        } else if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA) {
+			autoptr Param1<ref DZLHouseInventory> paramInventoryResponse;
+			if (ctx.Read(paramInventoryResponse)) {
+				inventory = paramInventoryResponse.param1;
+				
+				storagelvlCount.SetText(inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel).ToString());
+				storageSpaceAvailable.SetText(inventory.GetLeftStorage().ToString());
+				
+				houseInventoryList.ClearItems();
+				houseInventoryAddList.ClearItems();
+				playerInventoryList.ClearItems();
+				playerInventoryAddList.ClearItems();
+
+				array<EntityAI> playerItems = player.GetPlayerItems();
+				array<ref DZLStoreItem> houseInventoryItems = inventory.GetStore();
+				
+				foreach(DZLStoreItem storeItem: houseInventoryItems) {
+					houseInventoryList.AddItem(DZLDisplayHelper.GetItemDisplayName(storeItem.type), storeItem, 0);
+				}
+
+				foreach(EntityAI playerItem: playerItems) {
+					CargoBase cargo = playerItem.GetInventory().GetCargo();
+					if (cargo && cargo.GetItemCount() > 0) {
+					    continue;
+					}
+                    string name = "";
+                    GetGame().ObjectGetDisplayName(playerItem, name);
+
+					playerInventoryList.AddItem(name, playerItem, 0);
+				}
+			}
+		}
     }
 	
 	override void UpdateGUI(string message = "") {

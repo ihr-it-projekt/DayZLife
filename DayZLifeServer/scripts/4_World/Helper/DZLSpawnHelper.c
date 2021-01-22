@@ -84,6 +84,10 @@ class DZLSpawnHelper
             item = parent.GetInventory().CreateEntityInCargo(itemInStock.type);
         }
 
+        if (!item) {
+            item = parent.SpawnEntityOnGroundPos(itemInStock.type, parent.GetPosition());
+        }
+
         if (!item) return null;
 
         item.SetHealth(itemInStock.health);

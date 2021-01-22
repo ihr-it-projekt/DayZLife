@@ -1,5 +1,7 @@
 class DZLDisplayHelper
 {
+    static EntityAI previewItem;
+
     static string GetItemDisplayName(string itemClassname){
         TStringArray configs = new TStringArray;
         configs.Insert( CFG_VEHICLESPATH );
@@ -68,6 +70,7 @@ class DZLDisplayHelper
 
         return list;
     }
+
     static DZLPlayer GetDZLPlayerFromList(TextListboxWidget sourceWidget) {
         int pos = sourceWidget.GetSelectedRow();
         if (pos == -1) {
@@ -121,6 +124,114 @@ class DZLDisplayHelper
             }
         }
     }
-	
+
+	static void MoveItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
+        int pos = sourceWidget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        EntityAI item;
+        sourceWidget.GetItemData(pos, 0, item);
+
+        if (item) {
+            string name = "";
+            sourceWidget.GetItemText(pos, 0, name);
+            int index;
+            index = targetWidget.AddItem(name, item, 0);
+            sourceWidget.RemoveRow(pos);
+        }
+    }
+
+	static void MoveStoreItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
+        int pos = sourceWidget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        DZLStoreItem item;
+        sourceWidget.GetItemData(pos, 0, item);
+
+        if (item) {
+            string name = "";
+            sourceWidget.GetItemText(pos, 0, name);
+            int index;
+            index = targetWidget.AddItem(name, item, 0);
+            sourceWidget.RemoveRow(pos);
+        }
+    }
+
+    static void UpdaterPreviewByEntityAI(TextListboxWidget widget, ItemPreviewWidget preview) {
+        int pos = widget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        EntityAI item;
+        widget.GetItemData(pos, 0, item);
+
+        if (item) {
+            EntityAI currentItem = preview.GetItem();
+
+            if (currentItem && currentItem.GetType() == item.GetType()) return;
+
+            if (previewItem) {
+                GetGame().ObjectDelete(previewItem);
+            }
+
+            preview.SetItem(item);
+            preview.SetModelPosition(Vector(0,0,0.5));
+        }
+    }
+    static void UpdaterPreviewByStoreItem(TextListboxWidget widget, ItemPreviewWidget preview) {
+        int pos = widget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        DZLStoreItem itemType;
+        widget.GetItemData(pos, 0, itemType);
+
+        if (itemType) {
+            EntityAI currentItem = preview.GetItem();
+
+            if (currentItem && currentItem.GetType() == itemType.type) return;
+
+            if (previewItem) {
+                GetGame().ObjectDelete(previewItem);
+            }
+
+            previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
+
+            preview.SetItem(previewItem);
+            preview.SetModelPosition(Vector(0,0,0.5));
+        }
+    }
+
+    static void UpdaterPreviewType(TextListboxWidget widget, ItemPreviewWidget preview) {
+        int pos = widget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        DZLTraderType itemType;
+        widget.GetItemData(pos, 0, itemType);
+
+        if (itemType) {
+            EntityAI currentItem = preview.GetItem();
+
+            if (currentItem && currentItem.GetType() == itemType.type) return;
+
+            if (previewItem) {
+                GetGame().ObjectDelete(previewItem);
+            }
+
+            previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
+
+            preview.SetItem(previewItem);
+            preview.SetModelPosition(Vector(0,0,0.5));
+        }
+    }
+
+    static void DeletePreviewItem() {
+        if(previewItem) {
+            GetGame().ObjectDelete(previewItem);
+        }
+    }
 
 }

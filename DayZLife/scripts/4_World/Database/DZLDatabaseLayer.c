@@ -5,6 +5,7 @@ class DZLDatabaseLayer
     private ref map<string, ref DZLHouse> dzlHouses;
     private ref map<string, ref DZLPlayer> dzlPlayers;
     private ref map<string, ref DZLPlayerHouse> dzlPlayerHouses;
+    private ref map<string, ref DZLHouseInventory> dzlHouseInventory;
     private ref DZLPlayerIdentities dzlPlayerIdentities;
     private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
@@ -16,6 +17,7 @@ class DZLDatabaseLayer
         dzlHouses = new map<string, ref DZLHouse>;
         dzlPlayers = new map<string, ref DZLPlayer>;
         dzlPlayerHouses = new map<string, ref DZLPlayerHouse>;
+        dzlHouseInventory = new map<string, ref DZLHouseInventory>;
         dzlPlayerIdentities = new DZLPlayerIdentities;
         dzlLockedHouses = new DZLLockedHouses;
         storageCars = new map<string, ref DZLCarStorage>;
@@ -101,6 +103,23 @@ class DZLDatabaseLayer
             dzlPlayerHouses.Insert(playerId, house);
         }
         return house;
+    }
+
+    DZLHouseInventory GetHouseInventory(string playerId, vector position) {
+        DZLHouseInventory inventory;
+        if (!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
+            inventory = new DZLHouseInventory(playerId, position);
+            dzlHouseInventory.Insert(playerId + position.ToString(false), inventory);
+        }
+        return inventory;
+    }
+
+    void RemoveHouseInventory(string playerId, vector position) {
+        DZLHouseInventory inventory;
+        if (!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
+            dzlHouseInventory.Remove(playerId);
+            inventory.Delete();
+        }
     }
 
     DZLCarStorage GetPlayerCarStorage(string playerId) {

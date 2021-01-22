@@ -512,6 +512,7 @@ modded class PlayerBase
 		}
 	}
 
+
 	private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
         if(item.GetLowerCaseType() == ItemSearchType) {
             if(GetGame().IsServer()) {

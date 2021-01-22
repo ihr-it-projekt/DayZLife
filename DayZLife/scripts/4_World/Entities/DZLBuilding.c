@@ -61,6 +61,30 @@ class DZLBuilding
 
         return false;
 	}
+
+	bool CanBuyInventoryExtensionServer(DZLHouseExtensions config) {
+        if (house.HasInventory()) {
+            if (GetGame().IsServer()) {
+                DZLHouseInventory inventory = DZLDatabaseLayer.Get().GetHouseInventory(house.GetOwner(), house.GetPosition());
+                if (inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
+					return false;
+				}
+            }
+        }
+        return true;
+	}
+	
+	bool CanBuyInventoryExtensionClient(DZLHouseExtensions config, DZLHouseInventory inventory) {
+        if (house.HasInventory()) {
+            if (GetGame().IsClient()) {
+                if (inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
+					return false;
+				}
+            }
+        }
+        return true;
+	}
+	
 	
 	void SetHouseAlarm(DZLHouseExtension houseAlarm) {
 		if(!GetGame().IsClient()){
@@ -98,4 +122,7 @@ class DZLBuilding
 		return house;
 	}
 
+	bool HasInventory() {
+        return house.HasInventory();
+    }
 }

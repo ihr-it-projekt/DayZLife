@@ -11,7 +11,6 @@ class DZLTraderMenu: DZLBaseMenu
 	private TextWidget credits;
 	private ItemPreviewWidget preview;
 	private DZLTraderPosition position;
-	private EntityAI previewItem;
 
 	private int lastSelectedInventory;
 	private int lastSelectedSellCard;
@@ -29,9 +28,7 @@ class DZLTraderMenu: DZLBaseMenu
     }
 
     void ~DZLTraderMenu() {
-        if (previewItem){
-            GetGame().ObjectDelete(previewItem);
-        }
+        DZLDisplayHelper.DeletePreviewItem();
         Destruct();
     }
 
@@ -217,16 +214,16 @@ class DZLTraderMenu: DZLBaseMenu
         int currentSelectedTraderItemList = traderItemList.GetSelectedRow();
 
         if (currentSelectedInventory != lastSelectedInventory) {
-            UpdaterPreviewByEntityAI(inventory);
+            DZLDisplayHelper.UpdaterPreviewByEntityAI(inventory, preview);
             lastSelectedInventory = currentSelectedInventory;
         } else if (currentSelectedSellCard != lastSelectedSellCard) {
-            UpdaterPreviewByEntityAI(sellCard);
+            DZLDisplayHelper.UpdaterPreviewByEntityAI(sellCard, preview);
             lastSelectedSellCard = currentSelectedSellCard;
         } else if (currentSelectedTraderItemList != lastSelectedTraderItemList) {
-            UpdaterPreviewType(traderItemList);
+            DZLDisplayHelper.UpdaterPreviewType(traderItemList, preview);
             lastSelectedTraderItemList = currentSelectedTraderItemList;
         } else if (currentSelectedBuyCard != lastSelectedBuyCard) {
-            UpdaterPreviewType(buyCard);
+            DZLDisplayHelper.UpdaterPreviewType(buyCard, preview);
             lastSelectedBuyCard = currentSelectedBuyCard;
         }
 	}
@@ -271,7 +268,6 @@ class DZLTraderMenu: DZLBaseMenu
                     if (!carsScript) {
                         sellItems.Insert(sellItem);
                     } else if (!carsScript.isSold && carsScript.lastDriverId == player.GetIdentity().GetId()) {
-				
 						bool carIsEmpty = true;
 	                    for (int seat = 0; seat < carsScript.CrewSize(); seat++){
 		                	if (carsScript.CrewMember(seat)) {
@@ -360,51 +356,6 @@ class DZLTraderMenu: DZLBaseMenu
         }
     }
 	
-	private void UpdaterPreviewType(TextListboxWidget widget) {
-		int pos = widget.GetSelectedRow();
-   		if (pos == -1) {
-   			return;
-   		}
-   		DZLTraderType itemType;
-   		widget.GetItemData(pos, 0, itemType);
-
-   		if (itemType) {
-			EntityAI currentItem = preview.GetItem();
-			
-			if (currentItem && currentItem.GetType() == itemType.type) return;
-	
-			if (previewItem) {
-	            GetGame().ObjectDelete(previewItem);
-	        }
-	
-	        previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
-	
-			preview.SetItem(previewItem);
-			preview.SetModelPosition(Vector(0,0,0.5));
-		}
-	}
-	
-	private void UpdaterPreviewByEntityAI(TextListboxWidget widget) {
-		int pos = widget.GetSelectedRow();
-   		if (pos == -1) {
-   			return;
-   		}
-   		EntityAI item;
-   		widget.GetItemData(pos, 0, item);
-
-   		if (item) {
-			EntityAI currentItem = preview.GetItem();
-			
-			if (currentItem && currentItem.GetType() == item.GetType()) return;
-			
-			if (previewItem) {
-	            GetGame().ObjectDelete(previewItem);
-	        }
-			preview.SetItem(item);
-			preview.SetModelPosition(Vector(0,0,0.5));
-		}
-	}
-
     private void MoveItemFromListWidgetToListWidgetInventory(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, int factor) {
    		int pos = sourceWidget.GetSelectedRow();
    		if (pos == -1) {

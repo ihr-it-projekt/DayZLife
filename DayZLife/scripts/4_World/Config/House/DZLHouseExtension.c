@@ -6,6 +6,7 @@ class DZLHouseExtension : DZLIdModel
     int price;
 
     bool isHouseAlarm = false;
+    bool isHouseInventory = false;
     string message = "";
     int level;
 	

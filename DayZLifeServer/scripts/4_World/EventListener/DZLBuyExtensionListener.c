@@ -61,6 +61,13 @@ class DZLBuyExtensionListener
                                message = "#strorage_can_not_spawn";
                             }
                         }
+				    } else if (extension.isHouseInventory) {
+				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
+							buyPriceBuy = extension.price;
+                           	dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
+                           	dzlBuilding.SetHouseAlarm(extension);
+                           	message = "#successfully_buy_alarm_system";
+				        }
 				    } else {
 				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
 							buyPriceBuy = extension.price;

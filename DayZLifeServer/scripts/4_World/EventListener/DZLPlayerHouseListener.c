@@ -62,6 +62,42 @@ class DZLPlayerHouseListener
                 SendUpdateList(playerOwner, buildingUpdateKey);
 				DZLSendMessage(sender, "#keys_was_updated");
             }
+		} else if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA) {
+		    autoptr Param2<string, vector> paramInventory;
+            if (ctx.Read(paramInventory)){
+                DZLHouse houseInventory = DZLDatabaseLayer.Get().GetHouse(null, DZLHouse.GetFileNameByPosition(paramInventory.param2));
+                if (!houseInventory || !houseInventory.HasInventory()) return;
+
+				GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(DZLDatabaseLayer.Get().GetHouseInventory(paramInventory.param1, paramInventory.param2)), true, sender);
+            }
+		} else if (rpc_type == DAY_Z_LIFE_HOUSE_STORE_ITEMS) {
+		    autoptr Param4<string, vector, ref array<string>, ref array<EntityAI>> paramStoreInventory;
+            if (ctx.Read(paramStoreInventory)){
+                PlayerBase playerStore = PlayerBase.Cast(target);
+
+                if (!playerStore) return;
+                DZLHouse houseStore = DZLDatabaseLayer.Get().GetHouse(null, DZLHouse.GetFileNameByPosition(paramStoreInventory.param2));
+
+                if (!houseStore || !houseStore.HasInventory()) return;
+                DZLHouseInventory inventory = DZLDatabaseLayer.Get().GetHouseInventory(paramStoreInventory.param1, paramStoreInventory.param2);
+
+                if (!inventory) return;
+
+                foreach(string itemId: paramStoreInventory.param3) {
+                    DZLStoreItem storeOutItem = inventory.GetById(itemId);
+                    if (!storeOutItem) continue;
+
+                    if(DZLSpawnHelper.Add(playerStore, storeOutItem)) {
+                        inventory.Remove(storeOutItem);
+                    }
+                }
+
+                if (paramStoreInventory.param4.Count() > 0 && inventory.CanAddToStore(paramStoreInventory.param4)) {
+                    inventory.AddToStore(paramStoreInventory.param4);
+                }
+
+                GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
+            }
 		}
     }
 
