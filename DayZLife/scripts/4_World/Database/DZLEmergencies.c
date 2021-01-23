@@ -18,8 +18,13 @@ class DZLEmergencies
 	}
 
     void Remove(string playerId) {
-        emergencies.RemoveItem(playerId);
-    }
+		int removeIndex = emergencies.Find(playerId);
+
+		if (removeIndex >= 0){
+			emergencies.RemoveOrdered(removeIndex);
+        	Save();
+		}
+	}
 	
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
