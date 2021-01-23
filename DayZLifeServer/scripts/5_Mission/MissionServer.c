@@ -80,7 +80,8 @@ modded class MissionServer {
 	
 	override void OnClientDisconnectedEvent(PlayerIdentity identity, PlayerBase player, int logoutTime, bool authFailed) {
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
-		if (dzlPlayer.HasBetweenState()) {
+
+		if (100 > player.GetHealth("GlobalHealth", "Blood") || 7 > player.GetHealth("GlobalHealth", "Health") || dzlPlayer.HasBetweenState()) {
             player.SetCanBeDestroyed(true);
 		    player.SetHealth01("GlobalHealth", "Health", 0);
             player.SetHealth01("GlobalHealth", "Shock", 0);
