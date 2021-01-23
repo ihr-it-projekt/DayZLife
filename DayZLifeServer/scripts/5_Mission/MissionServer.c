@@ -27,17 +27,19 @@ modded class MissionServer {
     override void HandleBody(PlayerBase player) {
         if (player.IsAlive() && !player.IsRestrained() && !player.IsUnconscious()) {
             // remove the body
-            player.Delete();
+			player.Delete();
         } else if (player.IsUnconscious() || player.IsRestrained() || (100 >= player.GetHealth("GlobalHealth", "Blood") && 7 >= player.GetHealth("GlobalHealth", "Health")))  {
             // kill character
             player.SetCanBeDestroyed(true);
             player.SetHealth("", "", 0.0);
+			DZLDatabaseLayer.Get().GetEmergencies().Remove(player.GetIdentity().GetId());
         }
     }
 	
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
 		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
+			DZLDatabaseLayer.Get().GetEmergencies().Remove(identity.GetId());
 		    DZLStoreItem playerData = dzlPlayer.GetPlayerData();
 
             string type = "SurvivorF_Judy";
@@ -87,6 +89,7 @@ modded class MissionServer {
             player.SetHealth01("GlobalHealth", "Shock", 0);
             player.SetHealth01("GlobalHealth", "Blood", 0);
 			dzlPlayer.ResetDeadState();
+			DZLDatabaseLayer.Get().GetEmergencies().Remove(identity.GetId());
 		} 
 		
 		super.OnClientDisconnectedEvent(identity, player, logoutTime, authFailed);
