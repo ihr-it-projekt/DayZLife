@@ -207,6 +207,11 @@ class DZLPlayer
         Save();
     }
 
+    void SetBetweenState() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_BETWEEN;
+        Save();
+    }
+
     void ResetDeadState() {
         deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
         itemsStore = new array<ref DZLStoreItem>;;
@@ -240,6 +245,10 @@ class DZLPlayer
 
     bool HasNoDieState() {
         return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
+    }
+
+    bool HasBetweenState() {
+        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_BETWEEN;
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {

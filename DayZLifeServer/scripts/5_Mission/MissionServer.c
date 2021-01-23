@@ -69,6 +69,13 @@ modded class MissionServer {
             m_player.SetHealth01("GlobalHealth", "Shock", factorShock);
             m_player.SetHealth01("GlobalHealth", "Blood", factor);
 
+		} else if (dzlPlayer.HasBetweenState()) {
+		    super.OnClientNewEvent(identity, pos, ctx);
+            m_player.SetCanBeDestroyed(true);
+		    m_player.SetHealth01("GlobalHealth", "Health", 0);
+            m_player.SetHealth01("GlobalHealth", "Shock", 0);
+            m_player.SetHealth01("GlobalHealth", "Blood", 0);
+            m_player.RemoveAllItems();
 		} else {
 		    super.OnClientNewEvent(identity, pos, ctx);
 		    GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);

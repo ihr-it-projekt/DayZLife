@@ -2,7 +2,7 @@ class DZLMedicHealth
 {
 	static void CheckHealth(PlayerBase player, PlayerIdentity playerIdentity) {
 	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-	    if (!dzlPlayer.HasNoDieState()) return;
+	    if (!dzlPlayer.HasNoDieState() && !dzlPlayer.HasBetweenState()) return;
 	    bool showMedicHelpMenu = false;
         if (100 > player.GetHealth("GlobalHealth", "Blood")) {
             player.SetHealth("GlobalHealth", "Blood", 50);
@@ -17,7 +17,12 @@ class DZLMedicHealth
         }
 
         if (showMedicHelpMenu == true) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER, null, true, playerIdentity);
+            if (!dzlPlayer.HasBetweenState()) {
+                dzlPlayer.SetBetweenState();
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER, null, true, playerIdentity);
+            }
+        } else if (showMedicHelpMenu == false && dzlPlayer.HasBetweenState()) {
+            dzlPlayer.ResetDeadState();
         }
 	}
 
