@@ -27,7 +27,7 @@ modded class ActionOpenDoors
 					
 				if (GetGame().IsServer()) {
 	                DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
-	                if (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex) || dzlPlayer.IsActiveAsCop()) {
+	                if (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex) || DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId)) {
 	                    return true;
 	                }
 					return false;
