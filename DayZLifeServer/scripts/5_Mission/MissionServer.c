@@ -68,14 +68,6 @@ modded class MissionServer {
 			m_player.SetHealth01("GlobalHealth", "Health", factor);
             m_player.SetHealth01("GlobalHealth", "Shock", factorShock);
             m_player.SetHealth01("GlobalHealth", "Blood", factor);
-
-		} else if (dzlPlayer.HasBetweenState()) {
-		    super.OnClientNewEvent(identity, pos, ctx);
-            m_player.RemoveAllItems();
-            m_player.SetCanBeDestroyed(true);
-		    m_player.SetHealth01("GlobalHealth", "Health", 10);
-            m_player.SetHealth01("GlobalHealth", "Shock", 0);
-            m_player.SetHealth01("GlobalHealth", "Blood", 10);
 		} else {
 		    super.OnClientNewEvent(identity, pos, ctx);
 		    GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
@@ -85,4 +77,18 @@ modded class MissionServer {
 
 		return m_player;
 	}
+	
+	override void OnClientDisconnectedEvent(PlayerIdentity identity, PlayerBase player, int logoutTime, bool authFailed) {
+		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
+		if (dzlPlayer.HasBetweenState()) {
+            player.SetCanBeDestroyed(true);
+		    player.SetHealth01("GlobalHealth", "Health", 0);
+            player.SetHealth01("GlobalHealth", "Shock", 0);
+            player.SetHealth01("GlobalHealth", "Blood", 0);
+			dzlPlayer.ResetDeadState();
+		} 
+		
+		super.OnClientDisconnectedEvent(identity, player, logoutTime, authFailed);
+	}
+	 
 }
