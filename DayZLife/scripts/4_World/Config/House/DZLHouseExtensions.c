@@ -24,7 +24,7 @@ class DZLHouseExtensions
             extensions.Insert(new DZLInventoryExtension("70", "#desc_house_inventory", pricePerLevelHouseInventory, inventoryItemsPerLevel));
             pricePerLevelHouseInventory = 5000;
             inventoryItemsPerLevel = 10;
-            maxHouseInventoryLevel = 500;
+            maxHouseInventoryLevel = 50;
             version = "2";
             Save();
         }

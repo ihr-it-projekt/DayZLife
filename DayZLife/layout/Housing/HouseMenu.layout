@@ -484,6 +484,7 @@ FrameWidgetClass rootFrame {
            style editor_quad_dark
            {
             TextWidgetClass Price_Buy_UpgradePanel {
+             visible 1
              ignorepointer 1
              position 0.01525 0
              size 0.47709 0.71208

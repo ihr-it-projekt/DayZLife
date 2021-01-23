@@ -128,10 +128,10 @@ class DZLHouseMenu : DZLBaseMenu
 		upgardePriceBuyTextWidget.SetText("");
 	    upgradePriceSellTextWidget.SetText("");
 		alarmLevel.SetText("0");
-		storageItemCountMax.SetText(config.houseExtensions.maxHouseInventoryLevel.ToString());
-		storagelvlCount.SetText("0");
 		int maxSpace = config.houseExtensions.maxHouseInventoryLevel * config.houseExtensions.inventoryItemsPerLevel;
-		totalStorageSpace.SetText(maxSpace.ToString());
+		storageItemCountMax.SetText(maxSpace.ToString());
+		storagelvlCount.SetText("0");
+
 		storageSpaceAvailable.SetText("0");
 	    
 		if (actualHouseDef) {
@@ -170,7 +170,7 @@ class DZLHouseMenu : DZLBaseMenu
                 houseUpgrade.Show(indexHouseUpgrade == indexPanel);
                 houseKey.Show(indexHouseKey == indexPanel);
                 sellButton.Show(indexHouseBuy == indexPanel && house.HasOwner() && house.IsOwner(player));
-                buyButton.Show(indexHouseBuy == indexPanel && (!house.HasOwner() || !house.IsOwner(player)));
+                buyButton.Show(indexHouseBuy == indexPanel && !house.HasOwner());
 
 				return true;
             case buyButton:
@@ -221,6 +221,8 @@ class DZLHouseMenu : DZLBaseMenu
                     if (canBuy) {
                         GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION, new Param2<ref Building, string>(building, currentItemBuy.id), true);
                     }
+
+                    buyButton.Show(false);
 				}
                 return true;
             case sellButton:
@@ -448,8 +450,7 @@ class DZLHouseMenu : DZLBaseMenu
 			if (ctx.Read(paramInventoryResponse)) {
 				inventory = paramInventoryResponse.param1;
 				
-				storagelvlCount.SetText(inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel).ToString());
-				storageSpaceAvailable.SetText(inventory.GetLeftStorage().ToString());
+
 				
 				houseInventoryList.ClearItems();
 				houseInventoryAddList.ClearItems();
@@ -556,6 +557,13 @@ class DZLHouseMenu : DZLBaseMenu
         }
 
 		balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
+
+		if (inventory) {
+		    storagelvlCount.SetText(inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel).ToString());
+		    upgardePriceBuyTextWidget.SetText("");
+            storageSpaceAvailable.SetText(inventory.GetLeftStorage().ToString());
+		}
+
         int indexPanel = selectedPanel.GetCurrentItem();
 
         if (indexPanel == indexHouseBuy && house && house.HasOwner() && house.IsOwner(player)) {

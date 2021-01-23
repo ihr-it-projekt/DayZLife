@@ -76,7 +76,6 @@ class DZLBuyExtensionListener
 
 				        buyPriceBuy = config.houseExtensions.pricePerLevelHouseInventory * factor;
 				        if (dzlBuilding.CanBuyInventoryExtensionServer(config.houseExtensions) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
-							buyPriceBuy = extension.price;
                            	dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
 
                            	if (!inventory) {
@@ -87,6 +86,7 @@ class DZLBuyExtensionListener
                            	inventory.IncreaseStorage(config.houseExtensions.inventoryItemsPerLevel);
 
                            	message = "#successfully_extend_storage";
+                           	GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
 				        }
 				    } else {
 				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
