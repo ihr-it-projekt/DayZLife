@@ -530,7 +530,7 @@ class DZLHouseMenu : DZLBaseMenu
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), building.GetPosition()), true);
                 }
 		    } else if (house.HasOwner() && !house.IsOwner(player)) {
-		        if (indexHouseInventor == -1 && (!house.HasLockedDoors() && house.HasInventory() || (config.adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop())) && inventory) {
+		        if (indexHouseInventor == -1 && (!house.HasLockedDoors() || house.HasPlayerAccess(dzlPlayer.dayZPlayerId) || (config.adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop())) && house.HasInventory() && inventory) {
                     selectedPanel.AddItem("#House_Storage");
                     indexHouseInventor = selectedPanel.GetNumItems() - 1;
                 } else if (indexHouseInventor != -1) {
