@@ -549,7 +549,7 @@ class DZLHouseMenu : DZLBaseMenu
 			    }
 
 			    if (dzlPlayer.IsActiveAsCop()) {
-			        player.DisplayMessage("#owner_is" + house.GetOwnerName());
+			        player.DisplayMessage("#owner_is: " + house.GetOwnerName());
 			    } else {
 			        player.DisplayMessage("#building_has_alrready_an_owner");
 			    }
