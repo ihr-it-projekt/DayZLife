@@ -18,10 +18,8 @@ modded class InGameMenu
 	}
 
 	override protected void GameRespawn(bool random) {
-	    DebugMessageDZL("GameRespawn");
 	    PlayerBase player = PlayerBaseHelper.GetPlayer();
 	    player.SetAllowDamage(true);
-	   // player.KillPlayer();
 	    super.GameRespawn(random);
 	}
 };

@@ -57,13 +57,7 @@ class ActionOpenHouseMenu: ActionInteractBase
 
 		if (GetGame().IsServer()) {
 		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-            DZLBuilding building = DZLBuildingHelper.ActionTargetToDZLBuilding(target);
-
-            if (building && (!building.HasOwner() || (building.HasOwner() && building.IsOwner(player)))) {
-                return true;
-            } else {
-                DZLSendMessage(player.GetIdentity(), "#building_has_alrready_an_owner");
-            }
+		    return true;
         }
 
 		return false;

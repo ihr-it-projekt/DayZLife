@@ -45,6 +45,7 @@ class DZLAlmanacListener
                             }
                         }
 
+                        DZLDatabaseLayer.Get().RemoveHouseInventory(house.GetOwner(), house.GetPosition());
                         house.RemoveOwner();
 
                         DZLDatabaseLayer.Get().RemoveHouse(house.GetFileName());

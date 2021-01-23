@@ -114,14 +114,6 @@ class DZLDatabaseLayer
         return inventory;
     }
 
-    void RemoveHouseInventory(string playerId, vector position) {
-        DZLHouseInventory inventory;
-        if (!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
-            dzlHouseInventory.Remove(playerId);
-            inventory.Delete();
-        }
-    }
-
     DZLCarStorage GetPlayerCarStorage(string playerId) {
         DZLCarStorage storageCar;
         if (!storageCars.Find(playerId, storageCar)) {
@@ -129,6 +121,14 @@ class DZLDatabaseLayer
             storageCars.Insert(playerId, storageCar);
         }
         return storageCar;
+    }
+
+    void RemoveHouseInventory(string playerId, vector position) {
+        DZLHouseInventory inventory;
+        if (!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
+            dzlHouseInventory.Remove(playerId);
+            inventory.Delete();
+        }
     }
 
     void RemovePlayerHouse(string playerId) {

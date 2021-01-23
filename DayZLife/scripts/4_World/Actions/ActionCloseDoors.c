@@ -10,8 +10,10 @@ modded class ActionCloseDoors
             DZLPlayer dzlPlayer =  player.GetDZLPlayer();
             if (GetGame().IsServer()) {
                definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
-            } else {
+            } else if (player && player.config && player.config.houseConfig) {
                definition = player.config.houseConfig.GetCopHouseDefinition(building);
+            } else {
+                return false;
             }
 
             if(definition) {

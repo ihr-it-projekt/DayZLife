@@ -57,10 +57,16 @@ class DZLConfig
     }
 
 	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
-		return houseConfig.houseConfigs;
+	    if (houseConfig && houseConfig.houseConfigs) {
+		    return houseConfig.houseConfigs;
+	    }
+	    return null;
 	}
 
 	ref array<ref DZLHouseExtension> GetExtensions() {
-		return houseExtensions.extensions;
+	    if (houseExtensions && houseExtensions.extensions) {
+            return houseExtensions.extensions;
+        }
+        return null;
 	}
 }

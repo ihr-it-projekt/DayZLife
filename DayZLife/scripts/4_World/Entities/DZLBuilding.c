@@ -27,8 +27,13 @@ class DZLBuilding
     void SellOnServer(PlayerBase player) {
         if(!GetGame().IsClient()){
             house.RemoveOwner();
+            if (house.HasInventory()) {
+                DZLDatabaseLayer.Get().RemoveHouseInventory(house.GetOwner(), house.GetPosition());
+            }
+            house.DisableInventory();
             ref DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
             playerHouse.RemoveKey(house);
+
         }
     }
 	
@@ -122,7 +127,15 @@ class DZLBuilding
 		return house;
 	}
 
+	string GetOwnerName() {
+	    return house.GetOwnerName();
+    }
+
 	bool HasInventory() {
         return house.HasInventory();
+    }
+
+    bool HasLockedDoors() {
+        return house.HasLockedDoors();
     }
 }

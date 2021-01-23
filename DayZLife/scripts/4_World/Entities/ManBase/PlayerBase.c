@@ -274,6 +274,7 @@ modded class PlayerBase
 
 	DZLHouseDefinition FindHouseDefinition(Building building) {
 		array<ref DZLHouseDefinition> houseConfigs = GetConfig().GetHouseDefinitions();
+		if (!houseConfigs) return null;
 		foreach(DZLHouseDefinition definition: houseConfigs) {
                 if (definition.houseType == building.GetType()) {
 					return definition;

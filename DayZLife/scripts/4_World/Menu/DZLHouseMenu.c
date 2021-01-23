@@ -38,15 +38,16 @@ class DZLHouseMenu : DZLBaseMenu
 	private TextWidget totalStorageSpace;
 	private TextWidget storageSpaceAvailable;
 	
-	
 	private Widget houseBuy;
 	private Widget houseUpgrade;
 	private Widget houseKey;
 	private Widget houseInventoryWidget;
-	
-	private int indexPanel;
-	private int prevIndexPanel;
 
+	private int indexHouseBuy = -1;
+	private int indexHouseUpgrade = -1;
+	private int indexHouseKey = -1;
+	private int indexHouseInventor = -1;
+	
 	private ref array<ref DZLOnlinePlayer> noAccess;
 	private ref DZLHouseInventory inventory;
 
@@ -114,7 +115,6 @@ class DZLHouseMenu : DZLBaseMenu
 		totalStorageSpace = creator.GetTextWidget("totalStorageSpace");
 		storageSpaceAvailable = creator.GetTextWidget("storageSpaceAvailable");
 		
-		
 		houseInventoryWidget = creator.GetWidget("housingStorageMenuPanel");
 
 		GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
@@ -133,82 +133,49 @@ class DZLHouseMenu : DZLBaseMenu
 		int maxSpace = config.houseExtensions.maxHouseInventoryLevel * config.houseExtensions.inventoryItemsPerLevel;
 		totalStorageSpace.SetText(maxSpace.ToString());
 		storageSpaceAvailable.SetText("0");
-		indexPanel = selectedPanel.GetCurrentItem();
 	    
 		if (actualHouseDef) {
 	        super.OnShow();
-		   
-            balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
-        
+
 	        priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
             storageTextWidget.SetText(actualHouseDef.GetMaxStorage().ToString());
-			
+
 			vector mapPos;
 			float scale;
-
 			preview.UpdatePreview(actualHouseDef.houseType);
 			
 			if(player && !player.GetLastMapInfo(scale, mapPos)) {
                 mapPos = GetGame().GetCurrentCameraPosition();
 			}
-			
+
+			selectedPanel.AddItem("#Housing_Menu");
+			indexHouseBuy = selectedPanel.GetNumItems() - 1;
 			houseBuy.Show(true);
-			
-			selectedPanel.AddItem("#Housing_Menu");	
-
-            buyButton.Show(false);
-            sellButton.Show(false);
-
-			if (house && house.HasOwner() && house.IsOwner(player)) {
-				selectedPanel.AddItem("#Housing_Upgrade_Menu");
-				selectedPanel.AddItem("#Key_Menu");
-				if (0 == indexPanel) {
-				    buyButton.Show(false);
-                    sellButton.Show(true);
-				} else {
-				    buyButton.Show(true);
-                    sellButton.Show(false);
-				}
-			}
-
 
 			DZLDisplayHelper.UpdateMap(mapWidget, mapPos);
+            UpdateGUI();
         }
 	}
 	
 	override bool OnClick(Widget w, int x, int y, int button) {
 		if(super.OnClick(w, x, y, button)) return true;
-		prevIndexPanel = indexPanel;
-		indexPanel = selectedPanel.GetCurrentItem();
 		int itemsHasBought = 0;
-	
+		int indexPanel = -1;
 		switch(w){
-			case selectedPanel: 
-				bool showInventory = false;
-                if (3 == indexPanel) {
-					showInventory = house.HasOwner() && house.IsOwner(player) && house.HasInventory();
-					if (!showInventory) {
-						if (prevIndexPanel == 2) {
-							indexPanel = 0;
-						} else {
-							indexPanel = 2;
-						}
-						selectedPanel.SetCurrentItem(indexPanel);
-					}
-				}
-				
-				houseInventoryWidget.Show(showInventory);
-				houseBuy.Show(0 == indexPanel);
-                sellButton.Show(0 == indexPanel && house.HasOwner() && house.IsOwner(player));
-                buyButton.Show(0 == indexPanel && (!house.HasOwner() || !house.IsOwner(player)));
-                houseUpgrade.Show(1 == indexPanel);
-                houseKey.Show(2 == indexPanel);
-				
-							
+			case selectedPanel:
+			    indexPanel = selectedPanel.GetCurrentItem();
+				houseInventoryWidget.Show(indexHouseInventor == indexPanel);
+				houseBuy.Show(indexHouseBuy == indexPanel);
+                houseUpgrade.Show(indexHouseUpgrade == indexPanel);
+                houseKey.Show(indexHouseKey == indexPanel);
+                sellButton.Show(indexHouseBuy == indexPanel && house.HasOwner() && house.IsOwner(player));
+                buyButton.Show(indexHouseBuy == indexPanel && (!house.HasOwner() || !house.IsOwner(player)));
+
 				return true;
             case buyButton:
-                if (0 == indexPanel) {
+                indexPanel = selectedPanel.GetCurrentItem();
+                if (indexHouseBuy == indexPanel) {
                     if (actualHouseDef) {
                         if (dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
                             GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_BUY_BUILDING, new Param1<ref Building>(building), true);
@@ -218,7 +185,7 @@ class DZLHouseMenu : DZLBaseMenu
                     } else {
                         player.DisplayMessage("#error_please_reopen_menu");
                     }
-				} else if (1 == indexPanel) {
+				} else if (indexHouseUpgrade == indexPanel) {
 				    int itemPosBuy = extensionListTextWidget.GetSelectedRow();
                     DZLHouseExtension currentItemBuy;
                     extensionListTextWidget.GetItemData(itemPosBuy, 0, currentItemBuy);
@@ -257,9 +224,10 @@ class DZLHouseMenu : DZLBaseMenu
 				}
                 return true;
             case sellButton:
-                if (0 == indexPanel && house && house.HasOwner() && house.IsOwner(player)) {
+                indexPanel = selectedPanel.GetCurrentItem();
+                if (indexHouseBuy == indexPanel && house && house.HasOwner() && house.IsOwner(player)) {
                     GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_SELL_BUILDING, new Param1<ref Building>(building), true);
-                } else if (1 == indexPanel) {
+                } else if (indexHouseUpgrade == indexPanel) {
                     int itemPosStorageSell = sellStorageListTextWidget.GetSelectedRow();
                     DZLStorageTypeBought currentItemStorageSell;
                     sellStorageListTextWidget.GetItemData(itemPosStorageSell, 0, currentItemStorageSell);
@@ -398,13 +366,13 @@ class DZLHouseMenu : DZLBaseMenu
         } else if (w == keyPlayerAccessList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerAccessList, keyPlayerList);
         } else if (w == houseInventoryList) {
-            DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(houseInventoryList, houseInventoryAddList);
+            DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(houseInventoryList, playerInventoryAddList);
         } else if (w == houseInventoryAddList) {
-            DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(houseInventoryAddList, houseInventoryList);
+            DZLDisplayHelper.MoveItemFromListWidgetToListWidget(houseInventoryAddList, playerInventoryList);
         } else if (w == playerInventoryList) {
-            DZLDisplayHelper.MoveItemFromListWidgetToListWidget(playerInventoryList, playerInventoryAddList);
-        } else if (w == playerInventoryList) {
-            DZLDisplayHelper.MoveItemFromListWidgetToListWidget(playerInventoryAddList, playerInventoryList);
+            DZLDisplayHelper.MoveItemFromListWidgetToListWidget(playerInventoryList, houseInventoryAddList);
+        } else if (w == playerInventoryAddList) {
+            DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(playerInventoryAddList, houseInventoryList);
         }
 
         return false;
@@ -421,13 +389,13 @@ class DZLHouseMenu : DZLBaseMenu
             DZLDisplayHelper.UpdaterPreviewByEntityAI(playerInventoryList, inventoryPreview);
             lastSelectedPlayerInventory = currentSelectedPlayerInventory;
         } else if (currentSelectedPlayerAddInventory != lastSelectedPlayerAddInventory) {
-            DZLDisplayHelper.UpdaterPreviewByEntityAI(playerInventoryAddList, inventoryPreview);
+            DZLDisplayHelper.UpdaterPreviewByStoreItem(playerInventoryAddList, inventoryPreview);
             lastSelectedPlayerAddInventory = currentSelectedPlayerAddInventory;
         } else if (currentSelectedHouseInventory != lastSelectedHouseInventory) {
-            DZLDisplayHelper.UpdaterPreviewType(houseInventoryList, inventoryPreview);
+            DZLDisplayHelper.UpdaterPreviewByStoreItem(houseInventoryList, inventoryPreview);
             lastSelectedHouseInventory = currentSelectedHouseInventory;
         } else if (currentSelectedHouseAddInventory != lastSelectedHouseAddInventory) {
-            DZLDisplayHelper.UpdaterPreviewType(houseInventoryAddList, inventoryPreview);
+            DZLDisplayHelper.UpdaterPreviewByEntityAI(houseInventoryAddList, inventoryPreview);
             lastSelectedHouseAddInventory = currentSelectedHouseAddInventory;
         }
     }
@@ -473,8 +441,9 @@ class DZLHouseMenu : DZLBaseMenu
 				foreach(DZLOnlinePlayer playerAccess: access) {
 					keyPlayerAccessList.AddItem(playerAccess.name, playerAccess, 0);
 				}
+				UpdateGUI();
             }
-        } else if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA) {
+        } else if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE) {
 			autoptr Param1<ref DZLHouseInventory> paramInventoryResponse;
 			if (ctx.Read(paramInventoryResponse)) {
 				inventory = paramInventoryResponse.param1;
@@ -495,8 +464,9 @@ class DZLHouseMenu : DZLBaseMenu
 				}
 
 				foreach(EntityAI playerItem: playerItems) {
-					CargoBase cargo = playerItem.GetInventory().GetCargo();
-					if (cargo && cargo.GetItemCount() > 0) {
+					GameInventory itemInventory = playerItem.GetInventory();
+					CargoBase cargo = itemInventory.GetCargo();
+					if (cargo && cargo.GetItemCount() > 0 || player == playerItem || itemInventory.IsAttachment()) {
 					    continue;
 					}
                     string name = "";
@@ -512,70 +482,96 @@ class DZLHouseMenu : DZLBaseMenu
 	
 	override void UpdateGUI(string message = "") {
 	    super.UpdateGUI(message);
-		
-		balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
-		
-		if (indexPanel == 0 && house && house.HasOwner() && house.IsOwner(player)) {
-			sellButton.Show(true);
-			buyButton.Show(false);
-			
-		} else if (indexPanel == 0 && house && house.HasOwner() && !house.IsOwner(player)) {
-			sellButton.Show(false);
-			buyButton.Show(false);
-			player.DisplayMessage("#building_has_already_an_owner");
-			
-		} else if (indexPanel == 0 && house && !house.HasOwner()) {
-			sellButton.Show(false);
-			buyButton.Show(true);
-			
-		} else if (indexPanel == 0 && !house) {
-			sellButton.Show(false);
-			buyButton.Show(false);
-		} 
-		
+
 		if (house) {
-			if (house.HasOwner() && house.IsOwner(player) && selectedPanel.GetNumItems() == 1) {
-				selectedPanel.AddItem("#Housing_Upgrade_Menu");
-				selectedPanel.AddItem("#Key_Menu");
-			} else if(selectedPanel.GetNumItems() > 1 && (!house.HasOwner() || house.IsOwner(player))) {
-				selectedPanel.RemoveItem(2);
-				selectedPanel.RemoveItem(1);
-			}
-			
-            extensionListTextWidget.ClearItems();
-            if (house.HasAlarmSystem()) {
-                alarmLevel.SetText(house.GetHouseAlarm().level.ToString());
-            }
+		    if (house.HasOwner() && house.IsOwner(player)) {
+		        extensionListTextWidget.ClearItems();
+                if (house.HasAlarmSystem()) {
+                    alarmLevel.SetText(house.GetHouseAlarm().level.ToString());
+                }
 
-            array<ref DZLHouseExtension> extensions = config.GetExtensions();
-            foreach(DZLHouseExtension extension: extensions) {
-                string name = "";
-                if (extension.isStorage) {
-                    name = DZLDisplayHelper.GetItemDisplayName(extension.type);
-                } else if(extension.isHouseAlarm) {
-                    if (house.CanBuyAlarm(extension)) {
-                        name = extension.type;
+                array<ref DZLHouseExtension> extensions = config.GetExtensions();
+                foreach(DZLHouseExtension extension: extensions) {
+                    string name = "";
+                    if (extension.isStorage) {
+                        name = DZLDisplayHelper.GetItemDisplayName(extension.type);
+                    } else if(extension.isHouseAlarm) {
+                        if (house.CanBuyAlarm(extension)) {
+                            name = extension.type;
+                        }
+                    } else if(extension.isHouseInventory && house.CanBuyInventoryExtensionClient(config.houseExtensions, inventory)) {
+                        name = "#House_Storage";
                     }
-                } else if(extension.isHouseInventory && house.CanBuyInventoryExtensionClient(config.houseExtensions, inventory)) {
-                    name = "#House_Storage";
+
+                    if (name) {
+                        extensionListTextWidget.AddItem(name, extension, 0);
+                    }
                 }
 
-                if (name) {
-                    extensionListTextWidget.AddItem(name, extension, 0);
+                sellStorageListTextWidget.ClearItems();
+                array<ref DZLStorageTypeBought> storagesBought = house.GetStorage();
+                foreach(DZLStorageTypeBought storageBought: storagesBought) {
+                    sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageBought.storageType.type), storageBought, 0);
                 }
-            }
 
-            sellStorageListTextWidget.ClearItems();
-            array<ref DZLStorageTypeBought> storagesBought = house.GetStorage();
-            foreach(DZLStorageTypeBought storageBought: storagesBought) {
-                sellStorageListTextWidget.AddItem(DZLDisplayHelper.GetItemDisplayName(storageBought.storageType.type), storageBought, 0);
-            }
+		        if (indexHouseUpgrade == -1) {
+		            selectedPanel.AddItem("#Housing_Upgrade_Menu");
+                    indexHouseUpgrade = selectedPanel.GetNumItems() - 1;
+		        }
+                if (indexHouseKey == -1){
+                    selectedPanel.AddItem("#Key_Menu");
+                    indexHouseKey = selectedPanel.GetNumItems() - 1;
+                }
+                if (indexHouseInventor == -1 && house.HasInventory() && inventory) {
+                    selectedPanel.AddItem("#House_Storage");
+                    indexHouseInventor = selectedPanel.GetNumItems() - 1;
+                } else if(indexHouseInventor == -1 && house.HasInventory() && !inventory) {
+                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), building.GetPosition()), true);
+                }
+		    } else if (house.HasOwner() && !house.IsOwner(player)) {
+		        if (indexHouseInventor == -1 && !house.HasLockedDoors() && house.HasInventory() && inventory) {
+                    selectedPanel.AddItem("#House_Storage");
+                    indexHouseInventor = selectedPanel.GetNumItems() - 1;
+                } else if (indexHouseInventor != -1) {
+				    selectedPanel.RemoveItem(indexHouseInventor);
+				    indexHouseInventor = -1;
+			    }
+
+			    if (indexHouseKey != -1) {
+				    selectedPanel.RemoveItem(indexHouseKey);
+				    indexHouseKey = -1;
+			    }
+
+			    if (indexHouseUpgrade != -1) {
+				    selectedPanel.RemoveItem(indexHouseUpgrade);
+				    indexHouseUpgrade = -1;
+			    }
+
+			    if (dzlPlayer.IsActiveAsCop()) {
+			        player.DisplayMessage("#owner_is" + house.GetOwnerName());
+			    } else {
+			        player.DisplayMessage("#building_has_alrready_an_owner");
+			    }
+			}
         }
-		
-		if (indexPanel == 1) {
-			sellButton.Show(false);
+
+		balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
+        int indexPanel = selectedPanel.GetCurrentItem();
+
+        if (indexPanel == indexHouseBuy && house && house.HasOwner() && house.IsOwner(player)) {
+            sellButton.Show(true);
             buyButton.Show(false);
-		}
+
+        } else if (indexPanel == indexHouseBuy && house && house.HasOwner() && !house.IsOwner(player)) {
+            sellButton.Show(false);
+            buyButton.Show(false);
+        } else if (indexPanel == indexHouseBuy && house && !house.HasOwner()) {
+            sellButton.Show(false);
+            buyButton.Show(true);
+        } else if (indexPanel == indexHouseBuy && !house) {
+            sellButton.Show(false);
+            buyButton.Show(false);
+        }
 	}
 	
 	 void SetTarget(Building building) {

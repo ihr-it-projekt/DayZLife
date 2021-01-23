@@ -24,6 +24,8 @@ class DZLHouseInventory
     }
 
     bool CanAddToStore(array<EntityAI> items) {
+        if (!items || items.Count() == 0) return false;
+
         if (items.Count() <= GetLeftStorage()) {
             foreach(EntityAI item: items) {
                 CargoBase cargo = item.GetInventory().GetCargo();
@@ -59,6 +61,7 @@ class DZLHouseInventory
 			DZLStoreItem storeItem = new DZLStoreItem();
 			storeItem.Init(item, "0 0 0", false);
             store.Insert(storeItem);
+            GetGame().ObjectDelete(item);
         }
         Save();
     }

@@ -39,7 +39,6 @@ class DZLInsuranceManager
 		array<int> carsToRemove = new array<int>;
 		
 		foreach(int carId, CarScript car: scriptCars) {
-			DebugMessageDZL("Check " + carId);
 			if (!car) {
 			    DZLCarStoreItem carStoreItem = cars.Get(carId);
 			    if (!carStoreItem) continue;

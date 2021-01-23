@@ -86,7 +86,7 @@ class DZLBuyExtensionListener
 
                            	inventory.IncreaseStorage(config.houseExtensions.inventoryItemsPerLevel);
 
-                           	message = "#successfully_extend_storrage";
+                           	message = "#successfully_extend_storage";
 				        }
 				    } else {
 				        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
@@ -99,6 +99,7 @@ class DZLBuyExtensionListener
 
 					GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
 	                GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+	                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_SELL_STORAGE) {
@@ -125,6 +126,7 @@ class DZLBuyExtensionListener
                 }
                 GetGame().RPCSingleParam(playerSellStorage, DAY_Z_LIFE_SELL_STORAGE_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
                 GetGame().RPCSingleParam(playerSellStorage, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerSellStorage, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerSellStorage), true, sender);
             }
         }
     }

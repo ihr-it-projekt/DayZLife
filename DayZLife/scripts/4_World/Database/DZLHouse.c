@@ -3,6 +3,7 @@ class DZLHouse
     private string version = "1";
     private string fileName;
     private string owner = "";
+    private string ownerName = "";
     private string name = "";
     private vector position;
     private vector orientation;
@@ -35,6 +36,7 @@ class DZLHouse
 		if (!version) {
 		    version = "1";
 		    hasInventory = false;
+		    ownerName = "";
 		    Save();
 		}
     }
@@ -93,9 +95,25 @@ class DZLHouse
 	string GetOwner() {
 		return owner;
 	}
+
+	string GetOwnerName() {
+	    return ownerName;
+	}
 	
 	bool IsOwner(PlayerBase player) {
-		return owner == player.GetIdentity().GetId();
+		if (owner == player.GetIdentity().GetId()) {
+		    if (GetGame().IsServer()) {
+                string playerName = player.GetIdentity().GetName();
+
+                if(ownerName != playerName) {
+                    ownerName = playerName;
+                    Save();
+                }
+		    }
+		    return true;
+		}
+
+		return false;
 	}
 	
 	void RemoveOwner() {
@@ -195,6 +213,10 @@ class DZLHouse
 	void LockDoor(int doorIndex) {
 		lockedDoors.Insert(doorIndex);
 		Save();
+	}
+
+	bool HasLockedDoors() {
+	    return 0 != lockedDoors.Count();
 	}
 	
 	bool CanUnLookDoor(PlayerBase player, int index) {

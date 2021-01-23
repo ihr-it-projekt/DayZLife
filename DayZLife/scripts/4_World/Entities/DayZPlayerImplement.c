@@ -36,7 +36,6 @@ modded class DayZPlayerImplement
 		
 		if (player) {
 			DZLPlayer dzlPlayer = player.GetDZLPlayer();
-			DebugMessageDZL("2");	
 			if (dzlPlayer) {
 				if (dzlPlayer.WillHealByMedic()) {
 					text = "#you_will_healed";

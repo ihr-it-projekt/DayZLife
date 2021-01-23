@@ -40,6 +40,7 @@ class DZLBuyHouseListener
                 }
                 GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
                 GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
             autoptr Param1<ref Building> paramSellHouse;

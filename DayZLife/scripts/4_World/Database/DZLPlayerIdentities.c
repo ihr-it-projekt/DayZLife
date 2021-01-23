@@ -58,7 +58,6 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (exclude.Count() == 0 || exclude.Find(ident) == -1) {
-                DebugMessageDZL("Add player");
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
             }
         }

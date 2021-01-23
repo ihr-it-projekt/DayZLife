@@ -143,18 +143,24 @@ class DZLDisplayHelper
     }
 
 	static void MoveStoreItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
+	    DebugMessageDZL("00");
         int pos = sourceWidget.GetSelectedRow();
+        DebugMessageDZL("1");
         if (pos == -1) {
             return;
         }
+		DebugMessageDZL("2");
         DZLStoreItem item;
         sourceWidget.GetItemData(pos, 0, item);
-
+		DebugMessageDZL("3");
         if (item) {
+			DebugMessageDZL("4");
             string name = "";
             sourceWidget.GetItemText(pos, 0, name);
+			DebugMessageDZL("5");
             int index;
             index = targetWidget.AddItem(name, item, 0);
+			DebugMessageDZL("6");
             sourceWidget.RemoveRow(pos);
         }
     }

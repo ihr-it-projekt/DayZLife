@@ -28,7 +28,6 @@ class DZLSpawnHelper
         }
 
         obj.SetFlags(EntityFlags.STATIC, false);
-		DebugMessageDZL("Has spawned DB object");
         DZLSpawnHelper.SetPositionAndOrientation(obj, DZLDatabase.POSITION, "0 0 0");
         
 		return obj;
