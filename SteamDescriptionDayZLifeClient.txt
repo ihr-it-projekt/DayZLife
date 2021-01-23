@@ -18,6 +18,7 @@ Feature list
     - configurable no car collision damage
     - can be parked in a virtual garage
     - can be raided
+    - insurance for car damage, can be taken at garage
 
 - money can be stolen from other and dead players
 - bank system
@@ -37,7 +38,7 @@ Feature list
     - Alarm systems with different levels
     - House access control system (Give other Players Access to your house)
     - Houses can be raid by other players
-    - ... there will come more
+    - Houses can upgraded with an extendable inventory, this is accessible for all players when no door from house is looked
 - legal and illegal harvest of resources.
     - coal
     - iron
@@ -45,7 +46,7 @@ Feature list
     - cocaine
     - stones
     - apple
-- (some) resources can be further proccessed into goods.
+- (some) resources can be further processed into goods.
 - License-System
     - Players require a license to harvest certain resources (can be changed)
     - Players require a license for the further processing of resources (can be changed)
@@ -54,6 +55,7 @@ Feature list
 - Admins can (There are Panels in Almanac)
     - in game delete/reset player data related to our mod
     - can give players the role "Cop"
+        - player that can manage cops can also access all doors and house inventories
     - can give players the role "Medic"
     - can give players money to player or bank
     - can see details of players in game
@@ -79,6 +81,7 @@ Feature list
         - can give player arrest
         - can open every car
         - can see owner of cars
+        - can see owner of houses in house menu
 [/code]
 
 This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.
