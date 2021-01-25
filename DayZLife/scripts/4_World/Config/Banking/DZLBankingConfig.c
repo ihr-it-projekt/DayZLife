@@ -1,11 +1,14 @@
 class DZLBankingConfig
 {
-	string version = "1";
+	string version = "2";
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
 	bool showSumOfStoredCashInBank = true;
 	int raidTimeBankInSeconds = 3600;
 	ref array<string> itemsCanUsedToRaidBank;
     int percentOfMoneyWhenRaid = 15;
+    int minimumOfMoneyWhatAPlayerMustHaveThatHeLoseMoneyAtBankRaid = 40000;
+    int bonusPerCopWhenRobtMoneyWillPaidBackInPercent = 5;
+    int sellTradingTax = 10;
 	int raidCoolDownTimeInSeconds = 300;
 	int maximumRaidDistanceToBank = 7;
 	int startCapital = 5000;
@@ -46,6 +49,14 @@ class DZLBankingConfig
 			percentOfMoneyWhenRaid = 100;
 			
 			Save();
+		}
+
+		if (version == "1") {
+            minimumOfMoneyWhatAPlayerMustHaveThatHeLoseMoneyAtBankRaid = 40000;
+            bonusPerCopWhenRobtMoneyWillPaidBackInPercent = 5;
+            sellTradingTax = 10;
+            version = "2";
+            Save();
 		}
     }
 

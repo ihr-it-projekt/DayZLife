@@ -223,4 +223,4 @@ successfully_extend_storage, Successful extend storage, Successful extend storag
 raid_allready_started, Raid all ready started, Raid all ready started, Banküberfall ist schon restarted,
 payback_robt_money, Payback robt money, Payback robt money, Geraubtes Geld zurückzahlen.
 error_not_enough_money_payback," You have not enough money. Needed Money:"," You have not enough money. Needed Money:","Nicht genug Geld vorhanden! Benötigtes Geld:",
-payback_was_successful, Payback was successful. You have paid back: , Payback was successful. You have paid back: , Rückzahlung erfolgreich. Du hast zurückgezahlt: ,
+payback_was_successful, You have been refunded: , You have been refunded: , Du hast zurückgezahlt: ,

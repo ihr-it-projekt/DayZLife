@@ -6,6 +6,7 @@ class DZLBank
 	string fileName = "bank.json";
 	private string version = "1";
 	private int lastRaidMoney = 0;
+	private int taxSum = 0;
 	
     void DZLBank() {
         if (!Load()) {
@@ -15,26 +16,40 @@ class DZLBank
         if (!version) {
             lastRaidMoney = 0;
             version = "1";
+            taxSum = 0;
             Save();
         }
     }
 
-    void AddMoney(int moneyToAdd) {
+    void AddTax(int taxSum) {
+        if (GetGame().IsServer()) {
+            taxSum += taxSum;
+            Save();
+        }
+    }
+
+    int GetTaxSum() {
+        return tax;
+    }
+
+	void AddMoney(int moneyToAdd) {
         if (GetGame().IsServer()) {
             moneyAtBank += moneyToAdd;
             Save();
         }
     }
-	
-	int PlayerRaidBank(DZLPlayer player, int percentage) {
+
+	int PlayerRaidBank(DZLPlayer player, int percentage, int minimumMoney) {
 		DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
 		array<string> playerIdentities = identities.playerIdentities;
 
 		lastRaidMoney = 0;
 		foreach(string ident: playerIdentities) {
 			DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
-		    if (!playerRobt.HasBankMoney()) continue;
-		    if (player.fileName == playerRobt.fileName) continue;
+		    if (!playerRobt.HasBankMoney() || player.fileName == playerRobt.fileName || playerRobt.GetAllMoney() < minimumMoney) {
+		        playerRobt.ResetRobMoney();
+		        continue;
+		    }
 		    lastRaidMoney += playerRobt.BankRobMoney(percentage);
 		}
 
