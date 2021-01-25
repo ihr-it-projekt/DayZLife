@@ -154,7 +154,7 @@ FrameWidgetClass Banking {
         }
         PanelWidgetClass PanelWidget13 {
          ignorepointer 1
-         position -0.00038 0.10477
+         position 0 0.2048
          size 0.602 0.1079
          halign right_ref
          hexactpos 0
@@ -208,7 +208,7 @@ FrameWidgetClass Banking {
         }
         PanelWidgetClass PanelWidget14 {
          ignorepointer 1
-         position -0.0004 0.3095
+         position 0 0.105
          size 0.602 0.1079
          halign right_ref
          hexactpos 0
@@ -254,7 +254,7 @@ FrameWidgetClass Banking {
            hexactsize 1
            vexactsize 1
            style Bold
-           text "%"
+           text "$"
            "text halign" center
            "text valign" center
           }
@@ -365,7 +365,7 @@ FrameWidgetClass Banking {
         }
         PanelWidgetClass PanelWidget10 {
          ignorepointer 1
-         position -0.0004 0.2095
+         position 0 0.3095
          size 0.602 0.1079
          halign right_ref
          hexactpos 0

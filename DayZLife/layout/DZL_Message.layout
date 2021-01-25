@@ -2,8 +2,9 @@ FrameWidgetClass DZL_Message {
  visible 1
  disabled 0
  clipchildren 0
- ignorepointer 1
  inheritalpha 0
+ ignorepointer 1
+ keepsafezone 0
  position 0.01 0.01
  size 0.2131 0.0571
  halign right_ref
@@ -11,11 +12,11 @@ FrameWidgetClass DZL_Message {
  vexactpos 0
  hexactsize 0
  vexactsize 0
- keepsafezone 0
  {
   PanelWidgetClass PanelWidget0 {
    visible 1
    clipchildren 1
+   color 1 1 1 0.651
    position 0 0
    size 0.9717 0.898
    halign center_ref
@@ -27,9 +28,9 @@ FrameWidgetClass DZL_Message {
    style rover_sim_blackbox
    {
     MultilineTextWidgetClass Announcements {
+     clipchildren 1
      ignorepointer 1
      keepsafezone 0
-     clipchildren 1
      position 0 0
      size 0.97083 0.88644
      halign center_ref
