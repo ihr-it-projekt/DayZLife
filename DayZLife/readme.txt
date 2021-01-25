@@ -24,10 +24,6 @@ Nur mal so Interesseweise, kann man sich später auch bei seinem Dienst anmelden
     - Miete bezahlen
     - Anzeige Miete 24 h
 
-- Lagersystem wie P2PTrader
-    - Erweiterbar
-    - Raidbar machen
-    Menu ähnlich wie Trader
 
 - Hausdurchsuchung über Richterfunktion
     - zwei Menüs, eins für Cops, eins für Richter
@@ -112,9 +108,6 @@ Führerschein
          - Löhne steuern
          - Steuern bezahlen
 
-Text
-- set car lifetime in types
-- storeHouseStateDisabled = 0;
 
 Known Bugs
 - Licence Crafting wont work with items that have a quantity fill

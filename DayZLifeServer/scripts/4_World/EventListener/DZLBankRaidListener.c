@@ -83,14 +83,7 @@ class DZLBankRaidListener : Managed
 
         GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
         playerWhoStartedRaid = null;
-        array<Man> _players = new array<Man>;
-        GetGame().GetPlayers(_players);
-
-        if (_players) {
-            foreach(Man _player: _players) {
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, _player.GetIdentity());
-            }
-        }
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true);
     }
 
     private bool isInNearOfBankAndLocationIsEnabled() {

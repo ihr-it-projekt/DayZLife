@@ -4,9 +4,16 @@ class DZLBank
     bool raidRuns = false;
 	ref DZLDate lastRaidTime;
 	string fileName = "bank.json";
+	private string version = "3";
+	private int lastRaidMoney = 0;
 	
     void DZLBank() {
         if (!Load()) {
+            Save();
+        }
+
+        if (!version) {
+            lastRaidMoney = 0;
             Save();
         }
     }
@@ -22,23 +29,34 @@ class DZLBank
 		DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
 		array<string> playerIdentities = identities.playerIdentities;
 
-		int moneyToRaid = 0;
+		lastRaidMoney = 0;
 		foreach(string ident: playerIdentities) {
 			DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
 		    if (!playerRobt.HasBankMoney()) continue;
 		    if (player.fileName == playerRobt.fileName) continue;
-
-			float moneyToSteal = Math.Round(playerRobt.GetBankMoney() * percentage / 100);
-			
-		    playerRobt.AddMoneyToPlayerBank(moneyToSteal * -1);
-		    moneyToRaid += moneyToSteal;
+		    lastRaidMoney += playerRobt.BankRobMoney();
 		}
 
-        player.AddMoneyToPlayer(moneyToRaid);
-        moneyAtBank -= moneyToRaid;
+        player.AddMoneyToPlayer(lastRaidMoney);
+        moneyAtBank -= lastRaidMoney;
         Save();
 		
-		return moneyToRaid;
+		return lastRaidMoney;
+	}
+
+	void PaybackRobtMoney() {
+	    DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
+        array<string> playerIdentities = identities.playerIdentities;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
+            if (!playerRobt.HasBankMoney() || player.fileName == playerRobt.fileName) {
+                playerRobt.ResetRobMoney();
+                continue;
+            }
+            lastRaidMoney += playerRobt.BankRobMoney();
+        }
+	    Save();
 	}
 	
 	bool CanUseBank(int raidCoolDownTimeInSeconds) {

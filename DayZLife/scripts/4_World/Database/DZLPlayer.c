@@ -6,6 +6,7 @@ class DZLPlayer
     private int bank = 0;
     private bool isCop = false;
     private bool isMedic = false;
+    private int robtMoney = 0;
     string playerName = "";
 	int onlineTimeCivil = 0;
 	int onlineTimeMedic = 0;
@@ -17,7 +18,7 @@ class DZLPlayer
 	ref TStringArray licenceIds;
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
 	ref array<ref DZLStoreItem> itemsStore;
-	private string version = "2";
+	private string version = "3";
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -42,6 +43,12 @@ class DZLPlayer
             itemsStore = new array<ref DZLStoreItem>;
             version = "2";
         }
+
+        if (version == "2") {
+            robtMoney = 0;
+            version = "3";
+        }
+
 		Save();
     }
 
@@ -161,6 +168,26 @@ class DZLPlayer
 			bank += moneyCount;
 		    Save();
 		}
+    }
+
+    void ResetRobMoney() {
+       robtMoney = 0;
+       Save();
+    }
+
+    int BankRobMoney() {
+        robtMoney =  Math.Round(playerRobt.GetBankMoney() * percentage / 100);
+        AddMoneyToPlayerBank(robtMoney * -1);
+        Save();
+        return robtMoney;
+    }
+
+    int GiveBackRobtMoney() {
+       int backMoney = robtMoney;
+       AddMoneyToPlayerBank(robtMoney * -1);
+       robtMoney = 0;
+       Save();
+       return backMoney;
     }
 
     bool HasEnoughMoney(int amount) {
