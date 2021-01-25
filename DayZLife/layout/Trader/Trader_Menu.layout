@@ -86,7 +86,7 @@ FrameWidgetClass Trader_Menu {
          {
           PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           position 0 -0
+           position 0 0
            size 1 0.24473
            halign center_ref
            valign bottom_ref
@@ -228,7 +228,7 @@ FrameWidgetClass Trader_Menu {
            vexactsize 0
            style editor_quad_dark
            {
-            TextWidgetClass text {
+            TextWidgetClass tax {
              ignorepointer 1
              position 0.2001 0.0004
              size 0.56615 0.7559
