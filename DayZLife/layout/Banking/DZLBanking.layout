@@ -217,9 +217,9 @@ FrameWidgetClass Banking {
          vexactsize 0
          style editor_quad_dark
          {
-          TextWidgetClass Player_Cash {
+          TextWidgetClass bankTextWidget {
            ignorepointer 1
-           position 0.01437 0
+           position 0.0144 0
            size 0.47483 0.71229
            valign center_ref
            hexactpos 0
@@ -229,9 +229,9 @@ FrameWidgetClass Banking {
            text "#Tax"
            "text valign" center
           }
-          TextWidgetClass DZLCash {
+          TextWidgetClass bankTaxTextWidget {
            ignorepointer 1
-           position 0.08449 0
+           position 0.0845 0
            size 0.4155 0.7123
            halign right_ref
            valign center_ref
@@ -374,7 +374,7 @@ FrameWidgetClass Banking {
          vexactsize 0
          style editor_quad_dark
          {
-          TextWidgetClass Player_Cash0 {
+          TextWidgetClass Player_Cash {
            ignorepointer 1
            position 0.01437 0
            size 0.47483 0.71229
@@ -386,7 +386,7 @@ FrameWidgetClass Banking {
            text "#Player_Cash"
            "text valign" center
           }
-          TextWidgetClass DZLCash0 {
+          TextWidgetClass DZLCash {
            ignorepointer 1
            position 0.08449 0
            size 0.4155 0.7123
