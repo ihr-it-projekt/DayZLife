@@ -44,19 +44,28 @@ class DZLBank
 		return lastRaidMoney;
 	}
 
-	void PaybackRobtMoney() {
+	int PaybackRobtMoney(DZLPlayer player) {
 	    DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
         array<string> playerIdentities = identities.playerIdentities;
 
         foreach(string ident: playerIdentities) {
-            DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
-            if (!playerRobt.HasBankMoney() || player.fileName == playerRobt.fileName) {
-                playerRobt.ResetRobMoney();
-                continue;
-            }
-            lastRaidMoney += playerRobt.BankRobMoney();
+            DZLDatabaseLayer.Get().GetPlayer(ident).GiveBackRobtMoney();
         }
-	    Save();
+
+        player.AddMoneyToPlayerBank(lastRaidMoney * -1);
+	    int moneyBack = lastRaidMoney;
+	    lastRaidMoney = 0;
+	    Save()
+
+	    return moneyBack;
+	}
+
+	bool CanPaybackRobtMoney(DZLPlayer player) {
+		return player.HasEnoughMoney(lastRaidMoney);
+	}
+
+	int GetLastRaidMoney() {
+		return lastRaidMoney;
 	}
 	
 	bool CanUseBank(int raidCoolDownTimeInSeconds) {

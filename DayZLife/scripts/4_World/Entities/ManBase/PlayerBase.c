@@ -77,6 +77,7 @@ modded class PlayerBase
         AddAction(ActionOpenLoadOutMenu, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
         AddAction(ActionOpenCarStorageMenu, InputActionMap);
+        AddAction(DZLActionPaybackRobtMoney, InputActionMap);
 
         InitDZLPlayer();
     }

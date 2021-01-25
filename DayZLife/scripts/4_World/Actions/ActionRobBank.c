@@ -17,7 +17,7 @@ class ActionRobBank: ActionInteractBase
 	}
 
 	override string GetText() {
-        return "#get_money_from_dead_body";
+        return "#rob_bank";
     }
 
 	override void CreateConditionComponents() {

@@ -182,12 +182,11 @@ class DZLPlayer
         return robtMoney;
     }
 
-    int GiveBackRobtMoney() {
+    void GiveBackRobtMoney() {
        int backMoney = robtMoney;
        AddMoneyToPlayerBank(robtMoney * -1);
        robtMoney = 0;
        Save();
-       return backMoney;
     }
 
     bool HasEnoughMoney(int amount) {
