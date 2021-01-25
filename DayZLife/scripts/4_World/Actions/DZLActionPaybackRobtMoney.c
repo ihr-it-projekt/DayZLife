@@ -27,8 +27,9 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
 		PlayerBase other_player = PlayerBase.Cast(target.GetObject());
+		DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
-		return player.GetDZLPlayer().IsActiveAsCop() && other_player && other_player.IsDZLBank;
+		return player.GetDZLPlayer().IsActiveAsCop() && other_player && other_player.IsDZLBank && bank.GetLastRaidMoney() > 0;
 	}
 
 	override void OnEndServer(ActionData action_data) {
@@ -40,7 +41,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 		GetConfig();
 		DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
-		if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
+		if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds / 10)) {
 			DZLSendMessage(ident, "#bank_can_not_be_used_in_moment");
 			return;
 		}

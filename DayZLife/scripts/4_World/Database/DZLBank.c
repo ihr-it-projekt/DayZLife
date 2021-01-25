@@ -4,7 +4,7 @@ class DZLBank
     bool raidRuns = false;
 	ref DZLDate lastRaidTime;
 	string fileName = "bank.json";
-	private string version = "3";
+	private string version = "1";
 	private int lastRaidMoney = 0;
 	
     void DZLBank() {
@@ -14,6 +14,7 @@ class DZLBank
 
         if (!version) {
             lastRaidMoney = 0;
+            version = "1";
             Save();
         }
     }
