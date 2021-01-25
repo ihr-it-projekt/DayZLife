@@ -30,9 +30,9 @@ modded class MissionServer {
 			player.Delete();
         } else if (player.IsUnconscious() || player.IsRestrained() || (100 >= player.GetHealth("GlobalHealth", "Blood") && 7 >= player.GetHealth("GlobalHealth", "Health")))  {
             // kill character
+			DZLDatabaseLayer.Get().GetEmergencies().Remove(player.GetIdentity().GetId());
             player.SetCanBeDestroyed(true);
             player.SetHealth("", "", 0.0);
-			DZLDatabaseLayer.Get().GetEmergencies().Remove(player.GetIdentity().GetId());
         }
     }
 	
