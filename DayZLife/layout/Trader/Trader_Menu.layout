@@ -105,6 +105,22 @@ FrameWidgetClass Trader_Menu {
              vexactpos 0
              hexactsize 0
              vexactsize 0
+             {
+              TextWidgetClass sum0 {
+               ignorepointer 1
+               position 0.20014 -0.26759
+               size 0.56615 0.21994
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               text_proportion 0.7
+               "text halign" center
+               "text valign" center
+              }
+             }
             }
            }
           }

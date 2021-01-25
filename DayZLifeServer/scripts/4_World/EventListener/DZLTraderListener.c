@@ -50,11 +50,11 @@ class DZLTraderListener
                                 }
 
                                 if (item.GetType() == type.type) {
-                                    int itemPrice = GetPrice(item, type.sellPrice);
-                                    int itemTax = itemPrice * 100 / bankConfig.sellTradingTax;
+                                    float itemPrice = GetPrice(item, type.sellPrice);
+                                    float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
 
-                                    sum -= itemPrice - itemTax;
-                                    taxSum += itemTax;
+                                    sum -=  Math.Round(itemPrice - itemTax);
+                                    taxSum += Math.Round(itemTax);
 
                                     countSellItems++;
                                     itemsToSellPrice.Insert(type.sellPrice);
@@ -106,9 +106,11 @@ class DZLTraderListener
 					}
 
                     dzlPlayer.AddMoneyToPlayer(sum * -1);
-                    DZLDatabaseLayer.Get().GetBank().AddTax(taxSum);
+                    DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+                    bank.AddTax(taxSum);
 
                     message = "#trade_was_successful";
+                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                 }
 

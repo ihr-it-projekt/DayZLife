@@ -21,9 +21,9 @@ class DZLBank
         }
     }
 
-    void AddTax(int taxSum) {
+    void AddTax(int _taxSum) {
         if (GetGame().IsServer()) {
-            taxSum += taxSum;
+            taxSum += _taxSum;
             Save();
         }
     }

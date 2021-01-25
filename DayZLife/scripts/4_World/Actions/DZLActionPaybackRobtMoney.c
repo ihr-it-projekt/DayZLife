@@ -39,7 +39,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
             return false;
         }
 
-        if (!player.GetDZLPlayer().IsActiveAsCop()) {
+        if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
             return false;
         }
 
