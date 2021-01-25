@@ -22,14 +22,41 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 
 	override void CreateConditionComponents() {
 		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
+		m_ConditionTarget = new CCTNone;
 	}
 
-	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-		PlayerBase other_player = PlayerBase.Cast(target.GetObject());
-		DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+		if(!target.GetObject()) {
+            DebugMessageDZL("1");
 
-		return player.GetDZLPlayer().IsActiveAsCop() && other_player && other_player.IsDZLBank && bank.GetLastRaidMoney() > 0;
+		    return false;
+		}
+
+        PlayerBase npc = PlayerBase.Cast(target.GetObject());
+        if (!npc) {
+            return false;
+        }
+
+        if (!npc.IsDZLBank) {
+            return false;
+        }
+
+        if (!player.GetDZLPlayer().IsActiveAsCop()) {
+            DebugMessageDZL("4");
+            return false;
+        }
+
+        DZLBank bank = player.dzlBank;
+        if (GetGame().IsServer()) {
+            bank = DZLDatabaseLayer.Get().GetBank();
+        }
+
+        if(bank.GetLastRaidMoney() == 0) {
+            DebugMessageDZL("5");
+            return false;
+        }
+
+        return true;
 	}
 
 	override void OnEndServer(ActionData action_data) {
