@@ -18,7 +18,7 @@ class DZLPlayer
 	ref TStringArray licenceIds;
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
 	ref array<ref DZLStoreItem> itemsStore;
-	private string version = "3";
+	private string version = "2";
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -42,11 +42,6 @@ class DZLPlayer
             deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
             itemsStore = new array<ref DZLStoreItem>;
             version = "2";
-        }
-
-        if (version == "2") {
-            robtMoney = 0;
-            version = "3";
         }
 
 		Save();
@@ -168,25 +163,6 @@ class DZLPlayer
 			bank += moneyCount;
 		    Save();
 		}
-    }
-
-    void ResetRobMoney() {
-       robtMoney = 0;
-       Save();
-    }
-
-    int BankRobMoney(int percentage) {
-        robtMoney =  Math.Round(GetBankMoney() * percentage / 100);
-        AddMoneyToPlayerBank(robtMoney * -1);
-        Save();
-        return robtMoney;
-    }
-
-    void GiveBackRobtMoney() {
-       int backMoney = robtMoney;
-       AddMoneyToPlayerBank(robtMoney * -1);
-       robtMoney = 0;
-       Save();
     }
 
     bool HasEnoughMoney(int amount) {

@@ -77,13 +77,12 @@ class DZLBankRaidListener : Managed
         bank.RaidIsFinished();
         DZLPlayer dzlPlayer = playerWhoStartedRaid.GetDZLPlayer();
 
-        int money = bank.PlayerRaidBank(dzlPlayer, config.percentOfMoneyWhenRaid, config.minimumOfMoneyWhatAPlayerMustHaveThatHeLoseMoneyAtBankRaid);
+        int money = bank.PlayerRaidBank(dzlPlayer, config.percentOfMoneyWhenRaid);
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
         DZLLogRaid(playerWhoStartedRaid.GetIdentity().GetId(), "bank raid finished", "bank", playerWhoStartedRaid.GetPosition());
 
         GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
         playerWhoStartedRaid = null;
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true);
     }
 
     private bool isInNearOfBankAndLocationIsEnabled() {

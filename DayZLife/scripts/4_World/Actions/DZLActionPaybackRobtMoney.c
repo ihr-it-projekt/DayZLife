@@ -27,8 +27,6 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 		if(!target.GetObject()) {
-            DebugMessageDZL("1");
-
 		    return false;
 		}
 
@@ -42,7 +40,6 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
         }
 
         if (!player.GetDZLPlayer().IsActiveAsCop()) {
-            DebugMessageDZL("4");
             return false;
         }
 
@@ -52,7 +49,6 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
         }
 
         if(bank.GetLastRaidMoney() == 0) {
-            DebugMessageDZL("5");
             return false;
         }
 
@@ -77,6 +73,23 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 			return;
 		}
 
-		DZLSendMessage(ident, "#payback_was_successful " + bank.PaybackRobtMoney(dzlPlayer));
+		int moneyPaidBack = bank.PaybackRobtMoney(dzlPlayer);
+		int bonus = moneyPaidBack / 100 *  config.bonusPerCopWhenRobtMoneyWillPaidBackInPercent;
+
+		array<Man> allPlayers = new array<Man>;
+        GetGame().GetPlayers(allPlayers);
+
+        foreach(Man playerMan: allPlayers) {
+            PlayerBase player = PlayerBase.Cast(playerMan);
+            if (!player)  continue;
+
+            DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
+
+            if (dzlPlayerCop.IsActiveAsCop()) {
+                dzlPlayerCop.AddMoneyToPlayerBank(bonus);
+            }
+        }
+
+		DZLSendMessage(ident, "#payback_was_successful " + moneyPaidBack);
     }
 };

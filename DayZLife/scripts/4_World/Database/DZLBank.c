@@ -29,7 +29,7 @@ class DZLBank
     }
 
     int GetTaxSum() {
-        return tax;
+        return taxSum;
     }
 
 	void AddMoney(int moneyToAdd) {
@@ -39,37 +39,20 @@ class DZLBank
         }
     }
 
-	int PlayerRaidBank(DZLPlayer player, int percentage, int minimumMoney) {
-		DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
-		array<string> playerIdentities = identities.playerIdentities;
-
-		lastRaidMoney = 0;
-		foreach(string ident: playerIdentities) {
-			DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
-		    if (!playerRobt.HasBankMoney() || player.fileName == playerRobt.fileName || playerRobt.GetAllMoney() < minimumMoney) {
-		        playerRobt.ResetRobMoney();
-		        continue;
-		    }
-		    lastRaidMoney += playerRobt.BankRobMoney(percentage);
-		}
-
+	int PlayerRaidBank(DZLPlayer player, int percentage) {
+        lastRaidMoney =  Math.Round(taxSum * percentage / 100);
         player.AddMoneyToPlayer(lastRaidMoney);
-        moneyAtBank -= lastRaidMoney;
+        taxSum -= lastRaidMoney;
         Save();
 		
 		return lastRaidMoney;
 	}
 
 	int PaybackRobtMoney(DZLPlayer player) {
-	    DZLPlayerIdentities identities = DZLDatabaseLayer.Get().GetPlayerIds();
-        array<string> playerIdentities = identities.playerIdentities;
-
-        foreach(string ident: playerIdentities) {
-            DZLDatabaseLayer.Get().GetPlayer(ident).GiveBackRobtMoney();
-        }
-
         player.AddMoneyToPlayerBank(lastRaidMoney * -1);
+	    taxSum += lastRaidMoney;
 	    int moneyBack = lastRaidMoney;
+
 	    lastRaidMoney = 0;
 	    Save();
 

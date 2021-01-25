@@ -1,10 +1,12 @@
 class DZLTraderListener
 {
     ref DZLTraderConfig config;
+    ref DZLBankingConfig bankConfig;
 
     void DZLTraderListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         config = DZLConfig.Get().traderConfig;
+        bankConfig = DZLConfig.Get().bankConfig;
     }
 
     void ~DZLTraderListener() {
@@ -18,6 +20,7 @@ class DZLTraderListener
             if (ctx.Read(paramTrade)){
                 array<EntityAI> playerItems = PlayerBase.Cast(target).GetPlayerItems();
                 int sum = 0;
+                int taxSum = 0;
                 int countSellItems = 0;
 				array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
                 array<EntityAI> itemsToSell = paramTrade.param2;
@@ -47,7 +50,12 @@ class DZLTraderListener
                                 }
 
                                 if (item.GetType() == type.type) {
-                                    sum -= GetPrice(item, type.sellPrice);
+                                    int itemPrice = GetPrice(item, type.sellPrice);
+                                    int itemTax = itemPrice * 100 / bankConfig.sellTradingTax;
+
+                                    sum -= itemPrice - itemTax;
+                                    taxSum += itemTax;
+
                                     countSellItems++;
                                     itemsToSellPrice.Insert(type.sellPrice);
                                 }
@@ -98,6 +106,7 @@ class DZLTraderListener
 					}
 
                     dzlPlayer.AddMoneyToPlayer(sum * -1);
+                    DZLDatabaseLayer.Get().GetBank().AddTax(taxSum);
 
                     message = "#trade_was_successful";
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
