@@ -208,7 +208,7 @@ FrameWidgetClass Banking {
         }
         PanelWidgetClass PanelWidget14 {
          ignorepointer 1
-         position -0.00038 0.20955
+         position -0.0004 0.3095
          size 0.602 0.1079
          halign right_ref
          hexactpos 0
@@ -226,7 +226,7 @@ FrameWidgetClass Banking {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           text "#Player_Cash"
+           text "#Tax"
            "text valign" center
           }
           TextWidgetClass DZLCash {
@@ -245,7 +245,7 @@ FrameWidgetClass Banking {
           }
           TextWidgetClass TextWidget2 {
            ignorepointer 1
-           position 8.00366 0
+           position 8.0037 0
            size 30.83 39.612
            halign right_ref
            valign center_ref
@@ -254,7 +254,7 @@ FrameWidgetClass Banking {
            hexactsize 1
            vexactsize 1
            style Bold
-           text "$"
+           text "%"
            "text halign" center
            "text valign" center
           }
@@ -262,7 +262,7 @@ FrameWidgetClass Banking {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0 -0.07257
+         position 0 0.0274
          size 0.602 0.22829
          halign right_ref
          valign center_ref
@@ -360,6 +360,60 @@ FrameWidgetClass Banking {
              text "#Cash_Transfer"
             }
            }
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget10 {
+         ignorepointer 1
+         position -0.0004 0.2095
+         size 0.602 0.1079
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass Player_Cash0 {
+           ignorepointer 1
+           position 0.01437 0
+           size 0.47483 0.71229
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Player_Cash"
+           "text valign" center
+          }
+          TextWidgetClass DZLCash0 {
+           ignorepointer 1
+           position 0.08449 0
+           size 0.4155 0.7123
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "123.456.789"
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass TextWidget3 {
+           ignorepointer 1
+           position 8.00366 0
+           size 30.83 39.612
+           halign right_ref
+           valign center_ref
+           hexactpos 1
+           vexactpos 1
+           hexactsize 1
+           vexactsize 1
+           style Bold
+           text "$"
+           "text halign" center
+           "text valign" center
           }
          }
         }
