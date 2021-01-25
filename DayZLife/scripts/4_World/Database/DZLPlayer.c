@@ -175,8 +175,8 @@ class DZLPlayer
        Save();
     }
 
-    int BankRobMoney() {
-        robtMoney =  Math.Round(playerRobt.GetBankMoney() * percentage / 100);
+    int BankRobMoney(int percentage) {
+        robtMoney =  Math.Round(GetBankMoney() * percentage / 100);
         AddMoneyToPlayerBank(robtMoney * -1);
         Save();
         return robtMoney;

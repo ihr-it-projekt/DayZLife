@@ -34,8 +34,8 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 
 	override void OnEndServer(ActionData action_data) {
 		DZLPlayer dzlPlayer = action_data.m_Player.GetDZLPlayer();
-		PLayerIdentity ident = action_data.m_Player.GetIdentity();
-		if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
+		PlayerIdentity ident = action_data.m_Player.GetIdentity();
+		if (!DZLLicenceCheck.Get().HasActiveLicence(ident)) return;
 		if (!dzlPlayer.IsActiveAsCop()) return;
 
 		GetConfig();
@@ -45,7 +45,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 			DZLSendMessage(ident, "#bank_can_not_be_used_in_moment");
 			return;
 		}
-		if (!bank.CanPaybackRobtMoney()) {
+		if (!bank.CanPaybackRobtMoney(dzlPlayer)) {
 			DZLSendMessage(ident, "#error_not_enough_money_payback " + bank.GetLastRaidMoney());
 			return;
 		}

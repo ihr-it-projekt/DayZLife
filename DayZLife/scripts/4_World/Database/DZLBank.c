@@ -35,7 +35,7 @@ class DZLBank
 			DZLPlayer playerRobt = DZLDatabaseLayer.Get().GetPlayer(ident);
 		    if (!playerRobt.HasBankMoney()) continue;
 		    if (player.fileName == playerRobt.fileName) continue;
-		    lastRaidMoney += playerRobt.BankRobMoney();
+		    lastRaidMoney += playerRobt.BankRobMoney(percentage);
 		}
 
         player.AddMoneyToPlayer(lastRaidMoney);
@@ -56,7 +56,7 @@ class DZLBank
         player.AddMoneyToPlayerBank(lastRaidMoney * -1);
 	    int moneyBack = lastRaidMoney;
 	    lastRaidMoney = 0;
-	    Save()
+	    Save();
 
 	    return moneyBack;
 	}
