@@ -81,13 +81,17 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
+            PlayerIdentity playerIdentity = player.GetIdentity();
             if (!player)  continue;
 
             DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
 
             if (dzlPlayerCop.IsActiveAsCop()) {
                 dzlPlayerCop.AddMoneyToPlayerBank(bonus);
+                GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerCop), true, playerIdentity);
             }
+            
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true, playerIdentity);
         }
 
 		DZLSendMessage(ident, "#payback_was_successful " + moneyPaidBack);
