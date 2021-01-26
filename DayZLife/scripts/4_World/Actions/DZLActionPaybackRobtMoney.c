@@ -74,7 +74,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 		}
 
 		int moneyPaidBack = bank.PaybackRobtMoney(dzlPlayer);
-		int bonus = moneyPaidBack / 100 *  config.bonusPerCopWhenRobtMoneyWillPaidBackInPercent;
+		int bonus = moneyPaidBack / 100 * config.bonusPerCopWhenRobtMoneyWillPaidBackInPercent;
 
 		array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
