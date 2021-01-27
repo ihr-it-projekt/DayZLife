@@ -217,23 +217,24 @@ FrameWidgetClass rootFrame {
            {
             TextWidgetClass TextWidget0 {
              ignorepointer 1
-             position 8 8
-             size 302 41.8143
-             hexactpos 1
-             vexactpos 1
-             hexactsize 1
-             vexactsize 1
+             position 0.02102 0
+             size 0.68382 0.72325
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
              text "#out_parking_with_insurance"
-             text_proportion 0.6
+             text_proportion 0.5
              "text valign" center
             }
             CheckBoxWidgetClass insuranceCheckBox {
-             position 318 7.99998
-             size 54.578 41.8143
-             hexactpos 1
-             vexactpos 1
-             hexactsize 1
-             vexactsize 1
+             position 0.726 0.138
+             size 0.143 0.723
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
             }
            }
           }
