@@ -21,9 +21,9 @@ class DZLBank
         }
     }
 
-    void AddTax(int taxSum) {
+    void AddTax(int _taxSum) {
         if (GetGame().IsServer()) {
-            taxSum += taxSum;
+            taxSum += _taxSum;
             Save();
         }
     }
@@ -49,7 +49,7 @@ class DZLBank
 	}
 
 	int PaybackRobtMoney(DZLPlayer player) {
-        player.AddMoneyToPlayerBank(lastRaidMoney * -1);
+        player.AddMoneyToPlayer(lastRaidMoney * -1);
 	    taxSum += lastRaidMoney;
 	    int moneyBack = lastRaidMoney;
 

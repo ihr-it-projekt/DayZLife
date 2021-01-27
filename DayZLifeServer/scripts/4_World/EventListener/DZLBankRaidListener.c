@@ -81,7 +81,18 @@ class DZLBankRaidListener : Managed
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
         DZLLogRaid(playerWhoStartedRaid.GetIdentity().GetId(), "bank raid finished", "bank", playerWhoStartedRaid.GetPosition());
 
-        GetGame().RPCSingleParam(playerWhoStartedRaid, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+        array<Man> allPlayers = new array<Man>;
+        GetGame().GetPlayers(allPlayers);
+
+        foreach(Man playerMan: allPlayers) {
+            PlayerBase player = PlayerBase.Cast(playerMan);
+            PlayerIdentity playerIdentity = player.GetIdentity();
+            if (!player || !playerIdentity)  continue;
+
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true, playerIdentity);
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, playerIdentity);
+        }
+
         playerWhoStartedRaid = null;
     }
 

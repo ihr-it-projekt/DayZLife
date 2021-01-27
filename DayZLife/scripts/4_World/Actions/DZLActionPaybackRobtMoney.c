@@ -39,7 +39,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
             return false;
         }
 
-        if (!player.GetDZLPlayer().IsActiveAsCop()) {
+        if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
             return false;
         }
 
@@ -74,20 +74,24 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 		}
 
 		int moneyPaidBack = bank.PaybackRobtMoney(dzlPlayer);
-		int bonus = moneyPaidBack / 100 *  config.bonusPerCopWhenRobtMoneyWillPaidBackInPercent;
+		int bonus = moneyPaidBack / 100 * config.bonusPerCopWhenRobtMoneyWillPaidBackInPercent;
 
 		array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
 
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
+            PlayerIdentity playerIdentity = player.GetIdentity();
             if (!player)  continue;
 
             DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
 
             if (dzlPlayerCop.IsActiveAsCop()) {
                 dzlPlayerCop.AddMoneyToPlayerBank(bonus);
+                GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerCop), true, playerIdentity);
             }
+            
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true, playerIdentity);
         }
 
 		DZLSendMessage(ident, "#payback_was_successful " + moneyPaidBack);

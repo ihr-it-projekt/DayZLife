@@ -1,17 +1,18 @@
 class DZLBankingMenu : DZLBaseMenu
 {
-	TextListboxWidget playerListbox;
+	private TextListboxWidget playerListbox;
 
-    ButtonWidget payInButton;
-    ButtonWidget payOutButton;
-    ButtonWidget cashTransferButton;
-	
-    TextWidget playerBankBalanceTextWidget;
-    TextWidget balanceTextLabelWidget;
-    TextWidget playerBalanceTextWidget;
-    TextWidget bankBalanceTextWidget;
-	
-	EditBoxWidget inputDeposit;
+    private ButtonWidget payInButton;
+    private ButtonWidget payOutButton;
+    private ButtonWidget cashTransferButton;
+
+    private TextWidget playerBankBalanceTextWidget;
+    private TextWidget balanceTextLabelWidget;
+    private TextWidget playerBalanceTextWidget;
+    private TextWidget bankBalanceTextWidget;
+    private TextWidget bankTaxTextWidget;
+
+	private EditBoxWidget inputDeposit;
 	
     void DZLBankingMenu() {
         layoutPath = "DayZLife/layout/Banking/DZLBanking.layout";
@@ -61,7 +62,8 @@ class DZLBankingMenu : DZLBaseMenu
         playerBalanceTextWidget.Show(true);
         bankBalanceTextWidget = creator.GetTextWidget("DZLBank_Cash");
         balanceTextLabelWidget = creator.GetTextWidget("Cash_at_Bank");
-		
+        bankTaxTextWidget = creator.GetTextWidget("bankTaxTextWidget");
+
 		inputDeposit = creator.GetEditBoxWidget("Input_Deposit");
 		
 		playerListbox = creator.GetTextListboxWidget("Player_list");
@@ -86,7 +88,10 @@ class DZLBankingMenu : DZLBaseMenu
         playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
         playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
 
-        if (player.dzlBank) bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
+        if (player.dzlBank) {
+            bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
+            bankTaxTextWidget.SetText(player.dzlBank.GetTaxSum().ToString());
+        }
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {

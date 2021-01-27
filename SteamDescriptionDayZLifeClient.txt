@@ -4,12 +4,23 @@
 
 Attention: This Mod needs also a Serverside Mod and is published here: https://steamcommunity.com/sharedfiles/filedetails/?id=2344834877.
 
+Feature:
+- Add
+- Policemen
+
+Change:
+-
+
+Bugfix:
+- remove null pointer when char was died
+
 [code]
 Feature list
 
 - Supported languages: English, German, Chinese, Chinese Simple, more will come
 - Spawn Menu with Job choice
 - own Money-System
+- tax system, A tax is due for each sale at the trader.
 - Cars
     - Key System
     - last driver can sell cars
@@ -27,6 +38,7 @@ Feature list
     - transfer money directly to players
     - time and player count controlled raids
     - bank can be raided
+    - Bank rob steal the configured percentage from tax income, so player dont lose any money at bank rob.
     - if a player dies, the money will stay at the dead character. The money at bank will not be touched
 - own trader-system
     - several trader locations
@@ -82,6 +94,7 @@ Feature list
         - can open every car
         - can see owner of cars
         - can see owner of houses in house menu
+        - can pay back the money from a bank robbery, every policeman who is online at that time gets a percentage bonus.
 [/code]
 
 This mod was inspired by Altis Life for Arma 3. We have a lot of features on our list that will be added in future.

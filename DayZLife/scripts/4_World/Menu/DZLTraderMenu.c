@@ -6,9 +6,11 @@ class DZLTraderMenu: DZLBaseMenu
 	private TextListboxWidget traderItemList;
 	private TextWidget sum;
 	private int sumInt = 0;
+	private int taxInt = 0;
 	private XComboBoxWidget itemCategory;
 	private ButtonWidget tradeButton;
 	private TextWidget credits;
+	private TextWidget tax;
 	private ItemPreviewWidget preview;
 	private DZLTraderPosition position;
 
@@ -41,12 +43,14 @@ class DZLTraderMenu: DZLBaseMenu
 		traderItemList = creator.GetTextListboxWidget("Trader_Item_list");
 		sum = creator.GetTextWidget("sum");
 		sum.SetText("0");
+		tax.SetText("0");
 
 		itemCategory = creator.GetXComboBoxWidget("xcombobox_categorys");
 		
 		tradeButton = creator.GetButtonWidget("Button_Buy");
 
 		credits = creator.GetTextWidget("Cedits");
+		tax = creator.GetTextWidget("tax");
 
 		preview = creator.GetItemPreviewWidget("previewItem");
 
@@ -64,6 +68,7 @@ class DZLTraderMenu: DZLBaseMenu
 		sellCard.ClearItems();
 		buyCard.ClearItems();
 		sumInt = 0;
+		taxInt = 0;
 		UpdateSum();
 		string name = "";
 		int index;
@@ -118,6 +123,7 @@ class DZLTraderMenu: DZLBaseMenu
     override void OnShow() {
         super.OnShow();
         sumInt = 0;
+        taxInt = 0;
 
 		if (!position) {
 		    position = player.GetTraderByPosition(4);
@@ -376,7 +382,13 @@ class DZLTraderMenu: DZLBaseMenu
             string quantity = "";
             sourceWidget.GetItemText(pos, 2, quantity);
             targetWidget.SetItem(index, quantity, item, 2);
-			sumInt = sumInt + price.ToInt() * factor;
+
+            float itemSum = price.ToInt() * factor;
+            float itemTax = itemSum / 100 * config.bankConfig.sellTradingTax;
+
+			sumInt +=  Math.Round(itemSum);
+			taxInt -=  Math.Round(itemTax);
+
 			UpdateSum();
 
 			sourceWidget.RemoveRow(pos);
@@ -414,6 +426,7 @@ class DZLTraderMenu: DZLBaseMenu
 	private void UpdateSum() {
 	    int displaySum = sumInt * -1;
 		sum.SetText(displaySum.ToString());
+		tax.SetText(taxInt.ToString());
 		
 		if(displaySum >= 0) {
 			sum.SetColor(ARGB(255, 0, 94, 23));
