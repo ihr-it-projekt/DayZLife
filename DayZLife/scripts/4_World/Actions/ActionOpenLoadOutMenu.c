@@ -20,31 +20,17 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
-		if (g_Game.GetUIManager().GetMenu() == NULL){
-            if(!action_data) return;
-            if(!action_data.m_Target) return;
-            if(!action_data.m_Target.GetObject()) return;
-            if(!action_data.m_Target.GetObject().IsMan()) return;
-           	if (!PlayerBase.Cast(action_data.m_Target.GetObject()).IsLoadOut) return;
-			
+		if (g_Game.GetUIManager().GetMenu() == NULL){		
 			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLoadOutMenu(), NULL);
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+		if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
+		
 	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-	    if (GetGame().IsServer()) {
-	        if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-	    }
-
 	    if (!dzlPlayer || !dzlPlayer.IsActiveAsCop()) return false;
 
-        if(!target.GetObject()) return false;
-
-        PlayerBase npc = PlayerBase.Cast(target.GetObject());
-
-        if (!npc) return false;
-
-        return npc.IsLoadOut;
+        return player.config.jobConfig.loadOutsCops.IsInZone(player.GetPosition());
 	}
 }

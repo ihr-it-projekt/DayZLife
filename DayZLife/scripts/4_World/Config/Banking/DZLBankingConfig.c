@@ -63,6 +63,19 @@ class DZLBankingConfig
 		}
     }
 
+    bool IsInZone(vector playerPosition) {
+        if (!playerPosition) {
+            return false;
+        }
+
+        foreach(DZLBankingPosition zone: positionOfBankingPoints) {
+            if(vector.Distance(zone.position, playerPosition) <= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "banking.json")) {
             JsonFileLoader<DZLBankingConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "banking.json", this);

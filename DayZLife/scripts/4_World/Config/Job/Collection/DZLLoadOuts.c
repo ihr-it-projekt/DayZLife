@@ -82,6 +82,19 @@ class DZLLoadOuts
         }
     }
 
+    bool IsInZone(vector playerPosition) {
+        if (!playerPosition) {
+            return false;
+        }
+
+        foreach(DZLLoadOutPosition zone: loadOutPosition) {
+            if(vector.Distance(zone.position, playerPosition) <= 2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json")) {
             JsonFileLoader<DZLLoadOuts>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);

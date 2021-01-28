@@ -33,27 +33,20 @@ class DZLSpawnHelper
 		return obj;
     }
 
-    static PlayerBase SpawnActionPoint(vector pos, vector orientation, string gameObjectName, bool isBanking, bool isLicence, bool isTrader, bool isLoadOut, bool isGarage) {
+    static Object SpawnActionPoint(vector pos, vector orientation, string gameObjectName) {
         //pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true);
         if (!game_obj) {
            return null;
         }
 
-        PlayerBase character = PlayerBase.Cast(game_obj);
+        game_obj.SetAllowDamage(false);
+        DZLSpawnHelper.SetPositionAndOrientation(game_obj, pos, orientation);
 
-        character.SetAllowDamage(false);
-        DZLSpawnHelper.SetPositionAndOrientation(character, pos, orientation);
-        character.IsDZLBank = isBanking;
-        character.IsLicencePoint = isLicence;
-        character.IsTrader = isTrader;
-        character.IsLoadOut = isLoadOut;
-        character.IsGarage = isGarage;
-
-        return character;
+        return game_obj;
     }
 
-    static void SetPositionAndOrientation(Entity game_obj, vector position, vector orientation) {
+    static void SetPositionAndOrientation(Object game_obj, vector position, vector orientation) {
         game_obj.SetPosition(position);
         game_obj.SetOrientation(orientation);
         game_obj.SetOrientation(game_obj.GetOrientation()); //Collision fix

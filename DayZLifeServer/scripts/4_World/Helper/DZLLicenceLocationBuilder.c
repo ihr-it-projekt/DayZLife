@@ -13,24 +13,28 @@ class DZLLicenceLocationBuilder
     void Create() {
 		array<ref DZLLicencePosition> positions = DZLConfig.Get().licenceConfig.positionOfLicencePoints;
 		foreach(DZLLicencePosition position: positions) {
-		    npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position, false, true, false, false, false)));
+		    npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position)));
 		}
 	}
 
-	PlayerBase CreatePositions(DZLLicencePosition position, bool isBanking, bool isLicence, bool isTrader, bool isLoadOut, bool isGarage) {
-        PlayerBase player = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, position.survivor, isBanking, isLicence, isTrader, isLoadOut, isGarage);
+	EntityAI CreatePositions(DZLLicencePosition position) {
+        Object object = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, position.survivor);
 
-        if (!player) {
+        if (!object) {
             return null;
         }
+		
+		EntityAI entity = EntityAI.Cast(object);
+		
+		if (!entity) return null;
 
         array<string> attachments = position.attachments;
 
         foreach(string attachment: attachments) {
-            player.GetInventory().CreateInInventory(attachment);
+            entity.GetInventory().CreateInInventory(attachment);
         }
 
-        return player;
+        return entity;
 	}
 
 	void CheckPosition() {

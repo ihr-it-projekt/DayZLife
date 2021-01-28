@@ -30,12 +30,6 @@ class ActionOpenTraderMenu: ActionInteractBase
 		}
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-            if(!action_data) return;
-            if(!action_data.m_Target) return;
-            if(!action_data.m_Target.GetObject()) return;
-            if(!action_data.m_Target.GetObject().IsMan()) return;
-           	if (!PlayerBase.Cast(action_data.m_Target.GetObject()).IsTrader) return;
-			
 			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(), NULL);
         }
 	}
@@ -43,23 +37,14 @@ class ActionOpenTraderMenu: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 
-        if(!target.GetObject()) return false;
-
-        PlayerBase npc = PlayerBase.Cast(target.GetObject());
-
-        if (!npc) return false;
-
-        if (npc.IsTrader) {
-			DZLDate currentDate = new DZLDate();
-			
-			if(!player.hasTraderConfig && currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
-			    player.timeAskForTraderConfig = currentDate.inSeconds;
-				GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<ref PlayerBase>(player), true);
-			}
-
-			return player.hasTraderConfig;
-        }
+       
+		DZLDate currentDate = new DZLDate();
 		
-		return false;
-	}
+		if(!player.hasTraderConfig && currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
+		    player.timeAskForTraderConfig = currentDate.inSeconds;
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<ref PlayerBase>(player), true);
+		}
+
+		return !!player.GetTraderByPosition(); 
+    }
 }

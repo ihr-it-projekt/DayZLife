@@ -24,11 +24,6 @@ modded class PlayerBase
 	ref DZLMedicHelpMenu healMenu;
 
 	bool willHeal = false;
-	bool IsDZLBank = false;
-	bool IsLicencePoint = false;
-	bool IsTrader = false;
-	bool IsLoadOut = false;
-	bool IsGarage = false;
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
@@ -55,8 +50,8 @@ modded class PlayerBase
 	}
 
 	bool IsDZLPlayer() {
-	    return !IsDZLBank && !IsLicencePoint && !IsTrader && !IsLoadOut && !IsGarage;
-	}
+        return IsRealPlayerDZL && GetIdentity();
+    }
 
     override void SetActions(out TInputActionMap InputActionMap) {
         super.SetActions(InputActionMap);
@@ -83,7 +78,7 @@ modded class PlayerBase
     }
 
     void InitDZLPlayer() {
-        if (GetGame().IsClient() && IsDZLPlayer()) {
+        if (GetGame().IsClient()) {
             config = new DZLConfig();
             GetGame().RPCSingleParam(this, DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
             GetGame().RPCSingleParam(this, DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);

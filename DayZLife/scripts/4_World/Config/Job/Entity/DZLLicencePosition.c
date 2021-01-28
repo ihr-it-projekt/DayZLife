@@ -15,5 +15,4 @@ class DZLLicencePosition
         this.survivor = survivor;
         this.attachments = attachments;
     }
-
 }

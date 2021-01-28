@@ -41,11 +41,9 @@ class ActionRobBank: ActionInteractBase
 		}
 		
 		if (config) {
-			PlayerBase other_player = PlayerBase.Cast(target.GetObject());
 			EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
 			if(!item_in_hands_source) return false;
-			if(!other_player) return false;
 
 			bool hasItem = false;
 			foreach (string itemForRaid: config.itemsCanUsedToRaidBank) {
@@ -56,9 +54,8 @@ class ActionRobBank: ActionInteractBase
 			}
 
 			if(!hasItem) return false;
-			if(!isInNearOfBankAndLocationIsEnabled(player)) return false;
+			return isInNearOfBankAndLocationIsEnabled(player));
 
-			return other_player.IsDZLBank;
 		}
 
 		return false;

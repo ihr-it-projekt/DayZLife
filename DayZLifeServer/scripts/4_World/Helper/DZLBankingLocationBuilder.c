@@ -8,7 +8,7 @@ class DZLBankingLocationBuilder: DZLLicenceLocationBuilder {
 		array<ref DZLBankingPosition> positions = DZLConfig.Get().bankConfig.positionOfBankingPoints;
 		
 		foreach(DZLBankingPosition position: positions) {
-            npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position, true, false, false, false, false)));
+            npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position)));
         }
 	}
 };

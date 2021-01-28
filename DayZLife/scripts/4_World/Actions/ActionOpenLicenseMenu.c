@@ -21,27 +21,13 @@ class ActionOpenLicenseMenu: ActionInteractBase
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-            PlayerBase player = PlayerBaseHelper.GetPlayer();
-			
-			if(!action_data) return;
-            if(!action_data.m_Target) return;
-            if(!action_data.m_Target.GetObject()) return;
-            if(!action_data.m_Target.GetObject().IsMan()) return;
-           	if (!PlayerBase.Cast(action_data.m_Target.GetObject()).IsLicencePoint) return;
-			
-			GetGame().GetUIManager().ShowScriptedMenu(player.GetLicenceMenu(), NULL);
+			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceMenu(), NULL);
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 
-        if(!target.GetObject()) return false;
-
-        PlayerBase npc = PlayerBase.Cast(target.GetObject());
-
-        if (!npc) return false;
-
-        return npc.IsLicencePoint;
+		return !!player.config.licenceConfig.IsInZone(player.GetPosition());
 	}
 }

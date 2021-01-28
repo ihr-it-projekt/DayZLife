@@ -20,13 +20,7 @@ class ActionOpenCarStorageMenu: ActionInteractBase
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
-		if (g_Game.GetUIManager().GetMenu() == NULL){
-            if(!action_data) return;
-            if(!action_data.m_Target) return;
-            if(!action_data.m_Target.GetObject()) return;
-            if(!action_data.m_Target.GetObject().IsMan()) return;
-           	if (!PlayerBase.Cast(action_data.m_Target.GetObject()).IsGarage) return;
-			
+		if (g_Game.GetUIManager().GetMenu() == NULL){		
 			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetCarStorageMenu(), NULL);
         }
 	}
@@ -34,12 +28,6 @@ class ActionOpenCarStorageMenu: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 
-        if(!target.GetObject()) return false;
-
-        PlayerBase npc = PlayerBase.Cast(target.GetObject());
-
-        if (!npc) return false;
-
-        return npc.IsGarage;
+        return !!player.config.carConfig.GetStorageByPosition(player.GetPosition());
 	}
 }

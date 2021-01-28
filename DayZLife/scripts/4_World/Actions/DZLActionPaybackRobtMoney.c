@@ -2,9 +2,14 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 {
     ref DZLBankingConfig config;
 
-    DZLBankingConfig GetConfig() {
+    DZLBankingConfig GetConfig(PlayerBase player) {
         if (!config) {
-            config = DZLConfig.Get().bankConfig;
+			if (GetGame().IsServer()) {
+				config = DZLConfig.Get().bankConfig;
+			} else {
+				config = player.config.bankConfig;
+			}
+            
         }
 
         return config;
@@ -26,20 +31,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-		if(!target.GetObject()) {
-		    return false;
-		}
-
-        PlayerBase npc = PlayerBase.Cast(target.GetObject());
-        if (!npc) {
-            return false;
-        }
-
-        if (!npc.IsDZLBank) {
-            return false;
-        }
-
-        if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
+		if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
             return false;
         }
 
@@ -51,8 +43,10 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
         if(bank.GetLastRaidMoney() == 0) {
             return false;
         }
+		
+		GetConfig(player);
 
-        return true;
+        return config.IsInZone(player.GetPosition());;
 	}
 
 	override void OnEndServer(ActionData action_data) {
@@ -61,7 +55,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 		if (!DZLLicenceCheck.Get().HasActiveLicence(ident)) return;
 		if (!dzlPlayer.IsActiveAsCop()) return;
 
-		GetConfig();
+		GetConfig(action_data.m_Player);
 		DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
 		if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds / 10)) {

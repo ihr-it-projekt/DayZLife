@@ -1,10 +1,10 @@
 class DZLNPCKeepPosition
 {
-    PlayerBase npc;
+    EntityAI npc;
     vector position;
     vector orientation;
 
-    void DZLNPCKeepPosition(PlayerBase npc) {
+    void DZLNPCKeepPosition(EntityAI npc) {
         this.npc = npc;
         position = npc.GetPosition();
         orientation = npc.GetOrientation();

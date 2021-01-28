@@ -15,7 +15,7 @@ class DZLBuilderManager
         traderBuilder = new DZLTraderLocationBuilder();
         loadOutBuilder = new DZLLoadOutLocationBuilder();
         garageBuilder = new DZLGarageLocationBuilder();
-        checkTimer.Run(60, this, "Check", null, true);
+        checkTimer.Run(360, this, "Check", null, true);
 	}
 
 	void Create(){
