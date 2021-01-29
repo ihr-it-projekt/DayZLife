@@ -1,13 +1,13 @@
 modded class ActionDefibrilateBase
 {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+        if (!targetPlayer) return false;
+
         if (GetGame().IsClient() && player.GetDZLPlayer() && player.GetDZLPlayer().IsActiveAsMedic()) {
-			return super.ActionCondition(player, target, item);
-		} else if(GetGame().IsServer()) {
-		    PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
-
-		    if (!targetPlayer) return false;
-
+			return !targetPlayer.IsAlive();
+		} else if(GetGame().IsServer() && !targetPlayer.IsAlive()) {
+		    
             PlayerIdentity targetIdent = targetPlayer.GetIdentity();
 
             if (!targetIdent) return false;
