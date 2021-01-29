@@ -125,6 +125,7 @@ class DZLPlayerEventListener
                 player.RequestUpdateDZLPlayer();
             } else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
                 player.willDie = true;
+                player.CheckDeath();
                 PlayerRespawn();
             }
         }
