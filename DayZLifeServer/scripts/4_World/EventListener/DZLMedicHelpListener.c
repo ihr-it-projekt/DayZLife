@@ -51,6 +51,7 @@ class DZLMedicHelpListener
         dzlPlayer.AddMoneyToPlayerBank(config.priceHospitalHeal * -1);
         dzlPlayer.SetWillHealByHospital();
         dzlPlayer.SaveItems(player);
+        player.Delete();
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, sender);
     }
 }
