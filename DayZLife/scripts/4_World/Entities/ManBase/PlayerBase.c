@@ -24,6 +24,7 @@ modded class PlayerBase
 	ref DZLMedicHelpMenu healMenu;
 
 	bool willHeal = false;
+	bool willDie = false;
 	int moneyPlayerIsDead = 0;
 	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
@@ -40,7 +41,6 @@ modded class PlayerBase
         super.Init();
         RegisterNetSyncVariableBool("IsRealPlayerDZL");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-		SetCanBeDestroyed(false);
 	}
 
 	bool IsDZLPlayer() {
@@ -70,6 +70,19 @@ modded class PlayerBase
 
         InitDZLPlayer();
     }
+	
+	override void CheckDeath()
+	{
+		if( IsPlayerSelected() && !IsAlive() )
+		{
+			if (!medicHelpMenuWasShown) {
+			    ShowHealMenu();
+			} else if (willDie) {
+                SimulateDeath(true);
+                m_DeathCheckTimer.Stop();
+			}
+		}
+	}
 
     void InitDZLPlayer() {
         if (GetGame().IsClient()) {
@@ -538,23 +551,17 @@ modded class PlayerBase
 		}
 	}
 	
-	void ShowHealMenu(bool showMedicHelpMenu) {
+	void ShowHealMenu() {
         if (GetGame().IsClient()){
-            if (!healMenu && showMedicHelpMenu && medicHelpMenuWasShown == false){
+            if (!healMenu && medicHelpMenuWasShown == false){
                 if (g_Game.GetUIManager().GetMenu()) {
                     g_Game.GetUIManager().GetMenu().Close();
                 }
 
-                if (!config || !config.medicConfig) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(ShowHealMenu, 2, false, showMedicHelpMenu);
-                } else if (medicHelpMenuWasShown == false) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_GUI).Remove(ShowHealMenu);
+                if (config && config.medicConfig && medicHelpMenuWasShown == false) {
                     GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
                     medicHelpMenuWasShown = true;
                 }
-            }
-            if (showMedicHelpMenu == false) {
-                medicHelpMenuWasShown = false;
             }
         }
 	}
@@ -562,12 +569,8 @@ modded class PlayerBase
 	void ShowHealMenuFromMission() {
 	    if (GetGame().IsClient() && medicHelpMenuWasShown){
 	        medicHelpMenuWasShown = false;
-	        ShowHealMenu(true);
+	        ShowHealMenu();
 	    }
-	}
-
-	bool IsPlayerInBetweenWorld() {
-	    return 100 > GetHealth("GlobalHealth", "Blood") || 7 > GetHealth("GlobalHealth", "Health");
 	}
 
     private DZLConfig GetConfig() {

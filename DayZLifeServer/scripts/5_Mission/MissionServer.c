@@ -24,18 +24,6 @@ modded class MissionServer {
         }
     }
 
-    override void HandleBody(PlayerBase player) {
-        if (player.IsAlive() && !player.IsRestrained() && !player.IsUnconscious()) {
-            // remove the body
-			player.Delete();
-        } else if (player.IsUnconscious() || player.IsRestrained() || (100 >= player.GetHealth("GlobalHealth", "Blood") && 7 >= player.GetHealth("GlobalHealth", "Health")))  {
-            // kill character
-			DZLDatabaseLayer.Get().GetEmergencies().Remove(player.GetIdentity().GetId());
-            player.SetCanBeDestroyed(true);
-            player.SetHealth("", "", 0.0);
-        }
-    }
-	
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
 		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
@@ -79,20 +67,4 @@ modded class MissionServer {
 
 		return m_player;
 	}
-	
-	override void OnClientDisconnectedEvent(PlayerIdentity identity, PlayerBase player, int logoutTime, bool authFailed) {
-		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
-
-		if (100 > player.GetHealth("GlobalHealth", "Blood") || 7 > player.GetHealth("GlobalHealth", "Health") || dzlPlayer.HasBetweenState()) {
-            player.SetCanBeDestroyed(true);
-		    player.SetHealth01("GlobalHealth", "Health", 0);
-            player.SetHealth01("GlobalHealth", "Shock", 0);
-            player.SetHealth01("GlobalHealth", "Blood", 0);
-			dzlPlayer.ResetDeadState();
-			DZLDatabaseLayer.Get().GetEmergencies().Remove(identity.GetId());
-		} 
-		
-		super.OnClientDisconnectedEvent(identity, player, logoutTime, authFailed);
-	}
-	 
 }

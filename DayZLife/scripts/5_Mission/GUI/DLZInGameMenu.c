@@ -16,10 +16,4 @@ modded class InGameMenu
 		
 		return layoutRoot;
 	}
-
-	override protected void GameRespawn(bool random) {
-	    PlayerBase player = PlayerBaseHelper.GetPlayer();
-	    player.SetAllowDamage(true);
-	    super.GameRespawn(random);
-	}
 };

@@ -121,11 +121,10 @@ class DZLPlayerEventListener
                 if (ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param3){
                      player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));
                 }
-            } else if(rpc_type == DAY_Z_LIFE_EVENT_MEDIC_SYNC_PLAYER) {
-                 player.ShowHealMenu(true);
             } else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 player.RequestUpdateDZLPlayer();
             } else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
+                player.willDie = true;
                 PlayerRespawn();
             }
         }

@@ -29,7 +29,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
         if (super.OnClick(w, x, y, button)) return true;
 
         if (w == killButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER, null, true);
+            player.willDie = true;
             OnHide();
         } else if (w == healButton) {
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_MEDIC_CALL, null, true);
@@ -38,6 +38,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 			OnHide();
 		} else if (w == hospitalButton) {
 		    dzlPlayer.SetWillHealByHospital();
+		    player.willDie = true;
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, null, true);
 			OnHide();
 		}

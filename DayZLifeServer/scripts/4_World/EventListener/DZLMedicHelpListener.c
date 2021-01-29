@@ -15,7 +15,6 @@ class DZLMedicHelpListener
         if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
             DZLPlayer dzlPlayerKill = PlayerBase.Cast(target).GetDZLPlayer();
 			dzlPlayerKill.SetDieState();
-            KillPlayer(PlayerBase.Cast(target));
             DeleteMedicRequest(sender);
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
             DZLDatabaseLayer.Get().GetEmergencies().Add(sender.GetId());
@@ -53,12 +52,5 @@ class DZLMedicHelpListener
         dzlPlayer.SetWillHealByHospital();
         dzlPlayer.SaveItems(player);
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE, null, true, sender);
-        KillPlayer(player);
-    }
-
-    void KillPlayer(PlayerBase player) {
-		if (!player) return;
-        player.SetCanBeDestroyed(true);
-        player.SetHealth(0);
     }
 }
