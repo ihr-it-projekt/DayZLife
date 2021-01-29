@@ -274,7 +274,7 @@ FrameWidgetClass Banking {
          {
           PanelWidgetClass PanelWidget8 {
            ignorepointer 1
-           position 0.01268 0.0702
+           position 0.01804 0.0702
            size 0.31 0.35
            halign right_ref
            valign bottom_ref

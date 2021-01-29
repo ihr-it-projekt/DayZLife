@@ -28,6 +28,6 @@ class ActionOpenCarStorageMenu: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 
-        return !!player.config.carConfig.GetStorageByPosition(player.GetPosition());
+        return player.config && player.config.carConfig && !!player.config.carConfig.GetStorageByPosition(player.GetPosition());
 	}
 }

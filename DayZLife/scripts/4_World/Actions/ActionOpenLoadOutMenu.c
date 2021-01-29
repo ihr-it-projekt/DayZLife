@@ -29,7 +29,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 		if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 		
 	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-	    if (!dzlPlayer || !dzlPlayer.IsActiveAsCop()) return false;
+	    if (!dzlPlayer || !dzlPlayer.IsActiveAsCop() || !player.config || !player.config.jobConfig) return false;
 
         return player.config.jobConfig.loadOutsCops.IsInZone(player.GetPosition());
 	}

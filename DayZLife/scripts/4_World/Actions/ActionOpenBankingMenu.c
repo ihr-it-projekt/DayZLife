@@ -28,13 +28,12 @@ class ActionOpenBankingMenu: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 
-
         DZLDate currentDate = new DZLDate();
 
         if(!player.hasBankingConfig && currentDate.inSeconds - player.timeAskForBankingConfig > 5) {
             player.timeAskForBankingConfig = currentDate.inSeconds;
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING, new Param1<ref PlayerBase>(player), true);
-        } else {
+        } else if (player.config && player.config.bankConfig) {
 			return player.config.bankConfig.IsInZone(player.GetPosition());
         }
 

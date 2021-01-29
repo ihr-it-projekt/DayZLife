@@ -38,19 +38,13 @@ modded class PlayerBase
 
 	override void Init() {
         super.Init();
-        RegisterNetSyncVariableBool("IsDZLBank");
         RegisterNetSyncVariableBool("IsRealPlayerDZL");
-        RegisterNetSyncVariableBool("IsLicencePoint");
-        RegisterNetSyncVariableBool("IsTrader");
-        RegisterNetSyncVariableBool("IsLoadOut");
-        RegisterNetSyncVariableBool("isPolice");
-        RegisterNetSyncVariableBool("IsGarage");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 		SetCanBeDestroyed(false);
 	}
 
 	bool IsDZLPlayer() {
-        return IsRealPlayerDZL && GetIdentity();
+        return !!GetIdentity();
     }
 
     override void SetActions(out TInputActionMap InputActionMap) {
@@ -316,7 +310,7 @@ modded class PlayerBase
 
     DZLTraderPosition GetTraderByPosition(int distance = 2) {
 		vector playerPosition = GetPosition();
-        if (!playerPosition) {
+        if (!playerPosition || !GetConfig() || !GetConfig().traderConfig) {
             return null;
         }
 		

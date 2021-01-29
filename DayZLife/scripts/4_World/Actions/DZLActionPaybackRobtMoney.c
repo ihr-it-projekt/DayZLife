@@ -31,7 +31,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-		if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
+		if (!config || !player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
             return false;
         }
 

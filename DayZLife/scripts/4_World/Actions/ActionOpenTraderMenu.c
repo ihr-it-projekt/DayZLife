@@ -44,6 +44,7 @@ class ActionOpenTraderMenu: ActionInteractBase
 		    player.timeAskForTraderConfig = currentDate.inSeconds;
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<ref PlayerBase>(player), true);
 		}
+		
 
 		return !!player.GetTraderByPosition(); 
     }
