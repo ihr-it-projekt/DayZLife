@@ -125,6 +125,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu
     }
 
     void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
+        player.SetIsSpawned();
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param2<string, string>(point.id, jobId), true);
     }
 	

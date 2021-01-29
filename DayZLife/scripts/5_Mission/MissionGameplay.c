@@ -4,9 +4,11 @@ modded class MissionGameplay
     private bool holdLControl = false;
 	private bool holdOne = false;
 	private bool holdTow = false;
+	private bool holdTree = false;
 
 
 	private UIScriptedMenu almanac;
+	private UIScriptedMenu spawnMenu;
 	private ref DZLPlayerEventListener playerEventListener;
 	private ref DZLCarEventListener carEventListener;
 
@@ -39,6 +41,9 @@ modded class MissionGameplay
 			case KeyCode.KC_2:
                 holdTow = false;
                 break;
+            case KeyCode.KC_3:
+                holdTree = false;
+                break;
             default:
                 super.OnKeyRelease(key);
                 break;
@@ -63,8 +68,13 @@ modded class MissionGameplay
                 if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
 					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
+
                 if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
                     player.ShowHealMenuFromMission();
+                }
+
+                if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible()) {
+                    spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
 
                 break;
@@ -79,7 +89,11 @@ modded class MissionGameplay
 					player.ShowHealMenuFromMission();
                 }
 
-
+            case KeyCode.KC_3:
+				holdTree = true;
+				if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible()) {
+					spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+                }
             default:
                 super.OnKeyPress(key);
                 break;

@@ -1,11 +1,3 @@
-Bugs:
-- player remove from help
-- hauskauf bargeld wird nicht aktualisiert
-
-
-Nur mal so Interesseweise, kann man sich später auch bei seinem Dienst anmelden und abmelden? Oder geht das nur mit Respawn? z.B. als Cop das man zu einem NPC geht und da seinen dienst antreten kann.
-
-
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
 - Cops wollen spielern über liste strafe hinzufügen
@@ -23,17 +15,6 @@ Nur mal so Interesseweise, kann man sich später auch bei seinem Dienst anmelden
     - Eingabefeld Anzahl Tage
     - Miete bezahlen
     - Anzeige Miete 24 h
-
-
-- Hausdurchsuchung über Richterfunktion
-    - zwei Menüs, eins für Cops, eins für Richter
-    Cop:
-    - Eingabefeld: Warum?
-    - Beantragen Button
-    Richter:
-    - Text Feld
-    - Koordinate
-    - zwei buttons bestätigen/ablehnen
 
 Führerschein
 
@@ -54,9 +35,7 @@ Führerschein
 - trader preise nach health
 - nicht füttern von NPC
 - Waffen für NPC
-- telefon mod
-    - nur anrufen wenn bekannt
-    - blocken von spielern
+
 - Rollen
     - Rollen Spieler Anzahl begrenzen pro Job
     - Actions

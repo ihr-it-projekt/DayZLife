@@ -30,6 +30,7 @@ modded class PlayerBase
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	bool medicHelpMenuWasShown = false;
+	private ref Timer resetCanSpawn;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -43,6 +44,26 @@ modded class PlayerBase
         super.Init();
         RegisterNetSyncVariableBool("IsRealPlayerDZL");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
+	}
+
+	void SetIsSpawned() {
+	    int time = config.civilSpawnPoints.blockTimeForJobChange;
+	    if (dzlPlayerClient.IsCop()) {
+	        time = config.copSpawnPoints.blockTimeForJobChange;
+	    } else if (dzlPlayerClient.IsMedic()) {
+	        time = config.medicSpawnPoints.blockTimeForJobChange;
+	    }
+	    resetCanSpawn = new Timer;
+        resetCanSpawn.Run(time, this, "ResetSpawned");
+	}
+
+	void ResetSpawned() {
+	    resetCanSpawn.Stop();
+	    resetCanSpawn = null;
+	}
+
+	bool CanReSpawn() {
+	    return !resetCanSpawn;
 	}
 	
 	string GetPlayerId() {
@@ -283,6 +304,8 @@ modded class PlayerBase
 			carStorageMenu.OnHide();
 		} else if (healMenu && healMenu.IsVisible()) {
 			healMenu.OnHide();
+		} else if (spawnPositionMenu && spawnPositionMenu.IsVisible()) {
+			spawnPositionMenu.OnHide();
 		}
 	}
 

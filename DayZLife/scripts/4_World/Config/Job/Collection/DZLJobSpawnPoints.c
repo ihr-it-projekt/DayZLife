@@ -1,7 +1,8 @@
 class DZLJobSpawnPoints
 {
-	string version = "1";
+	string version = "2";
     string jobId;
+    int blockTimeForJobChange = 3600;
     ref array<ref DZLSpawnPoint> spawnPoints;
 
     void DZLJobSpawnPoints(string jobId) {
@@ -721,6 +722,12 @@ class DZLJobSpawnPoints
                     spawnPoints.Insert(point);
 			    }
 			}
+            Save();
+        }
+
+        if (version == "1") {
+            version = "2";
+            blockTimeForJobChange = 3600;
             Save();
         }
     }
