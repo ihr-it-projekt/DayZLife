@@ -17,6 +17,10 @@ class DZLMedicHelpListener
 			dzlPlayerKill.SetDieState();
             DeleteMedicRequest(sender);
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
+			PlayerBase emergencyPlayer = PlayerBase.Cast(target);
+			
+			if(!emergencyPlayer) return;
+			
             DZLDatabaseLayer.Get().GetEmergencies().Add(sender.GetId());
             DZLSendMessage(sender, "#medics_was_called. #Heal_menu_can_be_open_with: 2 + LCTRL");
 			DZLSendMedicMessage("#there_is_a_new_emergency");

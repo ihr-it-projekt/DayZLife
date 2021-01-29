@@ -136,7 +136,7 @@ class DZLBankingMenu : DZLBaseMenu
 			return;
 		}
 		
-		if (playerBankInfo.id == player.GetIdentity().GetId()) {
+		if (playerBankInfo.id == player.GetPlayerId()) {
 			player.DisplayMessage("#error_you_cant_send_money_to_yourself");
 			return;
 		}

@@ -4,8 +4,10 @@ class DZLEmergencies
 	string fileName = "emergencies.json";
 
     void DZLEmergencies() {
-        emergencies = new array<string>;
-        Save();
+        if (!Load()) {
+            emergencies = new array<string>;
+            Save();
+        }
     }
 
     void Add(string playerId) {

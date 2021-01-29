@@ -79,7 +79,7 @@ class DZLBankRaidListener : Managed
 
         int money = bank.PlayerRaidBank(dzlPlayer, config.percentOfMoneyWhenRaid);
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
-        DZLLogRaid(playerWhoStartedRaid.GetIdentity().GetId(), "bank raid finished", "bank", playerWhoStartedRaid.GetPosition());
+        DZLLogRaid(playerWhoStartedRaid.GetPlayerId(), "bank raid finished", "bank", playerWhoStartedRaid.GetPosition());
 
         array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);

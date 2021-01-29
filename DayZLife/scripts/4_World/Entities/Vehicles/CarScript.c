@@ -129,7 +129,7 @@ modded class CarScript
 
         if (!player) return false;
 		
-		string ident = player.GetIdentity().GetId();
+		string ident = player.GetPlayerId();
 		
 		DZLPlayer dzlPlayer = player.GetDZLPlayer();
 

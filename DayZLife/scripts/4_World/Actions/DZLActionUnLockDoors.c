@@ -22,7 +22,7 @@ class DZLActionUnLockDoors: ActionInteractBase
 			house = player.house;
 		} else {
 			if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-			house = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
+			house = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetPlayerId());
 		}
 
         if (!house) {

@@ -84,7 +84,7 @@ class DZLHouse
 	}
 
     void AddOwner(PlayerBase player) {
-        owner = player.GetIdentity().GetId();
+        owner = player.GetPlayerId();
         lockedDoors = new array<int>;
         alarmSystem = null;
         storagePositions = new array<int>;
@@ -101,7 +101,7 @@ class DZLHouse
 	}
 	
 	bool IsOwner(PlayerBase player) {
-		if (owner == player.GetIdentity().GetId()) {
+		if (owner == player.GetPlayerId()) {
 		    if (GetGame().IsServer()) {
                 string playerName = player.GetIdentity().GetName();
 
@@ -220,15 +220,15 @@ class DZLHouse
 	}
 	
 	bool CanUnLookDoor(PlayerBase player, int index) {
-		return IsDoorLooked(index) && (IsOwner(player) || HasPlayerAccess(player.GetIdentity().GetId()));
+		return IsDoorLooked(index) && (IsOwner(player) || HasPlayerAccess(player.GetPlayerId()));
 	}
 
 	bool CanLookDoor(PlayerBase player, int index) {
-		return !IsDoorLooked(index) && (IsOwner(player) || HasPlayerAccess(player.GetIdentity().GetId());
+		return !IsDoorLooked(index) && (IsOwner(player) || HasPlayerAccess(player.GetPlayerId());
 	}
 
 	bool CanRaidDoor(PlayerBase player, int index) {
-	    return IsDoorLooked(index) && !IsOwner(player) && !HasPlayerAccess(player.GetIdentity().GetId());
+	    return IsDoorLooked(index) && !IsOwner(player) && !HasPlayerAccess(player.GetPlayerId());
 	}
 	
 	bool HasAlarmSystem() {

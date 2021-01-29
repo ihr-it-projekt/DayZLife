@@ -118,7 +118,7 @@ class DZLAlmanacListener
     }
 
     void SendUpdateList(PlayerBase player) {
-        if (!config.adminIds.CanManageCops(player.GetIdentity().GetId())) return;
+        if (!config.adminIds.CanManageCops(player.GetPlayerId())) return;
 
         array<Man> _players = new array<Man>;
         GetGame().GetPlayers(_players);
@@ -142,7 +142,7 @@ class DZLAlmanacListener
     }
 	
     void SendUpdateListMedic(PlayerBase player) {
-        if (!config.adminIds.CanManageMedic(player.GetIdentity().GetId())) return;
+        if (!config.adminIds.CanManageMedic(player.GetPlayerId())) return;
 
         array<Man> _players = new array<Man>;
         GetGame().GetPlayers(_players);

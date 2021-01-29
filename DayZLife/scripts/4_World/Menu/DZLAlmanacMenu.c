@@ -145,7 +145,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 	
 	override void OnShow() {
 		super.OnShow();
-		string ident = player.GetIdentity().GetId();
+		string ident = player.GetPlayerId();
 		
 		if (player.GetDZLPlayer().IsActiveAsMedic()) {
 			toggleViewWidget.AddItem("#emergencies");
@@ -342,10 +342,10 @@ class DZLAlmanacMenu : DZLBaseMenu
 			medicWidget.Show(medicPanelId == item);
 			medicPanelWidget.Show(medicManagePanelId == item);
 		} else if (w == copPanelSave) {
-		    if (!config.adminIds.CanManageCops(player.GetIdentity().GetId())) return true;
+		    if (!config.adminIds.CanManageCops(player.GetPlayerId())) return true;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param1<ref array<string>>(DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
 		} else if (w == medicPanelSave) {
-		    if (!config.adminIds.CanManageMedic(player.GetIdentity().GetId())) return true;
+		    if (!config.adminIds.CanManageMedic(player.GetPlayerId())) return true;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS, new Param1<ref array<string>>(DZLDisplayHelper.GetPlayerIdsFromList(medicPanelCopsList)), true);
 		} else if (w == escapedPlayers) {
 			int posEscaped = escapedPlayers.GetSelectedRow();
@@ -362,7 +362,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			return true;
 		} else if (w == adminDeletePlayerButton) {
-		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
+		    if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
 		    DZLPlayer _dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (_dzlPlayer) {
@@ -371,7 +371,7 @@ class DZLAlmanacMenu : DZLBaseMenu
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == adminAddMoneyToPlayerButton) {
-		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
+		    if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
 		    DZLPlayer __dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (__dzlPlayer) {
@@ -381,7 +381,7 @@ class DZLAlmanacMenu : DZLBaseMenu
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == adminAddMoneyToPlayerButtonBank) {
-		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
+		    if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
 		    DZLPlayer ___dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (___dzlPlayer) {
@@ -391,7 +391,7 @@ class DZLAlmanacMenu : DZLBaseMenu
                 player.DisplayMessage("#no_player_selected");
             }
 		} else if (w == adminPlayers) {
-		    if (!config.adminIds.CanManagePlayers(player.GetIdentity().GetId())) return true;
+		    if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
 		    DZLPlayer selectedAdminPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if (selectedAdminPlayer) {

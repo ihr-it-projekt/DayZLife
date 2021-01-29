@@ -89,7 +89,7 @@ class DZLDisplayHelper
         int countPlayers = exclude.GetNumItems();
 
         foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
-            if (player.GetIdentity().GetId() == onlinePlayer.id) continue;
+            if (player.GetPlayerId() == onlinePlayer.id) continue;
             bool hasKey = false;
 
             for(int i = 0; i < countPlayers; i ++) {

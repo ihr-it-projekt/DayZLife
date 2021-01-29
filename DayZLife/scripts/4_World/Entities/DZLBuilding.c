@@ -20,7 +20,7 @@ class DZLBuilding
     void BuyOnServer(PlayerBase player) {
         if(!GetGame().IsClient()){
             house.AddOwner(player);
-            DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
+            DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetPlayerId());
             playerHouse.AddHouse(house);
         }
     }
@@ -31,7 +31,7 @@ class DZLBuilding
                 DZLDatabaseLayer.Get().RemoveHouseInventory(house.GetOwner(), house.GetPosition());
             }
             house.DisableInventory();
-            ref DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetIdentity().GetId());
+            ref DZLPlayerHouse playerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(player.GetPlayerId());
             playerHouse.RemoveKey(house);
 
         }

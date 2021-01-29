@@ -87,7 +87,7 @@ class DZLTraderMenu: DZLBaseMenu
                 addInventoryTypes.Insert(type.type);
 				
 				if (type.isCar) {
-					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetIdentity().GetId());
+					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetPlayerId());
 					
 					if (playerCar && !playerCar.isSold) {
 						quant = playerCar.GetQuantity().ToString();
@@ -175,7 +175,7 @@ class DZLTraderMenu: DZLBaseMenu
 			    if (type.sellPrice <= 0) continue
 				
 				if (type.isCar) {
-					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetIdentity().GetId());
+					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetPlayerId());
 					
 					if (playerCar && !playerCar.isSold) {
 						GetGame().ObjectGetDisplayName(playerCar, name);
@@ -273,7 +273,7 @@ class DZLTraderMenu: DZLBaseMenu
                     CarScript carsScript = CarScript.Cast(sellItem);
                     if (!carsScript) {
                         sellItems.Insert(sellItem);
-                    } else if (!carsScript.isSold && carsScript.lastDriverId == player.GetIdentity().GetId()) {
+                    } else if (!carsScript.isSold && carsScript.lastDriverId == player.GetPlayerId()) {
 						bool carIsEmpty = true;
 	                    for (int seat = 0; seat < carsScript.CrewSize(); seat++){
 		                	if (carsScript.CrewMember(seat)) {

@@ -117,7 +117,7 @@ class DZLPlayerHouseListener
 		
 		array <string> accessPlayer = dzlBuilding.GetPlayerAccess();
 		
-		string playerIdent =  player.GetIdentity().GetId();
+		string playerIdent =  player.GetPlayerId();
 		
 		accessPlayer.Insert(playerIdent);
 		

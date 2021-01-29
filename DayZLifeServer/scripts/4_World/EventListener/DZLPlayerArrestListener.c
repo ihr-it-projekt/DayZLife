@@ -43,7 +43,7 @@ class DZLPlayerArrestListener
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_ARREST_PLAYER_RESPONSE, null, true, sender);
 				DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
 				DZLSendMessage(cop.GetIdentity(), "#you_set_arrest_to_player_in_minutes: " + arrestTime.ToString());
-				DZLLogArrest(prisoner.GetIdentity().GetId(), "got arrest", arrestTime);
+				DZLLogArrest(prisoner.GetPlayerId(), "got arrest", arrestTime);
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param4<ref array<ref DZLEscapedPlayer>, int, int, int>(escapeePlayers, copCount, medicCount, civCount), true, sender);

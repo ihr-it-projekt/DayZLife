@@ -37,10 +37,20 @@ modded class PlayerBase
 	bool hasBankingConfig = false;
 	float deltaTimeLastUpdate = 0;
 
+	private string playerUID;
+
 	override void Init() {
         super.Init();
         RegisterNetSyncVariableBool("IsRealPlayerDZL");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
+	}
+	
+	string GetPlayerId() {
+		if (!playerUID) {
+			playerUID = GetIdentity().GetId();
+		}
+		
+		return playerUID;
 	}
 
 	bool IsDZLPlayer() {
@@ -445,7 +455,7 @@ modded class PlayerBase
 					if(craftMap.Find(itemType, countFoundCraft)) {
 						if (quantity == 1) {
 							GetGame().ObjectDelete(item);
-							DZLLogCrafting(GetIdentity().GetId(), "licence crafting delete resource", item.GetType());
+							DZLLogCrafting(GetPlayerId(), "licence crafting delete resource", item.GetType());
 							countFoundCraft -= 1;
 							craftMap.Set(itemType, countFoundCraft);
 						} else if (quantity > countFoundCraft) {
@@ -454,7 +464,7 @@ modded class PlayerBase
 						} else {
 							countFoundCraft -= quantity;
 							GetGame().ObjectDelete(item);
-							DZLLogCrafting(GetIdentity().GetId(), "licence crafting delete resource", item.GetType());
+							DZLLogCrafting(GetPlayerId(), "licence crafting delete resource", item.GetType());
 							craftMap.Set(itemType, countFoundCraft);
 						}
 
@@ -487,7 +497,7 @@ modded class PlayerBase
 						    }
 
 							item.SetHealth(health - toolItem.health);
-							DZLLogCrafting(GetIdentity().GetId(), "licence crafting tool reduce health", item.GetType());
+							DZLLogCrafting(GetPlayerId(), "licence crafting tool reduce health", item.GetType());
 						}
 						tools.Remove(index);
 						break;
@@ -510,7 +520,7 @@ modded class PlayerBase
         }
 		
 		if (itemSpawn) {
-		    DZLLogCrafting(GetIdentity().GetId(), "licence crafting get item", itemToCraft.type);
+		    DZLLogCrafting(GetPlayerId(), "licence crafting get item", itemToCraft.type);
 			itemSpawn.SetHealth(itemToCraft.health);
 			ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
 		}
@@ -583,7 +593,7 @@ modded class PlayerBase
     DZLPlayer GetDZLPlayer() {
         if (GetGame().IsServer()) {
             if (!dzlPlayerServer) {
-                dzlPlayerServer = DZLDatabaseLayer.Get().GetPlayer(GetIdentity().GetId());
+                dzlPlayerServer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
             }
             return dzlPlayerServer;
         }
@@ -598,7 +608,7 @@ modded class PlayerBase
     }
 
     void SetDZLPlayer(DZLPlayer dzlPlayer) {
-        if (dzlPlayer.dayZPlayerId == GetIdentity().GetId()) {
+        if (dzlPlayer.dayZPlayerId == GetPlayerId()) {
             this.dzlPlayerClient = dzlPlayer;
         }
     }
