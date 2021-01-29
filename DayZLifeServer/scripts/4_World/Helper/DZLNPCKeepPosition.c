@@ -5,6 +5,7 @@ class DZLNPCKeepPosition
     vector orientation;
 
     void DZLNPCKeepPosition(EntityAI npc) {
+        if (!npc) return;
         this.npc = npc;
         position = npc.GetPosition();
         orientation = npc.GetOrientation();

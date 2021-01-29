@@ -83,7 +83,7 @@ modded class PlayerBase
 	
 	override void CheckDeath()
 	{
-		if( IsPlayerSelected() && !IsAlive() )
+		if(IsPlayerSelected() && !IsAlive())
 		{
 			if (!medicHelpMenuWasShown) {
 			    ShowHealMenu();

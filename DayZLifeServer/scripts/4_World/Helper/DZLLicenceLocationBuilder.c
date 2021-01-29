@@ -13,7 +13,10 @@ class DZLLicenceLocationBuilder
     void Create() {
 		array<ref DZLLicencePosition> positions = DZLConfig.Get().licenceConfig.positionOfLicencePoints;
 		foreach(DZLLicencePosition position: positions) {
-		    npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position)));
+		    EntityAI npc = CreatePositions(position);
+		    if (npc) {
+		        npcs.Insert(new DZLNPCKeepPosition(npc));
+		    }
 		}
 	}
 
