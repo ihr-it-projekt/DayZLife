@@ -87,6 +87,7 @@ modded class PlayerBase
 		{
 			if (!medicHelpMenuWasShown) {
 			    ShowHealMenu();
+			    GetGame().GetUIManager().ScreenFadeIn(0, "", FadeColors.BLACK, FadeColors.WHITE);
 			} else if (willDie) {
                 SimulateDeath(true);
                 m_DeathCheckTimer.Stop();
