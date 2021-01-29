@@ -109,9 +109,9 @@ class DZLLicenceConfig
                 craftItems = new DZLLicenceCraftItemCollection;
                 toolItems = new DZLLicenceToolItemCollection;
 				
-				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Cocain", 10, 50));
+				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Cocaine", 10, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("DuctTape", 1, 10));
-                licences.collection.Insert(new DZLLicence(150, "Cocain Licence", "3691.775635 402.000000 5972.513672", 5, "", new DZLLicenceCraftedItem("DZL_Cocain_Brick", 5, 100), 5, toolItems, craftItems));
+                licences.collection.Insert(new DZLLicence(150, "Cocaine Licence", "3691.775635 402.000000 5972.513672", 5, "", new DZLLicenceCraftedItem("DZL_Cocaine_Brick", 5, 100), 5, toolItems, craftItems));
                 craftItems = new DZLLicenceCraftItemCollection;
                 toolItems = new DZLLicenceToolItemCollection;
 				
