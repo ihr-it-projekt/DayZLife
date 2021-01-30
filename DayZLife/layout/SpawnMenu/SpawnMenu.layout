@@ -62,7 +62,7 @@ FrameWidgetClass rootFrame {
       }
       MapWidgetClass map {
        position 0.0042 0.00776
-       size 0.7423 0.87335
+       size 0.7423 0.79355
        halign right_ref
        hexactpos 0
        vexactpos 0
@@ -72,7 +72,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
        position 0.12459 0.00112
-       size 0.75 0.11
+       size 0.75 0.19128
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -83,8 +83,8 @@ FrameWidgetClass rootFrame {
        {
         PanelWidgetClass PanelWidget4 {
          ignorepointer 1
-         position 0.021 0
-         size 0.25 0.6
+         position 0.0168 0.18
+         size 0.25 0.36
          halign right_ref
          valign center_ref
          hexactpos 0
@@ -95,6 +95,7 @@ FrameWidgetClass rootFrame {
          {
           ButtonWidgetClass spawnButton {
            color 0.251 0.502 0 1
+           position 0 0
            size 0.98 0.9
            halign center_ref
            valign center_ref
@@ -108,8 +109,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget5 {
          ignorepointer 1
-         position 0.31445 0
-         size 0.25 0.6
+         position 0.2788 0.18
+         size 0.25 0.3605
          halign right_ref
          valign center_ref
          hexactpos 0
@@ -134,8 +135,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget6 {
          ignorepointer 1
-         position 0.021 0
-         size 0.28103 0.6
+         position 0.049 0.18
+         size 0.281 0.36
          valign center_ref
          hexactpos 0
          vexactpos 0
@@ -156,6 +157,20 @@ FrameWidgetClass rootFrame {
            items "#Civ;#Cop;#Medic"
           }
          }
+        }
+        TextWidgetClass warnText {
+         ignorepointer 1
+         color 0.502 0 0 1
+         position 0.0065 0.0727
+         size 0.9902 0.4
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#you_will_loose_all_money_on_you_char"
+         text_proportion 0.7
+         "text halign" center
+         "text valign" center
         }
        }
       }

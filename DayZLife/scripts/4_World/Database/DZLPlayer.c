@@ -148,6 +148,11 @@ class DZLPlayer
         lastLoginDate = new DZLDate();
         Save();
     }
+
+    void LoosPlayerInventoryMoney() {
+        money = 0;
+        Save();
+    }
 	
 	void AddMoneyToPlayer(int moneyCount) {
         if (DayZGame().IsServer()) {

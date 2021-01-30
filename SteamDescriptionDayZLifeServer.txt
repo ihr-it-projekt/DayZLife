@@ -15,6 +15,7 @@ Feature list
 
 - Supported languages: English, German, Chinese, Chinese Simple, more will come
 - Spawn Menu with Job choice
+- Job change is possible every time without dying  (CTRLL + 3)
 - own Money-System
 - tax system, A tax is due for each sale at the trader.
 - Cars

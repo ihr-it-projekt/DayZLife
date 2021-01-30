@@ -17,6 +17,7 @@ class DZLPlayerSpawnListener
             if (ctx.Read(param) && param.param1 && param.param2){
                 PlayerBase player = PlayerBase.Cast(target);
                 player.RemoveAllItems();
+                player.GetDZLPlayer().LoosPlayerInventoryMoney();
 
                 DZLJobSpawnPoints points = config.GetJobSpanwPointById(param.param2);
 				DZLSpawnPoint point = points.FindSpawnById(param.param1);
@@ -32,7 +33,8 @@ class DZLPlayerSpawnListener
 
 				player.SetPosition(point.point);
 				player.SetOrientation(point.orientation);
-				
+
+				GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, sender);
 				GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_RESPONSE, null, true, sender);
             }
         }
