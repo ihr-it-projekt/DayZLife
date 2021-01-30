@@ -227,4 +227,4 @@ error_not_enough_money_payback," You have not enough money. Needed Money:"," You
 payback_was_successful, Payback was successful. You have paid back: , Payback was successful. You have paid back: , Rückzahlung erfolgreich. Du hast zurückgezahlt: ,
 Tax, Tax, Tax, Steuer,
 payback_was_successful, You have been refunded: , You have been refunded: , Du hast zurückgezahlt: ,
-you_will_loose_all_money_on_you_char,Attention: You will lose all your money at char when you respawn.,Attention: You will lose all your money at char when you respawn., Achtung: Du verlierst dein Geld was du bei dir hast.
+you_will_loose_all_money_on_you_char,Attention: You will lose all your money and items at char when you respawn.,Attention: You will lose all your money and items at char when you respawn., Achtung: Du verlierst dein Geld und die Sachen die du bei dir trägst was du bei dir hast.
