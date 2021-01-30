@@ -1,12 +1,4 @@
-Feature:
-Job change is possible every time without dying  (CTRLL + 3)
 
-Improvements
-- Medic system improvements
-
-Bugfix:
-- fix typo in generated config for cocaine and cocaine bricks
-- When no NPC is configured for an Trader/Bank/Licence Trader/Garage Server has crashed when they check the position of them
 
 
 - Wenn spieler sterben dann wieder in der Zelle spawnen
