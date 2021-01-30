@@ -83,17 +83,20 @@ modded class MissionGameplay
 				if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
 					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
+                break;
 			case KeyCode.KC_2:
 				holdTow = true;
 				if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
 					player.ShowHealMenuFromMission();
                 }
+                break;
 
             case KeyCode.KC_3:
 				holdTree = true;
 				if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible()) {
 					spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
+                break;
             default:
                 super.OnKeyPress(key);
                 break;
