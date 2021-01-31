@@ -128,6 +128,12 @@ class DZLSpawnPositionMenu : DZLBaseMenu
         player.SetIsSpawned();
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param2<string, string>(point.id, jobId), true);
     }
+
+    override void OnHide() {
+        super.OnHide();
+        GetGame().GetMission().GetHud().ShowHud(true);
+        GetGame().GetMission().GetHud().ShowQuickBar(true);
+    }
 	
 	private void UpdateSpawnPoints() {
 		DZLJobSpawnPoints spawnPointCollection = config.GetJobSpanwPointById(jobId);
