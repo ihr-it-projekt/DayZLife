@@ -22,7 +22,7 @@ class ActionRobBank: ActionInteractBase
 
 	override void CreateConditionComponents() {
 		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
+		m_ConditionTarget = new CCTNone;
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
@@ -71,7 +71,7 @@ class ActionRobBank: ActionInteractBase
             return false;
         }
         foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
-            if (vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
+            if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
                 return position.raidIsEnabled;
             }
         }
