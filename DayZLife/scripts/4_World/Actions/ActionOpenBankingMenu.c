@@ -37,7 +37,6 @@ class ActionOpenBankingMenu: ActionInteractBase
 			return player.config.bankConfig.IsInZone(player.GetPosition());
         }
 
-
         return false;
 	}
 }

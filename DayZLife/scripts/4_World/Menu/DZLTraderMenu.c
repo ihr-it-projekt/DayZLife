@@ -43,14 +43,14 @@ class DZLTraderMenu: DZLBaseMenu
 		traderItemList = creator.GetTextListboxWidget("Trader_Item_list");
 		sum = creator.GetTextWidget("sum");
 		sum.SetText("0");
-		tax.SetText("0");
 
 		itemCategory = creator.GetXComboBoxWidget("xcombobox_categorys");
-		
+
 		tradeButton = creator.GetButtonWidget("Button_Buy");
 
 		credits = creator.GetTextWidget("Cedits");
 		tax = creator.GetTextWidget("tax");
+		tax.SetText("0");
 
 		preview = creator.GetItemPreviewWidget("previewItem");
 

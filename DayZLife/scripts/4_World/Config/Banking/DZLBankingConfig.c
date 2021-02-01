@@ -69,7 +69,7 @@ class DZLBankingConfig
         }
 
         foreach(DZLBankingPosition zone: positionOfBankingPoints) {
-            if(vector.Distance(zone.position, playerPosition) <= 2) {
+            if(zone && zone.position && vector.Distance(zone.position, playerPosition) <= 2) {
                 return true;
             }
         }

@@ -5,6 +5,7 @@ class DZLBankRaidListener : Managed
 	int timeHappened = 0;
     private ref Timer raidTimer;
     private PlayerBase playerWhoStartedRaid;
+    private DZLBankingPosition position;
 
     void DZLBankRaidListener() {
         config = DZLConfig.Get().bankConfig;
@@ -45,12 +46,24 @@ class DZLBankRaidListener : Managed
             DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
             if (!playerWhoStartedRaid) {
-                playerWhoStartedRaid = PlayerBase.Cast(target);
-                bank.StartRaid();
-                timeHappened = 0;
-                DZLSendMessage(null, "#bank_rob_was_started");
-                DZLLogRaid(sender.GetId(), "start bank raid", "bank", playerWhoStartedRaid.GetPosition());
-                raidTimer.Run(1, this, "Finish", null, true);
+                foreach(DZLBankingPosition _position: config.positionOfBankingPoints) {
+                    if (_position && _position.position && vector.Distance(_position.position, PlayerBase.Cast(target).GetPosition()) <= config.maximumRaidDistanceToBank){
+                         if (_position.raidIsEnabled) {
+                            playerWhoStartedRaid = PlayerBase.Cast(target);
+                            position = _position;
+                            break;
+                         }
+                    }
+                }
+
+                if (playerWhoStartedRaid) {
+                    bank.StartRaid();
+                    timeHappened = 0;
+                    DZLSendMessage(null, "#bank_rob_was_started");
+                    DZLLogRaid(sender.GetId(), "start bank raid", "bank", playerWhoStartedRaid.GetPosition());
+
+                    raidTimer.Run(1, this, "Finish", null, true);
+                }
             } else {
                 DZLSendMessage(sender, "#raid_allready_started");
             }
@@ -59,7 +72,7 @@ class DZLBankRaidListener : Managed
 
     void Finish() {
 		if (time > timeHappened) {
-            if (!isInNearOfBankAndLocationIsEnabled() || !playerWhoStartedRaid || !playerWhoStartedRaid.IsAlive()) {
+            if (!isInNearOfBankAndLocationIsEnabled()) {
                 playerWhoStartedRaid = null;
                 raidTimer.Stop();
                 DZLBank bank_cancel = DZLDatabaseLayer.Get().GetBank();
@@ -100,16 +113,17 @@ class DZLBankRaidListener : Managed
         if (!playerWhoStartedRaid) {
             return false;
         }
+
+        if (!playerWhoStartedRaid.IsAlive()) {
+            return false;
+        }
+
         vector playerPosition = playerWhoStartedRaid.GetPosition();
         if (!playerPosition) {
             return false;
         }
-        foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
-            if (vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
-                return position.raidIsEnabled;
-            }
-        }
-        return false;
+
+        return position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank);
     }
 
 }
