@@ -27,7 +27,6 @@ modded class MissionServer {
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){
 		DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
 		if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
-			DZLDatabaseLayer.Get().GetEmergencies().Remove(identity.GetId());
 		    DZLStoreItem playerData = dzlPlayer.GetPlayerData();
 
             string type = "SurvivorF_Judy";
@@ -64,6 +63,7 @@ modded class MissionServer {
 		}
 		
         dzlPlayer.ResetDeadState();
+        DZLDatabaseLayer.Get().GetEmergencies().Remove(identity.GetId());
 
 		return m_player;
 	}
