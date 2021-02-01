@@ -220,7 +220,7 @@ Storage_Space_Available, Storage Space Available, Storage Space Available, Lager
 add_to_Player, add to Player, add to Player, zum Spieler,
 add_to_House_Storage, add to House Storage, add to House Storage, ins Haus einlagern,
 successfully_extend_storage, Successful extend storage, Successful extend storage, Lager erfolgreich hinzugefügt,
-raid_allready_started, Raid all ready started, Raid all ready started, Banküberfall ist schon restarted,
+raid_allready_started, Raid all ready started, Raid all ready started, Banküberfall ist schon gestarted,
 payback_robt_money, Payback robt money, Payback robt money, Geraubtes Geld zurückzahlen.
 error_not_enough_money_payback," You have not enough money. Needed Money:"," You have not enough money. Needed Money:","Nicht genug Geld vorhanden! Benötigtes Geld:",
 <<<<<<< .merge_file_a22712
@@ -228,3 +228,4 @@ payback_was_successful, Payback was successful. You have paid back: , Payback wa
 Tax, Tax, Tax, Steuer,
 payback_was_successful, You have been refunded: , You have been refunded: , Du hast zurückgezahlt: ,
 you_will_loose_all_money_on_you_char,Attention: You will lose all your money and items at char when you respawn.,Attention: You will lose all your money and items at char when you respawn., Achtung: Du verlierst dein Geld und die Sachen die du bei dir trägst was du bei dir hast.
+bank_rob_will_finished_in, Bank raid is finished in (Minutes), Bank raid is finished in (Minutes), Banküberfall ist beendet in (Minuten),

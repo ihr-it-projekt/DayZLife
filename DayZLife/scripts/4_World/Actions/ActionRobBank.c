@@ -33,11 +33,6 @@ class ActionRobBank: ActionInteractBase
 		} else {
 		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			GetConfig();
-			DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-			if (bank.raidRuns) {
-			    DZLSendMessage(player.GetIdentity(), "#raid_allready_started");
-			    return false;
-			}
 		}
 		
 		if (config) {

@@ -80,6 +80,11 @@ class DZLBankRaidListener : Managed
                 DZLSendMessage(null, "#bank_rob_was_canceled");
                 return;
             }
+
+            if (timeHappened % 300 == 1) {
+                int leftMinutes = (time - timeHappened) / 60;
+                DZLSendMessage(playerWhoStartedRaid.GetIdentity(), "#bank_rob_will_finished_in " + leftMinutes.ToString());
+            }
 			
 		    timeHappened++;
 			return;
