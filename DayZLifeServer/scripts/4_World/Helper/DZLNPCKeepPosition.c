@@ -12,6 +12,7 @@ class DZLNPCKeepPosition
     }
 
     void FixPosition() {
+        if (!npc) return;
         npc.SetPosition(position);
         npc.SetOrientation(orientation);
         npc.SetOrientation(npc.GetOrientation()); //Collision fix

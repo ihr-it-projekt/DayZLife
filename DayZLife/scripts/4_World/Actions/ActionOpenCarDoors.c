@@ -5,10 +5,8 @@ modded class ActionOpenCarDoors
         CarScript carScript = CarScript.Cast(target.GetParent());
         if ((carScript && carScript.HasPlayerAccess(player)) || (player && player.IsInVehicle())) {
             return super.ActionCondition(player, target, item);
-        } else if (carScript) {
-            return false;
         }
 		
-		return super.ActionCondition(player, target, item);
+		return false;
 	}
 };
