@@ -15,6 +15,7 @@ modded class CarScript
 	private bool hasInsurance = false;
 	private bool hasInsuranceServer = false;
 	private vector lastGaragePosition = "0 0 0";
+	private ref DZLCarStoreItem carStoreItem;
 
 
     override void OnEngineStart() {
@@ -33,9 +34,9 @@ modded class CarScript
 	    hasInsurance = true;
 	    hasInsuranceServer = true;
 	    carCheckTimer = new Timer;
-        carCheckTimer.Run(10, this, "CheckHealth", null, true);
+        carCheckTimer.Run(60, this, "CheckHealth", null, true);
         this.lastGaragePosition = lastGaragePosition;
-		DZLInsuranceManager.Get().AddCar(this);
+		carStoreItem = DZLInsuranceManager.Get().AddCar(this, null);	
 	}
 
 	void EnableInsuranceClient(bool hasInsurance) {
@@ -61,7 +62,7 @@ modded class CarScript
 				
 				DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(ownerId);
 				
-				storageIn.Add(this, storagePosition.position, true);
+				storageIn.Add(this, storagePosition.position, false, true);
                 DZLLogStore(ownerId, "insurance store in", GetType(), storagePosition.position);
 			}
 		}
@@ -167,6 +168,9 @@ modded class CarScript
         ctx.Write(store2);
         Param2<bool, vector> param3 = new Param2<bool, vector>(hasInsuranceServer, lastGaragePosition);
         ctx.Write(param3);
+		Param1<ref DZLCarStoreItem> store4 = new Param1<ref DZLCarStoreItem>(carStoreItem);
+		ctx.Write(store4);
+		
 	}
 
 	override bool IsInventoryVisible() {
@@ -196,9 +200,15 @@ modded class CarScript
 			hasInsuranceServer = store3.param1;
             if (hasInsuranceServer) {
                 EnableInsurance(store3.param2);
-				DZLInsuranceManager.Get().AddCar(this);
             }
         }
+		
+		
+		Param1<ref DZLCarStoreItem> store4 = new Param1<ref DZLCarStoreItem>(null);
+		if (ctx.Read(store4) && store4.param1) {
+			carStoreItem = store4.param1;
+			DZLInsuranceManager.Get().AddCar(this, carStoreItem);
+		}
 
 	
         SynchronizeValues(null);

@@ -11,8 +11,8 @@ class DZLCarStorage
         }
     }
 
-    void Add(CarScript entity, vector storagePosition, bool withCargo = true){
-		AddDZLCarStoreItem(new DZLCarStoreItem(entity, storagePosition, withCargo));
+    void Add(CarScript entity, vector storagePosition, bool withCargo, bool isInsuranceCase){
+		AddDZLCarStoreItem(new DZLCarStoreItem(entity, storagePosition, withCargo, isInsuranceCase));
 	}
 
 	void AddDZLCarStoreItem(DZLCarStoreItem carStoreItem) {

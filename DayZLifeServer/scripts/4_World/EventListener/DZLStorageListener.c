@@ -19,7 +19,7 @@ class DZLStorageListener
             autoptr Param1<vector> paramStoreCar;
             CarScript car = CarScript.Cast(target);
 			
-			if (car.IsRuined()) {
+			if (car && car.IsRuined()) {
 				DZLSendMessage(sender, "#car_can_not_store_is_ruined");
 			} else if (ctx.Read(paramStoreCar) && paramStoreCar.param1 && car){
 				DZLStoragePosition storagePosition = config.GetStorageByPosition(paramStoreCar.param1);
@@ -33,7 +33,7 @@ class DZLStorageListener
                 }
 				
                 DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
-                storageIn.Add(car, storagePosition.position);
+                storageIn.Add(car, storagePosition.position, config.canStoreCarsWithGoods, false);
 				
 				DZLInsuranceManager.Get().RemoveCar(car);
 
@@ -74,7 +74,7 @@ class DZLStorageListener
 
                     if (withInsurance) {
                         dzlPlayer.AddMoneyToPlayer(config.carInsurancePrice * -1);
-                        DZLInsuranceManager.Get().AddCar(carSpawned);
+                        DZLInsuranceManager.Get().AddCar(carSpawned, null);
                         GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                     }
                 }
