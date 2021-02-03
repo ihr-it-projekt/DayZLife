@@ -34,7 +34,7 @@ modded class CarScript
 	    hasInsurance = true;
 	    hasInsuranceServer = true;
 	    carCheckTimer = new Timer;
-        carCheckTimer.Run(60, this, "CheckHealth", null, true);
+        carCheckTimer.Run(120, this, "CheckHealth", null, true);
         this.lastGaragePosition = lastGaragePosition;
 		carStoreItem = DZLInsuranceManager.Get().AddCar(this, null);	
 	}
@@ -55,19 +55,16 @@ modded class CarScript
 	}
 
 	void CheckHealth() {
-        if (GetGame().IsServer()) {
-			if (IsRuined()) {
-				DisableInsurance();
-				DZLStoragePosition storagePosition = DZLConfig.Get().carConfig.GetStorageByPosition(lastGaragePosition);
-				
-				DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(ownerId);
-				
-				storageIn.Add(this, storagePosition.position, false, true);
-                DZLLogStore(ownerId, "insurance store in", GetType(), storagePosition.position);
-			}
+        if (GetGame().IsServer() && IsDamageDestroyed()) {
+            DisableInsurance();
+            DZLStoragePosition storagePosition = DZLConfig.Get().carConfig.GetStorageByPosition(lastGaragePosition);
+
+            DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(ownerId);
+
+            storageIn.Add(this, storagePosition.position, false, true);
+            DZLLogStore(ownerId, "insurance store in", GetType(), storagePosition.position);
 		}
 	}
-
 
 	override void SetActions(){
 	    super.SetActions();
