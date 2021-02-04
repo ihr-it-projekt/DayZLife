@@ -11,7 +11,6 @@ modded class CarScript
 
     private int timeAskForDataSync;
 
-    private ref Timer carCheckTimer;
 	private bool hasInsurance = false;
 	private bool hasInsuranceServer = false;
 	private vector lastGaragePosition = "0 0 0";
@@ -33,8 +32,6 @@ modded class CarScript
 	void EnableInsurance(vector lastGaragePosition) {
 	    hasInsurance = true;
 	    hasInsuranceServer = true;
-	    carCheckTimer = new Timer;
-        carCheckTimer.Run(120, this, "CheckHealth", null, true);
         this.lastGaragePosition = lastGaragePosition;
 		carStoreItem = DZLInsuranceManager.Get().AddCar(this, null);	
 	}
@@ -50,12 +47,10 @@ modded class CarScript
 	void DisableInsurance() {
 	    hasInsurance = false;
 	    hasInsuranceServer = false;
-	    carCheckTimer.Stop();
-		DZLInsuranceManager.Get().RemoveCar(this);
 	}
 
-	void CheckHealth() {
-        if (GetGame().IsServer() && IsDamageDestroyed()) {
+	bool CheckHealth() {
+        if (GetGame().IsServer() && IsDamageDestroyed() && hasInsurance) {
             DisableInsurance();
             DZLStoragePosition storagePosition = DZLConfig.Get().carConfig.GetStorageByPosition(lastGaragePosition);
 
@@ -63,7 +58,10 @@ modded class CarScript
 
             storageIn.Add(this, storagePosition.position, false, true);
             DZLLogStore(ownerId, "insurance store in", GetType(), storagePosition.position);
+            return true;
 		}
+
+		return false;
 	}
 
 	override void SetActions(){

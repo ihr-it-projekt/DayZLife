@@ -57,6 +57,8 @@ class DZLInsuranceManager
                 storageIn.AddDZLCarStoreItem(carStoreItem);
                 DZLLogStore(ownerId, "car deleted insurance store in", carStoreItem.type, storagePosition.position);
 				carsToRemove.Insert(carId);
+			} else if(car.CheckHealth()) {
+			    carsToRemove.Insert(carId);
 			}
 		}
 		

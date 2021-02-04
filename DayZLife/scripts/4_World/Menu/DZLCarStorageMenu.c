@@ -29,7 +29,6 @@ class DZLCarStorageMenu: DZLBaseMenu
 		
 		hasInsuranceWidget = creator.GetCheckBoxWidget("insuranceCheckBox");
 		insuranceText = creator.GetTextWidget("insurranceTextBox");
-		insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + ")");
 
         return layoutRoot;
     }
@@ -50,6 +49,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 
     override void OnShow() {
         super.OnShow();
+        insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + ")");
        
 		if (!position) {
 		    position = player.config.carConfig.GetStorageByPosition(player.GetPosition());
