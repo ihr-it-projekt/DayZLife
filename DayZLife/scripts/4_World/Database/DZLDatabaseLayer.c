@@ -126,8 +126,8 @@ class DZLDatabaseLayer
     void RemoveHouseInventory(string playerId, vector position) {
         DZLHouseInventory inventory;
         if (!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
-            dzlHouseInventory.Remove(playerId);
             inventory.Delete();
+            dzlHouseInventory.Remove(playerId);
         }
     }
 
