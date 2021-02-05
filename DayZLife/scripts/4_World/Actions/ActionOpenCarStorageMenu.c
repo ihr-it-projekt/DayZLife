@@ -10,7 +10,7 @@ class ActionOpenCarStorageMenu: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTNone;
+        m_ConditionTarget = new CCTCursor;
     }
 
 	override string GetText() {
@@ -27,7 +27,9 @@ class ActionOpenCarStorageMenu: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
+        if(!target) return false;
+        if(!target.GetObject()) return false;
 
-        return player.config && player.config.carConfig && !!player.config.carConfig.GetStorageByPosition(player.GetPosition());
+        return player.config && player.config.carConfig && !!player.config.carConfig.GetStorageByPositionObject(player.GetPosition(), target.GetObject().GetType());
 	}
 }

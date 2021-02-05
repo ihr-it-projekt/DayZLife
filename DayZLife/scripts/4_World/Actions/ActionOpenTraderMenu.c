@@ -1,5 +1,7 @@
 class ActionOpenTraderMenu: ActionInteractBase
 {
+    DZLTraderPosition position;
+
 	void ActionOpenTraderMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
@@ -10,7 +12,7 @@ class ActionOpenTraderMenu: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTNone;
+        m_ConditionTarget = new CCTCursor;
     }
 
 	override string GetText() {
@@ -20,8 +22,6 @@ class ActionOpenTraderMenu: ActionInteractBase
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
-		DZLTraderPosition position = action_data.m_Player.GetTraderByPosition();
-
 		if (!position) return;
 
 		if (!position.CanOpenWithJob(action_data.m_Player.GetDZLPlayer().GetActiveJob())) {
@@ -30,13 +30,14 @@ class ActionOpenTraderMenu: ActionInteractBase
 		}
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(), NULL);
+			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(position), NULL);
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
-
+        if(!target) return false;
+        if(!target.GetObject()) return false;
        
 		DZLDate currentDate = new DZLDate();
 		
@@ -44,8 +45,10 @@ class ActionOpenTraderMenu: ActionInteractBase
 		    player.timeAskForTraderConfig = currentDate.inSeconds;
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<ref PlayerBase>(player), true);
 		}
-		
 
-		return !!player.GetTraderByPosition(); 
+		position = player.GetTraderByPosition(target.GetObject().GetType());
+
+
+		return !!position;
     }
 }

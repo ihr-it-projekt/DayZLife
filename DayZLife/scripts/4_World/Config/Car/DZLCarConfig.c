@@ -98,6 +98,24 @@ class DZLCarConfig
         }
     }
 
+    DZLStoragePosition GetStorageByPositionObject(vector playerPosition, string type, int distance = 2) {
+        if (!playerPosition) {
+            return null;
+        }
+
+		foreach(DZLStoragePosition position: garages) {
+		    if (position && position.survivor != type) {
+		        continue;
+		    }
+			float distanceToPos = vector.Distance(position.position, playerPosition);
+			if (distanceToPos <= distance){
+                return position;
+            }
+		}
+
+		return null;
+    }
+	
     DZLStoragePosition GetStorageByPosition(vector playerPosition, int distance = 2) {
         if (!playerPosition) {
             return null;

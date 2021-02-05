@@ -22,7 +22,8 @@ class DZLTraderMenu: DZLBaseMenu
 	private ref map<string, ref array<ref DZLTraderType>> displayCategories;
 	private ref array<string> addedCats;
 
-    void DZLTraderMenu() {
+    void DZLTraderMenu(DZLTraderPosition position) {
+		this.position = position;
         layoutPath = "DayZLife/layout/Trader/Trader_Menu.layout";
 		displayCategories = new map<string, ref array<ref DZLTraderType>>;
 		addedCats = new array<string>;
@@ -62,7 +63,6 @@ class DZLTraderMenu: DZLBaseMenu
 		
 		array<EntityAI> playerItems = player.GetPlayerItems();
 		credits.SetText(dzlPlayer.GetMoney().ToString());
-		position = player.GetTraderByPosition();
 		
 		inventory.ClearItems();
 		sellCard.ClearItems();
@@ -125,16 +125,6 @@ class DZLTraderMenu: DZLBaseMenu
         sumInt = 0;
         taxInt = 0;
 
-		if (!position) {
-		    position = player.GetTraderByPosition(4);
-		}
-
-		if (!position) {
-		    OnHide();
-		    LogMessageDZL("No Trader position found.");
-		    return;
-		}
-		
 		int index;
 		string name = "";
 		int quantity;

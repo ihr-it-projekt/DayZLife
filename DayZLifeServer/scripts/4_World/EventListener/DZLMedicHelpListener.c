@@ -13,8 +13,6 @@ class DZLMedicHelpListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
-            DZLPlayer dzlPlayerKill = PlayerBase.Cast(target).GetDZLPlayer();
-			dzlPlayerKill.SetDieState();
             DeleteMedicRequest(sender);
         } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
 			PlayerBase emergencyPlayer = PlayerBase.Cast(target);

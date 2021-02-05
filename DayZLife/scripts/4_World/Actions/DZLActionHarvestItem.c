@@ -48,12 +48,12 @@ class DZLActionHarvestItem: ActionInteractBase
 				
                    foreach(string _item: relation.itemsThatNeededForHarvest) {
                     _item.ToLower();
-                       if (handItemType == _item) {
-                        if (GetGame().IsServer()){
-                            return 0 < item_in_hands_source.GetHealth();
-                           }
-                           return true;
+                    if (handItemType == _item) {
+                    if (GetGame().IsServer()){
+                        return 0 < item_in_hands_source.GetHealth();
                        }
+                       return true;
+                   }
                 }
             }
         }

@@ -26,7 +26,7 @@ class DZLLicenceLocationBuilder
         if (!object) {
             return null;
         }
-		
+
 		EntityAI entity = EntityAI.Cast(object);
 		
 		if (!entity) return null;

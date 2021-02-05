@@ -43,7 +43,6 @@ class DZLLicenceConfig
 				
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Ore_Diamond", 2, 50));
                 licences.collection.Insert(new DZLLicence(100, "Diamond Licence", "4680.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
-                craftItems = new DZLLicenceCraftItemCollection;
 				// End Crafting
                 // Position of licence dealer
                 positionOfLicencePoints.Insert(new DZLLicencePosition("4660.000000 339.282990 10315.000000", "0 0 0", "SurvivorM_Boris", attachments));
@@ -124,9 +123,7 @@ class DZLLicenceConfig
 				craftItems.collection.Insert(new DZLLicenceCraftItem("DZL_Oil_Barrel", 2, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("FieldShovel", 1, 10));
                 licences.collection.Insert(new DZLLicence(150, "Plastik Licence", "12845.079102 5.980000 9919.536133", 5, "Oil Licence", new DZLLicenceCraftedItem("DZL_Stone", 1, 100), 5, toolItems, craftItems));
-                craftItems = new DZLLicenceCraftItemCollection;
-                toolItems = new DZLLicenceToolItemCollection;
-				
+
                 // Position of licence dealer
                 positionOfLicencePoints.Insert(new DZLLicencePosition("6566.056152 6.000000 2456.487061", "138 0 0", "SurvivorM_Boris", attachments));
                 // end position
@@ -143,13 +140,13 @@ class DZLLicenceConfig
 		}
 	}
 
-	bool IsInZone(vector playerPosition) {
+	bool IsInZone(vector playerPosition, string type) {
         if (!playerPosition) {
             return false;
         }
 
         foreach(DZLLicencePosition zone: positionOfLicencePoints) {
-            if(vector.Distance(zone.position, playerPosition) <= 2) {
+            if(zone. survivor == type && vector.Distance(zone.position, playerPosition) <= 2) {
                 return true;
             }
         }

@@ -31,10 +31,13 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-		if (!config || !player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
+		if(!target) return false;
+        if(!target.GetObject()) return false;
+		
+		if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) {
             return false;
         }
-
+		
         DZLBank bank = player.dzlBank;
         if (GetGame().IsServer()) {
             bank = DZLDatabaseLayer.Get().GetBank();
@@ -45,8 +48,10 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
         }
 		
 		GetConfig(player);
+		
+		if (!config) return false;
 
-        return config.IsInZone(player.GetPosition());;
+        return config.IsInZone(player.GetPosition(), target.GetObject().GetType());;
 	}
 
 	override void OnEndServer(ActionData action_data) {

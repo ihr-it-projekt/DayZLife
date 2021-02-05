@@ -8,7 +8,7 @@ class ActionRobMoney: ActionInteractBase
 
     override void CreateConditionComponents()
     {
-        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
+        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT, false);
         m_ConditionItem = new CCINone;
     }
 
@@ -21,12 +21,10 @@ class ActionRobMoney: ActionInteractBase
         if (GetGame().IsServer()) {
             if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
         }
-		if (!target.GetObject()) return false;
-        if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
-
+		
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious();
+        return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious() || !targetPlayer.IsAlive();
     }
 
     override void OnEndServer(ActionData action_data) {

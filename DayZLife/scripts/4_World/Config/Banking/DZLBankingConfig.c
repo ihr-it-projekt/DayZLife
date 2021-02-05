@@ -63,13 +63,13 @@ class DZLBankingConfig
 		}
     }
 
-    bool IsInZone(vector playerPosition) {
+    bool IsInZone(vector playerPosition, string type) {
         if (!playerPosition) {
             return false;
         }
 
         foreach(DZLBankingPosition zone: positionOfBankingPoints) {
-            if(zone && zone.position && vector.Distance(zone.position, playerPosition) <= 2) {
+            if(zone && zone.survivor == type && zone.position && vector.Distance(zone.position, playerPosition) <= 2) {
                 return true;
             }
         }

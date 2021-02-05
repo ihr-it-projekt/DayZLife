@@ -10,7 +10,7 @@ class ActionOpenBankingMenu: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTNone;
+        m_ConditionTarget = new CCTCursor;
     }
 
 	override string GetText() {
@@ -27,6 +27,8 @@ class ActionOpenBankingMenu: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
+        if(!target) return false;
+        if(!target.GetObject()) return false;
 
         DZLDate currentDate = new DZLDate();
 
@@ -34,7 +36,7 @@ class ActionOpenBankingMenu: ActionInteractBase
             player.timeAskForBankingConfig = currentDate.inSeconds;
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING, new Param1<ref PlayerBase>(player), true);
         } else if (player.config && player.config.bankConfig) {
-			return player.config.bankConfig.IsInZone(player.GetPosition());
+			return player.config.bankConfig.IsInZone(player.GetPosition(), target.GetObject().GetType());
         }
 
         return false;

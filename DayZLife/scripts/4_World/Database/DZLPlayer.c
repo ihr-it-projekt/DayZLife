@@ -199,11 +199,6 @@ class DZLPlayer
         Save();
     }
 
-    void SetDieState() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_DEAD;
-        Save();
-    }
-
     void SetWillHealByMedic() {
         deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
         Save();
@@ -236,10 +231,6 @@ class DZLPlayer
 
     DZLStoreItem GetPlayerData() {
         return itemsStore.Get(0);
-    }
-
-    bool WillDie() {
-        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_DEAD;
     }
 
     bool WillHealByMedic() {

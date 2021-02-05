@@ -209,8 +209,8 @@ modded class PlayerBase
 		return almanacMenu;
 	}
 	
-	DZLTraderMenu GetTraderMenu() {
-		traderMenu = new DZLTraderMenu();
+	DZLTraderMenu GetTraderMenu(DZLTraderPosition position) {
+		traderMenu = new DZLTraderMenu(position);
 		InitMenu(traderMenu);
 		return traderMenu;
 	}
@@ -355,7 +355,7 @@ modded class PlayerBase
         return null;
     }
 
-    DZLTraderPosition GetTraderByPosition(int distance = 2) {
+    DZLTraderPosition GetTraderByPosition(string type, int distance = 2) {
 		vector playerPosition = GetPosition();
         if (!playerPosition || !GetConfig() || !GetConfig().traderConfig) {
             return null;
@@ -364,6 +364,9 @@ modded class PlayerBase
 		array<ref DZLTraderPosition> positions = GetConfig().traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
+		    if (position.survivor != type) {
+		        continue;
+		    }
 			float distanceToPos = vector.Distance(position.position, playerPosition);
 			if (distanceToPos <= distance){
                 return position;
@@ -386,7 +389,7 @@ modded class PlayerBase
 			if (quantity == 0) {
                 quantity = 1;
             }
-			
+
 			bool isCraft = false;
 
 			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
