@@ -15,11 +15,10 @@ modded class DayZPlayerImplement
                     } else if (dzlPlayer.WillHealByHospital()) {
                         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
 					    player.RemoveAllItems();
-                    } else {
+                    } else if (isDead){
                         player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
                         dzlPlayer.PlayerHasDied();
                     }
-
                 }
             }
         }

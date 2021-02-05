@@ -8,7 +8,7 @@ class ActionRobMoney: ActionInteractBase
 
     override void CreateConditionComponents()
     {
-        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT, false);
+        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
         m_ConditionItem = new CCINone;
     }
 
@@ -24,7 +24,7 @@ class ActionRobMoney: ActionInteractBase
 		
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious() || !targetPlayer.IsAlive();
+        return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious();
     }
 
     override void OnEndServer(ActionData action_data) {
