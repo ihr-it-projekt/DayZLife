@@ -28,9 +28,11 @@ class DZLHouseInventory
 
         if (items.Count() <= GetLeftStorage()) {
             foreach(EntityAI item: items) {
-                CargoBase cargo = item.GetInventory().GetCargo();
-                if (cargo && cargo.GetItemCount() > 0) {
-                    return false;
+                if (item.GetInventory()) {
+                    CargoBase cargo = item.GetInventory().GetCargo();
+                    if (cargo && cargo.GetItemCount() > 0) {
+                        return false;
+                    }
                 }
             }
         } else {

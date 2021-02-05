@@ -46,14 +46,15 @@ class DZLStoreItem: DZLIdModel
 			
 			quantity = ammo.GetAmmoCount();
 		}
-
-		for(int i = 0; i < item.GetInventory().AttachmentCount(); i++ ) {
-			EntityAI attachment = item.GetInventory().GetAttachmentFromIndex(i);
-			if(attachment){
-				DZLStoreItem storeItem = new DZLStoreItem();
-				storeItem.Init(attachment, positionOfStore, withCargo);
-				attached.Insert(storeItem);
-			}
+        if (item.GetInventory()) {
+            for(int i = 0; i < item.GetInventory().AttachmentCount(); i++ ) {
+                EntityAI attachment = item.GetInventory().GetAttachmentFromIndex(i);
+                if(attachment){
+                    DZLStoreItem storeItem = new DZLStoreItem();
+                    storeItem.Init(attachment, positionOfStore, withCargo);
+                    attached.Insert(storeItem);
+                }
+            }
 		}
 
 		

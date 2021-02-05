@@ -73,7 +73,7 @@ modded class MissionGameplay
                     player.ShowHealMenuFromMission();
                 }
 
-                if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible()) {
+                if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained()) {
                     spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
 
@@ -93,7 +93,7 @@ modded class MissionGameplay
 
             case KeyCode.KC_3:
 				holdTree = true;
-				if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible()) {
+				if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained()) {
 					spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
                 break;
