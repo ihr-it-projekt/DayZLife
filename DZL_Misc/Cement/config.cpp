@@ -37,6 +37,6 @@ class CfgVehicles
 		descriptionShort="#Cement";
 		model="DZL_Misc\Cement\DZL_Cement.p3d";
 		weight=20000;
-		itemSize[]={3,4};
+		itemSize[]={2,2};
 	};
 };

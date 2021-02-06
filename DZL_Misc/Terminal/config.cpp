@@ -19,5 +19,6 @@ class CfgVehicles
 	{
 		scope=2;
 		model="\DZL_Misc\Terminal\DZL_Terminal.p3d";
+		autocenter = false;
 	};
 };
