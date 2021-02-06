@@ -20,7 +20,7 @@ class CfgVehicles
 		displayName="Fass mit Ölschlamm";
 		descriptionShort="Kann zu Öl oder Plastik weiter verarbeitet werden";
 		canBeDigged=0;
-		itemSize[]={3,5};
+		itemSize[]={2,2};
 		carveNavmesh=1;
 		quantityBar=1;
 		scope=2;
@@ -42,6 +42,6 @@ class CfgVehicles
 		descriptionShort="";
 		model="\dz\vehicles\parts\oil_bottle.p3d"
 		weight=5000;
-		itemSize[]={2,3};
+		itemSize[]={2,2};
 	};
 };

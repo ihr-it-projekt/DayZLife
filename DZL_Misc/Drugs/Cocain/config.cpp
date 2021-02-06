@@ -57,7 +57,7 @@ class CfgVehicles
 		rotationFlags=17;
 		lootCategory="Crafted";
 		weight=500;
-		itemSize[]={4,4};
+		itemSize[]={2,2};
 		itemsCargoSize[]={0,0};
 		absorbency=0.2;
 		isMeleeWeapon=1;

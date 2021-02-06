@@ -59,7 +59,7 @@ class CfgVehicles
 		descriptionShort="$STR_CfgVehicles_WoodenLog1";
 		model="\dz\gear\camping\wooden_log.p3d";
 		weight=20000;
-		itemSize[]={2,8};
+		itemSize[]={2,2};
 		varQuantityDestroyOnMin=1;
 		itemBehaviour=0;
 		canBeSplit=1;
@@ -75,13 +75,12 @@ class CfgVehicles
 		descriptionShort="$STR_CfgVehicles_WoodenPlank1";
 		model="\dz\gear\consumables\single_plank.p3d";
 		weight=1500;
-		itemSize[]={2,8};
+		itemSize[]={2,2};
 		canBeSplit=1;
-		varQuantityInit=5;
+		varQuantityInit=1;
 		varQuantityMin=0;
-		varQuantityMax=5;
-		varQuantityDestroyOnMin=1;
-		varStackMax=5;
+		varQuantityMax=1;
+		varStackMax=1;
 	};
 	class DZL_Sandpaper: Paper
 	{
@@ -158,7 +157,7 @@ class CfgVehicles
 		descriptionShort="#Bucket";
 		model="\DZ\structures\furniture\decoration\bucket\bucket.p3d";
 		weight=1000;
-		itemSize[]={2,3};
+		itemSize[]={2,2};
 		itemsCargoSize[]={0,0};
 		canBeDigged=0;
 	};
