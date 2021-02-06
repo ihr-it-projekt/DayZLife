@@ -195,6 +195,7 @@ class DZLPlayer
     }
 
     void PlayerHasDied() {
+        DZLLogMoneyTransaction(dayZPlayerId, "has died", money, 0, money * -1);
         money = 0;
         Save();
     }
@@ -250,7 +251,7 @@ class DZLPlayer
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
-        DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money);
+        DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money * -1);
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
         Save();

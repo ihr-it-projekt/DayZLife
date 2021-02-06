@@ -70,7 +70,6 @@ class DZLStorageListener
                     storage.RemoveItem(storedCar);
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storage), true, sender);
                     DZLLogStore(sender.GetId(), "store out insurance: " + withInsurance.ToString(), carSpawned.GetType(), storagePositionCar.position);
-                    DZLSendMessage(sender, "#car_was_parked_out");
 
                     if (withInsurance) {
                         dzlPlayer.AddMoneyToPlayer(config.carInsurancePrice * -1);
@@ -96,9 +95,17 @@ class DZLStorageListener
 
         if (car) {
 			array<ref DZLStoreItem> attached = itemInStock.attached;
-			
+			bool spawnOnGround = false;
 			foreach(DZLStoreItem attach: attached) {
-				DZLSpawnHelper.Add(car, attach);
+				if (DZLSpawnHelper.Add(car, attach) && !spawnOnGround) {
+				    spawnOnGround = true;
+				}
+			}
+
+			if (spawnOnGround) {
+			    DZLSendMessage(player.GetIdentity(), "#car_was_parked_out_some_items_can_not_placed_in_car");
+			} else {
+			    DZLSendMessage(player.GetIdentity(), "#car_was_parked_out");
 			}
 
 			if (enableInsurance) {
