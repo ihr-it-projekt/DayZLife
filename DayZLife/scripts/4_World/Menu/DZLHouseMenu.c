@@ -449,9 +449,7 @@ class DZLHouseMenu : DZLBaseMenu
 			autoptr Param1<ref DZLHouseInventory> paramInventoryResponse;
 			if (ctx.Read(paramInventoryResponse)) {
 				inventory = paramInventoryResponse.param1;
-				
 
-				
 				houseInventoryList.ClearItems();
 				houseInventoryAddList.ClearItems();
 				playerInventoryList.ClearItems();

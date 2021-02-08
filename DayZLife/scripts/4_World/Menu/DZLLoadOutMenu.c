@@ -38,21 +38,27 @@ class DZLLoadOutMenu: DZLBaseMenu
 			loadoutComboBox = creator.GetXComboBoxWidget("loadoutComboBox");
 			
 			preview = creator.GetItemPreviewWidget("itemPreview");
-			
-			categories = player.config.jobConfig.loadOutsCops.loadOutCategories;
-			
-			foreach(DZLLoadOutCategory category: categories) {
-				loadoutComboBox.AddItem(category.name);
-			}
-			
-			currentCat = categories.Get(0);
-			UpdateCategory();
 		}
 		
 		return layoutRoot;
     }
 
+    void SetCategories(array<ref DZLLoadOutCategory> _categories) {
+        this.categories = _categories;
+    }
+
     override void OnShow() {
+        if (!categories) {
+            OnHide();
+            return;
+        }
+
+        foreach(DZLLoadOutCategory category: categories) {
+            loadoutComboBox.AddItem(category.name);
+        }
+
+        currentCat = categories.Get(0);
+        UpdateCategory();
         super.OnShow();
     }
 

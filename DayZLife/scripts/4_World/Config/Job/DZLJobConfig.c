@@ -3,12 +3,14 @@ class DZLJobConfig
     ref DZLWorkZones workZones;
     ref DZLPaycheckConfig paycheck;
     ref DZLLoadOuts loadOutsCops;
+    ref DZLLoadOuts loadOutsMedics;
     ref DZLArrestConfig arrestConfig;
 
     void DZLJobConfig() {
 		workZones = new DZLWorkZones;
         paycheck = new DZLPaycheckConfig;
         loadOutsCops = new DZLLoadOuts(DAY_Z_LIFE_JOB_COP);
+        loadOutsMedics = new DZLLoadOuts(DAY_Z_LIFE_JOB_MEDIC);
         arrestConfig = new DZLArrestConfig;
 	}
 

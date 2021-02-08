@@ -1,21 +1,27 @@
 class DZLHouseConfig
  {
-    string version = "1";
+    string version = "2";
+    ref array<ref DZLJobHouseDefinition> copHouseConfigs;
+    ref array<ref DZLJobHouseDefinition> medicHouseConfigs;
     ref array<ref DZLHouseDefinition> houseConfigs;
-    ref array<ref DZLCopHouseDefinition> copHouseConfigs;
 
     void DZLHouseConfig()
 	{
         if(!Load()) {
             houseConfigs = new array<ref DZLHouseDefinition>;
-            copHouseConfigs = new array<ref DZLCopHouseDefinition>;
+            copHouseConfigs = new array<ref DZLJobHouseDefinition>;
 
-            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Village_PoliceStation"));
-            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_City_PoliceStation"));
-            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Prison_Main"));
-            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Prison_Side"));
-            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_Village_PoliceStation_Enoch"));
-            copHouseConfigs.Insert(new DZLCopHouseDefinition("Land_City_PoliceStation_Enoch"));
+            copHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Village_PoliceStation"));
+            copHouseConfigs.Insert(new DZLJobHouseDefinition("Land_City_PoliceStation"));
+            copHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Prison_Main"));
+            copHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Prison_Side"));
+            copHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Village_PoliceStation_Enoch"));
+            copHouseConfigs.Insert(new DZLJobHouseDefinition("Land_City_PoliceStation_Enoch"));
+
+            medicHouseConfigs = new array<ref DZLJobHouseDefinition>;
+
+            medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_City_Hospital", 30));
+            medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Village_HealthCare"));
 
 			array<vector> storagePosition = new array<vector>;
             houseConfigs.Insert(new DZLHouseDefinition("Land_Garage_Row_Small", 100, 50, storagePosition, 0.5, 10));
@@ -148,6 +154,15 @@ class DZLHouseConfig
             houseConfigs.Insert(new DZLHouseDefinition("Land_House_2B03", 100, 50, storagePosition, 0.5, 10));
             Save();
         }
+
+        if (version == "1") {
+            medicHouseConfigs = new array<ref DZLJobHouseDefinition>;
+
+            medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_City_Hospital", 30));
+            medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Village_HealthCare"));
+            version = "2";
+            Save();
+        }
     }
 	
 	DZLHouseDefinition GetHouseDefinitionByBuilding(notnull Building building) {
@@ -170,13 +185,23 @@ class DZLHouseConfig
 		return false;
 	}
 	
-	DZLCopHouseDefinition GetCopHouseDefinition(notnull Building building) {
-		foreach(DZLCopHouseDefinition definition: copHouseConfigs) {
+	DZLJobHouseDefinition GetCopHouseDefinition(notnull Building building) {
+		foreach(DZLJobHouseDefinition definition: copHouseConfigs) {
 			if (definition.houseType == building.GetType()) {
 				return definition;
 			}
 		}
 		
+		return null;
+	}
+
+	DZLJobHouseDefinition GetMedicHouseDefinition(notnull Building building) {
+		foreach(DZLJobHouseDefinition definition: medicHouseConfigs) {
+			if (definition.houseType == building.GetType()) {
+				return definition;
+			}
+		}
+
 		return null;
 	}
 

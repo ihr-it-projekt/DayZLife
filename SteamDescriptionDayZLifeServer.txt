@@ -76,12 +76,14 @@ Feature list
 - Jobs
     - Medic
         - can raid police stations and prisons
+        - can get load out at specific position
         - Spawn with Medic Equipment
         - can heal other players
+        - can open medic buildings
         - have a panel in almanac where they can see player emergency
         - get a message, when there is a new emergency
     - Civil
-        - can raid police stations and prisons
+        - can raid police stations, prisons, hospitals and buildings from other players
         - Spawn with Civil Equipment
     - Cops
         - spawn with Cop Equipment

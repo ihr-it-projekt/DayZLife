@@ -5,10 +5,17 @@ class DZLLoadOutLocationBuilder: DZLLicenceLocationBuilder {
     }
 
     override void Create() {
-		array<ref DZLLoadOutPosition> positions = DZLConfig.Get().jobConfig.loadOutsCops.loadOutPosition;
-		
+		Build(DZLConfig.Get().jobConfig.loadOutsCops.loadOutPosition);
+		Build(DZLConfig.Get().jobConfig.loadOutsMedics.loadOutPosition);
+	}
+	
+	private void Build(array<ref DZLLoadOutPosition> positions) {
 		foreach(DZLLoadOutPosition position: positions) {
-           npcs.Insert(new DZLNPCKeepPosition(CreatePositions(position)));
+			EntityAI npc = CreatePositions(position);
+			if (npc) {
+				npcs.Insert(new DZLNPCKeepPosition(npc));
+			}
+           
         }
 	}
 };
