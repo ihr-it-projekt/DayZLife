@@ -10,19 +10,28 @@ modded class ActionOpenDoors
 		if(building) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 			if (doorIndex != -1) {
-			    DZLCopHouseDefinition definition;
+			    DZLJobHouseDefinition definition;
+			    DZLJobHouseDefinition medicDefinition;
 			    DZLPlayer dzlPlayer = player.GetDZLPlayer();
 			    if (GetGame().IsServer()) {
 			       if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			       definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
+			       if (!definition) {
+                       medicDefinition = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(building);
+                   }
 			    } else if (player.config && player.GetDZLPlayer()) {
 			       definition = player.config.houseConfig.GetCopHouseDefinition(building);
+			       if (!definition) {
+                       medicDefinition = player.config.houseConfig.GetMedicHouseDefinition(building);
+                   }
 			    } else {
 			        return false;
 			    }
-
-                if(definition) {
-                    return dzlPlayer.IsActiveAsCop();
+                bool canOpen = true;
+                if(definition && !dzlPlayer.IsActiveAsCop()) {
+                    canOpen = false;
+                } else if (medicDefinition && !dzlPlayer.IsActiveAsMedic()) {
+                    canOpen = false;
                 }
 					
 				if (GetGame().IsServer()) {
@@ -34,7 +43,7 @@ modded class ActionOpenDoors
 				}
                 DZLSendMessage(player.GetIdentity(), "#door_is_looked");
 
-				return (!building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex));
+				return canOpen && !building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex);
 			}
 		}
 		return false;

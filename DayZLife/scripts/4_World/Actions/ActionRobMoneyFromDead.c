@@ -22,11 +22,9 @@ class ActionRobMoneyFromDead: ActionInteractBase
             if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
         }
         if (!target.GetObject()) return false;
-        EntityAI targetEntity = EntityAI.Cast(target.GetObject());
+        PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        if (!targetEntity || !targetEntity.IsPlayer()) return false;
-
-		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+        if (!targetPlayer || !targetPlayer.IsPlayer()) return false;
 
         return !targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0;
     }

@@ -20,8 +20,15 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
-		if (g_Game.GetUIManager().GetMenu() == NULL){		
-			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLoadOutMenu(), NULL);
+		if (g_Game.GetUIManager().GetMenu() == NULL){
+		    DZLLoadOutMenu menu = action_data.m_Player.GetLoadOutMenu();
+		    if (action_data.m_Player.GetDZLPlayer().IsActiveAsCop()) {
+                menu.SetCategories(action_data.m_Player.config.jobConfig.loadOutsCops.loadOutCategories);
+            } else if (action_data.m_Player.GetDZLPlayer().IsActiveAsMedic()) {
+                menu.SetCategories(action_data.m_Player.config.jobConfig.loadOutsMedics.loadOutCategories);
+            }
+
+			GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
         }
 	}
 
@@ -29,8 +36,14 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 		if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
 		
 	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-	    if (!dzlPlayer || !dzlPlayer.IsActiveAsCop() || !player.config || !player.config.jobConfig) return false;
+	    if (!dzlPlayer || !player.config || !player.config.jobConfig) return false;
 
-        return player.config.jobConfig.loadOutsCops.IsInZone(player.GetPosition());
+        if (dzlPlayer.IsActiveAsCop()) {
+            return player.config.jobConfig.loadOutsCops.IsInZone(player.GetPosition());
+        } else if (dzlPlayer.IsActiveAsMedic()) {
+            return player.config.jobConfig.loadOutsMedics.IsInZone(player.GetPosition());
+        }
+		
+		return false;
 	}
 }

@@ -15,8 +15,9 @@ class DZLRaidListener
             if (ctx.Read(paramRaidDoor)){
 				Building raidedBuilding = Building.Cast(target);
 				
-				DZLCopHouseDefinition definitionRaided = DZLConfig.Get().houseConfig.GetCopHouseDefinition(raidedBuilding);
-				if (!definitionRaided) {
+				DZLJobHouseDefinition definitionRaided = DZLConfig.Get().houseConfig.GetCopHouseDefinition(raidedBuilding);
+				DZLJobHouseDefinition medicDefinitionRaided = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(raidedBuilding);
+				if (!definitionRaided && !medicDefinitionRaided) {
 					DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(raidedBuilding);
 	                dzlHouse.UnLookDoor(paramRaidDoor.param1);
 	                DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
@@ -38,12 +39,15 @@ class DZLRaidListener
                 PlayerBase raider = PlayerBase.Cast(target);
                 Building building = paramRaidDoorDZLBuilding.param1;
 				
-				DZLCopHouseDefinition definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
-				
+				DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
+				DZLJobHouseDefinition medicDefinition = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(building);
+
 				int raidTime = 9999999999;
 				
 				if (definition) {
 					raidTime = definition.raidTimeInSeconds;
+				} else if(medicDefinition) {
+				    raidTime = medicDefinition.raidTimeInSeconds;
 				} else {
 				    DZLHouse dzlHouseRaid = DZLDatabaseLayer.Get().GetHouse(building);
 	

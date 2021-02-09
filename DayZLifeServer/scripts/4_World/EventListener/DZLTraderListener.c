@@ -49,6 +49,10 @@ class DZLTraderListener
                                     continue;
                                 }
 
+                                if (!item || !type) {
+                                    continue;
+                                }
+
                                 if (item.GetType() == type.type) {
                                     float itemPrice = GetPrice(item, type.sellPrice);
                                     float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;

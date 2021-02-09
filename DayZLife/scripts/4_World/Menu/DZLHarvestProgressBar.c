@@ -11,8 +11,6 @@ class DZLHarvestProgressBar: DZLBaseProgressBar
 		}
 
         duration = zone.timeToHarvestPerItemInSeconds;
-        maxRange = zone.range;
-        position = zone.position;
     }
 
 	override void OnHide() {

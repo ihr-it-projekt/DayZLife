@@ -195,6 +195,7 @@ class DZLPlayer
     }
 
     void PlayerHasDied() {
+        DZLLogMoneyTransaction(dayZPlayerId, "has died", money, 0, money * -1);
         money = 0;
         Save();
     }
@@ -223,7 +224,7 @@ class DZLPlayer
     void SaveItems(PlayerBase player) {
         itemsStore = new array<ref DZLStoreItem>;
         DZLStoreItem items = new DZLStoreItem;
-		items.Init(player, player.GetPosition(), false);
+		items.Init(player, player.GetPosition(), true);
 
 		itemsStore.Insert(items);
         Save();
@@ -250,7 +251,7 @@ class DZLPlayer
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
-        DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money);
+        DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money * -1);
         playerTarget.AddMoneyToPlayer(money);
         money = 0;
         Save();

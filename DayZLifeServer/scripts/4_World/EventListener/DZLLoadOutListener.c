@@ -19,28 +19,28 @@ class DZLLoadOutListener
 				PlayerBase player = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
 				string categoryName = paramLoadOut.param1;
-                string message = "#error_not_a_cop";
 
-                if (dzlPlayer.IsCop()) {
-					message = "#error_category_not_found";
-					foreach(DZLLoadOutCategory category: config.loadOutsCops.loadOutCategories) {
-						if (categoryName == category.name) {
-							DZLLogLoadOut(sender.GetId(), categoryName);
-							player.RemoveAllItems();
-							foreach(DZLLoadOutType type: category.items) {
-								Add(player, type);
-							}
-							GetGame().RPCSingleParam(null, DAY_Z_LIFE_LOAD_OUT_RESPONSE, null, true, sender);
-							return;
-						}
-					}
-                }
-
-                if (message) {
-			        DZLSendMessage(sender, message);
-                }
+                if ((dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
+					DZLSendMessage(sender, "#error_category_not_found");
+				}
             }
         }
+    }
+
+    private bool SearchLoadOutAndEquip(string categoryName, array<ref DZLLoadOutCategory> categories, PlayerIdentity sender, PlayerBase player) {
+        foreach(DZLLoadOutCategory category: categories) {
+            if (categoryName == category.name) {
+                DZLLogLoadOut(sender.GetId(), categoryName);
+                player.RemoveAllItems();
+                foreach(DZLLoadOutType type: category.items) {
+                    Add(player, type);
+                }
+                GetGame().RPCSingleParam(null, DAY_Z_LIFE_LOAD_OUT_RESPONSE, null, true, sender);
+                return true;;
+            }
+        }
+
+        return false;
     }
 
     private void Add(PlayerBase player, DZLLoadOutType type) {

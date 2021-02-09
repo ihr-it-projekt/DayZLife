@@ -22,7 +22,7 @@ class DZLActionRaidDoors: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-	    if (GetGame().IsClient() && (!player.config || !player.config.houseConfig)) return false;
+	    if (GetGame().IsClient() && (!player.config || !player.config.houseConfig || !player.GetDZLPlayer())) return false;
 
 		if(GetGame().IsClient()){
 			config = player.config.houseConfig;
@@ -35,31 +35,32 @@ class DZLActionRaidDoors: ActionInteractBase
 		if (!building) return false;
 
 		if(building.IsBuilding()) {
-			DZLCopHouseDefinition copHouseDefinition = config.GetCopHouseDefinition(building);
+		    item = player.GetItemInHands();
+            if (!item) return false;
+
+			DZLJobHouseDefinition copHouseDefinition = config.GetCopHouseDefinition(building);
+			DZLJobHouseDefinition medicDefinition;
+			DZLHouseDefinition definition;
+
 			array<string> raidTools = new array<string>;
 			
-			if (copHouseDefinition) {
-				raidTools = copHouseDefinition.raidTools;
-				
-				if (GetGame().IsServer()) {
-					if(player.GetDZLPlayer().IsActiveAsCop()) {
-						DZLSendMessage(player.GetIdentity(), "#active_cops_can_not_raid_police_buildings");
-						return false;
-					}
-				}
-				
-			} else {
-				DZLHouseDefinition definition = config.GetHouseDefinitionByBuilding(building);
-				if (!definition) return false;
-				
-				raidTools = definition.raidTools;
-			}
-						
-			item = player.GetItemInHands();
+            if(copHouseDefinition && player.GetDZLPlayer().IsActiveAsCop()) {
+                return false;
+            } else if (copHouseDefinition && !player.GetDZLPlayer().IsActiveAsCop()) {
+                raidTools = copHouseDefinition.raidTools;
+            } else {
+                medicDefinition = config.GetMedicHouseDefinition(building);
+                if(medicDefinition && player.GetDZLPlayer().IsActiveAsMedic()) {
+                    return false;
+                } else if (medicDefinition && !player.GetDZLPlayer().IsActiveAsMedic()) {
+                    raidTools = medicDefinition.raidTools;
+                } else {
+                     definition = config.GetHouseDefinitionByBuilding(building);
+                     if (!definition) return false;
+                     raidTools = definition.raidTools;
+                }
+            }
 
-			if (!item) return false;
-						
-		   
 			foreach(string itemType: raidTools) {
 				if (item.GetType() == itemType) {
 					if (GetGame().IsServer() && item.GetHealth() < 50) {
@@ -69,15 +70,16 @@ class DZLActionRaidDoors: ActionInteractBase
 					}
 
 					int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
-					if (doorIndex != -1) {
+					if (doorIndex != -1 && !building.IsDoorOpen(doorIndex)) {
+					    if (copHouseDefinition) return true;
+					    if (medicDefinition) return true;
+
 						if (GetGame().IsServer()) {
 							DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(building);
-							if (!building.IsDoorOpen(doorIndex) && dzlHouse && (copHouseDefinition || dzlHouse.CanRaidDoor(player, doorIndex))) {
-								return true;
-							} else {
-							    DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
-							    return false;
-							}
+							if(dzlHouse && definition && dzlHouse.CanRaidDoor(player, doorIndex)) return true;
+
+                            DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
+                            return false;
 						}
 						
 						return !building.IsDoorOpen(doorIndex);
@@ -97,21 +99,7 @@ class DZLActionRaidDoors: ActionInteractBase
 		int doorIndex = buildingClient.GetDoorIndex(action_data.m_Target.GetComponentIndex());
 		if (doorIndex != -1) {
 			bar.SetBuilding(buildingClient, doorIndex);
-			
-			DZLCopHouseDefinition copHouseDefinition = config.GetCopHouseDefinition(buildingClient);
-			int raidRange = 0;
-			
-			if (copHouseDefinition) {
-				raidRange = copHouseDefinition.raidRange;
-			} else {
-				DZLHouseDefinition definition = config.GetHouseDefinitionByBuilding(buildingClient);
-				if (!definition) return;
-				
-				raidRange = definition.raidRange;
-			}
-			
-			
-			bar.SetMaxRange(raidRange);
+						
 			bar.SetRaidItem(action_data.m_MainItem);
 			GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR, new Param1<Building>(buildingClient), true);
 			GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);

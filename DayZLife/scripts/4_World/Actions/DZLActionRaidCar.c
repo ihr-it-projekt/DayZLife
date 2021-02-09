@@ -60,7 +60,6 @@ class DZLActionRaidCar: ActionInteractBase
 		DZLCarRaidProgressBar bar = action_data.m_Player.GetRaidCarProgressBar();
 		
 		bar.SetCar(car);
-		bar.SetMaxRange(5);
 
 		EntityAI item = action_data.m_Player.GetItemInHands();
         if (!item) return;

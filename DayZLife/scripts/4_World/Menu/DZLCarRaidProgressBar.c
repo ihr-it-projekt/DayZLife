@@ -11,8 +11,6 @@ class DZLCarRaidProgressBar: DZLBaseProgressBar
         this.car = car;
 
         duration = 999999999999999;
-        maxRange = 10;
-        position = car.GetPosition();
     }
 	
 	void SetRaidItem(EntityAI item) {

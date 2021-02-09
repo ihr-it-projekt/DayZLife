@@ -14,6 +14,8 @@ class DZLBaseProgressBar: UIScriptedMenu
    void SetPlayer(PlayerBase player) {
         this.player = player;
         this.dzlPlayer = player.GetDZLPlayer();
+        maxRange = 1;
+        position = player.GetPosition();
     }
 
     void UpdatePlayer(PlayerBase player) {
@@ -23,9 +25,7 @@ class DZLBaseProgressBar: UIScriptedMenu
 	void SetDuration(int duration) {
 		this.duration = duration;
 	}
-	void SetMaxRange(int maxRange) {
-		this.maxRange = maxRange;
-	}
+
 
     override Widget Init() {
         player = PlayerBaseHelper.GetPlayer();

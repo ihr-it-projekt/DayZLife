@@ -92,9 +92,8 @@ class DZLPlayerHouseListener
                     DZLStoreItem storeOutItem = inventory.GetById(itemId);
                     if (!storeOutItem) continue;
 
-                    if(DZLSpawnHelper.Add(playerStore, storeOutItem)) {
-                        inventory.Remove(storeOutItem);
-                    }
+                    DZLSpawnHelper.Add(playerStore, storeOutItem);
+                    inventory.Remove(storeOutItem);
                 }
 
                 if (storeInItems.Count() > 0 && inventory.CanAddToStore(storeInItems)) {

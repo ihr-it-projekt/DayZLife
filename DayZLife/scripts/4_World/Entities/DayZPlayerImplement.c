@@ -15,7 +15,7 @@ modded class DayZPlayerImplement
                     } else if (dzlPlayer.WillHealByHospital()) {
                         GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
 					    player.RemoveAllItems();
-                    } else if (isDead){
+                    } else if (isDead && dzlPlayer.HasMoney()){
                         player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
                         dzlPlayer.PlayerHasDied();
                     }

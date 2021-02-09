@@ -57,8 +57,9 @@ class DZLSpawnHelper
         }
     }
 
-    static EntityAI Add(EntityAI parent, DZLStoreItem itemInStock, ref InventoryLocation inventoryLocation = null) {
+    static bool Add(EntityAI parent, DZLStoreItem itemInStock, ref InventoryLocation inventoryLocation = null) {
         EntityAI item;
+        bool spawnOnGround = false;
 
         if (!inventoryLocation) {
             inventoryLocation = new InventoryLocation;
@@ -77,10 +78,11 @@ class DZLSpawnHelper
         }
 
         if (!item) {
+            spawnOnGround = true;
             item = parent.SpawnEntityOnGroundPos(itemInStock.type, parent.GetPosition());
         }
 
-        if (!item) return null;
+        if (!item) return spawnOnGround;
 
         item.SetHealth(itemInStock.health);
 
@@ -89,14 +91,14 @@ class DZLSpawnHelper
             Magazine mag = Magazine.Cast(item);
 
             if (!mag) {
-                return item;
+                return spawnOnGround;
             }
             mag.ServerSetAmmoCount(itemInStock.GetQuantity());
         } else if(item.IsAmmoPile()) {
             Ammunition_Base ammo = Ammunition_Base.Cast(item);
 
             if (!ammo) {
-                return item;
+                return spawnOnGround;
             }
             ammo.ServerSetAmmoCount(itemInStock.GetQuantity());
         } else if (ItemBase.CastTo(castItem, item)) {
@@ -105,10 +107,12 @@ class DZLSpawnHelper
 
         if(itemInStock.attached.Count() > 0) {
             foreach(DZLStoreItem itemAttached: itemInStock.attached) {
-                DZLSpawnHelper.Add(item, itemAttached, inventoryLocation);
+                if (DZLSpawnHelper.Add(item, itemAttached, inventoryLocation) && !spawnOnGround) {
+                    spawnOnGround = true;
+                }
             }
         }
 
-        return item;
+        return spawnOnGround;
     }
 }

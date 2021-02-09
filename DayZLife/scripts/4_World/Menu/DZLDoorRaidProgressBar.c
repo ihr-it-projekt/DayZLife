@@ -15,8 +15,6 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar
         this.doorIndex = doorIndex;
 
         duration = 999999999999999;
-        maxRange = 10;
-        position = building.GetPosition();
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
