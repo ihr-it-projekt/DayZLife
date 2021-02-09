@@ -21,8 +21,8 @@ FrameWidgetClass rootFrame {
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     position -0 -0
-     size 0.98818 0.97932
+     position 0 0
+     size 0.9882 0.9793
      halign center_ref
      valign center_ref
      hexactpos 0
@@ -61,8 +61,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget3 {
        ignorepointer 1
-       position 0 -0
-       size 0.34744 0.90884
+       position 0 0.08412
+       size 0.34744 0.82472
        valign bottom_ref
        hexactpos 0
        vexactpos 0
@@ -141,7 +141,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            "title visible" 1
            colums "#Kontakt"
-           lines 10
+           lines 15
           }
          }
         }
@@ -205,14 +205,14 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          "title visible" 1
          colums "#Add_Kontakt"
-         lines 10
+         lines 15
         }
        }
       }
       PanelWidgetClass PanelWidget7 {
        ignorepointer 1
-       position -0.05858 0.01056
-       size 0.176 0.063
+       position -0.41652 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -233,6 +233,293 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style OldStyle
          text "#Add_Kontakt"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget8 {
+       ignorepointer 1
+       position -0.25554 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass ButtonWidget1 {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Delete_Kontakt"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget9 {
+       ignorepointer 1
+       position 0 0.0038
+       size 0.6545 0.8254
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget14 {
+         ignorepointer 1
+         position 0 0.1
+         size 1 0.3
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          MultilineEditBoxWidgetClass MultilineEditBoxWidget0 {
+           position 0 0
+           size 0.9817 0.9147
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DayZNormal
+          }
+         }
+        }
+        TextWidgetClass TextWidget1 {
+         ignorepointer 1
+         color 0.502 0 0 1
+         position 0.00014 0.01321
+         size 0.982 0.074
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "Error... the message could not be sent. Try again"
+         text_proportion 0.6
+         "text halign" center
+         "text valign" center
+        }
+        TextListboxWidgetClass TextListboxWidget2 {
+         position 0 -0.34835
+         size 0.98172 0.27771
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         "title visible" 1
+         colums "#Player;35;#Date;25;#Message_Preview;40"
+         lines 10
+        }
+        PanelWidgetClass PanelWidget16 {
+         ignorepointer 1
+         position 0 0.3967
+         size 1 0.3
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          MultilineEditBoxWidgetClass MultilineEditBoxWidget1 {
+           position 0 0
+           size 0.9817 0.9147
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DayZNormal
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget10 {
+       ignorepointer 1
+       position 0.41652 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass ButtonWidget2 {
+         color 0 0.502 0.1255 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Send"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget12 {
+       ignorepointer 1
+       position 0.25554 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass ButtonWidget4 {
+         color 0 0.502 0.1255 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Send_Medic"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget11 {
+       ignorepointer 1
+       position 0.09525 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass ButtonWidget3 {
+         color 0 0.1255 0.502 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#SOS_Cop"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget13 {
+       ignorepointer 1
+       position -0.06573 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass ButtonWidget5 {
+         color 0 0.1255 0.502 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Send_Global"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget15 {
+       ignorepointer 1
+       position 0.00598 0.01056
+       size 0.03979 0.0647
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "X"
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget17 {
+       ignorepointer 1
+       position -0.41652 0.92644
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass ButtonWidget6 {
+         color 0 0.502 0.1255 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Show_Map"
          text_proportion 0.6
         }
        }
