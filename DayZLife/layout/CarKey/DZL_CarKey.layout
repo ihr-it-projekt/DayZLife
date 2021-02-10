@@ -195,7 +195,7 @@ FrameWidgetClass License_Menu {
              vexactpos 0
              hexactsize 0
              vexactsize 0
-             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
              mode blend
              "src alpha" 1
              stretch 1

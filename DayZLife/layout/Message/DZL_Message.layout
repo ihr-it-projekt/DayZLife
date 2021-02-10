@@ -123,14 +123,14 @@ FrameWidgetClass rootFrame {
              hexactsize 0
              vexactsize 0
              imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
-             mode additive
+             mode blend
              "src alpha" 1
              "no wrap" 0
              stretch 1
             }
            }
           }
-          TextListboxWidgetClass TextListboxWidget0 {
+          TextListboxWidgetClass contactsListbox {
            position 0 0.07322
            size 0.96557 0.80709
            halign center_ref
@@ -140,7 +140,7 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Kontakt"
+           colums "#Contacts"
            lines 15
           }
          }
@@ -187,14 +187,14 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
-           mode additive
+           mode blend
            "src alpha" 1
            "no wrap" 0
            stretch 1
           }
          }
         }
-        TextListboxWidgetClass TextListboxWidget1 {
+        TextListboxWidgetClass allPlayerListbox {
          position 0.00022 0.28594
          size 0.966 0.405
          halign center_ref
@@ -204,7 +204,7 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Add_Kontakt"
+         colums "#Add_Contacts"
          lines 15
         }
        }
@@ -221,7 +221,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget0 {
+        ButtonWidgetClass addContactsButton {
          color 0 0.502 0.1255 1
          position 0 0
          size 0.98 0.9
@@ -232,7 +232,7 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          style OldStyle
-         text "#Add_Kontakt"
+         text "#Add_Contacts"
          text_proportion 0.6
         }
        }
@@ -249,7 +249,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget1 {
+        ButtonWidgetClass deleteContactsButton {
          color 0.502 0 0 1
          position 0 0
          size 0.98 0.9
@@ -260,7 +260,7 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          style OldStyle
-         text "#Delete_Kontakt"
+         text "#Delete_Contacts"
          text_proportion 0.6
         }
        }
@@ -289,7 +289,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          MultilineEditBoxWidgetClass MultilineEditBoxWidget0 {
+          MultilineEditBoxWidgetClass writeMessage {
            position 0 0
            size 0.9817 0.9147
            halign center_ref
@@ -302,7 +302,7 @@ FrameWidgetClass rootFrame {
           }
          }
         }
-        TextWidgetClass TextWidget1 {
+        TextWidgetClass error {
          ignorepointer 1
          color 0.502 0 0 1
          position 0.00014 0.01321
@@ -318,7 +318,7 @@ FrameWidgetClass rootFrame {
          "text halign" center
          "text valign" center
         }
-        TextListboxWidgetClass TextListboxWidget2 {
+        TextListboxWidgetClass messageListbox {
          position 0 -0.34835
          size 0.98172 0.27771
          halign center_ref
@@ -328,7 +328,7 @@ FrameWidgetClass rootFrame {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Player;35;#Date;25;#Message_Preview;40"
+         colums "#Player;35;#Date_time;25;#Message_Preview;40"
          lines 10
         }
         PanelWidgetClass PanelWidget16 {
@@ -343,7 +343,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          MultilineEditBoxWidgetClass MultilineEditBoxWidget1 {
+          MultilineEditBoxWidgetClass readMessage {
            position 0 0
            size 0.9817 0.9147
            halign center_ref
@@ -353,6 +353,10 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            style DayZNormal
+           "exact text" 0
+           "size to text h" 0
+           "size to text v" 0
+           "limit visible" 0
           }
          }
         }
@@ -370,7 +374,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget2 {
+        ButtonWidgetClass sendButton {
          color 0 0.502 0.1255 1
          position 0 0
          size 0.98 0.9
@@ -398,7 +402,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget4 {
+        ButtonWidgetClass sendMedicButton {
          color 0 0.502 0.1255 1
          position 0 0
          size 0.98 0.9
@@ -426,7 +430,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget3 {
+        ButtonWidgetClass sendSOSButton {
          color 0 0.1255 0.502 1
          position 0 0
          size 0.98 0.9
@@ -454,7 +458,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget5 {
+        ButtonWidgetClass sendGlobalButton {
          color 0 0.1255 0.502 1
          position 0 0
          size 0.98 0.9
@@ -481,7 +485,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass Button_Closed {
+        ButtonWidgetClass closedButton {
          color 0.502 0 0 1
          position 0 0
          size 0.9 0.9
@@ -508,7 +512,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass ButtonWidget6 {
+        ButtonWidgetClass showMapButton {
          color 0 0.502 0.1255 1
          position 0 0
          size 0.98 0.9

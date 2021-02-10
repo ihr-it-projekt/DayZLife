@@ -71,7 +71,7 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass PanelWidget3 {
          ignorepointer 1
          position 0 0.01877
-         size 0.7 0.11
+         size 0.95941 0.11
          halign center_ref
          hexactpos 0
          vexactpos 0

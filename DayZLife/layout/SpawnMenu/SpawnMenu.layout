@@ -161,8 +161,8 @@ FrameWidgetClass rootFrame {
         TextWidgetClass warnText {
          ignorepointer 1
          color 0.502 0 0 1
-         position 0.0065 0.0727
-         size 0.9902 0.4
+         position 0.0056 0.03931
+         size 0.9888 0.4
          hexactpos 0
          vexactpos 0
          hexactsize 0
