@@ -127,6 +127,12 @@ class DZLPlayerEventListener
                 player.willDie = true;
                 player.CheckDeath();
                 PlayerRespawn();
+            } else if(rpc_type == DAY_Z_LIFE_SEND_MESSAGE_SERVER) {
+                Param1<ref DZLMessage> messagesParam;
+                if (ctx.Read(messagesParam) && messagesParam.param1){
+                     DZLMessage receivedMessage = messagesParam.param1;
+                     player.DisplayMessage("#you_got_a_message: " + receivedMessage.GetShortText());
+                }
             }
         }
 

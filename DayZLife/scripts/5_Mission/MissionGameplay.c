@@ -5,12 +5,15 @@ modded class MissionGameplay
 	private bool holdOne = false;
 	private bool holdTow = false;
 	private bool holdTree = false;
+	private bool holdFour = false;
 
 
 	private UIScriptedMenu almanac;
 	private UIScriptedMenu spawnMenu;
+	private UIScriptedMenu messageMenu;
 	private ref DZLPlayerEventListener playerEventListener;
 	private ref DZLCarEventListener carEventListener;
+	private ref DZLMessageDB messageDB;
 
    	PlayerBase player;
 
@@ -18,6 +21,7 @@ modded class MissionGameplay
 		super.OnInit();
 		playerEventListener = new DZLPlayerEventListener;
 		carEventListener = new DZLCarEventListener;
+		messageDB = new DZLMessageDB;
 	}
 
     override void OnKeyRelease(int key) {
@@ -43,6 +47,9 @@ modded class MissionGameplay
                 break;
             case KeyCode.KC_3:
                 holdTree = false;
+                break;
+            case KeyCode.KC_4:
+                holdFour = false;
                 break;
             default:
                 super.OnKeyRelease(key);
@@ -77,6 +84,10 @@ modded class MissionGameplay
                     spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
 
+                if ((holdLControl && holdFour && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained() && !player.IsUnconscious())) {
+                    messageMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+                }
+
                 break;
 			case KeyCode.KC_1:
 				holdOne = true;
@@ -95,6 +106,12 @@ modded class MissionGameplay
 				holdTree = true;
 				if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained()) {
 					spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+                }
+                break;
+            case KeyCode.KC_4:
+				holdFour = true;
+				if ((holdLControl && holdFour && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained() && !player.IsUnconscious())) {
+					messageMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetMessageSystemMenu(), NULL);
                 }
                 break;
             default:
