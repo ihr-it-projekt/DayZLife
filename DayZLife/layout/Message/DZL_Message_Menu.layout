@@ -279,7 +279,7 @@ FrameWidgetClass rootFrame {
        {
         PanelWidgetClass PanelWidget14 {
          ignorepointer 1
-         position 0 0.1
+         position 0 0
          size 1 0.3
          halign center_ref
          valign bottom_ref
@@ -302,25 +302,9 @@ FrameWidgetClass rootFrame {
           }
          }
         }
-        TextWidgetClass error {
-         ignorepointer 1
-         color 0.502 0 0 1
-         position 0.00014 0.01321
-         size 0.982 0.074
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "Error... the message could not be sent. Try again"
-         text_proportion 0.6
-         "text halign" center
-         "text valign" center
-        }
         TextListboxWidgetClass messageListbox {
-         position 0 -0.34835
-         size 0.98172 0.27771
+         position 0 -0.2983
+         size 0.98172 0.37771
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -329,11 +313,11 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          "title visible" 1
          colums "#Player;35;#Date_time;25;#Message_Preview;40"
-         lines 10
+         lines 15
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0 0.3967
+         position 0 0.2967
          size 1 0.3
          halign center_ref
          valign bottom_ref
@@ -343,20 +327,18 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          MultilineEditBoxWidgetClass readMessage {
+          MultilineTextWidgetClass MultilineTextWidget0 {
+           ignorepointer 1
            position 0 0
-           size 0.9817 0.9147
+           size 0.98172 0.91472
            halign center_ref
            valign center_ref
            hexactpos 0
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           style DayZNormal
-           "exact text" 0
-           "size to text h" 0
-           "size to text v" 0
-           "limit visible" 0
+           "exact text" 1
+           wrap 1
           }
          }
         }
