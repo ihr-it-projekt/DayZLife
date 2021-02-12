@@ -18,6 +18,7 @@ Feature list
 - Job change is possible every time without dying  (CTRLL + 3)
 - own Money-System
 - tax system, A tax is due for each sale at the trader.
+- messenger system (CTRLL + 4)
 - Cars
     - Key System
     - last driver can sell cars
