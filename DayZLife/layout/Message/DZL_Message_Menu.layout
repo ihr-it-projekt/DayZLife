@@ -295,7 +295,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget10 {
        ignorepointer 1
-       position 0.41652 0.01056
+       position 0.25623 0.01056
        size 0.155 0.063
        halign center_ref
        valign bottom_ref
@@ -431,7 +431,7 @@ FrameWidgetClass rootFrame {
         }
        }
       }
-      PanelWidgetClass PanelWidget17 {
+      PanelWidgetClass mapPanel {
        ignorepointer 1
        position -0.41652 0.92644
        size 0.155 0.063
@@ -461,7 +461,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget110 {
        ignorepointer 1
-       position 0.25554 0.01056
+       position 0.41652 0.01056
        size 0.155 0.063
        halign center_ref
        valign bottom_ref
@@ -472,7 +472,7 @@ FrameWidgetClass rootFrame {
        style editor_quad_dark
        {
         ButtonWidgetClass deleteButton {
-         color 0 0.502 0.1255 1
+         color 0.502 0 0 1
          position 0 0
          size 0.98 0.9
          halign center_ref
