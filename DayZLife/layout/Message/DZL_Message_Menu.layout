@@ -211,8 +211,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget7 {
        ignorepointer 1
-       position -0.41652 0.01056
-       size 0.155 0.063
+       position -0.42652 0.01056
+       size 0.135 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -239,8 +239,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget8 {
        ignorepointer 1
-       position -0.25554 0.01056
-       size 0.155 0.063
+       position -0.28554 0.01056
+       size 0.135 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -346,8 +346,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget10 {
        ignorepointer 1
-       position 0.41652 0.01056
-       size 0.155 0.063
+       position 0.42652 0.01056
+       size 0.135 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -374,8 +374,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget12 {
        ignorepointer 1
-       position 0.25554 0.01056
-       size 0.155 0.063
+       position 0.14455 0.01056
+       size 0.135 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -402,8 +402,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget11 {
        ignorepointer 1
-       position 0.09525 0.01056
-       size 0.155 0.063
+       position 0.00357 0.01056
+       size 0.135 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -430,8 +430,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget13 {
        ignorepointer 1
-       position -0.06573 0.01056
-       size 0.155 0.063
+       position -0.13741 0.01056
+       size 0.135 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -506,6 +506,34 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style OldStyle
          text "#Show_Map"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget110 {
+       ignorepointer 1
+       position 0.28554 0.01056
+       size 0.135 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass deleteButton {
+         color 0 0.502 0.1255 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Delete_Message"
          text_proportion 0.6
         }
        }

@@ -40,7 +40,7 @@ class CfgVehicles
 		scope=2;
 		displayName="10L Oil";
 		descriptionShort="";
-		model="\dz\vehicles\parts\oil_bottle.p3d"
+		model="\dz\vehicles\parts\oil_bottle.p3d";
 		weight=5000;
 		itemSize[]={2,2};
 	};
