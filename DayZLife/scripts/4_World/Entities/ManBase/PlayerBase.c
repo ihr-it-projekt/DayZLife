@@ -22,6 +22,7 @@ modded class PlayerBase
 	ref DZLCarMenu carMenu;
 	ref DZLCarStorageMenu carStorageMenu;
 	ref DZLMedicHelpMenu healMenu;
+	ref DZLMessageSystemMenu messageSystemMenu;
 
 	bool willHeal = false;
 	bool willDie = false;
@@ -158,6 +159,8 @@ modded class PlayerBase
             carStorageMenu.UpdatePlayer(this);
         } else if (healMenu && healMenu.IsVisible()) {
             healMenu.UpdatePlayer(this);
+        }else if (messageSystemMenu && messageSystemMenu.IsVisible()) {
+            messageSystemMenu.UpdatePlayer(this);
         }
     }
 
@@ -275,6 +278,12 @@ modded class PlayerBase
 		return spawnPositionMenu;
 	}
 
+	DZLMessageSystemMenu GetMessageSystemMenu() {
+		messageSystemMenu = new DZLMessageSystemMenu();
+		InitMenu(messageSystemMenu);
+		return messageSystemMenu;
+	}
+
 	void CloseMenu() {
 		if (houseMenu && houseMenu.IsVisible()) {
 			houseMenu.OnHide();
@@ -306,6 +315,8 @@ modded class PlayerBase
 			healMenu.OnHide();
 		} else if (spawnPositionMenu && spawnPositionMenu.IsVisible()) {
 			spawnPositionMenu.OnHide();
+		} else if (messageSystemMenu && messageSystemMenu.IsVisible()) {
+		    messageSystemMenu.OnHide();
 		}
 	}
 

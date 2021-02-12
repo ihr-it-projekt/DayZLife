@@ -36,6 +36,10 @@ class DZLUIItemCreator
     MultilineTextWidget GetMultilineTextWidget(string name) {
         return MultilineTextWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
+	
+    MultilineEditBoxWidget GetMultilineEditBoxWidget(string name) {
+        return MultilineEditBoxWidget.Cast(layoutRoot.FindAnyWidget(name));
+    }
 
     TextWidget GetTextWidget(string name) {
         return TextWidget.Cast(layoutRoot.FindAnyWidget(name));
