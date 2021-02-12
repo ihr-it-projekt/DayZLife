@@ -122,7 +122,7 @@ FrameWidgetClass rootFrame {
              vexactpos 0
              hexactsize 0
              vexactsize 0
-             imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
+             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
              mode blend
              "src alpha" 1
              "no wrap" 0
@@ -186,7 +186,7 @@ FrameWidgetClass rootFrame {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
+           imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
            mode blend
            "src alpha" 1
            "no wrap" 0
@@ -211,8 +211,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget7 {
        ignorepointer 1
-       position -0.42652 0.01056
-       size 0.135 0.063
+       position -0.41652 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -239,8 +239,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget8 {
        ignorepointer 1
-       position -0.28554 0.01056
-       size 0.135 0.063
+       position -0.25554 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -290,8 +290,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           MultilineEditBoxWidgetClass writeMessage {
-           position 0 0
-           size 0.9817 0.9147
+           position -0.00294 0.10056
+           size 0.98759 0.71359
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -299,6 +299,25 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            style DayZNormal
+           "size to text h" 0
+           "size to text v" 0
+           lines 100
+           "limit visible" 1
+          }
+          TextWidgetClass TextWidget1 {
+           ignorepointer 1
+           position -0.00367 -0.37323
+           size 0.98909 0.23209
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#your_message"
+           text_proportion 0.7
+           "text halign" center
+           "text valign" center
           }
          }
         }
@@ -346,8 +365,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget10 {
        ignorepointer 1
-       position 0.42652 0.01056
-       size 0.135 0.063
+       position 0.41652 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -374,8 +393,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget12 {
        ignorepointer 1
-       position 0.14455 0.01056
-       size 0.135 0.063
+       position 0.25554 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -402,8 +421,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget11 {
        ignorepointer 1
-       position 0.00357 0.01056
-       size 0.135 0.063
+       position 0.09525 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -430,8 +449,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget13 {
        ignorepointer 1
-       position -0.13741 0.01056
-       size 0.135 0.063
+       position -0.06573 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -467,7 +486,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass closedButton {
+        ButtonWidgetClass Button_Closed {
          color 0.502 0 0 1
          position 0 0
          size 0.9 0.9
