@@ -122,7 +122,7 @@ FrameWidgetClass rootFrame {
              vexactpos 0
              hexactsize 0
              vexactsize 0
-             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
              mode blend
              "src alpha" 1
              "no wrap" 0
@@ -186,7 +186,7 @@ FrameWidgetClass rootFrame {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+           imageTexture "{23E23D49A646AE19}DayZLife/DayZLife/layout/CarKey/search.edds"
            mode blend
            "src alpha" 1
            "no wrap" 0
@@ -209,62 +209,6 @@ FrameWidgetClass rootFrame {
         }
        }
       }
-      PanelWidgetClass PanelWidget7 {
-       ignorepointer 1
-       position -0.41652 0.01056
-       size 0.155 0.063
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass addContactsButton {
-         color 0 0.502 0.1255 1
-         position 0 0
-         size 0.98 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "#Add_Contacts"
-         text_proportion 0.6
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget8 {
-       ignorepointer 1
-       position -0.25554 0.01056
-       size 0.155 0.063
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass deleteContactsButton {
-         color 0.502 0 0 1
-         position 0 0
-         size 0.98 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "#Delete_Contacts"
-         text_proportion 0.6
-        }
-       }
-      }
       PanelWidgetClass PanelWidget9 {
        ignorepointer 1
        position 0 0.0038
@@ -280,7 +224,7 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass PanelWidget14 {
          ignorepointer 1
          position 0 0
-         size 1 0.3
+         size 1 0.2479
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -290,8 +234,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           MultilineEditBoxWidgetClass writeMessage {
-           position -0.00294 0.10056
-           size 0.98759 0.71359
+           position 0 -0
+           size 0.98172 0.89679
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -299,31 +243,17 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            style DayZNormal
+           "exact text" 1
            "size to text h" 0
            "size to text v" 0
            lines 100
            "limit visible" 1
           }
-          TextWidgetClass TextWidget1 {
-           ignorepointer 1
-           position -0.00367 -0.37323
-           size 0.98909 0.23209
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#your_message"
-           text_proportion 0.7
-           "text halign" center
-           "text valign" center
-          }
          }
         }
         TextListboxWidgetClass messageListbox {
-         position 0 -0.2983
-         size 0.98172 0.37771
+         position 0 -0.29832
+         size 0.98172 0.37766
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -336,8 +266,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0 0.2967
-         size 1 0.3
+         position 0 0.33745
+         size 1 0.25925
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -346,10 +276,10 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          style editor_quad_dark
          {
-          MultilineTextWidgetClass MultilineTextWidget0 {
+          MultilineTextWidgetClass readText {
            ignorepointer 1
-           position 0 0
-           size 0.98172 0.91472
+           position 0 -0.00251
+           size 0.9817 0.888
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -360,6 +290,21 @@ FrameWidgetClass rootFrame {
            wrap 1
           }
          }
+        }
+        TextWidgetClass TextWidget1 {
+         ignorepointer 1
+         position 0 0.20732
+         size 0.98172 0.06397
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#your_message"
+         text_proportion 0.7
+         "text halign" center
+         "text valign" center
         }
        }
       }
@@ -393,7 +338,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget12 {
        ignorepointer 1
-       position 0.25554 0.01056
+       position 0.09525 0.01056
        size 0.155 0.063
        halign center_ref
        valign bottom_ref
@@ -421,7 +366,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget11 {
        ignorepointer 1
-       position 0.09525 0.01056
+       position -0.06573 0.01056
        size 0.155 0.063
        halign center_ref
        valign bottom_ref
@@ -449,7 +394,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget13 {
        ignorepointer 1
-       position -0.06573 0.01056
+       position -0.41652 0.01056
        size 0.155 0.063
        halign center_ref
        valign bottom_ref
@@ -531,8 +476,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget110 {
        ignorepointer 1
-       position 0.28554 0.01056
-       size 0.135 0.063
+       position 0.25554 0.01056
+       size 0.155 0.063
        halign center_ref
        valign bottom_ref
        hexactpos 0
