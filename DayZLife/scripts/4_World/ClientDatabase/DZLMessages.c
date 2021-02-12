@@ -38,6 +38,10 @@ class DZLMessage: DZLIdModel
     }
 
     string GetShortText() {
+		if (text.Length() < 20) {
+			return text;
+		}
+
         return text.Substring(0,20);
     }
 

@@ -16,8 +16,11 @@ class DZLMessageSystemMenu : DZLBaseMenu
 	private TextListboxWidget onlinePlayerListWidget;
 	private TextListboxWidget messageListWidget;
 	private MultilineTextWidget readWidget;
-	private MultilineEditBoxWidget writeWidget;
+	private EditBoxWidget writeWidget;
+	private Widget mapButtonBoarder
+	private Widget mapPanelWidget;
 	private vector messagePosition;
+	private Widget globalBoarder;
 	private ref array<ref DZLOnlinePlayer> onlinePlayers;
 
 	void DZLMessageSystemMenu() {
@@ -33,8 +36,11 @@ class DZLMessageSystemMenu : DZLBaseMenu
         super.Init();
 		deleteMessageButton = creator.GetButtonWidget("deleteButton");
 		showMapButton = creator.GetButtonWidget("showMapButton");
-		mapClose = creator.GetButtonWidget("mapCloseButton");
+		mapClose = creator.GetButtonWidget("mapclosedButton");
 		mapWidget = creator.GetMapWidget("sosMap");
+		mapButtonBoarder = creator.GetWidget("mapPanel");
+		mapPanelWidget = creator.GetWidget("mapPanelWidget");
+		globalBoarder = creator.GetWidget("PanelWidget13");
 		searchContactWidget = creator.GetEditBoxWidget("searchKontakt");
 		searchContactButton = creator.GetButtonWidget("searchKontaktButton");
 		searchOnlineWidget = creator.GetEditBoxWidget("addKontakt");
@@ -48,10 +54,12 @@ class DZLMessageSystemMenu : DZLBaseMenu
 		onlinePlayerListWidget = creator.GetTextListboxWidget("allPlayerListbox");
 		messageListWidget = creator.GetTextListboxWidget("messageListbox");
 		readWidget = creator.GetMultilineTextWidget("readText");
-		writeWidget = creator.GetMultilineEditBoxWidget("writeMessage");
+		writeWidget = creator.GetEditBoxWidget("writeMessage");
 		
 		showMapButton.Show(false);
+		mapButtonBoarder.Show(false);
         mapWidget.Show(false);
+        mapPanelWidget.Show(false);
 
 		GetGame().RPCSingleParam(player, DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS, null, true);
 
@@ -81,6 +89,7 @@ class DZLMessageSystemMenu : DZLBaseMenu
                 ShowMap();
                 break;
             case mapClose:
+                mapPanelWidget.Show(false);
                 mapWidget.Show(false);
                 break;
             case deleteMessageButton:
@@ -112,11 +121,15 @@ class DZLMessageSystemMenu : DZLBaseMenu
 
     override void OnShow() {
         super.OnShow();
+        sendGlobalButton.Show(player.GetDZLPlayer().IsActiveAsCop() || player.GetDZLPlayer().IsActiveAsMedic());
+        globalBoarder.Show(player.GetDZLPlayer().IsActiveAsCop() || player.GetDZLPlayer().IsActiveAsMedic());
         RefreshMessageSystem();
     }
 
     override void OnHide() {
         mapWidget.Show(false);
+        mapPanelWidget.Show(false);
+
         super.OnHide();
     }
 
@@ -140,17 +153,25 @@ class DZLMessageSystemMenu : DZLBaseMenu
 
 	void RefreshMessageSystem() {
 	    messageListWidget.ClearItems();
-	    map<string, ref DZLMessage>messages = DZLMessageDB.Get().GetMessages();
+	    array<ref DZLMessage>messages = DZLMessageDB.Get().GetMessages();
 
-	    foreach(string id, DZLMessage message: messages) {
+	    for(int x = messages.Count(); 0 < x; x--) {
+	        DZLMessage message = messages.Get(x - 1);
 	        int index = messageListWidget.AddItem(message.GetSender(), message, 0);
             messageListWidget.SetItem(index, message.GetDate().ToDateString(), message, 1);
             messageListWidget.SetItem(index, message.GetShortText(), message, 2);
+			
+			if (!message.IsRead()) {
+			    messageListWidget.SetItemColor(index, 0, ARGB(255,0,255,0));
+			    messageListWidget.SetItemColor(index, 1, ARGB(255,0,255,0));
+			    messageListWidget.SetItemColor(index, 2, ARGB(255,0,255,0));
+			}
 	    }
 	}
 
 	private void ShowMap() {
 	    mapWidget.Show(true);
+	    mapPanelWidget.Show(true);
 	    DZLDisplayHelper.UpdateMap(mapWidget, messagePosition);
 	}
 
@@ -164,7 +185,14 @@ class DZLMessageSystemMenu : DZLBaseMenu
         if (message) {
             readWidget.SetText(message.GetText());
             showMapButton.Show(message.GetType() == DZLMessage.TYPE_COP);
+            mapButtonBoarder.Show(message.GetType() == DZLMessage.TYPE_COP);
             messagePosition = message.GetPosition();
+            if (!message.IsRead()) {
+                message.Read();
+                messageListWidget.SetItemColor(pos, 0, ARGB(255,255,255,255));
+                messageListWidget.SetItemColor(pos, 1, ARGB(255,255,255,255));
+                messageListWidget.SetItemColor(pos, 2, ARGB(255,255,255,255));
+            }
         }
 	}
 
@@ -177,6 +205,11 @@ class DZLMessageSystemMenu : DZLBaseMenu
         messageListWidget.GetItemData(pos, 0, message);
         if (message) {
             DZLMessageDB.Get().RemoveMessage(message);
+			RefreshMessageSystem();
+			messagePosition = "0 0 0";
+			mapButtonBoarder.Show(false);
+			showMapButton.Show(false);
+			readWidget.SetText("");
 			RefreshMessageSystem();
         }
 	}
@@ -227,8 +260,7 @@ class DZLMessageSystemMenu : DZLBaseMenu
             id = onlinePlayer.id;
         }
 
-        string text = "";
-		writeWidget.GetText(text);
+        string text = writeWidget.GetText();
         if (text == "") {
             player.DisplayMessage("#message_is_empty");
             return;
@@ -236,5 +268,6 @@ class DZLMessageSystemMenu : DZLBaseMenu
 
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_SEND_MESSAGE, new Param3<string, string, string>(id, text, type), true, player.GetIdentity());
         player.DisplayMessage("#message_was_send");
+		writeWidget.SetText("");
 	}
 }

@@ -248,7 +248,7 @@ FrameWidgetClass rootFrame {
          {
           MultilineTextWidgetClass readText {
            ignorepointer 1
-           position 0 -0
+           position 0 0
            size 0.98172 0.9269
            halign center_ref
            valign center_ref
@@ -491,9 +491,10 @@ FrameWidgetClass rootFrame {
     }
    }
   }
-  PanelWidgetClass PanelWidget18 {
-   visible 0
+  PanelWidgetClass mapPanelWidget {
+   visible 1
    ignorepointer 1
+   position -0.00073 0.00398
    size 0.52355 0.78372
    halign center_ref
    valign center_ref
@@ -504,41 +505,39 @@ FrameWidgetClass rootFrame {
    style editor_quad_dark
    {
     MapWidgetClass sosMap {
-     position 0 0
-     size 0.9766 0.9766
+     position 0 0.03556
+     size 0.9766 0.90547
      halign center_ref
      valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
+    }
+    PanelWidgetClass PanelWidget19 {
+     ignorepointer 1
+     position 0.005 0.005
+     size 0.0691 0.0647
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
      {
-      PanelWidgetClass PanelWidget19 {
-       ignorepointer 1
-       position 0.005 0.005
-       size 0.0691 0.0647
-       halign right_ref
+      ButtonWidgetClass mapclosedButton {
+       visible 1
+       color 0.502 0 0 1
+       position 0 0
+       size 0.9 0.9
+       halign center_ref
+       valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass mapclosedButton {
-         visible 1
-         color 0.502 0 0 1
-         position 0 0
-         size 0.9 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "X"
-        }
-       }
+       style OldStyle
+       text "X"
       }
      }
     }

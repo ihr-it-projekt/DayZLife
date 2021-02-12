@@ -46,7 +46,7 @@ class DZLMessageListener
         if (_players) {
             foreach(Man _player: _players) {
                 string ident = _player.GetIdentity().GetId();
-//                if (ident == player.GetPlayerId()) continue;
+                if (ident == player.GetPlayerId()) continue;
                 collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
             }
         }

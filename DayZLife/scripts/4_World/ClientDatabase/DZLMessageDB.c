@@ -3,7 +3,7 @@ class DZLMessageDB
     private static ref DZLMessageDB messageDB;
 
     private ref array<string> ids;
-    private ref map<string, ref DZLMessage> messageMap;
+    private ref array<ref DZLMessage> messageMap;
 	private string fileName = "messageIndex.json";
 	private ref array<ref DZLOnlinePlayer> contacts;
 
@@ -20,15 +20,16 @@ class DZLMessageDB
 			contacts = new array<ref DZLOnlinePlayer>;
 		}
 
-        messageMap = new map<string, ref DZLMessage>;
+        messageMap = new array<ref DZLMessage>;
+
 		foreach(string id: ids) {
-            messageMap.Insert(id, new DZLMessage(id));
+            messageMap.Insert(new DZLMessage(id));
 		}
 	}
 
 	void AddMessage(DZLMessage message) {
 	    message.Save();
-        messageMap.Insert(message.id, message);
+        messageMap.Insert(message);
         ids.Insert(message.id);
         Save();
 	}
@@ -37,6 +38,7 @@ class DZLMessageDB
 		if (message) {
 			message.Delete();
 			ids.RemoveItem(message.GetId());
+			messageMap.RemoveItem(message);
 	    	Save();
 		}
 	}
@@ -58,7 +60,7 @@ class DZLMessageDB
         return false;
     }
 	
-	map<string, ref DZLMessage> GetMessages() {
+	array<ref DZLMessage> GetMessages() {
 		return messageMap;
 	}
 
@@ -72,7 +74,7 @@ class DZLMessageDB
 
     private bool Save(){
         if (GetGame().IsClient()) {
-			ref map<string, ref DZLMessage> messageMapTemp = messageMap;
+			ref array<ref DZLMessage> messageMapTemp = messageMap;
 			messageMap = null;
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLMessageDB>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);

@@ -113,7 +113,7 @@ class cfgSoundShaders
 		samples[]=
 		{
 			{
-				"DayZCasinoV2\data\sound\message",
+				"DayZLife\Data\sound\message",
 				1
 			}
 		};
