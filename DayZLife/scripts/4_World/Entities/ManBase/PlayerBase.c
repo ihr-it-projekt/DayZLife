@@ -284,6 +284,12 @@ modded class PlayerBase
 		return messageSystemMenu;
 	}
 
+	void RefreshMessageSystem() {
+	    if (messageSystemMenu) {
+	        messageSystemMenu.RefreshMessageSystem();
+	    }
+	}
+
 	void CloseMenu() {
 		if (houseMenu && houseMenu.IsVisible()) {
 			houseMenu.OnHide();

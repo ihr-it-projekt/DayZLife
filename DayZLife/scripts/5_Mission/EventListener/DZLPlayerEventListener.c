@@ -132,6 +132,9 @@ class DZLPlayerEventListener
                 if (ctx.Read(messagesParam) && messagesParam.param1){
                      DZLMessage receivedMessage = messagesParam.param1;
                      player.DisplayMessage("#you_got_a_message: " + receivedMessage.GetShortText());
+                     SEffectManager.CreateSound("DZL_Message_SoundSet", player.GetPosition()).SoundPlay();
+                     DZLMessageDB.Get().AddMessage(receivedMessage);
+                     player.RefreshMessageSystem();
                 }
             }
         }

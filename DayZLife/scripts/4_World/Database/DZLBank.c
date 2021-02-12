@@ -1,7 +1,6 @@
 class DZLBank
 {
     int moneyAtBank = 0;
-    bool raidRuns = false;
 	ref DZLDate lastRaidTime;
 	string fileName = "bank.json";
 	private string version = "1";
@@ -68,8 +67,6 @@ class DZLBank
 	}
 	
 	bool CanUseBank(int raidCoolDownTimeInSeconds) {
-		if (raidRuns) return false;
-		
 		DZLDate currentDate = new DZLDate();
 		
 		if (lastRaidTime && (currentDate.inSeconds - lastRaidTime.inSeconds < raidCoolDownTimeInSeconds)) return false;
@@ -82,24 +79,12 @@ class DZLBank
 		return true;
 	}
 
-    void StartRaid() {
-        raidRuns = true;
-		Save();
-    }
-
     void RaidIsFinished() {
-        raidRuns = false;
         lastRaidTime = new DZLDate();
 		
 		Save();
     }
-	
-	void CancelRaid() {
-		raidRuns = false;
-		
-		Save();
-	}
-	
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
             JsonFileLoader<DZLBank>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);

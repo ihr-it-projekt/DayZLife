@@ -57,7 +57,7 @@ class DZLCarMenu : DZLBaseMenu
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<string>>(car, DZLDisplayHelper.GetPlayerIdsFromList(carPanelKeyOwnerList)), true);
 			carKeySearchInput.SetText("");
 		} else if (w == carKeySearchButton) {
-			DZLDisplayHelper.SearchOnlinePlayers(carKeySearchInput.GetText(), carPanelOnlinePlayerList, carPanelKeyOwnerList, onlinePlayers, player);
+			DZLDisplayHelper.SearchOnlinePlayersWithKey(carKeySearchInput.GetText(), carPanelOnlinePlayerList, carPanelKeyOwnerList, onlinePlayers, player);
 		}
 
 		return false;

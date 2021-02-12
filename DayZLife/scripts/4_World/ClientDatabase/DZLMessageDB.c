@@ -1,12 +1,23 @@
 class DZLMessageDB
 {
+    private static ref DZLMessageDB messageDB;
+
     private ref array<string> ids;
     private ref map<string, ref DZLMessage> messageMap;
 	private string fileName = "messageIndex.json";
+	private ref array<ref DZLOnlinePlayer> contacts;
+
+	static DZLMessageDB Get() {
+	    if (!messageDB) {
+	        messageDB = new DZLMessageDB;
+	    }
+	    return messageDB;
+	}
 
 	void DZLMessageDB() {
 		if (!Load()) {
 			ids = new array<string>;
+			contacts = new array<ref DZLOnlinePlayer>;
 		}
 
         messageMap = new map<string, ref DZLMessage>;
@@ -22,13 +33,30 @@ class DZLMessageDB
         Save();
 	}
 
-	void RemoveMessage(string id) {
-        DZLMessage message = messageMap.Get(id);
-		if (message) message.Delete();
-		
-	    ids.RemoveItem(id);
+	void RemoveMessage(DZLMessage message) {
+		if (message) {
+			message.Delete();
+			ids.RemoveItem(message.GetId());
+	    	Save();
+		}
+	}
+
+	void AddContact(DZLOnlinePlayer player) {
+	    contacts.Insert(player);
 	    Save();
 	}
+
+	void RemoveContact(DZLOnlinePlayer player) {
+	    contacts.RemoveItem(player);
+	    Save();
+	}
+
+    bool HasContact(DZLOnlinePlayer player) {
+        foreach(DZLOnlinePlayer onlinePlayer: contacts) {
+            if (onlinePlayer.id == player.id) return true;
+        }
+        return false;
+    }
 	
 	map<string, ref DZLMessage> GetMessages() {
 		return messageMap;

@@ -82,7 +82,7 @@ class DZLDisplayHelper
     }
 
 
-	static void SearchOnlinePlayers(string search, TextListboxWidget target, TextListboxWidget exclude, array<ref DZLOnlinePlayer> onlinePlayers, PlayerBase player) {
+	static void SearchOnlinePlayersWithKey(string search, TextListboxWidget target, TextListboxWidget exclude, array<ref DZLOnlinePlayer> onlinePlayers, PlayerBase player) {
 	    if (!onlinePlayers || onlinePlayers.Count() == 0) return;
         target.ClearItems();
         search.ToLower();
@@ -103,6 +103,35 @@ class DZLDisplayHelper
                 }
             }
             if (hasKey) continue;
+
+            string playerNameLow = onlinePlayer.name;
+            playerNameLow.ToLower();
+            if (search == "" || playerNameLow.Contains(search)) {
+                target.AddItem(onlinePlayer.name, onlinePlayer, 0);
+            }
+        }
+    }
+
+	static void SearchOnlinePlayers(string search, TextListboxWidget target, TextListboxWidget exclude, array<ref DZLOnlinePlayer> onlinePlayers) {
+	    if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        target.ClearItems();
+        search.ToLower();
+        int countPlayers = exclude.GetNumItems();
+
+        foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
+            bool mustExclude = false;
+            for(int i = 0; i < countPlayers; i ++) {
+                DZLOnlinePlayer keyPlayer;
+                exclude.GetItemData(i, 0, keyPlayer);
+                if (!keyPlayer) continue;
+
+                if (keyPlayer.id == onlinePlayer.id) {
+                    mustExclude = true;
+                    break;
+                }
+			}
+
+			if (mustExclude) continue;
 
             string playerNameLow = onlinePlayer.name;
             playerNameLow.ToLower();
