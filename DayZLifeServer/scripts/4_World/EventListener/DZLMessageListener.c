@@ -22,14 +22,14 @@ class DZLMessageListener
                 if (_players) {
                     foreach(Man _player: _players) {
                         PlayerBase receiver = PlayerBase.Cast(_player);
-                        if (paramMessage.param1 == "" || paramMessage.param1 == receiver.GetPlayerId() || (type == DZLMessage.TYPE_COP && receiver.GetDZLPlayer().IsActiveAsCop()) || (type == DZLMessage.TYPE_MEDIC && receiver.GetDZLPlayer().IsActiveAsMedic())) {
+                        if ((type != DZLMessage.TYPE_COP && type != DZLMessage.TYPE_MEDIC && paramMessage.param1 == "") || paramMessage.param1 == receiver.GetPlayerId() || (type == DZLMessage.TYPE_COP && receiver.GetDZLPlayer().IsActiveAsCop()) || (type == DZLMessage.TYPE_MEDIC && receiver.GetDZLPlayer().IsActiveAsMedic())) {
                             DZLMessage message = new DZLMessage;
                             message.CreateAndSend(player, _player.GetIdentity(), text, type);
                         }
                     }
                 }
            }
-        } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS_RESPONSE) {
+        } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {
             PlayerBase playerGetList = PlayerBase.Cast(target);
             SendOnlinePlayerList(playerGetList);
         }
@@ -46,7 +46,7 @@ class DZLMessageListener
         if (_players) {
             foreach(Man _player: _players) {
                 string ident = _player.GetIdentity().GetId();
-                if (ident == player.GetPlayerId()) continue;
+//                if (ident == player.GetPlayerId()) continue;
                 collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
             }
         }

@@ -229,6 +229,8 @@ Tax, Tax, Tax, Steuer,
 payback_was_successful, You have been refunded: , You have been refunded: , Du hast zurückgezahlt: ,
 you_will_loose_all_money_on_you_char,Attention: You will lose all your money and items at char when you respawn.,Attention: You will lose all your money and items at char when you respawn., Achtung: Du verlierst dein Geld und die Sachen die du bei dir trägst was du bei dir hast.
 bank_rob_will_finished_in, Bank raid is finished in (Minutes), Bank raid is finished in (Minutes), Banküberfall ist beendet in (Minuten),
+no_contact_is_selected, No contact is selected,No contact is selected, Es ist kein Kontakt ausgewählt.,
+message_is_empty, Message field is empty, Message field is empty, Nachricht ist leer,
 Show_Map, Map, Map, Karte,
 Contacts, Contacts, Contacts, Kontakte,
 Add_Contacts, Add Contacts, Add Contacts, Kontakt hinzufügen,
@@ -241,3 +243,6 @@ SOS_Cop, SoS, SoS, SoS,
 Send_Medic, Send to Medics, Send to Medics, An Medics senden,
 Delete_Message, Delete Message, Delete Message, Nachricht Löschen,
 Send, Send, Send, Senden,
+Message_Menu, Messages, Messages, Nachrichten
+your_message, Your message, Your message, Deine Nachricht
+message_was_send, Message was send, Message was send, Nachricht wurde gesendet,

@@ -1,8 +1,8 @@
 class DZLBankRaidListener : Managed 
 {
-    ref DZLBankingConfig config;
-    float time = 300;
-	int timeHappened = 0;
+    private ref DZLBankingConfig config;
+    private float time = 300;
+	private int timeHappened = 0;
     private ref Timer raidTimer;
     private PlayerBase playerWhoStartedRaid;
     private DZLBankingPosition position;
@@ -43,8 +43,6 @@ class DZLBankRaidListener : Managed
                 }
             }
 
-            DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-
             if (!playerWhoStartedRaid) {
                 foreach(DZLBankingPosition _position: config.positionOfBankingPoints) {
                     if (_position && _position.position && vector.Distance(_position.position, PlayerBase.Cast(target).GetPosition()) <= config.maximumRaidDistanceToBank){
@@ -57,7 +55,6 @@ class DZLBankRaidListener : Managed
                 }
 
                 if (playerWhoStartedRaid) {
-                    bank.StartRaid();
                     timeHappened = 0;
                     DZLSendMessage(null, "#bank_rob_was_started");
                     DZLLogRaid(sender.GetId(), "start bank raid", "bank", playerWhoStartedRaid.GetPosition());
@@ -75,8 +72,6 @@ class DZLBankRaidListener : Managed
             if (!isInNearOfBankAndLocationIsEnabled()) {
                 playerWhoStartedRaid = null;
                 raidTimer.Stop();
-                DZLBank bank_cancel = DZLDatabaseLayer.Get().GetBank();
-                bank_cancel.CancelRaid();
                 DZLSendMessage(null, "#bank_rob_was_canceled");
                 return;
             }

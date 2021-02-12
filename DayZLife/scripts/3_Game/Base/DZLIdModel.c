@@ -9,4 +9,8 @@ class DZLIdModel
     void SetId() {
         id = Math.RandomInt(0, 100000000000).ToString();
     }
+	
+	string GetId() {
+		return id;
+	}
 }

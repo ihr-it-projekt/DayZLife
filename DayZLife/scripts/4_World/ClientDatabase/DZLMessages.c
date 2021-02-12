@@ -10,6 +10,8 @@ class DZLMessage: DZLIdModel
     private string receiver;
     private string text;
     private vector position;
+    private bool isRead = false;
+    private bool isAnswered = false;
     private ref DZLDate date;
 
     void DZLMessage(string _id = ""){
@@ -55,6 +57,28 @@ class DZLMessage: DZLIdModel
         return date;
     }
 
+    bool IsRead() {
+        return isRead;
+    }
+
+    void Read() {
+        isRead = true;
+        Save();
+    }
+
+    bool IsAnswered() {
+        return isAnswered;
+    }
+
+    void Answer() {
+        isAnswered = true;
+        Save();
+    }
+	
+	string GetType() {
+		return type;
+	}
+
 	string GetFileName(string _id) {
 		return _id + ".json";
 	}
@@ -62,7 +86,6 @@ class DZLMessage: DZLIdModel
     void Delete() {
         DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(id));
     }
-
 
     bool Save(){
         if (GetGame().IsClient()) {

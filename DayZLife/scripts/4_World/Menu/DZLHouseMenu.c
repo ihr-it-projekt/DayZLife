@@ -320,7 +320,7 @@ class DZLHouseMenu : DZLBaseMenu
                 searchInput.SetText("");
                 return true;
 			case searchButton:
-				DZLDisplayHelper.SearchOnlinePlayers(searchInput.GetText(), keyPlayerList, keyPlayerAccessList, noAccess, player);
+				DZLDisplayHelper.SearchOnlinePlayersWithKey(searchInput.GetText(), keyPlayerList, keyPlayerAccessList, noAccess, player);
 				return true;
 		    case transferButton:
 		        array<string> storeOutItems = new array<string>;
