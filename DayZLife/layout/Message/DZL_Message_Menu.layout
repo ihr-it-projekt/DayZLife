@@ -221,39 +221,9 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        PanelWidgetClass PanelWidget14 {
-         ignorepointer 1
-         position 0 0
-         size 1 0.2479
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          MultilineEditBoxWidgetClass writeMessage {
-           position 0 -0
-           size 0.98172 0.89679
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style DayZNormal
-           "exact text" 1
-           "size to text h" 0
-           "size to text v" 0
-           lines 6
-           "limit visible" 1
-          }
-         }
-        }
         TextListboxWidgetClass messageListbox {
-         position 0 -0.29832
-         size 0.98172 0.37766
+         position 0 -0.26372
+         size 0.98172 0.44686
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -266,8 +236,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0 0.33745
-         size 1 0.25925
+         position 0 0.1775
+         size 1 0.35
          halign center_ref
          valign bottom_ref
          hexactpos 0
@@ -278,8 +248,8 @@ FrameWidgetClass rootFrame {
          {
           MultilineTextWidgetClass readText {
            ignorepointer 1
-           position 0 -0.00251
-           size 0.9817 0.888
+           position 0 -0
+           size 0.98172 0.9269
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -293,8 +263,8 @@ FrameWidgetClass rootFrame {
         }
         TextWidgetClass TextWidget1 {
          ignorepointer 1
-         position 0 0.20732
-         size 0.98172 0.06397
+         position 0 0.36728
+         size 0.43712 0.06397
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -305,6 +275,21 @@ FrameWidgetClass rootFrame {
          text_proportion 0.7
          "text halign" center
          "text valign" center
+        }
+        EditBoxWidgetClass writeMessage {
+         position 0 0.44919
+         size 0.9817 0.076
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
+         "no focus" 0
+         "limit visible" 0
+         "Use default text" 0
+         "exact text" 1
         }
        }
       }
