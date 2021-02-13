@@ -80,7 +80,7 @@ class CfgVehicles
 		canBeDigged=0;
 		displayName="The Database";
         descriptionShort="";
-        model="\DZ\structures_bliss\residential\Misc\Misc_WoodenCrate_5x.p3d";
+        model="\DZL_Misc\Terminal\DZL_Terminal.p3d";
         class Cargo
         {
             itemsCargoSize[]={0,0};

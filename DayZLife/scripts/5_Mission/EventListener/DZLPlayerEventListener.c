@@ -112,9 +112,7 @@ class DZLPlayerEventListener
             } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MEDIC_MESSAGE) {
                 Param1 <string> dzlMessageMedic;
                 if (ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1){
-                    if (player && player.GetDZLPlayer() && player.GetDZLPlayer().IsActiveAsMedic()) {
-						player.DisplayMessage(dzlMessageMedic.param1);
-					}
+                    player.DisplayMessage(dzlMessageMedic.param1);
                 }
             } else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {
                 Param3<ref DZLHouseExtension, string, PlayerBase> dzlAlarm;
