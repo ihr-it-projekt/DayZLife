@@ -309,7 +309,7 @@ class DZLPlayer
 	
 	bool HasLicense(DZLLicence licenceToBuy) {
 		foreach(string licenceId: licenceIds){
-            if(licenceId == licenceToBuy.id){
+            if(licenceId == licenceToBuy.GetId()){
                 return true;
             }
         }
@@ -318,7 +318,7 @@ class DZLPlayer
 	
 	void BuyLicence(DZLLicence licenceToBuy){
 		money -= licenceToBuy.price;
-		licenceIds.Insert(licenceToBuy.id);
+		licenceIds.Insert(licenceToBuy.GetId());
 		Save();
 	}
 

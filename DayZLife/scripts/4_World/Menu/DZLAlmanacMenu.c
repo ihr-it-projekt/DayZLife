@@ -408,7 +408,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 					array<ref DZLLicence> licences = player.config.licenceConfig.licences.collection;
 					foreach(DZLLicence configLicence: licences) {
 						foreach(string licenceId: licenceIds) {
-							if (licenceId == configLicence.id) {
+							if (licenceId == configLicence.GetId()) {
 								adminLicenseTextListbox.AddItem(configLicence.name, configLicence, 0);
 							}
 						}

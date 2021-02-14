@@ -28,7 +28,7 @@ class DZLBuyExtensionListener
 				DZLHouseExtension extension;
 				array<ref DZLHouseExtension> extensions = config.GetExtensions();
 				foreach(DZLHouseExtension _extension: extensions) {
-					if (_extension.id == paramBuyStorage.param2) {
+					if (_extension.GetId() == paramBuyStorage.param2) {
 						extension = _extension;
 						break;
 					}

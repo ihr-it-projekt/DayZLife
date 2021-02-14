@@ -70,7 +70,7 @@ class DZLHouseInventory
 
     DZLStoreItem GetById(string id) {
         foreach(DZLStoreItem item: store) {
-            if (item.id == id) {
+            if (item.GetId() == id) {
                 return item;
             }
         }

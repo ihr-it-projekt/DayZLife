@@ -1,6 +1,6 @@
 class DZLIdModel
 {
-    string id;
+    protected string id;
 
     bool HasCorrectId() {
         return id != "";

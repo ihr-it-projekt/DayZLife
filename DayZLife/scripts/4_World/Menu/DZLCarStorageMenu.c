@@ -118,7 +118,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 					player.DisplayMessage("#error_not_enough_money");
 				}
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param2<string, bool>(carOut.id, hasInsuranceWidget.IsChecked()), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param2<string, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked()), true);
             }
 		} else if (w == closeButton){
 		    OnHide();

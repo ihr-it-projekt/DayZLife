@@ -22,7 +22,7 @@ class DZLCarStorage
 
 	DZLCarStoreItem GetById(string id) {
 	    foreach(DZLCarStoreItem item: items) {
-	        if (item.id == id) {
+	        if (item.GetId() == id) {
 	            return item;
 	        }
 	    }

@@ -30,7 +30,7 @@ class DZLMessageDB
 	void AddMessage(DZLMessage message) {
 	    message.Save();
         messageMap.Insert(message);
-        ids.Insert(message.id);
+        ids.Insert(message.GetId());
         Save();
 	}
 

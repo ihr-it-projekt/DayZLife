@@ -35,7 +35,7 @@ class DZLTraderListener
                     foreach(DZLTraderType type: category.items) {
                         if (itemsToBuyParam.Count() > 0) {
                             foreach(string traderType: itemsToBuyParam) {
-                                if (traderType == type.id) {
+                                if (traderType == type.GetId()) {
                                     typesToBuy.Insert(type);
                                     sum += type.buyPrice;
                                 }

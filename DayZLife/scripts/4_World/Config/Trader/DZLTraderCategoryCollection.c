@@ -280,12 +280,12 @@ class DZLTraderCategoryCollection
                         mustSave = true;
                     }
 
-                    if(-1 != ids.Find(_items.id)) {
+                    if(-1 != ids.Find(_items.GetId())) {
                         _items.SetId();
                         mustSave = true;
                     }
 
-                    ids.Insert(_items.id);
+                    ids.Insert(_items.GetId());
                 }
             }
 			

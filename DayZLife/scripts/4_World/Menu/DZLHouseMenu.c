@@ -219,7 +219,7 @@ class DZLHouseMenu : DZLBaseMenu
                     }
 
                     if (canBuy) {
-                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION, new Param2<ref Building, string>(building, currentItemBuy.id), true);
+                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION, new Param2<ref Building, string>(building, currentItemBuy.GetId()), true);
                     }
 
                     buyButton.Show(false);
@@ -337,7 +337,7 @@ class DZLHouseMenu : DZLBaseMenu
                     playerInventoryAddList.GetItemData(z, 0, outItem);
 
 					if (!outItem) continue;
-                    storeOutItems.Insert(outItem.id);
+                    storeOutItems.Insert(outItem.GetId());
                 }
 
 

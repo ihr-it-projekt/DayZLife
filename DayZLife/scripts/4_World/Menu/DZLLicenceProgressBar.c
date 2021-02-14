@@ -11,6 +11,6 @@ class DZLLicenceProgressBar: DZLBaseProgressBar
     }
 	
     override void SendFinishEvent() {
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE_USE, new Param1<string>(licence.id), true);
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE_USE, new Param1<string>(licence.GetId()), true);
     }
 }

@@ -299,7 +299,7 @@ class DZLTraderMenu: DZLBaseMenu
 						carBuy = true;
 					}
 					
-                    buyItems.Insert(buyItem.id);
+                    buyItems.Insert(buyItem.GetId());
                 }
             }
 

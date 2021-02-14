@@ -735,7 +735,7 @@ class DZLJobSpawnPoints
 	
 	DZLSpawnPoint FindSpawnById(string id) {
 		foreach(DZLSpawnPoint spawnPoint: spawnPoints) {
-			if (id == spawnPoint.id) {
+			if (id == spawnPoint.GetId()) {
 				return spawnPoint;
 			}
 		}
