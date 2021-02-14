@@ -34,14 +34,17 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 		if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
-		
+
+		DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        if (!objectTarget || !objectTarget.IsLoadOut()) return false;
+
 	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
 	    if (!dzlPlayer || !player.config || !player.config.jobConfig) return false;
 
         if (dzlPlayer.IsActiveAsCop()) {
-            return player.config.jobConfig.loadOutsCops.IsInZone(player.GetPosition());
+            return !objectTarget.IsCopLoadOut();
         } else if (dzlPlayer.IsActiveAsMedic()) {
-            return player.config.jobConfig.loadOutsMedics.IsInZone(player.GetPosition());
+            return !objectTarget.IsMedicLoadOut();
         }
 		
 		return false;

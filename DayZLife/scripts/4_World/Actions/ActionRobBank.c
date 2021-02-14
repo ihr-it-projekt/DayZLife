@@ -22,7 +22,7 @@ class ActionRobBank: ActionInteractBase
 
 	override void CreateConditionComponents() {
 		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new CCTNone;
+		m_ConditionTarget = new CCTCursor;
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
@@ -34,6 +34,10 @@ class ActionRobBank: ActionInteractBase
 		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			GetConfig();
 		}
+
+		DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+
+		if (!objectTarget || !objectTarget.IsBank()) return false;
 		
 		if (config) {
 			EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();

@@ -38,17 +38,18 @@ class ActionOpenTraderMenu: ActionInteractBase
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
         if(!target) return false;
         if(!target.GetObject()) return false;
+
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        if (!objectTarget || !objectTarget.IsTrader()) return false;
        
 		DZLDate currentDate = new DZLDate();
 		
 		if(!player.hasTraderConfig && currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
 		    player.timeAskForTraderConfig = currentDate.inSeconds;
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<ref PlayerBase>(player), true);
+			return false;
 		}
 
-		position = player.GetTraderByPosition(target.GetObject().GetType());
-
-
-		return !!position;
+		return true;
     }
 }

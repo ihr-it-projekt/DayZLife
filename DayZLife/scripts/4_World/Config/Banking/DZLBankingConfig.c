@@ -1,6 +1,6 @@
 class DZLBankingConfig
 {
-	string version = "3";
+	string version = "4";
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
 	bool showSumOfStoredCashInBank = true;
 	int raidTimeBankInSeconds = 3600;
@@ -24,19 +24,13 @@ class DZLBankingConfig
             positionOfBankingPoints = new array<ref DZLBankingPosition>;
             itemsCanUsedToRaidBank = new array<string>;
 
-            array<string> attachments = new array<string>;
-            attachments.Insert("ManSuit_Black");
-            attachments.Insert("SlacksPants_Black");
-            attachments.Insert("ThickFramesGlasses");
-            attachments.Insert("DressShoes_Black");
-
             if (DAY_Z_LIFE_DEBUG) {
                  // first Bank
-                positionOfBankingPoints.Insert(new DZLBankingPosition("4660.000000 339.282990 10305.000000", "0 0 0", "SurvivorM_Boris", attachments));
+                positionOfBankingPoints.Insert(new DZLBankingPosition("4660.000000 339.282990 10305.000000", "0 0 0", "DZLBaseActionObject"));
 
                 itemsCanUsedToRaidBank.Insert("Deagle_Gold");
             } else {
-				positionOfBankingPoints.Insert(new DZLBankingPosition("6570.417969 6.000000 2449.841309", "-56 0 0", "SurvivorM_Rolf", attachments));
+				positionOfBankingPoints.Insert(new DZLBankingPosition("6570.417969 6.000000 2449.841309", "-56 0 0", "DZLBaseActionObject"));
 
                 itemsCanUsedToRaidBank.Insert("Deagle_Gold");
             }
@@ -61,19 +55,14 @@ class DZLBankingConfig
 		    version = "3";
 		    Save();
 		}
-    }
 
-    bool IsInZone(vector playerPosition, string type) {
-        if (!playerPosition) {
-            return false;
-        }
-
-        foreach(DZLBankingPosition zone: positionOfBankingPoints) {
-            if(zone && zone.survivor == type && zone.position && vector.Distance(zone.position, playerPosition) <= 2) {
-                return true;
+		if (version == "3") {
+            version = "4";
+            foreach(DZLBankingPosition position: positionOfBankingPoints) {
+                position.type = "DZLBaseActionObject";
             }
+            Save();
         }
-        return false;
     }
 
     private bool Load(){

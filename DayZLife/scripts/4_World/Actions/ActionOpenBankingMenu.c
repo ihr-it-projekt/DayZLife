@@ -30,15 +30,17 @@ class ActionOpenBankingMenu: ActionInteractBase
         if(!target) return false;
         if(!target.GetObject()) return false;
 
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        if (!objectTarget || !objectTarget.IsBank()) return false;
+
         DZLDate currentDate = new DZLDate();
 
         if(!player.hasBankingConfig && currentDate.inSeconds - player.timeAskForBankingConfig > 5) {
             player.timeAskForBankingConfig = currentDate.inSeconds;
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING, new Param1<ref PlayerBase>(player), true);
-        } else if (player.config && player.config.bankConfig) {
-			return player.config.bankConfig.IsInZone(player.GetPosition(), target.GetObject().GetType());
+            return false;
         }
 
-        return false;
+        return true;
 	}
 }

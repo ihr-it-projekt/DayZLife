@@ -2,17 +2,15 @@ class DZLLicencePosition
 {
     vector position;
 	vector orientation
-    string survivor;
-    ref array<string> attachments;
+    string type;
 
-    void DZLLicencePosition(vector position, vector orientation, string survivor, array<string> attachments) {
-        Init(position, orientation, survivor, attachments);
+    void DZLLicencePosition(vector position, vector orientation, string type) {
+        Init(position, orientation, type);
     }
 
-    protected void Init(vector position, vector orientation, string survivor, array<string> attachments) {
+    protected void Init(vector position, vector orientation, string type) {
         this.position = position;
         this.orientation = orientation;
-        this.survivor = survivor;
-        this.attachments = attachments;
+        this.type = type;
     }
 }

@@ -1,21 +1,19 @@
 class DZLLoadOutLocationBuilder: DZLLicenceLocationBuilder {
 
-    void vzDZLLoadOutLocationBuilder() {
-        Init();
-    }
-
     override void Create() {
-		Build(DZLConfig.Get().jobConfig.loadOutsCops.loadOutPosition);
-		Build(DZLConfig.Get().jobConfig.loadOutsMedics.loadOutPosition);
+		Build(DZLConfig.Get().jobConfig.loadOutsCops.loadOutPosition, DAY_Z_LIFE_JOB_COP);
+		Build(DZLConfig.Get().jobConfig.loadOutsMedics.loadOutPosition, DAY_Z_LIFE_JOB_MEDIC);
 	}
 	
-	private void Build(array<ref DZLLoadOutPosition> positions) {
+	private void Build(array<ref DZLLoadOutPosition> positions, string jobId) {
 		foreach(DZLLoadOutPosition position: positions) {
-			EntityAI npc = CreatePositions(position);
-			if (npc) {
-				npcs.Insert(new DZLNPCKeepPosition(npc));
+			DZLBaseActionObject object = CreatePositions(position);
+
+			if (jobId == DAY_Z_LIFE_JOB_COP) {
+                object.EnableCopLoadOut();
+			} else {
+                object.EnableMedicLoadOut();
 			}
-           
         }
 	}
 };
