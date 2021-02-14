@@ -23,6 +23,7 @@ modded class PlayerBase
 	ref DZLCarStorageMenu carStorageMenu;
 	ref DZLMedicHelpMenu healMenu;
 	ref DZLMessageSystemMenu messageSystemMenu;
+	ref DZLRaidChecker raidChecker;
 
 	bool willHeal = false;
 	bool willDie = false;
@@ -655,5 +656,13 @@ modded class PlayerBase
         if (dzlPlayer.dayZPlayerId == GetPlayerId()) {
             this.dzlPlayerClient = dzlPlayer;
         }
+    }
+
+    void StartBankRaid(DZLBankingPosition position) {
+        if(!raidChecker) {
+            raidChecker = new DZLRaidChecker(this);
+        }
+
+        raidChecker.Start(position);
     }
 }

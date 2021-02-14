@@ -146,7 +146,7 @@ class DZLLicenceConfig
         }
 
         foreach(DZLLicencePosition zone: positionOfLicencePoints) {
-            if(zone. survivor == type && vector.Distance(zone.position, playerPosition) <= 2) {
+            if(zone.survivor == type && vector.Distance(zone.position, playerPosition) <= 2) {
                 return true;
             }
         }

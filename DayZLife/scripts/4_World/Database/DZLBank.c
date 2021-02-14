@@ -6,18 +6,39 @@ class DZLBank
 	private string version = "1";
 	private int lastRaidMoney = 0;
 	private int taxSum = 0;
+	private bool raidRuns = false;
 	
     void DZLBank() {
-        if (!Load()) {
-            Save();
-        }
+        Load();
 
         if (!version) {
             lastRaidMoney = 0;
             version = "1";
             taxSum = 0;
-            Save();
         }
+
+        raidRuns = false;
+        Save();
+    }
+
+    void StartRaid() {
+        raidRuns = true;
+        Save();
+    }
+
+    void StopRaid() {
+        raidRuns = false;
+        Save();
+    }
+
+    bool RaidRuns() {
+        return raidRuns;
+    }
+
+    void RaidIsFinished() {
+        lastRaidTime = new DZLDate();
+        raidRuns = false;
+        Save();
     }
 
     void AddTax(int _taxSum) {
@@ -78,12 +99,6 @@ class DZLBank
 		
 		return true;
 	}
-
-    void RaidIsFinished() {
-        lastRaidTime = new DZLDate();
-		
-		Save();
-    }
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {

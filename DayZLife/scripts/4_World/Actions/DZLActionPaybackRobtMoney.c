@@ -38,12 +38,15 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
             return false;
         }
 		
-        DZLBank bank = player.dzlBank;
+        DZLBank bank;
         if (GetGame().IsServer()) {
             bank = DZLDatabaseLayer.Get().GetBank();
+        } else {
+            bank  = player.dzlBank;
         }
 
-        if(bank.GetLastRaidMoney() == 0) {
+
+        if(!bank || bank.GetLastRaidMoney() == 0) {
             return false;
         }
 		
