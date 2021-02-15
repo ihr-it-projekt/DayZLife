@@ -15,7 +15,6 @@ class CfgPatches
 class CfgVehicles
 {
 	class HouseNoDestruct;
-	//ATM
 	class DZL_ATM_Blue: HouseNoDestruct
 	{
 		scope=2;
@@ -30,5 +29,10 @@ class CfgVehicles
 	{
 		scope=2;
 		model="\DZL_Models\ATM\ATM_Yellow.p3d";
+	};
+	class DZL_Parking_Meter: HouseNoDestruct
+	{
+		scope=2;
+		model="\DZL_Models\ParkingMeter2\ParkingMeter.p3d";
 	};
 };
