@@ -1,6 +1,6 @@
 class DZLTraderPositionCollection
 {
-    string version = "2";
+    string version = "3";
     ref array<ref DZLTraderPosition> positions;
 
     void DZLTraderPositionCollection() {
@@ -88,6 +88,13 @@ class DZLTraderPositionCollection
 
         if (version == "1") {
             version = "2";
+            Save();
+        }
+        if (version == "2") {
+            version = "3";
+            foreach(DZLTraderPosition position: positions) {
+                position.type = "DZLBaseActionObject";
+            }
             Save();
         }
     }
