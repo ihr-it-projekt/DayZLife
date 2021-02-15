@@ -7,12 +7,11 @@ class DZLLoadOutLocationBuilder: DZLLicenceLocationBuilder {
 	
 	private void Build(array<ref DZLLoadOutPosition> positions, string jobId) {
 		foreach(DZLLoadOutPosition position: positions) {
-			DZLBaseActionObject object = CreatePositions(position);
 
 			if (jobId == DAY_Z_LIFE_JOB_COP) {
-                object.EnableCopLoadOut();
+			    CreatePositions(position, "DZLLoadoutCopActionObject");
 			} else {
-                object.EnableMedicLoadOut();
+			    CreatePositions(position, "DZLLoadoutMedicActionObject");
 			}
         }
 	}

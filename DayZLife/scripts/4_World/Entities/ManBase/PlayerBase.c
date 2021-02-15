@@ -366,7 +366,7 @@ modded class PlayerBase
         return null;
     }
 
-    DZLTraderPosition GetTraderByPosition(string type, int distance = 2) {
+    DZLTraderPosition GetTraderByPosition(int distance = 2) {
 		vector playerPosition = GetPosition();
         if (!playerPosition || !GetConfig() || !GetConfig().traderConfig) {
             return null;
@@ -375,9 +375,6 @@ modded class PlayerBase
 		array<ref DZLTraderPosition> positions = GetConfig().traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
-		    if (position.type != type) {
-		        continue;
-		    }
 			float distanceToPos = vector.Distance(position.position, playerPosition);
 			if (distanceToPos <= distance){
                 return position;

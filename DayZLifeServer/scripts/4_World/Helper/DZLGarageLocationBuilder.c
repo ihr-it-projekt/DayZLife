@@ -4,8 +4,7 @@ class DZLGarageLocationBuilder: DZLLicenceLocationBuilder {
 		array<ref DZLStoragePosition> positions = DZLConfig.Get().carConfig.garages;
 		
 		foreach(DZLStoragePosition position: positions) {
-            DZLBaseActionObject object = CreatePositions(position);
-            object.EnableGarage();
+            DZLBaseActionObject object = CreatePositions(position, "DZLParkingMeter");
         }
 	}
 };

@@ -15,30 +15,41 @@ class CfgPatches
 
 class CfgVehicles
 {
-	class DZLBaseActionObject;
-	class DZL_ATM_Blue: DZLBaseActionObject
+	class HouseNoDestruct;
+    class DZLBaseActionObject: HouseNoDestruct
+    {
+        scope=1;
+    };
+	class DZLBankActionObjectBlue: DZLBaseActionObject
 	{
-		scope=1;
 		model="\DZL_Models\ATM\ATM_Blue.p3d";
 	};
-	class DZL_ATM_Red: DZLBaseActionObject
+	class DZLBankActionObjectRed: DZLBankActionObjectBlue
 	{
-		scope=1;
 		model="\DZL_Models\ATM\ATM_Red.p3d";
 	};
-	class DZL_ATM_Yellow: DZLBaseActionObject
+	class DZLBankActionObjectYellow: DZLBankActionObjectBlue
 	{
-		scope=1;
 		model="\DZL_Models\ATM\ATM_Yellow.p3d";
 	};
-	class DZL_Parking_Meter: DZLBaseActionObject
+	class DZLParkingMeter: DZLBaseActionObject
 	{
-		scope=1;
 		model="\DZL_Models\ParkingMeter2\ParkingMeter.p3d";
 	};
-	class DZL_Trader: DZLBaseActionObject
+	class DZLTraderActionObject: DZLBaseActionObject
 	{
-		scope=1;
 		model="\DZ\structures\furniture\generalstore\pultskasou.p3d";
 	};
+	class DZLLicenseActionObject: DZLBaseActionObject
+	{
+		model="\DZ\structures\furniture\generalstore\pultskasou.p3d";
+	};
+    class DZLLoadoutMedicActionObject: DZLBaseActionObject
+    {
+        model="\DZL_Misc\Terminal\DZL_Terminal.p3d";
+    };
+    class DZLLoadoutCopActionObject: DZLBaseActionObject
+    {
+        model="\DZL_Misc\Terminal\DZL_Terminal.p3d";
+    };
 };

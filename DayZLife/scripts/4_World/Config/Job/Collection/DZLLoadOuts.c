@@ -11,7 +11,7 @@ class DZLLoadOuts
             loadOutPosition = new array<ref DZLLoadOutPosition>;
             loadOutCategories = new array<ref DZLLoadOutCategory>;
 
-            loadOutPosition.Insert(new DZLLoadOutPosition("6630.058105 7.579785 2585.382568", "-137.999985 0 0", "DZL_Terminal"));
+            loadOutPosition.Insert(new DZLLoadOutPosition("6630.058105 7.579785 2585.382568", "-137.999985 0 0"));
 
             array<ref DZLLoadOutType> loadOutSubAttachments = new array<ref DZLLoadOutType>;
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
@@ -79,9 +79,7 @@ class DZLLoadOuts
 
         if (version == "1") {
             version = "2";
-            foreach(DZLLoadOutPosition position: loadOutPosition) {
-                position.type = "DZLBaseActionObject";
-            }
+
             Save();
         }
     }

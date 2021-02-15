@@ -42,9 +42,9 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 	    if (!dzlPlayer || !player.config || !player.config.jobConfig) return false;
 
         if (dzlPlayer.IsActiveAsCop()) {
-            return !objectTarget.IsCopLoadOut();
+            return objectTarget.IsCopLoadOut();
         } else if (dzlPlayer.IsActiveAsMedic()) {
-            return !objectTarget.IsMedicLoadOut();
+            return objectTarget.IsMedicLoadOut();
         }
 		
 		return false;

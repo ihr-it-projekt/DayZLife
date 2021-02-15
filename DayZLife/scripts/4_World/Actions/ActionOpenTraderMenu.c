@@ -1,7 +1,5 @@
 class ActionOpenTraderMenu: ActionInteractBase
 {
-    DZLTraderPosition position;
-
 	void ActionOpenTraderMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
@@ -21,6 +19,8 @@ class ActionOpenTraderMenu: ActionInteractBase
 
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
+
+		DZLTraderPosition position = action_data.m_Player.GetTraderByPosition();
 
 		if (!position) return;
 

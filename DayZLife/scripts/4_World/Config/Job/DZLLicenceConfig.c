@@ -40,7 +40,7 @@ class DZLLicenceConfig
                 licences.collection.Insert(new DZLLicence(100, "Diamond Licence", "4680.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
 				// End Crafting
                 // Position of licence dealer
-                positionOfLicencePoints.Insert(new DZLLicencePosition("6601.938965 9.378500 2424.097168", "131.999954 0 0", "DZL_Trader"));
+                positionOfLicencePoints.Insert(new DZLLicencePosition("6601.938965 9.378500 2424.097168", "131.999954 0 0"));
                 // end position
 
             } else {
@@ -120,7 +120,7 @@ class DZLLicenceConfig
                 licences.collection.Insert(new DZLLicence(150, "Plastik Licence", "12845.079102 5.980000 9919.536133", 5, "Oil Licence", new DZLLicenceCraftedItem("DZL_Stone", 1, 100), 5, toolItems, craftItems));
 
                 // Position of licence dealer
-                positionOfLicencePoints.Insert(new DZLLicencePosition("6601.938965 9.378500 2424.097168", "131.999954 0 0", "DZL_Trader"));
+                positionOfLicencePoints.Insert(new DZLLicencePosition("6601.938965 9.378500 2424.097168", "131.999954 0 0"));
                 // end position
             }
 			
@@ -136,9 +136,6 @@ class DZLLicenceConfig
 
         if (version == "1") {
             version = "2";
-            foreach(DZLLicencePosition position: positionOfLicencePoints) {
-                position.type = "DZLBaseActionObject";
-            }
             Save();
         }
 	}

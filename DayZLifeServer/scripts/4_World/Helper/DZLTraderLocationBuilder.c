@@ -4,8 +4,7 @@ class DZLTraderLocationBuilder: DZLLicenceLocationBuilder
 		array<ref DZLTraderPosition> positions = DZLConfig.Get().traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
-            DZLBaseActionObject object = CreatePositions(position);
-            object.EnableTrader();
+            DZLBaseActionObject object = CreatePositions(position, "DZLTraderActionObject");
         }
 	}
 };

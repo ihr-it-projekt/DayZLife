@@ -89,14 +89,6 @@ class CfgVehicles
         };
 	};
 
-	class HouseNoDestruct;
-    class DZLBaseActionObject: HouseNoDestruct
-    {
-        scope=2;
-        canBeDigged=0;
-        model="\DZL_Misc\Terminal\DZL_Terminal.p3d";
-        autocenter = false;
-    };
 }
 
 class cfgSoundSets

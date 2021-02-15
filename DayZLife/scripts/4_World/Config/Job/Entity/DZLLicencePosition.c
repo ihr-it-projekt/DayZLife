@@ -2,15 +2,13 @@ class DZLLicencePosition
 {
     vector position;
 	vector orientation
-    string type;
 
-    void DZLLicencePosition(vector position, vector orientation, string type) {
-        Init(position, orientation, type);
+    void DZLLicencePosition(vector position, vector orientation) {
+        Init(position, orientation);
     }
 
-    protected void Init(vector position, vector orientation, string type) {
+    protected void Init(vector position, vector orientation) {
         this.position = position;
         this.orientation = orientation;
-        this.type = type;
     }
 }
