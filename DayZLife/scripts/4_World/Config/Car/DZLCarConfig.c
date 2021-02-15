@@ -19,7 +19,7 @@ class DZLCarConfig
             garages = new array<ref DZLStoragePosition>;
             carRaidTools = new array<string>;
             carRaidTools.Insert("Lockpick");
-            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "DZLBaseActionObject", "6365.0 9.1 2648.0", "180 0 0"));
+            garages.Insert(new DZLStoragePosition("6596.833984 6.000000 2435.520752", "131.999939 0.0 0.0", "DZL_Parking_Meter", "6590.140625 5.810940 2441.690674", "-47.950325 0 0"));
 
 			carTypesToStore = new array<string>;
 			carTypesToStore.Insert("OffroadHatchback");
@@ -49,7 +49,7 @@ class DZLCarConfig
             carRaidTools = new array<string>;
             carRaidTools.Insert("Lockpick");
             garages = new array<ref DZLStoragePosition>;
-            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "SurvivorM_Mirek", "6365.0 9.1 2648.0", "180 0 0"));
+            garages.Insert(new DZLStoragePosition("6596.833984 6.000000 2435.520752", "131.999939 0.0 0.0", "DZL_Parking_Meter", "6590.140625 5.810940 2441.690674", "-47.950325 0 0"));
 
 			carTypesToStore = new array<string>;
 			carTypesToStore.Insert("OffroadHatchback");

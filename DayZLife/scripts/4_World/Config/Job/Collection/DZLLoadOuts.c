@@ -11,7 +11,7 @@ class DZLLoadOuts
             loadOutPosition = new array<ref DZLLoadOutPosition>;
             loadOutCategories = new array<ref DZLLoadOutCategory>;
 
-            loadOutPosition.Insert(new DZLLoadOutPosition("4665.000000 339.282990 10305.000000", "0 0 0", "DZLBaseActionObject"));
+            loadOutPosition.Insert(new DZLLoadOutPosition("6630.058105 7.579785 2585.382568", "-137.999985 0 0", "DZL_Terminal"));
 
             array<ref DZLLoadOutType> loadOutSubAttachments = new array<ref DZLLoadOutType>;
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;

@@ -26,11 +26,11 @@ class DZLBankingConfig
 
             if (DAY_Z_LIFE_DEBUG) {
                  // first Bank
-                positionOfBankingPoints.Insert(new DZLBankingPosition("4660.000000 339.282990 10305.000000", "0 0 0", "DZLBaseActionObject"));
+                positionOfBankingPoints.Insert(new DZLBankingPosition("6601.550781 8.200232 2427.736328", "131.999939 0 0", "DZL_ATM_Red"));
 
                 itemsCanUsedToRaidBank.Insert("Deagle_Gold");
             } else {
-				positionOfBankingPoints.Insert(new DZLBankingPosition("6570.417969 6.000000 2449.841309", "-56 0 0", "DZLBaseActionObject"));
+				positionOfBankingPoints.Insert(new DZLBankingPosition("6601.550781 8.200232 2427.736328", "131.999939 0 0", "DZL_ATM_Red"));
 
                 itemsCanUsedToRaidBank.Insert("Deagle_Gold");
             }
