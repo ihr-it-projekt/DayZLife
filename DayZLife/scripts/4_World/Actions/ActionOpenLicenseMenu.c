@@ -29,10 +29,11 @@ class ActionOpenLicenseMenu: ActionInteractBase
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
         if(!target) return false;
         if(!target.GetObject()) return false;
-	    if (!player.config || !player.config.licenceConfig) {
-	        return false;
-	    }
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        if (!objectTarget || !objectTarget.IsLicensePoint()) return false;
 
-		return !!player.config.licenceConfig.IsInZone(player.GetPosition(), target.GetObject().GetType());
+	    if (!player.config || !player.config.licenceConfig)  return false;
+
+		return true;
 	}
 }

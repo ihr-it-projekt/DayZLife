@@ -5,8 +5,8 @@ class DZLTraderPosition: DZLLicencePosition
     vector spawnOrientationOfVehicles;
     string forJob = "";
 
-    void DZLTraderPosition(vector position, vector orientation, string survivor, array<string> attachments, array<string> categoryNames, vector spawnPositionOfVehicles, vector spawnOrientationOfVehicles = "0 0 0", string forJob = "") {
-        Init(position, orientation, survivor, attachments);
+    void DZLTraderPosition(vector position, vector orientation, string type, array<string> categoryNames, vector spawnPositionOfVehicles, vector spawnOrientationOfVehicles = "0 0 0", string forJob = "") {
+        Init(position, orientation, type);
         this.categoryNames = categoryNames;
         this.spawnPositionOfVehicles = spawnPositionOfVehicles;
         this.spawnOrientationOfVehicles = spawnOrientationOfVehicles;

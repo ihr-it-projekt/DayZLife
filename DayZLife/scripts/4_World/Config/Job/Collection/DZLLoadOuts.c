@@ -1,6 +1,6 @@
 class DZLLoadOuts
 {
-	string version = "1";
+	string version = "2";
     string jobId;
     ref array<ref DZLLoadOutCategory> loadOutCategories;
     ref array<ref DZLLoadOutPosition> loadOutPosition;
@@ -11,13 +11,7 @@ class DZLLoadOuts
             loadOutPosition = new array<ref DZLLoadOutPosition>;
             loadOutCategories = new array<ref DZLLoadOutCategory>;
 
-            array<string> attachments = new array<string>;
-            attachments.Insert("ManSuit_Black");
-            attachments.Insert("SlacksPants_Black");
-            attachments.Insert("ThickFramesGlasses");
-            attachments.Insert("DressShoes_Black");
-
-            loadOutPosition.Insert(new DZLLoadOutPosition("4665.000000 339.282990 10305.000000", "0 0 0", "SurvivorM_Boris", attachments));
+            loadOutPosition.Insert(new DZLLoadOutPosition("4665.000000 339.282990 10305.000000", "0 0 0", "DZLBaseActionObject"));
 
             array<ref DZLLoadOutType> loadOutSubAttachments = new array<ref DZLLoadOutType>;
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
@@ -82,19 +76,14 @@ class DZLLoadOuts
 
             Save();
         }
-    }
 
-    bool IsInZone(vector playerPosition) {
-        if (!playerPosition) {
-            return false;
-        }
-
-        foreach(DZLLoadOutPosition zone: loadOutPosition) {
-            if(vector.Distance(zone.position, playerPosition) <= 2) {
-                return true;
+        if (version == "1") {
+            version = "2";
+            foreach(DZLLoadOutPosition position: loadOutPosition) {
+                position.type = "DZLBaseActionObject";
             }
+            Save();
         }
-        return false;
     }
 
     private bool Load(){

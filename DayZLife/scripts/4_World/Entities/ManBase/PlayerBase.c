@@ -84,22 +84,15 @@ modded class PlayerBase
         super.SetActions(InputActionMap);
 
         AddAction(ActionOpenHouseMenu, InputActionMap);
-        AddAction(ActionOpenTraderMenu, InputActionMap);
-        AddAction(ActionOpenBankingMenu, InputActionMap);
         AddAction(ActionRobMoney, InputActionMap);
         AddAction(ActionRobMoneyFromDead, InputActionMap);
-        AddAction(ActionRobBank, InputActionMap);
         AddAction(DZLActionHarvestItem, InputActionMap);
-        AddAction(ActionOpenLicenseMenu, InputActionMap);
         AddAction(ActionLicenceCrafting, InputActionMap);
         AddAction(DZLActionLockDoors, InputActionMap);
         AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
-        AddAction(ActionOpenLoadOutMenu, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
-        AddAction(ActionOpenCarStorageMenu, InputActionMap);
-        AddAction(DZLActionPaybackRobtMoney, InputActionMap);
 
         InitDZLPlayer();
     }
@@ -382,7 +375,7 @@ modded class PlayerBase
 		array<ref DZLTraderPosition> positions = GetConfig().traderConfig.positions.positions;
 		
 		foreach(DZLTraderPosition position: positions) {
-		    if (position.survivor != type) {
+		    if (position.type != type) {
 		        continue;
 		    }
 			float distanceToPos = vector.Distance(position.position, playerPosition);

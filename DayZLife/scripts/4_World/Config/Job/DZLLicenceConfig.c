@@ -1,6 +1,6 @@
 class DZLLicenceConfig
 {
-	string version = "1";
+	string version = "2";
 	ref DZLLicenceCollection licences;
 	ref array<ref DZLLicencePosition> positionOfLicencePoints;
 
@@ -12,11 +12,6 @@ class DZLLicenceConfig
             DZLLicenceCraftItemCollection craftItems = new DZLLicenceCraftItemCollection;
             DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
 
-            array<string> attachments = new array<string>;
-            attachments.Insert("ManSuit_Black");
-            attachments.Insert("SlacksPants_Black");
-            attachments.Insert("ThickFramesGlasses");
-            attachments.Insert("DressShoes_Black");
 
             if (DAY_Z_LIFE_DEBUG) {
                 // Start Crafting
@@ -45,7 +40,7 @@ class DZLLicenceConfig
                 licences.collection.Insert(new DZLLicence(100, "Diamond Licence", "4680.000000 339.609009 10340.000000", 5, "", new DZLLicenceCraftedItem("DZL_Diamond", 1, 100), 5, toolItems, craftItems));
 				// End Crafting
                 // Position of licence dealer
-                positionOfLicencePoints.Insert(new DZLLicencePosition("4660.000000 339.282990 10315.000000", "0 0 0", "SurvivorM_Boris", attachments));
+                positionOfLicencePoints.Insert(new DZLLicencePosition("4660.000000 339.282990 10315.000000", "0 0 0", "DZLBaseActionObject"));
                 // end position
 
             } else {
@@ -125,7 +120,7 @@ class DZLLicenceConfig
                 licences.collection.Insert(new DZLLicence(150, "Plastik Licence", "12845.079102 5.980000 9919.536133", 5, "Oil Licence", new DZLLicenceCraftedItem("DZL_Stone", 1, 100), 5, toolItems, craftItems));
 
                 // Position of licence dealer
-                positionOfLicencePoints.Insert(new DZLLicencePosition("6566.056152 6.000000 2456.487061", "138 0 0", "SurvivorM_Boris", attachments));
+                positionOfLicencePoints.Insert(new DZLLicencePosition("6566.056152 6.000000 2456.487061", "138 0 0", "DZLBaseActionObject"));
                 // end position
             }
 			
@@ -138,21 +133,16 @@ class DZLLicenceConfig
 		    }
             Save();
 		}
+
+        if (version == "1") {
+            version = "2";
+            foreach(DZLLicencePosition position: positionOfLicencePoints) {
+                position.type = "DZLBaseActionObject";
+            }
+            Save();
+        }
 	}
 
-	bool IsInZone(vector playerPosition, string type) {
-        if (!playerPosition) {
-            return false;
-        }
-
-        foreach(DZLLicencePosition zone: positionOfLicencePoints) {
-            if(zone.survivor == type && vector.Distance(zone.position, playerPosition) <= 2) {
-                return true;
-            }
-        }
-        return false;
-    }
-	
 	private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json")) {
             JsonFileLoader<DZLLicenceConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json", this);

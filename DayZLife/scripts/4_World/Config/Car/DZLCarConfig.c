@@ -10,7 +10,7 @@ class DZLCarConfig
 	ref array<string> carTypesToStore;
 	ref array<string> carRaidTools;
 
-    string version = "4";
+    string version = "5";
 
     void DZLCarConfig() {
 		array<string> attachments;
@@ -19,12 +19,7 @@ class DZLCarConfig
             garages = new array<ref DZLStoragePosition>;
             carRaidTools = new array<string>;
             carRaidTools.Insert("Lockpick");
-            attachments = new array<string>;
-            attachments.Insert("SlacksPants_White");
-            attachments.Insert("DressShoes_White");
-            attachments.Insert("ManSuit_White");
-            attachments.Insert("AviatorGlasses");
-            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "SurvivorM_Mirek", attachments, "6365.0 9.1 2648.0", "180 0 0"));
+            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "DZLBaseActionObject", "6365.0 9.1 2648.0", "180 0 0"));
 
 			carTypesToStore = new array<string>;
 			carTypesToStore.Insert("OffroadHatchback");
@@ -53,13 +48,8 @@ class DZLCarConfig
         if (version == "1") {
             carRaidTools = new array<string>;
             carRaidTools.Insert("Lockpick");
-            attachments = new array<string>;
-            attachments.Insert("SlacksPants_White");
-            attachments.Insert("DressShoes_White");
-            attachments.Insert("ManSuit_White");
-            attachments.Insert("AviatorGlasses");
             garages = new array<ref DZLStoragePosition>;
-            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "SurvivorM_Mirek", attachments, "6365.0 9.1 2648.0", "180 0 0"));
+            garages.Insert(new DZLStoragePosition("6360.0 9.52 2653.0", "124.0 0.0 0.0", "SurvivorM_Mirek", "6365.0 9.1 2648.0", "180 0 0"));
 
 			carTypesToStore = new array<string>;
 			carTypesToStore.Insert("OffroadHatchback");
@@ -96,26 +86,16 @@ class DZLCarConfig
 
             Save();
         }
-    }
 
-    DZLStoragePosition GetStorageByPositionObject(vector playerPosition, string type, int distance = 2) {
-        if (!playerPosition) {
-            return null;
-        }
-
-		foreach(DZLStoragePosition position: garages) {
-		    if (position && position.survivor != type) {
-		        continue;
-		    }
-			float distanceToPos = vector.Distance(position.position, playerPosition);
-			if (distanceToPos <= distance){
-                return position;
+        if (version == "4") {
+            version = "5";
+            foreach(DZLStoragePosition garage: garages) {
+                garage.type = "DZLBaseActionObject";
             }
-		}
-
-		return null;
+            Save();
+        }
     }
-	
+
     DZLStoragePosition GetStorageByPosition(vector playerPosition, int distance = 2) {
         if (!playerPosition) {
             return null;
