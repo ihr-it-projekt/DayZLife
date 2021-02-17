@@ -50,7 +50,7 @@ class DZLStorageListener
                 bool withInsurance = paramGetCar.param2;
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-                if (withInsurance && !dzlPlayer.HasEnoughMoney(config.carInsurancePrice)) {
+                if (withInsurance && !dzlPlayer.HasEnoughMoneBank(config.carInsurancePrice)) {
                     DZLSendMessage(sender, "#error_not_enough_money");
                     return;
                 }
@@ -72,7 +72,7 @@ class DZLStorageListener
                     DZLLogStore(sender.GetId(), "store out insurance: " + withInsurance.ToString(), carSpawned.GetType(), storagePositionCar.position);
 
                     if (withInsurance) {
-                        dzlPlayer.AddMoneyToPlayer(config.carInsurancePrice * -1);
+                        dzlPlayer.AddMoneyToPlayerBank(config.carInsurancePrice * -1);
                         DZLInsuranceManager.Get().AddCar(carSpawned, null);
                         GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                     }

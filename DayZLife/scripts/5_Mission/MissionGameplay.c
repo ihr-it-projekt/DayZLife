@@ -7,10 +7,6 @@ modded class MissionGameplay
 	private bool holdTree = false;
 	private bool holdFour = false;
 
-
-	private UIScriptedMenu almanac;
-	private UIScriptedMenu spawnMenu;
-	private UIScriptedMenu messageMenu;
 	private ref DZLPlayerEventListener playerEventListener;
 	private ref DZLCarEventListener carEventListener;
 	private ref DZLMessageDB messageDB;
@@ -65,53 +61,53 @@ modded class MissionGameplay
             case KeyCode.KC_RCONTROL:
                 holdRControl = true;
 				 
-                if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
-                    almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
+                if ((holdRControl && holdLControl || holdOne && holdLControl) && g_Game.GetUIManager().GetMenu() == NULL) {
+                    GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
 
                 break;
             case KeyCode.KC_LCONTROL:
                 holdLControl = true;
-                if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
-					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
+                if ((holdRControl && holdLControl || holdOne && holdLControl) && g_Game.GetUIManager().GetMenu() == NULL) {
+					GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
 
-                if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
+                if ((holdLControl && holdTow) && g_Game.GetUIManager().GetMenu() == NULL) {
                     player.ShowHealMenuFromMission();
                 }
 
-                if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained()) {
-                    spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+                if ((holdLControl && holdTree && player.CanReSpawn()) && !player.IsRestrained() && g_Game.GetUIManager().GetMenu() == NULL) {
+                    GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
 
-                if ((holdLControl && holdFour && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained() && !player.IsUnconscious())) {
-                    messageMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+                if ((holdLControl && holdFour && !player.IsRestrained() && !player.IsUnconscious()) && g_Game.GetUIManager().GetMenu() == NULL && player.HasInInventory("PersonalRadio")) {
+                    GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
 
                 break;
 			case KeyCode.KC_1:
 				holdOne = true;
-				if ((holdRControl && holdLControl || holdOne && holdLControl) && !almanac && !GetGame().GetUIManager().IsCursorVisible()) {
-					almanac = GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
+				if ((holdRControl && holdLControl || holdOne && holdLControl) && g_Game.GetUIManager().GetMenu() == NULL) {
+					GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
                 }
                 break;
 			case KeyCode.KC_2:
 				holdTow = true;
-				if ((holdLControl && holdTow) && !GetGame().GetUIManager().IsCursorVisible()) {
+				if ((holdLControl && holdTow) && g_Game.GetUIManager().GetMenu() == NULL) {
 					player.ShowHealMenuFromMission();
                 }
                 break;
 
             case KeyCode.KC_3:
 				holdTree = true;
-				if ((holdLControl && holdTree && player.CanReSpawn()) && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained()) {
-					spawnMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+				if ((holdLControl && holdTree && player.CanReSpawn()) && g_Game.GetUIManager().GetMenu() == NULL && !player.IsRestrained()) {
+					GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
                 }
                 break;
             case KeyCode.KC_4:
 				holdFour = true;
-				if ((holdLControl && holdFour && !GetGame().GetUIManager().IsCursorVisible() && !player.IsRestrained() && !player.IsUnconscious())) {
-					messageMenu = GetGame().GetUIManager().ShowScriptedMenu(player.GetMessageSystemMenu(), NULL);
+				if ((holdLControl && holdFour && !player.IsRestrained() && !player.IsUnconscious()) && g_Game.GetUIManager().GetMenu() == NULL && player.HasInInventory("PersonalRadio")) {
+					GetGame().GetUIManager().ShowScriptedMenu(player.GetMessageSystemMenu(), NULL);
                 }
                 break;
             default:

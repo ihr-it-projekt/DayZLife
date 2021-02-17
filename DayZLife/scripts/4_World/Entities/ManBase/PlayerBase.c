@@ -582,6 +582,16 @@ modded class PlayerBase
 
         return itemsArray;
     }
+
+    bool HasInInventory(string type) {
+        array<EntityAI> items = GetPlayerItems();
+        foreach(EntityAI item: items) {
+            if (item.GetType() == type) {
+                return true;
+            }
+        }
+		return false;
+    }
 	
 	override void RemoveAllItems() {
 		array<EntityAI> itemsArray = new array<EntityAI>;

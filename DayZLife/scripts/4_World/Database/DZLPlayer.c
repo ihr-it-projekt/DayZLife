@@ -174,6 +174,10 @@ class DZLPlayer
         return money >= amount;
     }
 
+    bool HasEnoughMoneBank(int amount) {
+        return bank >= amount;
+    }
+
     bool HasMoney() {
         return money > 0;
     }

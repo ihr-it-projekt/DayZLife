@@ -1,4 +1,4 @@
-modded class ActionOpenCarDoors
+modded class ActionOpenCarDoorsOutside
 {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
