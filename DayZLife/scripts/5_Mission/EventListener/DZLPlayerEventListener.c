@@ -33,6 +33,13 @@ class DZLPlayerEventListener
                     player.IsRealPlayerDZL = true;
                     player.hasBankingConfig = true;
                 }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_BASE_BUILDING) {
+                Param1 <ref DZLBaseBuildingConfig> configParamBaseBuilding;
+                if (ctx.Read(configParamBaseBuilding) && configParamBaseBuilding.param1) {
+                    player.config.baseBuildingConfig = configParamBaseBuilding.param1;
+                    player.IsRealPlayerDZL = true;
+                    player.hasBankingConfig = true;
+                }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_JOB) {
                 Param1 <ref DZLJobConfig> configParamJob;
                 if (ctx.Read(configParamJob) && configParamJob.param1) {

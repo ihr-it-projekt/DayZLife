@@ -23,6 +23,7 @@ class DZLConfig
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
     ref DZLMedicConfig medicConfig;
+    ref DZLBaseBuildingConfig baseBuildingConfig;
 
     void DZLConfig() {
         if (GetGame().IsServer()) {
@@ -38,6 +39,7 @@ class DZLConfig
             adminIds = new DZLAdmin;
             carConfig = new DZLCarConfig;
             medicConfig = new DZLMedicConfig;
+            baseBuildingConfig = new DZLBaseBuildingConfig;
         }
 
         jobIds = new array<string>;
