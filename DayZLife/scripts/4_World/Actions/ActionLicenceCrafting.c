@@ -20,7 +20,7 @@ class ActionLicenceCrafting: ActionInteractBase
 	        if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 	    }
 
-		DZLLicence licence = player.GetLicenceByPosition();
+		DZLCraftLicence licence = player.GetLicenceByPosition();
 		if (!licence) return false;
 		
 		string message = player.CanUseLicence(licence);

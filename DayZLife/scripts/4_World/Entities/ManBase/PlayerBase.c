@@ -345,7 +345,7 @@ modded class PlayerBase
         money = 0;
     }
 	
-	DZLLicence GetLicenceByPosition() {
+	DZLCraftLicence GetLicenceByPosition() {
 	    if(!GetDZLPlayer() || !GetConfig() || !GetConfig().licenceConfig) return null;
 
         vector playerPosition = GetPosition();
@@ -354,7 +354,7 @@ modded class PlayerBase
         }
 		
         foreach(string licenceId: GetDZLPlayer().licenceIds) {
-			DZLLicence licence = GetConfig().licenceConfig.licences.FindById(licenceId);
+			DZLCraftLicence licence = GetConfig().licenceConfig.licenceCollection.FindById(licenceId);
 			
 			if(!licence) continue;
 			
@@ -383,7 +383,7 @@ modded class PlayerBase
 		return null;
     }
 
-	string CanUseLicence(notnull DZLLicence licence) {
+	string CanUseLicence(notnull DZLCraftLicence licence) {
         array<EntityAI> items = GetPlayerItems();
         map<string, int> craft = new map<string, int>;
         map<string, int> tools = new map<string, int>;
@@ -459,7 +459,7 @@ modded class PlayerBase
         return message;
 	}
 
-	void UseLicence(DZLLicence licence) {
+	void UseLicence(DZLCraftLicence licence) {
         array<EntityAI> items = GetPlayerItems();
         map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
         map<string, int> toolMap = licence.toolItems.GetTypeCountMap();

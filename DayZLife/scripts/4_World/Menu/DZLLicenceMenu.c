@@ -20,9 +20,9 @@ class DZLLicenceMenu : DZLBaseMenu
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
 
-		DZLLicenceCollection licences = config.licenceConfig.licences;
+		DZLLicenceCraftingCollection licences = config.licenceConfig.licenceCollection;
 		licenceListBox.ClearItems();
-		foreach(DZLLicence licence: licences.collection){
+		foreach(DZLCraftLicence licence: licences.collection){
 			string hasLicenseText = "x";
 			if (!dzlPlayer.HasLicense(licence)) {
 				hasLicenseText = "";
@@ -72,14 +72,14 @@ class DZLLicenceMenu : DZLBaseMenu
 				int position = licenceListBox.GetSelectedRow();
 				
 				if(-1 == position) return true;
-				DZLLicence licence;
+				DZLCraftLicence licence;
 				licenceListBox.GetItemData(position, 0, licence);
 				
 				if(!licence) return true;
 			
-				DZLLicence depLicence;
+				DZLCraftLicence depLicence;
 				if (licence.dependencyLicence) {
-					depLicence = config.licenceConfig.licences.FindByName(licence.dependencyLicence);
+					depLicence = config.licenceConfig.licenceCollection.FindByName(licence.dependencyLicence);
 				}
 			
 				string message = dzlPlayer.CanBuyLicence(licence, depLicence);
@@ -96,7 +96,7 @@ class DZLLicenceMenu : DZLBaseMenu
 				int positionBox = licenceListBox.GetSelectedRow();
 				
 				if(-1 == positionBox) return true;
-				DZLLicence licenceBox;
+				DZLCraftLicence licenceBox;
 				licenceListBox.GetItemData(positionBox, 0, licenceBox);
 				
 				if(!licenceBox) {

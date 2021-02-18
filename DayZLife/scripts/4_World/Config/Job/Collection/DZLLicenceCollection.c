@@ -3,7 +3,7 @@ class DZLLicenceCollection
     ref array<ref DZLLicence> collection;
 
     void DZLLicenceCollection() {
-        collection = new array<ref DZLLicence>
+        collection = new array<ref DZLLicence>;
     }
 
     DZLLicence FindById(string id) {

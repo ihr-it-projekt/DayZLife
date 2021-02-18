@@ -176,7 +176,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 	    workzoneWidget.Show(true);
 		
 		array<ref DZLWorkZone> workZones = config.jobConfig.workZones.workZones;
-		DZLLicenceCollection licences = config.licenceConfig.licences;
+		DZLLicenceCraftingCollection licences = config.licenceConfig.licenceCollection;
 		
 		int index;
 		workingZoneList.ClearItems();
@@ -186,7 +186,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		}
 		
 		licenceList.ClearItems();
-		foreach(DZLLicence licence: licences.collection) {
+		foreach(DZLCraftLicence licence: licences.collection) {
 			licenceList.AddItem(licence.name, licence, 0);
 		}
 	}
@@ -295,7 +295,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			if (index == -1) return true;
 			
-			DZLLicence licence;
+			DZLCraftLicence licence;
 			licenceList.GetItemData(index, 0, licence);
 			
 			if (!licence) return true;
@@ -405,8 +405,8 @@ class DZLAlmanacMenu : DZLBaseMenu
 				TStringArray licenceIds = selectedAdminPlayer.licenceIds;
 
 				if (licenceIds.Count() > 0) {
-					array<ref DZLLicence> licences = player.config.licenceConfig.licences.collection;
-					foreach(DZLLicence configLicence: licences) {
+					array<ref DZLCraftLicence> licences = player.config.licenceConfig.licenceCollection.collection;
+					foreach(DZLCraftLicence configLicence: licences) {
 						foreach(string licenceId: licenceIds) {
 							if (licenceId == configLicence.GetId()) {
 								adminLicenseTextListbox.AddItem(configLicence.name, configLicence, 0);

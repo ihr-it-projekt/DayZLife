@@ -18,11 +18,11 @@ class DZLLicenceListener
             if (ctx.Read(paramBuyLicence)){
                 PlayerBase playerBuyLicence = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = playerBuyLicence.GetDZLPlayer();
-				DZLLicence licence = config.licenceConfig.licences.FindById(paramBuyLicence.param1);
-				DZLLicence depLicence;
+				DZLCraftLicence licence = config.licenceConfig.licenceCollection.FindById(paramBuyLicence.param1);
+				DZLCraftLicence depLicence;
 
 				if (licence.dependencyLicence) {
-					depLicence = config.licenceConfig.licences.FindByName(licence.dependencyLicence);
+					depLicence = config.licenceConfig.licenceCollection.FindByName(licence.dependencyLicence);
 				}
 
                 string message = dzlPlayer.CanBuyLicence(licence, depLicence);
@@ -38,7 +38,7 @@ class DZLLicenceListener
             autoptr Param1<string> paramUseLicence;
             if (ctx.Read(paramUseLicence)){
                 PlayerBase playerLicenceUse = PlayerBase.Cast(target);
-                DZLLicence licenceUse = config.licenceConfig.licences.FindById(paramUseLicence.param1);
+                DZLCraftLicence licenceUse = config.licenceConfig.licenceCollection.FindById(paramUseLicence.param1);
 
                 if (!licenceUse) return;
 

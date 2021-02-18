@@ -52,7 +52,7 @@ class CfgVehicles
     {
         model="\DZL_Misc\Terminal\DZL_Terminal.p3d";
     };
-    class DZLLicenceCraftingActionObject: DZLLicenceActionObject
+    class DZLLicenceCraftingActionObject: DZLBaseActionObject
     {
         model="\DZ\structures\furniture\various\workbench_dz.p3d";
     };

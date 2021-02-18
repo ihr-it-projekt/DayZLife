@@ -296,7 +296,7 @@ class DZLPlayer
 		return moneyBankAdd;
 	}
 	
-	string CanBuyLicence(notnull DZLLicence licenceToBuy, DZLLicence depLicence){
+	string CanBuyLicence(notnull DZLCraftLicence licenceToBuy, DZLCraftLicence depLicence){
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
 
@@ -307,11 +307,11 @@ class DZLPlayer
 		return "#you_have_not_the_dependency_licence";
 	}
 
-	bool HasDependencyLicense(notnull DZLLicence depLicence) {
+	bool HasDependencyLicense(notnull DZLCraftLicence depLicence) {
 	    return HasLicense(depLicence);
 	}
 	
-	bool HasLicense(DZLLicence licenceToBuy) {
+	bool HasLicense(DZLCraftLicence licenceToBuy) {
 		foreach(string licenceId: licenceIds){
             if(licenceId == licenceToBuy.GetId()){
                 return true;
@@ -320,7 +320,7 @@ class DZLPlayer
         return false;
 	}
 	
-	void BuyLicence(DZLLicence licenceToBuy){
+	void BuyLicence(DZLCraftLicence licenceToBuy){
 		money -= licenceToBuy.price;
 		licenceIds.Insert(licenceToBuy.GetId());
 		Save();

@@ -6,8 +6,12 @@ class DZLIdModel
         return id != "";
     }
 
-    void SetId() {
-        id = Math.RandomInt(0, 100000000000).ToString();
+    void SetId(string _id = "") {
+        if (_id == "") {
+            id = Math.RandomInt(0, 100000000000).ToString();
+        } else {
+            id = _id;
+        }
     }
 	
 	string GetId() {

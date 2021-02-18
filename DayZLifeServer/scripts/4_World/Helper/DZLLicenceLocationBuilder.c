@@ -6,8 +6,8 @@ class DZLLicenceLocationBuilder
 		    CreatePositions(position, "DZLLicenseActionObject");
 		}
 
-        array<ref DZLLicence> licencePositions = DZLConfig.Get().licenceConfig.licences.collection;
-        foreach(DZLLicence licencePosition: licencePositions) {
+        array<ref DZLCraftLicence> licencePositions = DZLConfig.Get().licenceConfig.licenceCollection.collection;
+        foreach(DZLCraftLicence licencePosition: licencePositions) {
             CreatePositionsLicence(licencePosition, "DZLLicenceCraftingActionObject");
         }
 	}
@@ -17,9 +17,9 @@ class DZLLicenceLocationBuilder
         return DZLBaseActionObject.Cast(object);
 	}
 
-	DZLBaseActionObject CreatePositionsLicence(DZLLicence position, string type) {
-	    if (!position.orientation) position.orientation = "0 0 0";
-        Object object = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, type);
+	DZLBaseActionObject CreatePositionsLicence(DZLCraftLicence position, string type) {
+	    //if (!position.orientation) position.orientation = "0 0 0";
+        Object object = DZLSpawnHelper.SpawnActionPoint(position.position, "0 0 0", type);
         return DZLBaseActionObject.Cast(object);
 	}
 }

@@ -1,6 +1,6 @@
 class DZLLicenceProgressBar: DZLBaseProgressBar
 {
-    private DZLLicence licence;
+    private DZLCraftLicence licence;
 
     override void OnShow() {
         super.OnShow();
