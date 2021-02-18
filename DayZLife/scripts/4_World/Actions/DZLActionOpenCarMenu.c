@@ -31,15 +31,11 @@ class DZLActionOpenCarMenu: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (!GetGame().IsServer() && g_Game.GetUIManager().GetMenu() != NULL){
-			return false;
-		}
-        CarScript car = CarScript.Cast(target.GetParent());
+	    CarScript car = CarScript.Cast(target.GetParent());
 
-		if (car) {
-            return car.IsOwner(player.GetIdentity());
-		}
+        if (!car) return false;
+        if (GetGame().IsClient() && g_Game.GetUIManager().GetMenu() != NULL) return false;
 
-		return false;
+        return car.IsOwner(player.GetIdentity());
     }
 }

@@ -22,6 +22,9 @@ class DZLActionRaidDoors: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+	    Building building = Building.Cast(target.GetObject());
+        if (!building || !building.IsBuilding()) return false;
+
 	    if (GetGame().IsClient() && (!player.config || !player.config.houseConfig || !player.GetDZLPlayer())) return false;
 
 		if(GetGame().IsClient()){
@@ -30,64 +33,58 @@ class DZLActionRaidDoors: ActionInteractBase
 		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 		}
 
-		Building building = Building.Cast(target.GetObject());
+        item = player.GetItemInHands();
+        if (!item) return false;
 
-		if (!building) return false;
+        DZLJobHouseDefinition copHouseDefinition = config.GetCopHouseDefinition(building);
+        DZLJobHouseDefinition medicDefinition;
+        DZLHouseDefinition definition;
 
-		if(building.IsBuilding()) {
-		    item = player.GetItemInHands();
-            if (!item) return false;
+        array<string> raidTools = new array<string>;
 
-			DZLJobHouseDefinition copHouseDefinition = config.GetCopHouseDefinition(building);
-			DZLJobHouseDefinition medicDefinition;
-			DZLHouseDefinition definition;
-
-			array<string> raidTools = new array<string>;
-			
-            if(copHouseDefinition && player.GetDZLPlayer().IsActiveAsCop()) {
+        if(copHouseDefinition && player.GetDZLPlayer().IsActiveAsCop()) {
+            return false;
+        } else if (copHouseDefinition && !player.GetDZLPlayer().IsActiveAsCop()) {
+            raidTools = copHouseDefinition.raidTools;
+        } else {
+            medicDefinition = config.GetMedicHouseDefinition(building);
+            if(medicDefinition && player.GetDZLPlayer().IsActiveAsMedic()) {
                 return false;
-            } else if (copHouseDefinition && !player.GetDZLPlayer().IsActiveAsCop()) {
-                raidTools = copHouseDefinition.raidTools;
+            } else if (medicDefinition && !player.GetDZLPlayer().IsActiveAsMedic()) {
+                raidTools = medicDefinition.raidTools;
             } else {
-                medicDefinition = config.GetMedicHouseDefinition(building);
-                if(medicDefinition && player.GetDZLPlayer().IsActiveAsMedic()) {
+                 definition = config.GetHouseDefinitionByBuilding(building);
+                 if (!definition) return false;
+                 raidTools = definition.raidTools;
+            }
+        }
+
+        foreach(string itemType: raidTools) {
+            if (item.GetType() == itemType) {
+                if (GetGame().IsServer() && item.GetHealth() < 50) {
+                    DZLSendMessage(player.GetIdentity(), "#raid_item_has_not_enough_helth");
+
                     return false;
-                } else if (medicDefinition && !player.GetDZLPlayer().IsActiveAsMedic()) {
-                    raidTools = medicDefinition.raidTools;
-                } else {
-                     definition = config.GetHouseDefinitionByBuilding(building);
-                     if (!definition) return false;
-                     raidTools = definition.raidTools;
+                }
+
+                int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
+                if (doorIndex != -1 && !building.IsDoorOpen(doorIndex)) {
+                    if (copHouseDefinition) return true;
+                    if (medicDefinition) return true;
+
+                    if (GetGame().IsServer()) {
+                        DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(building);
+                        if(dzlHouse && definition && dzlHouse.CanRaidDoor(player, doorIndex)) return true;
+
+                        DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
+                        return false;
+                    }
+
+                    return !building.IsDoorOpen(doorIndex);
                 }
             }
+        }
 
-			foreach(string itemType: raidTools) {
-				if (item.GetType() == itemType) {
-					if (GetGame().IsServer() && item.GetHealth() < 50) {
-						DZLSendMessage(player.GetIdentity(), "#raid_item_has_not_enough_helth");
-					    
-                        return false;
-					}
-
-					int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
-					if (doorIndex != -1 && !building.IsDoorOpen(doorIndex)) {
-					    if (copHouseDefinition) return true;
-					    if (medicDefinition) return true;
-
-						if (GetGame().IsServer()) {
-							DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(building);
-							if(dzlHouse && definition && dzlHouse.CanRaidDoor(player, doorIndex)) return true;
-
-                            DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
-                            return false;
-						}
-						
-						return !building.IsDoorOpen(doorIndex);
-					}
-				}
-			}
-		}
-		
 		return false;
 	}
 

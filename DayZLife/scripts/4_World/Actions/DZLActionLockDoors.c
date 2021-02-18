@@ -17,6 +17,9 @@ class DZLActionLockDoors: ActionInteractBase
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
+	    Building building = Building.Cast(target.GetObject());
+        if (!building) return false;
+
 		DZLPlayerHouse house;
 		if(GetGame().IsClient()){
 			house = player.house;
@@ -28,10 +31,6 @@ class DZLActionLockDoors: ActionInteractBase
 		if (!house) {
 			return false;
 		}
-
-		Building building = Building.Cast(target.GetObject());
-
-		if (!building) return false;
 
 		if(building.IsBuilding() && (house.HasHouse(building) || house.HasKey(building))) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());

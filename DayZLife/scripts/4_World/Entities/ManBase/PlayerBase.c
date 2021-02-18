@@ -87,7 +87,6 @@ modded class PlayerBase
         AddAction(ActionRobMoney, InputActionMap);
         AddAction(ActionRobMoneyFromDead, InputActionMap);
         AddAction(DZLActionHarvestItem, InputActionMap);
-        AddAction(ActionLicenceCrafting, InputActionMap);
         AddAction(DZLActionLockDoors, InputActionMap);
         AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionUnLockDoors, InputActionMap);
@@ -359,7 +358,7 @@ modded class PlayerBase
 			
 			if(!licence) continue;
 			
-            if (vector.Distance(licence.position, playerPosition) <= licence.range){
+            if (vector.Distance(licence.position, playerPosition) <= 2){
                 return licence;
             }
         }

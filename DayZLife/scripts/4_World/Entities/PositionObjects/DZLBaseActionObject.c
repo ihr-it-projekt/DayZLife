@@ -7,6 +7,7 @@ class DZLBaseActionObject :BuildingSuper
     protected bool isCopLoadOut = false;
     protected bool isMedicLoadOut = false;
     protected bool isLicensePoint = false;
+    protected bool isLicenseActionPoint = false;
 
     bool IsBank() {
         return isBank;

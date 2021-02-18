@@ -25,7 +25,7 @@ class DZLActionTransferMoney: ActionInteractBase
 		
 		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 		
-        if (!targetPlayer.IsDZLPlayer()) return false;
+        if (!targetPlayer || !targetPlayer.IsDZLPlayer()) return false;
 
         return true;
     }

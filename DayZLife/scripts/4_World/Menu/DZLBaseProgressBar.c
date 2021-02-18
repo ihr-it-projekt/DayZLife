@@ -14,7 +14,7 @@ class DZLBaseProgressBar: UIScriptedMenu
    void SetPlayer(PlayerBase player) {
         this.player = player;
         this.dzlPlayer = player.GetDZLPlayer();
-        maxRange = 1;
+        maxRange = 2;
         position = player.GetPosition();
     }
 

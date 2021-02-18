@@ -6,7 +6,6 @@ class DZLLicenceProgressBar: DZLBaseProgressBar
         super.OnShow();
         licence = player.GetLicenceByPosition();
         duration = licence.durationForCrafting;
-        maxRange = licence.range;
         position = licence.position;
     }
 	

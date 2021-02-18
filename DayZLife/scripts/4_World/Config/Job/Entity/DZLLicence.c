@@ -3,7 +3,7 @@ class DZLLicence: DZLIdModel
 	int price;
 	string name;
 	vector position;
-	int range;
+	vector orientation = "0 0 0";
 	string dependencyLicence;
     ref DZLLicenceCraftedItem craftedItem;
 	ref DZLLicenceCraftItemCollection craftItems;
@@ -11,11 +11,10 @@ class DZLLicence: DZLIdModel
 	int durationForCrafting;
 
 
-	void DZLLicence(int price, string name, vector position, int range, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
+	void DZLLicence(int price, string name, vector position, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
 		this.price = price;
 		this.name = name;
 		this.position = position;
-		this.range = range;
 		this.dependencyLicence = dependencyLicence;
         this.craftedItem = craftedItem;
         this.durationForCrafting = durationForCrafting;

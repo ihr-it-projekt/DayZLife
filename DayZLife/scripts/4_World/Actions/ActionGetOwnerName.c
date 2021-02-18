@@ -19,7 +19,7 @@ class ActionGetOwnerName: ActionInteractBase
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
         CarScript carScript = CarScript.Cast(target.GetParent());
-        if ((carScript && carScript.HasPlayerAccess(player))) {
+        if (carScript && carScript.HasPlayerAccess(player)) {
             return true;
         }
         return false;

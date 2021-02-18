@@ -22,6 +22,9 @@ class DZLActionRaidCar: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+	    CarScript car = CarScript.Cast(target.GetParent());
+        if (!car) return false;
+
 	    if (GetGame().IsClient() && (!player.config || !player.config.carConfig)) return false;
 
 		if(GetGame().IsClient()){
@@ -29,10 +32,6 @@ class DZLActionRaidCar: ActionInteractBase
 		} else {
 		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 		}
-
-		CarScript car = CarScript.Cast(target.GetParent());
-
-		if (!car) return false;
 
         array<string> raidTools = config.carRaidTools;
 

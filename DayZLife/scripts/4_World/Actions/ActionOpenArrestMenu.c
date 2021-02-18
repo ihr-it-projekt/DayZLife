@@ -18,12 +18,12 @@ class ActionOpenArrestMenu: ActionInteractBase
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
 		if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
+        DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
+        if (!dzlPlayerCop.IsActiveAsCop()) return false;
 		
 		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
-		
 		if (!targetPlayer.IsDZLPlayer()) return false;
-		
-		DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
+
         if (GetGame().IsServer()) {
             if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 
@@ -33,8 +33,6 @@ class ActionOpenArrestMenu: ActionInteractBase
             if (dzlPlayerPrisoner.IsActiveAsCop()) return false;
         }
 
-        if (!dzlPlayerCop.IsActiveAsCop()) return false;
-		
         return true;
     }
 
