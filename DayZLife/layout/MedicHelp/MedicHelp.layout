@@ -177,6 +177,32 @@ FrameWidgetClass rootFrame {
         }
        }
       }
+      ImageWidgetClass ImageWidget1 {
+       ignorepointer 1
+       position 0.02146 0.02953
+       size 0.14799 0.18299
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
+       mode additive
+       "src alpha" 1
+       "no wrap" 0
+       stretch 1
+       "flip u" 0
+      }
+      TextWidgetClass countMedic {
+       ignorepointer 1
+       position 0.21773 0.02953
+       size 0.17499 0.18299
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
      }
     }
    }
