@@ -47,6 +47,8 @@ class DZLPlayerArrestListener
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param4<ref array<ref DZLEscapedPlayer>, int, int, int>(escapeePlayers, copCount, medicCount, civCount), true, sender);
+        } else if (rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT) {
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true, sender);
         }
     }
 	
@@ -106,6 +108,8 @@ class DZLPlayerArrestListener
 				}
 			}
 		}
+
+		GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
 	}
 
 	private void ChangeItems(PlayerBase prisoner, array<string> items, bool shouldDeleteAllItems) {

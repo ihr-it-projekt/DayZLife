@@ -37,6 +37,7 @@ modded class PlayerBase
 	bool canHealInHospital = false;
 	bool canSeeKillButton = false;
 	int waitForHospital = 0;
+	int medicCount = 0;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -88,7 +89,10 @@ modded class PlayerBase
 	}
 
 	int GetWaitTimeForHospital() {
-	    return config.medicConfig.minTimeBeforeHospital - waitForHospital;
+	    if (medicCount >= config.medicConfig.minMedicCountForHospitalTimer) {
+	        return config.medicConfig.minTimeBeforeHospital - waitForHospital;
+	    }
+	    return config.medicConfig.minTimeBeforeHospitalWhenMinMedicNotOnline - waitForHospital;
 	}
 
 	int GetWaitTimeForKill() {
@@ -138,6 +142,7 @@ modded class PlayerBase
 		{
 			if (!medicHelpMenuWasShown) {
 			    ShowHealMenu();
+			    EnableTimerEnableHospital();
 			    PPEffects.SetUnconsciousnessVignette(1000);
 			} else if (willDie) {
                 SimulateDeath(true);

@@ -5,7 +5,8 @@ class DZLMedicConfig
     int priceHospitalHeal = 5000;
     int priceMedicHeal = 1000;
     float deleteDeadBodyTimeWhenHealedByMedic = 5;
-    int minTimeBeforeHospital = 300;
+    int minTimeBeforeHospital = 600;
+    int minTimeBeforeHospitalWhenMinMedicNotOnline = 300;
     int minTimeBeforeKillButton = 20;
     int minMedicCountForHospitalTimer = 1;
 
@@ -28,7 +29,8 @@ class DZLMedicConfig
         if (version == "2") {
             version = "3";
 
-            minTimeBeforeHospital = 300;
+            minTimeBeforeHospital = 600;
+            minTimeBeforeHospitalWhenMinMedicNotOnline = 300;
             minTimeBeforeKillButton = 20;
             minMedicCountForHospitalTimer = 1;
             Save();

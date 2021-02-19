@@ -5,6 +5,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
 	private ButtonWidget hospitalButton;
 	private TextWidget healTextWidget;
 	private TextWidget killTextWidget;
+	private TextWidget medicCountWidget;
 	private bool hasRequestForMedic = false;
 	private ref Timer checkButtonTimer;
 
@@ -14,6 +15,16 @@ class DZLMedicHelpMenu : DZLBaseMenu
     }
     void ~DZLMedicHelpMenu() {
         Destruct();
+    }
+
+    override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if (rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE) {
+            autoptr Param1<int> paramMedicCount;
+            if (ctx.Read(paramMedicCount)){
+                medicCountWidget.SetText(paramMedicCount.param1.ToString());
+                player.medicCount = paramMedicCount.param1;
+            }
+        }
     }
 
     override Widget Init() {
@@ -27,6 +38,7 @@ class DZLMedicHelpMenu : DZLBaseMenu
         hospitalButton.SetText("#go_to_hospital (" + config.medicConfig.priceHospitalHeal.ToString() + ")");
         healTextWidget = creator.GetTextWidget("HealTextWidget");
         killTextWidget = creator.GetTextWidget("KillTextWidget");
+        medicCountWidget = creator.GetTextWidget("countMedic");
 
         if (!player.canHealInHospital || !player.canSeeKillButton) {
             checkButtonTimer = new Timer;
@@ -41,6 +53,8 @@ class DZLMedicHelpMenu : DZLBaseMenu
             killButton.Show(true);
             hospitalButton.Show(true);
         }
+
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_MEDIC_COUNT, null, true);
 
         return layoutRoot;
     }
