@@ -20,12 +20,22 @@ class ActionLicenceCrafting: ActionInteractBase
 	        if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 	    }
 
-		DZLCraftLicence licence = player.GetLicenceByPosition();
-		if (!licence) return false;
-		
-		string message = player.CanUseLicence(licence);
+	    if(!target) return false;
+        if(!target.GetObject()) return false;
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        if (!objectTarget || !objectTarget.IsLicenseActionPoint()) return false;
 
-		return !message;
+		if (GetGame().IsServer()) {
+		    DZLCraftLicence licence = player.GetLicenceByPosition();
+            if (!licence) return false;
+		    string message = player.CanUseLicence(licence);
+		    if (!!message){
+                DZLSendMessage(player.GetIdentity(), message);
+                return false;
+		    }
+		}
+		
+		return true;
 	}
 
 	override void OnStartClient(ActionData action_data) {

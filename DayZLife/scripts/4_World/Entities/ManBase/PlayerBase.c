@@ -358,14 +358,17 @@ modded class PlayerBase
 			
 			if(!licence) continue;
 			
-            if (vector.Distance(licence.position, playerPosition) <= 2){
+            if (vector.Distance(licence.position, playerPosition) <= 3){
                 return licence;
             }
+        }
+        if (GetGame().IsServer()) {
+            DZLSendMessage(GetIdentity(), "#you_have_not_the_dependency_licence");
         }
         return null;
     }
 
-    DZLTraderPosition GetTraderByPosition(int distance = 2) {
+    DZLTraderPosition GetTraderByPosition(int distance = 3) {
 		vector playerPosition = GetPosition();
         if (!playerPosition || !GetConfig() || !GetConfig().traderConfig) {
             return null;

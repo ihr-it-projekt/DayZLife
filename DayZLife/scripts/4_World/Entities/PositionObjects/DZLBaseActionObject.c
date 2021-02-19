@@ -37,4 +37,8 @@ class DZLBaseActionObject :BuildingSuper
         return isCopLoadOut || isMedicLoadOut;
     }
 
+    bool IsLicenseActionPoint() {
+        return isLicenseActionPoint;
+    }
+
 }
