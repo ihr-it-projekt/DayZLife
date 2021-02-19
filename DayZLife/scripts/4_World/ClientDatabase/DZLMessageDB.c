@@ -1,9 +1,11 @@
 class DZLMessageDB
 {
     private static ref DZLMessageDB messageDB;
-
+    private string version = "1";
     private ref array<string> ids;
+    private ref array<string> answerIds;
     private ref array<ref DZLMessage> messageMap;
+    private ref array<ref DZLMessage> answersMap;
 	private string fileName = "messageIndex.json";
 	private ref array<ref DZLOnlinePlayer> contacts;
 
@@ -20,11 +22,36 @@ class DZLMessageDB
 			contacts = new array<ref DZLOnlinePlayer>;
 		}
 
+		if (!version) {
+		    version = "1";
+		    answerIds = new array<string>;
+		    foreach(string __id: ids) {
+                DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + __id + ".json");
+            }
+            ids = new array<string>;
+
+		    Save();
+		}
+
         messageMap = new array<ref DZLMessage>;
+        answersMap = new array<ref DZLMessage>;
 
 		foreach(string id: ids) {
             messageMap.Insert(new DZLMessage(id));
 		}
+
+		foreach(string _id: answerIds) {
+            answersMap.Insert(new DZLMessage(_id));
+		}
+	}
+
+	void AddAnswer(PlayerBase sender, string receiver, string text, DZLMessage replayedMessage) {
+        DZLMessage replay = new DZLMessage;
+        replay.CreateAnswer(sender, receiver, text, replayedMessage);
+        replay.Save();
+        answersMap.Insert(replay);
+        answerIds.Insert(replay.GetId());
+        Save();
 	}
 
 	void AddMessage(DZLMessage message) {
@@ -62,6 +89,10 @@ class DZLMessageDB
 	
 	array<ref DZLMessage> GetMessages() {
 		return messageMap;
+	}
+
+	array<ref DZLMessage> GetAnswers() {
+		return answersMap;
 	}
 
     private bool Load(){
