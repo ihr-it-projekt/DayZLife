@@ -18,8 +18,7 @@ class DZLLicenceLocationBuilder
 	}
 
 	DZLBaseActionObject CreatePositionsLicence(DZLCraftLicence position, string type) {
-	    //if (!position.orientation) position.orientation = "0 0 0";
-        Object object = DZLSpawnHelper.SpawnActionPoint(position.position, "0 0 0", type);
+        Object object = DZLSpawnHelper.SpawnActionPoint(position.position, position.orientation, type);
         return DZLBaseActionObject.Cast(object);
 	}
 }
