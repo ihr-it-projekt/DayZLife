@@ -1,5 +1,13 @@
 class DZLMessageSystemMenu : DZLBaseMenu
 {
+    private static int LAST_CLICK_CONTACT = 1;
+    private static int LAST_CLICK_ALL_PLAYER = 2;
+    private static int LAST_CLICK_MESSAGE = 3;
+    private static int IN_BOX = 1;
+    private static int OUT_BOX = 2;
+    private int lastClick = 0;
+    private int selectedBox = 1;
+
 	private ButtonWidget showMapButton;
 	private MapWidget mapWidget;
 	private ButtonWidget mapClose;
@@ -12,6 +20,8 @@ class DZLMessageSystemMenu : DZLBaseMenu
 	private ButtonWidget sosCopButton;
 	private ButtonWidget sendMedicButton;
 	private ButtonWidget sendToPlayerButton;
+	private ButtonWidget outBoxButton;
+	private ButtonWidget inBoxButton;
 	private TextListboxWidget contactListWidget;
 	private TextListboxWidget onlinePlayerListWidget;
 	private TextListboxWidget messageListWidget;
@@ -38,6 +48,8 @@ class DZLMessageSystemMenu : DZLBaseMenu
 		showMapButton = creator.GetButtonWidget("showMapButton");
 		mapClose = creator.GetButtonWidget("mapclosedButton");
 		mapWidget = creator.GetMapWidget("sosMap");
+		inBoxButton = creator.GetButtonWidget("inBoxButton");
+		outBoxButton = creator.GetButtonWidget("outBoxButton");
 		mapButtonBoarder = creator.GetWidget("mapPanel");
 		mapPanelWidget = creator.GetWidget("mapPanelWidget");
 		globalBoarder = creator.GetWidget("PanelWidget13");
@@ -83,10 +95,35 @@ class DZLMessageSystemMenu : DZLBaseMenu
                 SendMessage(DZLMessage.TYPE_COP);
                 break;
             case messageListWidget:
+                if(selectedBox == IN_BOX) {
+                    lastClick = LAST_CLICK_MESSAGE;
+                    sendToPlayerButton.SetText("#replay_to_player");
+                }
+                sendToPlayerButton.Show(selectedBox == IN_BOX);
+
                 DisplayMessage();
+                break;
+            case onlinePlayerListWidget:
+                lastClick = LAST_CLICK_ALL_PLAYER;
+                sendToPlayerButton.SetText("#send_to_online_player");
+                sendToPlayerButton.Show(true);
+                break;
+            case contactListWidget:
+                lastClick = LAST_CLICK_CONTACT;
+                sendToPlayerButton.SetText("#send_to_contact");
+                sendToPlayerButton.Show(true);
                 break;
             case showMapButton:
                 ShowMap();
+                break;
+            case inBoxButton:
+                selectedBox = IN_BOX;
+                sendToPlayerButton.Show(true);
+                RefreshMessageSystem();
+                break;
+            case outBoxButton:
+                selectedBox = OUT_BOX;
+                RefreshMessageSystem();
                 break;
             case mapClose:
                 mapPanelWidget.Show(false);
@@ -153,7 +190,13 @@ class DZLMessageSystemMenu : DZLBaseMenu
 
 	void RefreshMessageSystem() {
 	    messageListWidget.ClearItems();
-	    array<ref DZLMessage>messages = DZLMessageDB.Get().GetMessages();
+
+	    array<ref DZLMessage>messages;
+	    if(selectedBox == IN_BOX) {
+	        messages = DZLMessageDB.Get().GetMessages();
+	    } else {
+	        messages = DZLMessageDB.Get().GetAnswers();
+	    }
 
 	    for(int x = messages.Count(); 0 < x; x--) {
 	        DZLMessage message = messages.Get(x - 1);
@@ -183,7 +226,11 @@ class DZLMessageSystemMenu : DZLBaseMenu
         DZLMessage message;
         messageListWidget.GetItemData(pos, 0, message);
         if (message) {
-            readWidget.SetText(message.GetText());
+            string text = message.GetText();
+            text = text + "\n-------------------------------------------------------------------\n";
+            text = text + message.GetReplay();
+
+            readWidget.SetText(text);
             showMapButton.Show(message.GetType() == DZLMessage.TYPE_COP);
             mapButtonBoarder.Show(message.GetType() == DZLMessage.TYPE_COP);
             messagePosition = message.GetPosition();
@@ -245,19 +292,65 @@ class DZLMessageSystemMenu : DZLBaseMenu
 
 	private void SendMessage(string type) {
 	    string id = "";
+	    DZLMessage message;
         if (DZLMessage.TYPE_PRIVATE == type) {
-			int pos = contactListWidget.GetSelectedRow();
+            int pos = -1;
+
+            if (lastClick == LAST_CLICK_CONTACT) {
+			    pos = contactListWidget.GetSelectedRow();
+				if (pos + 1 > contactListWidget.GetNumItems()) {
+					return;
+				}
+            } else if (lastClick == LAST_CLICK_ALL_PLAYER) {
+			    pos = onlinePlayerListWidget.GetSelectedRow();
+				if (pos + 1 > onlinePlayerListWidget.GetNumItems()) {
+					return;
+				}
+            } else if (lastClick == LAST_CLICK_MESSAGE) {
+			    pos = messageListWidget.GetSelectedRow();
+				if (pos + 1 > messageListWidget.GetNumItems()) {
+					return;
+				}
+            }
+
 	        if (pos == -1) {
 	            return;
 	        }
-            DZLOnlinePlayer onlinePlayer;
-            contactListWidget.GetItemData(pos, 0, onlinePlayer);
 
-            if (!onlinePlayer) {
-                player.DisplayMessage("#no_contact_is_selected");
-                return;
+            DZLOnlinePlayer onlinePlayer;
+
+            if (lastClick == LAST_CLICK_CONTACT) {
+                contactListWidget.GetItemData(pos, 0, onlinePlayer);
+            } else if (lastClick == LAST_CLICK_ALL_PLAYER) {
+                onlinePlayerListWidget.GetItemData(pos, 0, onlinePlayer);
+            } else if (lastClick == LAST_CLICK_MESSAGE) {
+                messageListWidget.GetItemData(pos, 0, message);
             }
-            id = onlinePlayer.id;
+
+            if (!onlinePlayer && !message) {
+                player.DisplayMessage("#nothing_is_selected");
+                return;
+            } else if (onlinePlayer) {
+                id = onlinePlayer.id;
+            } else if (message) {
+                id = message.GetSenderId();
+                if (!id) {
+                    player.DisplayMessage("#you_can_not_answer_this_message_missing_sender_id");
+                    return;
+                }
+                bool playerIsOnline = false;
+                foreach(DZLOnlinePlayer _onlinePlayer: onlinePlayers) {
+                    if (_onlinePlayer.id == id) {
+                        playerIsOnline = true;
+                        break;
+                    }
+                }
+
+                if (!playerIsOnline) {
+                    player.DisplayMessage("#recipient_is_not_online_you_can_not_answer");
+                    return;
+                }
+            }
         }
 
         string text = writeWidget.GetText();
@@ -269,5 +362,10 @@ class DZLMessageSystemMenu : DZLBaseMenu
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_SEND_MESSAGE, new Param3<string, string, string>(id, text, type), true, player.GetIdentity());
         player.DisplayMessage("#message_was_send");
 		writeWidget.SetText("");
+
+		if (message) {
+            DZLMessageDB.Get().AddAnswer(player, id, text, message);
+            message.Answer();
+		}
 	}
 }

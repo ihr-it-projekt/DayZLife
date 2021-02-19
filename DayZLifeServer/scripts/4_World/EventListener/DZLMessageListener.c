@@ -19,15 +19,23 @@ class DZLMessageListener
 
                 array<Man> _players = new array<Man>;
                 GetGame().GetPlayers(_players);
+                DZLMessage message;
                 if (_players) {
                     foreach(Man _player: _players) {
                         PlayerBase receiver = PlayerBase.Cast(_player);
                         if ((type != DZLMessage.TYPE_COP && type != DZLMessage.TYPE_MEDIC && paramMessage.param1 == "") || paramMessage.param1 == receiver.GetPlayerId() || (type == DZLMessage.TYPE_COP && receiver.GetDZLPlayer().IsActiveAsCop()) || (type == DZLMessage.TYPE_MEDIC && receiver.GetDZLPlayer().IsActiveAsMedic())) {
-                            DZLMessage message = new DZLMessage;
+                            message = new DZLMessage;
                             message.CreateAndSend(player, _player.GetIdentity(), text, type);
+                            if(paramMessage.param1 == receiver.GetPlayerId()) {
+                                break;
+                            }
                         }
                     }
                 }
+                if (!message) {
+                    DZLSendMessage(sender, "recipient_is_not_online_you_can_not_answer");
+                }
+
            }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {
             PlayerBase playerGetList = PlayerBase.Cast(target);

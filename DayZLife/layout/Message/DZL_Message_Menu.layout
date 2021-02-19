@@ -222,8 +222,8 @@ FrameWidgetClass rootFrame {
        style editor_quad_dark
        {
         TextListboxWidgetClass messageListbox {
-         position 0 -0.26372
-         size 0.98172 0.44686
+         position 0 -0.22448
+         size 0.98172 0.36839
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -232,7 +232,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          "title visible" 1
          colums "#Player;35;#Date_time;25;#Message_Preview;40"
-         lines 15
+         lines 12
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
@@ -290,6 +290,62 @@ FrameWidgetClass rootFrame {
          "limit visible" 0
          "Use default text" 0
          "exact text" 1
+        }
+        PanelWidgetClass PanelWidget14 {
+         ignorepointer 1
+         position -0.39359 0.91807
+         size 0.19085 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass inBoxButton {
+           color 0 0.1255 0.502 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "#inbox"
+           text_proportion 0.6
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget17 {
+         ignorepointer 1
+         position -0.17921 0.91807
+         size 0.22249 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass outBoxButton {
+           color 0 0.1255 0.502 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "#outbox"
+           text_proportion 0.6
+          }
+         }
         }
        }
       }
@@ -492,7 +548,7 @@ FrameWidgetClass rootFrame {
    }
   }
   PanelWidgetClass mapPanelWidget {
-   visible 1
+   visible 0
    ignorepointer 1
    position -0.00073 0.00398
    size 0.52355 0.78372
