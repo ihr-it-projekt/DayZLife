@@ -1,10 +1,13 @@
 class DZLMedicConfig
 {
-	string version = "2";
+	string version = "3";
     ref array<ref DZLBaseSpawnPoint> hospitalSpawnPoints;
     int priceHospitalHeal = 5000;
     int priceMedicHeal = 1000;
     float deleteDeadBodyTimeWhenHealedByMedic = 5;
+    int minTimeBeforeHospital = 300;
+    int minTimeBeforeKillButton = 20;
+    int minMedicCountForHospitalTimer = 1;
 
     void DZLMedicConfig() {
         if(!Load()) {
@@ -22,6 +25,15 @@ class DZLMedicConfig
             deleteDeadBodyTimeWhenHealedByMedic = 5;
             Save();
         }
+        if (version == "2") {
+            version = "3";
+
+            minTimeBeforeHospital = 300;
+            minTimeBeforeKillButton = 20;
+            minMedicCountForHospitalTimer = 1;
+            Save();
+        }
+
     }
 
     private bool Load(){

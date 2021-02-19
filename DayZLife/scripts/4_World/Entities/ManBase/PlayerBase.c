@@ -33,6 +33,10 @@ modded class PlayerBase
 	bool isPolice = false;
 	bool medicHelpMenuWasShown = false;
 	private ref Timer resetCanSpawn;
+	private ref Timer enableToHospital;
+	bool canHealInHospital = false;
+	bool canSeeKillButton = false;
+	int waitForHospital = 0;
 
 	int timeAskForTraderConfig = 0;
 	bool hasTraderConfig = false;
@@ -57,6 +61,38 @@ modded class PlayerBase
 	    }
 	    resetCanSpawn = new Timer;
         resetCanSpawn.Run(time, this, "ResetSpawned");
+	}
+
+	void EnableTimerEnableHospital() {
+	    enableToHospital = new Timer;
+	    enableToHospital.Run(1, this, "EnableToHospital", null, true);
+	    waitForHospital = 0;
+	}
+
+	void EnableToHospital() {
+	    ++waitForHospital;
+	    if (GetWaitTimeForHospital() < 1) {
+	        canHealInHospital = true;
+	    }
+	    if (GetWaitTimeForKill() < 1) {
+	        canSeeKillButton = true;
+	    }
+
+	    if(canHealInHospital && canSeeKillButton) {
+	        enableToHospital.Stop();
+	    }
+	}
+
+	int IsKillButtonOn() {
+	    return waitForHospital;
+	}
+
+	int GetWaitTimeForHospital() {
+	    return config.medicConfig.minTimeBeforeHospital - waitForHospital;
+	}
+
+	int GetWaitTimeForKill() {
+	    return config.medicConfig.minTimeBeforeKillButton - waitForHospital;
 	}
 
 	void ResetSpawned() {

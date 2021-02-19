@@ -254,3 +254,5 @@ you_can_not_answer_this_message_missing_sender_id,"You can not answer this messa
 "recipient_is_not_online_you_can_not_answer","Recipient is not online, you can not answer.","Recipient is not online, you can not answer.","Empfänger ist nicht online, du kannst nicht antworten.",
 inbox, Inbox, Inbox, Eingang,
 outbox, Outbox, Outbox, Ausgang,
+hospital_heal_will_enabled, Hospital heal possible in:, Hospital heal possible in:, Krankenhausheilung möglich in:,
+kill_will_enabled, Kill is possible in:, Kill is possible in:, Sterben ist möglich in:,

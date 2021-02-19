@@ -156,6 +156,8 @@ class DZLPlayerEventListener
             return;
         }
 
+        player.EnableTimerEnableHospital();
+
         queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
         queue.Remove(CreateSpawnMenu);
 

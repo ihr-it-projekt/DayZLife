@@ -59,6 +59,22 @@ FrameWidgetClass rootFrame {
          text "#go_to_the_light"
          text_proportion 0.7
         }
+        TextWidgetClass KillTextWidget {
+         ignorepointer 1
+         position 0.00759 0.07124
+         size 0.97954 0.91156
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#kill_will_enabled"
+         "exact text" 1
+         text_proportion 0.7
+         "size to text h" 0
+         "size to text v" 0
+         "text halign" center
+         "text valign" center
+        }
        }
       }
       PanelWidgetClass PanelWidget3 {
@@ -129,6 +145,7 @@ FrameWidgetClass rootFrame {
        style editor_quad_dark
        {
         ButtonWidgetClass HospitalButton {
+         visible 1
          color 0 0.1255 0.502 1
          position 0 0
          size 0.98 0.9
@@ -141,6 +158,22 @@ FrameWidgetClass rootFrame {
          style OldStyle
          text "#go_to_hospital"
          text_proportion 0.7
+        }
+        TextWidgetClass HealTextWidget {
+         ignorepointer 1
+         position 0.00759 0.07124
+         size 0.97954 0.91156
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#hospital_heal_will_enabled"
+         "exact text" 1
+         text_proportion 0.7
+         "size to text h" 0
+         "size to text v" 0
+         "text halign" center
+         "text valign" center
         }
        }
       }
