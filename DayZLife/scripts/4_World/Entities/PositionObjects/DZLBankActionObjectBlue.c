@@ -10,5 +10,7 @@ class DZLBankActionObjectBlue: DZLBaseActionObject
         AddAction(ActionOpenBankingMenu);
         AddAction(ActionRobBank);
         AddAction(DZLActionPaybackRobtMoney);
+        AddAction(ActionStopRobBank);
+        AddAction(ActionTakeRobbtMoneyBank);
     }
 }

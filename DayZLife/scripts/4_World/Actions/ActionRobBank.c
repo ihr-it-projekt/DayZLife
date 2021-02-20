@@ -75,10 +75,17 @@ class ActionRobBank: ActionInteractBase
                     } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_wrong_time");
                         return false;
-                    } else if(DZLDatabaseLayer.Get().GetBank().RaidRuns()) {
-                        DZLSendMessage(player.GetIdentity(), "#raid_allready_started");
-                        return false;
-                    }
+                    } 
+                }
+				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+				if(bank.RaidRuns()) {
+                    DZLSendMessage(player.GetIdentity(), "#raid_all_ready_started (" + bank.GetCountDownRaid() + "s)");
+                    return false;
+                }
+				
+				if(bank.HasMoneyToRaid()) {
+                    DZLSendMessage(player.GetIdentity(), "#safe_is_open");
+                    return false;
                 }
             }
 
@@ -88,26 +95,22 @@ class ActionRobBank: ActionInteractBase
 		return false;
 	}
 
-	override void OnStartClient(ActionData action_data) {
-	    if (g_Game.GetUIManager().GetMenu() != NULL) return;
-	    super.OnStartClient(action_data);
-		vector playerPosition = action_data.m_Player.GetPosition();
-		foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
-            if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
-				action_data.m_Player.StartBankRaid(position);
-                return;
-            }
-        }
-    }
-
     override void OnStartServer(ActionData action_data) {
         GetConfig();
         PlayerBase player = action_data.m_Player;
 
         if (player) {
-            DZLDatabaseLayer.Get().GetBank().StartRaid();
-            DZLSendMessage(null, "#bank_rob_was_started");
-            DZLLogRaid(player.GetPlayerId(), "start bank raid", "bank", player.GetPosition());
+            vector playerPosition = action_data.m_Player.GetPosition();
+            foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
+                if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
+					DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+										
+                    bank.StartRaid(position.position, config.raidTimeBankInSeconds);
+                    DZLSendMessage(null, "#bank_rob_was_started");
+                    DZLLogRaid(player.GetPlayerId(), "start bank raid", "bank", player.GetPosition());
+                    return;
+                }
+            }
         }
     }
 

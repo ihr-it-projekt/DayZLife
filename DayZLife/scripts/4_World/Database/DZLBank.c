@@ -1,12 +1,14 @@
 class DZLBank
 {
+	private string version = "2";
     int moneyAtBank = 0;
 	ref DZLDate lastRaidTime;
 	string fileName = "bank.json";
-	private string version = "1";
 	private int lastRaidMoney = 0;
 	private int taxSum = 0;
 	private bool raidRuns = false;
+	private string raidPosition = "0 0 0";
+	private int countDownRaid;
 	
     void DZLBank() {
         Load();
@@ -17,28 +19,59 @@ class DZLBank
             taxSum = 0;
         }
 
-        raidRuns = false;
-        Save();
+        if (version == "1") {
+            version = "2";
+            raidPosition = "0 0 0";
+            raidRuns = false;
+            Save();
+        }
+		
+		DZLBankRaidTimer.Get(this);
     }
 
-    void StartRaid() {
-        raidRuns = true;
-        Save();
+    void CheckRaid() {
+        countDownRaid--;
+        if (countDownRaid <= 0) {
+            lastRaidTime = new DZLDate();
+        	raidRuns = false;
+	        DZLBankRaidTimer.Get(this).Stop();
+        	DZLSendMessage(null, "#safe_is_open");
+		}
+		Save();
+    }
+
+    void StartRaid(vector position, int _countDownRaid) {
+        if (!raidRuns) {
+            raidRuns = true;
+            raidPosition = position.ToString(false);
+            Save();
+            DZLBankRaidTimer.Get(this).Start();
+			this.countDownRaid = _countDownRaid;
+        }
     }
 
     void StopRaid() {
+        DZLSendMessage(null, "#bank_rob_was_canceled");
         raidRuns = false;
+        raidPosition = "0 0 0";
+        DZLBankRaidTimer.Get(this).Stop();
         Save();
+    }
+
+    int GetCountDownRaid() {
+        return countDownRaid;
     }
 
     bool RaidRuns() {
         return raidRuns;
     }
 
-    void RaidIsFinished() {
-        lastRaidTime = new DZLDate();
-        raidRuns = false;
-        Save();
+    vector GetRaidPosition() {
+        return raidPosition.ToVector();
+    }
+
+    bool HasMoneyToRaid() {
+        return "0 0 0" != raidPosition;
     }
 
     void AddTax(int _taxSum) {
@@ -63,6 +96,7 @@ class DZLBank
         lastRaidMoney =  Math.Round(taxSum * percentage / 100);
         player.AddMoneyToPlayer(lastRaidMoney);
         taxSum -= lastRaidMoney;
+        raidPosition = "0 0 0";
         Save();
 		
 		return lastRaidMoney;
@@ -110,8 +144,8 @@ class DZLBank
 
     private bool Save(){
         if (GetGame().IsServer()) {
-            CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
-            DZLJsonFileHandler<DZLBank>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
+			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
+			DZLJsonFileHandler<DZLBank>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
 			return true;
         }
 		return false;

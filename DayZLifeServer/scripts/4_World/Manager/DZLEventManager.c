@@ -5,7 +5,6 @@ class DZLEventManager
     ref DZLPlayerHouseListener playerHouse;
     ref DZLBuyExtensionListener buyExtension;
     ref DZLBankListener bankListener;
-    ref DZLBankRaidListener bankRaidListener;
     ref DZLLicenceListener licenceListener;
     ref DZLRaidListener raidListener;
     ref DZLTraderListener traderListener;
@@ -25,7 +24,6 @@ class DZLEventManager
         playerHouse = new DZLPlayerHouseListener;
         buyExtension = new DZLBuyExtensionListener;
         bankListener = new DZLBankListener;
-        bankRaidListener = new DZLBankRaidListener;
         licenceListener = new DZLLicenceListener;
         raidListener = new DZLRaidListener;
         traderListener = new DZLTraderListener;
