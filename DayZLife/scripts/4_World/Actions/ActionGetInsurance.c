@@ -9,21 +9,12 @@ class ActionGetInsurance: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTCursor;
+        m_ConditionTarget = new DZL_CCTCar;
     }
 
     override string GetText() {
         return "#check_insurance";
     }
-
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
-	{
-        CarScript carScript = CarScript.Cast(target.GetParent());
-        if ((carScript && carScript.HasPlayerAccess(player))) {
-            return true;
-        }
-        return false;
-	}
 
 	override void OnStartClient(ActionData action_data) {
         CarScript car = CarScript.Cast(action_data.m_Target.GetParent());

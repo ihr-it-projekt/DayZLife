@@ -10,7 +10,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new CCTNone;
+        m_ConditionTarget = new DZL_CCTActionObject;
     }
 
 	override string GetText() {

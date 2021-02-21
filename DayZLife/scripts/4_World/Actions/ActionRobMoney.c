@@ -8,7 +8,7 @@ class ActionRobMoney: ActionInteractBase
 
     override void CreateConditionComponents()
     {
-        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
+        m_ConditionTarget = new CCTMan;
         m_ConditionItem = new CCINone;
     }
 

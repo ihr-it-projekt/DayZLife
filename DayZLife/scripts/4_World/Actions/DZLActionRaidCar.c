@@ -18,7 +18,7 @@ class DZLActionRaidCar: ActionInteractBase
 	
 	override void CreateConditionComponents(){	
 		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new CCTCursor;
+		m_ConditionTarget = new DZL_CCTCar(false);
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
@@ -29,8 +29,8 @@ class DZLActionRaidCar: ActionInteractBase
 
 		if(GetGame().IsClient()){
 			config = player.config.carConfig;
-		} else {
-		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
+		} else if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) {
+		    return false;
 		}
 
         array<string> raidTools = config.carRaidTools;

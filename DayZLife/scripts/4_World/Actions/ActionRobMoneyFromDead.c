@@ -8,7 +8,7 @@ class ActionRobMoneyFromDead: ActionInteractBase
 
     override void CreateConditionComponents()
     {
-        m_ConditionTarget = new CCTNone;
+        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT, false);
         m_ConditionItem = new CCINone;
     }
 
@@ -18,15 +18,9 @@ class ActionRobMoneyFromDead: ActionInteractBase
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsServer()) {
-            if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-        }
-        if (!target.GetObject()) return false;
-        PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+        if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 
-        if (!targetPlayer || !targetPlayer.IsPlayer()) return false;
-
-        return !targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0;
+        return PlayerBase.Cast(target.GetObject()).GetMoneyPlayerIsDead() > 0;
     }
 
     override void OnEndServer(ActionData action_data) {
