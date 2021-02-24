@@ -2,7 +2,6 @@ class DZLPlayerClientDB
 {
     private static ref DZLPlayerClientDB db;
 
-
     private ref DZLConfig config;
     private ref DZLPlayerHouse house;
     private ref DZLPlayer dzlPlayer;

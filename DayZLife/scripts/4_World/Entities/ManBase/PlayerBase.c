@@ -667,7 +667,7 @@ modded class PlayerBase
     }
 
     DZLPlayerHouse GetPlayerHouse() {
-        if (!GetGame().IsServer()) {
+        if (GetGame().IsServer()) {
             return DZLDatabaseLayer.Get().GetPlayerHouse(GetPlayerId());
         }
         return DZLPlayerClientDB.Get().GetPlayerHouse();
