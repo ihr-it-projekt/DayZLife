@@ -1,33 +1,27 @@
 modded class PlayerBase
 {
-    ref DZLHouseMenu houseMenu;
-    ref DZLBankingMenu bankingMenu;
-    ref DZLTraderMenu traderMenu;
-    ref DZLAlmanacMenu almanacMenu;
-    ref DZLConfig config;
-	ref DZLPlayerHouse house;
-	private DZLPlayer dzlPlayerServer;
-	private ref DZLPlayer dzlPlayerClient;
-	ref DZLBank dzlBank;
-	ref DZLLicenceMenu licenceMenu;
-	ref DZLLicenceProgressBar progressBarLicence;
-	ref DZLDoorRaidProgressBar progressBarRaid;
-	ref DZLCarRaidProgressBar progressBarRaidCar;
-	ref DZLHarvestProgressBar progressBarHarvest;
-	ref DZLMessageMenu messageMenu;
-	ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
-	ref DZLSpawnPositionMenu spawnPositionMenu;
-	ref DZLLoadOutMenu loadOutMenu;
-	ref DZLPlayerArrestMenu arrestMenu;
-	ref DZLCarMenu carMenu;
-	ref DZLCarStorageMenu carStorageMenu;
-	ref DZLMedicHelpMenu healMenu;
-	ref DZLMessageSystemMenu messageSystemMenu;
+    private ref DZLLicenceMenu licenceMenu;
+    private ref DZLLicenceProgressBar progressBarLicence;
+    private ref DZLDoorRaidProgressBar progressBarRaid;
+    private ref DZLCarRaidProgressBar progressBarRaidCar;
+    private ref DZLHarvestProgressBar progressBarHarvest;
+    private ref DZLMessageMenu messageMenu;
+    private ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
+    private ref DZLSpawnPositionMenu spawnPositionMenu;
+    private ref DZLLoadOutMenu loadOutMenu;
+    private ref DZLPlayerArrestMenu arrestMenu;
+    private ref DZLCarMenu carMenu;
+    private ref DZLCarStorageMenu carStorageMenu;
+    private ref DZLMedicHelpMenu healMenu;
+    private ref DZLMessageSystemMenu messageSystemMenu;
+    private ref DZLHouseMenu houseMenu;
+    private ref DZLBankingMenu bankingMenu;
+    private ref DZLTraderMenu traderMenu;
+    private ref DZLAlmanacMenu almanacMenu;
 
 	bool willHeal = false;
 	bool willDie = false;
 	int moneyPlayerIsDead = 0;
-	bool IsRealPlayerDZL = false;
 	bool isOnHarvest = false;
 	bool isPolice = false;
 	bool medicHelpMenuWasShown = false;
@@ -39,7 +33,6 @@ modded class PlayerBase
 	int medicCount = 0;
 
 	int timeAskForTraderConfig = 0;
-	bool hasTraderConfig = false;
 	int timeAskForBankingConfig = 0;
 	bool hasBankingConfig = false;
 	float deltaTimeLastUpdate = 0;
@@ -53,11 +46,12 @@ modded class PlayerBase
 	}
 
 	void SetIsSpawned() {
-	    int time = config.civilSpawnPoints.blockTimeForJobChange;
-	    if (dzlPlayerClient.IsCop()) {
-	        time = config.copSpawnPoints.blockTimeForJobChange;
-	    } else if (dzlPlayerClient.IsMedic()) {
-	        time = config.medicSpawnPoints.blockTimeForJobChange;
+	    int time = DZLPlayerClientDB.Get().GetConfig().civilSpawnPoints.blockTimeForJobChange;
+		DZLPlayer dzlPlayer = GetDZLPlayer();
+	    if (dzlPlayer.IsCop()) {
+	        time = DZLPlayerClientDB.Get().GetConfig().copSpawnPoints.blockTimeForJobChange;
+	    } else if (dzlPlayer.IsMedic()) {
+	        time = DZLPlayerClientDB.Get().GetConfig().medicSpawnPoints.blockTimeForJobChange;
 	    }
 	    resetCanSpawn = new Timer;
         resetCanSpawn.Run(time, this, "ResetSpawned");
@@ -88,6 +82,7 @@ modded class PlayerBase
 	}
 
 	int GetWaitTimeForHospital() {
+		DZLConfig config = GetConfig();
 	    if (medicCount >= config.medicConfig.minMedicCountForHospitalTimer) {
 	        return config.medicConfig.minTimeBeforeHospital - waitForHospital;
 	    }
@@ -95,7 +90,7 @@ modded class PlayerBase
 	}
 
 	int GetWaitTimeForKill() {
-	    return config.medicConfig.minTimeBeforeKillButton - waitForHospital;
+	    return GetConfig().medicConfig.minTimeBeforeKillButton - waitForHospital;
 	}
 
 	void ResetSpawned() {
@@ -131,8 +126,6 @@ modded class PlayerBase
         AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
-
-        InitDZLPlayer();
     }
 	
 	override void CheckDeath()
@@ -149,15 +142,6 @@ modded class PlayerBase
 			}
 		}
 	}
-
-    void InitDZLPlayer() {
-        if (GetGame().IsClient()) {
-            config = new DZLConfig();
-            GetGame().RPCSingleParam(this, DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
-            GetGame().RPCSingleParam(this, DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
-            RequestUpdateDZLPlayer();
-        }
-    }
 
     void RequestUpdateDZLPlayer() {
         GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_DATA, null, true);
@@ -380,7 +364,6 @@ modded class PlayerBase
     }
 
     void SetMoneyPlayerIsDead(float money) {
-        IsRealPlayerDZL = false;
         moneyPlayerIsDead = money;
         money = 0;
     }
@@ -654,7 +637,7 @@ modded class PlayerBase
                 if (g_Game.GetUIManager().GetMenu()) {
                     g_Game.GetUIManager().GetMenu().Close();
                 }
-
+				DZLConfig config = GetConfig();
                 if (config && config.medicConfig && medicHelpMenuWasShown == false) {
                     GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
                     medicHelpMenuWasShown = true;
@@ -670,33 +653,37 @@ modded class PlayerBase
 	    }
 	}
 
-    private DZLConfig GetConfig() {
-        if (!config && GetGame().IsServer()) {
-            config = DZLConfig.Get();
+    DZLConfig GetConfig() {
+        if (GetGame().IsServer()) {
+            return DZLConfig.Get();
         }
-        return config;
+        return DZLPlayerClientDB.Get().GetConfig();
     }
 
     DZLPlayer GetDZLPlayer() {
         if (GetGame().IsServer()) {
-            if (!dzlPlayerServer) {
-                dzlPlayerServer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
-            }
-            return dzlPlayerServer;
+            return DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
         }
-        return dzlPlayerClient;
+        return DZLPlayerClientDB.Get().GetDZLPlayer();
+    }
+
+    DZLPlayerHouse GetPlayerHouse() {
+        if (!GetGame().IsServer()) {
+            return DZLDatabaseLayer.Get().GetPlayerHouse(GetPlayerId());
+        }
+        return DZLPlayerClientDB.Get().GetPlayerHouse();
+    }
+
+    DZLBank GetBank() {
+        if (GetGame().IsServer()) {
+            return DZLDatabaseLayer.Get().GetBank();
+        }
+        return DZLPlayerClientDB.Get().GetBank();
     }
 
     void ResetDZLPlayer() {
         if (GetGame().IsServer()) {
-            dzlPlayerServer = null;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
-        }
-    }
-
-    void SetDZLPlayer(DZLPlayer dzlPlayer) {
-        if (dzlPlayer.dayZPlayerId == GetPlayerId()) {
-            this.dzlPlayerClient = dzlPlayer;
         }
     }
 }
