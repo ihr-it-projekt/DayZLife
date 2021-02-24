@@ -28,8 +28,8 @@ class ActionTakeRobbtMoneyBank: ActionInteractBase
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
 	{
 		if (GetGame().IsClient()) {
-		    if (!player.config) return false;
-			config = player.config.bankConfig;
+		    if (!player.GetConfig()) return false;
+			config = player.GetConfig().bankConfig;
 		} else {
 		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			GetConfig();

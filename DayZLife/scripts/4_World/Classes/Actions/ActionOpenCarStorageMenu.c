@@ -29,7 +29,7 @@ class ActionOpenCarStorageMenu: ActionInteractBase
 	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if (!objectTarget || !objectTarget.IsGarage()) return false;
-        if (!player.config || !player.config.carConfig) return false;
+        if (!player.GetConfig() || !player.GetConfig().carConfig) return false;
 
         return true;
 	}

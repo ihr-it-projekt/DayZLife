@@ -24,8 +24,8 @@ class DZLActionHarvestItem: ActionInteractBase
 	    if (GetGame().IsServer()) {
             if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
         }
-	    if(player && player.config) {
-            config = player.config.jobConfig;
+	    if(player && player.GetConfig()) {
+            config = player.GetConfig().jobConfig;
         }
 
         if (!config) return false;

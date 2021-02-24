@@ -88,9 +88,9 @@ class DZLBankingMenu : DZLBaseMenu
         playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
         playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
 
-        if (player.dzlBank) {
-            bankBalanceTextWidget.SetText(player.dzlBank.moneyAtBank.ToString());
-            bankTaxTextWidget.SetText(player.dzlBank.GetTaxSum().ToString());
+        if (player.GetBank()) {
+            bankBalanceTextWidget.SetText(player.GetBank().moneyAtBank.ToString());
+            bankTaxTextWidget.SetText(player.GetBank().GetTaxSum().ToString());
         }
     }
 

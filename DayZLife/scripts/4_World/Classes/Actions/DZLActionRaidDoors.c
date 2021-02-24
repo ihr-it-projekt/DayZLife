@@ -25,13 +25,12 @@ class DZLActionRaidDoors: ActionInteractBase
 	    Building building = Building.Cast(target.GetObject());
         if (!building || !building.IsBuilding()) return false;
 
-	    if (GetGame().IsClient() && (!player.config || !player.config.houseConfig || !player.GetDZLPlayer())) return false;
+	    if (!player.GetConfig() || !player.GetConfig().houseConfig || !player.GetDZLPlayer()) return false;
 
-		if(GetGame().IsClient()){
-			config = player.config.houseConfig;
-		} else {
-		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-		}
+		config = player.GetConfig().houseConfig;
+		
+		if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
+		
 
         item = player.GetItemInHands();
         if (!item) return false;

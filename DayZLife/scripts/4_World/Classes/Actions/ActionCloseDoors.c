@@ -14,10 +14,10 @@ modded class ActionCloseDoors
                 if (!definition) {
                     medicDefinition = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(building);
                 }
-            } else if (player && player.config && player.config.houseConfig) {
-                definition = player.config.houseConfig.GetCopHouseDefinition(building);
+            } else if (player && player.GetConfig() && player.GetConfig().houseConfig) {
+                definition = player.GetConfig().houseConfig.GetCopHouseDefinition(building);
                 if (!definition) {
-                    medicDefinition = player.config.houseConfig.GetMedicHouseDefinition(building);
+                    medicDefinition = player.GetConfig().houseConfig.GetMedicHouseDefinition(building);
                 }
             } else {
                 return false;

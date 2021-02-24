@@ -42,7 +42,7 @@ class ActionOpenTraderMenu: ActionInteractBase
        
 		DZLDate currentDate = new DZLDate();
 		
-		if(!player.hasTraderConfig && currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
+		if((!player.GetConfig() || !player.GetConfig().traderConfig)&& currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
 		    player.timeAskForTraderConfig = currentDate.inSeconds;
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<ref PlayerBase>(player), true);
 			return false;

@@ -36,7 +36,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 	override void UpdateGUI(string message = "") {
 		super.UpdateGUI(message);
 		carToStoreList.ClearItems();
-		array<string> carTypes = player.config.carConfig.carTypesToStore;
+		array<string> carTypes = player.GetConfig().carConfig.carTypesToStore;
 		foreach(string carType: carTypes) {
 			CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, player.GetPlayerId(), true);
 			if (playerCar && !playerCar.isSold) {
@@ -52,7 +52,7 @@ class DZLCarStorageMenu: DZLBaseMenu
         insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + ")");
        
 		if (!position) {
-		    position = player.config.carConfig.GetStorageByPosition(player.GetPosition());
+		    position = player.GetConfig().carConfig.GetStorageByPosition(player.GetPosition());
 		}
 
 		if (!position) {
@@ -86,7 +86,7 @@ class DZLCarStorageMenu: DZLBaseMenu
                 }
 
                 CargoBase cargo = car.GetInventory().GetCargo();
-                if (!player.config.carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
+                if (!player.GetConfig().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
                     player.DisplayMessage("#car_is_not_empty");
                     return true;
                 }

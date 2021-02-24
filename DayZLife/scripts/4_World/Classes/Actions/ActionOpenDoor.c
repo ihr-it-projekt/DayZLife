@@ -10,23 +10,20 @@ modded class ActionOpenDoors
 		if(building) {
 			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 			if (doorIndex != -1) {
-			    DZLJobHouseDefinition definition;
 			    DZLJobHouseDefinition medicDefinition;
 			    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-			    if (GetGame().IsServer()) {
-			       if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-			       definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
-			       if (!definition) {
-                       medicDefinition = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(building);
-                   }
-			    } else if (player.config && player.GetDZLPlayer()) {
-			       definition = player.config.houseConfig.GetCopHouseDefinition(building);
-			       if (!definition) {
-                       medicDefinition = player.config.houseConfig.GetMedicHouseDefinition(building);
-                   }
-			    } else {
-			        return false;
-			    }
+				
+				if (!player.GetConfig()) return false;
+				
+				DZLHouseConfig houseConfig = player.GetConfig().houseConfig;
+				
+		       	if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
+				
+		       	DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
+		       	if (!definition) {
+                   medicDefinition = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(building);
+                } 
+				
                 bool canOpen = true;
                 if(definition && !dzlPlayer.IsActiveAsCop()) {
                     canOpen = false;

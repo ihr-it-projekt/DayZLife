@@ -4,7 +4,7 @@ class DZLHarvestProgressBar: DZLBaseProgressBar
     override void SetPlayer(PlayerBase player) {
         super.SetPlayer(player);
 
-        DZLWorkZone zone = player.config.jobConfig.FindZone(player.GetPosition());
+        DZLWorkZone zone = player.GetConfig().jobConfig.FindZone(player.GetPosition());
 		
 		if (!zone)  {
 			OnHide();

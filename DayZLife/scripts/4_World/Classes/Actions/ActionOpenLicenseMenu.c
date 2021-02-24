@@ -30,7 +30,7 @@ class ActionOpenLicenseMenu: ActionInteractBase
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if (!objectTarget || !objectTarget.IsLicensePoint()) return false;
 
-	    if (!player.config || !player.config.licenceConfig)  return false;
+	    if (!player.GetConfig() || !player.GetConfig().licenceConfig)  return false;
 
 		return true;
 	}

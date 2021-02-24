@@ -7,7 +7,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 			if (GetGame().IsServer()) {
 				config = DZLConfig.Get().bankConfig;
 			} else {
-				config = player.config.bankConfig;
+				config = player.GetConfig().bankConfig;
 			}
             
         }
@@ -40,7 +40,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
         if (GetGame().IsServer()) {
             bank = DZLDatabaseLayer.Get().GetBank();
         } else {
-            bank  = player.dzlBank;
+            bank  = player.GetBank();
         }
 
         if(!bank || bank.GetLastRaidMoney() == 0)  return false;

@@ -405,7 +405,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 				TStringArray licenceIds = selectedAdminPlayer.licenceIds;
 
 				if (licenceIds.Count() > 0) {
-					array<ref DZLCraftLicence> licences = player.config.licenceConfig.licenceCollection.collection;
+					array<ref DZLCraftLicence> licences = player.GetConfig().licenceConfig.licenceCollection.collection;
 					foreach(DZLCraftLicence configLicence: licences) {
 						foreach(string licenceId: licenceIds) {
 							if (licenceId == configLicence.GetId()) {

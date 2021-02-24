@@ -23,9 +23,9 @@ class ActionOpenLoadOutMenu: ActionInteractBase
 		if (g_Game.GetUIManager().GetMenu() == NULL){
 		    DZLLoadOutMenu menu = action_data.m_Player.GetLoadOutMenu();
 		    if (action_data.m_Player.GetDZLPlayer().IsActiveAsCop()) {
-                menu.SetCategories(action_data.m_Player.config.jobConfig.loadOutsCops.loadOutCategories);
+                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsCops.loadOutCategories);
             } else if (action_data.m_Player.GetDZLPlayer().IsActiveAsMedic()) {
-                menu.SetCategories(action_data.m_Player.config.jobConfig.loadOutsMedics.loadOutCategories);
+                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsMedics.loadOutCategories);
             }
 
 			GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
@@ -39,7 +39,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase
         if (!objectTarget || !objectTarget.IsLoadOut()) return false;
 
 	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-	    if (!dzlPlayer || !player.config || !player.config.jobConfig) return false;
+	    if (!dzlPlayer || !player.GetConfig() || !player.GetConfig().jobConfig) return false;
 
         if (dzlPlayer.IsActiveAsCop()) {
             return objectTarget.IsCopLoadOut();

@@ -28,7 +28,7 @@ class ActionOpenHouseMenu: ActionInteractBase
 			if(!action_data) return;
             if(!action_data.m_Target) return;
             if(!IsBuilding(action_data.m_Target)) return;
-            if (!player.config) return;
+            if (!player.GetConfig()) return;
 			
 			Building building = Building.Cast(action_data.m_Target.GetObject());
 
@@ -41,7 +41,7 @@ class ActionOpenHouseMenu: ActionInteractBase
         if (GetGame().IsClient()){
             if(!target) return false;
             if(!IsBuilding(target)) return false;
-            if (!player.config) return false;
+            if (!player.GetConfig()) return false;
 
 
             Building _building = Building.Cast(target.GetObject());

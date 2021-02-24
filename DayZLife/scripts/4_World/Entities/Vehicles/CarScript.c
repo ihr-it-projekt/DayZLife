@@ -230,7 +230,7 @@ modded class CarScript
 			carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
 	    } else {
 	        PlayerBase player = PlayerBaseHelper.GetPlayer();
-			carCollisionDamage = player.config.carConfig.carCollisionDamage;
+			carCollisionDamage = player.GetConfig().carConfig.carCollisionDamage;
 	    }
 		
 		if (carCollisionDamage) {
