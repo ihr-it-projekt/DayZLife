@@ -185,7 +185,7 @@ FrameWidgetClass rootFrame {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{33316A6E1BD778B9}DayZLife/DayZLife/layout/Almanac/Medic.edds"
+       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
        mode additive
        "src alpha" 1
        "no wrap" 0

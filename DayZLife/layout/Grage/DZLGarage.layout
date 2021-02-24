@@ -215,7 +215,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style editor_quad_dark
            {
-            TextWidgetClass TextWidget0 {
+            TextWidgetClass insurranceTextBox {
              ignorepointer 1
              position 0.02102 0
              size 0.68382 0.72325

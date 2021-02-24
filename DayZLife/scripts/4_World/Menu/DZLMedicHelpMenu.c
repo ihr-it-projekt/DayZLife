@@ -33,9 +33,9 @@ class DZLMedicHelpMenu : DZLBaseMenu
 		
         killButton = creator.GetButtonWidget("KillButton");
         healButton = creator.GetButtonWidget("HealButton");
-        healButton.SetText("#call_a_medic (" + config.medicConfig.priceMedicHeal.ToString() + ")");
+        healButton.SetText("#call_a_medic (" + config.medicConfig.priceMedicHeal.ToString() + " $)");
         hospitalButton = creator.GetButtonWidget("HospitalButton");
-        hospitalButton.SetText("#go_to_hospital (" + config.medicConfig.priceHospitalHeal.ToString() + ")");
+        hospitalButton.SetText("#go_to_hospital (" + config.medicConfig.priceHospitalHeal.ToString() + " $)");
         healTextWidget = creator.GetTextWidget("HealTextWidget");
         killTextWidget = creator.GetTextWidget("KillTextWidget");
         medicCountWidget = creator.GetTextWidget("countMedic");

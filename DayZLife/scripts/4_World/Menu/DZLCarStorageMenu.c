@@ -49,7 +49,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 
     override void OnShow() {
         super.OnShow();
-        insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + ")");
+        insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + " $)");
        
 		if (!position) {
 		    position = player.GetConfig().carConfig.GetStorageByPosition(player.GetPosition());
