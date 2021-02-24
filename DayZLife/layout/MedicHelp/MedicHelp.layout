@@ -69,7 +69,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          text "#kill_will_enabled"
          "exact text" 1
-         text_proportion 0.7
+         text_proportion 0.5
          "size to text h" 0
          "size to text v" 0
          "text halign" center
@@ -169,7 +169,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          text "#hospital_heal_will_enabled"
          "exact text" 1
-         text_proportion 0.7
+         text_proportion 0.5
          "size to text h" 0
          "size to text v" 0
          "text halign" center
@@ -185,7 +185,7 @@ FrameWidgetClass rootFrame {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
+       imageTexture "{33316A6E1BD778B9}DayZLife/DayZLife/layout/Almanac/Medic.edds"
        mode additive
        "src alpha" 1
        "no wrap" 0
