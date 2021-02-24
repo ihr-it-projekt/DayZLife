@@ -11,6 +11,10 @@ class DZLPlayerClientDB
     static DZLPlayerClientDB Get() {
         if (!db) {
             db = new DZLPlayerClientDB;
+            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
+            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
+            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
         }
         return db;
     }

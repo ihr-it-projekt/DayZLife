@@ -18,10 +18,7 @@ modded class MissionGameplay
 		playerEventListener = new DZLPlayerEventListener;
 		carEventListener = new DZLCarEventListener;
 		messageDB = new DZLMessageDB;
-		DZLPlayerClientDB clientPlayerDb = DZLPlayerClientDB.Get();
-		clientPlayerDb.GetConfig();
-		clientPlayerDb.RequestUpdateDZLPlayer();
-		clientPlayerDb.GetPlayerHouse();
+		DZLPlayerClientDB.Get();
 	}
 
     override void OnKeyRelease(int key) {
