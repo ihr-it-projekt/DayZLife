@@ -41,7 +41,6 @@ modded class PlayerBase
 
 	override void Init() {
         super.Init();
-        RegisterNetSyncVariableBool("IsRealPlayerDZL");
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
 	}
 
