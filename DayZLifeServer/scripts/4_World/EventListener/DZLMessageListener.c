@@ -35,7 +35,6 @@ class DZLMessageListener
                 if (!message) {
                     DZLSendMessage(sender, "recipient_is_not_online_you_can_not_answer");
                 }
-
            }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {
             PlayerBase playerGetList = PlayerBase.Cast(target);

@@ -88,6 +88,13 @@ modded class CarScript
         SynchronizeValues(null);
     }
 
+    void ChangeOwner(DZLPlayer player) {
+        ownerId = player.dayZPlayerId;
+        ownerName = player.playerName;
+        playerAccess = new array<string>;
+        SynchronizeValues(null);
+    }
+
     bool IsOwner(PlayerIdentity player) {
         if(GetGame().IsServer() && ownerId == "") {
             ownerId = player.GetId();

@@ -37,6 +37,25 @@ class DZLCarKeyListener
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(players), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE) {
             CarScript.Cast(target).SynchronizeValues(sender);
+        } else if (rpc_type == DAY_Z_LIFE_CHANGE_CAR_OWNER) {
+            autoptr Param2<string, CarScript> paramChangeOwner;
+            if (ctx.Read(paramChangeOwner) && sender){
+                string receiverId = paramChangeOwner.param1;
+                CarScript carToChange = paramChangeOwner.param2;
+                if (!carToChange.IsOwner(sender)) {
+                    DZLSendMessage(sender, "#you_are_not_the_owner_can_not_change");
+                    return;
+                }
+
+                DZLPlayer receiverPlayer = DZLDatabaseLayer.Get().GetPlayer(receiverId);
+                if (!receiverPlayer) {
+                    DZLSendMessage(sender, "#player_was_not_found");
+                    return;
+                }
+
+                carToChange.ChangeOwner(receiverPlayer);
+                DZLSendMessage(sender, "#owner_has_changed");
+           }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_CAR_RAID) {
             Param1<EntityAI> paramRaidCar;
             if (ctx.Read(paramRaidCar)){
