@@ -79,14 +79,14 @@ class DZLCarMenu : DZLBaseMenu
         int currentRowKey = carPanelKeyOwnerList.GetSelectedRow();
         int currentRowPlayer = carPanelOnlinePlayerList.GetSelectedRow();
 
-        if (currentRowKey != lastSelectedKeyRow) {
+        if (currentRowKey != -1 && currentRowKey != lastSelectedKeyRow) {
             carPanelKeyOwnerList.GetItemData(currentRowKey, 0, selectedPlayer);
             lastSelectedKeyRow = currentRowKey;
             newOwnerDisplay.SetText("");
             if (selectedPlayer) {
                 newOwnerDisplay.SetText(selectedPlayer.name);
             }
-        } else if (currentRowPlayer != lastSelectedPlayerRow) {
+        } else if (currentRowPlayer != -1 && currentRowPlayer != lastSelectedPlayerRow) {
             carPanelOnlinePlayerList.GetItemData(currentRowPlayer, 0, selectedPlayer);
             lastSelectedPlayerRow = currentRowPlayer;
             newOwnerDisplay.SetText("");

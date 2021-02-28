@@ -36,6 +36,11 @@ class DZLMedicHelpListener
                 string ident = _player.GetIdentity().GetId();
                 
 				if (emergencies.HasEmergency(ident)) {
+				    if (_player.IsAlive()) {
+				        emergencies.Remove(ident);
+				        continue;
+				    }
+
 					onlineEmergencies.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), _player.GetPosition()));
 				}
             }

@@ -16,6 +16,7 @@ class DZLPlayerSpawnListener
             autoptr Param2<string, string> param;
             if (ctx.Read(param) && param.param1 && param.param2){
                 PlayerBase player = PlayerBase.Cast(target);
+                if (!player) return;
                 player.RemoveAllItems();
                 player.GetDZLPlayer().LoosPlayerInventoryMoney();
 
