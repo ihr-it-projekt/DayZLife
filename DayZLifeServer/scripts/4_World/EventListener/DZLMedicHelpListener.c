@@ -36,7 +36,7 @@ class DZLMedicHelpListener
                 string ident = _player.GetIdentity().GetId();
                 
 				if (emergencies.HasEmergency(ident)) {
-				    if (_player.IsAlive()) {
+				    if (_player.GetHealth() > 1) {
 				        emergencies.Remove(ident);
 				        continue;
 				    }

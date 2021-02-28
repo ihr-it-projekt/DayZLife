@@ -48,15 +48,41 @@ modded class MissionServer {
                     DZLSpawnHelper.Add(m_player, item);
                 }
 			}
-			float factor = 1.0;
 			float factorShock = 1.0;
+			float factorBlood = 1.0;
+			float factorHealth = 1.0;
 			if (dzlPlayer.WillHealByMedic()) {
-			    factor = 0.5;
+			    factorHealth = 0.5;
+			    factorBlood = 0.4;
 			    factorShock = 0;
+				array<string> damageZone = new array<string>;
+			
+				damageZone.Insert("RightFoot");
+				damageZone.Insert("LeftFoot");
+				damageZone.Insert("LeftForeArmRoll");
+				damageZone.Insert("RightForeArmRoll");
+				damageZone.Insert("Neck");
+				damageZone.Insert("Spine2");
+				damageZone.Insert("Head");
+				
+				int randCut = Math.RandomIntInclusive(0, 6);
+				
+				for(int x = 0; x < randCut; x++) {
+					string damageZ = damageZone.GetRandomElement();
+					m_player.GetBleedingManagerServer().AttemptAddBleedingSourceBySelection(damageZ);
+					factorBlood += 0.1;
+				}
+				
+				int brockenLegInt = Math.RandomIntInclusive(0,1);
+				
+				if (brockenLegInt == 1) {
+					m_player.SetBrokenLegs(eBrokenLegs.BROKEN_LEGS);
+				}
 			}
-			m_player.SetHealth01("GlobalHealth", "Health", factor);
+			
+			m_player.SetHealth01("GlobalHealth", "Health", factorHealth);
             m_player.SetHealth01("GlobalHealth", "Shock", factorShock);
-            m_player.SetHealth01("GlobalHealth", "Blood", factor);
+            m_player.SetHealth01("GlobalHealth", "Blood", factorBlood);
 		} else {
 		    super.OnClientNewEvent(identity, pos, ctx);
 		    GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
