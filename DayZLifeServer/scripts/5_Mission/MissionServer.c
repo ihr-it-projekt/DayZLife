@@ -72,12 +72,6 @@ modded class MissionServer {
 					m_player.GetBleedingManagerServer().AttemptAddBleedingSourceBySelection(damageZ);
 					factorBlood += 0.1;
 				}
-				
-				int brockenLegInt = Math.RandomIntInclusive(0,1);
-				
-				if (brockenLegInt == 1) {
-					m_player.SetBrokenLegs(eBrokenLegs.BROKEN_LEGS);
-				}
 			}
 			
 			m_player.SetHealth01("GlobalHealth", "Health", factorHealth);
