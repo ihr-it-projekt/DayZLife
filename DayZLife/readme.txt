@@ -1,25 +1,3 @@
-Add translations for all language
-Improve bank rob.
-->Robber can start rob with configured weapon
-->Everybody can stop raid at robt bank with an action on bank
-->Robber must not stay in range of bank after he has started the rob
-->After the configured raid timer is over, everybody can take the robt money from robt bank via action
-->bank raid continues when server restart
-->robber can get the information how long the raid takes when he execute the "take robt money" or "start rob" action
-
-Extend Message System
--> add outbox
--> add replay to message
--> add send message to non contacts
-Add timer to
-- Go to light Button
-- Go to hospital Button
-- Extend Config Medics
-- add Medic count info to Medic Help Menu
-- add count variable in medic config
-
-
-
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
 - Cops wollen spielern über liste strafe hinzufügen
@@ -46,7 +24,6 @@ Add timer to
 Führerschein
 
 - Journalistenrolle
-- Polizei Globalnachrichten senden
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
@@ -60,8 +37,6 @@ Führerschein
 - Alarmanlage Cops benachrichtigen
 - dynmaic price (Angebot/ Nachfrage)
 - trader preise nach health
-- nicht füttern von NPC
-- Waffen für NPC
 
 - Rollen
     - Rollen Spieler Anzahl begrenzen pro Job
