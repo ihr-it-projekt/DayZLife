@@ -28,14 +28,17 @@ class DZLMessage: DZLIdModel
         return;
     }
 
-    void CreateAndSend(PlayerBase _sender, PlayerIdentity _receiver, string _text, string _type) {
+    void CreateAndSend(PlayerBase _sender, PlayerIdentity _receiver, string _text, string _type, vector _position = "0 0 0") {
         sender = _sender.GetIdentity().GetName();
         senderId = _sender.GetIdentity().GetId();
         receiver = _receiver.GetId();
         type = _type;
         text = _text;
         if (type == TYPE_COP) {
-            position = _sender.GetPosition();
+			position = _sender.GetPosition();
+			if(_position != "0 0 0") {
+				position = _position;
+			}
         }
         SetId();
 

@@ -200,14 +200,21 @@ class DZLMessageSystemMenu : DZLBaseMenu
 
 	    for(int x = messages.Count(); 0 < x; x--) {
 	        DZLMessage message = messages.Get(x - 1);
-	        int index = messageListWidget.AddItem(message.GetSender(), message, 0);
-            messageListWidget.SetItem(index, message.GetDate().ToDateString(), message, 1);
-            messageListWidget.SetItem(index, message.GetShortText(), message, 2);
-			
-			if (!message.IsRead()) {
-			    messageListWidget.SetItemColor(index, 0, ARGB(255,0,255,0));
-			    messageListWidget.SetItemColor(index, 1, ARGB(255,0,255,0));
-			    messageListWidget.SetItemColor(index, 2, ARGB(255,0,255,0));
+	        
+			if (message) {
+				int index = messageListWidget.AddItem(message.GetSender(), message, 0);
+				
+				if (message.GetDate()) {
+					messageListWidget.SetItem(index, message.GetDate().ToDateString(), message, 1);
+				}
+	            
+	            messageListWidget.SetItem(index, message.GetShortText(), message, 2);
+				
+				if (!message.IsRead()) {
+				    messageListWidget.SetItemColor(index, 0, ARGB(255,0,255,0));
+				    messageListWidget.SetItemColor(index, 1, ARGB(255,0,255,0));
+				    messageListWidget.SetItemColor(index, 2, ARGB(255,0,255,0));
+				}
 			}
 	    }
 	}
@@ -251,8 +258,12 @@ class DZLMessageSystemMenu : DZLBaseMenu
         DZLMessage message;
         messageListWidget.GetItemData(pos, 0, message);
         if (message) {
-            DZLMessageDB.Get().RemoveMessage(message);
-			RefreshMessageSystem();
+			if(selectedBox == IN_BOX) {
+            	DZLMessageDB.Get().RemoveMessage(message);
+			} else {
+				DZLMessageDB.Get().RemoveAnswer(message);
+			}
+            
 			messagePosition = "0 0 0";
 			mapButtonBoarder.Show(false);
 			showMapButton.Show(false);

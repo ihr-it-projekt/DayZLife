@@ -69,6 +69,15 @@ class DZLMessageDB
 	    	Save();
 		}
 	}
+	
+	void RemoveAnswer(DZLMessage message) {
+		if (message) {
+			message.Delete();
+			answerIds.RemoveItem(message.GetId());
+			answersMap.RemoveItem(message);
+	    	Save();
+		}
+	}
 
 	void AddContact(DZLOnlinePlayer player) {
 	    contacts.Insert(player);

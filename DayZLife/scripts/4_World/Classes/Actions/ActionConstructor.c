@@ -26,6 +26,8 @@ modded class ActionConstructor
 		actions.Insert(ActionGetInsurance);
 		actions.Insert(DZLActionPaybackRobtMoney);
 		actions.Insert(ActionStopRobBank);
-		actions.Insert(ActionTakeRobbtMoneyBank);
+		actions.Insert(ActionTakeRobtMoneyBank);
+		actions.Insert(ActionTakeRobtMoneyShop);
+		actions.Insert(ActionRobShop);
     }
 }

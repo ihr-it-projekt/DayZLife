@@ -26,6 +26,7 @@ class DZLConfigListener
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_MEDIC_RESPONSE, new Param1<ref DZLMedicConfig>(config.medicConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_BANKING, new Param1<ref DZLBankingConfig>(config.bankConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_BASE_BUILDING, new Param1<ref DZLBaseBuildingConfig>(config.baseBuildingConfig), true, sender);
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CRIME, new Param1<ref DZLCrimeConfig>(config.crimeConfig), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER) {
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TRADER, new Param1<ref DZLTraderConfig>(config.traderConfig), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING) {

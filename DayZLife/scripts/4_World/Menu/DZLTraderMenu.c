@@ -423,7 +423,6 @@ class DZLTraderMenu: DZLBaseMenu
 		} else {
 			sum.SetColor(ARGB(255, 143, 18, 18));
 		}
-	
 	}
 
 }

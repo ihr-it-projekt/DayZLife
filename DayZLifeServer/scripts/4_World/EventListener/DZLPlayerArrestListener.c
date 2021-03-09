@@ -1,11 +1,11 @@
 class DZLPlayerArrestListener
 {
-	DZLArrestConfig arrestConfig;
-	ref Timer timerArrest;
-	ref array<ref DZLEscapedPlayer> escapeePlayers = new array<ref DZLEscapedPlayer>;
-	int copCount = 0;
-	int civCount = 0;
-	int medicCount = 0;
+	private DZLArrestConfig arrestConfig;
+	private ref Timer timerArrest;
+	private ref array<ref DZLEscapedPlayer> escapeePlayers = new array<ref DZLEscapedPlayer>;
+	private int copCount = 0;
+	private int civCount = 0;
+	private int medicCount = 0;
 	
     void DZLPlayerArrestListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -108,6 +108,7 @@ class DZLPlayerArrestListener
 				}
 			}
 		}
+		DZLDatabaseLayer.Get().SetCopCount(copCount).SetMedicCount(medicCount).SetCivCount(civCount);
 
 		GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
 	}

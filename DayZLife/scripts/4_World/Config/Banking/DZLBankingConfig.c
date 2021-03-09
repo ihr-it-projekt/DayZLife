@@ -1,6 +1,6 @@
 class DZLBankingConfig
 {
-	string version = "4";
+	string version = "5";
     ref array<ref DZLBankingPosition> positionOfBankingPoints;
 	bool showSumOfStoredCashInBank = true;
 	int raidTimeBankInSeconds = 3600;
@@ -11,13 +11,14 @@ class DZLBankingConfig
 	int raidCoolDownTimeInSeconds = 300;
 	int maximumRaidDistanceToBank = 7;
 	int startCapital = 5000;
-	bool raidIsPlayerControlled = true;
-	int minCountPlayerForRaid = 30;
+	bool raidIsCopControlled = true;
+	int minCountCopsForRaid = 5;
 	bool raidTimeControlled = true;
 	int raidStartTimeHour = 14;
 	int raidEndTimeHour = 22;
 	int raidStartTimeMinute = 0;
 	int raidEndTimeMinute = 59;
+    bool canStartRaidIfShopRaidRuns = false;
 
     void DZLBankingConfig() {
         if(!Load()) {
@@ -58,7 +59,14 @@ class DZLBankingConfig
 
 		if (version == "3") {
             version = "4";
-           
+            Save();
+        }
+
+        if (version == "4") {
+            version = "5";
+            canStartRaidIfShopRaidRuns = false;
+            minCountCopsForRaid = 5;
+            raidIsCopControlled = true;
             Save();
         }
     }

@@ -17,6 +17,7 @@ class DZLEventManager
     ref DZLStorageListener carStorageListener;
     ref DZLMedicHelpListener medicHelpListener;
     ref DZLMessageListener messageListener;
+    ref DZLShopRaidListener shopRaidListener;
 
     void DZLEventManager() {
         buyHouse = new DZLBuyHouseListener;
@@ -36,5 +37,6 @@ class DZLEventManager
         carStorageListener = new DZLStorageListener;
         medicHelpListener = new DZLMedicHelpListener;
         messageListener = new DZLMessageListener;
+        shopRaidListener = new DZLShopRaidListener;
     }
 }

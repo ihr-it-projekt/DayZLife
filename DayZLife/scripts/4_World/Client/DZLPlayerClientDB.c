@@ -143,6 +143,11 @@ class DZLPlayerClientDB
                 if (ctx.Read(houseParam) && houseParam.param1){
                     house = houseParam.param1;
                 }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CRIME) {
+                Param1 <ref DZLCrimeConfig> crimeParam;
+                if (ctx.Read(crimeParam) && crimeParam.param1){
+                    config.crimeConfig = crimeParam.param1;
+                }
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
                 Param1 <ref DZLPlayer> dzlPlayerParam;
                 if (ctx.Read(dzlPlayerParam) && dzlPlayerParam.param1){

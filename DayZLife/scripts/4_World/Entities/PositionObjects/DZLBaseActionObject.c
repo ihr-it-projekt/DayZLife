@@ -1,6 +1,5 @@
 class DZLBaseActionObject :BuildingSuper
 {
-
     protected bool isBank = false;
     protected bool isTrader = false;
     protected bool isGarage = false;
@@ -8,6 +7,7 @@ class DZLBaseActionObject :BuildingSuper
     protected bool isMedicLoadOut = false;
     protected bool isLicensePoint = false;
     protected bool isLicenseActionPoint = false;
+    protected bool isShopActionPoint = false;
 
     bool IsBank() {
         return isBank;
@@ -39,6 +39,10 @@ class DZLBaseActionObject :BuildingSuper
 
     bool IsLicenseActionPoint() {
         return isLicenseActionPoint;
+    }
+
+    bool IsShopActionPoint() {
+        return isShopActionPoint;
     }
 
 }

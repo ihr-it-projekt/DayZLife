@@ -11,6 +11,6 @@ class DZLBankActionObjectBlue: DZLBaseActionObject
         AddAction(ActionRobBank);
         AddAction(DZLActionPaybackRobtMoney);
         AddAction(ActionStopRobBank);
-        AddAction(ActionTakeRobbtMoneyBank);
+        AddAction(ActionTakeRobtMoneyBank);
     }
 }

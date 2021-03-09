@@ -57,10 +57,13 @@ class ActionRobBank: ActionInteractBase
 			if (!isInNearOfBankAndLocationIsEnabled(player)) return false;
 
             if (GetGame().IsServer()){
-                if (config.raidIsPlayerControlled && config.minCountPlayerForRaid > 0) {
-                    array<Man> players = new array<Man>;
-                    GetGame().GetPlayers(players);
-                    if (players.Count() < config.minCountPlayerForRaid) {
+                if (!config.canStartRaidIfShopRaidRuns && DZLDatabaseLayer.Get().GetCrimeData().ShopRaidRuns()) {
+                    DZLSendMessage(player.GetIdentity(), "#one_shop_rob_is_already_started");
+                    return false;
+                }
+
+                if (config.raidIsCopControlled && config.minCountCopsForRaid > 0) {
+                    if (DZLDatabaseLayer.Get().GetCopCount() < config.minCountCopsForRaid) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_to_less_players");
                         return false;
                     }

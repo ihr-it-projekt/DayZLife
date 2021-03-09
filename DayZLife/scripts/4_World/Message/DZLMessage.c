@@ -24,3 +24,4 @@ static void DZLSendMedicMessage(string message) {
         }
     }
 }
+

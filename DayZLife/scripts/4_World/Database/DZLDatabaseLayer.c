@@ -11,6 +11,10 @@ class DZLDatabaseLayer
     private ref DZLBank bank;
     private ref map<string, ref DZLCarStorage> storageCars;
     private ref DZLEmergencies emergencies;
+    private ref DZLCrimeData crimeData;
+    private int copCount = 0;
+    private int civCount = 0;
+    private int medicCount = 0;
 	private DZLDatabase database;
 
     void DZLDatabaseLayer() {
@@ -23,6 +27,7 @@ class DZLDatabaseLayer
         storageCars = new map<string, ref DZLCarStorage>;
         bank = new DZLBank;
         emergencies = new DZLEmergencies;
+        crimeData = new DZLCrimeData;
     }
 
     static DZLDatabaseLayer Get() {
@@ -153,4 +158,30 @@ class DZLDatabaseLayer
         database.RemovePlayer(playerId);
     }
 
+    DZLDatabaseLayer SetCopCount(int count) {
+        copCount = count;
+        return this;
+    }
+    DZLDatabaseLayer SetMedicCount(int count) {
+        medicCount = count;
+        return this;
+    }
+    DZLDatabaseLayer SetCivCount(int count) {
+        civCount = count;
+        return this;
+    }
+
+    int GetCopCount() {
+        return copCount;
+    }
+    int GetMedicCount() {
+        return medicCount;
+    }
+    int GetCivCount() {
+        return civCount;
+    }
+
+    DZLCrimeData GetCrimeData() {
+        return crimeData;
+    }
 }

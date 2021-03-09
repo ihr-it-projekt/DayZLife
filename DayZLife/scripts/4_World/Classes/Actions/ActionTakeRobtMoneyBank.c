@@ -1,4 +1,4 @@
-class ActionTakeRobbtMoneyBank: ActionInteractBase
+class ActionTakeRobtMoneyBank: ActionInteractBase
 {
     ref DZLBankingConfig config;
 
@@ -10,7 +10,7 @@ class ActionTakeRobbtMoneyBank: ActionInteractBase
         return config;
     }
 
-	void ActionTakeRobbtMoneyBank() {
+	void ActionTakeRobtMoneyBank() {
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;

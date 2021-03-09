@@ -40,6 +40,10 @@ class CfgVehicles
 	{
 		model="\DZ\structures\furniture\generalstore\pultskasou.p3d";
 	};
+	class DZLShopActionObject: DZLBaseActionObject
+	{
+		model="\DZ\structures\furniture\generalstore\cashier.p3d";
+	};
 	class DZLLicenseActionObject: DZLBaseActionObject
 	{
 		model="\DZ\structures\furniture\generalstore\pultskasou.p3d";
