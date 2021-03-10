@@ -138,7 +138,7 @@ modded class CarScript
 
 		if (!dzlPlayer) return false;
 
-        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop();
+        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop() || player.GetConfig().adminIds.CanManageCars(ident);
     }
 
     void RemovePlayerAccess(string ident) {

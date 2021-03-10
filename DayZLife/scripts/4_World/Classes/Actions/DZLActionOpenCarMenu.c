@@ -1,15 +1,5 @@
 class DZLActionOpenCarMenu: ActionInteractBase
 {
-	DZLAdmin config;
-
-	DZLAdmin GetConfig() {
-		if (!config) {
-			config = DZLConfig.Get().adminIds;
-		}
-
-		return config;
-	}
-
 	void ActionOpenCarMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
@@ -46,14 +36,8 @@ class DZLActionOpenCarMenu: ActionInteractBase
         if (!car) return false;
         if (GetGame().IsClient() && g_Game.GetUIManager().GetMenu() != NULL) return false;
 
-        if (GetGame().IsClient()) {
-			if (!player.GetConfig()) return false;
-			config = player.GetConfig().adminIds;
-		} else {
-			if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-			GetConfig();
-		}
+        if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 
-        return car.IsOwner(player.GetIdentity()) || config.CanManageCars(player.GetPlayerId());
+        return car.IsOwner(player.GetIdentity()) || player.GetConfig().adminIds.CanManageCars(player.GetPlayerId());
     }
 }

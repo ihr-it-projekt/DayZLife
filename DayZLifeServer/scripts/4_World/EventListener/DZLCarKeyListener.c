@@ -1,10 +1,12 @@
 class DZLCarKeyListener
 {
-	DZLCarConfig carConfig; 
+	DZLCarConfig carConfig;
+	DZLAdmin adminConfig;
 	
     void DZLCarKeyListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
 		carConfig = DZLConfig.Get().carConfig;
+		adminConfig = DZLConfig.Get().adminIds;
     }
 
     void ~DZLCarKeyListener() {
@@ -42,7 +44,7 @@ class DZLCarKeyListener
             if (ctx.Read(paramChangeOwner) && sender){
                 string receiverId = paramChangeOwner.param1;
                 CarScript carToChange = paramChangeOwner.param2;
-                if (!carToChange.IsOwner(sender)) {
+                if (!carToChange.IsOwner(sender) && !adminConfig.CanManageCars(sender.GetId())) {
                     DZLSendMessage(sender, "#you_are_not_the_owner_can_not_change");
                     return;
                 }

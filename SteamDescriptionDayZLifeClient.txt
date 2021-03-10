@@ -61,6 +61,7 @@ Feature list
     - can give players the role "Cop"
         - player that can manage cops can also access all doors and house inventories
     - can give players the role "Medic"
+    - can do any car actions
     - can give players money to player or bank
     - can see details of players in game
     - many logs to make the admin life easy

@@ -119,7 +119,6 @@ class DZLCarMenu : DZLBaseMenu
             carPanelOnlinePlayerList.ClearItems();
 
             foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
-                if (player.GetPlayerId() == onlinePlayer.id) continue;
                 bool hasKey = false;
                 foreach(DZLOnlinePlayer keyPlayer: keyOwner) {
                     if (onlinePlayer.id == keyPlayer.id) {
