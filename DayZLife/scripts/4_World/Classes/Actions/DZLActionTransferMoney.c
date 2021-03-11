@@ -16,10 +16,6 @@ class DZLActionTransferMoney: ActionInteractBase
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsServer()) {
-            if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-        }
-
 		if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
 		

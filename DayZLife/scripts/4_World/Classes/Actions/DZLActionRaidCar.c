@@ -29,11 +29,6 @@ class DZLActionRaidCar: ActionInteractBase
 
 		config = player.GetConfig().carConfig;
 		
-	
-		if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) {
-		    return false;
-		}
-
         array<string> raidTools = config.carRaidTools;
 
         item = player.GetItemInHands();

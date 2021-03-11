@@ -31,7 +31,6 @@ class ActionTakeRobtMoneyShop: ActionInteractBase
 		    if (!player.GetConfig()) return false;
 			config = player.GetConfig().crimeConfig;
 		} else {
-		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			GetConfig();
 		}
 

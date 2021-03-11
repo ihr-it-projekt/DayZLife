@@ -21,9 +21,6 @@ class DZLActionHarvestItem: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-	    if (GetGame().IsServer()) {
-            if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-        }
 	    if(player && player.GetConfig()) {
             config = player.GetConfig().jobConfig;
         }

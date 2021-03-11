@@ -51,7 +51,6 @@ class DZLActionPaybackRobtMoney: ActionInteractBase
 	override void OnEndServer(ActionData action_data) {
 		DZLPlayer dzlPlayer = action_data.m_Player.GetDZLPlayer();
 		PlayerIdentity ident = action_data.m_Player.GetIdentity();
-		if (!DZLLicenceCheck.Get().HasActiveLicence(ident)) return;
 		if (!dzlPlayer.IsActiveAsCop()) return;
 
 		GetConfig(action_data.m_Player);

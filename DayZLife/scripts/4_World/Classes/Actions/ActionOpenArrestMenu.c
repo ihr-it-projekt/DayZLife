@@ -25,8 +25,6 @@ class ActionOpenArrestMenu: ActionInteractBase
 		if (!targetPlayer.IsDZLPlayer()) return false;
 
         if (GetGame().IsServer()) {
-            if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-
             if(!targetPlayer || !targetPlayer.GetIdentity()) return false;
 
             DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();

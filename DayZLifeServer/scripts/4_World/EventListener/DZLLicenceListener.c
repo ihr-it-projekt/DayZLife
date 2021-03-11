@@ -12,7 +12,6 @@ class DZLLicenceListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_BUY_LICENCE) {
             autoptr Param1<string> paramBuyLicence;
             if (ctx.Read(paramBuyLicence)){

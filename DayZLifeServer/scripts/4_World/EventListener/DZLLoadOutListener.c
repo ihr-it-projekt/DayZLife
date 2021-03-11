@@ -12,7 +12,6 @@ class DZLLoadOutListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
             if (ctx.Read(paramLoadOut)){

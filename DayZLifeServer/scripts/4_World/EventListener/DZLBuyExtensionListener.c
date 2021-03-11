@@ -16,7 +16,6 @@ class DZLBuyExtensionListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-		if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
 			autoptr  Param2<ref Building, string> paramBuyStorage;
             if (ctx.Read(paramBuyStorage)){

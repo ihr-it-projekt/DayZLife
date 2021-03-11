@@ -36,8 +36,6 @@ class DZLActionOpenCarMenu: ActionInteractBase
         if (!car) return false;
         if (GetGame().IsClient() && g_Game.GetUIManager().GetMenu() != NULL) return false;
 
-        if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-
         return car.IsOwner(player.GetIdentity()) || player.GetConfig().adminIds.CanManageCars(player.GetPlayerId());
     }
 }

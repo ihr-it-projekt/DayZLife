@@ -11,7 +11,6 @@ class DZLHarvestListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_HARVEST) {
             PlayerBase player = PlayerBase.Cast(target);
 

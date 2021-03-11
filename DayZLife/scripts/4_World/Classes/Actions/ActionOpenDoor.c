@@ -17,8 +17,6 @@ modded class ActionOpenDoors
 				
 				DZLHouseConfig houseConfig = player.GetConfig().houseConfig;
 				
-		       	if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-				
 		       	DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetCopHouseDefinition(building);
 		       	if (!definition) {
                    medicDefinition = DZLConfig.Get().houseConfig.GetMedicHouseDefinition(building);

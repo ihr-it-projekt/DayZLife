@@ -29,9 +29,6 @@ class DZLActionRaidDoors: ActionInteractBase
 
 		config = player.GetConfig().houseConfig;
 		
-		if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-		
-
         item = player.GetItemInHands();
         if (!item) return false;
 

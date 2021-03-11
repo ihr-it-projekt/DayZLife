@@ -18,10 +18,6 @@ class ActionRobMoney: ActionInteractBase
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsServer()) {
-            if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-        }
-		
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
         return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious();

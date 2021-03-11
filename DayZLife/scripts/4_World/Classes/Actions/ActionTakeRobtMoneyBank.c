@@ -31,7 +31,6 @@ class ActionTakeRobtMoneyBank: ActionInteractBase
 		    if (!player.GetConfig()) return false;
 			config = player.GetConfig().bankConfig;
 		} else {
-		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 			GetConfig();
 		}
 

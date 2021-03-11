@@ -12,7 +12,6 @@ class DZLStorageListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE) {
 			GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId())), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_EVENT_STORE_CAR) {

@@ -18,8 +18,6 @@ class ActionRobMoneyFromDead: ActionInteractBase
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsServer() && !DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
-
         return PlayerBase.Cast(target.GetObject()).GetMoneyPlayerIsDead() > 0;
     }
 

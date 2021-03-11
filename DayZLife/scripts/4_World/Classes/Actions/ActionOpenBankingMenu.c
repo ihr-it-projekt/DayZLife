@@ -26,7 +26,6 @@ class ActionOpenBankingMenu: ActionInteractBase
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-	    if (GetGame().IsServer()) return DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity());
         if(!target) return false;
         if(!target.GetObject()) return false;
 

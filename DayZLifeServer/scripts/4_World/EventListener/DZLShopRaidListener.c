@@ -20,7 +20,6 @@ class DZLShopRaidListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (!DZLLicenceCheck.Get().HasActiveLicence(sender)) return;
         if (rpc_type == DAY_Z_LIFE_START_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerStart = PlayerBase.Cast(target);
             if (playerStart) {

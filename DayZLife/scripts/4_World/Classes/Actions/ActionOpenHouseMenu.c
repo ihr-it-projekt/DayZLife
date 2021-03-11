@@ -56,7 +56,6 @@ class ActionOpenHouseMenu: ActionInteractBase
         }
 
 		if (GetGame().IsServer()) {
-		    if (!DZLLicenceCheck.Get().HasActiveLicence(player.GetIdentity())) return false;
 		    return true;
         }
 
