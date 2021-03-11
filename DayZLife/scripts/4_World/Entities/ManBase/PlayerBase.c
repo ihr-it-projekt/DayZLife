@@ -570,19 +570,24 @@ modded class PlayerBase
         EntityAI itemSpawn;
 		DZLLicenceCraftedItem itemToCraft = licence.craftedItem;
 		
-        if (GetInventory().FindFirstFreeLocationForNewEntity(itemToCraft.type, FindInventoryLocationType.ANY, inventoryLocation)) {
-            itemSpawn = GetHumanInventory().CreateInInventory(itemToCraft.type);
-        } else if (GetHumanInventory().GetEntityInHands()) {
-            itemSpawn = GetHumanInventory().CreateInHands(itemToCraft.type);
-        } else {
-            itemSpawn = SpawnEntityOnGroundPos(itemToCraft.type, GetPosition());
-        }
+		if (itemToCraft.spawnOnGround) {
+			itemSpawn = SpawnEntityOnGroundPos(itemToCraft.type, itemToCraft.positionIfSpawnOnGround.ToVector());
+		} else {
+			if (GetInventory().FindFirstFreeLocationForNewEntity(itemToCraft.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+			    itemSpawn = GetHumanInventory().CreateInInventory(itemToCraft.type);
+			} else if (GetHumanInventory().GetEntityInHands()) {
+			    itemSpawn = GetHumanInventory().CreateInHands(itemToCraft.type);
+			} else {
+			    itemSpawn = SpawnEntityOnGroundPos(itemToCraft.type, GetPosition());
+			}
+		}
 		
 		if (itemSpawn) {
 		    DZLLogCrafting(GetPlayerId(), "licence crafting get item", itemToCraft.type);
 			itemSpawn.SetHealth(itemToCraft.health);
 			ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
 		}
+		
 	}
 
 

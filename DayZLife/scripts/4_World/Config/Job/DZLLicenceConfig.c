@@ -1,6 +1,6 @@
 class DZLLicenceConfig
 {
-	string version = "3";
+	string version = "4";
 	ref DZLLicenceCollection licences;
 	ref DZLLicenceCraftingCollection licenceCollection;
 	ref array<ref DZLLicencePosition> positionOfLicencePoints;
@@ -161,6 +161,11 @@ class DZLLicenceConfig
                 licenceCollection.collection.Insert(craftLicence);
             }
             licences = null;
+            Save();
+        }
+
+        if (version == "3") {
+            version = "4";
             Save();
         }
 	}
