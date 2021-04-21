@@ -1,9 +1,11 @@
 class DZLArrestConfig
 {
-	string version = "1";
+	string version = "2";
 
 	bool shouldDeleteAllItemsOnPrissoner = true;
 	bool shouldDeleteAllItemsOnExPrissoner = true;
+	bool teleportArrestedIntoJail = false;
+	string teleportPosition = "0 0 0";
 	ref array<string> prisonerItems;
 	ref array<string> exPrisonerItems;
 	ref array<vector> arrestAreas;
@@ -39,6 +41,13 @@ class DZLArrestConfig
 			exPrisonerAreas.Insert("3662.574219 6.720572 2396.926514");
 
             Save();
+        }
+
+        if (version == "1") {
+        	version = "2";
+        	teleportArrestedIntoJail = false;
+        	teleportPosition = "0 0 0";
+        	Save();
         }
     }
 

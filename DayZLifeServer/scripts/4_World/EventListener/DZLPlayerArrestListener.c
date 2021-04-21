@@ -38,6 +38,10 @@ class DZLPlayerArrestListener
 
 				ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
 
+				if (arrestConfig.teleportArrestedIntoJail) {
+					prisoner.SetPosition(arrestConfig.teleportPosition.ToVector());
+				}
+
 				GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, prisoner.GetIdentity());
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_ARREST_PLAYER_RESPONSE, null, true, sender);
 				DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
