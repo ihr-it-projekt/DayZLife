@@ -110,6 +110,20 @@ static void DZLLogArrest(string playerId, string info, int duration) {
 
     DZLCSVLog(playerId, fileName, head, data);
 }
+static void DZLLogTicket(string playerId, string info, int value) {
+    if (!DZLLoggerConfig.Get().logTicket) return;
+	string fileName = "ticket_log.csv";
+
+    array<string> head = new array<string>;
+    head.Insert("info");
+    head.Insert("value");
+
+    array<string> data = new array<string>;
+    data.Insert(info);
+    data.Insert(value.ToString());
+
+    DZLCSVLog(playerId, fileName, head, data);
+}
 
 static void DZLLogHouseTrade(string playerId, string info, int price, vector position) {
     if (!DZLLoggerConfig.Get().logHouseTrade) return;

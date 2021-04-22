@@ -25,6 +25,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private TextListboxWidget escapedPlayers;
 	private PlayerPreviewWidget escapedPlayerPreview;
 
+    private Widget playerOpenTicketsWidget;
+	private TextListboxWidget playerOpenTicketsList;
+
     private Widget copPanelWidget;
 	private TextListboxWidget copPanelOnlinePlayerList;
 	private TextListboxWidget copPanelCopsList;
@@ -66,6 +69,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 	private int adminPanelId = -1;
 	private int medicPanelId = -1;
 	private int medicManagePanelId = -1;
+	private int internalCopPanelId = -1;
 
 	private ref array<ref DZLPlayer> allPlayers;
 
@@ -110,6 +114,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 		escapedWidget = creator.GetWidget("escaped_panel");
         escapedPlayers = creator.GetTextListboxWidget("escaped_TextListbox");
 		escapedPlayerPreview = creator.GetPlayerPreview("escaped_PlayerPreview");
+
+		playerOpenTicketsWidget = creator.GetWidget("playerOpenTicketsWidget");
+        playerOpenTicketsList = creator.GetTextListboxWidget("playerOpenTicketsList");
 
 		adminPanelWidget = creator.GetWidget("admin_Panel");
 		adminPlayers = creator.GetTextListboxWidget("players");
@@ -172,6 +179,12 @@ class DZLAlmanacMenu : DZLBaseMenu
 		}
 
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, null, true);
+
+        if (player.GetDZLPlayer().IsActiveAsCop()) {
+        	toggleViewWidget.AddItem("#cop_panel");
+        	GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS, null, true);
+        	internalCopPanelId = toggleViewWidget.GetNumItems() - 1;
+        }
 
 	    workzoneWidget.Show(true);
 		
@@ -341,6 +354,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 			adminPanelWidget.Show(adminPanelId == item);
 			medicWidget.Show(medicPanelId == item);
 			medicPanelWidget.Show(medicManagePanelId == item);
+			playerOpenTicketsWidget.Show(internalCopPanelId == item);
 		} else if (w == copPanelSave) {
 		    if (!config.adminIds.CanManageCops(player.GetPlayerId())) return true;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param1<ref array<string>>(DZLDisplayHelper.GetPlayerIdsFromList(copPanelCopsList)), true);
@@ -506,6 +520,19 @@ class DZLAlmanacMenu : DZLBaseMenu
 						escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 2);
 					}
 					
+				}
+            }
+        } else if (rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE) {
+            autoptr Param1<ref array<ref DZLOpenTicketPlayer>> paramUnpaidTickets;
+            if (ctx.Read(paramUnpaidTickets)){
+                playerOpenTicketsList.ClearItems();
+
+				array<ref DZLOpenTicketPlayer> openTicketPlayersParam = paramUnpaidTickets.param1;
+
+				foreach(DZLOpenTicketPlayer openTicketPlayer: openTicketPlayersParam) {
+					int indexOfRow = playerOpenTicketsList.AddItem(openTicketPlayer.name, openTicketPlayer, 0);
+					playerOpenTicketsList.SetItem(indexOfRow, openTicketPlayer.arrestReason, openTicketPlayer, 1);
+					playerOpenTicketsList.SetItem(indexOfRow, openTicketPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE) {

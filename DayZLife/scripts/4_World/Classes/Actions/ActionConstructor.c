@@ -19,6 +19,7 @@ modded class ActionConstructor
 		actions.Insert(DZLActionTransferMoney);
 		actions.Insert(ActionOpenLoadOutMenu);
 		actions.Insert(ActionOpenArrestMenu);
+		actions.Insert(ActionOpenTicketMenu);
 		actions.Insert(DZLActionOpenCarMenu);
 		actions.Insert(ActionGetOwnerName);
 		actions.Insert(ActionOpenCarStorageMenu);
