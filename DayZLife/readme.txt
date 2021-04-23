@@ -1,3 +1,5 @@
+ToDos:
+
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 
 - Cops wollen spielern über liste strafe hinzufügen
