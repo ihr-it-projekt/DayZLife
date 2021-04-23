@@ -1,7 +1,7 @@
 class DZLLoggerConfig
 {
     static ref DZLLoggerConfig loggerConfig;
-	string version = "1";
+	string version = "2";
 	bool logMoneyTransfer = true;
 	bool logTraderTransactions = true;
 	bool logCrafting = true;
@@ -10,6 +10,7 @@ class DZLLoggerConfig
 	bool logStore = true;
 	bool logArrest = true;
 	bool logHouseTrade = true;
+	bool logTicket = true;
 
     static DZLLoggerConfig Get() {
         if (!loggerConfig) {
@@ -29,6 +30,12 @@ class DZLLoggerConfig
             logArrest = true;
             logHouseTrade = true;
             Save();
+        }
+
+        if ("1" == version) {
+        	version = "2";
+        	logTicket = true;
+        	Save();
         }
     }
 

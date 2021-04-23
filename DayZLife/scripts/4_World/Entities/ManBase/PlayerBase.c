@@ -10,6 +10,8 @@ modded class PlayerBase
     private ref DZLSpawnPositionMenu spawnPositionMenu;
     private ref DZLLoadOutMenu loadOutMenu;
     private ref DZLPlayerArrestMenu arrestMenu;
+    private ref DZLPlayerTicketMenu ticketMenu;
+    private ref DZLPlayerPayTicketMenu payTicketMenu;
     private ref DZLCarMenu carMenu;
     private ref DZLCarStorageMenu carStorageMenu;
     private ref DZLMedicHelpMenu healMenu;
@@ -125,6 +127,7 @@ modded class PlayerBase
         AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
+        AddAction(ActionOpenTicketMenu, InputActionMap);
     }
 	
 	override void CheckDeath()
@@ -169,6 +172,10 @@ modded class PlayerBase
             loadOutMenu.UpdatePlayer(this);
         } else if (arrestMenu && arrestMenu.IsVisible()) {
             arrestMenu.UpdatePlayer(this);
+        } else if (ticketMenu && ticketMenu.IsVisible()) {
+            ticketMenu.UpdatePlayer(this);
+        } else if (payTicketMenu && payTicketMenu.IsVisible()) {
+            payTicketMenu.UpdatePlayer(this);
         } else if (carMenu && carMenu.IsVisible()) {
             carMenu.UpdatePlayer(this);
         } else if (carStorageMenu && carStorageMenu.IsVisible()) {
@@ -258,6 +265,18 @@ modded class PlayerBase
 		return arrestMenu;
 	}
 
+	DZLPlayerTicketMenu GetTicketMenu() {
+		ticketMenu = new DZLPlayerTicketMenu();
+		InitMenu(ticketMenu);
+		return ticketMenu;
+	}
+
+	DZLPlayerPayTicketMenu GetPayTicketMenu() {
+		payTicketMenu = new DZLPlayerPayTicketMenu();
+		InitMenu(payTicketMenu);
+		return payTicketMenu;
+	}
+
 	DZLPlayerMoneyTransferMenu GetPlayerMoneyTransferMenu() {
 		moneyTransferMenu = new DZLPlayerMoneyTransferMenu();
 		InitMenu(moneyTransferMenu);
@@ -319,6 +338,10 @@ modded class PlayerBase
 			loadOutMenu.OnHide();
 		} else if (arrestMenu && arrestMenu.IsVisible()) {
 			arrestMenu.OnHide();
+		} else if (ticketMenu && ticketMenu.IsVisible()) {
+			ticketMenu.OnHide();
+		} else if (payTicketMenu && payTicketMenu.IsVisible()) {
+			payTicketMenu.OnHide();
 		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
 			progressBarLicence.OnHide();
 		} else if (almanacMenu && almanacMenu.IsVisible()) {

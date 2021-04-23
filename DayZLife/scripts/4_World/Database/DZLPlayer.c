@@ -18,7 +18,8 @@ class DZLPlayer
 	ref TStringArray licenceIds;
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
 	ref array<ref DZLStoreItem> itemsStore;
-	private string version = "2";
+	private string version = "3";
+	private ref array<ref DZLTicket> openTickets;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -28,6 +29,7 @@ class DZLPlayer
 			licenceIds = new TStringArray;
 
 			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
+			openTickets = new array<ref DZLTicket>;
 		}
 
 		DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -42,6 +44,10 @@ class DZLPlayer
             deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
             itemsStore = new array<ref DZLStoreItem>;
             version = "2";
+        }
+
+        if (version == "2") {
+        	openTickets = new array<ref DZLTicket>;
         }
 
 		Save();
@@ -324,6 +330,40 @@ class DZLPlayer
 		money -= licenceToBuy.price;
 		licenceIds.Insert(licenceToBuy.GetId());
 		Save();
+	}
+
+	void AddTicket(int value, string reason) {
+		openTickets.Insert(new DZLTicket(value, reason));
+		Save();
+	}
+
+	array<ref DZLTicket> GetTickets() {
+		return openTickets;
+	}
+
+	bool HasTickets() {
+		return 0 != openTickets.Count();
+	}
+
+	void RemoveTicketById(string id) {
+		if (!GetGame().IsServer()) return;
+
+		foreach(int index, DZLTicket ticket: openTickets) {
+			if (id == ticket.GetId()) {
+				openTickets.Remove(index);
+				Save();
+				return;
+			}
+		}
+	}
+
+	DZLTicket GetTicketById(string id) {
+		foreach(int index, DZLTicket ticket: openTickets) {
+			if (id == ticket.GetId()) {
+				return ticket;
+			}
+		}
+		return null;
 	}
 
     private bool Load(){

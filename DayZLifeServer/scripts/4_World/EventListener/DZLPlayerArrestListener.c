@@ -3,6 +3,7 @@ class DZLPlayerArrestListener
 	private DZLArrestConfig arrestConfig;
 	private ref Timer timerArrest;
 	private ref array<ref DZLEscapedPlayer> escapeePlayers = new array<ref DZLEscapedPlayer>;
+	private ref array<ref DZLOpenTicketPlayer> openTicketPlayers = new array<ref DZLOpenTicketPlayer>;
 	private int copCount = 0;
 	private int civCount = 0;
 	private int medicCount = 0;
@@ -38,6 +39,10 @@ class DZLPlayerArrestListener
 
 				ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
 
+				if (arrestConfig.teleportArrestedIntoJail) {
+					prisoner.SetPosition(arrestConfig.teleportPosition.ToVector());
+				}
+
 				GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, prisoner.GetIdentity());
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_ARREST_PLAYER_RESPONSE, null, true, sender);
 				DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
@@ -46,6 +51,8 @@ class DZLPlayerArrestListener
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param4<ref array<ref DZLEscapedPlayer>, int, int, int>(escapeePlayers, copCount, medicCount, civCount), true, sender);
+        } else if (rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS) {
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOpenTicketPlayer>>(openTicketPlayers), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT) {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true, sender);
         }
@@ -55,6 +62,7 @@ class DZLPlayerArrestListener
 		array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
         escapeePlayers.Clear();
+        openTicketPlayers.Clear();
         civCount = 0;
         copCount = 0;
         medicCount = 0;
@@ -62,6 +70,10 @@ class DZLPlayerArrestListener
 		foreach(Man playerMan: allPlayers) {
 		    PlayerBase player = PlayerBase.Cast(playerMan);
 			DZLPlayer dzlPlayer = player.GetDZLPlayer();
+			
+			if (dzlPlayer.HasTickets()) {
+				openTicketPlayers.Insert(new DZLOpenTicketPlayer(player));
+			}
 
 			if(dzlPlayer.IsActiveAsCop()) {
 			    copCount ++;

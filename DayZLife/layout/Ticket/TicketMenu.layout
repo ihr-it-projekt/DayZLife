@@ -1,0 +1,253 @@
+FrameWidgetClass rootFrame {
+ position 0 0.09464
+ size 0.20711 0.40599
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   position 0 0.00962
+   size 0.97455 0.99116
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0.00121
+     size 0.9739 0.9735
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       position 0 0
+       size 1 0.19093
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget3 {
+         ignorepointer 1
+         position -0.08042 0.00112
+         size 0.79677 0.78074
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass giveTicketMenu {
+           disabled 0
+           clipchildren 1
+           inheritalpha 0
+           ignorepointer 1
+           keepsafezone 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           draggable 0
+           text "#create_ticket_menu"
+           "exact text" 0
+           text_proportion 0.7
+           "size to text h" 0
+           "size to text v" 0
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget16 {
+         ignorepointer 1
+         position 0.0212 0.11075
+         size 0.13964 0.7785
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass Button_Closed {
+           color 0.502 0 0 1
+           position 0 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "X"
+           text_proportion 0.7
+          }
+         }
+        }
+       }
+      }
+      EditBoxWidgetClass input_ticket {
+       position 0.22699 0.5
+       size 0.50362 0.13968
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style DefaultBorder
+      }
+      PanelWidgetClass PanelWidget5 {
+       ignorepointer 1
+       position 0 0.03569
+       size 0.9576 0.17466
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass createTicketButton {
+         color 0.251 0.502 0 1
+         position 0 0.02696
+         size 0.98 0.92608
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#create_ticket"
+         text_proportion 0.7
+        }
+       }
+      }
+      TextWidgetClass prisonerName {
+       position 0.00237 0.66945
+       size 0.9576 0.10985
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Normal
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget4 {
+       ignorepointer 1
+       position -0.26241 -0.06984
+       size 0.42804 0.13968
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextWidgetClass giveTicketMenu0 {
+         disabled 0
+         clipchildren 1
+         inheritalpha 0
+         ignorepointer 1
+         keepsafezone 0
+         position 0 0
+         size 1 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         draggable 0
+         text "#ticket_fine"
+         "exact text" 0
+         text_proportion 0.6
+         "size to text h" 0
+         "size to text v" 0
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget6 {
+       ignorepointer 1
+       position -0.26241 0.09961
+       size 0.42804 0.13968
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextWidgetClass giveTicketMenu1 {
+         disabled 0
+         clipchildren 1
+         inheritalpha 0
+         ignorepointer 1
+         keepsafezone 0
+         position 0 0
+         size 1 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         draggable 0
+         text "#ticket_reason"
+         "exact text" 0
+         text_proportion 0.6
+         "size to text h" 0
+         "size to text v" 0
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      EditBoxWidgetClass ticket_reason {
+       position 0.22699 0.33055
+       size 0.50362 0.13968
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style DefaultBorder
+      }
+     }
+    }
+   }
+  }
+ }
+}

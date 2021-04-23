@@ -12,7 +12,6 @@ ToDos:
 - Alkoholkonsum
 - Drogenentzug mit medic Hilfe
 
-
 - Wohnung mieten
     - key management
     - miete im vorrausbezahlen
@@ -29,8 +28,6 @@ Führerschein
 - Erweiterung für Hause
     - Nachricht an Spieler die einen Key haben wenn eingebrochen wird
 
-- medic
-    - kann nur legale Jobs ausführen
 
 - Inactive Tracker
     - wenn keine Activität länger als 10 minuten, dann muss Spieler innerhalb von 15 sec bestätigen das er Paycheck bekommt.
@@ -48,9 +45,7 @@ Führerschein
             - Strafzettel
                 - config Geld / länge Knast
             - Fahndungsliste
-                - Spieler hinzufügen mit Strafe
                 - lebendig / bezahlung
-            - Lizensenkontrolle
             - Ausweiß
             - Waffenschein
 
@@ -59,14 +54,9 @@ Führerschein
             - Zugriff auf Fahndungslisten
 
         - Medic
-
             - Heilung
                 - 100 % mit Medic am Krankenhaus
                 - 75 % nur Krankenhaus
-            - Einsatzcentrale (Krankenhäuse) nur durch medics betretbar
-        - Jäger
-            - Tiere jagen
-
         - Schneide
             - Kleideung herstellen
             - Stofer
