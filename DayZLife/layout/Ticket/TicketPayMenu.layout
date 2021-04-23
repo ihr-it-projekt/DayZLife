@@ -1,6 +1,6 @@
 FrameWidgetClass rootFrame {
- position 0 0.09464
- size 0.20711 0.40599
+ position 0.00049 0.00092
+ size 0.49437 0.49114
  halign center_ref
  valign center_ref
  hexactpos 0
@@ -23,7 +23,7 @@ FrameWidgetClass rootFrame {
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     position 0 0.00121
+     position 0 -0.0013
      size 0.9739 0.9735
      halign center_ref
      valign center_ref
@@ -35,8 +35,8 @@ FrameWidgetClass rootFrame {
      {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
-       position 0 0
-       size 1 0.19093
+       position -0.00214 0
+       size 0.99573 0.10053
        halign center_ref
        hexactpos 0
        vexactpos 0
@@ -70,7 +70,7 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            draggable 0
-           text "#create_ticket_menu"
+           text "#pay_ticket"
            "exact text" 0
            text_proportion 0.7
            "size to text h" 0
@@ -83,7 +83,7 @@ FrameWidgetClass rootFrame {
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
          position 0.0212 0.11075
-         size 0.13964 0.7785
+         size 0.14178 0.7785
          halign right_ref
          hexactpos 0
          vexactpos 0
@@ -109,21 +109,10 @@ FrameWidgetClass rootFrame {
         }
        }
       }
-      EditBoxWidgetClass input_ticket {
-       position 0.22699 0.5
-       size 0.50362 0.13968
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style DefaultBorder
-      }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position 0 0.03569
-       size 0.9576 0.17466
+       position -0.00562 0.02932
+       size 0.96455 0.12713
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -132,7 +121,7 @@ FrameWidgetClass rootFrame {
        vexactsize 0
        style editor_quad_dark
        {
-        ButtonWidgetClass createTicketButton {
+        ButtonWidgetClass payTicketButton {
          color 0.251 0.502 0 1
          position 0 0.02696
          size 0.98 0.92608
@@ -142,112 +131,25 @@ FrameWidgetClass rootFrame {
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         text "#create_ticket"
+         text "#pay_ticket"
          text_proportion 0.7
         }
        }
       }
-      TextWidgetClass prisonerName {
-       position 0.00237 0.66945
-       size 0.9576 0.10985
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style Normal
-       "text halign" center
-       "text valign" center
-      }
-      PanelWidgetClass PanelWidget4 {
-       ignorepointer 1
-       position -0.26241 -0.06984
-       size 0.42804 0.13968
-       halign center_ref
-       valign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass giveTicketMenu0 {
-         disabled 0
-         clipchildren 1
-         inheritalpha 0
-         ignorepointer 1
-         keepsafezone 0
-         position 0 0
-         size 1 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         draggable 0
-         text "#ticket_fine"
-         "exact text" 0
-         text_proportion 0.6
-         "size to text h" 0
-         "size to text v" 0
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget6 {
-       ignorepointer 1
-       position -0.26241 0.09961
-       size 0.42804 0.13968
-       halign center_ref
-       valign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass giveTicketMenu1 {
-         disabled 0
-         clipchildren 1
-         inheritalpha 0
-         ignorepointer 1
-         keepsafezone 0
-         position 0 0
-         size 1 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         draggable 0
-         text "#ticket_reason"
-         "exact text" 0
-         text_proportion 0.6
-         "size to text h" 0
-         "size to text v" 0
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      EditBoxWidgetClass ticket_reason {
-       position 0.22699 0.33055
-       size 0.50362 0.13968
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style DefaultBorder
-      }
      }
     }
    }
+  }
+  TextListboxWidgetClass openTicketsList {
+   position 0.03643 0.14145
+   size 0.91754 0.67916
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   "title visible" 1
+   colums "#reason;40;#dunning_fee;30;#date;30"
+   lines 15
   }
  }
 }

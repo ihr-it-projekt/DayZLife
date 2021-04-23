@@ -8,7 +8,7 @@ class DZLOpenTicketPlayer
         this.name = player.GetIdentity().GetName();
 
         array<ref DZLTicket> tickets = player.GetDZLPlayer().GetTickets();
-        countOfTickets = ticket.Count();
+        countOfTickets = tickets.Count();
 
         foreach(DZLTicket ticket: tickets) {
         	valueOfTickets += ticket.value;

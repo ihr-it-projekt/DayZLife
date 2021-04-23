@@ -55,6 +55,7 @@ class DZLPlayerTicketMenu : DZLBaseMenu
 				if (ticketValue != 0) {
                     GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
                     inputTicket.SetText("");
+                    inputTicketReason.SetText("");
 		        } else {
 		            player.DisplayMessage("#error_value_is_not_a_int");
 		        }

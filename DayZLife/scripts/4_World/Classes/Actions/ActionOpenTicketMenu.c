@@ -7,7 +7,12 @@ class ActionOpenTicketMenu: ActionInteractBase
     }
 
     override void CreateConditionComponents() {
-        m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
+
+        if (DAY_Z_LIFE_DEBUG) {
+            m_ConditionTarget = new DZL_CCTCar(true);
+        } else {
+            m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT);
+        }
         m_ConditionItem = new CCINone;
     }
 
@@ -16,6 +21,8 @@ class ActionOpenTicketMenu: ActionInteractBase
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if (DAY_Z_LIFE_DEBUG) return true;
+
 		if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
         DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
@@ -38,8 +45,13 @@ class ActionOpenTicketMenu: ActionInteractBase
         if (g_Game.GetUIManager().GetMenu() != NULL) return;
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
-        DZLPlayerArrestMenu menu = player.GetTicketMenu();
+        DZLPlayerTicketMenu menu = player.GetTicketMenu();
 		menu.SetReceiver(targetPlayer);
+
+		if (DAY_Z_LIFE_DEBUG) {
+		    menu.SetReceiver(player);
+		}
+
 		GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 }

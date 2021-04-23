@@ -70,6 +70,10 @@ class DZLPlayerArrestListener
 		foreach(Man playerMan: allPlayers) {
 		    PlayerBase player = PlayerBase.Cast(playerMan);
 			DZLPlayer dzlPlayer = player.GetDZLPlayer();
+			
+			if (dzlPlayer.HasTickets()) {
+				openTicketPlayers.Insert(new DZLOpenTicketPlayer(player));
+			}
 
 			if(dzlPlayer.IsActiveAsCop()) {
 			    copCount ++;
@@ -82,10 +86,6 @@ class DZLPlayerArrestListener
 
             if(dzlPlayer.IsActiveAsMedic()) {
 			    medicCount ++;
-			}
-
-			if (dzlPlayer.HasTickets()) {
-				openTicketPlayers.Insert(new DZLOpenTicketPlayer(player));
 			}
 
 			if (dzlPlayer.IsPlayerInArrest()) {

@@ -63,10 +63,10 @@ class DZLPlayerPayTicketMenu: DZLBaseMenu
     void UpdateTickets() {
     	openTicketsList.ClearItems();
 		array<ref DZLTicket> tickets = dzlPlayer.GetTickets();
-		foreach(DZLTicket ticker: tickets) {
+		foreach(DZLTicket ticket: tickets) {
 			int pos = openTicketsList.AddItem(ticket.reason, ticket, 0);
 			openTicketsList.SetItem(pos, ticket.value.ToString() + " $", ticket, 1);
-			openTicketsList.SetItem(pos, , ticket.creationDate.ToDateString(), 2);
+			openTicketsList.SetItem(pos, ticket.creationDate.ToDateString(), ticket, 2);
 		}
     }
 }

@@ -133,8 +133,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 		adminArrestTime = creator.GetTextWidget("arrestTime");
 		adminCanCop = creator.GetTextWidget("copValue");
 		adminLicenseTextListbox = creator.GetTextListboxWidget("licenseTextListbox");
-		
-		
+
 		medicWidget = creator.GetWidget("medic_Panel");
 		playerNeedMedicList = creator.GetTextListboxWidget("player_Listbox");
 		medicMap = creator.GetMapWidget("medic_Map");
@@ -530,9 +529,9 @@ class DZLAlmanacMenu : DZLBaseMenu
 				array<ref DZLOpenTicketPlayer> openTicketPlayersParam = paramUnpaidTickets.param1;
 
 				foreach(DZLOpenTicketPlayer openTicketPlayer: openTicketPlayersParam) {
-					int indexOfRow = playerOpenTicketsList.AddItem(openTicketPlayer.name, openTicketPlayer, 0);
-					playerOpenTicketsList.SetItem(indexOfRow, openTicketPlayer.arrestReason, openTicketPlayer, 1);
-					playerOpenTicketsList.SetItem(indexOfRow, openTicketPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
+					int indexOfRowUnpaid = playerOpenTicketsList.AddItem(openTicketPlayer.name, openTicketPlayer, 0);
+					playerOpenTicketsList.SetItem(indexOfRowUnpaid, openTicketPlayer.countOfTickets.ToString(), openTicketPlayer, 1);
+					playerOpenTicketsList.SetItem(indexOfRowUnpaid, openTicketPlayer.valueOfTickets.ToString(), openTicketPlayer, 2);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE) {

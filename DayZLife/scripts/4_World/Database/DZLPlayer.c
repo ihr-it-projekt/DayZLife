@@ -19,7 +19,7 @@ class DZLPlayer
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
 	ref array<ref DZLStoreItem> itemsStore;
 	private string version = "3";
-	private array<ref DZLTicket> openTickets;
+	private ref array<ref DZLTicket> openTickets;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
