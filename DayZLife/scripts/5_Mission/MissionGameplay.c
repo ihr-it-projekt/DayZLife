@@ -106,7 +106,7 @@ modded class MissionGameplay
 			} else if (holdTree && player.CanReSpawn() && !player.IsRestrained()) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
 			} else if (holdFour && !player.IsRestrained() && !player.IsUnconscious() && player.HasInInventory("PersonalRadio")) {
-				GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
+				GetGame().GetUIManager().ShowScriptedMenu(player.GetMessageSystemMenu(), NULL);
 			} else if (holdFive && !player.IsUnconscious()) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetPayTicketMenu(), NULL);
 			}
