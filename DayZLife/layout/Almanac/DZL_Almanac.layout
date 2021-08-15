@@ -1415,7 +1415,7 @@ FrameWidgetClass Almanac {
        }
       }
       PanelWidgetClass playerOpenTicketsWidget {
-       visible 1
+       visible 0
        ignorepointer 1
        position 0 0
        size 1 0.91076
