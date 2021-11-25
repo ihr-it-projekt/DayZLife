@@ -5,8 +5,8 @@ modded class DayZGame
 	
 	
 	override void OnRespawnEvent(int time)	{	
-		if (GetPlayer()) GetPlayer().StopDeathDarkeningEffect();
-		
-		PPEffects.SetDeathDarkening(1);
+		if (GetPlayer())
+			GetPlayer().StopDeathDarkeningEffect();
+		PPERequesterBank.GetRequester(PPERequester_DeathDarkening).Start(new Param1<float>(1.0));
 	}
 }
