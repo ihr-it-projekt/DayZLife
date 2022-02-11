@@ -8,5 +8,7 @@ modded class DayZGame
 		if (GetPlayer())
 			GetPlayer().StopDeathDarkeningEffect();
 		PPERequesterBank.GetRequester(PPERequester_DeathDarkening).Start(new Param1<float>(1.0));
+
+		PPEffects.SetUnconsciousnessVignette(0);
 	}
 }
