@@ -26,10 +26,10 @@ modded class MissionGameplay
         player = PlayerBaseHelper.GetPlayer();
 
         if (!player) return;
-
+        bool wasActionDone = false;
         switch (key){
             case KeyCode.KC_ESCAPE:
-                player.CloseMenu();
+                wasActionDone = player.CloseMenu();
                 break;
             case KeyCode.KC_RCONTROL:
                 holdRControl = false;
@@ -53,8 +53,11 @@ modded class MissionGameplay
                 holdFive = false;
                 break;
             default:
-                super.OnKeyRelease(key);
                 break;
+        }
+
+        if (false == wasActionDone){
+            super.OnKeyRelease(key);
         }
     }
 

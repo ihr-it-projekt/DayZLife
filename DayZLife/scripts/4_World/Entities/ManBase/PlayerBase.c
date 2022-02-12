@@ -325,44 +325,66 @@ modded class PlayerBase
 	    }
 	}
 
-	void CloseMenu() {
+	bool CloseMenu() {
+	    bool hasDoAction = false;
+
 		if (houseMenu && houseMenu.IsVisible()) {
 			houseMenu.OnHide();
+			hasDoAction = true;
 		} else if (bankingMenu && bankingMenu.IsVisible()) {
 			bankingMenu.OnHide();
+			hasDoAction = true;
 		} else if (traderMenu && traderMenu.IsVisible()) {
 			traderMenu.OnHide();
+			hasDoAction = true;
 		} else if (licenceMenu && licenceMenu.IsVisible()) {
 			licenceMenu.OnHide();
+			hasDoAction = true;
 		} else if (loadOutMenu && loadOutMenu.IsVisible()) {
 			loadOutMenu.OnHide();
+			hasDoAction = true;
 		} else if (arrestMenu && arrestMenu.IsVisible()) {
 			arrestMenu.OnHide();
+			hasDoAction = true;
 		} else if (ticketMenu && ticketMenu.IsVisible()) {
 			ticketMenu.OnHide();
+			hasDoAction = true;
 		} else if (payTicketMenu && payTicketMenu.IsVisible()) {
 			payTicketMenu.OnHide();
+			hasDoAction = true;
 		} else if (progressBarLicence && progressBarLicence.IsVisible()) {
 			progressBarLicence.OnHide();
+			hasDoAction = true;
 		} else if (almanacMenu && almanacMenu.IsVisible()) {
 			almanacMenu.OnHide();
+			hasDoAction = true;
 		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
 			progressBarRaid.OnHide();
+			hasDoAction = true;
 		} else if (progressBarRaidCar && progressBarRaidCar.IsVisible()) {
 			progressBarRaidCar.OnHide();
+			hasDoAction = true;
 		} else if (moneyTransferMenu && moneyTransferMenu.IsVisible()) {
 			moneyTransferMenu.OnHide();
+			hasDoAction = true;
 		} else if (carMenu && carMenu.IsVisible()) {
 			carMenu.OnHide();
+			hasDoAction = true;
 		} else if (carStorageMenu && carStorageMenu.IsVisible()) {
 			carStorageMenu.OnHide();
+			hasDoAction = true;
 		} else if (healMenu && healMenu.IsVisible()) {
 			healMenu.OnHide();
+			hasDoAction = true;
 		} else if (spawnPositionMenu && spawnPositionMenu.IsVisible()) {
 			spawnPositionMenu.OnHide();
+			hasDoAction = true;
 		} else if (messageSystemMenu && messageSystemMenu.IsVisible()) {
 		    messageSystemMenu.OnHide();
+			hasDoAction = true;
 		}
+		
+		return hasDoAction;
 	}
 
 	DZLHouseDefinition FindHouseDefinition(Building building) {
