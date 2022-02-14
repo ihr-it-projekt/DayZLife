@@ -526,7 +526,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Cop_list"
+           colums "#Cop_list;50;#Rang;50;"
            lines 20
           }
          }
@@ -568,7 +568,7 @@ FrameWidgetClass Almanac {
          style editor_quad_dark
          {
           TextListboxWidgetClass cop_RangList {
-           position -0 -0
+           position 0 0
            size 0.96078 0.97183
            halign center_ref
            valign center_ref
@@ -584,7 +584,7 @@ FrameWidgetClass Almanac {
         }
         MultilineTextWidgetClass save_CopTextWidget {
          ignorepointer 1
-         position -0 0.35083
+         position 0 0.35083
          size 0.29258 0.12933
          halign center_ref
          valign center_ref
@@ -1423,7 +1423,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Medic_list"
+           colums "#Medic_list;50;#Rang;50;"
            lines 20
           }
          }
@@ -1607,7 +1607,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_list"
+           colums "#Army_list;50;#Rang;50;"
            lines 20
           }
          }

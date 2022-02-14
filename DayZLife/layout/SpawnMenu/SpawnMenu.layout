@@ -154,7 +154,7 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            style Default
-           items "#Civ;#Cop;#Medic"
+           items "#Civ;#Cop;#Medic;#Army"
           }
          }
         }
