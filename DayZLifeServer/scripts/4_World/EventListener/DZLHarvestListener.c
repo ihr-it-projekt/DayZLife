@@ -28,9 +28,9 @@ class DZLHarvestListener
                         matchedRelations.Insert(relation);
                         continue;
                     }
-                    foreach(string _item: relation.itemsThatNeededForHarvest) {
-                        _item.ToLower();
-                         if (item_in_hands_source && handItemType == _item) {
+                    foreach(string itemsThatNeededForHarvest: relation.itemsThatNeededForHarvest) {
+                        itemsThatNeededForHarvest.ToLower();
+                         if (item_in_hands_source && handItemType == itemsThatNeededForHarvest) {
                             if (0 < item_in_hands_source.GetHealth()) {
                                 matchedRelations.Insert(relation);
                             }

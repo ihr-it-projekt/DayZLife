@@ -17,7 +17,7 @@ class DZLBuyExtensionListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
-			autoptr  Param2<ref Building, string> paramBuyStorage;
+			autoptr  Param2<Building, string> paramBuyStorage;
             if (ctx.Read(paramBuyStorage)){
 				PlayerBase player = PlayerBase.Cast(target);
 				DZLPlayer dzlPlayer = player.GetDZLPlayer();
@@ -102,7 +102,7 @@ class DZLBuyExtensionListener
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_SELL_STORAGE) {
-            autoptr Param2<ref Building, vector> paramSellStorage;
+            autoptr Param2<Building, vector> paramSellStorage;
             if (ctx.Read(paramSellStorage)){
                 PlayerBase playerSellStorage = PlayerBase.Cast(target);
 				DZLPlayer dzlPlayerSellStorage = playerSellStorage.GetDZLPlayer();

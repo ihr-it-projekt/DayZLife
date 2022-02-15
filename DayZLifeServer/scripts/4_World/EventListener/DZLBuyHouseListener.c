@@ -16,12 +16,12 @@ class DZLBuyHouseListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
-            autoptr Param1<ref Building> paramGetBuildingProperties;
+            autoptr Param1<Building> paramGetBuildingProperties;
             if (ctx.Read(paramGetBuildingProperties)){
                 GetGame().RPCSingleParam(PlayerBase.Cast(target), DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param1)), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
-            autoptr Param1<ref Building> paramBuyHouse;
+            autoptr Param1<Building> paramBuyHouse;
             if (ctx.Read(paramBuyHouse)){
 				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param1);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param1);
@@ -42,7 +42,7 @@ class DZLBuyHouseListener
                 GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
-            autoptr Param1<ref Building> paramSellHouse;
+            autoptr Param1<Building> paramSellHouse;
             if (ctx.Read(paramSellHouse)){
 				DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param1);
                 DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellHouse.param1);
