@@ -14,11 +14,12 @@ class DZLPlayer
 	int arrestTimeInMinutes = 0;
 	string arrestReason = "";
 	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
+	private string activeJobGrade = "Rekrut";
 	ref DZLDate lastLoginDate;
 	ref TStringArray licenceIds;
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
 	ref array<ref DZLStoreItem> itemsStore;
-	private string version = "3";
+	private string version = "4";
 	private ref array<ref DZLTicket> openTickets;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
@@ -35,19 +36,16 @@ class DZLPlayer
 		DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
         idents.AddPlayer(playerId);
 		
-		if (!version) {
-			arrestReason = "";
-			version = "1";
-		}
 
-		if (version == "1") {
-            deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-            itemsStore = new array<ref DZLStoreItem>;
-            version = "2";
+        if (version == "3") {
+            activeJobGrade = "Rekrut";
+        	openTickets = new array<ref DZLTicket>;
         }
 
-        if (version == "2") {
-        	openTickets = new array<ref DZLTicket>;
+        DZLPaycheck payCheck = DZLRangHelper.getCurrentPayCheck(this, DZLConfig.Get().jobConfig.paycheck);
+
+        if (payCheck.rang != activeJobGrade) {
+            activeJobGrade = payCheck.rang;
         }
 
 		Save();
@@ -80,6 +78,10 @@ class DZLPlayer
         }
         return activeJob;
     }
+
+    bool hasJobGrade(string grade) {
+        return activeJobGrade == grade;
+    }
 	
 	bool IsActiveAsCop() {
 		return DAY_Z_LIFE_JOB_COP == activeJob;
@@ -87,6 +89,10 @@ class DZLPlayer
 
 	bool IsActiveAsMedic() {
 		return DAY_Z_LIFE_JOB_MEDIC == activeJob;
+	}
+
+	bool IsActiveAsArmy() {
+		return DAY_Z_LIFE_JOB_ARMY == activeJob;
 	}
 
 	bool IsActiveAsCivil() {

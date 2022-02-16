@@ -126,6 +126,7 @@ static string DAY_Z_LIFE_LOGS = "$profile:DayZLife\\Logs\\";
 static string DAY_Z_LIFE_JOB_COP = "Cop";
 static string DAY_Z_LIFE_JOB_MEDIC = "Medic";
 static string DAY_Z_LIFE_JOB_CIVIL = "Civil";
+static string DAY_Z_LIFE_JOB_ARMY = "Army";
 
 
 static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE = "none";

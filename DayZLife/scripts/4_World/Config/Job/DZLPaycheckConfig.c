@@ -1,22 +1,50 @@
 class DZLPaycheckConfig
 {
-	string version = "1";
+	string version = "2";
     ref DZLPaycheck cop;
     ref DZLPaycheck medic;
     ref DZLPaycheck civil;
+	
+	ref array<ref DZLPaycheck>cops;
+    ref array<ref DZLPaycheck>medics;
+    ref array<ref DZLPaycheck>civils;
+    ref array<ref DZLPaycheck>armies;
 
 
     void DZLPaycheckConfig() {
         if(!Load()) {
-            if (DAY_Z_LIFE_DEBUG) {
-                cop = new DZLPaycheck(DAY_Z_LIFE_JOB_COP, 100, 1);
-                medic = new DZLPaycheck(DAY_Z_LIFE_JOB_MEDIC, 0, 10000000);
-                civil = new DZLPaycheck(DAY_Z_LIFE_JOB_CIVIL, 0, 10000000);
-            } else {
-                cop = new DZLPaycheck(DAY_Z_LIFE_JOB_COP, 100, 10);
-                medic = new DZLPaycheck(DAY_Z_LIFE_JOB_MEDIC, 0, 10000000);
-                civil = new DZLPaycheck(DAY_Z_LIFE_JOB_CIVIL, 0, 10000000);
-            }
+            cops = new array<ref DZLPaycheck>;
+            cops.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_COP, "Rekrut", 100, 1));
+
+            medics = new array<ref DZLPaycheck>;
+            medics.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_MEDIC, "Rekrut", 0, 10000000));
+
+            civils = new array<ref DZLPaycheck>;
+            civils.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_CIVIL, "Rekrut", 0, 10000000));
+
+            armies = new array<ref DZLPaycheck>;
+            armies.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_ARMY, "Rekrut", 0, 10000000));
+
+            Save();
+        } else if ("1" == version)
+        {
+            cops = new array<ref DZLPaycheck>;
+            cops.Insert(cop);
+
+            medics = new array<ref DZLPaycheck>;
+            medics.Insert(medic);
+
+            civils = new array<ref DZLPaycheck>;
+            civils.Insert(civil);
+
+            armies = new array<ref DZLPaycheck>;
+            armies.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_ARMY, "Rekrut", 0, 10000000));
+
+            version = "2";
+            cop = null;
+            medic = null;
+            civil = null;
+
             Save();
         }
     }
