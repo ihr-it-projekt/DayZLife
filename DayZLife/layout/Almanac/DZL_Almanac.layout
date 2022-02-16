@@ -1166,6 +1166,58 @@ FrameWidgetClass Almanac {
            text "#Money_to_Player"
            "text halign" center
            "text valign" center
+           {
+            PanelWidgetClass medic_Panel {
+             visible 0
+             ignorepointer 1
+             position 0 0
+             size 1 0.9108
+             halign center_ref
+             valign bottom_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_quad_dark
+             {
+              PanelWidgetClass PanelWidget26 {
+               ignorepointer 1
+               position 0 0
+               size 0.35856 1
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               style editor_quad_dark
+               {
+                TextListboxWidgetClass player_Listbox {
+                 position 0.00043 0
+                 size 0.97286 0.97887
+                 halign center_ref
+                 valign center_ref
+                 hexactpos 0
+                 vexactpos 0
+                 hexactsize 0
+                 vexactsize 0
+                 "title visible" 0
+                 lines 20
+                }
+               }
+              }
+              MapWidgetClass medic_Map {
+               position 0.192 0
+               size 0.412 0.925
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+              }
+             }
+            }
+           }
           }
          }
         }
@@ -1225,7 +1277,7 @@ FrameWidgetClass Almanac {
       }
       ImageWidgetClass ImageWidget1 {
        ignorepointer 1
-       position 0.109 0.01
+       position 0.08929 0.00994
        size 0.0333 0.07
        hexactpos 0
        vexactpos 0
@@ -1240,7 +1292,7 @@ FrameWidgetClass Almanac {
       }
       TextWidgetClass countMedic {
        ignorepointer 1
-       position 0.147 0.01
+       position 0.12671 0.00994
        size 0.0424 0.07
        hexactpos 0
        vexactpos 0
@@ -1251,7 +1303,7 @@ FrameWidgetClass Almanac {
       }
       ImageWidgetClass ImageWidget2 {
        ignorepointer 1
-       position 0.21313 0.00962
+       position 0.17324 0.00994
        size 0.0333 0.07
        hexactpos 0
        vexactpos 0
@@ -1264,7 +1316,31 @@ FrameWidgetClass Almanac {
       }
       TextWidgetClass countCivil {
        ignorepointer 1
-       position 0.251 0.01
+       position 0.21066 0.00994
+       size 0.0424 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      ImageWidgetClass ImageWidget5 {
+       ignorepointer 1
+       position 0.25718 0.00994
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{E9F81291467FB5B8}DayZLife/layout/Almanac/Army.edds"
+       mode blend
+       "src alpha" 1
+       stretch 1
+      }
+      TextWidgetClass countArmy {
+       ignorepointer 1
+       position 0.29461 0.00994
        size 0.0424 0.07
        hexactpos 0
        vexactpos 0
@@ -1313,56 +1389,6 @@ FrameWidgetClass Almanac {
            stretch 1
           }
          }
-        }
-       }
-      }
-      PanelWidgetClass medic_Panel {
-       visible 0
-       ignorepointer 1
-       position 0 0
-       size 1 0.9108
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        PanelWidgetClass PanelWidget26 {
-         ignorepointer 1
-         position 0 0
-         size 0.35856 1
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextListboxWidgetClass player_Listbox {
-           position 0.00043 0
-           size 0.97286 0.97887
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           "title visible" 0
-           lines 20
-          }
-         }
-        }
-        MapWidgetClass medic_Map {
-         position 0.192 0
-         size 0.412 0.925
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
         }
        }
       }
