@@ -300,3 +300,8 @@ date,Date,Date,Datum,日期,日期,Дата,Datum,Data,Dátum,Data,Fecha,Date,Da
 count,Count,Count,Anzahl,数目,數數,Посчитать,Počet,Licznik,Számlálás,Conteggio,Cuenta,Compte,Conde,回数
 value,Value,Value,Wert,价值,價值,Значение,Hodnota,Wartość,Érték,Valore,Valor,Valeur,Valor,金額
 cop_panel,Cop Internal,Cop Internal,Polizei intern,内部警察,警察內部,Внутренний коп,Policista Interní,Cop Wewnętrzny,Zsaru Belső,Poliziotto interno,Policía interno,Flic interne,Cópia Interna,コピー・インターナル
+Cop_Rang,Available Cop Ranks,Available Cop Ranks,Verfügbare Polizei Ränge
+Medic_Rang,Available Medic Ranks,Available Medic Ranks,Verfügbare Sanitäter Ränge
+Army_Rang,Available Army Ranks,Available Army Ranks,Verfügbare Armee Ränge
+Rang,Current Rank,Current Rank,Aktueller Rang
+Army_list,Army list,Army list,Armee Liste
