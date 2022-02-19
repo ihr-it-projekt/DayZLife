@@ -113,6 +113,11 @@ class DZLPlayerClientDB
                 if (ctx.Read(configParamCop) && configParamCop.param1) {
                     config.copSpawnPoints = configParamCop.param1;
                 }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ARMY) {
+                Param1 <ref DZLJobSpawnPoints> configParamArmySpawn;
+                if (ctx.Read(configParamArmySpawn) && configParamArmySpawn.param1) {
+                    config.armySpawnPoints = configParamArmySpawn.param1;
+                }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_MEDIC) {
                 Param1 <ref DZLJobSpawnPoints> configParamMedicSpawn;
                 if (ctx.Read(configParamMedicSpawn) && configParamMedicSpawn.param1) {

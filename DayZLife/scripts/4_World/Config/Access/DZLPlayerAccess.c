@@ -3,6 +3,7 @@ class DZLPlayerAccess
     private bool canManageCops = true;
     private bool canManagePlayers = true;
     private bool canManageMedic = true;
+    private bool canManageArmy = false;
     private bool canManageCars = true;
     private string ident;
 
@@ -12,6 +13,7 @@ class DZLPlayerAccess
         canManagePlayers = true;
 		canManageMedic = true;
 		canManageCars = true;
+		canManageArmy = true;
     }
 
     string GetIdent() {
@@ -28,6 +30,10 @@ class DZLPlayerAccess
 	
     bool CanManageMedic() {
         return canManageMedic;
+    }
+	
+    bool CanManageArmy() {
+        return canManageArmy;
     }
 
     bool CanManageCars() {

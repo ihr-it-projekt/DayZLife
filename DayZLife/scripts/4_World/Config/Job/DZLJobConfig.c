@@ -4,6 +4,7 @@ class DZLJobConfig
     ref DZLPaycheckConfig paycheck;
     ref DZLLoadOuts loadOutsCops;
     ref DZLLoadOuts loadOutsMedics;
+    ref DZLLoadOuts loadOutsArmy;
     ref DZLArrestConfig arrestConfig;
 
     void DZLJobConfig() {
@@ -11,6 +12,7 @@ class DZLJobConfig
         paycheck = new DZLPaycheckConfig;
         loadOutsCops = new DZLLoadOuts(DAY_Z_LIFE_JOB_COP);
         loadOutsMedics = new DZLLoadOuts(DAY_Z_LIFE_JOB_MEDIC);
+        loadOutsArmy = new DZLLoadOuts(DAY_Z_LIFE_JOB_ARMY);
         arrestConfig = new DZLArrestConfig;
 	}
 

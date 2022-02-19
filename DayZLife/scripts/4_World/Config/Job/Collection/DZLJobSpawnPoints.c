@@ -242,7 +242,8 @@ class DZLJobSpawnPoints
 					point = new DZLSpawnPoint("Police Outpost Krasnostav", "11060.768555 231.467606 12488.763672", "-95.663597 0 0", items);
                     spawnPoints.Insert(point);
 
-			    } else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
+			    }
+			    else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
                     items.Insert("ParamedicJacket_Green");
 					items.Insert("ParamedicPants_Green");
 					items.Insert("Sneakers_White");
@@ -616,7 +617,19 @@ class DZLJobSpawnPoints
 					items.Insert("SurgicalMask");
 					point = new DZLSpawnPoint("Medic Station Zelenogorsk", "2746.510742 200.855423 5172.751953", "132.636261 0 0", items);
                     spawnPoints.Insert(point);
-			    } else {
+			    }
+			    else if (jobId == DAY_Z_LIFE_JOB_ARMY) {
+			        items = new array<string>;
+                    items.Insert("BDUPants");
+                    items.Insert("BDUJacket");
+                    items.Insert("MilitaryBelt");
+                    items.Insert("TacticalGloves_Green");
+                    items.Insert("MilitaryBoots_Black");
+                    items.Insert("MilitaryBeret_Red");
+                    point = new DZLSpawnPoint("North West Airfield", "4657.540039 343.892548 9586.001953", "64.744408 0.0 0.0", items);
+                    spawnPoints.Insert(point);
+			    }
+			    else {
                     items.Insert("Jeans_Blue");
                     items.Insert("Shirt_BlueCheck");
                     items.Insert("AthleticShoes_Blue");

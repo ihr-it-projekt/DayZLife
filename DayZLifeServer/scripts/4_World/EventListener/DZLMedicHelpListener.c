@@ -41,7 +41,7 @@ class DZLMedicHelpListener
 				        continue;
 				    }
 
-					onlineEmergencies.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), _player.GetPosition()));
+					onlineEmergencies.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), "", _player.GetPosition()));
 				}
             }
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(onlineEmergencies), true, sender);

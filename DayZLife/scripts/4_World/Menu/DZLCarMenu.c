@@ -50,9 +50,9 @@ class DZLCarMenu : DZLBaseMenu
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {
 		if (w == carPanelOnlinePlayerList) {
-		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(carPanelOnlinePlayerList, carPanelKeyOwnerList);
+		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(carPanelOnlinePlayerList, carPanelKeyOwnerList, DAY_Z_LIFE_JOB_CIVIL);
 		} else if (w == carPanelKeyOwnerList) {
-		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(carPanelKeyOwnerList, carPanelOnlinePlayerList);
+		    DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(carPanelKeyOwnerList, carPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
 		}
 		
 		return false;
@@ -62,7 +62,7 @@ class DZLCarMenu : DZLBaseMenu
 		if (super.OnClick(w, x, y, button)) return true;
 
 		if (w == carKeySaveButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<string>>(car, DZLDisplayHelper.GetPlayerIdsFromList(carPanelKeyOwnerList)), true);
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<DZLOnlinePlayer>>(car, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(carPanelKeyOwnerList)), true);
 			carKeySearchInput.SetText("");
 		} else if (w == carKeySearchButton) {
 			DZLDisplayHelper.SearchOnlinePlayersWithKey(carKeySearchInput.GetText(), carPanelOnlinePlayerList, carPanelKeyOwnerList, onlinePlayers, player);

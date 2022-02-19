@@ -48,6 +48,48 @@ class DZLPaycheckConfig
             Save();
         }
     }
+	
+	array<ref DZLPaycheck> GetPaycheckByJob(string job) {
+		if (DAY_Z_LIFE_JOB_MEDIC == job) {
+			return medics;
+		}
+		
+		if (DAY_Z_LIFE_JOB_COP == job) {
+			return cops;
+		}
+		
+		if (DAY_Z_LIFE_JOB_ARMY == job) {
+			return armies;
+		}
+		
+		return civils;
+	}
+	
+	DZLPaycheck GetFallbackPaycheckByJob(string job) {
+		if (DAY_Z_LIFE_JOB_MEDIC == job) {
+			return GetFallbackFromCollection(medics);
+		}
+		
+		if (DAY_Z_LIFE_JOB_COP == job) {
+			return GetFallbackFromCollection(cops);
+		}
+		
+		if (DAY_Z_LIFE_JOB_ARMY == job) {
+			return GetFallbackFromCollection(armies);
+		}
+		
+		return GetFallbackFromCollection(civils);
+	}
+	
+	private DZLPaycheck GetFallbackFromCollection(array<ref DZLPaycheck> collection) {
+		foreach(DZLPaycheck paycheck: collection) {
+			if (paycheck.isFallbackRang) {
+				return paycheck;
+			}
+		}
+		
+		return null;
+	}
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json")) {

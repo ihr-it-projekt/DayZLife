@@ -28,7 +28,7 @@ class DZLRangHelper
         DZLPaycheck defaultPaycheck = new DZLPaycheck("", "", 0, 10000000);
 
         foreach(DZLPaycheck payCheck: payChecks) {
-            if (dzlPlayer.hasJobGrade(payCheck.rang) && payCheck.amount > 0) {
+            if (dzlPlayer.HasJobGrade(payCheck.rang) && payCheck.amount > 0) {
                 return payCheck;
             }
 

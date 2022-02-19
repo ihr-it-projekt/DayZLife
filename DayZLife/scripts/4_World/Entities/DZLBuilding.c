@@ -97,7 +97,7 @@ class DZLBuilding
 		}
 	}
 
-	void UpdatePlayerAccess(array<string> playerAccess) {
+	void UpdatePlayerAccess(array<DZLOnlinePlayer> playerAccess) {
 		if(!GetGame().IsClient()){
 			house.UpdatePlayerAccess(playerAccess);
 		}

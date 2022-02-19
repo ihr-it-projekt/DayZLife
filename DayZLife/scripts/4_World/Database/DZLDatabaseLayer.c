@@ -15,6 +15,7 @@ class DZLDatabaseLayer
     private int copCount = 0;
     private int civCount = 0;
     private int medicCount = 0;
+    private int armyCount = 0;
 	private DZLDatabase database;
 
     void DZLDatabaseLayer() {
@@ -162,10 +163,17 @@ class DZLDatabaseLayer
         copCount = count;
         return this;
     }
+
     DZLDatabaseLayer SetMedicCount(int count) {
         medicCount = count;
         return this;
     }
+
+    DZLDatabaseLayer SetArmyCount(int count) {
+        armyCount = count;
+        return this;
+    }
+
     DZLDatabaseLayer SetCivCount(int count) {
         civCount = count;
         return this;
@@ -174,9 +182,15 @@ class DZLDatabaseLayer
     int GetCopCount() {
         return copCount;
     }
+
     int GetMedicCount() {
         return medicCount;
     }
+
+    int GetArmyCount() {
+        return armyCount;
+    }
+
     int GetCivCount() {
         return civCount;
     }

@@ -1,6 +1,6 @@
 class DZLArrestConfig
 {
-	string version = "2";
+	string version = "3";
 
 	bool shouldDeleteAllItemsOnPrissoner = true;
 	bool shouldDeleteAllItemsOnExPrissoner = true;
@@ -11,6 +11,7 @@ class DZLArrestConfig
 	ref array<vector> arrestAreas;
 	ref array<vector> exPrisonerAreas;
 	int arrestAreaRadius = 110;
+	string job;
 
     void DZLArrestConfig() {
         if (!Load()) {
@@ -65,4 +66,5 @@ class DZLArrestConfig
             JsonFileLoader<DZLArrestConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
         }
     }
+	
 }

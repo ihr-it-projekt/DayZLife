@@ -20,12 +20,12 @@ class DZLPlayerHouseListener
                 }
             }
 		} else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE) {
-			autoptr Param2<Building, ref array<string>> paramSaveKeyLists;
+			autoptr Param2<Building, ref array<DZLOnlinePlayer>> paramSaveKeyLists;
             if (ctx.Read(paramSaveKeyLists)){
                 Building buildingUpdateKey = paramSaveKeyLists.param1;
                 DZLBuilding dzlBuilding = new DZLBuilding(buildingUpdateKey);
 				PlayerBase playerOwner = PlayerBase.Cast(target);
-				array<string> playersAccess = paramSaveKeyLists.param2;
+				array<DZLOnlinePlayer> playersAccess = paramSaveKeyLists.param2;
 				
 				if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
 
@@ -39,11 +39,11 @@ class DZLPlayerHouseListener
                     playerMustUpdated.Insert(playerId);
                 }
 				
-				foreach(string playerIdWithNewAccess: playersAccess) {
-                    DZLPlayerHouse playerHouseAccess = DZLDatabaseLayer.Get().GetPlayerHouse(playerIdWithNewAccess);
+				foreach(DZLOnlinePlayer playerIdWithNewAccess: playersAccess) {
+                    DZLPlayerHouse playerHouseAccess = DZLDatabaseLayer.Get().GetPlayerHouse(playerIdWithNewAccess.id);
 
                     playerHouseAccess.AddKey(dzlBuilding.GetDZLHouse());
-                    playerMustUpdated.Insert(playerIdWithNewAccess);
+                    playerMustUpdated.Insert(playerIdWithNewAccess.id);
 				}
 
 				array<Man> onlinePlayers = new array<Man>;
@@ -125,7 +125,7 @@ class DZLPlayerHouseListener
 	    foreach(string ident: allPlayer) {
 	        DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayer(ident);
 			if (dzlBuilding.HasPlayerAccess(ident) && ident != playerIdent) {
-			    collection.Insert(new DZLOnlinePlayer(ident, _player.playerName));
+			    collection.Insert(new DZLOnlinePlayer(ident, _player.playerName, ""));
 			}
 		}
 		

@@ -18,6 +18,7 @@ class DZLConfig
 	ref DZLTraderConfig traderConfig;
 	ref DZLJobSpawnPoints copSpawnPoints;
     ref DZLJobSpawnPoints medicSpawnPoints;
+    ref DZLJobSpawnPoints armySpawnPoints;
     ref DZLJobSpawnPoints civilSpawnPoints;
     ref array<string> jobIds;
     ref DZLAdmin adminIds;
@@ -37,6 +38,7 @@ class DZLConfig
             copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
             medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
             civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
+            armySpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_ARMY);
             adminIds = new DZLAdmin;
             carConfig = new DZLCarConfig;
             medicConfig = new DZLMedicConfig;
@@ -48,6 +50,7 @@ class DZLConfig
         jobIds.Insert(DAY_Z_LIFE_JOB_CIVIL);
         jobIds.Insert(DAY_Z_LIFE_JOB_MEDIC);
         jobIds.Insert(DAY_Z_LIFE_JOB_COP);
+        jobIds.Insert(DAY_Z_LIFE_JOB_ARMY);
     }
 
     DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
@@ -55,6 +58,8 @@ class DZLConfig
             return copSpawnPoints;
         } else if (searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
             return medicSpawnPoints;
+        } else if (searchJobId == DAY_Z_LIFE_JOB_ARMY) {
+            return armySpawnPoints;
         }
 
         return civilSpawnPoints;

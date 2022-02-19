@@ -135,8 +135,12 @@ class DZLHouse
 		Save();
 	}
 
-	void UpdatePlayerAccess(array<string> playerAccess) {
-	    this.playerAccess = playerAccess;
+	void UpdatePlayerAccess(array<DZLOnlinePlayer> playerAccess) {
+	    this.playerAccess = new array<string>;
+		foreach(DZLOnlinePlayer player: playerAccess) {
+			this.playerAccess.Insert(player.id);
+		}
+		
 	    Save();
 	}
 

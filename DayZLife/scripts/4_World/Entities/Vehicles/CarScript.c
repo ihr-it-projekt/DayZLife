@@ -118,8 +118,19 @@ modded class CarScript
         SynchronizeValues(null);
     }
 
-    void UpdatePlayerAccess(array<string> playerAccess) {
+    void UpdatePlayerAccessByDZLOnlinePlayer(array<DZLOnlinePlayer> onlinePlayers) {
+		this.playerAccess = new array<string>;
+		
+		foreach(DZLOnlinePlayer player: onlinePlayers) {
+			this.playerAccess.Insert(player.id);
+		}
         this.playerAccess = playerAccess;
+        SynchronizeValues(null);
+    }
+	
+    void UpdatePlayerAccess(array<string> playerAccess) {
+		this.playerAccess = playerAccess;
+	
         SynchronizeValues(null);
     }
 

@@ -60,7 +60,7 @@ class DZLMessageListener
             foreach(Man _player: _players) {
                 string ident = _player.GetIdentity().GetId();
                 if (ident == player.GetPlayerId()) continue;
-                collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName()));
+                collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), DZLDatabaseLayer.Get().GetPlayer(ident).GetJobGrade()));
             }
         }
 

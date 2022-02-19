@@ -30,7 +30,7 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (player.IsCop()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRang(DAY_Z_LIFE_JOB_COP)));
             }
         }
 
@@ -44,7 +44,21 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (player.IsMedic()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRang(DAY_Z_LIFE_JOB_MEDIC)));
+            }
+        }
+
+        return collection;
+    }
+
+    array<ref DZLOnlinePlayer> GetArmyPlayerCollection() {
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
+
+            if (player.IsArmy()) {
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRang(DAY_Z_LIFE_JOB_ARMY)));
             }
         }
 
@@ -58,56 +72,76 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (exclude.Count() == 0 || exclude.Find(ident) == -1) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName));
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, ""));
             }
         }
 
         return collection;
     }
 
-    void UpdateCops(ref array<string> cops) {
+    void UpdateCops(ref array<DZLOnlinePlayer> cops) {
         if (!cops) return;
 
-        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
-
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
-            foreach(string newCop: cops) {
-                if (ident == newCop) {
+			string newRang = "";
+            foreach(DZLOnlinePlayer newCop: cops) {
+                if (ident == newCop.id) {
                     hasFound = true;
+					newRang = newCop.rang;
                     break;
                 }
             }
-            player.UpdateCop(hasFound);
+			
+            player.UpdateCop(hasFound, newRang);
         }
     }
-    void UpdateMedics(ref array<string> medics) {
+	
+    void UpdateMedics(ref array<DZLOnlinePlayer> medics) {
         if (!medics) return;
 
-        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
+            bool hasFound = false;
+			string newRang = "";
+            foreach(DZLOnlinePlayer newMedic: medics) {
+                if (ident == newMedic.id) {
+                    hasFound = true;
+					newRang = newMedic.rang;
+                    break;
+                }
+            }
+            player.UpdateMedic(hasFound, newRang);
+        }
+    }
+	
+    void UpdateArmy(ref array<DZLOnlinePlayer> army) {
+        if (!army) return;
 
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
-            foreach(string newMedic: medics) {
-                if (ident == newMedic) {
+			string newRang = "";
+            foreach(DZLOnlinePlayer newArmy: army) {
+                if (ident == newArmy.id) {
                     hasFound = true;
+					newRang = newArmy.rang;
                     break;
                 }
             }
-            player.UpdateMedic(hasFound);
+            player.UpdateArmy(hasFound, newRang);
         }
     }
 
-    void UpdateCarKeys(PlayerIdentity player, CarScript car, ref array<string> players) {
+    void UpdateCarKeys(PlayerIdentity player, CarScript car, ref array<DZLOnlinePlayer> players) {
         if (!players) return;
 
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
         
         if (!car.IsOwner(player)) return;
 
-        car.UpdatePlayerAccess(players);
+        car.UpdatePlayerAccessByDZLOnlinePlayer(players);
     }
 
     private bool Load(){

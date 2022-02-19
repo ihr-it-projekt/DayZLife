@@ -15,7 +15,7 @@ class DZLCarKeyListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_GET_UPDATE_CAR_KEYS) {
-            autoptr Param2<CarScript, ref array<string>> paramUpdateKeys;
+            autoptr Param2<CarScript, ref array<DZLOnlinePlayer>> paramUpdateKeys;
             if (ctx.Read(paramUpdateKeys)){
 
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -30,7 +30,7 @@ class DZLCarKeyListener
             foreach(string playerId: keys) {
                 DZLPlayer dPlayer = DZLDatabaseLayer.Get().GetPlayer(playerId);
 
-                keyOwner.Insert(new DZLOnlinePlayer(dPlayer.dayZPlayerId, dPlayer.playerName));
+                keyOwner.Insert(new DZLOnlinePlayer(dPlayer.dayZPlayerId, dPlayer.playerName, dPlayer.GetJobGrade()));
             }
 
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(keyOwner), true, sender);

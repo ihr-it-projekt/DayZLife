@@ -36,7 +36,29 @@ class DZLDisplayHelper
         mapWidget.AddUserMark(pos, "", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
     }
 
-    static void MoveDZLOnlinePlayerFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
+    static void MoveDZLOnlinePlayerFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, string job) {
+        int pos = sourceWidget.GetSelectedRow();
+        if (pos == -1) {
+            return;
+        }
+        DZLOnlinePlayer itemType;
+        sourceWidget.GetItemData(pos, 0, itemType);
+		
+        if (itemType) {
+            sourceWidget.RemoveRow(pos);
+
+            int posInsert = targetWidget.AddItem(itemType.name, itemType, 0);
+			
+			DZLPaycheck paycheck = DZLConfig.Get().jobConfig.paycheck.GetFallbackPaycheckByJob(job);
+			itemType.rang = paycheck.rang;
+			
+			if (DAY_Z_LIFE_JOB_CIVIL != job) {
+				targetWidget.SetItem(posInsert, itemType.rang, itemType, 1);
+			}
+        }
+    }
+	
+    static void LoadDZLOnlinePlayerAndFillRangListWidget(TextListboxWidget sourceWidget, TextListboxWidget jobRangList, string job) {
         int pos = sourceWidget.GetSelectedRow();
         if (pos == -1) {
             return;
@@ -45,17 +67,52 @@ class DZLDisplayHelper
         sourceWidget.GetItemData(pos, 0, itemType);
 
         if (itemType) {
-            sourceWidget.RemoveRow(pos);
-
-            targetWidget.AddItem(itemType.name, itemType, 0);
-
+            array<ref DZLPaycheck> paychecks = DZLConfig.Get().jobConfig.paycheck.GetPaycheckByJob(job);
+			
+			
+			int count = 0;
+			jobRangList.ClearItems();
+			foreach(DZLPaycheck paycheck: paychecks) {
+				jobRangList.AddItem(paycheck.rang, paycheck, 0);
+				
+				if (paycheck.rang == itemType.rang) {
+					jobRangList.SelectRow(count);
+				}
+				
+				count++;
+			}
         }
     }
+	
+	static void ChangeRangFromPlayer(TextListboxWidget rangWidget, TextListboxWidget playerWidget){
+		int posPlayer = playerWidget.GetSelectedRow();
+        if (posPlayer == -1) {
+            return;
+        }
+		
+        DZLOnlinePlayer player;
+        playerWidget.GetItemData(posPlayer, 0, player);
+		
+		int posRang = rangWidget.GetSelectedRow();
+        if (posRang == -1) {
+            return;
+        }
+        DZLPaycheck paycheck;
+        rangWidget.GetItemData(posRang, 0, paycheck);
 
-    static array<string> GetPlayerIdsFromList(TextListboxWidget listWidget) {
+        if (paycheck && player) {
+			player.rang = paycheck.rang;
+			
+			playerWidget.SetItem(posPlayer, player.name, player, 0);
+			playerWidget.SetItem(posPlayer, player.rang, player, 1);
+		}
+	}
+
+    static array<DZLOnlinePlayer> GetPlayerIdsAndRanksFromList(TextListboxWidget listWidget) {
         int count = listWidget.GetNumItems();
 
-        array<string> list = new array<string>;
+        array<DZLOnlinePlayer> list = new array<DZLOnlinePlayer>;
+		
 
         if (count > 0) {
             for (int i = 0; i < count; ++i) {
@@ -63,7 +120,7 @@ class DZLDisplayHelper
                 listWidget.GetItemData(i, 0, _player);
 
                 if (_player) {
-                    list.Insert(_player.id);
+					list.Insert(_player);
                 }
             }
         }

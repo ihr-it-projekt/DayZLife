@@ -10,6 +10,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 
 	private int medicIndex = -1;
 	private int copIndex = -1;
+	private int armyIndex = -1;
 
 	
 	void DZLSpawnPositionMenu() {
@@ -65,6 +66,10 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 		if (player.GetDZLPlayer().IsCop()) {
 		    copIndex = jobSelection.AddItem("#Cop");
 		}
+		
+		if (player.GetDZLPlayer().IsArmy()) {
+		    armyIndex = jobSelection.AddItem("#Army");
+		}
 
 		UpdateSpawnPoints();
 	}
@@ -114,6 +119,8 @@ class DZLSpawnPositionMenu : DZLBaseMenu
 			    index = 1;
 			} else if (copIndex == index) {
 			    index = 2;
+			} else if (armyIndex == index) {
+			    index = 3;
 			}
 			
 			jobId = activeJobIds.Get(index);

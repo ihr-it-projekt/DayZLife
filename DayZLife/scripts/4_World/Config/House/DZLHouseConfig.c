@@ -1,8 +1,9 @@
 class DZLHouseConfig
  {
-    string version = "3";
+    string version = "4";
     ref array<ref DZLJobHouseDefinition> copHouseConfigs;
     ref array<ref DZLJobHouseDefinition> medicHouseConfigs;
+    ref array<ref DZLJobHouseDefinition> armyHouseConfigs;
     ref array<ref DZLHouseDefinition> houseConfigs;
 
     void DZLHouseConfig()
@@ -22,6 +23,12 @@ class DZLHouseConfig
 
             medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_City_Hospital", 30));
             medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Village_HealthCare"));
+
+            armyHouseConfigs = new array<ref DZLJobHouseDefinition>;
+
+            armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Tisy_HQ"));
+            armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Mil_ATC_Small"));
+            armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Mil_ATC_Big"));
 
 			array<vector> storagePosition = new array<vector>;
             houseConfigs.Insert(new DZLHouseDefinition("Land_Garage_Row_Small", 100, 50, storagePosition, 10));
@@ -152,6 +159,7 @@ class DZLHouseConfig
 			storagePosition.Insert("0.268555 -5.509995 6.685059");
 			storagePosition.Insert("1.824219 -2.240005 -1.942383");
             houseConfigs.Insert(new DZLHouseDefinition("Land_House_2B03", 100, 50, storagePosition, 10));
+
             Save();
         }
 
@@ -167,6 +175,16 @@ class DZLHouseConfig
 		if (version == "2") {
 			version = "3";
 			//Change: remove raid range config param
+			Save();
+		}
+
+		if (version == "3") {
+			version = "4";
+			armyHouseConfigs = new array<ref DZLJobHouseDefinition>;
+			armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Tisy_HQ"));
+			armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Mil_ATC_Small"));
+			armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Mil_ATC_Big"));
+			armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Mil_Airfield_HQ"));
 			Save();
 		}
     }
@@ -191,22 +209,24 @@ class DZLHouseConfig
 		return false;
 	}
 	
-	DZLJobHouseDefinition GetCopHouseDefinition(notnull Building building) {
-		foreach(DZLJobHouseDefinition definition: copHouseConfigs) {
-			if (definition.houseType == building.GetType()) {
-				return definition;
-			}
-		}
-		
-		return null;
-	}
+	DZLJobHouseDefinition GetJobHouseDefinition(notnull Building building, string job) {
+	    array<ref DZLJobHouseDefinition> houseJobConfig;
 
-	DZLJobHouseDefinition GetMedicHouseDefinition(notnull Building building) {
-		foreach(DZLJobHouseDefinition definition: medicHouseConfigs) {
-			if (definition.houseType == building.GetType()) {
-				return definition;
-			}
-		}
+	    if (DAY_Z_LIFE_JOB_COP == job) {
+	        houseJobConfig = copHouseConfigs;
+	    } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
+	        houseJobConfig = medicHouseConfigs;
+	    } else if (DAY_Z_LIFE_JOB_ARMY == job) {
+	        houseJobConfig = armyHouseConfigs;
+	    }
+		
+		if (houseJobConfig) {
+            foreach(DZLJobHouseDefinition definition: houseJobConfig) {
+                if (definition.houseType == building.GetType()) {
+                    return definition;
+                }
+            }
+        }
 
 		return null;
 	}

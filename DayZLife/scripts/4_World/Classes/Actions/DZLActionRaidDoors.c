@@ -32,27 +32,17 @@ class DZLActionRaidDoors: ActionInteractBase
         item = player.GetItemInHands();
         if (!item) return false;
 
-        DZLJobHouseDefinition copHouseDefinition = config.GetCopHouseDefinition(building);
-        DZLJobHouseDefinition medicDefinition;
-        DZLHouseDefinition definition;
+        DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(building, player);
 
         array<string> raidTools = new array<string>;
 
-        if(copHouseDefinition && player.GetDZLPlayer().IsActiveAsCop()) {
-            return false;
-        } else if (copHouseDefinition && !player.GetDZLPlayer().IsActiveAsCop()) {
-            raidTools = copHouseDefinition.raidTools;
+        if(!definition) {
+            DZLHouseDefinition houseDefinition = config.GetHouseDefinitionByBuilding(building);
+			if (!houseDefinition) return false;
+			
+			raidTools = houseDefinition.raidTools;
         } else {
-            medicDefinition = config.GetMedicHouseDefinition(building);
-            if(medicDefinition && player.GetDZLPlayer().IsActiveAsMedic()) {
-                return false;
-            } else if (medicDefinition && !player.GetDZLPlayer().IsActiveAsMedic()) {
-                raidTools = medicDefinition.raidTools;
-            } else {
-                 definition = config.GetHouseDefinitionByBuilding(building);
-                 if (!definition) return false;
-                 raidTools = definition.raidTools;
-            }
+            raidTools = definition.raidTools;
         }
 
         foreach(string itemType: raidTools) {
@@ -65,15 +55,14 @@ class DZLActionRaidDoors: ActionInteractBase
 
                 int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
                 if (doorIndex != -1 && !building.IsDoorOpen(doorIndex)) {
-                    if (copHouseDefinition) return true;
-                    if (medicDefinition) return true;
-
-                    if (GetGame().IsServer()) {
+                    if (GetGame().IsServer() && !definition) {
                         DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(building);
-                        if(dzlHouse && definition && dzlHouse.CanRaidDoor(player, doorIndex)) return true;
+                        if(dzlHouse && dzlHouse.CanRaidDoor(player, doorIndex)) return true;
 
                         DZLSendMessage(player.GetIdentity(), "#you_can_not_raid_that_door");
                         return false;
+                    } else {
+                        if (definition) return true;
                     }
 
                     return !building.IsDoorOpen(doorIndex);

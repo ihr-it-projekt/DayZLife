@@ -7,7 +7,8 @@ class DZLPlayerArrestListener
 	private int copCount = 0;
 	private int civCount = 0;
 	private int medicCount = 0;
-	
+	private int armyCont = 0;
+
     void DZLPlayerArrestListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
 		arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
@@ -32,9 +33,10 @@ class DZLPlayerArrestListener
 				DZLPlayer copDzl = cop.GetDZLPlayer();
 				DZLPlayer prisonerDzl = prisoner.GetDZLPlayer();
 				
-				if(!copDzl.IsActiveAsCop()) return;
-				if(prisonerDzl.IsActiveAsCop()) return;
-				
+				if (copDzl.IsActiveAsMedic() || copDzl.IsActiveAsCivil()) return;
+				if (copDzl.arrestTimeInMinutes != 0) return;
+				if ((prisonerDzl.IsActiveAsCop() == copDzl.IsActiveAsCop()) || (prisonerDzl.IsActiveAsArmy() == copDzl.IsActiveAsArmy())) return;
+
 				prisonerDzl.ArrestPlayer(arrestReason, arrestTime);
 
 				ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
@@ -50,7 +52,7 @@ class DZLPlayerArrestListener
 				DZLLogArrest(prisoner.GetPlayerId(), "got arrest", arrestTime);
             }
         } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param4<ref array<ref DZLEscapedPlayer>, int, int, int>(escapeePlayers, copCount, medicCount, civCount), true, sender);
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int>(escapeePlayers, copCount, medicCount, civCount, armyCont), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS) {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOpenTicketPlayer>>(openTicketPlayers), true, sender);
         } else if (rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT) {
@@ -66,6 +68,7 @@ class DZLPlayerArrestListener
         civCount = 0;
         copCount = 0;
         medicCount = 0;
+        armyCont = 0;
 
 		foreach(Man playerMan: allPlayers) {
 		    PlayerBase player = PlayerBase.Cast(playerMan);
@@ -77,7 +80,10 @@ class DZLPlayerArrestListener
 
 			if(dzlPlayer.IsActiveAsCop()) {
 			    copCount ++;
-				continue;
+			}
+
+			if(dzlPlayer.IsActiveAsArmy()) {
+			    armyCont ++;
 			}
 
             if(dzlPlayer.IsActiveAsCivil()) {
@@ -119,7 +125,7 @@ class DZLPlayerArrestListener
 				}
 			}
 		}
-		DZLDatabaseLayer.Get().SetCopCount(copCount).SetMedicCount(medicCount).SetCivCount(civCount);
+		DZLDatabaseLayer.Get().SetCopCount(copCount).SetMedicCount(medicCount).SetCivCount(civCount).SetArmyCount(armyCont);
 
 		GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
 	}

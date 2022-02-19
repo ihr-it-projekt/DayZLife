@@ -316,7 +316,7 @@ class DZLHouseMenu : DZLBaseMenu
 
                 return true;
             case keySaveButton:
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param2<Building, ref array<string>>(building, DZLDisplayHelper.GetPlayerIdsFromList(keyPlayerAccessList)), true);
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param2<Building, ref array<DZLOnlinePlayer>>(building, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(keyPlayerAccessList)), true);
                 searchInput.SetText("");
                 return true;
 			case searchButton:
@@ -364,9 +364,9 @@ class DZLHouseMenu : DZLBaseMenu
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {
         if (w == keyPlayerList) {
-            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerList, keyPlayerAccessList);
+            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerList, keyPlayerAccessList, DAY_Z_LIFE_JOB_CIVIL);
         } else if (w == keyPlayerAccessList) {
-            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerAccessList, keyPlayerList);
+            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(keyPlayerAccessList, keyPlayerList, DAY_Z_LIFE_JOB_CIVIL);
         } else if (w == houseInventoryList) {
             DZLDisplayHelper.MoveStoreItemFromListWidgetToListWidget(houseInventoryList, playerInventoryAddList);
         } else if (w == houseInventoryAddList) {

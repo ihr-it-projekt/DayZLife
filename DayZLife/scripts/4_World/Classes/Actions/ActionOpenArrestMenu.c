@@ -19,8 +19,9 @@ class ActionOpenArrestMenu: ActionInteractBase
 		if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
         DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
-        if (!dzlPlayerCop.IsActiveAsCop()) return false;
-		
+        if (dzlPlayerCop.IsActiveAsMedic() || dzlPlayerCop.IsActiveAsCivil()) return false;
+        if (dzlPlayerCop.arrestTimeInMinutes != 0) return false;
+
 		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 		if (!targetPlayer.IsDZLPlayer()) return false;
 
@@ -28,7 +29,8 @@ class ActionOpenArrestMenu: ActionInteractBase
             if(!targetPlayer || !targetPlayer.GetIdentity()) return false;
 
             DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();
-            if (dzlPlayerPrisoner.IsActiveAsCop()) return false;
+
+            if ((dzlPlayerPrisoner.IsActiveAsCop() == dzlPlayerCop.IsActiveAsCop()) || (dzlPlayerPrisoner.IsActiveAsArmy() == dzlPlayerCop.IsActiveAsArmy())) return false;
         }
 
         return true;
