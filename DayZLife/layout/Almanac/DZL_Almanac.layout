@@ -582,21 +582,6 @@ FrameWidgetClass Almanac {
           }
          }
         }
-        MultilineTextWidgetClass save_CopTextWidget {
-         ignorepointer 1
-         position 0 0.35083
-         size 0.29258 0.12933
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#Du musst einen rang waehlen bevor du speichern kannst!"
-         "text halign" center
-         "text valign" center
-         wrap 1
-        }
        }
       }
       PanelWidgetClass escaped_panel {
@@ -1505,21 +1490,6 @@ FrameWidgetClass Almanac {
           }
          }
         }
-        MultilineTextWidgetClass save_MedicTextWidget {
-         ignorepointer 1
-         position 0 0.35083
-         size 0.29258 0.12933
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#Du musst einen rang waehlen bevor du speichern kannst!"
-         "text halign" center
-         "text valign" center
-         wrap 1
-        }
        }
       }
       PanelWidgetClass playerOpenTicketsWidget {
@@ -1689,20 +1659,465 @@ FrameWidgetClass Almanac {
           }
          }
         }
-        MultilineTextWidgetClass save_ArmyTextWidget0 {
+       }
+      }
+      PanelWidgetClass armyjob_panel0 {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget117 {
          ignorepointer 1
-         position 0 0.35083
-         size 0.29258 0.12933
-         halign center_ref
+         position 0 0
+         size 0.35 1
          valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         text "#Du musst einen rang waehlen bevor du speichern kannst!"
-         "text halign" center
-         "text valign" center
-         wrap 1
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_ArmyPanel0 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget118 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass armyListbox0 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_list;50;#Rang;50;"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget119 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_ArmyPanel0 {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget36 {
+         ignorepointer 1
+         position 0 0
+         size 0.18918 0.77525
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass army_RangList0 {
+           position 0 0
+           size 0.96078 0.97183
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_Rang"
+           lines 15
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass armyjob_panel1 {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget1110 {
+         ignorepointer 1
+         position 0 0
+         size 0.35 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_ArmyPanel1 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget1111 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass armyListbox1 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_list;50;#Rang;50;"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget1112 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_ArmyPanel1 {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget37 {
+         ignorepointer 1
+         position 0 0
+         size 0.18918 0.77525
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass army_RangList1 {
+           position 0 0
+           size 0.96078 0.97183
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_Rang"
+           lines 15
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass armyjob_panel2 {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget1113 {
+         ignorepointer 1
+         position 0 0
+         size 0.35 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_ArmyPanel2 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget1114 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass armyListbox2 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_list;50;#Rang;50;"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget1115 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_ArmyPanel2 {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget38 {
+         ignorepointer 1
+         position 0 0
+         size 0.18918 0.77525
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass army_RangList2 {
+           position 0 0
+           size 0.96078 0.97183
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_Rang"
+           lines 15
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass armyjob_panel3 {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget1116 {
+         ignorepointer 1
+         position 0 0
+         size 0.35 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_ArmyPanel3 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget1117 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass armyListbox3 {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_list;50;#Rang;50;"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget1118 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_ArmyPanel3 {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget39 {
+         ignorepointer 1
+         position 0 0
+         size 0.18918 0.77525
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass army_RangList3 {
+           position 0 0
+           size 0.96078 0.97183
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Army_Rang"
+           lines 15
+          }
+         }
         }
        }
       }
