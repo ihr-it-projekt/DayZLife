@@ -1243,7 +1243,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{2B34C7CA0DE7341A}DayZLife/layout/Almanac/Police.edds"
+       imageTexture "{048ED4A53EA093A4}DayZLife/layout/Almanac/PoliceIcon.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
@@ -1262,13 +1262,13 @@ FrameWidgetClass Almanac {
       }
       ImageWidgetClass ImageWidget1 {
        ignorepointer 1
-       position 0.08929 0.00994
+       position 0.17344 0.00994
        size 0.0333 0.07
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{33316A6E1BD778B9}DayZLife/layout/Almanac/Medic.edds"
+       imageTexture "{39DAA9AABB8E2B03}DayZLife/layout/Almanac/MedicIcon.edds"
        mode additive
        "src alpha" 1
        "no wrap" 0
@@ -1277,7 +1277,7 @@ FrameWidgetClass Almanac {
       }
       TextWidgetClass countMedic {
        ignorepointer 1
-       position 0.12671 0.00994
+       position 0.21094 0.00994
        size 0.0424 0.07
        hexactpos 0
        vexactpos 0
@@ -1288,20 +1288,20 @@ FrameWidgetClass Almanac {
       }
       ImageWidgetClass ImageWidget2 {
        ignorepointer 1
-       position 0.17324 0.00994
+       position 0.25753 0.00994
        size 0.0333 0.07
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{19676136A428B8E7}DayZLife/layout/Almanac/Personal.edds"
+       imageTexture "{7354D2EE62FCC049}DayZLife/layout/Almanac/CivilIcon.edds"
        mode blend
        "src alpha" 1
        stretch 1
       }
       TextWidgetClass countCivil {
        ignorepointer 1
-       position 0.21066 0.00994
+       position 0.29502 0.00994
        size 0.0424 0.07
        hexactpos 0
        vexactpos 0
@@ -1312,20 +1312,20 @@ FrameWidgetClass Almanac {
       }
       ImageWidgetClass ImageWidget5 {
        ignorepointer 1
-       position 0.25718 0.00994
+       position 0.08935 0.00994
        size 0.0333 0.07
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{E9F81291467FB5B8}DayZLife/layout/Almanac/Army.edds"
+       imageTexture "{C67AC3543A5B9451}DayZLife/layout/Almanac/ArmyIcon.edds"
        mode blend
        "src alpha" 1
        stretch 1
       }
       TextWidgetClass countArmy {
        ignorepointer 1
-       position 0.29461 0.00994
+       position 0.12685 0.00994
        size 0.0424 0.07
        hexactpos 0
        vexactpos 0
