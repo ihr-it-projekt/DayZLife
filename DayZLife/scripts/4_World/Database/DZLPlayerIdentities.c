@@ -30,7 +30,7 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (player.IsCop()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRang(DAY_Z_LIFE_JOB_COP)));
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_COP)));
             }
         }
 
@@ -44,7 +44,7 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (player.IsMedic()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRang(DAY_Z_LIFE_JOB_MEDIC)));
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_MEDIC)));
             }
         }
 
@@ -58,7 +58,7 @@ class DZLPlayerIdentities
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
             if (player.IsArmy()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRang(DAY_Z_LIFE_JOB_ARMY)));
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_ARMY)));
             }
         }
 
@@ -85,16 +85,16 @@ class DZLPlayerIdentities
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
-			string newRang = "";
+			string newRank = "";
             foreach(DZLOnlinePlayer newCop: cops) {
                 if (ident == newCop.id) {
                     hasFound = true;
-					newRang = newCop.rang;
+					newRank = newCop.rank;
                     break;
                 }
             }
 			
-            player.UpdateCop(hasFound, newRang);
+            player.UpdateCop(hasFound, newRank);
         }
     }
 	
@@ -104,15 +104,15 @@ class DZLPlayerIdentities
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
-			string newRang = "";
+			string newRank = "";
             foreach(DZLOnlinePlayer newMedic: medics) {
                 if (ident == newMedic.id) {
                     hasFound = true;
-					newRang = newMedic.rang;
+					newRank = newMedic.rank;
                     break;
                 }
             }
-            player.UpdateMedic(hasFound, newRang);
+            player.UpdateMedic(hasFound, newRank);
         }
     }
 	
@@ -122,15 +122,15 @@ class DZLPlayerIdentities
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
-			string newRang = "";
+			string newRank = "";
             foreach(DZLOnlinePlayer newArmy: army) {
                 if (ident == newArmy.id) {
                     hasFound = true;
-					newRang = newArmy.rang;
+					newRank = newArmy.rank;
                     break;
                 }
             }
-            player.UpdateArmy(hasFound, newRang);
+            player.UpdateArmy(hasFound, newRank);
         }
     }
 

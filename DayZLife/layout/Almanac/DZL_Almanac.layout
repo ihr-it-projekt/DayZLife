@@ -526,7 +526,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Cop_list;50;#Rang;50;"
+           colums "#Cop_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -567,7 +567,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass cop_RangList {
+          TextListboxWidgetClass cop_RankList {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -577,7 +577,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Cop_Rang"
+           colums "#Cop_Rank"
            lines 15
           }
          }
@@ -1434,7 +1434,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Medic_list;50;#Rang;50;"
+           colums "#Medic_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -1475,7 +1475,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass medic_RangList {
+          TextListboxWidgetClass medic_RankList {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -1485,7 +1485,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Medic_Rang"
+           colums "#Medic_Rank"
            lines 15
           }
          }
@@ -1603,7 +1603,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_list;50;#Rang;50;"
+           colums "#Army_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -1644,7 +1644,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass army_RangList {
+          TextListboxWidgetClass army_RankList {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -1654,7 +1654,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_Rang"
+           colums "#Army_Rank"
            lines 15
           }
          }
@@ -1718,7 +1718,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_list;50;#Rang;50;"
+           colums "#Army_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -1759,7 +1759,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass army_RangList0 {
+          TextListboxWidgetClass army_RankList0 {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -1769,7 +1769,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_Rang"
+           colums "#Army_Rank"
            lines 15
           }
          }
@@ -1833,7 +1833,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_list;50;#Rang;50;"
+           colums "#Army_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -1874,7 +1874,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass army_RangList1 {
+          TextListboxWidgetClass army_RankList1 {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -1884,7 +1884,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_Rang"
+           colums "#Army_Rank"
            lines 15
           }
          }
@@ -1948,7 +1948,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_list;50;#Rang;50;"
+           colums "#Army_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -1989,7 +1989,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass army_RangList2 {
+          TextListboxWidgetClass army_RankList2 {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -1999,7 +1999,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_Rang"
+           colums "#Army_Rank"
            lines 15
           }
          }
@@ -2063,7 +2063,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_list;50;#Rang;50;"
+           colums "#Army_list;50;#Rank;50;"
            lines 20
           }
          }
@@ -2104,7 +2104,7 @@ FrameWidgetClass Almanac {
          vexactsize 0
          style editor_quad_dark
          {
-          TextListboxWidgetClass army_RangList3 {
+          TextListboxWidgetClass army_RankList3 {
            position 0 0
            size 0.96078 0.97183
            halign center_ref
@@ -2114,7 +2114,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Army_Rang"
+           colums "#Army_Rank"
            lines 15
           }
          }

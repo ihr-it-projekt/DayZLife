@@ -50,15 +50,15 @@ class DZLDisplayHelper
             int posInsert = targetWidget.AddItem(itemType.name, itemType, 0);
 			
 			DZLPaycheck paycheck = DZLConfig.Get().jobConfig.paycheck.GetFallbackPaycheckByJob(job);
-			itemType.rang = paycheck.rang;
+			itemType.rank = paycheck.rank;
 			
 			if (DAY_Z_LIFE_JOB_CIVIL != job) {
-				targetWidget.SetItem(posInsert, itemType.rang, itemType, 1);
+				targetWidget.SetItem(posInsert, itemType.rank, itemType, 1);
 			}
         }
     }
 	
-    static void LoadDZLOnlinePlayerAndFillRangListWidget(TextListboxWidget sourceWidget, TextListboxWidget jobRangList, string job) {
+    static void LoadDZLOnlinePlayerAndFillRankListWidget(TextListboxWidget sourceWidget, TextListboxWidget jobRankList, string job) {
         int pos = sourceWidget.GetSelectedRow();
         if (pos == -1) {
             return;
@@ -71,12 +71,12 @@ class DZLDisplayHelper
 			
 			
 			int count = 0;
-			jobRangList.ClearItems();
+			jobRankList.ClearItems();
 			foreach(DZLPaycheck paycheck: paychecks) {
-				jobRangList.AddItem(paycheck.rang, paycheck, 0);
+				jobRankList.AddItem(paycheck.rank, paycheck, 0);
 				
-				if (paycheck.rang == itemType.rang) {
-					jobRangList.SelectRow(count);
+				if (paycheck.rank == itemType.rank) {
+					jobRankList.SelectRow(count);
 				}
 				
 				count++;
@@ -84,7 +84,7 @@ class DZLDisplayHelper
         }
     }
 	
-	static void ChangeRangFromPlayer(TextListboxWidget rangWidget, TextListboxWidget playerWidget){
+	static void ChangeRankFromPlayer(TextListboxWidget rankWidget, TextListboxWidget playerWidget){
 		int posPlayer = playerWidget.GetSelectedRow();
         if (posPlayer == -1) {
             return;
@@ -93,18 +93,18 @@ class DZLDisplayHelper
         DZLOnlinePlayer player;
         playerWidget.GetItemData(posPlayer, 0, player);
 		
-		int posRang = rangWidget.GetSelectedRow();
-        if (posRang == -1) {
+		int posRank = rankWidget.GetSelectedRow();
+        if (posRank == -1) {
             return;
         }
         DZLPaycheck paycheck;
-        rangWidget.GetItemData(posRang, 0, paycheck);
+        rankWidget.GetItemData(posRank, 0, paycheck);
 
         if (paycheck && player) {
-			player.rang = paycheck.rang;
+			player.rank = paycheck.rank;
 			
 			playerWidget.SetItem(posPlayer, player.name, player, 0);
-			playerWidget.SetItem(posPlayer, player.rang, player, 1);
+			playerWidget.SetItem(posPlayer, player.rank, player, 1);
 		}
 	}
 

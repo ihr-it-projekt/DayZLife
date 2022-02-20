@@ -3,14 +3,14 @@ class DZLPaycheck
     string jobName;
     int amount;
     int onlineMinutesForPay;
-    string rang;
-    bool isFallbackRang = true;
+    string rank;
+    bool isFallbackRank = true;
 
-    void DZLPaycheck(string jobName, string rang, int amount, int onlineMinutesForPay) {
+    void DZLPaycheck(string jobName, string rank, int amount, int onlineMinutesForPay) {
         this.jobName = jobName;
-        this.rang = rang;
+        this.rank = rank;
         this.amount = amount;
         this.onlineMinutesForPay = onlineMinutesForPay;
-        isFallbackRang = true;
+        isFallbackRank = true;
     }
 }

@@ -5,11 +5,11 @@ class DZLPlayer
     private int money = 0;
     private int bank = 0;
     private bool isCop = false;
-    private string lastCopRang = "";
+    private string lastCopRank = "";
     private bool isMedic = false;
-    private string lastMedicRang = "";
+    private string lastMedicRank = "";
     private bool isArmy = false;
-    private string lastArmyRang = "";
+    private string lastArmyRank = "";
     private int robtMoney = 0;
     string playerName = "";
 	int onlineTimeCivil = 0;
@@ -46,10 +46,10 @@ class DZLPlayer
         	openTickets = new array<ref DZLTicket>;
         }
 
-        DZLPaycheck payCheck = DZLRangHelper.getCurrentPayCheck(this, DZLConfig.Get().jobConfig.paycheck);
+        DZLPaycheck payCheck = DZLRankHelper.getCurrentPayCheck(this, DZLConfig.Get().jobConfig.paycheck);
 
-        if (payCheck.rang != activeJobGrade) {
-            activeJobGrade = payCheck.rang;
+        if (payCheck.rank != activeJobGrade) {
+            activeJobGrade = payCheck.rank;
         }
 
 		Save();
@@ -82,21 +82,21 @@ class DZLPlayer
 		activeJobGrade = grade;
 		
 		if (DAY_Z_LIFE_JOB_COP == activeJob) {
-			lastCopRang = activeJobGrade;
+			lastCopRank = activeJobGrade;
 		} else if (DAY_Z_LIFE_JOB_MEDIC == activeJob) {
-			lastMedicRang = activeJobGrade;
+			lastMedicRank = activeJobGrade;
 		} else if (DAY_Z_LIFE_JOB_ARMY == activeJob) {
-			lastArmyRang = activeJobGrade;
+			lastArmyRank = activeJobGrade;
 		}
 	}
 
-	string GetLastJobRang(string job) {
+	string GetLastJobRank(string job) {
 	    if (DAY_Z_LIFE_JOB_COP == job) {
-            return lastCopRang;
+            return lastCopRank;
         } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
-            return lastMedicRang;
+            return lastMedicRank;
         } else if (DAY_Z_LIFE_JOB_ARMY == job) {
-            return lastArmyRang;
+            return lastArmyRank;
         }
 
         return "Rekrut";
@@ -130,11 +130,11 @@ class DZLPlayer
 		activeJob = job;
 
 		if (DAY_Z_LIFE_JOB_COP == job) {
-			activeJobGrade = lastCopRang;
+			activeJobGrade = lastCopRank;
 		} else if (DAY_Z_LIFE_JOB_MEDIC == job) {
-			activeJobGrade = lastMedicRang;
+			activeJobGrade = lastMedicRank;
 		} else if (DAY_Z_LIFE_JOB_ARMY == job) {
-			activeJobGrade = lastArmyRang;
+			activeJobGrade = lastArmyRank;
 		}
 
 		Save();
@@ -173,49 +173,49 @@ class DZLPlayer
 		return onlineTimeCivil;
 	}
 
-    void UpdateCop(bool isCop, string rang) {
+    void UpdateCop(bool isCop, string rank) {
         this.isCop = isCop;
         if (isCop) {
-            this.lastCopRang = rang;
+            this.lastCopRank = rank;
             if (IsActiveAsCop()) {
-               this.activeJobGrade = rang;
+               this.activeJobGrade = rank;
             }
         }
         else {
-            this.lastCopRang = "";
+            this.lastCopRank = "";
             ResetJobCivil();
         }
 
         Save();
     }
 	
-    void UpdateMedic(bool isMedic, string rang) {
+    void UpdateMedic(bool isMedic, string rank) {
         this.isMedic = isMedic;
 
         if (isCop) {
-            this.lastMedicRang = rang;
+            this.lastMedicRank = rank;
             if (IsActiveAsMedic()) {
-               this.activeJobGrade = rang;
+               this.activeJobGrade = rank;
             }
         }
         else {
-            this.lastMedicRang = "";
+            this.lastMedicRank = "";
             ResetJobCivil();
         }
 
         Save();
     }
-    void UpdateArmy(bool isArmy, string rang) {
+    void UpdateArmy(bool isArmy, string rank) {
         this.isArmy = isArmy;
 
         if (isArmy) {
-            this.lastArmyRang = rang;
+            this.lastArmyRank = rank;
             if (IsActiveAsArmy()) {
-               this.activeJobGrade = rang;
+               this.activeJobGrade = rank;
             }
         }
         else {
-            this.lastArmyRang = "";
+            this.lastArmyRank = "";
             ResetJobCivil();
         }
 

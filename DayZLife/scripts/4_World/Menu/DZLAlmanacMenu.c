@@ -30,20 +30,20 @@ class DZLAlmanacMenu : DZLBaseMenu
 
     private Widget copPanelWidget;
 	private TextListboxWidget copPanelOnlinePlayerList;
-	private TextListboxWidget copPanelRangList;
+	private TextListboxWidget copPanelRankList;
 	private TextListboxWidget copPanelCopsList;
 	private ButtonWidget copPanelSave;
 	
     private Widget armyPanelWidget;
 	private TextListboxWidget armyPanelOnlinePlayerList;
-	private TextListboxWidget armyPanelRangList;
+	private TextListboxWidget armyPanelRankList;
 	private TextListboxWidget armyPanelArmyList;
 	private ButtonWidget armyPanelSave;
 	
     private Widget medicPanelWidget;
 	private TextListboxWidget medicPanelOnlinePlayerList;
 	private TextListboxWidget medicPaneMedicList;
-	private TextListboxWidget medicPanelRangList;
+	private TextListboxWidget medicPanelRankList;
 	private ButtonWidget medicPanelSave;
 
     private Widget adminPanelWidget;
@@ -114,19 +114,19 @@ class DZLAlmanacMenu : DZLBaseMenu
 		copPanelWidget = creator.GetWidget("cop_panel");
 		copPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_CopPanel");
 		copPanelCopsList = creator.GetTextListboxWidget("coplist_CopPanel");
-		copPanelRangList = creator.GetTextListboxWidget("cop_RangList");
+		copPanelRankList = creator.GetTextListboxWidget("cop_RankList");
 		copPanelSave = creator.GetButtonWidget("saveButton_CopPanel");
 		
 		medicPanelWidget = creator.GetWidget("medicjob_panel");
 		medicPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_MedicPanel");
 		medicPaneMedicList = creator.GetTextListboxWidget("medicListbox");
-		medicPanelRangList = creator.GetTextListboxWidget("medic_RangList");
+		medicPanelRankList = creator.GetTextListboxWidget("medic_RankList");
 		medicPanelSave = creator.GetButtonWidget("saveButton_MedicPanel");
 		
 		armyPanelWidget = creator.GetWidget("armyjob_panel");
 		armyPanelOnlinePlayerList = creator.GetTextListboxWidget("playerlist_ArmyPanel");
 		armyPanelArmyList = creator.GetTextListboxWidget("armyListbox");
-		armyPanelRangList = creator.GetTextListboxWidget("army_RangList");
+		armyPanelRankList = creator.GetTextListboxWidget("army_RankList");
 		armyPanelSave = creator.GetButtonWidget("saveButton_ArmyPanel");
 		
 		escapedWidget = creator.GetWidget("escaped_panel");
@@ -252,18 +252,18 @@ class DZLAlmanacMenu : DZLBaseMenu
 		string name;
 		int index;
 		
-		if (w == copPanelRangList) {
-			DZLDisplayHelper.ChangeRangFromPlayer(copPanelRangList, copPanelCopsList);
+		if (w == copPanelRankList) {
+			DZLDisplayHelper.ChangeRankFromPlayer(copPanelRankList, copPanelCopsList);
 		} else if (w == copPanelCopsList) {
-			DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRangListWidget(copPanelCopsList, copPanelRangList, DAY_Z_LIFE_JOB_COP);
-		} else if (w == medicPanelRangList) {
-			DZLDisplayHelper.ChangeRangFromPlayer(medicPanelRangList, medicPaneMedicList);
+			DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(copPanelCopsList, copPanelRankList, DAY_Z_LIFE_JOB_COP);
+		} else if (w == medicPanelRankList) {
+			DZLDisplayHelper.ChangeRankFromPlayer(medicPanelRankList, medicPaneMedicList);
 		} else if (w == medicPaneMedicList) {
-			DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRangListWidget(medicPaneMedicList, medicPanelRangList, DAY_Z_LIFE_JOB_MEDIC);
-		} else if (w == armyPanelRangList) {
-			DZLDisplayHelper.ChangeRangFromPlayer(armyPanelRangList, armyPanelArmyList);
+			DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(medicPaneMedicList, medicPanelRankList, DAY_Z_LIFE_JOB_MEDIC);
+		} else if (w == armyPanelRankList) {
+			DZLDisplayHelper.ChangeRankFromPlayer(armyPanelRankList, armyPanelArmyList);
 		} else if (w == armyPanelArmyList) {
-			DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRangListWidget(armyPanelArmyList, armyPanelRangList, DAY_Z_LIFE_JOB_ARMY);
+			DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(armyPanelArmyList, armyPanelRankList, DAY_Z_LIFE_JOB_ARMY);
 		} else if (w == workingZoneList) {
 			index = workingZoneList.GetSelectedRow();
 			
@@ -512,7 +512,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 				
 				foreach(DZLOnlinePlayer copPlayer: copPlayers) {
 					int copPlayerIndex = copPanelCopsList.AddItem(copPlayer.name, copPlayer, 0);
-                    copPanelCopsList.SetItem(copPlayerIndex, copPlayer.rang, copPlayer, 1);
+                    copPanelCopsList.SetItem(copPlayerIndex, copPlayer.rank, copPlayer, 1);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_NOT_MEDIC_PLAYER_ONLINE_PLAYERS_RESPONSE) {
@@ -529,7 +529,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 				
 				foreach(DZLOnlinePlayer medicPlayer: medicPlayers) {
 					int medicPlayerIndex = medicPaneMedicList.AddItem(medicPlayer.name, medicPlayer, 0);
-                    medicPaneMedicList.SetItem(medicPlayerIndex, medicPlayer.rang, medicPlayer, 1);
+                    medicPaneMedicList.SetItem(medicPlayerIndex, medicPlayer.rank, medicPlayer, 1);
 				}
             }
         } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS_RESPONSE) {
@@ -546,7 +546,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 				array<ref DZLOnlinePlayer> armyPlayers = paramArmyPlayers.param2;
 				foreach(DZLOnlinePlayer armyPlayer: armyPlayers) {
 					int posArmyPlayer = armyPanelArmyList.AddItem(armyPlayer.name, armyPlayer, 0);
-					armyPanelArmyList.SetItem(posArmyPlayer, armyPlayer.rang, armyPlayer, 1);
+					armyPanelArmyList.SetItem(posArmyPlayer, armyPlayer.rank, armyPlayer, 1);
 				}
             }
         } if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {

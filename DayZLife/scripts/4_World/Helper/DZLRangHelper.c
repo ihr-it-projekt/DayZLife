@@ -1,4 +1,4 @@
-class DZLRangHelper
+class DZLRankHelper
 {
     static DZLPaycheck getCurrentPayCheck(DZLPlayer dzlPlayer, DZLPaycheckConfig config)
     {
@@ -28,11 +28,11 @@ class DZLRangHelper
         DZLPaycheck defaultPaycheck = new DZLPaycheck("", "", 0, 10000000);
 
         foreach(DZLPaycheck payCheck: payChecks) {
-            if (dzlPlayer.HasJobGrade(payCheck.rang) && payCheck.amount > 0) {
+            if (dzlPlayer.HasJobGrade(payCheck.rank) && payCheck.amount > 0) {
                 return payCheck;
             }
 
-            if (payCheck.isFallbackRang) {
+            if (payCheck.isFallbackRank) {
                 defaultPaycheck = payCheck;
             }
         }

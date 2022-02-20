@@ -143,7 +143,7 @@ class DZLAlmanacListener
                	DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
 				
 				if (!dzlPlayer.IsCop()) {
-					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRang(DAY_Z_LIFE_JOB_COP)));
+					collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRank(DAY_Z_LIFE_JOB_COP)));
 				}
             }
         }
@@ -187,7 +187,7 @@ class DZLAlmanacListener
             foreach(Man _player: _players) {
                	DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
 				if (!dzlPlayer.IsArmy()) {
-					collection.Insert(new DZLOnlinePlayer(_player.GetIdentity().GetId(), _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRang(DAY_Z_LIFE_JOB_ARMY)));
+					collection.Insert(new DZLOnlinePlayer(_player.GetIdentity().GetId(), _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRank(DAY_Z_LIFE_JOB_ARMY)));
 				}
             }
         }

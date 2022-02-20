@@ -83,7 +83,7 @@ class DZLPaycheckConfig
 	
 	private DZLPaycheck GetFallbackFromCollection(array<ref DZLPaycheck> collection) {
 		foreach(DZLPaycheck paycheck: collection) {
-			if (paycheck.isFallbackRang) {
+			if (paycheck.isFallbackRank) {
 				return paycheck;
 			}
 		}
