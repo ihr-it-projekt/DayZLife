@@ -84,6 +84,9 @@ class DZLTraderMenu: DZLBaseMenu
             foreach(DZLTraderType type: category.items) {
                 if (type.sellPrice <= 0) continue;
                 if (-1 != addInventoryTypes.Find(type.type)) continue;
+
+                int price = type.CalculateDynamicSellPrice();
+
                 addInventoryTypes.Insert(type.type);
 				
 				if (type.isCar) {
@@ -93,8 +96,9 @@ class DZLTraderMenu: DZLBaseMenu
 						quant = playerCar.GetQuantity().ToString();
 						GetGame().ObjectGetDisplayName(playerCar, name);
 						index = inventory.AddItem(name, playerCar, 0);
-	                   	inventory.SetItem(index, type.sellPrice.ToString(), playerCar, 1);
+	                   	inventory.SetItem(index, price.ToString(), type, 1);
 	                   	inventory.SetItem(index, quant, playerCar, 2);
+	                   	inventory.SetItem(index, type.GetStorageString(), playerCar, 3);
 					}
 					continue;
 				}
@@ -113,8 +117,9 @@ class DZLTraderMenu: DZLBaseMenu
                     }
 
                     index = inventory.AddItem(name, item, 0);
-                    inventory.SetItem(index, type.sellPrice.ToString(), item, 1);
+                    inventory.SetItem(index, price.ToString(), type, 1);
                     inventory.SetItem(index, quant, item, 2);
+                    inventory.SetItem(index, type.GetStorageString(), item, 3);
                 }
             }
        }
@@ -154,8 +159,13 @@ class DZLTraderMenu: DZLBaseMenu
 				type.displayName = name;
 				if(!hasAddFirstCategory && type.buyPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
-                    traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
-                    traderItemList.SetItem(index, type.sellPrice.ToString(), type, 2);
+
+					int sellPrice = type.CalculateDynamicSellPrice();
+					int buyPrice = type.CalculateDynamicBuyPrice();
+
+                    traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
+                    traderItemList.SetItem(index, sellPrice.ToString(), type, 2);
+                    traderItemList.SetItem(index, type.GetStorageString(), type, 3);
 				}
 				
 				if (-1 != addInventoryTypes.Find(type.type)) continue;
@@ -170,7 +180,7 @@ class DZLTraderMenu: DZLBaseMenu
 					if (playerCar && !playerCar.isSold) {
 						GetGame().ObjectGetDisplayName(playerCar, name);
 						index = inventory.AddItem(name, playerCar, 0);
-	                   	inventory.SetItem(index, type.sellPrice.ToString(), playerCar, 1);
+	                   	inventory.SetItem(index, sellPrice.ToString(), playerCar, 1);
 	                   	inventory.SetItem(index, "1", playerCar, 2);
 					}
 					continue;
@@ -191,10 +201,10 @@ class DZLTraderMenu: DZLBaseMenu
 						maxQuantity = 1;
 					} 
 
-					int sumItem = Math.Round(quantity/maxQuantity * type.sellPrice);
+					int sumItem = Math.Round(quantity/maxQuantity * sellPrice);
 					
 					index = inventory.AddItem(name, item, 0);
-					inventory.SetItem(index, sumItem.ToString(), item, 1);
+					inventory.SetItem(index, sumItem.ToString(), type, 1);
 					inventory.SetItem(index, quantity.ToString(), item, 2);
 				}
 			}
@@ -233,15 +243,18 @@ class DZLTraderMenu: DZLBaseMenu
 			foreach(DZLTraderType type: items) {
 			    if (type.buyPrice <= 0) continue
 
-			    string sellPriceText = "";
+			    int sellPrice = type.CalculateDynamicSellPrice();
+                int buyPrice = type.CalculateDynamicBuyPrice();
 
+			    string sellPriceText = "";
 			    if (type.sellPrice > 0) {
-			        sellPriceText = type.sellPrice.ToString();
+			        sellPriceText = sellPrice.ToString();
 			    }
 
 				int index = traderItemList.AddItem(type.displayName, type, 0);
-				traderItemList.SetItem(index, type.buyPrice.ToString(), type, 1);
+				traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
                 traderItemList.SetItem(index, sellPriceText, type, 2);
+                traderItemList.SetItem(index, type.GetStorageString(), type, 3);
 			}
 		}
 	}
@@ -359,6 +372,8 @@ class DZLTraderMenu: DZLBaseMenu
    		}
    		EntityAI item;
    		sourceWidget.GetItemData(pos, 0, item);
+   		DZLTraderType type;
+   		sourceWidget.GetItemData(pos, 1, type);
 
    		if (item) {
    		    string name = "";
@@ -382,6 +397,19 @@ class DZLTraderMenu: DZLBaseMenu
 			UpdateSum();
 
 			sourceWidget.RemoveRow(pos);
+
+			int sellPrice;
+			if (1 == factor) {
+                type.storageDown();
+                sellPrice = type.CalculateDynamicSellPrice();
+                sourceWidget.SetItem(index, sellPrice.ToString(), type, 1);
+                targetWidget.SetItem(index, sellPrice.ToString(), type, 1);
+            } else {
+                type.storageUp();
+                sellPrice = type.CalculateDynamicSellPrice();
+                sourceWidget.SetItem(index, sellPrice.ToString(), type, 1);
+                targetWidget.SetItem(index, sellPrice.ToString(), type, 1);
+            }
    		}
    	}
 	
@@ -394,10 +422,9 @@ class DZLTraderMenu: DZLBaseMenu
    		sourceWidget.GetItemData(pos, 0, itemType);
 
    		if (itemType) {
-			string buyPrice = "";
-	        sourceWidget.GetItemText(pos, 1, buyPrice);
-			
-			sumInt = sumInt + buyPrice.ToInt() * factor;
+            int buyPrice = itemType.CalculateDynamicBuyPrice();
+
+			sumInt = sumInt + buyPrice * factor;
 			UpdateSum();
 			
 			if (removeRow) {
@@ -408,7 +435,21 @@ class DZLTraderMenu: DZLBaseMenu
 	
 	   		    int index;
 	            index = targetWidget.AddItem(name, itemType, 0);
-	            targetWidget.SetItem(index, buyPrice, itemType, 1);
+	            targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
+			}
+
+			if (1 == factor) {
+			    itemType.storageDown();
+			    buyPrice = itemType.CalculateDynamicBuyPrice();
+			    sourceWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
+			    targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
+                sourceWidget.SetItem(index, itemType.GetStorageString(), itemType, 3);
+			} else {
+			    itemType.storageUp();
+			    buyPrice = itemType.CalculateDynamicBuyPrice();
+			    sourceWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
+			    targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
+			    targetWidget.SetItem(index, itemType.GetStorageString(), itemType, 3);
 			}
    		}
    	}
