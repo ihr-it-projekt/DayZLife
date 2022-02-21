@@ -284,7 +284,7 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Inventory;60;#Sell;20;#Quantity;20"
+         colums "#Inventory;35;#Sell;15;#Quantity;20;#Trader_Storage;30"
          lines 25
         }
         TextListboxWidgetClass Trader_Item_list {
@@ -297,7 +297,7 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Item;60;#Buy;20;#Sell;20"
+         colums "#Item;35;#Buy;15;#Sell;15;#Trader_Storage;35"
          lines 15
         }
         PanelWidgetClass PanelWidget5 {

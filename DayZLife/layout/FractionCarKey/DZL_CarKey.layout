@@ -1,0 +1,277 @@
+FrameWidgetClass License_Menu {
+ position 0 0
+ size 1 1
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   size 0.59425 0.51574
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0
+     size 0.99 0.987
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       position 0 0.01455
+       size 0.28826 0.075
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextWidgetClass fractionCarKey {
+         ignorepointer 1
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Normal
+         text "#FractionCarKey"
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget7 {
+       ignorepointer 1
+       position 0.00708 0.01184
+       size 0.04672 0.07463
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "X"
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       position -0.00042 0
+       size 1 0.89898
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextListboxWidgetClass playerList {
+         position 0.00708 0.05248
+         size 0.31 0.86263
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         "title visible" 0
+         colums ""
+         lines 20
+        }
+        TextListboxWidgetClass fractionPlayerhaveKeylist {
+         position 0.00708 0
+         size 0.31 0.9676
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         "title visible" 0
+         colums ""
+         lines 20
+        }
+        PanelWidgetClass PanelWidget4 {
+         ignorepointer 1
+         position 0 0.00318
+         size 0.35167 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget8 {
+           ignorepointer 1
+           position 0 0.01619
+           size 0.66 0.1
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass fractionSafeKeylist {
+             color 0.251 0.502 0 1
+             position 0 0
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             text "#save"
+            }
+           }
+          }
+          TextWidgetClass fractioNewOwnerDisplay {
+           ignorepointer 1
+           position 0.06733 0.22462
+           size 0.8679 0.0862
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text_proportion 0.7
+           "text halign" center
+           "text valign" center
+          }
+          TextWidgetClass TextWidget1 {
+           ignorepointer 1
+           position 0.06733 0.11965
+           size 0.8679 0.0862
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#change_owner_to"
+           text_proportion 0.7
+           "text halign" center
+           "text valign" center
+          }
+          PanelWidgetClass PanelWidget6 {
+           ignorepointer 1
+           position 0.00251 0.55376
+           size 0.86621 0.1
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass fractionChangOwnerButton {
+             color 0.251 0.502 0 1
+             position 0 0
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             text "#change_owner"
+            }
+           }
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget5 {
+         ignorepointer 1
+         position -0.20457 0.89502
+         size 0.0433 0.08879
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass searchButton {
+           color 0.251 0.502 0 1
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           {
+            ImageWidgetClass ImageWidget0 {
+             ignorepointer 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             mode blend
+             "src alpha" 1
+             stretch 1
+            }
+           }
+          }
+         }
+        }
+        EditBoxWidgetClass search_input {
+         position -0.36311 0.89502
+         size 0.25962 0.08879
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
