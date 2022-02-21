@@ -26,6 +26,8 @@ class ActionOpenLoadOutMenu: ActionInteractBase
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsCops.loadOutCategories);
             } else if (action_data.m_Player.GetDZLPlayer().IsActiveAsMedic()) {
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsMedics.loadOutCategories);
+            } else if (action_data.m_Player.GetDZLPlayer().IsActiveAsArmy()) {
+                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsArmy.loadOutCategories);
             }
 
 			GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
@@ -43,6 +45,8 @@ class ActionOpenLoadOutMenu: ActionInteractBase
             return objectTarget.IsCopLoadOut();
         } else if (dzlPlayer.IsActiveAsMedic()) {
             return objectTarget.IsMedicLoadOut();
+        } else if (dzlPlayer.IsActiveAsArmy()) {
+            return objectTarget.IsArmyLoadOut();
         }
 		
 		return false;

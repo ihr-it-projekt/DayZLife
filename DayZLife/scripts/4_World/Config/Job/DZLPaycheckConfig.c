@@ -29,12 +29,18 @@ class DZLPaycheckConfig
         } else if ("1" == version)
         {
             cops = new array<ref DZLPaycheck>;
+            cop.isFallbackRank = true;
+            cop.rank = "Rekrut";
             cops.Insert(cop);
 
             medics = new array<ref DZLPaycheck>;
+            medic.isFallbackRank = true;
+            cop.rank = "Rekrut";
             medics.Insert(medic);
 
             civils = new array<ref DZLPaycheck>;
+            civil.isFallbackRank = true;
+            cop.rank = "Rekrut";
             civils.Insert(civil);
 
             armies = new array<ref DZLPaycheck>;

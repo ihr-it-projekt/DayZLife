@@ -7,7 +7,7 @@ class DZLBankActionObjectBlue: DZLBaseActionObject
 	override void SetActions() {
         super.SetActions();
 
-        AddAction(ActionOpenBankingMenu);
+        AddAction(DZLActionOpenBankingMenu);
         AddAction(ActionRobBank);
         AddAction(DZLActionPaybackRobtMoney);
         AddAction(ActionStopRobBank);

@@ -1,6 +1,6 @@
-class ActionOpenBankingMenu: ActionInteractBase
+class DZLActionOpenBankingMenu: ActionInteractBase
 {
-	void ActionOpenBankingMenu()
+	void DZLActionOpenBankingMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
 		m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;

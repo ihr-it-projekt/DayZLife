@@ -6,7 +6,7 @@ modded class ActionConstructor
 		
 		actions.Insert(ActionOpenHouseMenu);
 		actions.Insert(ActionOpenTraderMenu);
-		actions.Insert(ActionOpenBankingMenu);
+		actions.Insert(DZLActionOpenBankingMenu);
 		actions.Insert(ActionRobMoney);
 		actions.Insert(ActionRobMoneyFromDead);
 		actions.Insert(ActionRobBank);

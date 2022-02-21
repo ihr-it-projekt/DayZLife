@@ -5,6 +5,7 @@ class DZLBaseActionObject :BuildingSuper
     protected bool isGarage = false;
     protected bool isCopLoadOut = false;
     protected bool isMedicLoadOut = false;
+    protected bool isArmyLoadOut = false;
     protected bool isLicensePoint = false;
     protected bool isLicenseActionPoint = false;
     protected bool isShopActionPoint = false;
@@ -29,12 +30,16 @@ class DZLBaseActionObject :BuildingSuper
         return isMedicLoadOut;
     }
 
+    bool IsArmyLoadOut() {
+        return isArmyLoadOut;
+    }
+
     bool IsLicensePoint() {
         return isLicensePoint;
     }
 
     bool IsLoadOut() {
-        return isCopLoadOut || isMedicLoadOut;
+        return isCopLoadOut || isMedicLoadOut || isArmyLoadOut;
     }
 
     bool IsLicenseActionPoint() {

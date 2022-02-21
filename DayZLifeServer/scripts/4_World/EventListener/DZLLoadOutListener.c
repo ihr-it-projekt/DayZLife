@@ -19,7 +19,7 @@ class DZLLoadOutListener
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
 				string categoryName = paramLoadOut.param1;
 
-                if ((dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
+                if ((dzlPlayer.IsActiveAsArmy() && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
 					DZLSendMessage(sender, "#error_category_not_found");
 				}
             }
