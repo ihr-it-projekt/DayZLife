@@ -12,6 +12,7 @@ class DZLDatabaseLayer
     private ref map<string, ref DZLCarStorage> storageCars;
     private ref DZLEmergencies emergencies;
     private ref DZLCrimeData crimeData;
+    private ref DZLTraderStorage traderStorage;
     private int copCount = 0;
     private int civCount = 0;
     private int medicCount = 0;
@@ -29,6 +30,7 @@ class DZLDatabaseLayer
         bank = new DZLBank;
         emergencies = new DZLEmergencies;
         crimeData = new DZLCrimeData;
+        traderStorage = new DZLTraderStorage;
     }
 
     static DZLDatabaseLayer Get() {
@@ -197,5 +199,9 @@ class DZLDatabaseLayer
 
     DZLCrimeData GetCrimeData() {
         return crimeData;
+    }
+
+    DZLTraderStorage GetTraderStorage() {
+        return traderStorage;
     }
 }

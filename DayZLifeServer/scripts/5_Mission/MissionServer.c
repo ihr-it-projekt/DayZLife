@@ -4,6 +4,7 @@ modded class MissionServer {
     private ref DZLBuilderManager builderManager;
 	private ref Timer paycheckTimer;
 	private ref DZLCheckController checkController;
+	private ref DZLStorageController storageController;
 
 	void MissionServer() {
         DebugMessageDZL("Load DayZLifeServer");
@@ -17,9 +18,11 @@ modded class MissionServer {
             manager = new DZLEventManager;
             builderManager = new DZLBuilderManager;
             checkController = new DZLCheckController;
+            storageController = new DZLStorageController;
 
             DZLLockedHouses.OnServerStart();
             paycheckTimer.Run(60, checkController, "Check", null, true);
+            paycheckTimer.Run(60, storageController, "Check", null, true);
             builderManager.Create();
         }
     }

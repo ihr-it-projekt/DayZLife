@@ -117,6 +117,8 @@ static int DAY_Z_LIFE_ALL_PLAYER_UPDATE_ARMY_PLAYERS = 222339;
 static int DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS = 222340;
 static int DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS_RESPONSE = 222341;
 static int DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ARMY = 222342;
+static int DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE = 222343;
+static int DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE = 222344;
 
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE = "$profile:DayZLife\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA = "$profile:DayZLife\\Data\\";
@@ -124,6 +126,7 @@ static string DAY_Z_LIFE_SERVER_FOLDER_CONFIG = "$profile:DayZLife\\Config\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE = "$profile:DayZLife\\Data\\House\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR = "$profile:DayZLife\\Data\\Car\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER = "$profile:DayZLife\\Data\\Player\\";
+static string DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE = "$profile:DayZLife\\Data\\ItemStorage\\";
 static string LOCKED_HOUSES_FILE_NAME = "housesLocked.json";
 static string DAY_Z_LIFE_LOGS = "$profile:DayZLife\\Logs\\";
 

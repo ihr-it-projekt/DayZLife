@@ -1,6 +1,6 @@
 class DZLTraderCategoryCollection
 {
-     string version = "1";
+     string version = "2";
      ref array<ref DZLTraderCategory> categories;
 
      void DZLTraderCategoryCollection() {
@@ -294,8 +294,21 @@ class DZLTraderCategoryCollection
 				mustSave = true;
 			}
 
+			if (version == "1") {
+				version = "2";
+				mustSave = true;
+			}
+
             if (mustSave) {
                	Save();
+            }
+        }
+
+        foreach(DZLTraderCategory cat: categories) {
+            foreach(DZLTraderType item: cat.items) {
+                if (item.isStorageItem) {
+                    DZLDatabaseLayer.Get().GetTraderStorage().Insert(item);
+                }
             }
         }
     }
@@ -308,7 +321,7 @@ class DZLTraderCategoryCollection
 		}
 	
 		return null;
-	}	
+	}
 
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderCategories.json")) {

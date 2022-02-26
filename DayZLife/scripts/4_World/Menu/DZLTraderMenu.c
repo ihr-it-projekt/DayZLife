@@ -21,6 +21,7 @@ class DZLTraderMenu: DZLBaseMenu
 
 	private ref map<string, ref array<ref DZLTraderType>> displayCategories;
 	private ref array<string> addedCats;
+	private ref array<ref DZLTraderTypeStorage> storageOfItems;
 
     void DZLTraderMenu(DZLTraderPosition position) {
 		this.position = position;
@@ -55,6 +56,8 @@ class DZLTraderMenu: DZLBaseMenu
 
 		preview = creator.GetItemPreviewWidget("previewItem");
 
+		GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
+
         return layoutRoot;
     }
 
@@ -84,8 +87,10 @@ class DZLTraderMenu: DZLBaseMenu
             foreach(DZLTraderType type: category.items) {
                 if (type.sellPrice <= 0) continue;
                 if (-1 != addInventoryTypes.Find(type.type)) continue;
-
-                int price = type.CalculateDynamicSellPrice();
+				
+				DZLTraderTypeStorage storage = GetCurrentStorageByName(type.type);
+				
+				int price = type.CalculateDynamicSellPrice(storage);
 
                 addInventoryTypes.Insert(type.type);
 				
@@ -98,7 +103,7 @@ class DZLTraderMenu: DZLBaseMenu
 						index = inventory.AddItem(name, playerCar, 0);
 	                   	inventory.SetItem(index, price.ToString(), type, 1);
 	                   	inventory.SetItem(index, quant, playerCar, 2);
-	                   	inventory.SetItem(index, type.GetStorageString(), playerCar, 3);
+	                   	inventory.SetItem(index, type.GetStorageString(storage), playerCar, 3);
 					}
 					continue;
 				}
@@ -119,7 +124,7 @@ class DZLTraderMenu: DZLBaseMenu
                     index = inventory.AddItem(name, item, 0);
                     inventory.SetItem(index, price.ToString(), type, 1);
                     inventory.SetItem(index, quant, item, 2);
-                    inventory.SetItem(index, type.GetStorageString(), item, 3);
+                    inventory.SetItem(index, type.GetStorageString(storage), item, 3);
                 }
             }
        }
@@ -133,23 +138,23 @@ class DZLTraderMenu: DZLBaseMenu
 		int index;
 		string name = "";
 		int quantity;
-		
+
 		credits.SetText(dzlPlayer.GetMoney().ToString());
 		
 		traderItemList.ClearItems();
 		inventory.ClearItems();
-		
+
 		array<EntityAI> playerItems = player.GetPlayerItems();
-		
+
         bool hasAddFirstCategory = false;
 
 		array<string> addInventoryTypes = new array<string>;
-		
+
 		foreach(string categoryName: position.categoryNames) {
 			DZLTraderCategory category = config.traderConfig.categories.GetCatByName(categoryName);
 			if (!category) continue;
 			if (displayCategories.Get(category.name)) continue;
-			
+
 			itemCategory.AddItem(categoryName);
 			displayCategories.Insert(categoryName, category.items);
 			addedCats.Insert(categoryName);
@@ -160,23 +165,23 @@ class DZLTraderMenu: DZLBaseMenu
 				if(!hasAddFirstCategory && type.buyPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
 
-					int sellPrice = type.CalculateDynamicSellPrice();
-					int buyPrice = type.CalculateDynamicBuyPrice();
+					int sellPrice = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type));
+					int buyPrice = type.CalculateDynamicBuyPrice(GetCurrentStorageByName(type.type));
 
                     traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
                     traderItemList.SetItem(index, sellPrice.ToString(), type, 2);
-                    traderItemList.SetItem(index, type.GetStorageString(), type, 3);
+                    traderItemList.SetItem(index, type.GetStorageString(GetCurrentStorageByName(type.type)), type, 3);
 				}
-				
+
 				if (-1 != addInventoryTypes.Find(type.type)) continue;
-				
+
 				addInventoryTypes.Insert(type.type);
 
 			    if (type.sellPrice <= 0) continue
-				
+
 				if (type.isCar) {
 					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, player.GetPlayerId());
-					
+
 					if (playerCar && !playerCar.isSold) {
 						GetGame().ObjectGetDisplayName(playerCar, name);
 						index = inventory.AddItem(name, playerCar, 0);
@@ -185,24 +190,15 @@ class DZLTraderMenu: DZLBaseMenu
 					}
 					continue;
 				}
-				
+
 				foreach(EntityAI item: playerItems) {
 					if (item.GetType() != type.type) {
 						continue;
 					}
-					
+
 					GetGame().ObjectGetDisplayName(item, name);
+					int sumItem = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type), item);
 
-					int maxQuantity = item.GetQuantityMax();
-					quantity = item.GetQuantity();
-					
-					if (quantity == 0) {
-						quantity = 1;
-						maxQuantity = 1;
-					} 
-
-					int sumItem = Math.Round(quantity/maxQuantity * sellPrice);
-					
 					index = inventory.AddItem(name, item, 0);
 					inventory.SetItem(index, sumItem.ToString(), type, 1);
 					inventory.SetItem(index, quantity.ToString(), item, 2);
@@ -243,8 +239,8 @@ class DZLTraderMenu: DZLBaseMenu
 			foreach(DZLTraderType type: items) {
 			    if (type.buyPrice <= 0) continue
 
-			    int sellPrice = type.CalculateDynamicSellPrice();
-                int buyPrice = type.CalculateDynamicBuyPrice();
+			    int sellPrice = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type));
+                int buyPrice = type.CalculateDynamicBuyPrice(GetCurrentStorageByName(type.type));
 
 			    string sellPriceText = "";
 			    if (type.sellPrice > 0) {
@@ -254,7 +250,7 @@ class DZLTraderMenu: DZLBaseMenu
 				int index = traderItemList.AddItem(type.displayName, type, 0);
 				traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
                 traderItemList.SetItem(index, sellPriceText, type, 2);
-                traderItemList.SetItem(index, type.GetStorageString(), type, 3);
+                traderItemList.SetItem(index, type.GetStorageString(GetCurrentStorageByName(type.type)), type, 3);
 			}
 		}
 	}
@@ -343,14 +339,23 @@ class DZLTraderMenu: DZLBaseMenu
     }
 	
 	override bool OnDoubleClick(Widget w, int x, int y, int button) {
+	    DZLTraderType type;
 		if (w == inventory) {
-			MoveItemFromListWidgetToListWidgetInventory(inventory, sellCard, -1);
+			type = MoveItemFromListWidgetToListWidgetInventory(inventory, sellCard, -1);
+			UpdateItemOnList(type, traderItemList, false);
+			UpdateItemOnList(type, inventory, true);
 		} else if (w == sellCard) {
-			MoveItemFromListWidgetToListWidgetInventory(sellCard, inventory, 1);
+			type = MoveItemFromListWidgetToListWidgetInventory(sellCard, inventory, 1);
+			UpdateItemOnList(type, traderItemList, false);
+			UpdateItemOnList(type, inventory, true);
 		} else if (w == traderItemList) {
-			MoveItemFromListWidgetToListWidgetTrader(traderItemList, buyCard, false, 1);
+			type = MoveItemFromListWidgetToListWidgetTrader(traderItemList, buyCard, false, 1);
+			UpdateItemOnList(type, traderItemList, false);
+			UpdateItemOnList(type, inventory, true);
 		} else if (w == buyCard) {
-			MoveItemFromListWidgetToListWidgetTrader(buyCard, traderItemList, true, -1);
+			type = MoveItemFromListWidgetToListWidgetTrader(buyCard, traderItemList, true, -1);
+			UpdateItemOnList(type, traderItemList, false);
+			UpdateItemOnList(type, inventory, true);
 		}
 
 		return true;
@@ -362,96 +367,103 @@ class DZLTraderMenu: DZLBaseMenu
            if (ctx.Read(paramGetResponse)){
                 UpdateGUI(paramGetResponse.param1);
            }
+        } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE) {
+           autoptr Param1<ref array<ref DZLTraderTypeStorage>> traderStorageResponse;
+           if (ctx.Read(traderStorageResponse)){
+				storageOfItems = traderStorageResponse.param1;
+               
+                UpdateGUI();
+            }
+
         }
     }
 	
-    private void MoveItemFromListWidgetToListWidgetInventory(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, int factor) {
+    private DZLTraderType MoveItemFromListWidgetToListWidgetInventory(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, int factor) {
    		int pos = sourceWidget.GetSelectedRow();
-   		if (pos == -1) {
-   			return;
-   		}
+   		if (pos == -1) return null;
+
    		EntityAI item;
    		sourceWidget.GetItemData(pos, 0, item);
    		DZLTraderType type;
    		sourceWidget.GetItemData(pos, 1, type);
 
-   		if (item) {
-   		    string name = "";
-            sourceWidget.GetItemText(pos, 0, name);
-   		    int index;
-            index = targetWidget.AddItem(name, item, 0);
-            string price = "";
-            sourceWidget.GetItemText(pos, 1, price);
+   		if (!item) return null;
+   		if (!type) return null;
 
-            targetWidget.SetItem(index, price, item, 1);
-            string quantity = "";
-            sourceWidget.GetItemText(pos, 2, quantity);
-            targetWidget.SetItem(index, quantity, item, 2);
+   		DZLTraderTypeStorage storage = GetCurrentStorageByName(type.type);
+   		if (-1 == factor && type.isStorageItem && storage && storage.IsStorageFull()) return null;
 
-            float itemSum = price.ToInt() * factor;
-            float itemTax = itemSum / 100 * config.bankConfig.sellTradingTax;
+        string name = "";
+        sourceWidget.GetItemText(pos, 0, name);
+        int index;
+        index = targetWidget.AddItem(name, item, 0);
+        string price = "";
+        sourceWidget.GetItemText(pos, 1, price);
 
-			sumInt +=  Math.Round(itemSum);
-			taxInt -=  Math.Round(itemTax);
+        targetWidget.SetItem(index, price, type, 1);
+        string quantity = "";
+        sourceWidget.GetItemText(pos, 2, quantity);
+        targetWidget.SetItem(index, quantity, item, 2);
 
-			UpdateSum();
+        float itemSum = price.ToInt() * factor;
+        float itemTax = itemSum / 100 * config.bankConfig.sellTradingTax;
 
-			sourceWidget.RemoveRow(pos);
+        sumInt +=  Math.Round(itemSum);
+        taxInt -=  Math.Round(itemTax);
 
-			int sellPrice;
-			if (1 == factor) {
-                type.storageDown();
-                sellPrice = type.CalculateDynamicSellPrice();
-                sourceWidget.SetItem(index, sellPrice.ToString(), type, 1);
-                targetWidget.SetItem(index, sellPrice.ToString(), type, 1);
-            } else {
-                type.storageUp();
-                sellPrice = type.CalculateDynamicSellPrice();
-                sourceWidget.SetItem(index, sellPrice.ToString(), type, 1);
-                targetWidget.SetItem(index, sellPrice.ToString(), type, 1);
-            }
-   		}
+        UpdateSum();
+
+        sourceWidget.RemoveRow(pos);
+		
+
+
+        if (1 == factor && storage) {
+            storage.StorageDown();
+        } else if (storage) {
+            storage.StorageUp(type.GetStorageAdd(item));
+        }
+
+        return type;
    	}
 	
-	private void MoveItemFromListWidgetToListWidgetTrader(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, bool removeRow, int factor) {
+	private DZLTraderType MoveItemFromListWidgetToListWidgetTrader(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, bool removeRow, int factor) {
    		int pos = sourceWidget.GetSelectedRow();
    		if (pos == -1) {
-   			return;
+   			return null;
    		}
    		DZLTraderType itemType;
    		sourceWidget.GetItemData(pos, 0, itemType);
+		
+		DZLTraderTypeStorage storage = GetCurrentStorageByName(itemType.type);
 
-   		if (itemType) {
-            int buyPrice = itemType.CalculateDynamicBuyPrice();
-
-			sumInt = sumInt + buyPrice * factor;
-			UpdateSum();
-			
-			if (removeRow) {
-				sourceWidget.RemoveRow(pos);
-			} else {
-				string name = "";
-	            sourceWidget.GetItemText(pos, 0, name);
-	
-	   		    int index;
-	            index = targetWidget.AddItem(name, itemType, 0);
-	            targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
-			}
-
-			if (1 == factor) {
-			    itemType.storageDown();
-			    buyPrice = itemType.CalculateDynamicBuyPrice();
-			    sourceWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
-			    targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
-                sourceWidget.SetItem(index, itemType.GetStorageString(), itemType, 3);
-			} else {
-			    itemType.storageUp();
-			    buyPrice = itemType.CalculateDynamicBuyPrice();
-			    sourceWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
-			    targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
-			    targetWidget.SetItem(index, itemType.GetStorageString(), itemType, 3);
-			}
+   		if (!itemType || itemType.isStorageItem && storage && storage.IsStorageEmpty() && !removeRow) {
+   		    return null;
    		}
+
+        int buyPrice = itemType.CalculateDynamicBuyPrice(storage);
+
+
+        sumInt = sumInt + buyPrice * factor;
+        UpdateSum();
+
+        if (removeRow) {
+            sourceWidget.RemoveRow(pos);
+        } else {
+            string name = "";
+            sourceWidget.GetItemText(pos, 0, name);
+
+            int index;
+            index = targetWidget.AddItem(name, itemType, 0);
+            targetWidget.SetItem(index, buyPrice.ToString(), itemType, 1);
+        }
+
+        if (1 == factor && storage) {
+            storage.StorageDown();
+        } else if (storage) {
+            storage.StorageUp(1.0);
+        }
+
+        return itemType;
    	}
 
 	private void UpdateSum() {
@@ -464,6 +476,51 @@ class DZLTraderMenu: DZLBaseMenu
 		} else {
 			sum.SetColor(ARGB(255, 143, 18, 18));
 		}
+	}
+
+	private void UpdateItemOnList(DZLTraderType type, TextListboxWidget widgetToChange, bool targetIsInventory) {
+	    if (!type.isStorageItem) return;
+	    if (!targetIsInventory && type.buyPrice <= 0) return;
+	    if (targetIsInventory && type.sellPrice <= 0) return;
+
+	    int count = widgetToChange.GetNumItems();
+		
+		for(int x = 0; x < count; x++) {
+			DZLTraderType itemType;
+   			widgetToChange.GetItemData(x, 1, itemType);	
+			
+			if (!itemType) continue;
+			
+			if (itemType.GetId() == type.GetId()) {
+				int sellPrice = 0;
+				DZLTraderTypeStorage storage = GetCurrentStorageByName(type.type);
+				if (!targetIsInventory) {
+					int buyPrice = itemType.CalculateDynamicBuyPrice(storage);
+					sellPrice = itemType.CalculateDynamicSellPrice(storage);
+		            widgetToChange.SetItem(x, buyPrice.ToString(), itemType, 1);
+		            widgetToChange.SetItem(x, sellPrice.ToString(), itemType, 2);
+		            widgetToChange.SetItem(x, itemType.GetStorageString(storage), itemType, 3);
+		        } else {
+					EntityAI item;
+   					widgetToChange.GetItemData(x, 0, item);	
+					sellPrice = itemType.CalculateDynamicSellPrice(storage, item);
+		            widgetToChange.SetItem(x, sellPrice.ToString(), itemType, 1);
+		            widgetToChange.SetItem(x, itemType.GetStorageString(storage), item, 3);
+		        }
+			}
+		}
+	}
+	
+	private DZLTraderTypeStorage GetCurrentStorageByName(string name) {
+		if (storageOfItems) {
+			foreach(DZLTraderTypeStorage storage: storageOfItems) {
+				if (name == storage.GetType()) {
+					return storage;
+				}
+			}
+		}
+		
+		return null;	
 	}
 
 }
