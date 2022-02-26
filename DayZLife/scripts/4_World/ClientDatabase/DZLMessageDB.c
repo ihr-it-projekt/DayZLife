@@ -18,16 +18,10 @@ class DZLMessageDB
 
 	void DZLMessageDB() {
 		if (!Load()) {
+		    version = "1";
 			ids = new array<string>;
 			contacts = new array<ref DZLOnlinePlayer>;
-		}
-
-		if (!version) {
-		    version = "1";
-		    answerIds = new array<string>;
-		    foreach(string __id: ids) {
-                DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + __id + ".json");
-            }
+            answerIds = new array<string>;
             ids = new array<string>;
 
 		    Save();
