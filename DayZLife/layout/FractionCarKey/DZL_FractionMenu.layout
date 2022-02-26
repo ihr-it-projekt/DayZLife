@@ -53,7 +53,7 @@ FrameWidgetClass License_Menu {
          hexactsize 0
          vexactsize 0
          style Normal
-         text "#FractionCarKey"
+         text "#FractionMenu"
          "text halign" center
          "text valign" center
         }
