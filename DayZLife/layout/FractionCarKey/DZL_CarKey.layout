@@ -109,7 +109,7 @@ FrameWidgetClass License_Menu {
          colums ""
          lines 20
         }
-        TextListboxWidgetClass fractionPlayerhaveKeylist {
+        TextListboxWidgetClass fractionMembers {
          position 0.00708 0
          size 0.31 0.9676
          halign right_ref
@@ -146,7 +146,7 @@ FrameWidgetClass License_Menu {
            vexactsize 0
            style editor_quad_dark
            {
-            ButtonWidgetClass fractionSafeKeylist {
+            ButtonWidgetClass fractionSafeMembers {
              color 0.251 0.502 0 1
              position 0 0
              size 0.98 0.9
@@ -161,32 +161,8 @@ FrameWidgetClass License_Menu {
             }
            }
           }
-          TextWidgetClass fractioNewOwnerDisplay {
-           ignorepointer 1
-           position 0.06733 0.22462
-           size 0.8679 0.0862
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text_proportion 0.7
-           "text halign" center
-           "text valign" center
-          }
-          TextWidgetClass TextWidget1 {
-           ignorepointer 1
-           position 0.06733 0.11965
-           size 0.8679 0.0862
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#change_owner_to"
-           text_proportion 0.7
-           "text halign" center
-           "text valign" center
-          }
           PanelWidgetClass PanelWidget6 {
+           visible 0
            ignorepointer 1
            position 0.00251 0.55376
            size 0.86621 0.1
@@ -198,7 +174,8 @@ FrameWidgetClass License_Menu {
            vexactsize 0
            style editor_quad_dark
            {
-            ButtonWidgetClass fractionChangOwnerButton {
+            ButtonWidgetClass fractionChangRightsButton {
+             visible 0
              color 0.251 0.502 0 1
              position 0 0
              size 0.98 0.9
