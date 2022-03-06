@@ -1,7 +1,6 @@
-class DZLOnlinePlayer
+class DZLOnlinePlayer: DZLNamePlayer
 {
     string id;
-    string name;
     vector position;
 	string rank;
 

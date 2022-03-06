@@ -23,6 +23,7 @@ class DZLTraderMenu: DZLBaseMenu
 	private ref array<string> addedCats;
 	private ref array<ref DZLTraderTypeStorage> storageOfItems;
 
+
     void DZLTraderMenu(DZLTraderPosition position) {
 		this.position = position;
         layoutPath = "DayZLife/layout/Trader/Trader_Menu.layout";
@@ -130,8 +131,7 @@ class DZLTraderMenu: DZLBaseMenu
        }
     }
 
-    override void OnShow() {
-        super.OnShow();
+    void RenderView() {
         sumInt = 0;
         taxInt = 0;
 
@@ -372,7 +372,7 @@ class DZLTraderMenu: DZLBaseMenu
            if (ctx.Read(traderStorageResponse)){
 				storageOfItems = traderStorageResponse.param1;
                
-                UpdateGUI();
+                RenderView();
             }
 
         }

@@ -7,7 +7,6 @@ class DZLDatabase: Container_Base
     private ref DZLPlayerIdentities dzlPlayerIdentities;
     private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
-    private ref map<string, ref DZLCarStorage> storageCars;
     private ref DZLEmergencies emergencies;
 
     override void EEInit() {

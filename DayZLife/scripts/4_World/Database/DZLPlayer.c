@@ -23,8 +23,11 @@ class DZLPlayer
 	ref TStringArray licenceIds;
 	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
 	ref array<ref DZLStoreItem> itemsStore;
-	private string version = "4";
+	private string version = "5";
 	private ref array<ref DZLTicket> openTickets;
+	private string fractionId = "";
+	private ref array<string> fractionWherePlayerCanJoin;
+	private DZLFraction fraction = null;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -39,7 +42,6 @@ class DZLPlayer
 
 		DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
         idents.AddPlayer(playerId);
-		
 
         if (version == "3") {
             activeJobGrade = "Rekrut";
@@ -50,6 +52,21 @@ class DZLPlayer
 
         if (payCheck.rank != activeJobGrade) {
             activeJobGrade = payCheck.rank;
+        }
+
+        if (version != "5") {
+            fractionId = "";
+            fractionWherePlayerCanJoin = new array<string>;
+
+            version = "5";
+        }
+
+        if (IsInAnyFraction()) {
+            fraction = DZLDatabaseLayer.Get().GetFraction(fractionId);
+
+            if (!fraction) {
+                fractionId = "";
+            }
         }
 
 		Save();
@@ -457,6 +474,89 @@ class DZLPlayer
 		return null;
 	}
 
+	bool IsFractionBoss() {
+	    return fractionId == dayZPlayerId;
+	}
+
+	bool IsInAnyFraction() {
+	    return "" != fractionId;
+	}
+
+	DZLFraction GetFraction() {
+	    return fraction;
+	}
+
+	DZLFractionMember GetFractionMember() {
+	    if (fraction) {
+	        return fraction.GetMember(dayZPlayerId);
+	    }
+	    return null;
+	}
+
+    void RemoveFraction(string fractionId) {
+        if (this.fractionId == fractionId) {
+            fractionId = "";
+            fraction = null;
+
+            Save();
+        }
+    }
+
+    void SetFraction(DZLFraction fraction) {
+        if (IsInAnyFraction()) return;
+
+        this.fraction = fraction;
+        this.fractionId = fraction.GetId();
+
+        Save();
+    }
+
+    void RemovePotentialFraction(string fractionId) {
+        foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
+            if (fractionId == fractionIdCanJoin) {
+                fractionWherePlayerCanJoin.Remove(key);
+                break;
+            }
+        }
+
+        Save();
+    }
+
+    void AddPotentialFraction(string fractionId) {
+        if (IsInAnyFraction()) return;
+
+        foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
+            if (fractionId == fractionIdCanJoin) {
+                return;
+            }
+        }
+
+        fractionWherePlayerCanJoin.Insert(fractionId);
+
+        Save();
+    }
+
+    bool HasPotentialFraction(string fractionId) {
+        if (IsInAnyFraction()) return false;
+
+        foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
+            if (fractionId == fractionIdCanJoin) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    void ResetPotentialFractions() {
+        fractionWherePlayerCanJoin.Clear();
+        Save();
+    }
+
+    array<string> GetFractionIdsWherePlayerCanJoin() {
+        return fractionWherePlayerCanJoin;
+    }
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayer>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
@@ -473,6 +573,7 @@ class DZLPlayer
             }
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
+
 			return true;
         }
 		return false;
