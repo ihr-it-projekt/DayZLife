@@ -7,6 +7,7 @@ modded class MissionGameplay
 	private bool holdTree = false;
 	private bool holdFour = false;
 	private bool holdFive = false;
+	private bool holdSix = false;
 
 	private ref DZLPlayerEventListener playerEventListener;
 	private ref DZLCarEventListener carEventListener;
@@ -52,6 +53,9 @@ modded class MissionGameplay
             case KeyCode.KC_5:
                 holdFive = false;
                 break;
+            case KeyCode.KC_6:
+                holdSix = false;
+                break;
             default:
                 break;
         }
@@ -94,6 +98,10 @@ modded class MissionGameplay
 				holdFive = true;
 				CheckOpenMenu();
                 break;
+            case KeyCode.KC_6:
+				holdSix = true;
+				CheckOpenMenu();
+                break;
             default:
                 super.OnKeyPress(key);
                 break;
@@ -112,6 +120,8 @@ modded class MissionGameplay
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetMessageSystemMenu(), NULL);
 			} else if (holdFive && !player.IsUnconscious()) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetPayTicketMenu(), NULL);
+			} else if (holdSix) {
+				GetGame().GetUIManager().ShowScriptedMenu(player.GetFractionMenu(), NULL);
 			}
 		}
     }
