@@ -13,17 +13,25 @@ class DZLBankListener
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA) {
-            autoptr Param1<int> paramDeposit;
+            autoptr Param2<int, bool> paramDeposit;
             string message = "";
             if (ctx.Read(paramDeposit)){
                 DZLPlayer dzlPlayer = PlayerBase.Cast(target).GetDZLPlayer();
 				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 				if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					message = "#bank_can_not_be_used_in_moment";
-				} else if(paramDeposit.param1 >= dzlPlayer.GetMoney() || paramDeposit.param1 <= dzlPlayer.GetBankMoney()) {
+				} else if(!paramDeposit.param2 && paramDeposit.param1 >= dzlPlayer.GetMoney() || !paramDeposit.param2 && paramDeposit.param1 <= dzlPlayer.GetBankMoney()) {
                     bank.AddMoney(paramDeposit.param1 * -1);
                     dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
                     dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param1 * -1);
+
+                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                    message = "#money_transfer_successful";
+                } else if(paramDeposit.param2 && dzlPlayer.HasFractionRightCanAccessBankAccount() && paramDeposit.param1 >= dzlPlayer.GetMoney() || dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && paramDeposit.param2 && paramDeposit.param1 <= dzlPlayer.GetFraction().GetBankAccount()) {
+                    bank.AddMoney(paramDeposit.param1 * -1);
+                    dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
+                    dzlPlayer.GetFraction().AddMoney(paramDeposit.param1 * -1);
 
                     GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
@@ -34,7 +42,7 @@ class DZLBankListener
                 DZLSendMessage(sender, message);
             }
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER) {
-            autoptr Param2<DZLPlayerBankInfo, int> paramDepositPlayer;
+            autoptr Param3<DZLPlayerBankInfo, int, bool> paramDepositPlayer;
             string messageDeposit = "";
             if (ctx.Read(paramDepositPlayer)){
                 DZLPlayer dzlPlayerSender = PlayerBase.Cast(target).GetDZLPlayer();
@@ -59,11 +67,22 @@ class DZLBankListener
 				if (!bankTransfer.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					messageDeposit = "#bank_can_not_be_used_in_moment";
 				} else if ("" == messageDeposit) {
-					if(dzlPlayerSender.GetAllMoney() >= paramDepositPlayer.param2) {
-						int moneyBankAdd = dzlPlayerSender.DepositMoneyToOtherPlayer(dzlPlayerReceiver, paramDepositPlayer.param2);
+				    int money = dzlPlayerSender.GetAllMoney();
+				    bool isFractionTransaction = false;
 
-						bankTransfer.AddMoney(moneyBankAdd);
-						
+                    if (paramDepositPlayer.param3 && dzlPlayerSender.HasFractionRightCanGetMoneyFromBankAccount()) {
+                        money = dzlPlayerSender.GetFraction().GetBankAccount();
+                        isFractionTransaction = true;
+                    }
+
+					if(money >= paramDepositPlayer.param2) {
+					    if (isFractionTransaction) {
+					        dzlPlayerSender.GetFraction().DepositMoneyFromFractionToOtherPlayer(dzlPlayerReceiver, paramDepositPlayer.param2);
+					    } else {
+						    int moneyBankAdd = dzlPlayerSender.DepositMoneyToOtherPlayer(dzlPlayerReceiver, paramDepositPlayer.param2);
+						    bankTransfer.AddMoney(moneyBankAdd);
+					    }
+
 						GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bankTransfer), true);
                     	GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                     	GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, playerFound.GetIdentity());

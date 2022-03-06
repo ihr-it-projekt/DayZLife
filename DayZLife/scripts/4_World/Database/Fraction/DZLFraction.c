@@ -103,6 +103,27 @@ class DZLFraction
         return name;
     }
 
+    int GetBankAccount() {
+        return bankAccount;
+    }
+
+    void AddMoney(int money) {
+        bankAccount += money;
+
+        Save();
+    }
+
+	void DepositMoneyFromFractionToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+	    playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
+
+		if (moneyToTransfer > 0) {
+		    DZLLogMoneyTransaction(id, "fraction", bankAccount, bankAccount - moneyToTransfer, moneyToTransfer * -1);
+			bankAccount -= moneyToTransfer;
+		}
+
+		Save();
+	}
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
             JsonFileLoader<DZLFraction>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);

@@ -409,7 +409,7 @@ class DZLPlayer
 		Save();
 		return moneyBankAdd;
 	}
-	
+
 	string CanBuyLicence(notnull DZLCraftLicence licenceToBuy, DZLCraftLicence depLicence){
 		if(money < licenceToBuy.price) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
@@ -494,7 +494,15 @@ class DZLPlayer
 	}
 
 	bool HasFractionRightCanAccessFractionGarage() {
-	    return IsFractionBoss() || GetFractionMember().canAccessFractionGarage;
+	    return IsFractionBoss() || fraction && GetFractionMember().canAccessFractionGarage;
+	}
+
+	bool HasFractionRightCanAccessBankAccount() {
+	    return IsFractionBoss() || fraction && GetFractionMember().canAccessBankAccount;
+	}
+
+	bool HasFractionRightCanGetMoneyFromBankAccount() {
+	    return IsFractionBoss() || fraction && GetFractionMember().canGetMoneyFromBankAccount;
 	}
 
     void RemoveFraction(string fractionId) {
