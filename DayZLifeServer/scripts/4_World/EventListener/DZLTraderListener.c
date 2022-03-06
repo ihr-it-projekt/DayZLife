@@ -188,7 +188,7 @@ class DZLTraderListener
 			CarScript _car = CarScript.Cast(car);
 			
 			if (_car) {
-				_car.AddOwner(player.GetIdentity());
+				_car.OwnCar(player.GetIdentity(), "", "");
 			}
 		}
 

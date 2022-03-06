@@ -1,5 +1,5 @@
 FrameWidgetClass Banking {
- position 0.00054 0
+ position 0.00124 -0.00291
  size 1 1
  halign center_ref
  valign center_ref
@@ -263,8 +263,8 @@ FrameWidgetClass Banking {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0 0.051
-         size 0.602 0.18109
+         position 0 0.08732
+         size 0.602 0.25373
          halign right_ref
          valign center_ref
          hexactpos 0
@@ -275,8 +275,8 @@ FrameWidgetClass Banking {
          {
           PanelWidgetClass PanelWidget8 {
            ignorepointer 1
-           position 0.01804 0.0702
-           size 0.31 0.35
+           position 0.01462 0.05188
+           size 0.3 0.24
            halign right_ref
            valign bottom_ref
            hexactpos 0
@@ -302,8 +302,8 @@ FrameWidgetClass Banking {
           }
           PanelWidgetClass PanelWidget9 {
            ignorepointer 1
-           position 0 0.0702
-           size 0.31 0.35
+           position -0 0.05188
+           size 0.3 0.24
            halign center_ref
            valign bottom_ref
            hexactpos 0
@@ -327,8 +327,8 @@ FrameWidgetClass Banking {
            }
           }
           EditBoxWidgetClass Input_Deposit {
-           position 0.25715 -0.2548
-           size 0.4857 0.35
+           position 0.25715 -0.30729
+           size 0.4857 0.245
            valign center_ref
            hexactpos 0
            vexactpos 0
@@ -340,7 +340,7 @@ FrameWidgetClass Banking {
            visible 1
            ignorepointer 1
            position 0.01268 0.0702
-           size 0.31 0.35
+           size 0.3 0.24
            valign bottom_ref
            hexactpos 0
            vexactpos 0
@@ -350,6 +350,32 @@ FrameWidgetClass Banking {
            {
             ButtonWidgetClass Button_Cash_Transfer {
              color 0.502 0 0 1
+             position 0 -0.01363
+             size 0.98 0.9273
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Cash_Transfer"
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           position 0 0.36833
+           size 0.3 0.24
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Pay_out_Fraction {
+             color 0 0.1255 0.502 1
              position 0 0
              size 0.98 0.9
              halign center_ref
@@ -358,7 +384,61 @@ FrameWidgetClass Banking {
              vexactpos 0
              hexactsize 0
              vexactsize 0
-             text "#Cash_Transfer"
+             text "#Pay_out_Fraction"
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget6 {
+           ignorepointer 1
+           position 0.01462 0.36833
+           size 0.3 0.24
+           halign right_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Deposit_Fraction {
+             color 0 0.502 0.1255 1
+             position 0.00809 -0
+             size 0.98 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style Default
+             text "#Deposit_Fraction"
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget17 {
+           visible 1
+           ignorepointer 1
+           position 0.01462 0.36833
+           size 0.3 0.24
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass Button_Cash_Transfer_Fraction {
+             color 0.502 0 0 1
+             position 0 -0.01363
+             size 0.98 0.9273
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             scaled 1
+             text "#Cash_Transfer_Fraction"
             }
            }
           }

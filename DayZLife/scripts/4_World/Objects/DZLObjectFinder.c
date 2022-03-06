@@ -55,7 +55,7 @@ class DZLObjectFinder
         }
     }
 
-    static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, string playerId, bool byOwner = false) {
+    static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, DZLPlayer player, bool byOwner = false) {
         array<Object> excludedObjects = new array<Object>;
         array<Object> nearbyObjects = new array<Object>;
         if (GetGame().IsBoxColliding(carSpawnPosition, orientation, "3 5 9", excludedObjects, nearbyObjects)){
@@ -65,11 +65,10 @@ class DZLObjectFinder
                     if(!carsScript) continue;
 					
 					if (!byOwner) {
-						if(carsScript.lastDriverId != playerId) continue;
+						if(carsScript.lastDriverId != player.dayZPlayerId || !player.IsInAnyFraction() || !player.HasFractionRightCanAccessFractionGarage() || !player.GetFraction().HasMember(carsScript.lastDriverId)) continue;
 					} else {
-						if(carsScript.ownerId != playerId) continue;
+						if(carsScript.ownerId != player.dayZPlayerId) continue;
 					}
-                    
 
                     return carsScript;
                 }

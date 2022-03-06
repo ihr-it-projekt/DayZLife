@@ -487,10 +487,14 @@ class DZLPlayer
 	}
 
 	DZLFractionMember GetFractionMember() {
-	    if (fraction) {
-	        return fraction.GetMember(dayZPlayerId);
+	    if (fraction && !IsFractionBoss()) {
+            return fraction.GetMember(dayZPlayerId);
 	    }
 	    return null;
+	}
+
+	bool HasFractionRightCanAccessFractionGarage() {
+	    return IsFractionBoss() || GetFractionMember().canAccessFractionGarage;
 	}
 
     void RemoveFraction(string fractionId) {
