@@ -297,12 +297,13 @@ FrameWidgetClass Banking {
              vexactsize 0
              style Default
              text "#Deposit"
+             text_proportion 0.5
             }
            }
           }
           PanelWidgetClass PanelWidget9 {
            ignorepointer 1
-           position -0 0.05188
+           position 0 0.05188
            size 0.3 0.24
            halign center_ref
            valign bottom_ref
@@ -323,6 +324,7 @@ FrameWidgetClass Banking {
              hexactsize 0
              vexactsize 0
              text "#Pay_out"
+             text_proportion 0.5
             }
            }
           }
@@ -339,7 +341,7 @@ FrameWidgetClass Banking {
           PanelWidgetClass PanelWidget4 {
            visible 1
            ignorepointer 1
-           position 0.01268 0.0702
+           position 0.01087 0.05188
            size 0.3 0.24
            valign bottom_ref
            hexactpos 0
@@ -359,12 +361,13 @@ FrameWidgetClass Banking {
              hexactsize 0
              vexactsize 0
              text "#Cash_Transfer"
+             text_proportion 0.5
             }
            }
           }
           PanelWidgetClass PanelWidget5 {
            ignorepointer 1
-           position 0 0.36833
+           position 0 0.33623
            size 0.3 0.24
            halign center_ref
            valign bottom_ref
@@ -385,12 +388,13 @@ FrameWidgetClass Banking {
              hexactsize 0
              vexactsize 0
              text "#Pay_out_Fraction"
+             text_proportion 0.5
             }
            }
           }
           PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           position 0.01462 0.36833
+           position 0.01462 0.33623
            size 0.3 0.24
            halign right_ref
            valign bottom_ref
@@ -402,7 +406,7 @@ FrameWidgetClass Banking {
            {
             ButtonWidgetClass Button_Deposit_Fraction {
              color 0 0.502 0.1255 1
-             position 0.00809 -0
+             position 0 0
              size 0.98 0.9
              halign center_ref
              valign center_ref
@@ -412,13 +416,14 @@ FrameWidgetClass Banking {
              vexactsize 0
              style Default
              text "#Deposit_Fraction"
+             text_proportion 0.5
             }
            }
           }
           PanelWidgetClass PanelWidget17 {
            visible 1
            ignorepointer 1
-           position 0.01462 0.36833
+           position 0.01087 0.33623
            size 0.3 0.24
            valign bottom_ref
            hexactpos 0
@@ -429,7 +434,7 @@ FrameWidgetClass Banking {
            {
             ButtonWidgetClass Button_Cash_Transfer_Fraction {
              color 0.502 0 0 1
-             position 0 -0.01363
+             position 0 -0.0136
              size 0.98 0.9273
              halign center_ref
              valign center_ref
@@ -439,6 +444,7 @@ FrameWidgetClass Banking {
              vexactsize 0
              scaled 1
              text "#Cash_Transfer_Fraction"
+             text_proportion 0.5
             }
            }
           }
