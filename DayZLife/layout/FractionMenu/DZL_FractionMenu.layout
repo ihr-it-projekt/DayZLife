@@ -56,6 +56,7 @@ FrameWidgetClass License_Menu {
          vexactsize 0
          style Normal
          text "#FractionMenu"
+         text_proportion 0.7
          "text halign" center
          "text valign" center
         }
@@ -217,6 +218,7 @@ FrameWidgetClass License_Menu {
              style Normal
              text "#Access_Bank_Account"
              "exact text" 0
+             text_proportion 0.6
              "size to text h" 0
              "size to text v" 0
              "text valign" center
@@ -257,6 +259,7 @@ FrameWidgetClass License_Menu {
              style Normal
              text "#Get_Money_From_Bank"
              "exact text" 0
+             text_proportion 0.6
              "size to text h" 0
              "size to text v" 0
              "text valign" center
@@ -297,6 +300,7 @@ FrameWidgetClass License_Menu {
              style Normal
              text "#Access_Fraction_Garage"
              "exact text" 0
+             text_proportion 0.6
              "size to text h" 0
              "size to text v" 0
              "text valign" center
@@ -487,6 +491,7 @@ FrameWidgetClass License_Menu {
            vexactsize 0
            style Default
            text "#Accept_Invitation"
+           text_proportion 0.6
           }
          }
         }
@@ -514,6 +519,7 @@ FrameWidgetClass License_Menu {
            vexactsize 0
            style Default
            text "#Create_Faction"
+           text_proportion 0.6
           }
          }
         }
@@ -541,6 +547,7 @@ FrameWidgetClass License_Menu {
            vexactsize 0
            style Default
            text "#Fraction_Leave"
+           text_proportion 0.6
           }
          }
         }
@@ -606,6 +613,7 @@ FrameWidgetClass License_Menu {
              style Normal
              text "#Access_Bank_Account"
              "exact text" 0
+             text_proportion 0.6
              "size to text h" 0
              "size to text v" 0
              "text valign" center
@@ -647,6 +655,7 @@ FrameWidgetClass License_Menu {
              style Normal
              text "#Get_Money_From_Bank"
              "exact text" 0
+             text_proportion 0.6
              "size to text h" 0
              "size to text v" 0
              "text valign" center
@@ -688,6 +697,7 @@ FrameWidgetClass License_Menu {
              style Normal
              text "#Access_Fraction_Garage"
              "exact text" 0
+             text_proportion 0.6
              "size to text h" 0
              "size to text v" 0
              "text valign" center
