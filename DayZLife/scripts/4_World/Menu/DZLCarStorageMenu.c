@@ -8,6 +8,7 @@ class DZLCarStorageMenu: DZLBaseMenu
 	private DZLStoragePosition position;
 	private CheckBoxWidget hasInsuranceWidget;
 	private TextWidget insuranceText;
+	private Widget storeInFractionButtonWrapper;
 
     void DZLCarStorageMenu() {
         Construct();
@@ -32,18 +33,23 @@ class DZLCarStorageMenu: DZLBaseMenu
 		hasInsuranceWidget = creator.GetCheckBoxWidget("insuranceCheckBox");
 		insuranceText = creator.GetTextWidget("insurranceTextBox");
 
+		storeInFractionButtonWrapper = creator.GetWidget("storeInFractionButtonWrapper");
+
         return layoutRoot;
     }
 	
 	override void UpdateGUI(string message = "") {
 		super.UpdateGUI(message);
+        storeInFractionButtonWrapper.Show(dzlPlayer.HasFractionRightCanAccessFractionGarage());
 		carToStoreList.ClearItems();
 		array<string> carTypes = player.GetConfig().carConfig.carTypesToStore;
 		foreach(string carType: carTypes) {
-			CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, true);
+			CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, false);
 			if (playerCar && !playerCar.isSold) {
 				string name = "";
             	GetGame().ObjectGetDisplayName(playerCar, name);
+				name += " (" + playerCar.ownerName + ")"; 
+				carToStoreList.AddItem(name, playerCar, 0);
 	        }
 		}
 	}
@@ -66,7 +72,9 @@ class DZLCarStorageMenu: DZLBaseMenu
 	}
 
     override bool OnClick(Widget w, int x, int y, int button) {
-		if (w == inStoreButton || storeInFractionButton) {
+		if (w == inStoreButton || w == storeInFractionButton) {
+		    if (w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
+
 			int index = carToStoreList.GetSelectedRow();
 			
 			if (-1 == index) {
@@ -92,10 +100,12 @@ class DZLCarStorageMenu: DZLBaseMenu
                     return true;
                 }
 
-                if (w == storeInFractionButton && car.lastDriverId != dzlPlayer.dayZPlayerId) {
+                if (w == inStoreButton && car.ownerId != dzlPlayer.dayZPlayerId) {
                     player.DisplayMessage("#car_can_only_stored_in_fraction_garage");
                     return true;
                 }
+				
+				if (w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
 				GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
 			    car.isSold = true;
@@ -110,6 +120,8 @@ class DZLCarStorageMenu: DZLBaseMenu
 
             DZLCarStoreItem carOut = null;
 			carInStoreList.GetItemData(indexOut, 0, carOut);
+
+			if (!carOut.IsOwner(dzlPlayer.dayZPlayerId) && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
 			string textPrivate = "";
 			carInStoreList.GetItemText(indexOut, 1, textPrivate);

@@ -129,8 +129,9 @@ static int DAY_Z_LIFE_FRACTION_MEMBER_LEAVE = 222351;
 static int DAY_Z_LIFE_FRACTION_MEMBER_LEAVE_RESPONSE = 222352;
 static int DAY_Z_LIFE_GET_FRACTION_RESPONSE_NOT_A_FRACTION_MEMBER = 222353;
 static int DAY_Z_LIFE_FRACTION_MEMBER_JOIN = 222354;
-static int DAY_Z_LIFE_FRACTION_MEMBER_JOIN_RESPONSE = 222354;
-static int DAY_Z_LIFE_FRACTION_CREATE_FRACTION = 222355;
+static int DAY_Z_LIFE_FRACTION_MEMBER_JOIN_RESPONSE = 222355;
+static int DAY_Z_LIFE_FRACTION_CREATE_FRACTION = 222356;
+static int DAY_Z_LIFE_DELETE_FRACTION_RESPONSE = 222357;
 
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE = "$profile:DayZLife\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA = "$profile:DayZLife\\Data\\";
@@ -139,6 +140,7 @@ static string DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE = "$profile:DayZLife\\Data\\Ho
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR = "$profile:DayZLife\\Data\\Car\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER = "$profile:DayZLife\\Data\\Player\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE = "$profile:DayZLife\\Data\\ItemStorage\\";
+static string DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION = "$profile:DayZLife\\Data\\Fraction\\";
 static string LOCKED_HOUSES_FILE_NAME = "housesLocked.json";
 static string DAY_Z_LIFE_LOGS = "$profile:DayZLife\\Logs\\";
 

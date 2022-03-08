@@ -415,8 +415,6 @@ class DZLTraderMenu: DZLBaseMenu
 
         sourceWidget.RemoveRow(pos);
 		
-
-
         if (1 == factor && storage) {
             storage.StorageDown();
         } else if (storage) {

@@ -42,4 +42,8 @@ class DZLCarStoreItem: DZLStoreItem
 		}
 		
 	}
+
+	bool IsOwner(string playerId) {
+        return playerId == ownerId;
+	}
 }

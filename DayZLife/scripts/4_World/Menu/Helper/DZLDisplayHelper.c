@@ -4,11 +4,11 @@ class DZLDisplayHelper
 
     static string GetItemDisplayName(string itemClassname){
         TStringArray configs = new TStringArray;
-        configs.Insert( CFG_VEHICLESPATH );
-        configs.Insert( CFG_WEAPONSPATH );
-        configs.Insert( CFG_MAGAZINESPATH );
-        configs.Insert( "CfgNonAIVehicles" );
-        configs.Insert( "CfgAmmo" );
+        configs.Insert(CFG_VEHICLESPATH);
+        configs.Insert(CFG_WEAPONSPATH);
+        configs.Insert(CFG_MAGAZINESPATH);
+        configs.Insert("CfgNonAIVehicles");
+        configs.Insert("CfgAmmo");
 
         string displayName;
         foreach (string itemName: configs){
@@ -57,8 +57,6 @@ class DZLDisplayHelper
 			}
         }
     }
-
-
 
     static array<ref DZLFractionMember> GetDZLFractionMemberFromList(TextListboxWidget listWidget) {
         int count = listWidget.GetNumItems();

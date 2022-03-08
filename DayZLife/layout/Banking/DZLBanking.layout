@@ -365,7 +365,7 @@ FrameWidgetClass Banking {
             }
            }
           }
-          PanelWidgetClass PanelWidget5 {
+          PanelWidgetClass wrapper_Button_Pay_out_Fraction {
            ignorepointer 1
            position 0 0.33623
            size 0.3 0.24
@@ -392,7 +392,7 @@ FrameWidgetClass Banking {
             }
            }
           }
-          PanelWidgetClass PanelWidget6 {
+          PanelWidgetClass wrapper_Button_Deposit_Fraction {
            ignorepointer 1
            position 0.01462 0.33623
            size 0.3 0.24
@@ -420,7 +420,7 @@ FrameWidgetClass Banking {
             }
            }
           }
-          PanelWidgetClass PanelWidget17 {
+          PanelWidgetClass wrapper_Button_Cash_Transfer_Fraction {
            visible 1
            ignorepointer 1
            position 0.01087 0.33623
@@ -504,7 +504,7 @@ FrameWidgetClass Banking {
           }
          }
         }
-        PanelWidgetClass PanelWidget15 {
+        PanelWidgetClass wrapperFractionCash {
          ignorepointer 1
          position 0 0.29492
          size 0.602 0.0785

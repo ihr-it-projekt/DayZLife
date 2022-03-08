@@ -19,7 +19,7 @@ class DZLFractionListener
             array<ref DZLFractionMember> notMembers;
             if (dzlPlayer.IsFractionBoss()) {
                 fraction = database.GetFraction(sender.GetId());
-                notMembers = GetPlayerNotInFractionCollection();
+                notMembers = GetPlayerNotInFractionCollection(fraction);
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_FRACTION_RESPONSE_FRACTION_OWNER, new Param2<ref DZLFraction, ref array<ref DZLFractionMember>>(fraction, notMembers), true, sender);
             } else if (dzlPlayer.IsInAnyFraction()) {
                  GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_FRACTION_RESPONSE_FRACTION_MEMBER, new Param1<ref DZLFractionMember>(dzlPlayer.GetFractionMember()), true, sender);
@@ -31,7 +31,7 @@ class DZLFractionListener
                      fraction = database.GetFraction(id);
 
                      if (fraction) {
-                         potentialFractions.Insert(new DZLFractionMember(id, sender.GetId(), "", fraction.GetName()));
+                         potentialFractions.Insert(new DZLFractionMember(id, sender.GetId(), "", fraction.GetName(), false));
                      }
                  }
 
@@ -53,7 +53,7 @@ class DZLFractionListener
                         HandleRemoveMembers(members, newMembersFromRequest, fraction);
                         HandleRemovePotentialsMembers(potentialMembers, newPotentialMembersFromRequest, fraction);
                         HandleAddPotential(newPotentialMembersFromRequest, potentialMembers, fraction);
-                        HandleUpdateMemberRights(members, fraction);
+                        HandleUpdateMemberRights(newMembersFromRequest, fraction);
                     }
 
                     fraction.Save();
@@ -65,7 +65,11 @@ class DZLFractionListener
 			dzlPlayer = database.Get().GetPlayer(sender.GetId());
             if (dzlPlayer.IsFractionBoss()) {
                 database.RemoveFraction(sender.GetId());
+				dzlPlayer.RemoveFraction(sender.GetId());
             }
+			GetGame().RPCSingleParam(null, DAY_Z_LIFE_DELETE_FRACTION_RESPONSE, null, true, sender);
+			GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+
         } else if (rpc_type == DAY_Z_LIFE_FRACTION_MEMBER_LEAVE) {
 			dzlPlayer = database.Get().GetPlayer(sender.GetId());
             if (!dzlPlayer.IsFractionBoss() && dzlPlayer.IsInAnyFraction()) {
@@ -76,15 +80,18 @@ class DZLFractionListener
             }
 
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_FRACTION_MEMBER_LEAVE_RESPONSE, null, true, sender);
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+
         } else if (rpc_type == DAY_Z_LIFE_FRACTION_MEMBER_JOIN) {
 			dzlPlayer = database.Get().GetPlayer(sender.GetId());
             autoptr Param1<ref DZLFractionMember> fractionMemberToJoinParam;
             if (ctx.Read(fractionMemberToJoinParam)){
+                if (!fractionMemberToJoinParam.param1) return;
 				DZLFractionMember fractionMemberToJoin = fractionMemberToJoinParam.param1;
-                if (!dzlPlayer.HasPotentialFraction(fractionMemberToJoin.fractionID) && !dzlPlayer.IsInAnyFraction()) {
+                if (dzlPlayer.HasPotentialFraction(fractionMemberToJoin.fractionID) && !dzlPlayer.IsInAnyFraction()) {
                     fraction = database.GetFraction(fractionMemberToJoin.fractionID);
                     fraction.RemovePotentialMember(sender.GetId());
-                    fraction.AddMember(new DZLFractionMember(fraction.GetId(), sender.GetId(), "", fraction.GetName()));
+                    fraction.AddMember(new DZLFractionMember(fraction.GetId(), sender.GetId(), dzlPlayer.playerName, fraction.GetName(), true));
                     fraction.Save();
 
                     dzlPlayer.SetFraction(fraction);
@@ -100,7 +107,12 @@ class DZLFractionListener
                 if (!dzlPlayer.IsInAnyFraction()) {
                     fraction = new DZLFraction(sender.GetId(), createFractionParam.param1);
                     fraction.RemovePotentialMember(sender.GetId());
-                    fraction.AddMember(new DZLFractionMember(fraction.GetId(), sender.GetId(), "", fraction.GetName()));
+                    DZLFractionMember boss = new DZLFractionMember(fraction.GetId(), sender.GetId(), dzlPlayer.playerName, fraction.GetName(), true);
+                    boss.canAccessBankAccount = true;
+                    boss.canGetMoneyFromBankAccount = true;
+                    boss.canAccessFractionGarage = true;
+
+                    fraction.AddMember(boss);
                     fraction.Save();
 
                     dzlPlayer.SetFraction(fraction);
@@ -132,6 +144,7 @@ class DZLFractionListener
 
     private void HandleRemoveMembers(ref array<ref DZLFractionMember> members, ref array<ref DZLFractionMember> membersToCompare, DZLFraction fraction) {
         foreach(DZLFractionMember member: members) {
+			if (member.IsFractionBoss()) continue;
             bool hasFound = false;
             foreach(DZLFractionMember memberToCompare: membersToCompare) {
                 if (memberToCompare.playerId == member.playerId) {
@@ -150,6 +163,9 @@ class DZLFractionListener
     private void HandleUpdateMemberRights(ref array<ref DZLFractionMember> members, DZLFraction fraction) {
         foreach(DZLFractionMember member: members) {
             fraction.UpdateMember(member);
+			DZLPlayer player = database.GetPlayer(member.playerId);
+			
+			player.UpdateFraction(fraction);
         }
     }
 
@@ -170,14 +186,14 @@ class DZLFractionListener
         }
     }
 
-    private array<ref DZLFractionMember> GetPlayerNotInFractionCollection() {
+    private array<ref DZLFractionMember> GetPlayerNotInFractionCollection(DZLFraction fraction) {
         array<ref DZLFractionMember> collection = new array<ref DZLFractionMember>;
         ref array<string> playerIdentities = DZLDatabaseLayer.Get().GetPlayerIds().playerIdentities;
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if (player.IsInAnyFraction()) {
-                collection.Insert(new DZLFractionMember("", ident, player.playerName, ""));
+            if (!player.IsInAnyFraction() && !fraction.HasPotentialMember(ident)) {
+                collection.Insert(new DZLFractionMember("", ident, player.playerName, "", false));
             }
         }
 

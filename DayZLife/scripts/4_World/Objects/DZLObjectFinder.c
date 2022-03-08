@@ -65,7 +65,11 @@ class DZLObjectFinder
                     if(!carsScript) continue;
 					
 					if (!byOwner) {
-						if(carsScript.lastDriverId != player.dayZPlayerId || !player.IsInAnyFraction() || !player.HasFractionRightCanAccessFractionGarage() || !player.GetFraction().HasMember(carsScript.lastDriverId)) continue;
+						if (player.IsInAnyFraction() && (player.GetFraction() && !player.GetFraction().HasMember(carsScript.ownerId))) {
+						    continue;
+                        } else if (!player.IsInAnyFraction() && carsScript.ownerId != player.dayZPlayerId) {
+                            continue;
+                        }
 					} else {
 						if(carsScript.ownerId != player.dayZPlayerId) continue;
 					}

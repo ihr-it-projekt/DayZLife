@@ -121,6 +121,7 @@ modded class MissionGameplay
 			} else if (holdFive && !player.IsUnconscious()) {
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetPayTicketMenu(), NULL);
 			} else if (holdSix) {
+			    player.RequestUpdateDZLPlayer();
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetFractionMenu(), NULL);
 			}
 		}

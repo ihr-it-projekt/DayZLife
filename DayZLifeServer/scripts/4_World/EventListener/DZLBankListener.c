@@ -18,27 +18,36 @@ class DZLBankListener
             if (ctx.Read(paramDeposit)){
                 DZLPlayer dzlPlayer = PlayerBase.Cast(target).GetDZLPlayer();
 				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+				message = "#error_not_enough_money_to_transfer";	
 				if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
 					message = "#bank_can_not_be_used_in_moment";
-				} else if(!paramDeposit.param2 && paramDeposit.param1 >= dzlPlayer.GetMoney() || !paramDeposit.param2 && paramDeposit.param1 <= dzlPlayer.GetBankMoney()) {
-                    bank.AddMoney(paramDeposit.param1 * -1);
-                    dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
-                    dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param1 * -1);
-
-                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
-                    message = "#money_transfer_successful";
-                } else if(paramDeposit.param2 && dzlPlayer.HasFractionRightCanAccessBankAccount() && paramDeposit.param1 >= dzlPlayer.GetMoney() || dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && paramDeposit.param2 && paramDeposit.param1 <= dzlPlayer.GetFraction().GetBankAccount()) {
-                    bank.AddMoney(paramDeposit.param1 * -1);
-                    dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
-                    dzlPlayer.GetFraction().AddMoney(paramDeposit.param1 * -1);
-
-                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
-                    message = "#money_transfer_successful";
-                } else {
-                    message = "#error_not_enough_money_to_transfer";
+				} else if(!paramDeposit.param2) {
+					bool canSendMoney = paramDeposit.param1 >= dzlPlayer.GetMoney();
+					bool canTakeMoney = paramDeposit.param1 <= dzlPlayer.GetBankMoney();
+					if (canTakeMoney || canSendMoney) {
+	                    bank.AddMoney(paramDeposit.param1 * -1);
+	                    dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
+	                    dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param1 * -1);
+	
+	                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+	                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+	                    message = "#money_transfer_successful";
+					}
+                } else if(paramDeposit.param2) {
+					bool canSendMoneyToFraction = dzlPlayer.HasFractionRightCanAccessBankAccount() && paramDeposit.param1 <= dzlPlayer.GetMoney();
+					bool canTakeMoneyToFraction = dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && paramDeposit.param1 <= dzlPlayer.GetFraction().GetBankAccount();
+					
+					if (canTakeMoneyToFraction || canSendMoneyToFraction) {
+	                    bank.AddMoney(paramDeposit.param1 * -1);
+	                    dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
+	                    dzlPlayer.GetFraction().AddMoney(paramDeposit.param1 * -1);
+	
+	                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+	                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+	                    message = "#money_transfer_successful";
+					}
                 }
+				
                 DZLSendMessage(sender, message);
             }
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER) {

@@ -39,7 +39,7 @@ class DZLTraderListener
                                 if (traderType == type.GetId()) {
                                     typesToBuy.Insert(type);
 									sum += type.CalculateDynamicBuyPrice(storage);
-                                    storage.StorageDown();
+									if (storage) storage.StorageDown();
                                     mustSave = true;
                                 }
                             }
@@ -66,22 +66,22 @@ class DZLTraderListener
 
                                     countSellItems++;
                                     itemsToSellPrice.Insert(type.sellPrice);
-                                    storage.StorageUp(type.GetStorageAdd(item));
+                                    if (storage) storage.StorageUp(type.GetStorageAdd(item));
 									mustSave = true;
                                }
                             }
                         }
 
-                        if (storage.IsStorageBelowZero()) {
+                        if (storage && storage.IsStorageBelowZero()) {
                             DZLSendMessage(sender, "#you_buy_too_much");
 							return;
                         }
-                        if (storage.IsStorageOverFilled()) {
+                        if (storage && storage.IsStorageOverFilled()) {
                             DZLSendMessage(sender, "#you_sell_too_much");
 							return;
                         }
 						
-						if (mustSave) storage.Save();
+						if (mustSave && storage) storage.Save();
                     }
                 }
 

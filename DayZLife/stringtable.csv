@@ -329,3 +329,5 @@ car_can_only_stored_in_fraction_garage, Car can only stored in fraction garage,C
 Pay_out_Fraction, Pay out from Fraction, Pay out from Fraction, Auszahlung Fraktionskasse,
 Cash_Transfer_Fraction, Cash transfer from Fraction, Cash transfer from Fraction, Geld aus Fraktionskasse senden,
 Deposit_Fraction,Deposit to Fraction,Deposit to Fraction, Einzahlung Fraktionskasse,
+Privat, Privat, Privat, Privat,
+Fraction, Fraction, Fraction, Fraktion,

@@ -165,7 +165,7 @@ FrameWidgetClass License_Menu {
             }
            }
           }
-          PanelWidgetClass PanelWidget11 {
+          PanelWidgetClass wrapperFractionPlayer {
            ignorepointer 1
            position 0 0.0346
            size 0.7583 0.1
@@ -193,7 +193,7 @@ FrameWidgetClass License_Menu {
             }
            }
           }
-          PanelWidgetClass PanelWidget12 {
+          PanelWidgetClass wrapperBankRight {
            ignorepointer 1
            position 0 0.1624
            size 1 0.1
@@ -233,7 +233,7 @@ FrameWidgetClass License_Menu {
             }
            }
           }
-          PanelWidgetClass PanelWidget10 {
+          PanelWidgetClass wrapperBankMoneyRight {
            ignorepointer 1
            position 0 0.255
            size 1 0.1
@@ -273,7 +273,7 @@ FrameWidgetClass License_Menu {
             }
            }
           }
-          PanelWidgetClass PanelWidget13 {
+          PanelWidgetClass wrapperGarageRight {
            ignorepointer 1
            position 0 0.35
            size 1 0.1
@@ -451,7 +451,7 @@ FrameWidgetClass License_Menu {
        }
       }
       PanelWidgetClass fractionPanel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0
        size 1 0.899
@@ -463,7 +463,7 @@ FrameWidgetClass License_Menu {
        vexactsize 0
        style editor_quad_dark
        {
-        PanelWidgetClass PanelWidget3 {
+        PanelWidgetClass wrapperInvite {
          ignorepointer 1
          position 0 -0.17
          size 0.2596 0.1
@@ -478,7 +478,7 @@ FrameWidgetClass License_Menu {
           ButtonWidgetClass acceptInvitation {
            color 0.251 0.502 0 1
            position 0 0
-           size 0.9 0.9
+           size 1 0.9
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -490,7 +490,7 @@ FrameWidgetClass License_Menu {
           }
          }
         }
-        PanelWidgetClass PanelWidget6 {
+        PanelWidgetClass wrapperCreate {
          ignorepointer 1
          position 0 0.39
          size 0.2596 0.1
@@ -505,7 +505,7 @@ FrameWidgetClass License_Menu {
           ButtonWidgetClass createFaction {
            color 0.251 0.502 0 1
            position 0 0
-           size 0.9 0.9
+           size 1 0.9
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -517,7 +517,7 @@ FrameWidgetClass License_Menu {
           }
          }
         }
-        PanelWidgetClass PanelWidget18 {
+        PanelWidgetClass wrapperLeave {
          ignorepointer 1
          position 0 -0.03
          size 0.2596 0.1
@@ -532,7 +532,7 @@ FrameWidgetClass License_Menu {
           ButtonWidgetClass fractionLeave {
            color 0.251 0.502 0 1
            position 0 0
-           size 0.9 0.9
+           size 1 0.9
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -719,7 +719,7 @@ FrameWidgetClass License_Menu {
          {
           TextListboxWidgetClass fractionInvitationList {
            position 0.02166 0
-           size 0.95668 0.96763
+           size 0.9567 0.9676
            valign center_ref
            hexactpos 0
            vexactpos 0
@@ -731,10 +731,10 @@ FrameWidgetClass License_Menu {
           }
          }
         }
-        PanelWidgetClass PanelWidget20 {
+        PanelWidgetClass wrapperName {
          ignorepointer 1
          position -0.0013 0.1862
-         size 0.32921 0.11104
+         size 0.3292 0.081
          halign center_ref
          valign bottom_ref
          hexactpos 0

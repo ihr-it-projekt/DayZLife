@@ -26,6 +26,7 @@ class DZLDatabase: Container_Base
     }
 
 	DZLPlayer GetPlayer(string playerId) {
+		if ("" == playerId) return null;
         DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
             player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);

@@ -133,7 +133,7 @@ FrameWidgetClass rootFrame {
               }
              }
             }
-            PanelWidgetClass PanelWidget12 {
+            PanelWidgetClass storeInFractionButtonWrapper {
              ignorepointer 1
              position 0 0.5389
              size 0.8 0.3

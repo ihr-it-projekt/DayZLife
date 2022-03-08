@@ -27,7 +27,8 @@ class DZLPlayer
 	private ref array<ref DZLTicket> openTickets;
 	private string fractionId = "";
 	private ref array<string> fractionWherePlayerCanJoin;
-	private DZLFraction fraction = null;
+	private ref DZLFraction fraction = null;
+	private ref DZLFractionMember fractionMember = null;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
@@ -487,28 +488,29 @@ class DZLPlayer
 	}
 
 	DZLFractionMember GetFractionMember() {
-	    if (fraction && !IsFractionBoss()) {
-            return fraction.GetMember(dayZPlayerId);
+	    if (!fractionMember && fraction || fractionMember.playerId != dayZPlayerId) {
+            fractionMember = fraction.GetMember(dayZPlayerId);
 	    }
-	    return null;
+	    return fractionMember;
 	}
 
 	bool HasFractionRightCanAccessFractionGarage() {
-	    return IsFractionBoss() || fraction && GetFractionMember().canAccessFractionGarage;
+	    return fraction && GetFractionMember().canAccessFractionGarage;
 	}
 
 	bool HasFractionRightCanAccessBankAccount() {
-	    return IsFractionBoss() || fraction && GetFractionMember().canAccessBankAccount;
+	    return fraction && GetFractionMember().canAccessBankAccount;
 	}
 
 	bool HasFractionRightCanGetMoneyFromBankAccount() {
-	    return IsFractionBoss() || fraction && GetFractionMember().canGetMoneyFromBankAccount;
+	    return fraction && GetFractionMember().canGetMoneyFromBankAccount;
 	}
 
     void RemoveFraction(string fractionId) {
         if (this.fractionId == fractionId) {
-            fractionId = "";
+            this.fractionId = "";
             fraction = null;
+			fractionMember = null;
 
             Save();
         }
@@ -519,9 +521,22 @@ class DZLPlayer
 
         this.fraction = fraction;
         this.fractionId = fraction.GetId();
+		fractionMember = null;
+		fractionWherePlayerCanJoin.Clear();
+		
 
         Save();
     }
+	
+	void UpdateFraction(DZLFraction fraction) {
+        if (fractionId != fraction.GetId()) return;
+		
+        this.fraction = fraction;
+        this.fractionId = fraction.GetId();
+		fractionMember = null;
+
+        Save();
+    }	
 
     void RemovePotentialFraction(string fractionId) {
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
@@ -583,8 +598,15 @@ class DZLPlayer
                 LogMessageDZL("Can not save PlayerData. There are inconsistent in your player database: Please check file:" + fileName);
                 return false;
             }
+            DZLFraction fractionTemp = fraction;
+            fraction = null;
+            DZLFractionMember memberTemp = fractionMember;
+            fractionMember = null;
+
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
+            fraction = fractionTemp;
+            fractionMember = memberTemp;
 
 			return true;
         }
