@@ -30,7 +30,8 @@ class ActionOpenArrestMenu: ActionInteractBase
 
             DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();
 
-            if ((dzlPlayerPrisoner.IsActiveAsCop() == dzlPlayerCop.IsActiveAsCop()) || (dzlPlayerPrisoner.IsActiveAsArmy() == dzlPlayerCop.IsActiveAsArmy())) return false;
+            if (true == dzlPlayerPrisoner.IsActiveAsCop() && true == dzlPlayerCop.IsActiveAsCop()) return false;
+            if (true == dzlPlayerPrisoner.IsActiveAsArmy() && true == dzlPlayerCop.IsActiveAsArmy()) return false;
         }
 
         return true;
