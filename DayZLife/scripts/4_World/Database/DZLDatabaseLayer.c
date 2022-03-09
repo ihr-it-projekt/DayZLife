@@ -178,19 +178,20 @@ class DZLDatabaseLayer
         DZLFraction fraction = GetFraction(fractionId);
         if (!fraction) return;
 
-        ref array<ref DZLFractionMember>members = fraction.GetMembers();
-        ref array<ref DZLFractionMember>potentialMembers = fraction.GetPotentialMembers();
-        foreach(DZLFractionMember member: potentialMembers) {
-            DZLPlayer currentPlayer = database.GetPlayer(member.playerId);
+        DZLPlayer currentPlayer;
+        array<ref DZLFractionMember>potentialMembers = fraction.GetPotentialMembers();
+        foreach(DZLFractionMember potentialMember: potentialMembers) {
+            currentPlayer = database.GetPlayer(potentialMember.playerId);
             currentPlayer.RemovePotentialFraction(fraction.GetId());
-            fraction.RemovePotentialMember(member.playerId);
         }
 
-        foreach(DZLFractionMember _member: members) {
-            DZLPlayer _currentPlayer = database.GetPlayer(_member.playerId);
-            _currentPlayer.RemoveFraction(fraction.GetId());
-            fraction.RemoveMember(_member.playerId);
+        currentPlayer = null;
+        array<ref DZLFractionMember>members = fraction.GetMembers();
+        foreach(DZLFractionMember member: members) {
+            currentPlayer = database.GetPlayer(member.playerId);
+            currentPlayer.RemoveFraction(fraction.GetId());
         }
+
         fraction.Delete();
         dzlFractions.Remove(fraction.GetId());
     }

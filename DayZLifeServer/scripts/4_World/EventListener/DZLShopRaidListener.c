@@ -55,6 +55,7 @@ class DZLShopRaidListener
 
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_got: " + moneyForRob.ToString() + "$");
 					moneyForRob = 0;
+					dzlPlayer.GetFractionMember();
 					GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, playerGetMoney.GetIdentity());
                 } else {
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_can_not_take_the_money_wrong_position");

@@ -35,7 +35,7 @@ class DZLConfigListener
         } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA) {
             DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());;
             dzlPlayer.UpdateName(sender.GetName());
-
+            dzlPlayer.GetFractionMember();
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
         }
     }

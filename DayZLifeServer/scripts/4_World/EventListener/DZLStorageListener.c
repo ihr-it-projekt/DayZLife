@@ -37,7 +37,7 @@ class DZLStorageListener
                 DZLCarStorage storageIn;
                 if (paramStoreCar.param2) {
                     if (dzlPlayer.IsInAnyFraction() && dzlPlayer.HasFractionRightCanAccessFractionGarage()) {
-                        storageIn = DZLDatabaseLayer.Get().GetFractionCarStorage(sender.GetId());
+                        storageIn = DZLDatabaseLayer.Get().GetFractionCarStorage(dzlPlayer.GetFractionId());
                     } else {
                         return;
                     }
@@ -73,7 +73,7 @@ class DZLStorageListener
                     storage = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
                 } else {
                     if (dzlPlayer.IsInAnyFraction()) {
-                        storage = DZLDatabaseLayer.Get().GetFractionCarStorage(sender.GetId());
+                        storage = DZLDatabaseLayer.Get().GetFractionCarStorage(dzlPlayer.GetFractionId());
                     } else {
                         return;
                     }
@@ -169,7 +169,7 @@ class DZLStorageListener
             DZLFractionMember member = dzlPlayer.GetFractionMember();
 
             if (member) {
-                fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(dzlPlayer.GetFraction().GetId());
+                fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(member.fractionID);
             }
         }
 
