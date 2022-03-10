@@ -160,17 +160,18 @@ class DZLTraderMenu: DZLBaseMenu
 			addedCats.Insert(categoryName);
 
 			foreach(DZLTraderType type: category.items) {
+			    DZLTraderTypeStorage storage = GetCurrentStorageByName(type.type);
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);
 				type.displayName = name;
 				if(!hasAddFirstCategory && type.buyPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
 
-					int sellPrice = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type));
-					int buyPrice = type.CalculateDynamicBuyPrice(GetCurrentStorageByName(type.type));
+					int sellPrice = type.CalculateDynamicSellPrice(storage);
+					int buyPrice = type.CalculateDynamicBuyPrice(storage);
 
                     traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
                     traderItemList.SetItem(index, sellPrice.ToString(), type, 2);
-                    traderItemList.SetItem(index, type.GetStorageString(GetCurrentStorageByName(type.type)), type, 3);
+                    traderItemList.SetItem(index, type.GetStorageString(storage), type, 3);
 				}
 
 				if (-1 != addInventoryTypes.Find(type.type)) continue;
@@ -197,11 +198,12 @@ class DZLTraderMenu: DZLBaseMenu
 					}
 
 					GetGame().ObjectGetDisplayName(item, name);
-					int sumItem = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type), item);
+					int sumItem = type.CalculateDynamicSellPrice(storage, item);
 
 					index = inventory.AddItem(name, item, 0);
 					inventory.SetItem(index, sumItem.ToString(), type, 1);
 					inventory.SetItem(index, quantity.ToString(), item, 2);
+					inventory.SetItem(index, type.GetStorageString(storage), item, 3);
 				}
 			}
 			hasAddFirstCategory = true;
