@@ -11,11 +11,15 @@ class DZLCarStoreItem: DZLStoreItem
 	float user3;
 	float user4;
 	bool isInsurance = false;
+	string ownerId = "";
+	string ownerName = "";
 
 	void DZLCarStoreItem(CarScript item, vector storagePosition, bool withCargo, bool isInsuranceCase) {
 		Init(item, storagePosition, withCargo);
 		isCar = true;
 		this.playerAccess = item.playerAccess;
+		this.ownerId = item.ownerId;
+		this.ownerName = item.ownerName;
 
 		if (!isInsuranceCase) {
 			fuel = item.GetFluidFraction(CarFluid.FUEL);
@@ -37,5 +41,9 @@ class DZLCarStoreItem: DZLStoreItem
 	        user4 = item.GetFluidCapacity(CarFluid.USER4);
 		}
 		
+	}
+
+	bool IsOwner(string playerId) {
+        return playerId == ownerId;
 	}
 }

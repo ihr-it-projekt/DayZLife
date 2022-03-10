@@ -20,6 +20,7 @@ modded class PlayerBase
     private ref DZLBankingMenu bankingMenu;
     private ref DZLTraderMenu traderMenu;
     private ref DZLAlmanacMenu almanacMenu;
+    private ref DZLFractionMenu fractionMenu;
 
 	bool willHeal = false;
 	bool willDie = false;
@@ -234,6 +235,12 @@ modded class PlayerBase
 		InitMenu(almanacMenu);
 		return almanacMenu;
 	}
+
+	DZLFractionMenu GetFractionMenu() {
+	    fractionMenu = new DZLFractionMenu();
+	    InitMenu(fractionMenu);
+	    return fractionMenu;
+	}
 	
 	DZLTraderMenu GetTraderMenu(DZLTraderPosition position) {
 		traderMenu = new DZLTraderMenu(position);
@@ -357,6 +364,9 @@ modded class PlayerBase
 			hasDoAction = true;
 		} else if (almanacMenu && almanacMenu.IsVisible()) {
 			almanacMenu.OnHide();
+			hasDoAction = true;
+		} else if (fractionMenu && fractionMenu.IsVisible()) {
+			fractionMenu.OnHide();
 			hasDoAction = true;
 		} else if (progressBarRaid && progressBarRaid.IsVisible()) {
 			progressBarRaid.OnHide();

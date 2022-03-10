@@ -81,9 +81,15 @@ modded class CarScript
         SynchronizeValues(null);
     }
 
-    void AddOwner(PlayerIdentity player) {
-        ownerId = player.GetId();
-        ownerName = player.GetName();
+    void OwnCar(PlayerIdentity player, string _ownerId, string _ownerName) {
+        if (_ownerId != "" && _ownerName != "") {
+            this.ownerId = _ownerId;
+            this.ownerName = _ownerName;
+        } else {
+            ownerId = player.GetId();
+            ownerName = player.GetName();
+        }
+
         playerAccess = new array<string>;
         SynchronizeValues(null);
     }

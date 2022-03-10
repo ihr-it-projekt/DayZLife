@@ -43,6 +43,7 @@ class ActionOpenTraderMenu: ActionInteractBase
 		if((!player.GetConfig() || !player.GetConfig().traderConfig)&& currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
 		    player.timeAskForTraderConfig = currentDate.inSeconds;
 			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER, new Param1<PlayerBase>(player), true);
+			GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
 			return false;
 		}
 

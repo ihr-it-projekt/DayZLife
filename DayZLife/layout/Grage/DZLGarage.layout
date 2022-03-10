@@ -82,8 +82,8 @@ FrameWidgetClass rootFrame {
          style editor_quad_dark
          {
           TextListboxWidgetClass tostoreTextListbox {
-           position 0 -0.06628
-           size 0.964 0.83944
+           position 0 -0.18167
+           size 0.964 0.60866
            halign center_ref
            valign center_ref
            hexactpos 0
@@ -97,7 +97,7 @@ FrameWidgetClass rootFrame {
           PanelWidgetClass PanelWidget10 {
            ignorepointer 1
            position 0 0
-           size 1 0.1298
+           size 1 0.3247
            halign center_ref
            valign bottom_ref
            hexactpos 0
@@ -108,8 +108,8 @@ FrameWidgetClass rootFrame {
            {
             PanelWidgetClass PanelWidget7 {
              ignorepointer 1
-             position 0 0.17885
-             size 0.6 0.6423
+             position 0 0.1089
+             size 0.8 0.3
              halign center_ref
              valign bottom_ref
              hexactpos 0
@@ -130,6 +130,33 @@ FrameWidgetClass rootFrame {
                vexactsize 0
                style OldStyle
                text "#Store_in"
+              }
+             }
+            }
+            PanelWidgetClass storeInFractionButtonWrapper {
+             ignorepointer 1
+             position 0 0.5389
+             size 0.8 0.3
+             halign center_ref
+             valign bottom_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_quad_dark
+             {
+              ButtonWidgetClass storeinFractionButton {
+               color 0.251 0.502 0 1
+               position 0 0
+               size 0.98 0.9
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               style OldStyle
+               text "#Store_in_Fraction"
               }
              }
             }
@@ -159,7 +186,7 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Cars_in_Sored"
+           colums "#Cars_in_Sored;50;#Privat;25;#Fraction;25"
            lines 17
           }
           PanelWidgetClass PanelWidget9 {

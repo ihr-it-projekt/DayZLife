@@ -33,7 +33,10 @@ class ActionOpenHouseMenu: ActionInteractBase
 			Building building = Building.Cast(action_data.m_Target.GetObject());
 
             DZLHouseDefinition definition = player.FindHouseDefinition(building);
-			if (definition) GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseMenu(definition, building), NULL);
+			if (definition) {
+			    player.RequestUpdateDZLPlayer();
+			    GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseMenu(definition, building), NULL);
+			}
         }
 	}
 

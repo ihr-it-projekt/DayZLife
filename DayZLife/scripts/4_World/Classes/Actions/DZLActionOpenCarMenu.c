@@ -25,6 +25,7 @@ class DZLActionOpenCarMenu: ActionInteractBase
 
 			
 			if (car) {
+			    player.RequestUpdateDZLPlayer();
 				GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
 			}
         }

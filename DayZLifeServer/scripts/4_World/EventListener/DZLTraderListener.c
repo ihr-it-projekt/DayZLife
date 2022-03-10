@@ -32,11 +32,15 @@ class DZLTraderListener
                     if (!category) continue;
 					
                     foreach(DZLTraderType type: category.items) {
+						bool mustSave = false;
+						DZLTraderTypeStorage storage = DZLDatabaseLayer.Get().GetTraderStorage().GetCurrentStorageByName(type.type);
                         if (itemsToBuyParam.Count() > 0) {
                             foreach(string traderType: itemsToBuyParam) {
                                 if (traderType == type.GetId()) {
                                     typesToBuy.Insert(type);
-                                    sum += type.buyPrice;
+									sum += type.CalculateDynamicBuyPrice(storage);
+									if (storage) storage.StorageDown();
+                                    mustSave = true;
                                 }
                             }
                         }
@@ -53,7 +57,8 @@ class DZLTraderListener
                                 }
 
                                 if (item.GetType() == type.type) {
-                                    float itemPrice = GetPrice(item, type.sellPrice);
+									
+                                    float itemPrice = type.CalculateDynamicSellPrice(storage, item);
                                     float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
 
                                     sum -=  Math.Round(itemPrice - itemTax);
@@ -61,9 +66,22 @@ class DZLTraderListener
 
                                     countSellItems++;
                                     itemsToSellPrice.Insert(type.sellPrice);
-                                }
+                                    if (storage) storage.StorageUp(type.GetStorageAdd(item));
+									mustSave = true;
+                               }
                             }
                         }
+
+                        if (storage && storage.IsStorageBelowZero()) {
+                            DZLSendMessage(sender, "#you_buy_too_much");
+							return;
+                        }
+                        if (storage && storage.IsStorageOverFilled()) {
+                            DZLSendMessage(sender, "#you_sell_too_much");
+							return;
+                        }
+						
+						if (mustSave && storage) storage.Save();
                     }
                 }
 
@@ -120,6 +138,9 @@ class DZLTraderListener
 			    GetGame().RPCSingleParam(target, DAY_Z_LIFE_TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
             }
         }
+        else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE) {
+            GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE, new Param1<ref array<ref DZLTraderTypeStorage>>(DZLDatabaseLayer.Get().GetTraderStorage().GetStorageItems()), true, sender);
+        }
     }
 
 
@@ -167,22 +188,10 @@ class DZLTraderListener
 			CarScript _car = CarScript.Cast(car);
 			
 			if (_car) {
-				_car.AddOwner(player.GetIdentity());
+				_car.OwnCar(player.GetIdentity(), "", "");
 			}
 		}
 
 		return !!item;
-    }
-
-    private int GetPrice(EntityAI item, int sellPrice) {
-        int maxQuantity = item.GetQuantityMax();
-        int quantity = item.GetQuantity();
-
-        if (quantity == 0) {
-            quantity = 1;
-            maxQuantity = 1;
-        }
-
-        return Math.Round(quantity/maxQuantity * sellPrice);
     }
 }

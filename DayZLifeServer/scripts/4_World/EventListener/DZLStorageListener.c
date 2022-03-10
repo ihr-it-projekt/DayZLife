@@ -12,10 +12,11 @@ class DZLStorageListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        DZLPlayer dzlPlayer;
         if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE) {
-			GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId())), true, sender);
+                SendStorageUpdate(sender);
         } else if (rpc_type == DAY_Z_LIFE_EVENT_STORE_CAR) {
-            autoptr Param1<vector> paramStoreCar;
+            autoptr Param2<vector, bool> paramStoreCar;
             CarScript car = CarScript.Cast(target);
 			
 			if (car && car.IsRuined()) {
@@ -30,8 +31,20 @@ class DZLStorageListener
                     DZLSendMessage(sender, "#car_is_not_empty");
                     return;
                 }
+
+                dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
 				
-                DZLCarStorage storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
+                DZLCarStorage storageIn;
+                if (paramStoreCar.param2) {
+                    if (dzlPlayer.IsInAnyFraction() && dzlPlayer.HasFractionRightCanAccessFractionGarage()) {
+                        storageIn = DZLDatabaseLayer.Get().GetFractionCarStorage(dzlPlayer.GetFractionId());
+                    } else {
+                        return;
+                    }
+                } else {
+                    storageIn = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
+                }
+
                 storageIn.Add(car, storagePosition.position, config.canStoreCarsWithGoods, false);
 				
 				DZLInsuranceManager.Get().RemoveCar(car);
@@ -39,22 +52,33 @@ class DZLStorageListener
                 DZLLogStore(sender.GetId(), "store in", car.GetType(), storagePosition.position);
 				GetGame().ObjectDelete(car);
 				DZLSendMessage(sender, "#car_was_parked");
-				GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storageIn), true, sender);
+				SendStorageUpdate(sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE) {
-            autoptr Param2<string, bool> paramGetCar;
+            autoptr Param3<string, bool, bool> paramGetCar;
             PlayerBase player = PlayerBase.Cast(target);
             if (ctx.Read(paramGetCar) && player){
                 string itemId = paramGetCar.param1;
                 bool withInsurance = paramGetCar.param2;
-                DZLPlayer dzlPlayer = player.GetDZLPlayer();
+                dzlPlayer = player.GetDZLPlayer();
 
                 if (withInsurance && !dzlPlayer.HasEnoughMoneBank(config.carInsurancePrice)) {
                     DZLSendMessage(sender, "#error_not_enough_money");
                     return;
                 }
 
-                DZLCarStorage storage = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
+                DZLCarStorage storage;
+
+                if (paramGetCar.param3) {
+                    storage = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
+                } else {
+                    if (dzlPlayer.IsInAnyFraction()) {
+                        storage = DZLDatabaseLayer.Get().GetFractionCarStorage(dzlPlayer.GetFractionId());
+                    } else {
+                        return;
+                    }
+					
+                }
 				DZLStoragePosition storagePositionCar = config.GetStorageByPosition(player.GetPosition());
 				
                 DZLCarStoreItem storedCar = storage.GetById(itemId);
@@ -63,11 +87,13 @@ class DZLStorageListener
 
                 if (!config.canGetCarsFromEveryGarage && storedCar.positionOfStore != storagePositionCar.position) return;
 
+                if (!paramGetCar.param3 && !storedCar.IsOwner(dzlPlayer.dayZPlayerId) && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return;
+
 				CarScript carSpawned = SpawnCar(player, storedCar, storagePositionCar, withInsurance);
 
                 if (carSpawned) {
                     storage.RemoveItem(storedCar);
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param1<ref DZLCarStorage>(storage), true, sender);
+                    SendStorageUpdate(sender);
                     DZLLogStore(sender.GetId(), "store out insurance: " + withInsurance.ToString(), carSpawned.GetType(), storagePositionCar.position);
 
                     if (withInsurance) {
@@ -111,7 +137,7 @@ class DZLStorageListener
 			    car.EnableInsurance(storagePositionCar.position);
 			}
 
-			car.AddOwner(player.GetIdentity());
+			car.OwnCar(player.GetIdentity(), itemInStock.ownerId, itemInStock.ownerName);
 			car.UpdatePlayerAccess(itemInStock.playerAccess);
 			car.SetOrientation(storagePositionCar.spawnOrientationOfVehicles);
 
@@ -132,5 +158,21 @@ class DZLStorageListener
 		if (inPercent > 0) {
 			car.Fill(type, car.GetFluidCapacity(type) * inPercent);
 		}
+	}
+
+	private void SendStorageUpdate(PlayerIdentity sender) {
+	    DZLCarStorage playerStorage = DZLDatabaseLayer.Get().GetPlayerCarStorage(sender.GetId());
+        DZLCarStorage fractionStorage;
+        DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
+
+        if (dzlPlayer.IsInAnyFraction()) {
+            DZLFractionMember member = dzlPlayer.GetFractionMember();
+
+            if (member) {
+                fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(member.fractionID);
+            }
+        }
+
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
 	}
 }

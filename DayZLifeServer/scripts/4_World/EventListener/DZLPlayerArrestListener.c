@@ -35,7 +35,8 @@ class DZLPlayerArrestListener
 				
 				if (copDzl.IsActiveAsMedic() || copDzl.IsActiveAsCivil()) return;
 				if (copDzl.arrestTimeInMinutes != 0) return;
-				if ((prisonerDzl.IsActiveAsCop() == copDzl.IsActiveAsCop()) || (prisonerDzl.IsActiveAsArmy() == copDzl.IsActiveAsArmy())) return;
+				if (true == prisonerDzl.IsActiveAsCop() && true == copDzl.IsActiveAsCop()) return;
+                if (true == prisonerDzl.IsActiveAsArmy() && true == copDzl.IsActiveAsArmy()) return;
 
 				prisonerDzl.ArrestPlayer(arrestReason, arrestTime);
 

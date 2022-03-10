@@ -1,0 +1,4 @@
+class DZLNamePlayer
+{
+    string name;
+}

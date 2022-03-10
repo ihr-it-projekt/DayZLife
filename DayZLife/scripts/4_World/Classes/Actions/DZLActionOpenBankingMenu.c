@@ -1,6 +1,6 @@
-class ActionOpenLoadOutMenu: ActionInteractBase
+class DZLActionOpenBankingMenu: ActionInteractBase
 {
-	void ActionOpenLoadOutMenu()
+	void DZLActionOpenBankingMenu()
 	{
 		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
 		m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
@@ -10,45 +10,37 @@ class ActionOpenLoadOutMenu: ActionInteractBase
     override void CreateConditionComponents()
     {
         m_ConditionItem = new CCINone;
-        m_ConditionTarget = new DZL_CCTActionObject;
+        m_ConditionTarget = new CCTCursor;
     }
 
 	override string GetText() {
-		return "#open_loadout_menu";
+		return "#open_banking_menu";
 	}
 
 	override void OnStartClient(ActionData action_data) {
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-		    DZLLoadOutMenu menu = action_data.m_Player.GetLoadOutMenu();
-		    if (action_data.m_Player.GetDZLPlayer().IsActiveAsCop()) {
-                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsCops.loadOutCategories);
-            } else if (action_data.m_Player.GetDZLPlayer().IsActiveAsMedic()) {
-                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsMedics.loadOutCategories);
-            } else if (action_data.m_Player.GetDZLPlayer().IsActiveAsArmy()) {
-                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsArmy.loadOutCategories);
-            }
-
-			GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+            GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
         }
 	}
 
 	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-		DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget || !objectTarget.IsLoadOut()) return false;
+        if(!target) return false;
+        if(!target.GetObject()) return false;
 
-	    DZLPlayer dzlPlayer = player.GetDZLPlayer();
-	    if (!dzlPlayer || !player.GetConfig() || !player.GetConfig().jobConfig) return false;
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        if (!objectTarget || !objectTarget.IsBank()) return false;
 
-        if (dzlPlayer.IsActiveAsCop()) {
-            return objectTarget.IsCopLoadOut();
-        } else if (dzlPlayer.IsActiveAsMedic()) {
-            return objectTarget.IsMedicLoadOut();
-        } else if (dzlPlayer.IsActiveAsArmy()) {
-            return objectTarget.IsArmyLoadOut();
+        DZLDate currentDate = new DZLDate();
+        player.RequestUpdateDZLPlayer();
+
+        if(!player.hasBankingConfig && currentDate.inSeconds - player.timeAskForBankingConfig > 5) {
+            player.timeAskForBankingConfig = currentDate.inSeconds;
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING, new Param1<PlayerBase>(player), true);
+            return false;
         }
-		
-		return false;
+
+        return true;
 	}
 }

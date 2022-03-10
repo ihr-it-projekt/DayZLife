@@ -6,12 +6,16 @@ class DZLDatabaseLayer
     private ref map<string, ref DZLPlayer> dzlPlayers;
     private ref map<string, ref DZLPlayerHouse> dzlPlayerHouses;
     private ref map<string, ref DZLHouseInventory> dzlHouseInventory;
+    private ref map<string, ref DZLFraction> dzlFractions;
     private ref DZLPlayerIdentities dzlPlayerIdentities;
     private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
     private ref map<string, ref DZLCarStorage> storageCars;
+    private ref map<string, ref DZLCarStorage> fractionStorageCars;
     private ref DZLEmergencies emergencies;
     private ref DZLCrimeData crimeData;
+    private ref DZLTraderStorage traderStorage;
+
     private int copCount = 0;
     private int civCount = 0;
     private int medicCount = 0;
@@ -23,12 +27,15 @@ class DZLDatabaseLayer
         dzlPlayers = new map<string, ref DZLPlayer>;
         dzlPlayerHouses = new map<string, ref DZLPlayerHouse>;
         dzlHouseInventory = new map<string, ref DZLHouseInventory>;
+        dzlFractions = new map<string, ref DZLFraction>;
         dzlPlayerIdentities = new DZLPlayerIdentities;
         dzlLockedHouses = new DZLLockedHouses;
         storageCars = new map<string, ref DZLCarStorage>;
+        fractionStorageCars = new map<string, ref DZLCarStorage>;
         bank = new DZLBank;
         emergencies = new DZLEmergencies;
         crimeData = new DZLCrimeData;
+        traderStorage = new DZLTraderStorage;
     }
 
     static DZLDatabaseLayer Get() {
@@ -64,6 +71,7 @@ class DZLDatabaseLayer
     }
 
     DZLPlayer GetPlayerFromFiles(string playerId) {
+		if ("" == playerId) return null;
 		DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
 			player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
@@ -120,11 +128,31 @@ class DZLDatabaseLayer
         return inventory;
     }
 
+    DZLFraction GetFraction(string playerId) {
+        DZLFraction fraction;
+        if (!dzlFractions.Find(playerId, fraction)) {
+            fraction = new DZLFraction(playerId);
+            dzlFractions.Insert(playerId, fraction);
+        }
+
+        return fraction;
+    }
+
     DZLCarStorage GetPlayerCarStorage(string playerId) {
         DZLCarStorage storageCar;
         if (!storageCars.Find(playerId, storageCar)) {
             storageCar = new DZLCarStorage(playerId);
             storageCars.Insert(playerId, storageCar);
+        }
+        return storageCar;
+    }
+
+    DZLCarStorage GetFractionCarStorage(string fractionId) {
+        DZLCarStorage storageCar;
+        fractionId = fractionId + "fraction";
+        if (!fractionStorageCars.Find(fractionId, storageCar)) {
+            storageCar = new DZLCarStorage(fractionId);
+            fractionStorageCars.Insert(fractionId, storageCar);
         }
         return storageCar;
     }
@@ -144,6 +172,28 @@ class DZLDatabaseLayer
             dzlPlayerHouses.Remove(playerId);
 			DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + house.fileName);
         }
+    }
+
+    void RemoveFraction(string fractionId) {
+        DZLFraction fraction = GetFraction(fractionId);
+        if (!fraction) return;
+
+        DZLPlayer currentPlayer;
+        array<ref DZLFractionMember>potentialMembers = fraction.GetPotentialMembers();
+        foreach(DZLFractionMember potentialMember: potentialMembers) {
+            currentPlayer = database.GetPlayer(potentialMember.playerId);
+            currentPlayer.RemovePotentialFraction(fraction.GetId());
+        }
+
+        currentPlayer = null;
+        array<ref DZLFractionMember>members = fraction.GetMembers();
+        foreach(DZLFractionMember member: members) {
+            currentPlayer = database.GetPlayer(member.playerId);
+            currentPlayer.RemoveFraction(fraction.GetId());
+        }
+
+        fraction.Delete();
+        dzlFractions.Remove(fraction.GetId());
     }
 
     void RemovePlayerCars(string playerId) {
@@ -197,5 +247,9 @@ class DZLDatabaseLayer
 
     DZLCrimeData GetCrimeData() {
         return crimeData;
+    }
+
+    DZLTraderStorage GetTraderStorage() {
+        return traderStorage;
     }
 }

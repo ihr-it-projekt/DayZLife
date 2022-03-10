@@ -4,11 +4,11 @@ class DZLDisplayHelper
 
     static string GetItemDisplayName(string itemClassname){
         TStringArray configs = new TStringArray;
-        configs.Insert( CFG_VEHICLESPATH );
-        configs.Insert( CFG_WEAPONSPATH );
-        configs.Insert( CFG_MAGAZINESPATH );
-        configs.Insert( "CfgNonAIVehicles" );
-        configs.Insert( "CfgAmmo" );
+        configs.Insert(CFG_VEHICLESPATH);
+        configs.Insert(CFG_WEAPONSPATH);
+        configs.Insert(CFG_MAGAZINESPATH);
+        configs.Insert("CfgNonAIVehicles");
+        configs.Insert("CfgAmmo");
 
         string displayName;
         foreach (string itemName: configs){
@@ -56,6 +56,25 @@ class DZLDisplayHelper
 				targetWidget.SetItem(posInsert, itemType.rank, itemType, 1);
 			}
         }
+    }
+
+    static array<ref DZLFractionMember> GetDZLFractionMemberFromList(TextListboxWidget listWidget) {
+        int count = listWidget.GetNumItems();
+
+        array<ref DZLFractionMember> list = new array<ref DZLFractionMember>;
+
+        if (count > 0) {
+            for (int i = 0; i < count; ++i) {
+                DZLFractionMember _player;
+                listWidget.GetItemData(i, 0, _player);
+
+                if (_player) {
+                    list.Insert(_player);
+                }
+            }
+        }
+
+        return list;
     }
 	
     static void LoadDZLOnlinePlayerAndFillRankListWidget(TextListboxWidget sourceWidget, TextListboxWidget jobRankList, string job) {
@@ -197,6 +216,7 @@ class DZLDisplayHelper
             }
         }
     }
+	
 	static void SearchOnlinePlayersSingleWiget(string search, TextListboxWidget target, array<ref DZLPlayer> onlinePlayers) {
 	    if (!onlinePlayers || onlinePlayers.Count() == 0) return;
         target.ClearItems();
@@ -207,6 +227,20 @@ class DZLDisplayHelper
             playerNameLow.ToLower();
             if (search == "" || playerNameLow.Contains(search)) {
                 target.AddItem(onlinePlayer.playerName, onlinePlayer, 0);
+            }
+        }
+    }
+	
+	static void SearchFractionMembersSingleWiget(string search, TextListboxWidget target, array<ref DZLFractionMember> onlinePlayers) {
+	    if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        target.ClearItems();
+        search.ToLower();
+
+        foreach(DZLFractionMember onlinePlayer: onlinePlayers) {
+            string playerNameLow = onlinePlayer.name;
+            playerNameLow.ToLower();
+            if (search == "" || playerNameLow.Contains(search)) {
+                target.AddItem(onlinePlayer.name, onlinePlayer, 0);
             }
         }
     }
