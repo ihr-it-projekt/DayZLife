@@ -274,8 +274,13 @@ class DZLAlmanacMenu : DZLBaseMenu
 			
 			if (!zoneWZL) return true;
 
-			DZLDisplayHelper.UpdateMap(workingZoneMap, zoneWZL.position);
-			
+            if (!zoneWZL.showNotOnMapInAlmanac) {
+			    DZLDisplayHelper.UpdateMap(workingZoneMap, zoneWZL.position);
+            } else {
+                workingZoneMap.ClearUserMarks();
+            }
+            workingZoneMap.Show(!zoneWZL.showNotOnMapInAlmanac);
+
 			workingZoneToolsList.ClearItems();
 			workzoneYieldList.ClearItems();
 
@@ -352,8 +357,13 @@ class DZLAlmanacMenu : DZLBaseMenu
 			licenceList.GetItemData(index, 0, licence);
 			
 			if (!licence) return true;
-			
-			DZLDisplayHelper.UpdateMap(licenceMap, licence.position);
+
+			if (!licence.showNotOnMapInAlmanac) {
+			    DZLDisplayHelper.UpdateMap(licenceMap, licence.position);
+			} else {
+			    licenceMap.ClearUserMarks();
+			}
+			licenceMap.Show(!licence.showNotOnMapInAlmanac);
 
 			name = "#no_tool_required";
 			
@@ -639,6 +649,7 @@ class DZLAlmanacMenu : DZLBaseMenu
 
    		UpdaterPreview(itemType.Get(0), preview, previewItem);
 	}
+
 	private void UpdaterPreviewListBoxCraftItem(TextListboxWidget widget, ItemPreviewWidget preview, EntityAI previewItem) {
 		int pos = widget.GetSelectedRow();
    		if (pos == -1) {
