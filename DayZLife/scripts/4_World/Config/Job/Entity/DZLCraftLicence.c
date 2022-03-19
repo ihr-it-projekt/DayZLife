@@ -9,7 +9,7 @@ class DZLCraftLicence: DZLIdModel
 	ref DZLLicenceCraftItemCollection craftItems;
 	ref DZLLicenceToolItemCollection toolItems;
 	int durationForCrafting;
-
+    bool showNotOnMapInAlmanac = false;
 
 	void DZLCraftLicence(int price, string name, vector position, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
 		this.price = price;
@@ -20,6 +20,7 @@ class DZLCraftLicence: DZLIdModel
         this.durationForCrafting = durationForCrafting;
         this.toolItems = toolItems;
         this.craftItems = craftItems;
+        this.showNotOnMapInAlmanac = false;
 
 		SetId();
 	}
