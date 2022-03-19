@@ -1,6 +1,6 @@
 class DZLWorkZones
 {
-	string version = "1";
+	string version = "2";
     ref array<ref DZLWorkZone> workZones;
 
     void DZLWorkZones() {
@@ -452,6 +452,10 @@ class DZLWorkZones
                 // Ölschlamm ende
             }
 
+            Save();
+        }
+        if (version == "1") {
+            version = "2";
             Save();
         }
     }
