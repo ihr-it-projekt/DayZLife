@@ -1,10 +1,10 @@
 class DZLPayCheck
 {
-    static void Check(PlayerBase player, DZLPaycheckConfig config) {
+    static void Check(PlayerBase player, DZLPaycheckConfig paycheckConfig) {
         int amount = 0;
         int onlineTime = 100000000;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
-        DZLPaycheck payCheck = DZLRankHelper.getCurrentPayCheck(dzlPlayer, DZLConfig.Get().jobConfig.paycheck);
+        DZLPaycheck payCheck = DZLRankHelper.getCurrentPayCheck(dzlPlayer, paycheckConfig);
         amount = payCheck.amount;
         onlineTime = payCheck.onlineMinutesForPay;
 
