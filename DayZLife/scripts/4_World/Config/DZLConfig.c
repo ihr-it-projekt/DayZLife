@@ -31,6 +31,7 @@ class DZLConfig
         if (GetGame().IsServer()) {
             houseConfig = new DZLHouseConfig;
             houseExtensions = new DZLHouseExtensions;
+            //houseConfig.MigrateToVersionFive(houseExtensions.inventoryItemsPerLevel, houseExtensions.maxHouseInventoryLevel);
             bankConfig = new DZLBankingConfig;
             jobConfig = new DZLJobConfig;
             licenceConfig = new DZLLicenceConfig;
@@ -77,5 +78,18 @@ class DZLConfig
             return houseExtensions.extensions;
         }
         return null;
+	}
+	
+	DZLHouseExtension GetHouseExtensionById(string id) {
+		array<ref DZLHouseExtension> extensions = GetExtensions();
+		if (null == extensions) return null;
+		
+		foreach(DZLHouseExtension _extension: extensions) {
+			if (_extension.GetId() == id) {
+				return _extension;
+			}
+		}
+		
+		return null;
 	}
 }

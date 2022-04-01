@@ -100,6 +100,11 @@ class DZLTraderMenu: DZLBaseMenu
 					
 					if (playerCar && !playerCar.isSold) {
 						quant = playerCar.GetQuantity().ToString();
+						
+						if (quant == "0") {
+	                        quant = "1";
+	                    }
+						
 						GetGame().ObjectGetDisplayName(playerCar, name);
 						index = inventory.AddItem(name, playerCar, 0);
 	                   	inventory.SetItem(index, price.ToString(), type, 1);
@@ -163,10 +168,11 @@ class DZLTraderMenu: DZLBaseMenu
 			    DZLTraderTypeStorage storage = GetCurrentStorageByName(type.type);
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);
 				type.displayName = name;
+				int sellPrice = type.CalculateDynamicSellPrice(storage);
 				if(!hasAddFirstCategory && type.buyPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
 
-					int sellPrice = type.CalculateDynamicSellPrice(storage);
+					
 					int buyPrice = type.CalculateDynamicBuyPrice(storage);
 
                     traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
@@ -186,8 +192,9 @@ class DZLTraderMenu: DZLBaseMenu
 					if (playerCar && !playerCar.isSold) {
 						GetGame().ObjectGetDisplayName(playerCar, name);
 						index = inventory.AddItem(name, playerCar, 0);
-	                   	inventory.SetItem(index, sellPrice.ToString(), playerCar, 1);
+	                   	inventory.SetItem(index, sellPrice.ToString(), type, 1);
 	                   	inventory.SetItem(index, "1", playerCar, 2);
+						inventory.SetItem(index, type.GetStorageString(storage), playerCar, 3);
 					}
 					continue;
 				}
@@ -199,7 +206,12 @@ class DZLTraderMenu: DZLBaseMenu
 
 					GetGame().ObjectGetDisplayName(item, name);
 					int sumItem = type.CalculateDynamicSellPrice(storage, item);
-
+					quantity = item.GetQuantity();
+					
+					if (0 == quantity) {
+						quantity = 1;
+					}
+					
 					index = inventory.AddItem(name, item, 0);
 					inventory.SetItem(index, sumItem.ToString(), type, 1);
 					inventory.SetItem(index, quantity.ToString(), item, 2);
@@ -274,7 +286,7 @@ class DZLTraderMenu: DZLBaseMenu
                     CarScript carsScript = CarScript.Cast(sellItem);
                     if (!carsScript) {
                         sellItems.Insert(sellItem);
-                    } else if (!carsScript.isSold && carsScript.lastDriverId == player.GetPlayerId()) {
+                    } else if (!carsScript.isSold && carsScript.ownerId == player.GetPlayerId()) {
 						bool carIsEmpty = true;
 	                    for (int seat = 0; seat < carsScript.CrewSize(); seat++){
 		                	if (carsScript.CrewMember(seat)) {
@@ -422,6 +434,12 @@ class DZLTraderMenu: DZLBaseMenu
         } else if (storage) {
             storage.StorageUp(type.GetStorageAdd(item));
         }
+		
+		if (0 == sourceWidget.GetNumItems()) {
+			sourceWidget.ClearItems();
+		} else {
+			sourceWidget.SelectRow(0);
+		}
 
         return type;
    	}
@@ -479,6 +497,7 @@ class DZLTraderMenu: DZLBaseMenu
 	}
 
 	private void UpdateItemOnList(DZLTraderType type, TextListboxWidget widgetToChange, bool targetIsInventory) {
+		if (!type) return;
 	    if (!type.isStorageItem) return;
 	    if (!targetIsInventory && type.buyPrice <= 0) return;
 	    if (targetIsInventory && type.sellPrice <= 0) return;

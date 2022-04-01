@@ -24,14 +24,7 @@ class DZLBuyExtensionListener
 				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param1);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyStorage.param1);
 
-				DZLHouseExtension extension;
-				array<ref DZLHouseExtension> extensions = config.GetExtensions();
-				foreach(DZLHouseExtension _extension: extensions) {
-					if (_extension.GetId() == paramBuyStorage.param2) {
-						extension = _extension;
-						break;
-					}
-				}
+				DZLHouseExtension extension = config.GetHouseExtensionById(paramBuyStorage.param2);
 
 				if (extension && dzlBuilding.IsOwner(player)) {
 				    string message = "#error_buying_alarm_system";
@@ -69,12 +62,12 @@ class DZLBuyExtensionListener
 						}
 					
 				        if (inventory) {
-                            currentLevel = inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel);
+                            currentLevel = inventory.GetLevel(actualHouseDef.inventoryItemsPerLevel);
                             factor = currentLevel * 10 / 100 + 1;
                         }
 
 				        buyPriceBuy = config.houseExtensions.pricePerLevelHouseInventory * factor;
-				        if (dzlBuilding.CanBuyInventoryExtensionServer(config.houseExtensions) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
+				        if (dzlBuilding.CanBuyInventoryExtensionServer(actualHouseDef) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
                            	dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
 
                            	if (!inventory) {
@@ -82,7 +75,7 @@ class DZLBuyExtensionListener
                            	    dzlBuilding.GetDZLHouse().EnableInventory();
                            	}
 
-                           	inventory.IncreaseStorage(config.houseExtensions.inventoryItemsPerLevel);
+                           	inventory.IncreaseStorage(actualHouseDef.inventoryItemsPerLevel);
 
                            	message = "#successfully_extend_storage";
                            	GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);

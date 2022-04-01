@@ -53,18 +53,24 @@ class DZLRaidListener
 				    raidTime = armyDefinition.raidTimeInSeconds;
 				} else {
 				    DZLHouse dzlHouseRaid = DZLDatabaseLayer.Get().GetHouse(building);
-	
+					
 	                if (dzlHouseRaid.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {
 	                    array<Man> players = new array<Man>;
 	                    GetGame().GetPlayers(players);
-	
+
+	                    DZLHouseExtension extension = dzlHouseRaid.GetHouseAlarm();
+						if (extension.level == 4) {
+							string copMessage = extension.GetCopMessage();
+							DZLMessageListener.SendMessage(raider, "", copMessage, DZLMessage.TYPE_COP, dzlHouseRaid.GetPosition(), false);
+						}
+
 	                    if (players) {
 	                        foreach(Man player: players) {
 								PlayerBase currentPlayer = PlayerBase.Cast(player);
 	                            if (raider == currentPlayer) continue;
 	
 	                            if (dzlHouseRaid.IsOwner(currentPlayer)) {
-	                                GetGame().RPCSingleParam(currentPlayer, DAY_Z_LIFE_HOUSE_RAID_ALARM, new Param3<ref DZLHouseExtension, string, PlayerBase>(dzlHouseRaid.GetHouseAlarm(), dzlHouseRaid.GetName(), raider), true, currentPlayer.GetIdentity());
+	                                GetGame().RPCSingleParam(currentPlayer, DAY_Z_LIFE_HOUSE_RAID_ALARM, new Param3<ref DZLHouseExtension, string, PlayerBase>(extension, dzlHouseRaid.GetName(), raider), true, currentPlayer.GetIdentity());
 	                            }
 	                        }
 	                    }

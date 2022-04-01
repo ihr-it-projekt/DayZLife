@@ -67,7 +67,7 @@ class DZLBuilding
         return false;
 	}
 
-	bool CanBuyInventoryExtensionServer(DZLHouseExtensions config) {
+	bool CanBuyInventoryExtensionServer(DZLHouseDefinition config) {
         if (house.HasInventory()) {
             if (GetGame().IsServer()) {
                 DZLHouseInventory inventory = DZLDatabaseLayer.Get().GetHouseInventory(house.GetOwner(), house.GetPosition());
@@ -79,7 +79,7 @@ class DZLBuilding
         return true;
 	}
 	
-	bool CanBuyInventoryExtensionClient(DZLHouseExtensions config, DZLHouseInventory inventory) {
+	bool CanBuyInventoryExtensionClient(DZLHouseDefinition config, DZLHouseInventory inventory) {
         if (house.HasInventory()) {
             if (GetGame().IsClient()) {
                 if (inventory && inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {

@@ -28,9 +28,11 @@ class DZLMessage: DZLIdModel
         return;
     }
 
-    void CreateAndSend(PlayerBase _sender, PlayerIdentity _receiver, string _text, string _type, vector _position = "0 0 0") {
-        sender = _sender.GetIdentity().GetName();
-        senderId = _sender.GetIdentity().GetId();
+    void CreateAndSend(PlayerBase _sender, PlayerIdentity _receiver, string _text, string _type, vector _position = "0 0 0", bool senderVisible = true) {
+        sender = "";
+        if (senderVisible) {
+            sender = _sender.GetIdentity().GetName();
+        }
         receiver = _receiver.GetId();
         type = _type;
         text = _text;
@@ -43,7 +45,6 @@ class DZLMessage: DZLIdModel
         SetId();
 
         date = new DZLDate;
-
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_SEND_MESSAGE_SERVER, new Param1<ref DZLMessage>(this), true, _receiver);
     }
 
