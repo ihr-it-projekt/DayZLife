@@ -10,10 +10,10 @@ class DZLPlayerClientDB
     static DZLPlayerClientDB Get() {
         if (!db) {
             db = new DZLPlayerClientDB;
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
         }
         return db;
     }
@@ -28,7 +28,7 @@ class DZLPlayerClientDB
 
     DZLConfig GetConfig(){
         if (!config) {
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
             config = DZLConfig.Get();
         }
 
@@ -37,7 +37,7 @@ class DZLPlayerClientDB
 
     DZLPlayerHouse GetPlayerHouse() {
         if (!house) {
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_GET_PLAYER_BUILDING, null, true);
         }
 
         return house;
@@ -45,7 +45,7 @@ class DZLPlayerClientDB
 
     DZLBank GetBank() {
         if (!dzlBank) {
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
         }
 
         return dzlBank;
@@ -53,7 +53,7 @@ class DZLPlayerClientDB
    
     DZLPlayer GetDZLPlayer() {
         if (!dzlPlayer) {
-            GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
+            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
         }
 
         return dzlPlayer;
@@ -66,12 +66,12 @@ class DZLPlayerClientDB
     }
 
    void RequestUpdateDZLPlayer() {
-        GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
-        GetGame().RPCSingleParam(PlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+        GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
+        GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
    }
 
    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        PlayerBase player = PlayerBaseHelper.GetPlayer();
+        PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
         if (player) {
             if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_HOUSE) {
                 Param1 <ref DZLHouseConfig> configParamHouse;
@@ -163,6 +163,11 @@ class DZLPlayerClientDB
                 Param1 <ref DZLBank> dzlBankParam;
                 if (ctx.Read(dzlBankParam) && dzlBankParam.param1){
                     dzlBank = dzlBankParam.param1;
+                }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_MESSAGE) {
+                Param1 <ref DZLMessageConfig> dzlMessageParam;
+                if (ctx.Read(dzlMessageParam) && dzlMessageParam.param1){
+                    config.messageConfig = dzlMessageParam.param1;
                 }
             }  else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 RequestUpdateDZLPlayer();

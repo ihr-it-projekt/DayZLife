@@ -26,12 +26,13 @@ class DZLConfig
     ref DZLMedicConfig medicConfig;
     ref DZLBaseBuildingConfig baseBuildingConfig;
 	ref DZLCrimeConfig crimeConfig;
+	ref DZLMessageConfig messageConfig;
 
     void DZLConfig() {
         if (GetGame().IsServer()) {
             houseConfig = new DZLHouseConfig;
             houseExtensions = new DZLHouseExtensions;
-            //houseConfig.MigrateToVersionFive(houseExtensions.inventoryItemsPerLevel, houseExtensions.maxHouseInventoryLevel);
+            houseConfig.MigrateToVersionFive(houseExtensions.inventoryItemsPerLevel, houseExtensions.maxHouseInventoryLevel);
             bankConfig = new DZLBankingConfig;
             jobConfig = new DZLJobConfig;
             licenceConfig = new DZLLicenceConfig;
@@ -45,6 +46,7 @@ class DZLConfig
             medicConfig = new DZLMedicConfig;
             baseBuildingConfig = new DZLBaseBuildingConfig;
 			crimeConfig = new DZLCrimeConfig;
+			messageConfig = new DZLMessageConfig;
         }
 
         jobIds = new array<string>;

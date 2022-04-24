@@ -32,6 +32,7 @@ class DZLMessage: DZLIdModel
         sender = "";
         if (senderVisible) {
             sender = _sender.GetIdentity().GetName();
+			senderId = _sender.GetIdentity().GetId();
         }
         receiver = _receiver.GetId();
         type = _type;

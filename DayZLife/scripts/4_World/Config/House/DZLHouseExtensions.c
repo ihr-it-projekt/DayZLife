@@ -3,9 +3,6 @@ class DZLHouseExtensions
     string version = "3";
     ref array<ref DZLHouseExtension> extensions;
     int pricePerLevelHouseInventory = 5000;
-    //@todo remove in version 5
-    int inventoryItemsPerLevel = 10;
-    int maxHouseInventoryLevel = 50;
 
     void DZLHouseExtensions() {
         if (!Load()) {
@@ -22,6 +19,11 @@ class DZLHouseExtensions
         if ("2" == version) {
             version = "3";
             extensions.Insert(new DZLHouseAlarm("7", "#Alarm_system", "#Alarm_system_desc_4", 50000, 4, "#Alarm_system_message_4"));
+            Save();
+        }
+
+        if ("3" == version) {
+            version = "4";
             Save();
         }
     }

@@ -11,16 +11,17 @@ class DZLMessageListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_SEND_MESSAGE) {
             PlayerBase player = PlayerBase.Cast(target);
-            autoptr Param3<string, string, string> paramMessage;
+            autoptr Param4<string, string, string, bool> paramMessage;
             if (ctx.Read(paramMessage) && player){
                 string receiverId = paramMessage.param1;
                 string text = paramMessage.param2;
                 string type = paramMessage.param3;
+                bool senderVisible = paramMessage.param4;
 
-                DZLMessage message = DZLMessageListener.SendMessage(player, receiverId, text, type);
+                DZLMessage message = DZLMessageListener.SendMessage(player, receiverId, text, type, "0 0 0", senderVisible);
 
                 if (!message) {
-                    DZLSendMessage(sender, "recipient_is_not_online_you_can_not_answer");
+                    DZLSendMessage(sender, "#recipient_is_not_online_you_can_not_answer");
                 }
            }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {

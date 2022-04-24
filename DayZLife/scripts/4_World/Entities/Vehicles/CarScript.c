@@ -192,7 +192,7 @@ modded class CarScript
 	}
 
 	override bool IsInventoryVisible() {
-	    PlayerBase player = PlayerBaseHelper.GetPlayer();
+	    PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 	    
 	    return super.IsInventoryVisible() && HasPlayerAccess(player);
     }
@@ -250,7 +250,7 @@ modded class CarScript
 	    if (GetGame().IsServer()) {
 			carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
 	    } else {
-	        PlayerBase player = PlayerBaseHelper.GetPlayer();
+	        PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 			carCollisionDamage = player.GetConfig().carConfig.carCollisionDamage;
 	    }
 		

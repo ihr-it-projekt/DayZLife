@@ -28,7 +28,7 @@ class DZLBaseProgressBar: UIScriptedMenu
 
 
     override Widget Init() {
-        player = PlayerBaseHelper.GetPlayer();
+        player = DZLPlayerBaseHelper.GetPlayer();
         creator = new DZLUIItemCreator("DayZLife/layout/Processing/Processing_bar.layout");
 		progressBar = creator.GetProgressBarWidget("Status_bar");
 		status = creator.GetTextWidget("Status");

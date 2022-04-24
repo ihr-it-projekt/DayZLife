@@ -30,5 +30,6 @@ modded class ActionConstructor
 		actions.Insert(ActionTakeRobtMoneyBank);
 		actions.Insert(ActionTakeRobtMoneyShop);
 		actions.Insert(ActionRobShop);
+		actions.Insert(DZLActionGiveNumber);
     }
 }

@@ -157,6 +157,7 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style Normal
+       "exact text" 1
       }
       PanelWidgetClass PanelWidget4 {
        ignorepointer 1
@@ -242,6 +243,8 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
+       "Use default text" 0
+       "exact text" 0
       }
      }
     }

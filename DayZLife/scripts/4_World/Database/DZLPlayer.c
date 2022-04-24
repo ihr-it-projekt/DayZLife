@@ -586,6 +586,10 @@ class DZLPlayer
         return fractionWherePlayerCanJoin;
     }
 
+    void AddToContact(DZLOnlinePlayer player) {
+        DZLMessageDB.Get().AddContact(player);
+    }
+
     private bool Load(){
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayer>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
