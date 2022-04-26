@@ -1,6 +1,7 @@
 FrameWidgetClass rootFrame {
- position 0 0.09464
- size 0.20711 0.40599
+ color 1 1 1 0.3922
+ position 0 0.12428
+ size 0.41806 0.4316
  halign center_ref
  valign center_ref
  hexactpos 0
@@ -11,8 +12,8 @@ FrameWidgetClass rootFrame {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0.6588 0.6588 0.6588 1
-   position 0 0.00962
-   size 0.97455 0.99116
+   position 0 -0.00155
+   size 0.97455 0.96883
    halign center_ref
    valign center_ref
    hexactpos 0
@@ -23,8 +24,8 @@ FrameWidgetClass rootFrame {
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     position 0 0.00121
-     size 0.9739 0.9735
+     position -0 0
+     size 0.98381 0.9735
      halign center_ref
      valign center_ref
      hexactpos 0
@@ -36,7 +37,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
        position 0 0
-       size 1 0.19093
+       size 1 0.1593
        halign center_ref
        hexactpos 0
        vexactpos 0
@@ -46,10 +47,9 @@ FrameWidgetClass rootFrame {
        {
         PanelWidgetClass PanelWidget3 {
          ignorepointer 1
-         position -0.08042 0.00112
-         size 0.79677 0.78074
+         position 0 0.11885
+         size 0.55 0.76229
          halign center_ref
-         valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -82,8 +82,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0.0212 0.11075
-         size 0.13964 0.7785
+         position 0.00831 0.11066
+         size 0.05706 0.77868
          halign right_ref
          hexactpos 0
          vexactpos 0
@@ -93,7 +93,6 @@ FrameWidgetClass rootFrame {
          {
           ButtonWidgetClass Button_Closed {
            color 0.502 0 0 1
-           position 0 0
            size 0.9 0.9
            halign center_ref
            valign center_ref
@@ -110,8 +109,8 @@ FrameWidgetClass rootFrame {
        }
       }
       EditBoxWidgetClass input_ticket {
-       position 0.22699 0.5
-       size 0.50362 0.13968
+       position 0.21805 0.58283
+       size 0.5472 0.11
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -122,8 +121,9 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position 0 0.03569
-       size 0.9576 0.17466
+       color 1 1 1 0.3922
+       position -0 0.04516
+       size 0.61352 0.10592
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -134,8 +134,7 @@ FrameWidgetClass rootFrame {
        {
         ButtonWidgetClass createTicketButton {
          color 0.251 0.502 0 1
-         position 0 0.02696
-         size 0.98 0.92608
+         size 0.99 0.9
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -148,8 +147,8 @@ FrameWidgetClass rootFrame {
        }
       }
       TextWidgetClass prisonerName {
-       position 0.00237 0.66945
-       size 0.9576 0.10985
+       position 0 0.71176
+       size 0.9576 0.11
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -162,8 +161,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget4 {
        ignorepointer 1
-       position -0.26241 -0.06984
-       size 0.42804 0.13968
+       position -0.27777 -0.13783
+       size 0.428 0.11
        halign center_ref
        valign center_ref
        hexactpos 0
@@ -199,8 +198,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget6 {
        ignorepointer 1
-       position -0.26241 0.09961
-       size 0.42804 0.13968
+       position -0 0.065
+       size 0.428 0.13
        halign center_ref
        valign center_ref
        hexactpos 0
@@ -215,8 +214,7 @@ FrameWidgetClass rootFrame {
          inheritalpha 0
          ignorepointer 1
          keepsafezone 0
-         position 0 0
-         size 1 0.9
+         size 0.9808 0.8
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -235,8 +233,8 @@ FrameWidgetClass rootFrame {
        }
       }
       EditBoxWidgetClass ticket_reason {
-       position 0.22699 0.33055
-       size 0.50362 0.13968
+       position 0 0.20598
+       size 0.98355 0.10458
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -244,6 +242,10 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
+       text "Das hier ist ien Test. bla bla"
+       "limit visible" 0
+       "Use default text" 0
+       "exact text" 1
       }
      }
     }

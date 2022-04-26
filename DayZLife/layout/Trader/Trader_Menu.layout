@@ -284,8 +284,8 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Inventory;35;#Sell;15;#Quantity;20;#Trader_Storage;30"
-         lines 25
+         colums "#Inventory;40;#Sell;22;#Quantity;22;#Trader_Storage;10"
+         lines 40
         }
         TextListboxWidgetClass Trader_Item_list {
          color 0.502 0 0 1
@@ -297,9 +297,10 @@ FrameWidgetClass Trader_Menu {
          hexactsize 0
          vexactsize 0
          "no focus" 0
+         "next down" ""
          "title visible" 1
-         colums "#Item;35;#Buy;15;#Sell;15;#Trader_Storage;35"
-         lines 15
+         colums "#Item;40;#Buy;22;#Sell;22;#Trader_Storage;10"
+         lines 20
         }
         PanelWidgetClass PanelWidget5 {
          ignorepointer 1
