@@ -174,20 +174,6 @@ class DZLHouseConfig
 		}
     }
 
-    void MigrateToVersionFive(int inventoryItemsPerLevel, int maxHouseInventoryLevel) {
-        if ("4" == version) {
-            foreach(DZLHouseDefinition houseConfig: houseConfigs) {
-                houseConfig.inventoryItemsPerLevel = inventoryItemsPerLevel;
-                houseConfig.maxHouseInventoryLevel = maxHouseInventoryLevel;
-            }
-
-            minCountOfCopsForRaid = 5;
-
-            version = "5";
-            Save();
-        }
-    }
-	
 	DZLHouseDefinition GetHouseDefinitionByBuilding(notnull Building building) {
 		foreach(DZLHouseDefinition definition: houseConfigs) {
 			if (definition.houseType == building.GetType()) {

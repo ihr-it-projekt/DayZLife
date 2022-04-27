@@ -32,7 +32,6 @@ class DZLConfig
         if (GetGame().IsServer()) {
             houseConfig = new DZLHouseConfig;
             houseExtensions = new DZLHouseExtensions;
-            houseConfig.MigrateToVersionFive(houseExtensions.inventoryItemsPerLevel, houseExtensions.maxHouseInventoryLevel);
             bankConfig = new DZLBankingConfig;
             jobConfig = new DZLJobConfig;
             licenceConfig = new DZLLicenceConfig;
