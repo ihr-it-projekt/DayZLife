@@ -27,6 +27,7 @@ class DZLConfig
     ref DZLBaseBuildingConfig baseBuildingConfig;
 	ref DZLCrimeConfig crimeConfig;
 	ref DZLMessageConfig messageConfig;
+	ref DZLTuningConfig tuningConfig;
 
     void DZLConfig() {
         if (GetGame().IsServer()) {
@@ -46,6 +47,7 @@ class DZLConfig
             baseBuildingConfig = new DZLBaseBuildingConfig;
 			crimeConfig = new DZLCrimeConfig;
 			messageConfig = new DZLMessageConfig;
+			tuningConfig = new DZLTuningConfig;
         }
 
         jobIds = new array<string>;

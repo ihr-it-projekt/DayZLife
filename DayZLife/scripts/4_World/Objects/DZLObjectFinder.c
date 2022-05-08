@@ -82,6 +82,23 @@ class DZLObjectFinder
         return null;
     }
 
+    static CarScript GetCarForTuning(vector carSpawnPosition, string carType) {
+        array<Object> excludedObjects = new array<Object>;
+        array<Object> nearbyObjects = new array<Object>;
+        if (GetGame().IsBoxColliding(carSpawnPosition, "0 0 0", "3 5 9", excludedObjects, nearbyObjects)){
+            foreach (Object object: nearbyObjects){
+                if (object.GetType().Contains(carType)){
+                    CarScript carsScript = CarScript.Cast(object);
+                    if(!carsScript) continue;
+
+                    return carsScript;
+                }
+            }
+        }
+
+        return null;
+    }
+
     private Object CheckForObject(set< Object > geom) {
         for (int newObject = 0; newObject < geom.Count(); ++newObject){
             Object obj = geom.Get(newObject);

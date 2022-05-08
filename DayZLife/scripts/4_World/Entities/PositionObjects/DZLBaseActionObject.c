@@ -9,6 +9,7 @@ class DZLBaseActionObject :BuildingSuper
     protected bool isLicensePoint = false;
     protected bool isLicenseActionPoint = false;
     protected bool isShopActionPoint = false;
+    protected bool isTuningPoint = false;
 
     bool IsBank() {
         return isBank;
@@ -50,4 +51,7 @@ class DZLBaseActionObject :BuildingSuper
         return isShopActionPoint;
     }
 
+    bool IsTuningPoint() {
+        return isTuningPoint;
+    }
 }

@@ -169,6 +169,11 @@ class DZLPlayerClientDB
                 if (ctx.Read(dzlMessageParam) && dzlMessageParam.param1){
                     config.messageConfig = dzlMessageParam.param1;
                 }
+            } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TUNING_CONFIG) {
+                Param1 <ref DZLTuningConfig> dzlTuningConfigParam;
+                if (ctx.Read(dzlTuningConfigParam) && dzlTuningConfigParam.param1){
+                    config.tuningConfig = dzlTuningConfigParam.param1;
+                }
             }  else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 RequestUpdateDZLPlayer();
             }

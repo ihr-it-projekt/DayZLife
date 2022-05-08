@@ -21,6 +21,7 @@ modded class PlayerBase
     private ref DZLTraderMenu traderMenu;
     private ref DZLAlmanacMenu almanacMenu;
     private ref DZLFractionMenu fractionMenu;
+    private ref DZLTuningMenu tuningMenu;
 
 	bool willHeal = false;
 	bool willDie = false;
@@ -327,6 +328,12 @@ modded class PlayerBase
 		return messageSystemMenu;
 	}
 
+	DZLTuningMenu GetTuningMenu() {
+		tuningMenu = new DZLTuningMenu();
+		InitMenu(tuningMenu);
+		return tuningMenu;
+	}
+
 	void RefreshMessageSystem() {
 	    if (messageSystemMenu) {
 	        messageSystemMenu.RefreshMessageSystem();
@@ -461,6 +468,24 @@ modded class PlayerBase
             }
 		}
 		
+		return null;
+    }
+
+    DZLTunerPosition GetTunerPositionByPosition(int distance = 3) {
+		vector playerPosition = GetPosition();
+        if (!playerPosition || !GetConfig() || !GetConfig().tuningConfig) {
+            return null;
+        }
+
+		array<ref DZLTunerPosition> positions = GetConfig().tuningConfig.tuner;
+
+		foreach(DZLTunerPosition position: positions) {
+			float distanceToPos = vector.Distance(position.position, playerPosition);
+			if (distanceToPos <= distance){
+                return position;
+            }
+		}
+
 		return null;
     }
 

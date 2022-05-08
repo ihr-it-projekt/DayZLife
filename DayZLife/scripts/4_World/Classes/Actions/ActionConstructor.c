@@ -31,5 +31,6 @@ modded class ActionConstructor
 		actions.Insert(ActionTakeRobtMoneyShop);
 		actions.Insert(ActionRobShop);
 		actions.Insert(DZLActionGiveNumber);
+		actions.Insert(DZLActionOpenTuningMenu);
     }
 }
