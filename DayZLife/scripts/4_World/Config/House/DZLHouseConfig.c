@@ -1,6 +1,7 @@
 class DZLHouseConfig
  {
-    string version = "4";
+    string version = "5";
+    int minCountOfCopsForRaid = 3;
     ref array<ref DZLJobHouseDefinition> copHouseConfigs;
     ref array<ref DZLJobHouseDefinition> medicHouseConfigs;
     ref array<ref DZLJobHouseDefinition> armyHouseConfigs;
@@ -160,26 +161,10 @@ class DZLHouseConfig
 			storagePosition.Insert("1.824219 -2.240005 -1.942383");
             houseConfigs.Insert(new DZLHouseDefinition("Land_House_2B03", 100, 50, storagePosition, 10));
 
-            Save();
-        }
-
-        if (version == "1") {
             medicHouseConfigs = new array<ref DZLJobHouseDefinition>;
-
             medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_City_Hospital", 30));
             medicHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Village_HealthCare"));
-            version = "2";
-            Save();
-        }
-		
-		if (version == "2") {
-			version = "3";
-			//Change: remove raid range config param
-			Save();
-		}
 
-		if (version == "3") {
-			version = "4";
 			armyHouseConfigs = new array<ref DZLJobHouseDefinition>;
 			armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Tisy_HQ"));
 			armyHouseConfigs.Insert(new DZLJobHouseDefinition("Land_Mil_ATC_Small"));
@@ -188,7 +173,7 @@ class DZLHouseConfig
 			Save();
 		}
     }
-	
+
 	DZLHouseDefinition GetHouseDefinitionByBuilding(notnull Building building) {
 		foreach(DZLHouseDefinition definition: houseConfigs) {
 			if (definition.houseType == building.GetType()) {

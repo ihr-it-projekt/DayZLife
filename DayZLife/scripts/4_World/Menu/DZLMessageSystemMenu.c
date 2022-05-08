@@ -29,9 +29,12 @@ class DZLMessageSystemMenu : DZLBaseMenu
 	private EditBoxWidget writeWidget;
 	private Widget mapButtonBoarder
 	private Widget mapPanelWidget;
+	private Widget onlinePlayersWidget;
 	private vector messagePosition;
 	private Widget globalBoarder;
 	private ref array<ref DZLOnlinePlayer> onlinePlayers;
+
+	private CheckBoxWidget sendAnonymousBox;
 
 	void DZLMessageSystemMenu() {
 	    layoutPath = "DayZLife/layout/Message/DZL_Message_Menu.layout";
@@ -52,6 +55,7 @@ class DZLMessageSystemMenu : DZLBaseMenu
 		outBoxButton = creator.GetButtonWidget("outBoxButton");
 		mapButtonBoarder = creator.GetWidget("mapPanel");
 		mapPanelWidget = creator.GetWidget("mapPanelWidget");
+		onlinePlayersWidget = creator.GetWidget("onlinePlayersWidget");
 		globalBoarder = creator.GetWidget("PanelWidget13");
 		searchContactWidget = creator.GetEditBoxWidget("searchKontakt");
 		searchContactButton = creator.GetButtonWidget("searchKontaktButton");
@@ -67,6 +71,8 @@ class DZLMessageSystemMenu : DZLBaseMenu
 		messageListWidget = creator.GetTextListboxWidget("messageListbox");
 		readWidget = creator.GetMultilineTextWidget("readText");
 		writeWidget = creator.GetEditBoxWidget("writeMessage");
+
+		sendAnonymousBox = creator.GetCheckBoxWidget("checkSendAnonym");
 		
 		showMapButton.Show(false);
 		mapButtonBoarder.Show(false);
@@ -160,6 +166,9 @@ class DZLMessageSystemMenu : DZLBaseMenu
         super.OnShow();
         sendGlobalButton.Show(player.GetDZLPlayer().IsActiveAsCop() || player.GetDZLPlayer().IsActiveAsMedic());
         globalBoarder.Show(player.GetDZLPlayer().IsActiveAsCop() || player.GetDZLPlayer().IsActiveAsMedic());
+
+        onlinePlayersWidget.Show(config.messageConfig.showOnlinePlayersInMessageMenu);
+
         RefreshMessageSystem();
     }
 
@@ -281,7 +290,7 @@ class DZLMessageSystemMenu : DZLBaseMenu
         onlinePlayerListWidget.GetItemData(pos, 0, onlinePlayer);
 
         if (onlinePlayer) {
-            DZLMessageDB.Get().AddContact(onlinePlayer);
+            dzlPlayer.AddToContact(onlinePlayer);
             contactListWidget.AddItem(onlinePlayer.name, onlinePlayer, 0);
             onlinePlayerListWidget.RemoveRow(pos);
         }
@@ -369,8 +378,10 @@ class DZLMessageSystemMenu : DZLBaseMenu
             player.DisplayMessage("#message_is_empty");
             return;
         }
+		
+		bool anonym = sendAnonymousBox.IsChecked();
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_SEND_MESSAGE, new Param3<string, string, string>(id, text, type), true, player.GetIdentity());
+        GetGame().RPCSingleParam(player, DAY_Z_LIFE_SEND_MESSAGE, new Param4<string, string, string, bool>(id, text, type, !anonym), true, player.GetIdentity());
         player.DisplayMessage("#message_was_send");
 		writeWidget.SetText("");
 

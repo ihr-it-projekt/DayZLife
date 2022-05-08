@@ -89,6 +89,7 @@ FrameWidgetClass rootFrame {
            hexactsize 0
            vexactsize 0
            style DefaultBorder
+           "exact text" 1
           }
           PanelWidgetClass PanelWidget5 {
            ignorepointer 1
@@ -145,73 +146,86 @@ FrameWidgetClass rootFrame {
           }
          }
         }
-        EditBoxWidgetClass addKontakt {
-         position 0.01722 0.51162
-         size 0.849 0.0602
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style DefaultBorder
-        }
-        PanelWidgetClass PanelWidget6 {
+        PanelWidgetClass onlinePlayersWidget {
          ignorepointer 1
-         position 0.01722 0.51162
-         size 0.0994 0.06
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
+         position 1.37261 314.42499
+         size 0.99199 0.47673
+         hexactpos 1
+         vexactpos 1
          hexactsize 0
          vexactsize 0
-         style editor_quad_dark
          {
-          ButtonWidgetClass addSearchKontaktButton {
-           color 0 0.502 0.1255 1
-           position 0 0
-           size 0.95 0.95
+          TextListboxWidgetClass allPlayerListbox {
+           position 0.00022 0.07688
+           size 0.966 0.82313
            halign center_ref
            valign center_ref
            hexactpos 0
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           style OldStyle
+           "title visible" 1
+           colums "#Add_Contacts"
+           lines 15
           }
-          ImageWidgetClass ImageWidget1 {
+          PanelWidgetClass PanelWidget6 {
            ignorepointer 1
-           size 0.8 0.8
-           halign center_ref
-           valign center_ref
+           position 0.01878 0.01151
+           size 0.09628 0.13789
+           halign right_ref
            hexactpos 0
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
-           mode blend
-           "src alpha" 1
-           "no wrap" 0
-           stretch 1
+           style editor_quad_dark
+           {
+            ButtonWidgetClass addSearchKontaktButton {
+             color 0 0.502 0.1255 1
+             position 0 0
+             size 0.95 0.95
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style OldStyle
+            }
+            ImageWidgetClass ImageWidget1 {
+             ignorepointer 1
+             position 0 0
+             size 0.8 0.8
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             mode blend
+             "src alpha" 1
+             "no wrap" 0
+             stretch 1
+            }
+           }
+          }
+          EditBoxWidgetClass addKontakt {
+           position 0.00787 0.01561
+           size 0.85523 0.12989
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
+           "exact text" 1
           }
          }
-        }
-        TextListboxWidgetClass allPlayerListbox {
-         position 0.00022 0.28594
-         size 0.966 0.405
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         "title visible" 1
-         colums "#Add_Contacts"
-         lines 15
         }
        }
       }
       PanelWidgetClass PanelWidget9 {
        ignorepointer 1
-       position 0 0.0038
+       position -0.00127 0.0038
        size 0.6545 0.8254
        halign right_ref
        valign center_ref
@@ -277,8 +291,8 @@ FrameWidgetClass rootFrame {
          "text valign" center
         }
         EditBoxWidgetClass writeMessage {
-         position 0 0.44919
-         size 0.9817 0.076
+         position -0.12336 0.44919
+         size 0.73498 0.076
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -346,6 +360,29 @@ FrameWidgetClass rootFrame {
            text_proportion 0.6
           }
          }
+        }
+        CheckBoxWidgetClass checkSendAnonym {
+         position 0.74675 0.91455
+         size 0.03933 0.0737
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+        }
+        TextWidgetClass TextWidget2 {
+         ignorepointer 1
+         position 0.79184 0.9134
+         size 0.2016 0.0763
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#send_anonymous"
+         "exact text" 1
+         text_proportion 0.8
+         "size to text h" 0
+         "size to text v" 0
+         "text valign" center
         }
        }
       }

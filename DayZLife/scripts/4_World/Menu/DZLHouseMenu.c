@@ -128,8 +128,7 @@ class DZLHouseMenu : DZLBaseMenu
 		upgardePriceBuyTextWidget.SetText("");
 	    upgradePriceSellTextWidget.SetText("");
 		alarmLevel.SetText("0");
-		int maxSpace = config.houseExtensions.maxHouseInventoryLevel * config.houseExtensions.inventoryItemsPerLevel;
-		storageItemCountMax.SetText(maxSpace.ToString());
+		
 		storagelvlCount.SetText("0");
 
 		storageSpaceAvailable.SetText("0");
@@ -154,6 +153,10 @@ class DZLHouseMenu : DZLBaseMenu
 			houseBuy.Show(true);
 
 			DZLDisplayHelper.UpdateMap(mapWidget, mapPos);
+			
+			int maxSpace = actualHouseDef.maxHouseInventoryLevel * actualHouseDef.inventoryItemsPerLevel;
+			storageItemCountMax.SetText(maxSpace.ToString());
+			
             UpdateGUI();
         }
 	}
@@ -206,13 +209,14 @@ class DZLHouseMenu : DZLBaseMenu
                         float factor = 1.0;
 
                         if (inventory) {
-                            currentLevel = inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel);
+                            currentLevel = inventory.GetLevel(actualHouseDef.inventoryItemsPerLevel);
 
                             factor = currentLevel * 10 / 100 + 1;
                         }
 
                         buyPriceBuy = config.houseExtensions.pricePerLevelHouseInventory * factor;
-                        canBuy = dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(player) && house.CanBuyInventoryExtensionClient(config.houseExtensions, inventory);
+										
+                        canBuy = dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(player) && house.CanBuyInventoryExtensionClient(actualHouseDef, inventory);
                     } else {
                         buyPriceBuy = currentItemBuy.price;
                         canBuy = dzlPlayer.HasEnoughMoney(buyPriceBuy) && house.IsOwner(player) && house.CanBuyAlarm(currentItemBuy);
@@ -275,14 +279,14 @@ class DZLHouseMenu : DZLBaseMenu
                     }
                 } else if (currentItem.isHouseInventory) {
 
-                    showBuyButton = house.CanBuyInventoryExtensionClient(config.houseExtensions, inventory);
+                    showBuyButton = house.CanBuyInventoryExtensionClient(actualHouseDef, inventory);
                     sellButton.Show(false);
 
                     int currentLevelUpgrade = 0;
                     float factorUpgrade = 1.0;
 
                     if (inventory) {
-                        currentLevelUpgrade = inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel);
+                        currentLevelUpgrade = inventory.GetLevel(actualHouseDef.inventoryItemsPerLevel);
                         factorUpgrade = currentLevelUpgrade * 10 / 100 + 1;
                     }
 
@@ -498,7 +502,7 @@ class DZLHouseMenu : DZLBaseMenu
                         if (house.CanBuyAlarm(extension)) {
                             name = extension.type;
                         }
-                    } else if(extension.isHouseInventory && house.CanBuyInventoryExtensionClient(config.houseExtensions, inventory)) {
+                    } else if(extension.isHouseInventory && house.CanBuyInventoryExtensionClient(actualHouseDef, inventory)) {
                         name = "#House_Storage";
                     }
 
@@ -557,7 +561,7 @@ class DZLHouseMenu : DZLBaseMenu
 		balanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
 
 		if (inventory) {
-		    storagelvlCount.SetText(inventory.GetLevel(config.houseExtensions.inventoryItemsPerLevel).ToString());
+		    storagelvlCount.SetText(inventory.GetLevel(actualHouseDef.inventoryItemsPerLevel).ToString());
 		    upgardePriceBuyTextWidget.SetText("");
             storageSpaceAvailable.SetText(inventory.GetLeftStorage().ToString());
 		}

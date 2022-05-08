@@ -48,7 +48,7 @@ class DZLTraderListener
                             foreach(EntityAI item: itemsToSell) {
                                 CarScript carsScript = CarScript.Cast(item);
 
-                                if (carsScript && carsScript.lastDriverId != sender.GetId()) {
+                                if (carsScript && carsScript.ownerId != sender.GetId()) {
                                     continue;
                                 }
 

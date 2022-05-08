@@ -1,10 +1,10 @@
+
 class DZLInventoryExtension: DZLHouseExtension
 {
-	void DZLInventoryExtension(string id, string description, int price, int level) {
+	void DZLInventoryExtension(string id, string description, int price) {
         this.id = id;
         this.description = description;
         this.price = price;
-        this.level = level;
         isHouseInventory = true;
     }
 }

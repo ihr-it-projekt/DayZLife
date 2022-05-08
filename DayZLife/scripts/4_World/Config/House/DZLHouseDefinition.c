@@ -6,6 +6,8 @@ class DZLHouseDefinition {
 	ref array<vector> storagePosition;
 	float storageBuyFactor;
 	ref array<string> raidTools;
+    int inventoryItemsPerLevel = 10;
+    int maxHouseInventoryLevel = 20;
 
 	
     void DZLHouseDefinition(string houseType, int buyPrice, int sellPrice, ref array<vector> storagePosition, float storageBuyFactor) {

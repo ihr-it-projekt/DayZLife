@@ -20,6 +20,7 @@ class DZLEventManager
     ref DZLShopRaidListener shopRaidListener;
     ref DZLPlayerTicketListener playerTicketListener;
     ref DZLFractionListener fractionListener;
+    ref DZLTuningListener tuningListener;
 
     void DZLEventManager() {
         buyHouse = new DZLBuyHouseListener;
@@ -42,5 +43,6 @@ class DZLEventManager
         shopRaidListener = new DZLShopRaidListener;
         playerTicketListener = new DZLPlayerTicketListener;
         fractionListener = new DZLFractionListener;
+        tuningListener = new DZLTuningListener;
     }
 }

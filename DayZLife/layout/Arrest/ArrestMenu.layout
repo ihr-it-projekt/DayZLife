@@ -1,6 +1,6 @@
 FrameWidgetClass rootFrame {
- position 0 0.09464
- size 0.20711 0.40599
+ position -0 0
+ size 0.35211 0.40599
  halign center_ref
  valign center_ref
  hexactpos 0
@@ -36,7 +36,7 @@ FrameWidgetClass rootFrame {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
        position 0 0
-       size 1 0.19093
+       size 1 0.15679
        halign center_ref
        hexactpos 0
        vexactpos 0
@@ -46,8 +46,8 @@ FrameWidgetClass rootFrame {
        {
         PanelWidgetClass PanelWidget3 {
          ignorepointer 1
-         position -0.08042 0.00112
-         size 0.79677 0.78074
+         position -0.00986 0
+         size 0.77704 0.74903
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -82,8 +82,8 @@ FrameWidgetClass rootFrame {
         }
         PanelWidgetClass PanelWidget16 {
          ignorepointer 1
-         position 0.0212 0.11075
-         size 0.13964 0.7785
+         position 0.00987 0.12549
+         size 0.07054 0.74903
          halign right_ref
          hexactpos 0
          vexactpos 0
@@ -110,8 +110,8 @@ FrameWidgetClass rootFrame {
        }
       }
       EditBoxWidgetClass input_arrest {
-       position 0.22699 0.5
-       size 0.50362 0.13968
+       position 0.21893 0.5955
+       size 0.5424 0.11
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -122,8 +122,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position 0 0.03569
-       size 0.9576 0.17466
+       position 0 0.04553
+       size 0.72918 0.11893
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -148,8 +148,8 @@ FrameWidgetClass rootFrame {
        }
       }
       TextWidgetClass prisonerName {
-       position 0.00237 0.66945
-       size 0.9576 0.10985
+       position -0 0.72517
+       size 0.9576 0.09837
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -157,11 +157,12 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style Normal
+       "exact text" 1
       }
       PanelWidgetClass PanelWidget4 {
        ignorepointer 1
-       position -0.26241 -0.06984
-       size 0.42804 0.13968
+       position -0.27613 -0.1505
+       size 0.428 0.11
        halign center_ref
        valign center_ref
        hexactpos 0
@@ -197,8 +198,8 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget6 {
        ignorepointer 1
-       position -0.26241 0.09961
-       size 0.42804 0.13968
+       position -0 0.08451
+       size 0.428 0.11
        halign center_ref
        valign center_ref
        hexactpos 0
@@ -233,8 +234,8 @@ FrameWidgetClass rootFrame {
        }
       }
       EditBoxWidgetClass arrest_reason {
-       position 0.22699 0.33055
-       size 0.50362 0.13968
+       position 0.00002 0.21035
+       size 0.9803 0.11
        halign center_ref
        valign bottom_ref
        hexactpos 0
@@ -242,6 +243,8 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
+       "Use default text" 0
+       "exact text" 0
       }
      }
     }

@@ -12,7 +12,7 @@ class DZLPlayerEventListener
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        player = PlayerBaseHelper.GetPlayer();
+        player = DZLPlayerBaseHelper.GetPlayer();
         if (player) {
             if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
                 Param1 <string> dzlMessage;
@@ -42,6 +42,16 @@ class DZLPlayerEventListener
                      DZLMessageDB.Get().AddMessage(receivedMessage);
                      player.RefreshMessageSystem();
                 }
+            } else if(rpc_type == DAY_Z_LIFE_EVENT_SEND_CONTACT) {
+                Param1<ref DZLOnlinePlayer> contactParam;
+                if (ctx.Read(contactParam) && contactParam.param1){
+                     DZLOnlinePlayer newContact = contactParam.param1;
+                     DZLPlayer dzlPlayer = player.GetDZLPlayer();
+					
+					if (dzlPlayer) {
+						dzlPlayer.AddToContact(newContact);
+					}
+                }
             }
         }
 
@@ -52,7 +62,7 @@ class DZLPlayerEventListener
     }
 
     void CreateSpawnMenu() {
-        player = PlayerBaseHelper.GetPlayer();
+        player = DZLPlayerBaseHelper.GetPlayer();
         if (!player || !player.GetConfig() || !player.GetDZLPlayer()) {
             return;
         }

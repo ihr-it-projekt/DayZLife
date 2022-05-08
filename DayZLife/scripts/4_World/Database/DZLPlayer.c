@@ -209,7 +209,7 @@ class DZLPlayer
     void UpdateMedic(bool isMedic, string rank) {
         this.isMedic = isMedic;
 
-        if (isCop) {
+        if (isMedic) {
             this.lastMedicRank = rank;
             if (IsActiveAsMedic()) {
                this.activeJobGrade = rank;
@@ -222,6 +222,7 @@ class DZLPlayer
 
         Save();
     }
+	
     void UpdateArmy(bool isArmy, string rank) {
         this.isArmy = isArmy;
 
@@ -583,6 +584,10 @@ class DZLPlayer
 
     array<string> GetFractionIdsWherePlayerCanJoin() {
         return fractionWherePlayerCanJoin;
+    }
+
+    void AddToContact(DZLOnlinePlayer player) {
+        DZLMessageDB.Get().AddContact(player);
     }
 
     private bool Load(){

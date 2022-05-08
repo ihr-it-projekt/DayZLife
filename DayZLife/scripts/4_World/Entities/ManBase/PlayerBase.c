@@ -21,6 +21,7 @@ modded class PlayerBase
     private ref DZLTraderMenu traderMenu;
     private ref DZLAlmanacMenu almanacMenu;
     private ref DZLFractionMenu fractionMenu;
+    private ref DZLTuningMenu tuningMenu;
 
 	bool willHeal = false;
 	bool willDie = false;
@@ -129,6 +130,7 @@ modded class PlayerBase
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
         AddAction(ActionOpenTicketMenu, InputActionMap);
+        AddAction(DZLActionGiveNumber, InputActionMap);
     }
 	
 	override void CheckDeath()
@@ -326,6 +328,12 @@ modded class PlayerBase
 		return messageSystemMenu;
 	}
 
+	DZLTuningMenu GetTuningMenu() {
+		tuningMenu = new DZLTuningMenu();
+		InitMenu(tuningMenu);
+		return tuningMenu;
+	}
+
 	void RefreshMessageSystem() {
 	    if (messageSystemMenu) {
 	        messageSystemMenu.RefreshMessageSystem();
@@ -460,6 +468,24 @@ modded class PlayerBase
             }
 		}
 		
+		return null;
+    }
+
+    DZLTunerPosition GetTunerPositionByPosition(int distance = 3) {
+		vector playerPosition = GetPosition();
+        if (!playerPosition || !GetConfig() || !GetConfig().tuningConfig) {
+            return null;
+        }
+
+		array<ref DZLTunerPosition> positions = GetConfig().tuningConfig.tuner;
+
+		foreach(DZLTunerPosition position: positions) {
+			float distanceToPos = vector.Distance(position.position, playerPosition);
+			if (distanceToPos <= distance){
+                return position;
+            }
+		}
+
 		return null;
     }
 
@@ -676,7 +702,18 @@ modded class PlayerBase
         }
 		return false;
     }
-	
+
+    array<EntityAI> GetItemsByTypeFromInventory(string type) {
+        array<EntityAI> items = GetPlayerItems();
+        array<EntityAI> itemsFound = new array<EntityAI>;
+        foreach(EntityAI item: items) {
+            if (item.GetType() == type) {
+                itemsFound.Insert(item);
+            }
+        }
+        return itemsFound;
+    }
+
 	override void RemoveAllItems() {
 		array<EntityAI> itemsArray = new array<EntityAI>;
 		ItemBase item;
@@ -738,6 +775,42 @@ modded class PlayerBase
             return DZLDatabaseLayer.Get().GetBank();
         }
         return DZLPlayerClientDB.Get().GetBank();
+    }
+
+    bool CanOpenMessageMenu() {
+        if (IsRestrained()) return false;
+        if (IsUnconscious()) return false;
+        if (!GetConfig()) return false;
+        if (!GetConfig().messageConfig) return false;
+
+        if (!GetConfig().messageConfig.mustHavePersonalRadio) return true;
+
+        array<EntityAI> radios = GetItemsByTypeFromInventory("PersonalRadio");
+
+        if (radios.Count() < 1) return false;
+
+        if (!GetConfig().messageConfig.radioMustHaveBattery) return true;
+
+        foreach(EntityAI radio: radios) {
+            if (radio.GetInventory()) {
+                for(int i = 0; i < radio.GetInventory().AttachmentCount(); i++ ) {
+                    EntityAI attachment = radio.GetInventory().GetAttachmentFromIndex(i);
+                    if(attachment && attachment.GetType() == "Battery9V") {
+						Battery9V itemCast = Battery9V.Cast(attachment);
+						
+						
+						
+						if (itemCast && itemCast.GetQuantity() > 0) {
+							float energy = itemCast.GetCompEM().GetEnergy();
+							
+							if (energy > 0) return true;
+						}                        
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 
     void ResetDZLPlayer() {

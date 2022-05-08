@@ -26,6 +26,8 @@ class DZLConfig
     ref DZLMedicConfig medicConfig;
     ref DZLBaseBuildingConfig baseBuildingConfig;
 	ref DZLCrimeConfig crimeConfig;
+	ref DZLMessageConfig messageConfig;
+	ref DZLTuningConfig tuningConfig;
 
     void DZLConfig() {
         if (GetGame().IsServer()) {
@@ -44,6 +46,8 @@ class DZLConfig
             medicConfig = new DZLMedicConfig;
             baseBuildingConfig = new DZLBaseBuildingConfig;
 			crimeConfig = new DZLCrimeConfig;
+			messageConfig = new DZLMessageConfig;
+			tuningConfig = new DZLTuningConfig;
         }
 
         jobIds = new array<string>;
@@ -77,5 +81,18 @@ class DZLConfig
             return houseExtensions.extensions;
         }
         return null;
+	}
+	
+	DZLHouseExtension GetHouseExtensionById(string id) {
+		array<ref DZLHouseExtension> extensions = GetExtensions();
+		if (null == extensions) return null;
+		
+		foreach(DZLHouseExtension _extension: extensions) {
+			if (_extension.GetId() == id) {
+				return _extension;
+			}
+		}
+		
+		return null;
 	}
 }

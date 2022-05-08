@@ -7,6 +7,7 @@ class DZLTraderTypeStorage
     private int reducePerTick;
     private int tickLengthInMinutes;
     private int maxStorage;
+	private bool mustSave = false;
 
     void DZLTraderTypeStorage(DZLTraderType type) {
         this.type = type.type;
@@ -18,7 +19,7 @@ class DZLTraderTypeStorage
         this.reducePerTick = type.reducePerTick;
         this.tickLengthInMinutes = type.tickLengthInMinutes;
         this.maxStorage = type.maxStorage;
-
+		mustSave = true;
         Save();
     }
 	
@@ -32,6 +33,7 @@ class DZLTraderTypeStorage
 
     void StorageDown() {
         currentStorage--;
+		mustSave = true;
     }
 
     bool IsStorageBelowZero() {
@@ -65,6 +67,7 @@ class DZLTraderTypeStorage
     void IncreaseTick() {
         if (tickLengthInMinutes == 0) return;
         lastTick++;
+		mustSave = true;
     }
 
     void ResetTick() {
@@ -72,7 +75,7 @@ class DZLTraderTypeStorage
     }
 
     void ReduceTickAmount() {
-        if (currentStorage == 0 || currentStorage == maxStorage || reducePerTick == 0) return;
+        if (reducePerTick == 0) return;
 
         currentStorage = currentStorage - reducePerTick;
 
@@ -83,8 +86,7 @@ class DZLTraderTypeStorage
         if (currentStorage > maxStorage) {
             currentStorage = maxStorage;
         }
-
-        Save();
+		mustSave = true;
     }
 
     private bool Load(){
@@ -96,7 +98,8 @@ class DZLTraderTypeStorage
     }
 
     void Save(){
-        if (GetGame().IsServer()) {
+        if (GetGame().IsServer() && mustSave == true) {
+			mustSave = false;
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE);
             DZLJsonFileHandler<DZLTraderTypeStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
         }

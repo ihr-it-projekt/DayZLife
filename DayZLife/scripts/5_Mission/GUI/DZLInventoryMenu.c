@@ -15,7 +15,7 @@ modded class Inventory : LayoutHolder
     override void OnShow() {
         super.OnShow();
 		
-		DZLPlayer dzlPlayer = PlayerBaseHelper.GetPlayer().GetDZLPlayer();
+		DZLPlayer dzlPlayer = DZLPlayerBaseHelper.GetPlayer().GetDZLPlayer();
 
          if (dzlPlayer) {
              moneyAtBank.SetText(dzlPlayer.GetBankMoney().ToString());

@@ -32,6 +32,10 @@ class DZLActionRaidDoors: ActionInteractBase
         item = player.GetItemInHands();
         if (!item) return false;
 
+        if (GetGame().IsServer()) {
+            if (DZLDatabaseLayer.Get().GetCopCount() < config.minCountOfCopsForRaid) return false;
+        }
+
         DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(building, player);
 
         array<string> raidTools = new array<string>;
@@ -44,6 +48,8 @@ class DZLActionRaidDoors: ActionInteractBase
         } else {
             raidTools = definition.raidTools;
         }
+
+
 
         foreach(string itemType: raidTools) {
             if (item.GetType() == itemType) {

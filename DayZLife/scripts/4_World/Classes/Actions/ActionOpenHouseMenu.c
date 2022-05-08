@@ -23,7 +23,7 @@ class ActionOpenHouseMenu: ActionInteractBase
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-            PlayerBase player = PlayerBaseHelper.GetPlayer();
+            PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 			
 			if(!action_data) return;
             if(!action_data.m_Target) return;

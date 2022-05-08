@@ -8,6 +8,7 @@ class DZLStorageController
                 itemStorage.ResetTick();
                 itemStorage.ReduceTickAmount();
             }
+			itemStorage.Save();
         }
 	}
 }

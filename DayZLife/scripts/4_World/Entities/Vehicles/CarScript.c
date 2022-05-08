@@ -155,7 +155,7 @@ modded class CarScript
 
 		if (!dzlPlayer) return false;
 
-        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop() || player.GetConfig().adminIds.CanManageCars(ident);
+        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop() || player.GetConfig().adminIds.CanManageCars(ident) || dzlPlayer.IsActiveAsArmy();
     }
 
     void RemovePlayerAccess(string ident) {
@@ -189,11 +189,10 @@ modded class CarScript
         ctx.Write(param3);
 		Param1<ref DZLCarStoreItem> store4 = new Param1<ref DZLCarStoreItem>(carStoreItem);
 		ctx.Write(store4);
-		
 	}
 
 	override bool IsInventoryVisible() {
-	    PlayerBase player = PlayerBaseHelper.GetPlayer();
+	    PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 	    
 	    return super.IsInventoryVisible() && HasPlayerAccess(player);
     }
@@ -221,15 +220,13 @@ modded class CarScript
                 EnableInsurance(store3.param2);
             }
         }
-		
-		
+
 		Param1<ref DZLCarStoreItem> store4 = new Param1<ref DZLCarStoreItem>(null);
 		if (ctx.Read(store4) && store4.param1) {
 			carStoreItem = store4.param1;
 			DZLInsuranceManager.Get().AddCar(this, carStoreItem);
 		}
 
-	
         SynchronizeValues(null);
 		
 		return true;
@@ -253,7 +250,7 @@ modded class CarScript
 	    if (GetGame().IsServer()) {
 			carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
 	    } else {
-	        PlayerBase player = PlayerBaseHelper.GetPlayer();
+	        PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 			carCollisionDamage = player.GetConfig().carConfig.carCollisionDamage;
 	    }
 		

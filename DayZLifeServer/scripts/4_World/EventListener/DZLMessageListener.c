@@ -11,16 +11,17 @@ class DZLMessageListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_SEND_MESSAGE) {
             PlayerBase player = PlayerBase.Cast(target);
-            autoptr Param3<string, string, string> paramMessage;
+            autoptr Param4<string, string, string, bool> paramMessage;
             if (ctx.Read(paramMessage) && player){
                 string receiverId = paramMessage.param1;
                 string text = paramMessage.param2;
                 string type = paramMessage.param3;
+                bool senderVisible = paramMessage.param4;
 
-                DZLMessage message = DZLMessageListener.SendMessage(player, receiverId, text, type);
+                DZLMessage message = DZLMessageListener.SendMessage(player, receiverId, text, type, "0 0 0", senderVisible);
 
                 if (!message) {
-                    DZLSendMessage(sender, "recipient_is_not_online_you_can_not_answer");
+                    DZLSendMessage(sender, "#recipient_is_not_online_you_can_not_answer");
                 }
            }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {
@@ -29,7 +30,7 @@ class DZLMessageListener
         }
     }
 
-    static DZLMessage SendMessage(PlayerBase player, string receiverId, string text, string type, vector position = "0 0 0") {
+    static DZLMessage SendMessage(PlayerBase player, string receiverId, string text, string type, vector position = "0 0 0", bool senderVisible = true) {
         array<Man> _players = new array<Man>;
         GetGame().GetPlayers(_players);
         DZLMessage message;
@@ -38,7 +39,7 @@ class DZLMessageListener
                 PlayerBase receiver = PlayerBase.Cast(_player);
                 if ((type != DZLMessage.TYPE_COP && type != DZLMessage.TYPE_MEDIC && receiverId == "") || receiverId == receiver.GetPlayerId() || (type == DZLMessage.TYPE_COP && receiver.GetDZLPlayer().IsActiveAsCop()) || (type == DZLMessage.TYPE_MEDIC && receiver.GetDZLPlayer().IsActiveAsMedic())) {
                     message = new DZLMessage;
-                    message.CreateAndSend(player, _player.GetIdentity(), text, type, position);
+                    message.CreateAndSend(player, _player.GetIdentity(), text, type, position, senderVisible);
                     if(receiverId == receiver.GetPlayerId()) {
                         break;
                     }

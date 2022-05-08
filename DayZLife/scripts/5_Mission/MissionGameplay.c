@@ -13,7 +13,7 @@ modded class MissionGameplay
 	private ref DZLCarEventListener carEventListener;
 	private ref DZLMessageDB messageDB;
 
-   	PlayerBase player;
+   	PlayerBase dzlPlayerBase;
 
 	override void OnInit() {
 		super.OnInit();
@@ -24,13 +24,13 @@ modded class MissionGameplay
 	}
 
     override void OnKeyRelease(int key) {
-        player = PlayerBaseHelper.GetPlayer();
+        dzlPlayerBase = DZLPlayerBaseHelper.GetPlayer();
 
-        if (!player) return;
+        if (!dzlPlayerBase) return;
         bool wasActionDone = false;
         switch (key){
             case KeyCode.KC_ESCAPE:
-                wasActionDone = player.CloseMenu();
+                wasActionDone = dzlPlayerBase.CloseMenu();
                 break;
             case KeyCode.KC_RCONTROL:
                 holdRControl = false;
@@ -66,8 +66,8 @@ modded class MissionGameplay
     }
 
     override void OnKeyPress(int key) {
-        player = PlayerBaseHelper.GetPlayer();
-        if (!player) return;
+        dzlPlayerBase = DZLPlayerBaseHelper.GetPlayer();
+        if (!dzlPlayerBase) return;
 
         switch (key){
             case KeyCode.KC_RCONTROL:
@@ -111,18 +111,18 @@ modded class MissionGameplay
     private void CheckOpenMenu() {
     	if (holdLControl && g_Game.GetUIManager().GetMenu() == NULL) {
 			if (holdRControl || holdOne) {
-				GetGame().GetUIManager().ShowScriptedMenu(player.GetAlmanacMenu(), NULL);
+				GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetAlmanacMenu(), NULL);
 			} else if (holdTow) {
-				player.ShowHealMenuFromMission();
-			} else if (holdTree && player.CanReSpawn() && !player.IsRestrained()) {
-				GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), NULL);
-			} else if (holdFour && !player.IsRestrained() && !player.IsUnconscious() && player.HasInInventory("PersonalRadio")) {
-				GetGame().GetUIManager().ShowScriptedMenu(player.GetMessageSystemMenu(), NULL);
-			} else if (holdFive && !player.IsUnconscious()) {
-				GetGame().GetUIManager().ShowScriptedMenu(player.GetPayTicketMenu(), NULL);
+				dzlPlayerBase.ShowHealMenuFromMission();
+			} else if (holdTree && dzlPlayerBase.CanReSpawn() && !dzlPlayerBase.IsRestrained()) {
+				GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(), NULL);
+			} else if (holdFour && dzlPlayerBase.CanOpenMessageMenu()) {
+				GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetMessageSystemMenu(), NULL);
+			} else if (holdFive && !dzlPlayerBase.IsUnconscious()) {
+				GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetPayTicketMenu(), NULL);
 			} else if (holdSix) {
-			    player.RequestUpdateDZLPlayer();
-				GetGame().GetUIManager().ShowScriptedMenu(player.GetFractionMenu(), NULL);
+			    dzlPlayerBase.RequestUpdateDZLPlayer();
+				GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetFractionMenu(), NULL);
 			}
 		}
     }

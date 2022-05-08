@@ -21,7 +21,7 @@ class ActionOpenCarStorageMenu: ActionInteractBase
 		super.OnStartClient(action_data);
 
 		if (g_Game.GetUIManager().GetMenu() == NULL){
-		    PlayerBase player = PlayerBaseHelper.GetPlayer();
+		    PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 		    player.RequestUpdateDZLPlayer();
 			GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetCarStorageMenu(), NULL);
         }

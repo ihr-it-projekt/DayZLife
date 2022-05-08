@@ -6,6 +6,7 @@ class DZLBuilderManager
 	private ref DZLLoadOutLocationBuilder loadOutBuilder;
 	private ref DZLGarageLocationBuilder garageBuilder;
 	private ref DZLShopLocationBuilder shopBuilder;
+	private ref DZLTuningLocationBuilder tuningBuilder;
 
 	private ref Timer checkTimer;
 
@@ -17,6 +18,7 @@ class DZLBuilderManager
         loadOutBuilder = new DZLLoadOutLocationBuilder();
         garageBuilder = new DZLGarageLocationBuilder();
         shopBuilder = new DZLShopLocationBuilder();
+        tuningBuilder = new DZLTuningLocationBuilder();
 	}
 
 	void Create(){
@@ -26,5 +28,6 @@ class DZLBuilderManager
         loadOutBuilder.Create();
         garageBuilder.Create();
         shopBuilder.Create();
+        tuningBuilder.Create();
 	}
 }
