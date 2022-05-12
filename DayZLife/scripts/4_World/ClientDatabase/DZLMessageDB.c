@@ -1,7 +1,7 @@
 class DZLMessageDB
 {
     private static ref DZLMessageDB messageDB;
-    private string version = "1";
+    private string version = "2";
     private ref array<string> ids;
     private ref array<string> answerIds;
     private ref array<ref DZLMessage> messageMap;
@@ -24,6 +24,11 @@ class DZLMessageDB
             answerIds = new array<string>;
             ids = new array<string>;
 
+		    Save();
+		}
+
+		if (version == "1") {
+		    version = "2";
 		    Save();
 		}
 
@@ -109,10 +114,13 @@ class DZLMessageDB
     private bool Save(){
         if (GetGame().IsClient()) {
 			ref array<ref DZLMessage> messageMapTemp = messageMap;
+			ref array<ref DZLMessage> answerMapTemp = answersMap;
 			messageMap = null;
+			answersMap = null;
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLMessageDB>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
 			messageMap = messageMapTemp;
+			answersMap = answerMapTemp;
 			return true;
         }
 		return false;
