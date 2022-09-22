@@ -61,7 +61,7 @@ class DZLHouseInventory
     void AddToStore(array<EntityAI> items) {
         foreach(EntityAI item: items) {
 			DZLStoreItem storeItem = new DZLStoreItem();
-			storeItem.Init(item, "0 0 0", false);
+			storeItem.Init(item, "0 0 0", false, false);
             store.Insert(storeItem);
             GetGame().ObjectDelete(item);
         }

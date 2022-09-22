@@ -15,7 +15,7 @@ class DZLCarStoreItem: DZLStoreItem
 	string ownerName = "";
 
 	void DZLCarStoreItem(CarScript item, vector storagePosition, bool withCargo, bool isInsuranceCase) {
-		Init(item, storagePosition, withCargo);
+		Init(item, storagePosition, withCargo, false);
 		isCar = true;
 		this.playerAccess = item.playerAccess;
 		this.ownerId = item.ownerId;
