@@ -25,7 +25,7 @@ class DZLTraderType: DZLIdModel
     }
     
     int CalculateDynamicSellPrice(DZLTraderTypeStorage currentStorage, EntityAI item = null) {
-        if (false == isStorageItem || sellPrice <= 0 || !currentStorage || !item) {
+        if (false == isStorageItem || sellPrice <= 0 || !currentStorage) {
             return sellPrice;
         }
 
@@ -82,4 +82,20 @@ class DZLTraderType: DZLIdModel
 
         return quantity/maxQuantity;
     }
+	
+	float GetQuantityPrice(float price, EntityAI item = null) {
+		int quantity = 1;
+        int maxQuantity = 1;
+        if (item) {
+            maxQuantity = item.GetQuantityMax();
+            quantity = item.GetQuantity();
+        }
+
+        if (quantity == 0) {
+            quantity = 1;
+            maxQuantity = 1;
+        }
+		
+		return price / maxQuantity * quantity;
+	}
 }

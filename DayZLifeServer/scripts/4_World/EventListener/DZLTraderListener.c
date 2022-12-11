@@ -59,7 +59,8 @@ class DZLTraderListener
                                 if (item.GetType() == type.type) {
 									
                                     float itemPrice = type.CalculateDynamicSellPrice(storage, item);
-                                    float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
+									itemPrice = type.GetQuantityPrice(itemPrice, item);
+									float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
 
                                     sum -=  Math.Round(itemPrice - itemTax);
                                     taxSum += Math.Round(itemTax);
