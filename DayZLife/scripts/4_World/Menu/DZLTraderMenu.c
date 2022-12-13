@@ -65,6 +65,8 @@ class DZLTraderMenu: DZLBaseMenu
     override void UpdateGUI(string message = "") {
 		super.UpdateGUI(message);
 		
+		
+		
 		array<EntityAI> playerItems = player.GetPlayerItems();
 		credits.SetText(dzlPlayer.GetMoney().ToString());
 		
