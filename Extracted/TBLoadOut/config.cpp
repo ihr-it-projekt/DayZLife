@@ -76,7 +76,16 @@ class CfgVehicles
 
     class TBLOLoadoutActionObject: HouseNoDestruct
     {
+		scope=2;
         model="\TBLoadOut\Terminal\TBLO_Terminal.p3d";
+		hiddenSelections[]=
+		{
+			"camo"
+		};
+		hiddenSelectionsTextures[] = 
+		{
+			"TBLoadOut\Terminal\Data\Terminal.paa"
+		};
     };
 }
 
