@@ -291,7 +291,14 @@ class DZLTraderMenu: DZLBaseMenu
                 if (sellItem) {
                     CarScript carsScript = CarScript.Cast(sellItem);
                     if (!carsScript) {
-                        sellItems.Insert(sellItem);
+			// Edited by Gramps
+			int z;
+			if (sellItem.ConfigGetBool("canBeSplit") && sellItem.GetType() != "Nail" && sellItem.GetType() != "PurificationTablets" && sellItem.GetType() != "CharcoalTablets" && sellItem.GetType() != "PainkillerTablets" && sellItem.GetType() != "TetracyclineAntibiotics"){
+				for (z = 0; z < sellItem.GetQuantity(); z++){
+					sellItems.Insert(sellItem);
+				}
+			} else	sellItems.Insert(sellItem);
+			// End Gramps' edit
                     } else if (!carsScript.isSold && carsScript.ownerId == player.GetPlayerId()) {
 						bool carIsEmpty = true;
 	                    for (int seat = 0; seat < carsScript.CrewSize(); seat++){
@@ -426,6 +433,11 @@ class DZLTraderMenu: DZLBaseMenu
         targetWidget.SetItem(index, quantity, item, 2);
 
         float itemSum = price.ToInt() * factor;
+		// Added by Gramps
+		if (item.ConfigGetBool("canBeSplit") && item.GetType() != "Nail" && item.GetType() != "PurificationTablets" && item.GetType() != "CharcoalTablets" && item.GetType() != "PainkillerTablets" && item.GetType() != "TetracyclineAntibiotics"){
+			itemSum = itemSum * item.GetQuantity();
+		}
+		// End Gramps' addition
         float itemTax = itemSum / 100 * config.bankConfig.sellTradingTax;
 
         sumInt +=  Math.Round(itemSum);
@@ -531,6 +543,11 @@ class DZLTraderMenu: DZLBaseMenu
    					widgetToChange.GetItemData(x, 0, item);	
 					sellPrice = itemType.CalculateDynamicSellPrice(storage, item);
 					sellPrice = itemType.GetQuantityPrice(sellPrice, item);
+				// Added by Gramps
+				if (item.ConfigGetBool("canBeSplit") && item.GetType() != "Nail" && item.GetType() != "PurificationTablets" && item.GetType() != "CharcoalTablets" && item.GetType() != "PainkillerTablets" && item.GetType() != "TetracyclineAntibiotics"){
+					sellPrice = sellPrice * item.GetQuantity();
+				}
+				// End Gramps' addition
 		            widgetToChange.SetItem(x, sellPrice.ToString(), itemType, 1);
 		            widgetToChange.SetItem(x, itemType.GetStorageString(storage), item, 3);
 		        }
