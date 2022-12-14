@@ -35,7 +35,7 @@ class DZLTraderType: DZLIdModel
             return 0;
         }
 
-        float storageLeft = maxStorage - currentStorage.getStorage() + GetStorageAdd(item);
+        float storageLeft = maxStorage - currentStorage.getStorage() + 1;
         float storageInPercent = storageLeft / maxStorage;
         float priceSpan = maxSellPrice - sellPrice;
 
@@ -67,35 +67,4 @@ class DZLTraderType: DZLIdModel
         return storage;
     }
 
-    float GetStorageAdd(EntityAI item = null) {
-        int quantity = 1;
-        int maxQuantity = 1;
-        if (item) {
-            maxQuantity = item.GetQuantityMax();
-            quantity = item.GetQuantity();
-        }
-
-        if (quantity == 0) {
-            quantity = 1;
-            maxQuantity = 1;
-        }
-
-        return quantity/maxQuantity;
-    }
-	
-	float GetQuantityPrice(float price, EntityAI item = null) {
-		int quantity = 1;
-        int maxQuantity = 1;
-        if (item) {
-            maxQuantity = item.GetQuantityMax();
-            quantity = item.GetQuantity();
-        }
-
-        if (quantity == 0) {
-            quantity = 1;
-            maxQuantity = 1;
-        }
-		
-		return price / maxQuantity * quantity;
-	}
 }

@@ -92,19 +92,15 @@ class DZLTraderMenu: DZLBaseMenu
 				DZLTraderTypeStorage storage = GetCurrentStorageByName(type.type);
 				
 				int price = type.CalculateDynamicSellPrice(storage);
-				price = type.GetQuantityPrice(price);
+				price = DZLTraderHelper.GetQuantityPrice(price);
 
                 addInventoryTypes.Insert(type.type);
 				
 				if (type.isCar) {
 					CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer);
 					
-					if (playerCar && !playerCar.isSold) {
-						quant = playerCar.GetQuantity().ToString();
-						
-						if (quant == "0") {
-	                        quant = "1";
-	                    }
+					if (playerCar && !playerCar.isSold) {				
+						quant = DZLTraderHelper.GetQuantity(playerCar).ToString();
 						
 						GetGame().ObjectGetDisplayName(playerCar, name);
 						index = inventory.AddItem(name, playerCar, 0);
@@ -122,12 +118,8 @@ class DZLTraderMenu: DZLBaseMenu
 
                     GetGame().ObjectGetDisplayName(item, name);
 
-                    quant = item.GetQuantity().ToString();
-					price = type.GetQuantityPrice(price, item);
-
-                    if (quant == "0") {
-                        quant = "1";
-                    }
+                    quant = DZLTraderHelper.GetQuantity(item).ToString();
+					price = DZLTraderHelper.GetQuantityPrice(price, item);
 
                     index = inventory.AddItem(name, item, 0);
                     inventory.SetItem(index, price.ToString(), type, 1);
@@ -171,11 +163,10 @@ class DZLTraderMenu: DZLBaseMenu
 				name = DZLDisplayHelper.GetItemDisplayName(type.type);
 				type.displayName = name;
 				int sellPrice = type.CalculateDynamicSellPrice(storage);
-				sellPrice = type.GetQuantityPrice(sellPrice);
+				sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice);
 				if(!hasAddFirstCategory && type.buyPrice > 0) {
 					index = traderItemList.AddItem(name, type, 0);
 
-					
 					int buyPrice = type.CalculateDynamicBuyPrice(storage);
 
                     traderItemList.SetItem(index, buyPrice.ToString(), type, 1);
@@ -209,13 +200,8 @@ class DZLTraderMenu: DZLBaseMenu
 
 					GetGame().ObjectGetDisplayName(item, name);
 					int sumItem = type.CalculateDynamicSellPrice(storage, item);
-					sumItem = type.GetQuantityPrice(sumItem, item);
-					
-					quantity = item.GetQuantity();
-					
-					if (0 == quantity) {
-						quantity = 1;
-					}
+					sumItem = DZLTraderHelper.GetQuantityPrice(sumItem, item);
+					quantity = DZLTraderHelper.GetQuantity(item);
 					
 					index = inventory.AddItem(name, item, 0);
 					inventory.SetItem(index, sumItem.ToString(), type, 1);
@@ -259,7 +245,7 @@ class DZLTraderMenu: DZLBaseMenu
 			    if (type.buyPrice <= 0) continue
 
 			    int sellPrice = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type));
-				sellPrice = type.GetQuantityPrice(sellPrice);
+				sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice);
                 int buyPrice = type.CalculateDynamicBuyPrice(GetCurrentStorageByName(type.type));
 
 			    string sellPriceText = "";
@@ -291,14 +277,7 @@ class DZLTraderMenu: DZLBaseMenu
                 if (sellItem) {
                     CarScript carsScript = CarScript.Cast(sellItem);
                     if (!carsScript) {
-			// Edited by Gramps
-			int z;
-			if (sellItem.ConfigGetBool("canBeSplit") && sellItem.GetType() != "Nail" && sellItem.GetType() != "PurificationTablets" && sellItem.GetType() != "CharcoalTablets" && sellItem.GetType() != "PainkillerTablets" && sellItem.GetType() != "TetracyclineAntibiotics"){
-				for (z = 0; z < sellItem.GetQuantity(); z++){
-					sellItems.Insert(sellItem);
-				}
-			} else	sellItems.Insert(sellItem);
-			// End Gramps' edit
+                       sellItems.Insert(sellItem);
                     } else if (!carsScript.isSold && carsScript.ownerId == player.GetPlayerId()) {
 						bool carIsEmpty = true;
 	                    for (int seat = 0; seat < carsScript.CrewSize(); seat++){
@@ -433,11 +412,6 @@ class DZLTraderMenu: DZLBaseMenu
         targetWidget.SetItem(index, quantity, item, 2);
 
         float itemSum = price.ToInt() * factor;
-		// Added by Gramps
-		if (item.ConfigGetBool("canBeSplit") && item.GetType() != "Nail" && item.GetType() != "PurificationTablets" && item.GetType() != "CharcoalTablets" && item.GetType() != "PainkillerTablets" && item.GetType() != "TetracyclineAntibiotics"){
-			itemSum = itemSum * item.GetQuantity();
-		}
-		// End Gramps' addition
         float itemTax = itemSum / 100 * config.bankConfig.sellTradingTax;
 
         sumInt +=  Math.Round(itemSum);
@@ -450,7 +424,7 @@ class DZLTraderMenu: DZLBaseMenu
         if (1 == factor && storage) {
             storage.StorageDown();
         } else if (storage) {
-            storage.StorageUp(type.GetStorageAdd(item));
+            storage.StorageUp(DZLTraderHelper.GetQuantity(item));
         }
 		
 		if (0 == sourceWidget.GetNumItems()) {
@@ -534,7 +508,7 @@ class DZLTraderMenu: DZLBaseMenu
 				if (!targetIsInventory) {
 					int buyPrice = itemType.CalculateDynamicBuyPrice(storage);
 					sellPrice = itemType.CalculateDynamicSellPrice(storage);
-					sellPrice = itemType.GetQuantityPrice(sellPrice);
+					sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice);
 		            widgetToChange.SetItem(x, buyPrice.ToString(), itemType, 1);
 		            widgetToChange.SetItem(x, sellPrice.ToString(), itemType, 2);
 		            widgetToChange.SetItem(x, itemType.GetStorageString(storage), itemType, 3);
@@ -542,12 +516,9 @@ class DZLTraderMenu: DZLBaseMenu
 					EntityAI item;
    					widgetToChange.GetItemData(x, 0, item);	
 					sellPrice = itemType.CalculateDynamicSellPrice(storage, item);
-					sellPrice = itemType.GetQuantityPrice(sellPrice, item);
-				// Added by Gramps
-				if (item.ConfigGetBool("canBeSplit") && item.GetType() != "Nail" && item.GetType() != "PurificationTablets" && item.GetType() != "CharcoalTablets" && item.GetType() != "PainkillerTablets" && item.GetType() != "TetracyclineAntibiotics"){
-					sellPrice = sellPrice * item.GetQuantity();
-				}
-				// End Gramps' addition
+					sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice, item);
+
+
 		            widgetToChange.SetItem(x, sellPrice.ToString(), itemType, 1);
 		            widgetToChange.SetItem(x, itemType.GetStorageString(storage), item, 3);
 		        }

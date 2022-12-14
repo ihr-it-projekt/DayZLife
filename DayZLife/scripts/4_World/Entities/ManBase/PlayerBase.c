@@ -498,11 +498,8 @@ modded class PlayerBase
         foreach(EntityAI item: items) {
             string itemType = item.GetType();
             itemType.ToLower();
-			int quantity = item.GetQuantity();
-			if (quantity == 0) {
-                quantity = 1;
-            }
 
+			int quantity = DZLTraderHelper.GetQuantity(item);
 			bool isCraft = false;
 
 			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
@@ -581,10 +578,7 @@ modded class PlayerBase
 			
             string itemType = item.GetType();
             itemType.ToLower();
-            int quantity = item.GetQuantity();
-            if (quantity == 0) {
-                quantity = 1;
-            }
+            int quantity = DZLTraderHelper.GetQuantity(item);
 
 			bool isCraft = false;
 			foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
