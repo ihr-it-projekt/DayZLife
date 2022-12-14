@@ -1,0 +1,23 @@
+{
+	"Departments": [
+		{
+			"DepartmentName": "DayZLife",
+			"Sections": [
+				{
+					"SectionName": "Developers",
+					"SectionLines": [
+						"TheBuster",
+						"Sense"
+					]
+				},
+				{
+					"SectionName": "Thank you to",
+					"SectionLines": [
+						"Sense",
+						"rasselbande-gaming.com"
+					]
+				}
+			]
+		}
+	]
+}

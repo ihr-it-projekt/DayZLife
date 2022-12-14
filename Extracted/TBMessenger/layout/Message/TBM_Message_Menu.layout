@@ -1,0 +1,513 @@
+FrameWidgetClass rootFrame {
+ size 0.71323 0.73115
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   size 0.98832 0.97974
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0
+     size 0.9882 0.9793
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       position 0 0.0106
+       size 0.29316 0.07
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        TextWidgetClass TextWidget0 {
+         ignorepointer 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#Message_Menu"
+         font "gui/fonts/metron"
+         text_proportion 0.7
+         "text halign" center
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       position 0 0.08412
+       size 0.34744 0.82472
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget4 {
+         ignorepointer 1
+         position 0 0
+         size 1 0.5
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          EditBoxWidgetClass searchKontakt {
+           position 0.01722 0.02324
+           size 0.84895 0.1232
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
+           "exact text" 1
+           font "gui/fonts/metron"
+          }
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           position 0.01722 0.02324
+           size 0.0994 0.1232
+           halign right_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass searchKontaktButton {
+             color 0 0.502 0.1255 1
+             position 0 0
+             size 0.95 0.95
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style OldStyle
+            }
+            ImageWidgetClass ImageWidget0 {
+             ignorepointer 1
+             size 0.8 0.8
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             mode blend
+             "src alpha" 1
+             "no wrap" 0
+             stretch 1
+            }
+           }
+          }
+          TextListboxWidgetClass contactsListbox {
+           position 0 0.07322
+           size 0.96557 0.80709
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Contacts"
+           lines 15
+           font "gui/fonts/metron"
+          }
+         }
+        }
+        PanelWidgetClass onlinePlayersWidget {
+         ignorepointer 1
+         position 1.37261 314.42499
+         size 0.99199 0.47673
+         hexactpos 1
+         vexactpos 1
+         hexactsize 0
+         vexactsize 0
+         {
+          TextListboxWidgetClass allPlayerListbox {
+           position 0.00022 0.07688
+           size 0.966 0.82313
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Add_Contacts"
+           lines 15
+           font "gui/fonts/metron"
+          }
+          PanelWidgetClass PanelWidget6 {
+           ignorepointer 1
+           position 0.01878 0.01151
+           size 0.09628 0.13789
+           halign right_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass addSearchKontaktButton {
+             color 0 0.502 0.1255 1
+             position 0 0
+             size 0.95 0.95
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style OldStyle
+            }
+            ImageWidgetClass ImageWidget1 {
+             ignorepointer 1
+             position 0 0
+             size 0.8 0.8
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+             mode blend
+             "src alpha" 1
+             "no wrap" 0
+             stretch 1
+            }
+           }
+          }
+          EditBoxWidgetClass addKontakt {
+           position 0.00787 0.01561
+           size 0.85523 0.12989
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
+           "exact text" 1
+           font "gui/fonts/metron"
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget9 {
+       ignorepointer 1
+       position -0.00127 0.0038
+       size 0.6545 0.8254
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       scaled 1
+       style editor_quad_dark
+       {
+        TextListboxWidgetClass messageListbox {
+         position 0 -0.22448
+         size 0.98172 0.36839
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         "title visible" 1
+         colums "#Player;35;#Date_time;25;#Message_Preview;40"
+         lines 12
+         font "gui/fonts/metron"
+        }
+        PanelWidgetClass PanelWidget16 {
+         ignorepointer 1
+         position 0 0.1775
+         size 1 0.35
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          MultilineTextWidgetClass readText {
+           ignorepointer 1
+           position 0 0
+           size 0.98172 0.9269
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           font "gui/fonts/metron"
+           "exact text" 1
+           wrap 1
+          }
+         }
+        }
+        TextWidgetClass TextWidget1 {
+         ignorepointer 1
+         position 0 0.36728
+         size 0.43712 0.06397
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#your_message"
+         text_proportion 0.7
+         "text halign" center
+         "text valign" center
+        }
+        EditBoxWidgetClass writeMessage {
+         position -0.12336 0.44919
+         size 0.73498 0.076
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
+         "no focus" 0
+         "limit visible" 0
+         "Use default text" 0
+         "exact text" 1
+         font "gui/fonts/metron"
+        }
+        PanelWidgetClass PanelWidget14 {
+         ignorepointer 1
+         position -0.39359 0.91807
+         size 0.19085 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass inBoxButton {
+           color 0 0.1255 0.502 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "#inbox"
+           text_proportion 0.6
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget17 {
+         ignorepointer 1
+         position -0.17921 0.91807
+         size 0.22249 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass outBoxButton {
+           color 0 0.1255 0.502 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "#outbox"
+           text_proportion 0.6
+          }
+         }
+        }
+        CheckBoxWidgetClass checkSendAnonym {
+         position 0.74675 0.91455
+         size 0.03933 0.0737
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+        }
+        TextWidgetClass TextWidget2 {
+         ignorepointer 1
+         position 0.7876 0.92838
+         size 0.22188 0.04865
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#send_anonymous"
+         font "gui/fonts/metron"
+         "exact text" 0
+         "size to text h" 0
+         "size to text v" 0
+         "text valign" center
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget10 {
+       ignorepointer 1
+       position 0.25623 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass sendButton {
+         color 0 0.502 0.1255 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Send"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget13 {
+       ignorepointer 1
+       position -0.41652 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass sendGlobalButton {
+         color 0 0.1255 0.502 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Send_Global"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget15 {
+       ignorepointer 1
+       position 0.00598 0.01056
+       size 0.03979 0.0647
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "X"
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget110 {
+       ignorepointer 1
+       position 0.41652 0.01056
+       size 0.155 0.063
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass deleteButton {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.98 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "#Delete_Message"
+         text_proportion 0.6
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}
