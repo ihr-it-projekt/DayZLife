@@ -60,6 +60,9 @@ class DZLTraderListener
 									
                                     float itemPrice = type.CalculateDynamicSellPrice(storage, item);
 									itemPrice = type.GetQuantityPrice(itemPrice, item);
+					// Added by Gramps
+					if (item.ConfigGetBool("canBeSplit") && item.GetType() != "Nail" && item.GetType() != "PurificationTablets" && item.GetType() != "CharcoalTablets" && item.GetType() != "PainkillerTablets" && item.GetType() != "TetracyclineAntibiotics")	itemPrice * item.GetQuantity();
+					// End Gramps' addition
 									float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
 
                                     sum -=  Math.Round(itemPrice - itemTax);
@@ -163,6 +166,12 @@ class DZLTraderListener
 	        if (!item) {
 	            item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
 	        }
+		// Added by Gramps
+		if (item && item.ConfigGetBool("canBeSplit")){
+			ItemBase entityAi = ItemBase.Cast(item);
+			if (entityAi && entityAi.GetType() != "Nail" && entityAi.GetType() != "PurificationTablets" && entityAi.GetType() != "CharcoalTablets" && entityAi.GetType() != "PainkillerTablets" && entityAi.GetType() != "TetracyclineAntibiotics")	entityAi.SetQuantity(1);
+		}
+		// End Gramps' addition
 		}
 
 		if (item) {
