@@ -24,7 +24,7 @@ FrameWidgetClass rootFrame {
    {
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     position -0 0
+     position 0 0
      size 0.98381 0.9735
      halign center_ref
      valign center_ref
@@ -118,11 +118,12 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
+       font "gui/fonts/metron"
       }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1
        color 1 1 1 0.3922
-       position -0 0.04516
+       position 0 0.04516
        size 0.61352 0.10592
        halign center_ref
        valign bottom_ref
@@ -198,7 +199,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget6 {
        ignorepointer 1
-       position -0 0.065
+       position 0 0.065
        size 0.428 0.13
        halign center_ref
        valign center_ref
@@ -242,10 +243,10 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
-       text "Das hier ist ien Test. bla bla"
        "limit visible" 0
        "Use default text" 0
        "exact text" 1
+       font "gui/fonts/metron"
       }
      }
     }

@@ -117,6 +117,7 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
+       font "gui/fonts/metron"
       }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1

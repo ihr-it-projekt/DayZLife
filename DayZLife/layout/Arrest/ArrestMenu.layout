@@ -1,5 +1,5 @@
 FrameWidgetClass rootFrame {
- position -0 0
+ position 0 0
  size 0.35211 0.40599
  halign center_ref
  valign center_ref
@@ -71,6 +71,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            draggable 0
            text "#Give_Arrest_Menu"
+           font "gui/fonts/metron"
            "exact text" 0
            text_proportion 0.7
            "size to text h" 0
@@ -119,6 +120,7 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style DefaultBorder
+       font "gui/fonts/metron"
       }
       PanelWidgetClass PanelWidget5 {
        ignorepointer 1
@@ -144,11 +146,12 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          text "#give_arrest"
          text_proportion 0.7
+         font "gui/fonts/metron"
         }
        }
       }
       TextWidgetClass prisonerName {
-       position -0 0.72517
+       position 0 0.72517
        size 0.9576 0.09837
        halign center_ref
        valign bottom_ref
@@ -157,6 +160,7 @@ FrameWidgetClass rootFrame {
        hexactsize 0
        vexactsize 0
        style Normal
+       font "gui/fonts/metron"
        "exact text" 1
       }
       PanelWidgetClass PanelWidget4 {
@@ -198,7 +202,7 @@ FrameWidgetClass rootFrame {
       }
       PanelWidgetClass PanelWidget6 {
        ignorepointer 1
-       position -0 0.08451
+       position 0 0.08451
        size 0.428 0.11
        halign center_ref
        valign center_ref
@@ -224,6 +228,7 @@ FrameWidgetClass rootFrame {
          vexactsize 0
          draggable 0
          text "#arrestReason"
+         font "gui/fonts/metron"
          "exact text" 0
          text_proportion 0.6
          "size to text h" 0
@@ -245,6 +250,7 @@ FrameWidgetClass rootFrame {
        style DefaultBorder
        "Use default text" 0
        "exact text" 0
+       font "gui/fonts/metron"
       }
      }
     }

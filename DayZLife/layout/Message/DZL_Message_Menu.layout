@@ -90,6 +90,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style DefaultBorder
            "exact text" 1
+           font "gui/fonts/metron"
           }
           PanelWidgetClass PanelWidget5 {
            ignorepointer 1
@@ -218,6 +219,7 @@ FrameWidgetClass rootFrame {
            vexactsize 0
            style DefaultBorder
            "exact text" 1
+           font "gui/fonts/metron"
           }
          }
         }
