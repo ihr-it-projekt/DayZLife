@@ -7,12 +7,13 @@ class TBLOLoadOutMenu: TBLOBaseMenu
 	private ItemPreviewWidget preview;
 
 	private EntityAI previewItem;
-	private array<ref TBLOLoadOutCategory> categories;
+	private ref array<ref TBLOLoadOutCategory> categories;
 	private int lastSelectedItem;
 	
     void TBLOLoadOutMenu() {
         layoutPath = "TBLoadOut/layout/LoadoutMenu/LoadoutMenu.layout";
         Construct();
+        categories = new ref array<ref TBLOLoadOutCategory>;
     }
 
     void ~TBLOLoadOutMenu() {
@@ -33,21 +34,18 @@ class TBLOLoadOutMenu: TBLOBaseMenu
 		
 		equipButton = creator.GetButtonWidget("equipButton");
 		loadoutListbox = creator.GetTextListboxWidget("loadoutListbox");
-		
 		loadoutComboBox = creator.GetXComboBoxWidget("loadoutComboBox");
-		
 		preview = creator.GetItemPreviewWidget("itemPreview");
 
-		
 		return layoutRoot;
     }
 
-    void SetCategories(array<ref TBLOLoadOutCategory> _categories) {
-        this.categories = _categories;
+    void AddCategory(ref TBLOLoadOutCategory category) {
+        this.categories.Insert(category);
     }
 
     override void OnShow() {
-        if (!categories) {
+        if (categories.Count() == 0) {
             OnHide();
             return;
         }

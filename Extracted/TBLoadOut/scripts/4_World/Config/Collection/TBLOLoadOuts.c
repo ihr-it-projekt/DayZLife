@@ -1,6 +1,6 @@
 class TBLOLoadOuts
 {
-	string version = "1";
+	string version = "2";
     ref array<ref TBLOLoadOutCategory> loadOutCategories;
     ref array<ref TBLOLoadOutPosition> loadOutPosition;
 
@@ -69,6 +69,18 @@ class TBLOLoadOuts
             loadOutAttachments.Insert(new TBLOLoadOutType("AK_Suppressor"));
             loadOutTypes.Insert(new TBLOLoadOutType("AKM", loadOutAttachments, 0));
             loadOutCategories.Insert(new TBLOLoadOutCategory("cat2", loadOutTypes));
+
+            Save();
+        }
+
+        if (version == "1") {
+            foreach(TBLOLoadOutCategory cat: loadOutCategories) {
+                foreach(TBLOLoadOutPosition pos: loadOutPosition) {
+                    pos.AddCategory(cat.name);
+                }
+            }
+
+            version = "2";
 
             Save();
         }
