@@ -13,7 +13,7 @@ class DZLTraderHelper
 	    if (DZLTraderHelper.IsStackable(item)) {
 	        price = price * GetQuantity(item);
         } else if(item) {
-	        price = price / item.GetQuantityMax() * GetQuantity(item);
+	        price = price / GetQuantityMax(item) * GetQuantity(item);
 	    }
 
 		return price;
@@ -23,6 +23,19 @@ class DZLTraderHelper
 	    int quantity = 1;
         if (item) {
             quantity = item.GetQuantity();
+        }
+
+        if (quantity == 0) {
+            quantity = 1;
+        }
+
+        return quantity;
+    }
+
+	static float GetQuantityMax(EntityAI item) {
+	    int quantity = 1;
+        if (item) {
+            quantity = item.GetQuantityMax();
         }
 
         if (quantity == 0) {
