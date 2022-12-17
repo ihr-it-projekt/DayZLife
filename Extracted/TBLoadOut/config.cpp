@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DayZLife
+	class TBLoadOut
 	{
 		units[]={};
         weapons[]={};

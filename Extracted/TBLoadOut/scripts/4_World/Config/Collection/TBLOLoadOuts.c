@@ -1,6 +1,6 @@
 class TBLOLoadOuts
 {
-	string version = "2";
+	string version = "1";
     ref array<ref TBLOLoadOutCategory> loadOutCategories;
     ref array<ref TBLOLoadOutPosition> loadOutPosition;
 
