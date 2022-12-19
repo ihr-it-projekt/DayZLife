@@ -1,8 +1,12 @@
 class TBLOLoadOutListener
 {
+    ref map<string, ref TBLDate> playerLoadOutAction;
+    ref TBLOLoadOuts config;
 
     void TBLOLoadOutListener() {
+        config = TBLOConfig.Get().loadOuts;
         GetDayZGame().Event_OnRPC.Insert(HandleEventsTBLO);
+		playerLoadOutAction = new map<string, ref TBLDate>;
     }
 
     void ~TBLOLoadOutListener() {
@@ -13,6 +17,17 @@ class TBLOLoadOutListener
         if (rpc_type == TB_LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
             if (ctx.Read(paramLoadOut)){
+				string senderId = sender.GetId();
+				
+				TBLDate nextAction = playerLoadOutAction.Get(senderId);
+				
+				if (nextAction && !nextAction.IsInPast()) {
+				    GetGame().RPCSingleParam(null, TB_LOAD_OUT_CONFIG_TIMEOUT_RESPONSE, new Param1<int>(nextAction.GetRemainingSeconds()), true, sender);
+				    return
+				}
+
+				playerLoadOutAction.Set(senderId, new TBLDate(config.coolDownUsageInSeconds));
+				
 				PlayerBase player = PlayerBase.Cast(target);
 				string categoryName = paramLoadOut.param1;
 
@@ -50,6 +65,10 @@ class TBLOLoadOutListener
             item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
         }
 
+        if (item) {
+            item.SetHealth(Math.RandomIntInclusive(type.minHealth, type.maxHealth));
+        }
+
 		if (item && type.attachments) {
 			AddAttachments(type, item);
 		}
@@ -71,6 +90,10 @@ class TBLOLoadOutListener
 					if (!itemAttachment) {
 						itemAttachment = item.GetInventory().CreateAttachment(attachment.type);
 					}
+                }
+
+                if (itemAttachment) {
+                    itemAttachment.SetHealth(Math.RandomIntInclusive(type.minHealth, type.maxHealth));
                 }
 
 				if(itemAttachment && attachment.attachments) {

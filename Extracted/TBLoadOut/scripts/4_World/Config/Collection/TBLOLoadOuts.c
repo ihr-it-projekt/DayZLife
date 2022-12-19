@@ -3,6 +3,7 @@ class TBLOLoadOuts
 	string version = "1";
     ref array<ref TBLOLoadOutCategory> loadOutCategories;
     ref array<ref TBLOLoadOutPosition> loadOutPosition;
+    int coolDownUsageInSeconds = 100;
 
     void TBLOLoadOuts() {
         if (!Load()) {
@@ -82,6 +83,16 @@ class TBLOLoadOuts
 
             version = "2";
 
+            Save();
+        }
+
+        if (version == "2") {
+            version = "3";
+            coolDownUsageInSeconds = 100;
+
+            foreach(TBLOLoadOutCategory catToUpdate: loadOutCategories) {
+                catToUpdate.UpdateV3();
+            }
             Save();
         }
     }

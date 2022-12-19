@@ -26,6 +26,11 @@ class TBLOLoadOutMenu: TBLOBaseMenu
     override void HandleEventsTBLO(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == TB_LOAD_OUT_RESPONSE) {
             OnHide();
+        } else if (rpc_type == TB_LOAD_OUT_CONFIG_TIMEOUT_RESPONSE) {
+            autoptr Param1<int> paramLoadOut;
+            if (ctx.Read(paramLoadOut)){
+                equipButton.SetText(paramLoadOut.param1.ToString() + " #seconds")
+            }
         }
     }
 
