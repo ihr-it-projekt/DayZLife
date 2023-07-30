@@ -20,9 +20,10 @@ class DZLDatabaseLayer
     private int civCount = 0;
     private int medicCount = 0;
     private int armyCount = 0;
-	private DZLDatabase database;
+	private ref DZLDatabase database;
 
     void DZLDatabaseLayer() {
+
         dzlHouses = new map<string, ref DZLHouse>;
         dzlPlayers = new map<string, ref DZLPlayer>;
         dzlPlayerHouses = new map<string, ref DZLPlayerHouse>;
@@ -36,18 +37,20 @@ class DZLDatabaseLayer
         emergencies = new DZLEmergencies;
         crimeData = new DZLCrimeData;
         traderStorage = new DZLTraderStorage;
+        database = new DZLDatabase;
     }
 
     static DZLDatabaseLayer Get() {
         if (!databaseLayer) {
             databaseLayer = new DZLDatabaseLayer;
+            databaseLayer.InitDB();
         }
 
         return databaseLayer;
     }
 	
-	void SetDatabase(DZLDatabase database) {
-		this.database = database;
+	void InitDB() {
+		database.Init(this);
 	}
 
 	DZLBank GetBank() {

@@ -15,18 +15,16 @@ modded class MissionServer {
 
 	override void OnInit() {
 	    super.OnInit();
-		DZLDatabase database = DZLSpawnHelper.SpawnDataBase();
-		if (database) {
-            manager = new DZLEventManager;
-            builderManager = new DZLBuilderManager;
-            checkController = new DZLCheckController;
-            storageController = new DZLStorageController;
 
-            DZLLockedHouses.OnServerStart();
-            paycheckTimer.Run(60, checkController, "Check", null, true);
-            storageTimer.Run(60, storageController, "Check", null, true);
-            builderManager.Create();
-        }
+        manager = new DZLEventManager;
+        builderManager = new DZLBuilderManager;
+        checkController = new DZLCheckController;
+        storageController = new DZLStorageController;
+
+        DZLLockedHouses.OnServerStart();
+        paycheckTimer.Run(60, checkController, "Check", null, true);
+        storageTimer.Run(60, storageController, "Check", null, true);
+        builderManager.Create();
     }
 
 	override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx){

@@ -27,42 +27,42 @@ modded class MissionGameplay
         dzlPlayerBase = DZLPlayerBaseHelper.GetPlayer();
 
         if (!dzlPlayerBase) return;
-        bool wasActionDone = false;
-        switch (key){
-            case KeyCode.KC_ESCAPE:
-                wasActionDone = dzlPlayerBase.CloseMenu();
-                break;
-            case KeyCode.KC_RCONTROL:
-                holdRControl = false;
-                break;
-            case KeyCode.KC_LCONTROL:
-                holdLControl = false;
-                break;
-			case KeyCode.KC_1:
-                holdOne = false;
-                break;
-			case KeyCode.KC_2:
-                holdTow = false;
-                break;
-            case KeyCode.KC_3:
-                holdTree = false;
-                break;
-            case KeyCode.KC_4:
-                holdFour = false;
-                break;
-            case KeyCode.KC_5:
-                holdFive = false;
-                break;
-            case KeyCode.KC_6:
-                holdSix = false;
-                break;
-            default:
-                break;
-        }
+            bool wasActionDone = false;
+            switch (key){
+                case KeyCode.KC_ESCAPE:
+                    wasActionDone = dzlPlayerBase.CloseMenu();
+                    break;
+                case KeyCode.KC_RCONTROL:
+                    holdRControl = false;
+                    break;
+                case KeyCode.KC_LCONTROL:
+                    holdLControl = false;
+                    break;
+                case KeyCode.KC_1:
+                    holdOne = false;
+                    break;
+                case KeyCode.KC_2:
+                    holdTow = false;
+                    break;
+                case KeyCode.KC_3:
+                    holdTree = false;
+                    break;
+                case KeyCode.KC_4:
+                    holdFour = false;
+                    break;
+                case KeyCode.KC_5:
+                    holdFive = false;
+                    break;
+                case KeyCode.KC_6:
+                    holdSix = false;
+                    break;
+                default:
+                    break;
+            }
 
-        if (false == wasActionDone){
-            super.OnKeyRelease(key);
-        }
+            if (false == wasActionDone){
+                super.OnKeyRelease(key);
+            }
     }
 
     override void OnKeyPress(int key) {

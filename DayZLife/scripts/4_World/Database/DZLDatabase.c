@@ -1,6 +1,5 @@
-class DZLDatabase: Container_Base
+class DZLDatabase
 {
-    static vector POSITION = "10 0 10";
     private ref map<string, ref DZLHouse> dzlHouses;
     private ref map<string, ref DZLPlayer> dzlPlayers;
     private ref map<string, ref DZLPlayerHouse> dzlPlayerHouses;
@@ -9,20 +8,18 @@ class DZLDatabase: Container_Base
     private ref DZLBank bank;
     private ref DZLEmergencies emergencies;
 
-    override void EEInit() {
-        super.EEInit();
+    void DZLDatabase() {
         dzlPlayers = new map<string, ref DZLPlayer>;
-        array<ref DZLPlayer> collection = new array<ref DZLPlayer>;
-        DZLDatabaseLayer.Get().SetDatabase(this);
+    }
 
-        DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
-        array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
+    void Init(DZLDatabaseLayer databaseLayer) {
+        DZLPlayerIdentities dzlPlayerIdentities = databaseLayer.GetPlayerIds();
+		
+		array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
         foreach(string ident: allPlayer) {
-            DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayerFromFiles(ident);
+            DZLPlayer _player = databaseLayer.GetPlayerFromFiles(ident);
             dzlPlayers.Insert(ident, _player);
         }
-
-        SetAllowDamage(false);
     }
 
 	DZLPlayer GetPlayer(string playerId) {
