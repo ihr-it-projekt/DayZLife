@@ -1,6 +1,6 @@
 class CfgPatches
 {
-	class DayZLifeServer
+	class DayZLifeClient
 	{
 		units[]={};
         weapons[]={};
@@ -8,7 +8,7 @@ class CfgPatches
         requiredAddons[]={
             "DZ_Data",
             "DZ_Scripts",
-            "DayZLifeClient"
+            "DZ_Structures_Residential"
         };
 	};
 };
@@ -20,33 +20,26 @@ class CfgAddons
 	{
 		class dayz
 		{
-			list[] ={
-			    "DayZLifeClient"
-			};
+			list[] ={};
 		};
 	};
 };
 
 class CfgMods
 {
-	class DayZLifeServer
+	class DayZLifeClient
 	{
-	    dir = "DayZLifeServer";
-        picture = "";
-        action = "";
+	    dir = "DayZLifeClient";
         hideName = 0;
-		inputs = "DayZLifeServer/inputs.xml";
-		name = "DayZLifeServer";
+		name = "DayZLifeClient";
 		credits = "TheBuster, Sense";
-		creditsJson = "DayZLifeServer/Scripts/Data/Credits.json";
-		versionPath = "DayZLifeServer/scripts/Data/Version.hpp";
 		author = "TheBuster Sense";
 		authorID = "76561198196317725";
 		version = "0.0.1";
 		extra = 0;
 		type = "mod";
 		
-		dependencies[] = {"Game", "World", "Mission", "JM_CF_Scripts", "DayZLife"};
+		dependencies[] = {"Game", "World", "Mission"};
 
 		class defs
 		{
@@ -55,7 +48,7 @@ class CfgMods
                 value="";
                 files[]=
                 {
-                    "DayZLifeServer/scripts/3_Game"
+                    "DayZLifeClient/scripts/3_Game"
                 };
             };
             class worldScriptModule
@@ -63,16 +56,48 @@ class CfgMods
                 value="";
                 files[]=
                 {
-                    "DayZLifeServer/scripts/4_World"
+                    "DayZLifeClient/scripts/4_World"
                 };
             };
 			class missionScriptModule
 			{
 				value = "";
 				files[] = {
-				     "DayZLifeServer/scripts/5_Mission"
+				     "DayZLifeClient/scripts/5_Mission"
 				};
 			};
 		};
+	};
+};
+
+class cfgSoundSets
+{
+	class DZL_Message_SoundSet
+	{
+		soundShaders[]=
+		{
+			"DZL_Message_SoundShader"
+		};
+		sound3DProcessingType="character3DProcessingType";
+		volumeCurve="characterAttenuationCurve";
+		spatial=1;
+		doppler=0;
+		loop=0;
+	};
+};
+class cfgSoundShaders
+{
+	class DZL_Message_SoundShader
+	{
+		samples[]=
+		{
+			{
+				"DayZLifeClient\Data\sound\message",
+				1
+			}
+		};
+		volume=1;
+		range=10;
+		limitation=0;
 	};
 };
