@@ -46,7 +46,7 @@ class CfgMods
 		extra = 0;
 		type = "mod";
 		
-		dependencies[] = {"Game", "World", "Mission", "JM_CF_Scripts", "DayZLife"};
+		dependencies[] = {"Game", "World", "Mission", "JM_CF_Scripts", "DayZLifeClient"};
 
 		class defs
 		{

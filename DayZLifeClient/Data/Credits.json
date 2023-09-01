@@ -1,7 +1,7 @@
 {
 	"Departments": [
 		{
-			"DepartmentName": "DayZLife",
+			"DepartmentName": "DayZLifeClient",
 			"Sections": [
 				{
 					"SectionName": "Developers",

@@ -704,7 +704,7 @@ FrameWidgetClass Almanac {
                vexactpos 0
                hexactsize 0
                vexactsize 0
-               imageTexture "{23E23D49A646AE19}DayZLife/layout/CarKey/search.edds"
+               imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
                mode blend
                "src alpha" 1
                stretch 1
@@ -868,7 +868,7 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{729A02D897FD10EA}DayZLife/layout/Banking/DZLCash.edds"
+           imageTexture "{729A02D897FD10EA}DayZLifeClient/layout/Banking/DZLCash.edds"
            mode blend
            "src alpha" 1
            stretch 1
@@ -908,7 +908,7 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{63429AE7A994ECE2}DayZLife/layout/Banking/DZLBank.edds"
+           imageTexture "{63429AE7A994ECE2}DayZLifeClient/layout/Banking/DZLBank.edds"
            mode blend
            "src alpha" 1
            stretch 1
@@ -987,7 +987,7 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{BA01A4394F203C2A}DayZLife/layout/Banking/Prison.edds"
+           imageTexture "{BA01A4394F203C2A}DayZLifeClient/layout/Banking/Prison.edds"
            mode blend
            "src alpha" 1
            stretch 1
@@ -1242,7 +1242,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{048ED4A53EA093A4}DayZLife/layout/Almanac/PoliceIcon.edds"
+       imageTexture "{048ED4A53EA093A4}DayZLifeClient/layout/Almanac/PoliceIcon.edds"
        mode blend
        "src alpha" 1
        "no wrap" 0
@@ -1267,7 +1267,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{39DAA9AABB8E2B03}DayZLife/layout/Almanac/MedicIcon.edds"
+       imageTexture "{39DAA9AABB8E2B03}DayZLifeClient/layout/Almanac/MedicIcon.edds"
        mode additive
        "src alpha" 1
        "no wrap" 0
@@ -1293,7 +1293,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{7354D2EE62FCC049}DayZLife/layout/Almanac/CivilIcon.edds"
+       imageTexture "{7354D2EE62FCC049}DayZLifeClient/layout/Almanac/CivilIcon.edds"
        mode blend
        "src alpha" 1
        stretch 1
@@ -1317,7 +1317,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       imageTexture "{C67AC3543A5B9451}DayZLife/layout/Almanac/ArmyIcon.edds"
+       imageTexture "{C67AC3543A5B9451}DayZLifeClient/layout/Almanac/ArmyIcon.edds"
        mode blend
        "src alpha" 1
        stretch 1
@@ -1367,7 +1367,7 @@ FrameWidgetClass Almanac {
            vexactpos 0
            hexactsize 0
            vexactsize 0
-           imageTexture "{35E83651B6E3321F}DayZLife/layout/Almanac/sync.edds"
+           imageTexture "{35E83651B6E3321F}DayZLifeClient/layout/Almanac/sync.edds"
            mode blend
            "src alpha" 1
            stretch 1

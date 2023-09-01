@@ -7,8 +7,7 @@ class CfgPatches
 		requiredVersion=0.1;
 		requiredAddons[]=
 		{
-			"DZ_Data",
-			"DayZLife"
+			"DZ_Data"
 		};
 	};
 };

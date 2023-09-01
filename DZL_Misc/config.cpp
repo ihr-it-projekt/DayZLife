@@ -18,7 +18,7 @@ class CfgMods
 	{
 		dir = "DayZLifeMisc";
         hideName = 0;
-		name = "DayZLife";
+		name = "DayZLifeMisc";
 		credits = "TheBuster, Sense";
 		author = "TheBuster Sense";
 		authorID = "76561198196317725";
