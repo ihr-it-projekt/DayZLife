@@ -55,8 +55,8 @@ modded class MissionServer {
 			float factorBlood = 1.0;
 			float factorHealth = 1.0;
 			if (dzlPlayer.WillHealByMedic()) {
-			    factorHealth = 0.5;
-			    factorBlood = 0.4;
+			    factorHealth = 0.05;
+			    factorBlood = 0.6;
 			    factorShock = 0;
 				array<string> damageZone = new array<string>;
 			
@@ -68,7 +68,7 @@ modded class MissionServer {
 				damageZone.Insert("Spine2");
 				damageZone.Insert("Head");
 				
-				int randCut = Math.RandomIntInclusive(0, 6);
+				int randCut = Math.RandomIntInclusive(2, 6);
 				
 				for(int x = 0; x < randCut; x++) {
 					string damageZ = damageZone.GetRandomElement();
