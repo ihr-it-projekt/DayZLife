@@ -14,7 +14,7 @@ class DZLTraderListener {
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_TRADE_ACTION) {
-            autoptr Param3<ref array<string>,ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
+            autoptr Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
             if (ctx.Read(paramTrade)) {
                 array<EntityAI> playerItems = PlayerBase.Cast(target).GetPlayerItems();
                 int sum = 0;

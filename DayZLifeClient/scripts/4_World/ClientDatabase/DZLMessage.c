@@ -66,7 +66,7 @@ class DZLMessage: DZLIdModel {
             return text;
         }
 
-        return text.Substring(0,20);
+        return text.Substring(0, 20);
     }
 
     string GetText() {

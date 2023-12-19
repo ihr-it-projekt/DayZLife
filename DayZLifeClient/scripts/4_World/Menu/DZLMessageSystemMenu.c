@@ -219,9 +219,9 @@ class DZLMessageSystemMenu : DZLBaseMenu {
                 messageListWidget.SetItem(index, message.GetShortText(), message, 2);
 
                 if (!message.IsRead()) {
-                    messageListWidget.SetItemColor(index, 0, ARGB(255,0,255,0));
-                    messageListWidget.SetItemColor(index, 1, ARGB(255,0,255,0));
-                    messageListWidget.SetItemColor(index, 2, ARGB(255,0,255,0));
+                    messageListWidget.SetItemColor(index, 0, ARGB(255, 0, 255, 0));
+                    messageListWidget.SetItemColor(index, 1, ARGB(255, 0, 255, 0));
+                    messageListWidget.SetItemColor(index, 2, ARGB(255, 0, 255, 0));
                 }
             }
         }
@@ -251,9 +251,9 @@ class DZLMessageSystemMenu : DZLBaseMenu {
             messagePosition = message.GetPosition();
             if (!message.IsRead()) {
                 message.Read();
-                messageListWidget.SetItemColor(pos, 0, ARGB(255,255,255,255));
-                messageListWidget.SetItemColor(pos, 1, ARGB(255,255,255,255));
-                messageListWidget.SetItemColor(pos, 2, ARGB(255,255,255,255));
+                messageListWidget.SetItemColor(pos, 0, ARGB(255, 255, 255, 255));
+                messageListWidget.SetItemColor(pos, 1, ARGB(255, 255, 255, 255));
+                messageListWidget.SetItemColor(pos, 2, ARGB(255, 255, 255, 255));
             }
         }
     }

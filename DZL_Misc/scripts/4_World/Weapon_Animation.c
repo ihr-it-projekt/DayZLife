@@ -15,11 +15,11 @@ modded class ModItemRegisterCallbacks {
         pType.AddItemInHandsProfileIK("DZL_W_FAL", "dz/anims/workspaces/player/player_main/weapons/player_main_m4a1.asi", pBehavior, "dz/anims/anm/player/ik/weapons/m4a1_ik.anm", "dz/anims/anm/player/reloads/M4A1/w_M4A1_states.anm");
         pType.AddItemInHandsProfileIK("DZL_W_Izh18", "dz/anims/workspaces/player/player_main/weapons/player_main_izh18.asi", pBehavior, "dz/anims/anm/player/ik/weapons/izh18.anm", "dz/anims/anm/player/reloads/IZH18/w_izh18_states.anm");
         pType.AddItemInHandsProfileIK("DZL_W_M4A1", "dz/anims/workspaces/player/player_main/weapons/player_main_m4a1.asi", pBehavior, "dz/anims/anm/player/ik/weapons/m4a1_ik.anm", "dz/anims/anm/player/reloads/M4A1/w_M4A1_states.anm");
-        pType.AddItemInHandsProfileIK("DZL_W_MP5K", "dz/anims/workspaces/player/player_main/weapons/player_main_mp5.asi", pBehavior, "dz/anims/anm/player/ik/weapons/mp5k.anm","dz/anims/anm/player/reloads/mp5/w_mp5k_states.anm");
+        pType.AddItemInHandsProfileIK("DZL_W_MP5K", "dz/anims/workspaces/player/player_main/weapons/player_main_mp5.asi", pBehavior, "dz/anims/anm/player/ik/weapons/mp5k.anm", "dz/anims/anm/player/reloads/mp5/w_mp5k_states.anm");
         pType.AddItemInHandsProfileIK("DZL_W_SKS", "dz/anims/workspaces/player/player_main/weapons/player_main_sks.asi", pBehavior, "dz/anims/anm/player/ik/weapons/SKS.anm", "dz/anims/anm/player/reloads/SKS/w_SKS_states.anm");
-        pType.AddItemInHandsProfileIK("DZL_W_SVD", "dz/anims/workspaces/player/player_main/weapons/player_main_svd.asi", pBehavior, "dz/anims/anm/player/ik/weapons/svd.anm","dz/anims/anm/player/reloads/SVD/w_SVD_states.anm");
-        pType.AddItemInHandsProfileIK("DZL_W_UMP45", "dz/anims/workspaces/player/player_main/weapons/player_main_ump45.asi", pBehavior, "dz/anims/anm/player/ik/weapons/ump.anm","dz/anims/anm/player/reloads/UMP45/w_UMP45_states.anm");
-        pType.AddItemInHandsProfileIK("DZL_W_VSS", "dz/anims/workspaces/player/player_main/weapons/player_main_vss.asi", pBehavior, "dz/anims/anm/player/ik/weapons/VSS.anm","dz/anims/anm/player/reloads/VSS/w_VSS_states.anm");
+        pType.AddItemInHandsProfileIK("DZL_W_SVD", "dz/anims/workspaces/player/player_main/weapons/player_main_svd.asi", pBehavior, "dz/anims/anm/player/ik/weapons/svd.anm", "dz/anims/anm/player/reloads/SVD/w_SVD_states.anm");
+        pType.AddItemInHandsProfileIK("DZL_W_UMP45", "dz/anims/workspaces/player/player_main/weapons/player_main_ump45.asi", pBehavior, "dz/anims/anm/player/ik/weapons/ump.anm", "dz/anims/anm/player/reloads/UMP45/w_UMP45_states.anm");
+        pType.AddItemInHandsProfileIK("DZL_W_VSS", "dz/anims/workspaces/player/player_main/weapons/player_main_vss.asi", pBehavior, "dz/anims/anm/player/ik/weapons/VSS.anm", "dz/anims/anm/player/reloads/VSS/w_VSS_states.anm");
         pType.AddItemInHandsProfileIK("DZL_W_Winchester", "dz/anims/workspaces/player/player_main/weapons/player_main_winchester70.asi", pBehavior, "dz/anims/anm/player/ik/weapons/winchester70.anm", "dz/anims/anm/player/reloads/Winchester70/w_winchester70_states.anm");
 
     };

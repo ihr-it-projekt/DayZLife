@@ -1,5 +1,5 @@
 class DZLCanDoDoorAction {
-    static DZLJobHouseDefinition GetJobHouseDefinition(Building building,notnull PlayerBase player) {
+    static DZLJobHouseDefinition GetJobHouseDefinition(Building building, notnull PlayerBase player) {
         if (!player.GetConfig()) return null;
 
         DZLPlayer dzlPlayer =  player.GetDZLPlayer();

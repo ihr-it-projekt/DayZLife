@@ -26,7 +26,7 @@ class DZLPreviewWindow extends Managed {
 
     private void Update(EntityAI previewItem) {
         widget.SetItem(previewItem);
-        widget.SetModelPosition(Vector(0,0,0.5));
+        widget.SetModelPosition(Vector(0, 0, 0.5));
 
         widget.Show(true);
         if (description) description.Show(true);

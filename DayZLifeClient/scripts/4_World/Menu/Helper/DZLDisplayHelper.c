@@ -32,7 +32,7 @@ class DZLDisplayHelper {
         mapWidget.ClearUserMarks();
         mapWidget.SetScale(0.1);
         mapWidget.SetMapPos(pos);
-        mapWidget.AddUserMark(pos, "", ARGB(255,0,255,0), "set:dayz_gui image:cartridge_pistol");
+        mapWidget.AddUserMark(pos, "", ARGB(255, 0, 255, 0), "set:dayz_gui image:cartridge_pistol");
     }
 
     static void MoveDZLOnlinePlayerFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, string job) {
@@ -295,7 +295,7 @@ class DZLDisplayHelper {
             }
 
             preview.SetItem(item);
-            preview.SetModelPosition(Vector(0,0,0.5));
+            preview.SetModelPosition(Vector(0, 0, 0.5));
         }
     }
     static void UpdaterPreviewByStoreItem(TextListboxWidget widget, ItemPreviewWidget preview) {
@@ -318,7 +318,7 @@ class DZLDisplayHelper {
             previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
 
             preview.SetItem(previewItem);
-            preview.SetModelPosition(Vector(0,0,0.5));
+            preview.SetModelPosition(Vector(0, 0, 0.5));
         }
     }
 
@@ -342,7 +342,7 @@ class DZLDisplayHelper {
             previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
 
             preview.SetItem(previewItem);
-            preview.SetModelPosition(Vector(0,0,0.5));
+            preview.SetModelPosition(Vector(0, 0, 0.5));
         }
     }
 

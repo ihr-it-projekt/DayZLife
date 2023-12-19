@@ -635,7 +635,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
             previewItem = EntityAI.Cast(GetGame().CreateObject(itemType, "0 0 0", true, false, false));
 
             preview.SetItem(previewItem);
-            preview.SetModelPosition(Vector(0,0,0.5));
+            preview.SetModelPosition(Vector(0, 0, 0.5));
         }
     }
 

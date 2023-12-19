@@ -74,7 +74,7 @@ class DZLTuningListener {
         Math3D.MatrixIdentity4(mat);
         mat[3] = position;
         il.SetGround(NULL, mat);
-        EntityAI item = SpawnEntity(itemInStock.type, il,ECE_PLACE_ON_SURFACE,RF_DEFAULT);
+        EntityAI item = SpawnEntity(itemInStock.type, il, ECE_PLACE_ON_SURFACE, RF_DEFAULT);
 
         if (!item) {
             return null;

@@ -21,7 +21,7 @@ class DZLObjectFinder {
         return obj;
     }
 
-    void DeleteContainerAt(vector from, vector to, string typeToSearch, Object ignore = NULL, float radius = 0, Object with = NULL,int tries = 0) {
+    void DeleteContainerAt(vector from, vector to, string typeToSearch, Object ignore = NULL, float radius = 0, Object with = NULL, int tries = 0) {
         vector contact_pos;
         vector contact_dir;
         int contact_component;
