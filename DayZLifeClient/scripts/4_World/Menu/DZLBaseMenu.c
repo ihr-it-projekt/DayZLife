@@ -1,5 +1,4 @@
-class DZLBaseMenu: UIScriptedMenu
-{
+class DZLBaseMenu: UIScriptedMenu {
     protected ref DZLUIItemCreator creator;
     protected ref DZLConfig config;
     protected string layoutPath;
@@ -12,7 +11,7 @@ class DZLBaseMenu: UIScriptedMenu
 
 
     protected void Construct() {
-        if(GetGame().IsClient()){
+        if(GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         }
     }
@@ -37,9 +36,9 @@ class DZLBaseMenu: UIScriptedMenu
     }
 
     void UpdateGUI(string message = "") {
-       if(message) {
+        if(message) {
             player.DisplayMessage(message);
-       }
+        }
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
@@ -64,12 +63,12 @@ class DZLBaseMenu: UIScriptedMenu
     override bool OnClick(Widget w, int x, int y, int button) {
         if (super.OnClick(w, x, y, button)) return true;
 
-        switch(w){
-            case closeButton:
-                OnHide();
-                return true;
-            default:
-                break;
+        switch(w) {
+        case closeButton:
+            OnHide();
+            return true;
+        default:
+            break;
         }
         return false;
     }
@@ -78,7 +77,7 @@ class DZLBaseMenu: UIScriptedMenu
         super.OnShow();
 
         GetGame().GetUIManager().ShowCursor(true);
-		
+
         GetGame().GetInput().ChangeGameFocus(1);
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
     }

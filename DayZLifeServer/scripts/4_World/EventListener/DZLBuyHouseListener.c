@@ -1,5 +1,4 @@
-class DZLBuyHouseListener
-{
+class DZLBuyHouseListener {
     private ref DZLHouseFinder houseFinder;
 
     void DZLBuyHouseListener() {
@@ -17,16 +16,16 @@ class DZLBuyHouseListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
             autoptr Param1<Building> paramGetBuildingProperties;
-            if (ctx.Read(paramGetBuildingProperties)){
+            if (ctx.Read(paramGetBuildingProperties)) {
                 GetGame().RPCSingleParam(PlayerBase.Cast(target), DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param1)), true, sender);
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
             autoptr Param1<Building> paramBuyHouse;
-            if (ctx.Read(paramBuyHouse)){
-				DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param1);
+            if (ctx.Read(paramBuyHouse)) {
+                DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param1);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param1);
                 PlayerBase playerOpenBuy = PlayerBase.Cast(target);
-				DZLPlayer dzlPlayer = playerOpenBuy.GetDZLPlayer();;
+                DZLPlayer dzlPlayer = playerOpenBuy.GetDZLPlayer();;
 
                 string message = "#error_buying_house";
 
@@ -44,8 +43,8 @@ class DZLBuyHouseListener
             }
         } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
             autoptr Param1<Building> paramSellHouse;
-            if (ctx.Read(paramSellHouse)){
-				DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param1);
+            if (ctx.Read(paramSellHouse)) {
+                DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param1);
                 DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellHouse.param1);
                 string messageSell = "#error_sell_house";
                 PlayerBase playerSellHouse = PlayerBase.Cast(target);

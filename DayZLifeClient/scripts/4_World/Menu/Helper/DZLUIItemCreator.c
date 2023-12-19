@@ -1,25 +1,24 @@
-class DZLUIItemCreator
-{
+class DZLUIItemCreator {
 
-	Widget layoutRoot;
-	
+    Widget layoutRoot;
+
     void DZLUIItemCreator(string layoutRootPath) {
-		this.layoutRoot = GetGame().GetWorkspace().CreateWidgets(layoutRootPath);
-	}
+        this.layoutRoot = GetGame().GetWorkspace().CreateWidgets(layoutRootPath);
+    }
 
-	Widget GetLayoutRoot() {
-	    return this.layoutRoot;
-	}
+    Widget GetLayoutRoot() {
+        return this.layoutRoot;
+    }
 
     TextListboxWidget GetTextListboxWidget(string name) {
         TextListboxWidget widget = TextListboxWidget.Cast(layoutRoot.FindAnyWidget(name));
 
         return widget;
     }
-	
-	Widget GetWidget(string name) {
-		return layoutRoot.FindAnyWidget(name);
-	}
+
+    Widget GetWidget(string name) {
+        return layoutRoot.FindAnyWidget(name);
+    }
 
     XComboBoxWidget GetXComboBoxWidget(string name) {
         return XComboBoxWidget.Cast(layoutRoot.FindAnyWidget(name));
@@ -36,7 +35,7 @@ class DZLUIItemCreator
     MultilineTextWidget GetMultilineTextWidget(string name) {
         return MultilineTextWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
-	
+
     MultilineEditBoxWidget GetMultilineEditBoxWidget(string name) {
         return MultilineEditBoxWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
@@ -44,7 +43,7 @@ class DZLUIItemCreator
     TextWidget GetTextWidget(string name) {
         return TextWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
-	
+
     MapWidget GetMapWidget(string name) {
         return MapWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
@@ -52,17 +51,17 @@ class DZLUIItemCreator
     ButtonWidget GetButtonWidget(string name) {
         return ButtonWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
-	
+
     ProgressBarWidget GetProgressBarWidget(string name) {
         return ProgressBarWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
-	
+
     PlayerPreviewWidget GetPlayerPreview(string name) {
         return PlayerPreviewWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
-	
+
     CheckBoxWidget GetCheckBoxWidget(string name) {
         return CheckBoxWidget.Cast(layoutRoot.FindAnyWidget(name));
     }
-	
+
 }

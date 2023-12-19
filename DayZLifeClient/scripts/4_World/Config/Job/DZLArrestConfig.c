@@ -1,17 +1,16 @@
-class DZLArrestConfig
-{
-	string version = "3";
+class DZLArrestConfig {
+    string version = "3";
 
-	bool shouldDeleteAllItemsOnPrissoner = true;
-	bool shouldDeleteAllItemsOnExPrissoner = true;
-	bool teleportArrestedIntoJail = false;
-	string teleportPosition = "0 0 0";
-	ref array<string> prisonerItems;
-	ref array<string> exPrisonerItems;
-	ref array<vector> arrestAreas;
-	ref array<vector> exPrisonerAreas;
-	int arrestAreaRadius = 110;
-	string job;
+    bool shouldDeleteAllItemsOnPrissoner = true;
+    bool shouldDeleteAllItemsOnExPrissoner = true;
+    bool teleportArrestedIntoJail = false;
+    string teleportPosition = "0 0 0";
+    ref array<string> prisonerItems;
+    ref array<string> exPrisonerItems;
+    ref array<vector> arrestAreas;
+    ref array<vector> exPrisonerAreas;
+    int arrestAreaRadius = 110;
+    string job;
 
     void DZLArrestConfig() {
         if (!Load()) {
@@ -36,23 +35,23 @@ class DZLArrestConfig
             exPrisonerItems.Insert("TunaCan");
 
             arrestAreas = new array<vector>;
-			arrestAreas.Insert("2746.173340 26.421398 1301.691162");
+            arrestAreas.Insert("2746.173340 26.421398 1301.691162");
 
             exPrisonerAreas = new array<vector>;
-			exPrisonerAreas.Insert("3662.574219 6.720572 2396.926514");
+            exPrisonerAreas.Insert("3662.574219 6.720572 2396.926514");
 
             Save();
         }
 
         if (version == "1") {
-        	version = "2";
-        	teleportArrestedIntoJail = false;
-        	teleportPosition = "0 0 0";
-        	Save();
+            version = "2";
+            teleportArrestedIntoJail = false;
+            teleportPosition = "0 0 0";
+            Save();
         }
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json")) {
             JsonFileLoader<DZLArrestConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
             return true;
@@ -60,11 +59,11 @@ class DZLArrestConfig
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLArrestConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
         }
     }
-	
+
 }

@@ -1,25 +1,25 @@
 static void DZLLogMoneyTransaction(string playerId, string type, int oldMoney, int newMoney, int addMoney) {
     if (!DZLLoggerConfig.Get().logMoneyTransfer) return;
-	string fileName = "money_log.csv";
+    string fileName = "money_log.csv";
 
-	array<string> head = new array<string>;
-	head.Insert("type");
-	head.Insert("oldMoney");
-	head.Insert("newMoney");
-	head.Insert("addMoney");
+    array<string> head = new array<string>;
+    head.Insert("type");
+    head.Insert("oldMoney");
+    head.Insert("newMoney");
+    head.Insert("addMoney");
 
-	array<string> data = new array<string>;
-	data.Insert(type);
-	data.Insert(oldMoney.ToString());
-	data.Insert(newMoney.ToString());
-	data.Insert(addMoney.ToString());
+    array<string> data = new array<string>;
+    data.Insert(type);
+    data.Insert(oldMoney.ToString());
+    data.Insert(newMoney.ToString());
+    data.Insert(addMoney.ToString());
 
-	DZLCSVLog(playerId, fileName, head, data);
+    DZLCSVLog(playerId, fileName, head, data);
 }
 
 static void DZLLogTraderTransaction(string playerId, string tradeType, string itemType, int price) {
     if (!DZLLoggerConfig.Get().logTraderTransactions) return;
-	string fileName = "trader_log.csv";
+    string fileName = "trader_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("tradeType");
@@ -36,7 +36,7 @@ static void DZLLogTraderTransaction(string playerId, string tradeType, string it
 
 static void DZLLogCrafting(string playerId, string craftType, string itemType) {
     if (!DZLLoggerConfig.Get().logCrafting) return;
-	string fileName = "crafting_log.csv";
+    string fileName = "crafting_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("craftType");
@@ -51,7 +51,7 @@ static void DZLLogCrafting(string playerId, string craftType, string itemType) {
 
 static void DZLLogLoadOut(string playerId, string categoryName) {
     if (!DZLLoggerConfig.Get().logLoadOut) return;
-	string fileName = "load_out_log.csv";
+    string fileName = "load_out_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("categoryName");
@@ -64,7 +64,7 @@ static void DZLLogLoadOut(string playerId, string categoryName) {
 
 static void DZLLogRaid(string playerId, string info, string target, vector position) {
     if (!DZLLoggerConfig.Get().logRaid) return;
-	string fileName = "raid_log.csv";
+    string fileName = "raid_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("info");
@@ -81,7 +81,7 @@ static void DZLLogRaid(string playerId, string info, string target, vector posit
 
 static void DZLLogStore(string playerId, string info, string target, vector position) {
     if (!DZLLoggerConfig.Get().logStore) return;
-	string fileName = "store_log.csv";
+    string fileName = "store_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("info");
@@ -98,7 +98,7 @@ static void DZLLogStore(string playerId, string info, string target, vector posi
 
 static void DZLLogArrest(string playerId, string info, int duration) {
     if (!DZLLoggerConfig.Get().logArrest) return;
-	string fileName = "arrest_log.csv";
+    string fileName = "arrest_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("info");
@@ -112,7 +112,7 @@ static void DZLLogArrest(string playerId, string info, int duration) {
 }
 static void DZLLogTicket(string playerId, string info, int value) {
     if (!DZLLoggerConfig.Get().logTicket) return;
-	string fileName = "ticket_log.csv";
+    string fileName = "ticket_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("info");
@@ -127,7 +127,7 @@ static void DZLLogTicket(string playerId, string info, int value) {
 
 static void DZLLogHouseTrade(string playerId, string info, int price, vector position) {
     if (!DZLLoggerConfig.Get().logHouseTrade) return;
-	string fileName = "houseTrade_log.csv";
+    string fileName = "houseTrade_log.csv";
 
     array<string> head = new array<string>;
     head.Insert("info");
@@ -158,7 +158,7 @@ static void DZLCSVLog(string playerId, string fileName, array<string> head, arra
 
     FileHandle handle;
     if (!FileExist(fileName)) {
-        handle = OpenFile(fileName , FileMode.APPEND);
+        handle = OpenFile(fileName, FileMode.APPEND);
         if ( handle == 0 )
             return;
 
@@ -172,7 +172,7 @@ static void DZLCSVLog(string playerId, string fileName, array<string> head, arra
     }
 
     if (handle == 0) {
-        handle = OpenFile(fileName , FileMode.APPEND);
+        handle = OpenFile(fileName, FileMode.APPEND);
     }
 
     if (handle == 0) return;

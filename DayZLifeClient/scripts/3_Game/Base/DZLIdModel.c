@@ -1,5 +1,4 @@
-class DZLIdModel
-{
+class DZLIdModel {
     protected string id;
 
     bool HasCorrectId() {
@@ -13,8 +12,8 @@ class DZLIdModel
             id = _id;
         }
     }
-	
-	string GetId() {
-		return id;
-	}
+
+    string GetId() {
+        return id;
+    }
 }

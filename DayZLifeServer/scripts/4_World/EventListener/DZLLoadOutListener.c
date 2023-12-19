@@ -1,5 +1,4 @@
-class DZLLoadOutListener
-{
+class DZLLoadOutListener {
     ref DZLJobConfig config;
 
     void DZLLoadOutListener() {
@@ -14,14 +13,14 @@ class DZLLoadOutListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
-            if (ctx.Read(paramLoadOut)){
-				PlayerBase player = PlayerBase.Cast(target);
+            if (ctx.Read(paramLoadOut)) {
+                PlayerBase player = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
-				string categoryName = paramLoadOut.param1;
+                string categoryName = paramLoadOut.param1;
 
                 if ((dzlPlayer.IsActiveAsArmy() && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
-					DZLSendMessage(sender, "#error_category_not_found");
-				}
+                    DZLSendMessage(sender, "#error_category_not_found");
+                }
             }
         }
     }
@@ -45,8 +44,8 @@ class DZLLoadOutListener
     private void Add(PlayerBase player, DZLLoadOutType type) {
         EntityAI item;
         InventoryLocation inventoryLocation = new InventoryLocation;
-		
-		if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+
+        if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
             item = player.GetHumanInventory().CreateInInventory(type.type);
         } else if (!player.GetHumanInventory().GetEntityInHands()) {
             item = player.GetHumanInventory().CreateInHands(type.type);
@@ -56,32 +55,32 @@ class DZLLoadOutListener
             item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
         }
 
-		if (item && type.attachments) {
-			AddAttachments(type, item);
-		}
-		
+        if (item && type.attachments) {
+            AddAttachments(type, item);
+        }
+
         if (item && type.quickBarEntityShortcut != -1) {
             player.SetQuickBarEntityShortcut(item, type.quickBarEntityShortcut, true);
         }
     }
 
     private void AddAttachments(DZLLoadOutType type, EntityAI item) {
-		if (!item) return;
-		
+        if (!item) return;
+
         foreach(DZLLoadOutType attachment: type.attachments) {
             if (item.GetInventory()) {
                 EntityAI itemAttachment = item.GetInventory().CreateInInventory(attachment.type);
 
                 if (!itemAttachment) {
                     itemAttachment = item.GetInventory().CreateEntityInCargo(attachment.type);
-					if (!itemAttachment) {
-						itemAttachment = item.GetInventory().CreateAttachment(attachment.type);
-					}
+                    if (!itemAttachment) {
+                        itemAttachment = item.GetInventory().CreateAttachment(attachment.type);
+                    }
                 }
 
-				if(itemAttachment && attachment.attachments) {
-					AddAttachments(attachment, itemAttachment);
-				}
+                if(itemAttachment && attachment.attachments) {
+                    AddAttachments(attachment, itemAttachment);
+                }
             }
         }
     }

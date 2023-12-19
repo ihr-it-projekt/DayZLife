@@ -1,19 +1,18 @@
-class DZLCarConfig
-{
+class DZLCarConfig {
     bool carCollisionDamage = false;
-	bool canStoreCarsWithGoods = false;
-	bool canGetCarsFromEveryGarage = true;
-	int carRaidTimeInSeconds = 60;
-	int chanceToRaid = 2;
-	int carInsurancePrice = 2000;
+    bool canStoreCarsWithGoods = false;
+    bool canGetCarsFromEveryGarage = true;
+    int carRaidTimeInSeconds = 60;
+    int chanceToRaid = 2;
+    int carInsurancePrice = 2000;
     ref array<ref DZLStoragePosition> garages;
-	ref array<string> carTypesToStore;
-	ref array<string> carRaidTools;
+    ref array<string> carTypesToStore;
+    ref array<string> carRaidTools;
 
     string version = "5";
 
     void DZLCarConfig() {
-		array<string> attachments;
+        array<string> attachments;
         if (!Load()) {
             carCollisionDamage = false;
             garages = new array<ref DZLStoragePosition>;
@@ -21,8 +20,8 @@ class DZLCarConfig
             carRaidTools.Insert("Lockpick");
             garages.Insert(new DZLStoragePosition("6596.833984 6.000000 2435.520752", "131.999939 0.0 0.0", "6590.140625 5.810940 2441.690674", "-47.950325 0 0"));
 
-			carTypesToStore = new array<string>;
-			carTypesToStore.Insert("OffroadHatchback");
+            carTypesToStore = new array<string>;
+            carTypesToStore.Insert("OffroadHatchback");
             carTypesToStore.Insert("OffroadHatchback_Blue");
             carTypesToStore.Insert("OffroadHatchback_White");
             carTypesToStore.Insert("Hatchback_02");
@@ -38,8 +37,8 @@ class DZLCarConfig
             carTypesToStore.Insert("Truck_01_Covered_Blue");
             carTypesToStore.Insert("Truck_01_Covered_Orange");
 
-	        canStoreCarsWithGoods = false;
-	        carRaidTimeInSeconds = 60;
+            canStoreCarsWithGoods = false;
+            carRaidTimeInSeconds = 60;
 
             version = "3";
             Save();
@@ -51,8 +50,8 @@ class DZLCarConfig
             garages = new array<ref DZLStoragePosition>;
             garages.Insert(new DZLStoragePosition("6596.833984 6.000000 2435.520752", "131.999939 0.0 0.0", "6590.140625 5.810940 2441.690674", "-47.950325 0 0"));
 
-			carTypesToStore = new array<string>;
-			carTypesToStore.Insert("OffroadHatchback");
+            carTypesToStore = new array<string>;
+            carTypesToStore.Insert("OffroadHatchback");
             carTypesToStore.Insert("OffroadHatchback_Blue");
             carTypesToStore.Insert("OffroadHatchback_White");
             carTypesToStore.Insert("Hatchback_02");
@@ -99,17 +98,17 @@ class DZLCarConfig
             return null;
         }
 
-		foreach(DZLStoragePosition position: garages) {
-			float distanceToPos = vector.Distance(position.position, playerPosition);
-			if (distanceToPos <= distance){
+        foreach(DZLStoragePosition position: garages) {
+            float distanceToPos = vector.Distance(position.position, playerPosition);
+            if (distanceToPos <= distance) {
                 return position;
             }
-		}
+        }
 
-		return null;
+        return null;
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json")) {
             JsonFileLoader<DZLCarConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json", this);
             return true;
@@ -117,7 +116,7 @@ class DZLCarConfig
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLCarConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json", this);

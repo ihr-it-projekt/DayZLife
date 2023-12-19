@@ -1,5 +1,4 @@
-class DZLTraderStorage
-{
+class DZLTraderStorage {
     private ref array<ref DZLTraderTypeStorage> storage;
 
     void DZLTraderStorage() {
@@ -15,14 +14,14 @@ class DZLTraderStorage
     }
 
     DZLTraderTypeStorage GetCurrentStorageByName(string name) {
-       if (storage) {
-			foreach(DZLTraderTypeStorage itemStorage: storage) {
-				if (name == itemStorage.GetType()) {
-					return itemStorage;
-				}
-			}
-		}
-		
-		return null;	
+        if (storage) {
+            foreach(DZLTraderTypeStorage itemStorage: storage) {
+                if (name == itemStorage.GetType()) {
+                    return itemStorage;
+                }
+            }
+        }
+
+        return null;
     }
 }

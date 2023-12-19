@@ -1,5 +1,4 @@
-class DZLPaycheck
-{
+class DZLPaycheck {
     string jobName;
     int amount;
     int onlineMinutesForPay;

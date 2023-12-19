@@ -1,5 +1,4 @@
-class DZLLicenceCollection
-{
+class DZLLicenceCollection {
     ref array<ref DZLLicence> collection;
 
     void DZLLicenceCollection() {
@@ -8,17 +7,17 @@ class DZLLicenceCollection
 
     DZLLicence FindById(string id) {
         foreach(DZLLicence licence: collection) {
-			if (licence.GetId() == id) return licence;
-		}
-		
-		return null;
+            if (licence.GetId() == id) return licence;
+        }
+
+        return null;
     }
-	
+
     DZLLicence FindByName(string name) {
         foreach(DZLLicence licence: collection) {
-			if (licence.name == name) return licence;
-		}
-		
-		return null;
+            if (licence.name == name) return licence;
+        }
+
+        return null;
     }
 }

@@ -1,6 +1,5 @@
-class DZLLicenceCraftedItem: DZLLicenceCraftItem
-{
-	bool spawnOnGround = false;
-	string positionIfSpawnOnGround = "";
+class DZLLicenceCraftedItem: DZLLicenceCraftItem {
+    bool spawnOnGround = false;
+    string positionIfSpawnOnGround = "";
 
 }

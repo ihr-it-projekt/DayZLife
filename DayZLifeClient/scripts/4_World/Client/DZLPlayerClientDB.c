@@ -1,5 +1,4 @@
-class DZLPlayerClientDB
-{
+class DZLPlayerClientDB {
     private static ref DZLPlayerClientDB db;
 
     private ref DZLConfig config;
@@ -26,7 +25,7 @@ class DZLPlayerClientDB
         GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
     }
 
-    DZLConfig GetConfig(){
+    DZLConfig GetConfig() {
         if (!config) {
             GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_EVENT_GET_CONFIG, null, true);
             config = DZLConfig.Get();
@@ -50,7 +49,7 @@ class DZLPlayerClientDB
 
         return dzlBank;
     }
-   
+
     DZLPlayer GetDZLPlayer() {
         if (!dzlPlayer) {
             GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
@@ -65,12 +64,12 @@ class DZLPlayerClientDB
         }
     }
 
-   void RequestUpdateDZLPlayer() {
+    void RequestUpdateDZLPlayer() {
         GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_DATA, null, true);
         GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
-   }
+    }
 
-   void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
         if (player) {
             if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_HOUSE) {
@@ -145,38 +144,38 @@ class DZLPlayerClientDB
                 }
             } else if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE) {
                 Param1 <ref DZLPlayerHouse> houseParam;
-                if (ctx.Read(houseParam) && houseParam.param1){
+                if (ctx.Read(houseParam) && houseParam.param1) {
                     house = houseParam.param1;
                 }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CRIME) {
                 Param1 <ref DZLCrimeConfig> crimeParam;
-                if (ctx.Read(crimeParam) && crimeParam.param1){
+                if (ctx.Read(crimeParam) && crimeParam.param1) {
                     config.crimeConfig = crimeParam.param1;
                 }
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA_RESPONSE) {
                 Param1 <ref DZLPlayer> dzlPlayerParam;
-                if (ctx.Read(dzlPlayerParam) && dzlPlayerParam.param1){
+                if (ctx.Read(dzlPlayerParam) && dzlPlayerParam.param1) {
                     SetDZLPlayer(dzlPlayerParam.param1, player.GetPlayerId());
                     player.UpdatePlayerAtDependencies();
                 }
             } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE) {
                 Param1 <ref DZLBank> dzlBankParam;
-                if (ctx.Read(dzlBankParam) && dzlBankParam.param1){
+                if (ctx.Read(dzlBankParam) && dzlBankParam.param1) {
                     dzlBank = dzlBankParam.param1;
                 }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_MESSAGE) {
                 Param1 <ref DZLMessageConfig> dzlMessageParam;
-                if (ctx.Read(dzlMessageParam) && dzlMessageParam.param1){
+                if (ctx.Read(dzlMessageParam) && dzlMessageParam.param1) {
                     config.messageConfig = dzlMessageParam.param1;
                 }
             } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TUNING_CONFIG) {
                 Param1 <ref DZLTuningConfig> dzlTuningConfigParam;
-                if (ctx.Read(dzlTuningConfigParam) && dzlTuningConfigParam.param1){
+                if (ctx.Read(dzlTuningConfigParam) && dzlTuningConfigParam.param1) {
                     config.tuningConfig = dzlTuningConfigParam.param1;
                 }
             }  else if(rpc_type == DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE) {
                 RequestUpdateDZLPlayer();
             }
         }
-   }
+    }
 }

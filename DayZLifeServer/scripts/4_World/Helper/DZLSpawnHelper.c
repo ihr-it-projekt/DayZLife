@@ -1,5 +1,4 @@
-class DZLSpawnHelper
-{
+class DZLSpawnHelper {
 
     static bool SpawnContainer(vector position, vector orientation, string gameObjectName) {
         Container_Base obj = Container_Base.Cast(GetGame().CreateObject(gameObjectName, position));
@@ -10,14 +9,14 @@ class DZLSpawnHelper
         obj.SetFlags(EntityFlags.STATIC, false);
         DZLSpawnHelper.SetPositionAndOrientation(obj, position, orientation);
 
-		return true;
+        return true;
     }
 
     static Object SpawnActionPoint(vector pos, vector orientation, string gameObjectName) {
         //pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true);
         if (!game_obj) {
-           return null;
+            return null;
         }
 
         game_obj.SetAllowDamage(false);

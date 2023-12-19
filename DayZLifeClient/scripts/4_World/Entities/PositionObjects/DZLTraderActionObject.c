@@ -1,12 +1,10 @@
-class DZLTraderActionObject: DZLBaseActionObject
-{
+class DZLTraderActionObject: DZLBaseActionObject {
     void DZLTraderActionObject() {
-		isTrader = true;
-	}
+        isTrader = true;
+    }
 
 
-    override void SetActions()
-    {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(ActionOpenTraderMenu);

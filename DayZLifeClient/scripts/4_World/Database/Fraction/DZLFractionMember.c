@@ -1,5 +1,4 @@
-class DZLFractionMember: DZLNamePlayer
-{
+class DZLFractionMember: DZLNamePlayer {
     string playerId;
     string fractionID;
     string fractionName;
@@ -21,8 +20,8 @@ class DZLFractionMember: DZLNamePlayer
         canGetMoneyFromBankAccount = member.canGetMoneyFromBankAccount;
         canAccessFractionGarage = member.canAccessFractionGarage;
     }
-	
-	bool IsFractionBoss() {
-		return fractionID == playerId;
-	}
+
+    bool IsFractionBoss() {
+        return fractionID == playerId;
+    }
 }

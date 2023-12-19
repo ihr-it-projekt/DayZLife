@@ -1,10 +1,9 @@
-class DZLParkingMeter: DZLBaseActionObject
-{
+class DZLParkingMeter: DZLBaseActionObject {
     void DZLParkingMeter() {
-		isGarage = true;
-	}
+        isGarage = true;
+    }
 
-	override void SetActions() {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(ActionOpenCarStorageMenu);

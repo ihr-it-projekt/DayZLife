@@ -1,5 +1,4 @@
-class DZLLicenceProgressBar: DZLBaseProgressBar
-{
+class DZLLicenceProgressBar: DZLBaseProgressBar {
     private DZLCraftLicence licence;
 
     override void OnShow() {
@@ -8,7 +7,7 @@ class DZLLicenceProgressBar: DZLBaseProgressBar
         duration = licence.durationForCrafting;
         position = licence.position;
     }
-	
+
     override void SendFinishEvent() {
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE_USE, new Param1<string>(licence.GetId()), true);
     }

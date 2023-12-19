@@ -1,5 +1,4 @@
-class DZLDatabaseLayer
-{
+class DZLDatabaseLayer {
     private static ref DZLDatabaseLayer databaseLayer;
 
     private ref map<string, ref DZLHouse> dzlHouses;
@@ -20,7 +19,7 @@ class DZLDatabaseLayer
     private int civCount = 0;
     private int medicCount = 0;
     private int armyCount = 0;
-	private ref DZLDatabase database;
+    private ref DZLDatabase database;
 
     void DZLDatabaseLayer() {
 
@@ -48,18 +47,18 @@ class DZLDatabaseLayer
 
         return databaseLayer;
     }
-	
-	void InitDB() {
-		database.Init(this);
-	}
 
-	DZLBank GetBank() {
-	    return bank;
-	}
+    void InitDB() {
+        database.Init(this);
+    }
 
-	DZLEmergencies GetEmergencies() {
-	    return emergencies;
-	}
+    DZLBank GetBank() {
+        return bank;
+    }
+
+    DZLEmergencies GetEmergencies() {
+        return emergencies;
+    }
 
     DZLLockedHouses GetLockedHouses() {
         return dzlLockedHouses;
@@ -74,18 +73,18 @@ class DZLDatabaseLayer
     }
 
     DZLPlayer GetPlayerFromFiles(string playerId) {
-		if ("" == playerId) return null;
-		DZLPlayer player;
+        if ("" == playerId) return null;
+        DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
-			player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
-			dzlPlayers.Insert(playerId, player);
-		}
-		
-		return player;
+            player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
+            dzlPlayers.Insert(playerId, player);
+        }
+
+        return player;
     }
 
     DZLPlayer GetPlayer(string playerId) {
-		return database.GetPlayer(playerId);
+        return database.GetPlayer(playerId);
     }
 
     DZLHouse GetHouse(Building building = null, string fileNameParam = "") {
@@ -173,7 +172,7 @@ class DZLDatabaseLayer
         DZLPlayerHouse house;
         if (dzlPlayerHouses.Find(playerId, house)) {
             dzlPlayerHouses.Remove(playerId);
-			DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + house.fileName);
+            DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + house.fileName);
         }
     }
 

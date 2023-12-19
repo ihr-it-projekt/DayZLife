@@ -1,16 +1,15 @@
-class DZLFileStore
-{
-	protected string folder;
-	protected string fileName;
-	
-    protected bool Load(){
+class DZLFileStore {
+    protected string folder;
+    protected string fileName;
+
+    protected bool Load() {
         if (GetGame().IsServer() && FileExist(folder + fileName)) {
             return DoLoad();
         }
         return false;
     }
 
-    protected bool Save(){
+    protected bool Save() {
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(folder);
             return DoSave();
@@ -18,6 +17,10 @@ class DZLFileStore
         return false;
     }
 
-    protected bool DoSave() { return false; };
-    protected bool DoLoad() { return false; };
+    protected bool DoSave() {
+        return false;
+    };
+    protected bool DoLoad() {
+        return false;
+    };
 }

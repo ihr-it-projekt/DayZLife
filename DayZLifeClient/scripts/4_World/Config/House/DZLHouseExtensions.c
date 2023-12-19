@@ -1,5 +1,4 @@
-class DZLHouseExtensions
-{
+class DZLHouseExtensions {
     string version = "3";
     ref array<ref DZLHouseExtension> extensions;
     int pricePerLevelHouseInventory = 5000;
@@ -28,7 +27,7 @@ class DZLHouseExtensions
         }
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json")) {
             JsonFileLoader<DZLHouseExtensions>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json", this);
             return true;
@@ -36,7 +35,7 @@ class DZLHouseExtensions
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLHouseExtensions>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json", this);

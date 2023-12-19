@@ -1,10 +1,9 @@
-class DZLBankActionObjectBlue: DZLBaseActionObject
-{
+class DZLBankActionObjectBlue: DZLBaseActionObject {
     void DZLBankActionObjectBlue() {
-		isBank = true;
-	}
+        isBank = true;
+    }
 
-	override void SetActions() {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(DZLActionOpenBankingMenu);

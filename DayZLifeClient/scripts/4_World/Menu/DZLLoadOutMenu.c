@@ -1,22 +1,21 @@
-class DZLLoadOutMenu: DZLBaseMenu
-{
-	private ButtonWidget equipButton;
-	private TextListboxWidget loadoutListbox;
-	private XComboBoxWidget loadoutComboBox;
-	private DZLLoadOutCategory currentCat;
-	private ItemPreviewWidget preview;
+class DZLLoadOutMenu: DZLBaseMenu {
+    private ButtonWidget equipButton;
+    private TextListboxWidget loadoutListbox;
+    private XComboBoxWidget loadoutComboBox;
+    private DZLLoadOutCategory currentCat;
+    private ItemPreviewWidget preview;
 
-	private EntityAI previewItem;
-	private array<ref DZLLoadOutCategory> categories;
-	private int lastSelectedItem;
-	
+    private EntityAI previewItem;
+    private array<ref DZLLoadOutCategory> categories;
+    private int lastSelectedItem;
+
     void DZLLoadOutMenu() {
         layoutPath = "DayZLifeClient/layout/LoadoutMenu/LoadoutMenu.layout";
         Construct();
     }
 
     void ~DZLLoadOutMenu() {
-        if (previewItem){
+        if (previewItem) {
             GetGame().ObjectDelete(previewItem);
         }
         Destruct();
@@ -30,17 +29,17 @@ class DZLLoadOutMenu: DZLBaseMenu
 
     override Widget Init() {
         super.Init();
-		
-		if (config){
-			equipButton = creator.GetButtonWidget("equipButton");
-			loadoutListbox = creator.GetTextListboxWidget("loadoutListbox");
-			
-			loadoutComboBox = creator.GetXComboBoxWidget("loadoutComboBox");
-			
-			preview = creator.GetItemPreviewWidget("itemPreview");
-		}
-		
-		return layoutRoot;
+
+        if (config) {
+            equipButton = creator.GetButtonWidget("equipButton");
+            loadoutListbox = creator.GetTextListboxWidget("loadoutListbox");
+
+            loadoutComboBox = creator.GetXComboBoxWidget("loadoutComboBox");
+
+            preview = creator.GetItemPreviewWidget("itemPreview");
+        }
+
+        return layoutRoot;
     }
 
     void SetCategories(array<ref DZLLoadOutCategory> _categories) {
@@ -71,40 +70,40 @@ class DZLLoadOutMenu: DZLBaseMenu
             lastSelectedItem = currentSelectedItem;
         }
     }
-	
-	override bool OnClick(Widget w, int x, int y, int button){
-		if(super.OnClick(w, x, y, button)) return true;
-		switch(w){
-            case equipButton:
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param1<string>(currentCat.name), true);
-				return true;
-			case loadoutComboBox:
-				int index = loadoutComboBox.GetCurrentItem();
-			
-				currentCat = categories.Get(index);
-				UpdateCategory();
-				return true;
-            default:
-                break;
-        }
-		
-		return false;
-	}
-	
-	private void UpdateCategory() {
-		if(currentCat) {
-			loadoutListbox.ClearItems();
-			foreach(DZLLoadOutType type: currentCat.items) {
-				if (type.displayName == "") {
-					type.displayName = DZLDisplayHelper.GetItemDisplayName(type.type);
-				}
-				
-				loadoutListbox.AddItem(type.displayName, type, 0);
-			}
-		}
-	}
 
-	private void UpdaterPreviewType(TextListboxWidget widget) {
+    override bool OnClick(Widget w, int x, int y, int button) {
+        if(super.OnClick(w, x, y, button)) return true;
+        switch(w) {
+        case equipButton:
+            GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param1<string>(currentCat.name), true);
+            return true;
+        case loadoutComboBox:
+            int index = loadoutComboBox.GetCurrentItem();
+
+            currentCat = categories.Get(index);
+            UpdateCategory();
+            return true;
+        default:
+            break;
+        }
+
+        return false;
+    }
+
+    private void UpdateCategory() {
+        if(currentCat) {
+            loadoutListbox.ClearItems();
+            foreach(DZLLoadOutType type: currentCat.items) {
+                if (type.displayName == "") {
+                    type.displayName = DZLDisplayHelper.GetItemDisplayName(type.type);
+                }
+
+                loadoutListbox.AddItem(type.displayName, type, 0);
+            }
+        }
+    }
+
+    private void UpdaterPreviewType(TextListboxWidget widget) {
         int pos = widget.GetSelectedRow();
         if (pos == -1) {
             return;

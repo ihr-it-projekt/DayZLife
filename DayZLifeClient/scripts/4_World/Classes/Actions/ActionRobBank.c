@@ -1,5 +1,4 @@
-class ActionRobBank: ActionInteractBase
-{
+class ActionRobBank: ActionInteractBase {
     ref DZLBankingConfig config;
 
     DZLBankingConfig GetConfig() {
@@ -10,52 +9,51 @@ class ActionRobBank: ActionInteractBase
         return config;
     }
 
-	void ActionRobBank() {
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
+    void ActionRobBank() {
+        m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
-	}
+    }
 
-	override string GetText() {
+    override string GetText() {
         return "#rob_bank";
     }
 
-	override void CreateConditionComponents() {
-		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new DZL_CCTActionObject;
-	}
+    override void CreateConditionComponents() {
+        m_ConditionItem = new CCINone;
+        m_ConditionTarget = new DZL_CCTActionObject;
+    }
 
-	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
-	{
-		if (GetGame().IsClient()) {
-		    if (!player.GetConfig()) return false;
-			config = player.GetConfig().bankConfig;
-		} else {
-			GetConfig();
-		}
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
+        if (GetGame().IsClient()) {
+            if (!player.GetConfig()) return false;
+            config = player.GetConfig().bankConfig;
+        } else {
+            GetConfig();
+        }
 
-		DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
-		if (!objectTarget || !objectTarget.IsBank()) return false;
-		
-		if (config) {
-			EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
+        if (!objectTarget || !objectTarget.IsBank()) return false;
 
-			if(!item_in_hands_source) return false;
+        if (config) {
+            EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
-			bool hasItem = false;
-			foreach (string itemForRaid: config.itemsCanUsedToRaidBank) {
-			    if (item_in_hands_source.GetType() == itemForRaid) {
-			        hasItem = true;
-			        break;
-			    }
-			}
+            if(!item_in_hands_source) return false;
 
-			if(!hasItem) return false;
+            bool hasItem = false;
+            foreach (string itemForRaid: config.itemsCanUsedToRaidBank) {
+                if (item_in_hands_source.GetType() == itemForRaid) {
+                    hasItem = true;
+                    break;
+                }
+            }
 
-			if (!isInNearOfBankAndLocationIsEnabled(player)) return false;
+            if(!hasItem) return false;
 
-            if (GetGame().IsServer()){
+            if (!isInNearOfBankAndLocationIsEnabled(player)) return false;
+
+            if (GetGame().IsServer()) {
                 if (!config.canStartRaidIfShopRaidRuns && DZLDatabaseLayer.Get().GetCrimeData().ShopRaidRuns()) {
                     DZLSendMessage(player.GetIdentity(), "#one_shop_rob_is_already_started");
                     return false;
@@ -77,25 +75,25 @@ class ActionRobBank: ActionInteractBase
                     } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_wrong_time");
                         return false;
-                    } 
+                    }
                 }
-				DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-				if(bank.RaidRuns()) {
+                DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+                if(bank.RaidRuns()) {
                     DZLSendMessage(player.GetIdentity(), "#raid_all_ready_started (" + bank.GetCountDownRaid() + "s)");
                     return false;
                 }
-				
-				if(bank.HasMoneyToRaid()) {
+
+                if(bank.HasMoneyToRaid()) {
                     DZLSendMessage(player.GetIdentity(), "#safe_is_open");
                     return false;
                 }
             }
 
-			return true;
-		}
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
     override void OnStartServer(ActionData action_data) {
         GetConfig();
@@ -104,9 +102,9 @@ class ActionRobBank: ActionInteractBase
         if (player) {
             vector playerPosition = action_data.m_Player.GetPosition();
             foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
-                if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
-					DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-										
+                if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank) {
+                    DZLBank bank = DZLDatabaseLayer.Get().GetBank();
+
                     bank.StartRaid(position.position, config.raidTimeBankInSeconds);
                     DZLSendMessage(null, "#bank_rob_was_started");
                     DZLLogRaid(player.GetPlayerId(), "start bank raid", "bank", player.GetPosition());
@@ -125,7 +123,7 @@ class ActionRobBank: ActionInteractBase
             return false;
         }
         foreach(DZLBankingPosition position: config.positionOfBankingPoints) {
-            if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank){
+            if (position && position.position && vector.Distance(position.position, playerPosition) <= config.maximumRaidDistanceToBank) {
                 return position.raidIsEnabled;
             }
         }

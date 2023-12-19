@@ -1,5 +1,4 @@
-class CarTuneAttachment
-{
+class CarTuneAttachment {
     string positionName;
     string type;
 

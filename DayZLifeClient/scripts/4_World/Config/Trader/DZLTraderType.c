@@ -1,29 +1,28 @@
-class DZLTraderType: DZLIdModel
-{
+class DZLTraderType: DZLIdModel {
     string type;
     string displayName = "";
     int sellPrice;
     int buyPrice;
     ref array<string> attachments;
-	bool usePlayerAsSpawnPoint;
-	bool isCar;
-	bool isStorageItem = false;
-	int maxStorage = 0;
-	int maxBuyPrice;
-	int maxSellPrice;
-	int reducePerTick;
-	int tickLengthInMinutes;
+    bool usePlayerAsSpawnPoint;
+    bool isCar;
+    bool isStorageItem = false;
+    int maxStorage = 0;
+    int maxBuyPrice;
+    int maxSellPrice;
+    int reducePerTick;
+    int tickLengthInMinutes;
 
     void DZLTraderType(string type, int sellPrice, int buyPrice, array<string> attachments, bool usePlayerAsSpawnPoint = true, bool isCar = false) {
         this.type = type;
         this.sellPrice = sellPrice;
         this.buyPrice = buyPrice;
-		this.attachments = attachments;
-		this.usePlayerAsSpawnPoint = usePlayerAsSpawnPoint;
-		this.isCar = isCar;
+        this.attachments = attachments;
+        this.usePlayerAsSpawnPoint = usePlayerAsSpawnPoint;
+        this.isCar = isCar;
         SetId();
     }
-    
+
     int CalculateDynamicSellPrice(DZLTraderTypeStorage currentStorage, EntityAI item = null) {
         if (false == isStorageItem || sellPrice <= 0 || !currentStorage) {
             return sellPrice;
@@ -41,7 +40,7 @@ class DZLTraderType: DZLIdModel
 
         return  Math.Round(priceSpan * storageInPercent + sellPrice);
     }
-    
+
     int CalculateDynamicBuyPrice(DZLTraderTypeStorage currentStorage) {
         if (false == isStorageItem || buyPrice <= 0 || !currentStorage) {
             return buyPrice;

@@ -1,5 +1,4 @@
-class DZLHouseInventory
-{
+class DZLHouseInventory {
     private string version = "1";
     private string fileName = "";
     private int countOfStorage;
@@ -49,19 +48,19 @@ class DZLHouseInventory
     int GetUsedStorage() {
         return store.Count();
     }
-	
-	int GetLeftStorage() {
-		return countOfStorage - store.Count();
-	}
-	
-	int GetLevel(int inventoryItemsPerLevel) {
-		return countOfStorage / inventoryItemsPerLevel;
-	}
+
+    int GetLeftStorage() {
+        return countOfStorage - store.Count();
+    }
+
+    int GetLevel(int inventoryItemsPerLevel) {
+        return countOfStorage / inventoryItemsPerLevel;
+    }
 
     void AddToStore(array<EntityAI> items) {
         foreach(EntityAI item: items) {
-			DZLStoreItem storeItem = new DZLStoreItem();
-			storeItem.Init(item, "0 0 0", false, false);
+            DZLStoreItem storeItem = new DZLStoreItem();
+            storeItem.Init(item, "0 0 0", false, false);
             store.Insert(storeItem);
             GetGame().ObjectDelete(item);
         }
@@ -78,16 +77,16 @@ class DZLHouseInventory
         return null;
     }
 
-	void Remove(DZLStoreItem item) {
-	    store.RemoveItem(item);
-	    Save();
-	}
+    void Remove(DZLStoreItem item) {
+        store.RemoveItem(item);
+        Save();
+    }
 
-	array<ref DZLStoreItem> GetStore() {
-		return store;
-	}
+    array<ref DZLStoreItem> GetStore() {
+        return store;
+    }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLHouseInventory>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;
@@ -95,7 +94,7 @@ class DZLHouseInventory
         return false;
     }
 
-    private bool Save(){
+    private bool Save() {
         if (GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLHouseInventory>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);

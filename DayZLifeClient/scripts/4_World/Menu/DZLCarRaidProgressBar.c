@@ -1,9 +1,8 @@
-class DZLCarRaidProgressBar: DZLBaseProgressBar
-{
+class DZLCarRaidProgressBar: DZLBaseProgressBar {
     private CarScript car;
-	private EntityAI item;
+    private EntityAI item;
 
-	override Widget Init() {
+    override Widget Init() {
         return super.Init();
     }
 
@@ -12,17 +11,17 @@ class DZLCarRaidProgressBar: DZLBaseProgressBar
 
         duration = 999999999999999;
     }
-	
-	void SetRaidItem(EntityAI item) {
-		this.item = item;
-	}
 
-	override void OnHide() {
-	    super.OnHide();
-	}
-	
-	override void SendFinishEvent() {
-	    car.isRaided;
+    void SetRaidItem(EntityAI item) {
+        this.item = item;
+    }
+
+    override void OnHide() {
+        super.OnHide();
+    }
+
+    override void SendFinishEvent() {
+        car.isRaided;
         GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_CAR_RAID, new Param1<EntityAI>(item), true);
     }
 }

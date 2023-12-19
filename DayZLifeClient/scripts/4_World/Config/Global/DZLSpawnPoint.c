@@ -1,5 +1,4 @@
-class DZLBaseSpawnPoint: DZLIdModel
-{
+class DZLBaseSpawnPoint: DZLIdModel {
     vector orientation;
     vector point;
 

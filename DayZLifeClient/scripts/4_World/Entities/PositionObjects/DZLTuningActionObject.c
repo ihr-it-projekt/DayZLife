@@ -1,10 +1,9 @@
-class DZLTuningActionObject: DZLBaseActionObject
-{
+class DZLTuningActionObject: DZLBaseActionObject {
     void DZLTuningActionObject() {
-		this.isTuningPoint = true;
-	}
+        this.isTuningPoint = true;
+    }
 
-	override void SetActions() {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(DZLActionOpenTuningMenu);

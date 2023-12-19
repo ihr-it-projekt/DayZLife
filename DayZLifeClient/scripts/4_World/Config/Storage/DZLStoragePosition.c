@@ -1,5 +1,4 @@
-class DZLStoragePosition: DZLLicencePosition
-{
+class DZLStoragePosition: DZLLicencePosition {
     vector spawnPositionOfVehicles;
     vector spawnOrientationOfVehicles;
 

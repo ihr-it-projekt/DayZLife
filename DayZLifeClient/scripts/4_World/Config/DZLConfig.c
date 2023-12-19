@@ -1,5 +1,4 @@
-class DZLConfig
-{
+class DZLConfig {
     private static ref DZLConfig config;
 
     static DZLConfig Get() {
@@ -12,11 +11,11 @@ class DZLConfig
 
     ref DZLHouseConfig houseConfig;
     ref DZLHouseExtensions houseExtensions;
-	ref DZLBankingConfig bankConfig;
-	ref DZLJobConfig jobConfig;
-	ref DZLLicenceConfig licenceConfig;
-	ref DZLTraderConfig traderConfig;
-	ref DZLJobSpawnPoints copSpawnPoints;
+    ref DZLBankingConfig bankConfig;
+    ref DZLJobConfig jobConfig;
+    ref DZLLicenceConfig licenceConfig;
+    ref DZLTraderConfig traderConfig;
+    ref DZLJobSpawnPoints copSpawnPoints;
     ref DZLJobSpawnPoints medicSpawnPoints;
     ref DZLJobSpawnPoints armySpawnPoints;
     ref DZLJobSpawnPoints civilSpawnPoints;
@@ -25,9 +24,9 @@ class DZLConfig
     ref DZLCarConfig carConfig;
     ref DZLMedicConfig medicConfig;
     ref DZLBaseBuildingConfig baseBuildingConfig;
-	ref DZLCrimeConfig crimeConfig;
-	ref DZLMessageConfig messageConfig;
-	ref DZLTuningConfig tuningConfig;
+    ref DZLCrimeConfig crimeConfig;
+    ref DZLMessageConfig messageConfig;
+    ref DZLTuningConfig tuningConfig;
 
     void DZLConfig() {
         if (GetGame().IsServer()) {
@@ -45,9 +44,9 @@ class DZLConfig
             carConfig = new DZLCarConfig;
             medicConfig = new DZLMedicConfig;
             baseBuildingConfig = new DZLBaseBuildingConfig;
-			crimeConfig = new DZLCrimeConfig;
-			messageConfig = new DZLMessageConfig;
-			tuningConfig = new DZLTuningConfig;
+            crimeConfig = new DZLCrimeConfig;
+            messageConfig = new DZLMessageConfig;
+            tuningConfig = new DZLTuningConfig;
         }
 
         jobIds = new array<string>;
@@ -69,30 +68,30 @@ class DZLConfig
         return civilSpawnPoints;
     }
 
-	ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
-	    if (houseConfig && houseConfig.houseConfigs) {
-		    return houseConfig.houseConfigs;
-	    }
-	    return null;
-	}
+    ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
+        if (houseConfig && houseConfig.houseConfigs) {
+            return houseConfig.houseConfigs;
+        }
+        return null;
+    }
 
-	ref array<ref DZLHouseExtension> GetExtensions() {
-	    if (houseExtensions && houseExtensions.extensions) {
+    ref array<ref DZLHouseExtension> GetExtensions() {
+        if (houseExtensions && houseExtensions.extensions) {
             return houseExtensions.extensions;
         }
         return null;
-	}
-	
-	DZLHouseExtension GetHouseExtensionById(string id) {
-		array<ref DZLHouseExtension> extensions = GetExtensions();
-		if (null == extensions) return null;
-		
-		foreach(DZLHouseExtension _extension: extensions) {
-			if (_extension.GetId() == id) {
-				return _extension;
-			}
-		}
-		
-		return null;
-	}
+    }
+
+    DZLHouseExtension GetHouseExtensionById(string id) {
+        array<ref DZLHouseExtension> extensions = GetExtensions();
+        if (null == extensions) return null;
+
+        foreach(DZLHouseExtension _extension: extensions) {
+            if (_extension.GetId() == id) {
+                return _extension;
+            }
+        }
+
+        return null;
+    }
 }

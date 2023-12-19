@@ -1,10 +1,9 @@
-class DZLLicenseActionObject: DZLBaseActionObject
-{
+class DZLLicenseActionObject: DZLBaseActionObject {
     void DZLLicenseActionObject() {
-		isLicensePoint = true;
-	}
+        isLicensePoint = true;
+    }
 
-	override void SetActions() {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(ActionOpenLicenseMenu);

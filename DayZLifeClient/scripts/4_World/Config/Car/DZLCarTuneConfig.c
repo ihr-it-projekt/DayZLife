@@ -1,5 +1,4 @@
-class DZLCarTuneConfig
-{
+class DZLCarTuneConfig {
     string type;
     ref array<ref CarTuneAttachment> tunedAttachments;
 

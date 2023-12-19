@@ -1,10 +1,9 @@
-class DZLLicenceCraftingActionObject: DZLBaseActionObject
-{
+class DZLLicenceCraftingActionObject: DZLBaseActionObject {
     void DZLLicenceCraftingActionObject() {
-		isLicenseActionPoint = true;
-	}
+        isLicenseActionPoint = true;
+    }
 
-	override void SetActions() {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(ActionLicenceCrafting);

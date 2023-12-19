@@ -1,5 +1,4 @@
-class DZLPlayerAccess
-{
+class DZLPlayerAccess {
     private bool canManageCops = true;
     private bool canManagePlayers = true;
     private bool canManageMedic = true;
@@ -11,9 +10,9 @@ class DZLPlayerAccess
         this.ident = ident;
         canManageCops = true;
         canManagePlayers = true;
-		canManageMedic = true;
-		canManageCars = true;
-		canManageArmy = true;
+        canManageMedic = true;
+        canManageCars = true;
+        canManageArmy = true;
     }
 
     string GetIdent() {
@@ -27,11 +26,11 @@ class DZLPlayerAccess
     bool CanManageCops() {
         return canManageCops;
     }
-	
+
     bool CanManageMedic() {
         return canManageMedic;
     }
-	
+
     bool CanManageArmy() {
         return canManageArmy;
     }

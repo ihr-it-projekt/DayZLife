@@ -1,5 +1,4 @@
-class DZLOpenTicketPlayer
-{
+class DZLOpenTicketPlayer {
     int valueOfTickets;
     int countOfTickets;
     string name;
@@ -11,7 +10,7 @@ class DZLOpenTicketPlayer
         countOfTickets = tickets.Count();
 
         foreach(DZLTicket ticket: tickets) {
-        	valueOfTickets += ticket.value;
+            valueOfTickets += ticket.value;
         }
     }
 }

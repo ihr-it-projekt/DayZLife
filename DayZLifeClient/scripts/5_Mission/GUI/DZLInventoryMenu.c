@@ -1,5 +1,4 @@
-modded class Inventory
-{
+modded class Inventory {
     TextWidget playerArrest;
     TextWidget moneyAtBank;
     TextWidget moneyAtPlayer;
@@ -15,21 +14,21 @@ modded class Inventory
     override void OnShow() {
         super.OnShow();
 
-		UpdateDzlValues();
-     }
+        UpdateDzlValues();
+    }
 
-	override void Update(float timeslice) {
-		super.Update(timeslice);
-		UpdateDzlValues();
-	}
-	
-	private void UpdateDzlValues() {
-		DZLPlayer dzlPlayer = DZLPlayerBaseHelper.GetPlayer().GetDZLPlayer();
+    override void Update(float timeslice) {
+        super.Update(timeslice);
+        UpdateDzlValues();
+    }
 
-         if (dzlPlayer) {
-             moneyAtBank.SetText(dzlPlayer.GetBankMoney().ToString());
-             moneyAtPlayer.SetText(dzlPlayer.GetMoney().ToString());
-             playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());
-         }
-	}
+    private void UpdateDzlValues() {
+        DZLPlayer dzlPlayer = DZLPlayerBaseHelper.GetPlayer().GetDZLPlayer();
+
+        if (dzlPlayer) {
+            moneyAtBank.SetText(dzlPlayer.GetBankMoney().ToString());
+            moneyAtPlayer.SetText(dzlPlayer.GetMoney().ToString());
+            playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());
+        }
+    }
 }

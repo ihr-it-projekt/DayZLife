@@ -1,13 +1,12 @@
-class DZLPlayerTicketMenu : DZLBaseMenu
-{
+class DZLPlayerTicketMenu : DZLBaseMenu {
     private PlayerBase receiver;
-	private ButtonWidget createTicket;
-	private EditBoxWidget inputTicket;
-	private EditBoxWidget inputTicketReason;
-	private TextWidget prisonerName;
+    private ButtonWidget createTicket;
+    private EditBoxWidget inputTicket;
+    private EditBoxWidget inputTicketReason;
+    private TextWidget prisonerName;
 
     void DZLPlayerTicketMenu() {
-		layoutPath = "DayZLifeClient/layout/Ticket/TicketMenu.layout";
+        layoutPath = "DayZLifeClient/layout/Ticket/TicketMenu.layout";
         Construct();
     }
 
@@ -20,49 +19,49 @@ class DZLPlayerTicketMenu : DZLBaseMenu
     }
 
     override Widget Init() {
-		super.Init();
-		
-		createTicket = creator.GetButtonWidget("createTicketButton");
-		inputTicket = creator.GetEditBoxWidget("input_ticket");
-		inputTicketReason = creator.GetEditBoxWidget("ticket_reason");
-		prisonerName = creator.GetTextWidget("prisonerName");
-		return layoutRoot;
+        super.Init();
+
+        createTicket = creator.GetButtonWidget("createTicketButton");
+        inputTicket = creator.GetEditBoxWidget("input_ticket");
+        inputTicketReason = creator.GetEditBoxWidget("ticket_reason");
+        prisonerName = creator.GetTextWidget("prisonerName");
+        return layoutRoot;
     }
-	
-	override void OnShow() {
-		super.OnShow();
-		prisonerName.SetText(receiver.GetIdentity().GetName());
-	}
-	
-	override bool OnClick(Widget w, int x, int y, int button) {
+
+    override void OnShow() {
+        super.OnShow();
+        prisonerName.SetText(receiver.GetIdentity().GetName());
+    }
+
+    override bool OnClick(Widget w, int x, int y, int button) {
         if (super.OnClick(w, x, y, button)) return true;
 
-        switch(w){
-            case createTicket:
-            	int ticketValue = inputTicket.GetText().ToInt();
-            	string ticketReason = inputTicketReason.GetText();
-		
-				if (ticketValue < 0) {
-				    player.DisplayMessage("#error_value_must_be_positiv_or_null");
-					return false;
-				}
-				
-				if (!receiver) {
-					player.DisplayMessage("#error_no_player_was_selected");
-					return false;
-				}
-				
-				if (ticketValue != 0) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
-                    inputTicket.SetText("");
-                    inputTicketReason.SetText("");
-		        } else {
-		            player.DisplayMessage("#error_value_is_not_a_int");
-		        }
-			
-                return true;
-            default:
-                break;
+        switch(w) {
+        case createTicket:
+            int ticketValue = inputTicket.GetText().ToInt();
+            string ticketReason = inputTicketReason.GetText();
+
+            if (ticketValue < 0) {
+                player.DisplayMessage("#error_value_must_be_positiv_or_null");
+                return false;
+            }
+
+            if (!receiver) {
+                player.DisplayMessage("#error_no_player_was_selected");
+                return false;
+            }
+
+            if (ticketValue != 0) {
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
+                inputTicket.SetText("");
+                inputTicketReason.SetText("");
+            } else {
+                player.DisplayMessage("#error_value_is_not_a_int");
+            }
+
+            return true;
+        default:
+            break;
         }
         return false;
     }

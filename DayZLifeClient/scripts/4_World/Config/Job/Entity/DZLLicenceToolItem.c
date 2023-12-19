@@ -1,3 +1,2 @@
-class DZLLicenceToolItem: DZLLicenceCraftItem
-{
+class DZLLicenceToolItem: DZLLicenceCraftItem {
 }

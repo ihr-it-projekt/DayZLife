@@ -1,10 +1,9 @@
-class DZLMessageMenu
-{
-	private ref DZLUIItemCreator creator;
-	private MultilineTextWidget message;
-	private ref Timer timer;
-	private string messageText;
-	private Widget layoutRoot;
+class DZLMessageMenu {
+    private ref DZLUIItemCreator creator;
+    private MultilineTextWidget message;
+    private ref Timer timer;
+    private string messageText;
+    private Widget layoutRoot;
 
 
     void ~DZLMessageMenu() {

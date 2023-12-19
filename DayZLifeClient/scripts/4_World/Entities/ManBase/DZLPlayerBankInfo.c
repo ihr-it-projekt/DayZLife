@@ -1,5 +1,4 @@
-class DZLPlayerBankInfo
-{
+class DZLPlayerBankInfo {
     string id;
     string name;
 

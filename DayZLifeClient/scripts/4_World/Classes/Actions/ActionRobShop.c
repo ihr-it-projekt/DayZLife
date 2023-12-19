@@ -1,5 +1,4 @@
-class ActionRobShop: ActionInteractBase
-{
+class ActionRobShop: ActionInteractBase {
     DZLCrimeConfig config;
 
     DZLCrimeConfig GetConfig() {
@@ -10,50 +9,49 @@ class ActionRobShop: ActionInteractBase
         return config;
     }
 
-	void ActionRobShop() {
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
+    void ActionRobShop() {
+        m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
-	}
+    }
 
-	override string GetText() {
+    override string GetText() {
         return "#rob_shop";
     }
 
-	override void CreateConditionComponents() {
-		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new DZL_CCTActionObject;
-	}
+    override void CreateConditionComponents() {
+        m_ConditionItem = new CCINone;
+        m_ConditionTarget = new DZL_CCTActionObject;
+    }
 
-	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item )
-	{
-		if (GetGame().IsClient()) {
-		    if (!player.GetConfig()) return false;
-			config = player.GetConfig().crimeConfig;
-		} else {
-			GetConfig();
-		}
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
+        if (GetGame().IsClient()) {
+            if (!player.GetConfig()) return false;
+            config = player.GetConfig().crimeConfig;
+        } else {
+            GetConfig();
+        }
 
-		DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
+        DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
-		if (!objectTarget || !objectTarget.IsShopActionPoint()) return false;
-		
-		if (config) {
-			EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
+        if (!objectTarget || !objectTarget.IsShopActionPoint()) return false;
 
-			if(!item_in_hands_source) return false;
+        if (config) {
+            EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
-			bool hasItem = false;
-			foreach (string itemForRaid: config.robTools) {
-			    if (item_in_hands_source.GetType() == itemForRaid) {
-			        hasItem = true;
-			        break;
-			    }
-			}
+            if(!item_in_hands_source) return false;
 
-			if(!hasItem) return false;
+            bool hasItem = false;
+            foreach (string itemForRaid: config.robTools) {
+                if (item_in_hands_source.GetType() == itemForRaid) {
+                    hasItem = true;
+                    break;
+                }
+            }
 
-            if (GetGame().IsServer()){
+            if(!hasItem) return false;
+
+            if (GetGame().IsServer()) {
                 if (config.raidIsCopControlled && config.minCountCopsForRaid > 0) {
                     if (DZLDatabaseLayer.Get().GetCopCount() < config.minCountCopsForRaid) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_to_less_cops");
@@ -70,15 +68,15 @@ class ActionRobShop: ActionInteractBase
                     } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_wrong_time");
                         return false;
-                    } 
+                    }
                 }
             }
 
-			return true;
-		}
+            return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
     override void OnStartClient(ActionData action_data) {
         PlayerBase player = action_data.m_Player;

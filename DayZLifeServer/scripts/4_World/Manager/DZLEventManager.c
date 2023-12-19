@@ -1,5 +1,4 @@
-class DZLEventManager
-{
+class DZLEventManager {
     ref DZLBuyHouseListener buyHouse;
     ref DZLConfigListener config;
     ref DZLPlayerHouseListener playerHouse;

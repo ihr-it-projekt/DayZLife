@@ -1,5 +1,4 @@
-class DZLTraderListener
-{
+class DZLTraderListener {
     ref DZLTraderConfig config;
     ref DZLBankingConfig bankConfig;
 
@@ -16,12 +15,12 @@ class DZLTraderListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_TRADE_ACTION) {
             autoptr Param3<ref array<string>,ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
-            if (ctx.Read(paramTrade)){
+            if (ctx.Read(paramTrade)) {
                 array<EntityAI> playerItems = PlayerBase.Cast(target).GetPlayerItems();
                 int sum = 0;
                 int taxSum = 0;
                 int countSellItems = 0;
-				array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
+                array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
                 array<EntityAI> itemsToSell = paramTrade.param2;
                 array<int> itemsToSellPrice = new array<int>;
                 array<string> itemsToBuyParam = paramTrade.param1;
@@ -30,16 +29,16 @@ class DZLTraderListener
                     DZLTraderCategory category = config.categories.GetCatByName(categoryName);
 
                     if (!category) continue;
-					
+
                     foreach(DZLTraderType type: category.items) {
-						bool mustSave = false;
-						DZLTraderTypeStorage storage = DZLDatabaseLayer.Get().GetTraderStorage().GetCurrentStorageByName(type.type);
+                        bool mustSave = false;
+                        DZLTraderTypeStorage storage = DZLDatabaseLayer.Get().GetTraderStorage().GetCurrentStorageByName(type.type);
                         if (itemsToBuyParam.Count() > 0) {
                             foreach(string traderType: itemsToBuyParam) {
                                 if (traderType == type.GetId()) {
                                     typesToBuy.Insert(type);
-									sum += type.CalculateDynamicBuyPrice(storage);
-									if (storage) storage.StorageDown();
+                                    sum += type.CalculateDynamicBuyPrice(storage);
+                                    if (storage) storage.StorageDown();
                                     mustSave = true;
                                 }
                             }
@@ -58,9 +57,9 @@ class DZLTraderListener
 
                                 if (item.GetType() == type.type) {
                                     float itemPrice = type.CalculateDynamicSellPrice(storage, item);
-									itemPrice = DZLTraderHelper.GetQuantityPrice(itemPrice, item);
+                                    itemPrice = DZLTraderHelper.GetQuantityPrice(itemPrice, item);
 
-									float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
+                                    float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
 
                                     sum -=  Math.Round(itemPrice - itemTax);
                                     taxSum += Math.Round(itemTax);
@@ -68,21 +67,21 @@ class DZLTraderListener
                                     countSellItems++;
                                     itemsToSellPrice.Insert(type.sellPrice);
                                     if (storage) storage.StorageUp(DZLTraderHelper.GetQuantity(item));
-									mustSave = true;
-                               }
+                                    mustSave = true;
+                                }
                             }
                         }
 
                         if (storage && storage.IsStorageBelowZero()) {
                             DZLSendMessage(sender, "#you_buy_too_much");
-							return;
+                            return;
                         }
                         if (storage && storage.IsStorageOverFilled()) {
                             DZLSendMessage(sender, "#you_sell_too_much");
-							return;
+                            return;
                         }
-						
-						if (mustSave && storage) storage.Save();
+
+                        if (mustSave && storage) storage.Save();
                     }
                 }
 
@@ -101,31 +100,31 @@ class DZLTraderListener
                     }
 
                     int index = itemsToSell.Count() - 1;
-					if (index > -1) {
-						EntityAI itemSell = itemsToSell.Get(index);
-						int itemSellPrice = itemsToSellPrice.Get(index);
-						while (itemSell) {
+                    if (index > -1) {
+                        EntityAI itemSell = itemsToSell.Get(index);
+                        int itemSellPrice = itemsToSellPrice.Get(index);
+                        while (itemSell) {
                             DZLLogTraderTransaction(sender.GetId(), "sell", itemSell.GetType(), itemSellPrice);
-	                        GetGame().ObjectDelete(itemSell);
-							
-							int tmpIndex = itemsToSell.Count() - 1;
+                            GetGame().ObjectDelete(itemSell);
 
-							if (tmpIndex == index) {
-							    itemsToSell.Remove(index);
-							}
+                            int tmpIndex = itemsToSell.Count() - 1;
+
+                            if (tmpIndex == index) {
+                                itemsToSell.Remove(index);
+                            }
 
                             CarScript car = CarScript.Cast(itemSell);
-							if (car) {
-							    DZLInsuranceManager.Get().RemoveCar(car);
-							}
+                            if (car) {
+                                DZLInsuranceManager.Get().RemoveCar(car);
+                            }
 
-							index = itemsToSell.Count() - 1;
-							if (index == -1) {
-								break;
-							}
-							itemSell = itemsToSell.Get(index);
-	                    }
-					}
+                            index = itemsToSell.Count() - 1;
+                            if (index == -1) {
+                                break;
+                            }
+                            itemSell = itemsToSell.Get(index);
+                        }
+                    }
 
                     dzlPlayer.AddMoneyToPlayer(sum * -1);
                     DZLBank bank = DZLDatabaseLayer.Get().GetBank();
@@ -136,10 +135,9 @@ class DZLTraderListener
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                 }
 
-			    GetGame().RPCSingleParam(target, DAY_Z_LIFE_TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
+                GetGame().RPCSingleParam(target, DAY_Z_LIFE_TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
             }
-        }
-        else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE) {
+        } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE) {
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE, new Param1<ref array<ref DZLTraderTypeStorage>>(DZLDatabaseLayer.Get().GetTraderStorage().GetStorageItems()), true, sender);
         }
     }
@@ -148,41 +146,41 @@ class DZLTraderListener
     private bool Add(PlayerBase player, DZLTraderType type, DZLTraderPosition position) {
         EntityAI item;
         InventoryLocation inventoryLocation = new InventoryLocation;
-		
-		if (!type.usePlayerAsSpawnPoint) {
-			item = player.SpawnEntityOnGroundPos(type.type, position.spawnPositionOfVehicles);
-			item.SetOrientation(position.spawnOrientationOfVehicles);
-			
-		} else {
-			if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
-	            item = player.GetHumanInventory().CreateInInventory(type.type);
-	        } else if (!player.GetHumanInventory().GetEntityInHands()) {
-	            item = player.GetHumanInventory().CreateInHands(type.type);
-	        }
-	
-	        if (!item) {
-	            item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
-	        }
+
+        if (!type.usePlayerAsSpawnPoint) {
+            item = player.SpawnEntityOnGroundPos(type.type, position.spawnPositionOfVehicles);
+            item.SetOrientation(position.spawnOrientationOfVehicles);
+
+        } else {
+            if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+                item = player.GetHumanInventory().CreateInInventory(type.type);
+            } else if (!player.GetHumanInventory().GetEntityInHands()) {
+                item = player.GetHumanInventory().CreateInHands(type.type);
+            }
+
+            if (!item) {
+                item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
+            }
 
             if (DZLTraderHelper.IsStackable(item)) {
                 ItemBase itemBase = ItemBase.Cast(item);
                 itemBase.SetQuantity(1);
             }
 
-		}
+        }
 
-		if (item) {
-			foreach(string attachment: type.attachments) {
-				if (item.GetInventory()) {
-					item.GetInventory().CreateAttachment(attachment);
-				}
-			}
-		}
+        if (item) {
+            foreach(string attachment: type.attachments) {
+                if (item.GetInventory()) {
+                    item.GetInventory().CreateAttachment(attachment);
+                }
+            }
+        }
 
-		if (item && type.isCar) {
-			Car car = Car.Cast(item);
+        if (item && type.isCar) {
+            Car car = Car.Cast(item);
 
-		    car.Fill(CarFluid.FUEL, car.GetFluidCapacity(CarFluid.FUEL));
+            car.Fill(CarFluid.FUEL, car.GetFluidCapacity(CarFluid.FUEL));
             car.Fill(CarFluid.OIL, car.GetFluidCapacity(CarFluid.OIL));
             car.Fill(CarFluid.BRAKE, car.GetFluidCapacity(CarFluid.BRAKE));
             car.Fill(CarFluid.COOLANT, car.GetFluidCapacity(CarFluid.COOLANT));
@@ -192,13 +190,13 @@ class DZLTraderListener
             car.Fill(CarFluid.USER3, car.GetFluidCapacity(CarFluid.USER3));
             car.Fill(CarFluid.USER4, car.GetFluidCapacity(CarFluid.USER4));
 
-			CarScript _car = CarScript.Cast(car);
-			
-			if (_car) {
-				_car.OwnCar(player.GetIdentity(), "", "");
-			}
-		}
+            CarScript _car = CarScript.Cast(car);
 
-		return !!item;
+            if (_car) {
+                _car.OwnCar(player.GetIdentity(), "", "");
+            }
+        }
+
+        return !!item;
     }
 }

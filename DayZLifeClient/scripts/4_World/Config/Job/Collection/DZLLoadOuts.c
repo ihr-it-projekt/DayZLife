@@ -1,6 +1,5 @@
-class DZLLoadOuts
-{
-	string version = "2";
+class DZLLoadOuts {
+    string version = "2";
     string jobId;
     ref array<ref DZLLoadOutCategory> loadOutCategories;
     ref array<ref DZLLoadOutPosition> loadOutPosition;
@@ -13,8 +12,8 @@ class DZLLoadOuts
 
             array<ref DZLLoadOutType> loadOutSubAttachments = new array<ref DZLLoadOutType>;
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
-			array<ref DZLLoadOutType> loadOutAttachments;
-            
+            array<ref DZLLoadOutType> loadOutAttachments;
+
             if (jobId == DAY_Z_LIFE_JOB_COP) {
                 loadOutPosition.Insert(new DZLLoadOutPosition("6630.058105 7.579785 2585.382568", "-137.999985 0 0"));
                 loadOutTypes.Insert(new DZLLoadOutType("PoliceCap"));
@@ -141,7 +140,7 @@ class DZLLoadOuts
         }
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json")) {
             JsonFileLoader<DZLLoadOuts>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);
             return true;
@@ -149,7 +148,7 @@ class DZLLoadOuts
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLLoadOuts>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);

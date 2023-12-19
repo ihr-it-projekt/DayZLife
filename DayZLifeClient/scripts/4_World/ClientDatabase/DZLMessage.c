@@ -1,5 +1,4 @@
-class DZLMessage: DZLIdModel
-{
+class DZLMessage: DZLIdModel {
     static string TYPE_COP = "cop";
     static string TYPE_MEDIC = "medic";
     static string TYPE_GLOBAL = "global";
@@ -16,7 +15,7 @@ class DZLMessage: DZLIdModel
     private ref DZLDate date;
     private string replayedMessage;
 
-    void DZLMessage(string _id = ""){
+    void DZLMessage(string _id = "") {
         if (GetGame().IsClient() && _id != "" && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id))) {
             JsonFileLoader<DZLMessage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id), this);
 
@@ -32,16 +31,16 @@ class DZLMessage: DZLIdModel
         sender = "";
         if (senderVisible) {
             sender = _sender.GetIdentity().GetName();
-			senderId = _sender.GetIdentity().GetId();
+            senderId = _sender.GetIdentity().GetId();
         }
         receiver = _receiver.GetId();
         type = _type;
         text = _text;
         if (type == TYPE_COP) {
-			position = _sender.GetPosition();
-			if(_position != "0 0 0") {
-				position = _position;
-			}
+            position = _sender.GetPosition();
+            if(_position != "0 0 0") {
+                position = _position;
+            }
         }
         SetId();
 
@@ -63,9 +62,9 @@ class DZLMessage: DZLIdModel
     }
 
     string GetShortText() {
-		if (text.Length() < 20) {
-			return text;
-		}
+        if (text.Length() < 20) {
+            return text;
+        }
 
         return text.Substring(0,20);
     }
@@ -103,31 +102,31 @@ class DZLMessage: DZLIdModel
         isAnswered = true;
         Save();
     }
-	
-	string GetType() {
-		return type;
-	}
 
-	string GetSenderId() {
-	    return senderId;
-	}
+    string GetType() {
+        return type;
+    }
 
-	string GetReplay() {
-	    if (replayedMessage) {
-	        return replayedMessage;
-	    }
-	    return "";
-	}
+    string GetSenderId() {
+        return senderId;
+    }
 
-	string GetFileName(string _id) {
-		return _id + ".json";
-	}
+    string GetReplay() {
+        if (replayedMessage) {
+            return replayedMessage;
+        }
+        return "";
+    }
+
+    string GetFileName(string _id) {
+        return _id + ".json";
+    }
 
     void Delete() {
         DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(id));
     }
 
-    bool Save(){
+    bool Save() {
         if (GetGame().IsClient()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLMessage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(id), this);

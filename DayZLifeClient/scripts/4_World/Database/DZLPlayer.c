@@ -1,5 +1,4 @@
-class DZLPlayer
-{
+class DZLPlayer {
     string fileName = "";
     string dayZPlayerId = "";
     private int money = 0;
@@ -12,41 +11,41 @@ class DZLPlayer
     private string lastArmyRank = "";
     private int robtMoney = 0;
     string playerName = "";
-	int onlineTimeCivil = 0;
-	int onlineTimeMedic = 0;
-	int onlineTimeCop = 0;
-	int arrestTimeInMinutes = 0;
-	string arrestReason = "";
-	private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
-	private string activeJobGrade = "Rekrut";
-	ref DZLDate lastLoginDate;
-	ref TStringArray licenceIds;
-	private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-	ref array<ref DZLStoreItem> itemsStore;
-	private string version = "5";
-	private ref array<ref DZLTicket> openTickets;
-	private string fractionId = "";
-	private ref array<string> fractionWherePlayerCanJoin;
-	private ref DZLFraction fraction = null;
-	[NonSerialized()] PlayerBase player;
+    int onlineTimeCivil = 0;
+    int onlineTimeMedic = 0;
+    int onlineTimeCop = 0;
+    int arrestTimeInMinutes = 0;
+    string arrestReason = "";
+    private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
+    private string activeJobGrade = "Rekrut";
+    ref DZLDate lastLoginDate;
+    ref TStringArray licenceIds;
+    private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
+    ref array<ref DZLStoreItem> itemsStore;
+    private string version = "5";
+    private ref array<ref DZLTicket> openTickets;
+    private string fractionId = "";
+    private ref array<string> fractionWherePlayerCanJoin;
+    private ref DZLFraction fraction = null;
+    [NonSerialized()] PlayerBase player;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
-		fileName = playerId + ".json";
+        fileName = playerId + ".json";
         if (!Load()) {
             bank = moneyToAdd;
             this.dayZPlayerId = playerId;
-			licenceIds = new TStringArray;
+            licenceIds = new TStringArray;
 
-			DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
-			openTickets = new array<ref DZLTicket>;
-		}
+            DZLDatabaseLayer.Get().GetBank().AddMoney(bank);
+            openTickets = new array<ref DZLTicket>;
+        }
 
-		DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
+        DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
         idents.AddPlayer(playerId);
 
         if (version == "3") {
             activeJobGrade = "Rekrut";
-        	openTickets = new array<ref DZLTicket>;
+            openTickets = new array<ref DZLTicket>;
         }
 
         DZLPaycheck payCheck = DZLRankHelper.getCurrentPayCheck(this, DZLConfig.Get().jobConfig.paycheck);
@@ -70,22 +69,22 @@ class DZLPlayer
             }
         }
 
-		Save();
+        Save();
     }
 
     bool IsPlayerInArrest() {
         return arrestTimeInMinutes != 0;
     }
-	
-	void ArrestCountDown() {
-		--arrestTimeInMinutes;
-		Save();
-	}
+
+    void ArrestCountDown() {
+        --arrestTimeInMinutes;
+        Save();
+    }
 
     void ArrestPlayer(string reason, int time) {
         arrestTimeInMinutes = time;
-		arrestReason = reason;
-		Save();
+        arrestReason = reason;
+        Save();
     }
 
     string GetActiveJob() {
@@ -95,21 +94,21 @@ class DZLPlayer
         }
         return activeJob;
     }
-	
-	void SetJobGrade(string grade) {
-		activeJobGrade = grade;
-		
-		if (DAY_Z_LIFE_JOB_COP == activeJob) {
-			lastCopRank = activeJobGrade;
-		} else if (DAY_Z_LIFE_JOB_MEDIC == activeJob) {
-			lastMedicRank = activeJobGrade;
-		} else if (DAY_Z_LIFE_JOB_ARMY == activeJob) {
-			lastArmyRank = activeJobGrade;
-		}
-	}
 
-	string GetLastJobRank(string job) {
-	    if (DAY_Z_LIFE_JOB_COP == job) {
+    void SetJobGrade(string grade) {
+        activeJobGrade = grade;
+
+        if (DAY_Z_LIFE_JOB_COP == activeJob) {
+            lastCopRank = activeJobGrade;
+        } else if (DAY_Z_LIFE_JOB_MEDIC == activeJob) {
+            lastMedicRank = activeJobGrade;
+        } else if (DAY_Z_LIFE_JOB_ARMY == activeJob) {
+            lastArmyRank = activeJobGrade;
+        }
+    }
+
+    string GetLastJobRank(string job) {
+        if (DAY_Z_LIFE_JOB_COP == job) {
             return lastCopRank;
         } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
             return lastMedicRank;
@@ -118,122 +117,119 @@ class DZLPlayer
         }
 
         return "Rekrut";
-	}
-	
-	string GetJobGrade() {
-		return activeJobGrade;
-	}
+    }
+
+    string GetJobGrade() {
+        return activeJobGrade;
+    }
 
     bool HasJobGrade(string grade) {
         return activeJobGrade == grade;
     }
-	
-	bool IsActiveAsCop() {
-		return DAY_Z_LIFE_JOB_COP == activeJob;
-	}
 
-	bool IsActiveAsMedic() {
-		return DAY_Z_LIFE_JOB_MEDIC == activeJob;
-	}
+    bool IsActiveAsCop() {
+        return DAY_Z_LIFE_JOB_COP == activeJob;
+    }
 
-	bool IsActiveAsArmy() {
-		return DAY_Z_LIFE_JOB_ARMY == activeJob;
-	}
+    bool IsActiveAsMedic() {
+        return DAY_Z_LIFE_JOB_MEDIC == activeJob;
+    }
 
-	bool IsActiveAsCivil() {
-		return DAY_Z_LIFE_JOB_CIVIL == activeJob || activeJob == "";
-	}
-	
-	void UpdateActiveJob(string job) {
-		activeJob = job;
+    bool IsActiveAsArmy() {
+        return DAY_Z_LIFE_JOB_ARMY == activeJob;
+    }
 
-		if (DAY_Z_LIFE_JOB_COP == job) {
-			activeJobGrade = lastCopRank;
-		} else if (DAY_Z_LIFE_JOB_MEDIC == job) {
-			activeJobGrade = lastMedicRank;
-		} else if (DAY_Z_LIFE_JOB_ARMY == job) {
-			activeJobGrade = lastArmyRank;
-		}
+    bool IsActiveAsCivil() {
+        return DAY_Z_LIFE_JOB_CIVIL == activeJob || activeJob == "";
+    }
 
-		Save();
-	}
-	
-	void UpdateOnlineTime() {
-		if (activeJob == DAY_Z_LIFE_JOB_COP) {
-			onlineTimeCop++;
-		} else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
-			onlineTimeMedic++;
-		} else {
-			onlineTimeCivil++;
-		}
-		
-		Save();
-	}
-	
-	void ResetOnlineTime() {
-		if (activeJob == DAY_Z_LIFE_JOB_COP) {
-			onlineTimeCop = 0;
-		} else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
-			onlineTimeMedic = 0;
-		} else {
-			onlineTimeCivil = 0;
-		}
-		
-		Save();
-	}
-	
-	int GetActiveOnlineTime() {
-		if (activeJob == DAY_Z_LIFE_JOB_COP) {
-			return onlineTimeCop;
-		} else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
-			return onlineTimeMedic;
-		}
-		return onlineTimeCivil;
-	}
+    void UpdateActiveJob(string job) {
+        activeJob = job;
+
+        if (DAY_Z_LIFE_JOB_COP == job) {
+            activeJobGrade = lastCopRank;
+        } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
+            activeJobGrade = lastMedicRank;
+        } else if (DAY_Z_LIFE_JOB_ARMY == job) {
+            activeJobGrade = lastArmyRank;
+        }
+
+        Save();
+    }
+
+    void UpdateOnlineTime() {
+        if (activeJob == DAY_Z_LIFE_JOB_COP) {
+            onlineTimeCop++;
+        } else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+            onlineTimeMedic++;
+        } else {
+            onlineTimeCivil++;
+        }
+
+        Save();
+    }
+
+    void ResetOnlineTime() {
+        if (activeJob == DAY_Z_LIFE_JOB_COP) {
+            onlineTimeCop = 0;
+        } else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+            onlineTimeMedic = 0;
+        } else {
+            onlineTimeCivil = 0;
+        }
+
+        Save();
+    }
+
+    int GetActiveOnlineTime() {
+        if (activeJob == DAY_Z_LIFE_JOB_COP) {
+            return onlineTimeCop;
+        } else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+            return onlineTimeMedic;
+        }
+        return onlineTimeCivil;
+    }
 
     void UpdateCop(bool isCop, string rank) {
         this.isCop = isCop;
         if (isCop) {
             this.lastCopRank = rank;
             if (IsActiveAsCop()) {
-               this.activeJobGrade = rank;
+                this.activeJobGrade = rank;
             }
-        }
-        else {
+        } else {
             this.lastCopRank = "";
             ResetJobCivil();
         }
 
         Save();
     }
-	
+
     void UpdateMedic(bool isMedic, string rank) {
         this.isMedic = isMedic;
 
         if (isMedic) {
             this.lastMedicRank = rank;
             if (IsActiveAsMedic()) {
-               this.activeJobGrade = rank;
+                this.activeJobGrade = rank;
             }
-        }
-        else {
+        } else {
             this.lastMedicRank = "";
             ResetJobCivil();
         }
 
         Save();
     }
-	
+
     void UpdateArmy(bool isArmy, string rank) {
         this.isArmy = isArmy;
 
         if (isArmy) {
             this.lastArmyRank = rank;
             if (IsActiveAsArmy()) {
-               this.activeJobGrade = rank;
+                this.activeJobGrade = rank;
             }
-        }
-        else {
+        } else {
             this.lastArmyRank = "";
             ResetJobCivil();
         }
@@ -243,18 +239,18 @@ class DZLPlayer
 
     private void ResetJobCivil() {
         if (IsActiveAsCivil()) {
-           this.activeJobGrade = "Rekrut";
+            this.activeJobGrade = "Rekrut";
         }
     }
 
     bool IsCop() {
         return isCop;
     }
-	
+
     bool IsMedic() {
         return isMedic;
     }
-    
+
     bool IsArmy() {
         return isArmy;
     }
@@ -269,8 +265,8 @@ class DZLPlayer
         money = 0;
         Save();
     }
-	
-	void AddMoneyToPlayer(int moneyCount) {
+
+    void AddMoneyToPlayer(int moneyCount) {
         if (GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 
@@ -279,17 +275,17 @@ class DZLPlayer
                 return;
             }
 
-			money += moneyCount;
-		    Save();
-		}
+            money += moneyCount;
+            Save();
+        }
     }
 
-	void AddMoneyToPlayerBank(int moneyCount) {
+    void AddMoneyToPlayerBank(int moneyCount) {
         if (GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
-			bank += moneyCount;
-		    Save();
-		}
+            bank += moneyCount;
+            Save();
+        }
     }
 
     bool HasEnoughMoney(int amount) {
@@ -360,9 +356,9 @@ class DZLPlayer
     void SaveItems(PlayerBase player) {
         itemsStore = new array<ref DZLStoreItem>;
         DZLStoreItem items = new DZLStoreItem;
-		items.Init(player, player.GetPosition(), true, false);
+        items.Init(player, player.GetPosition(), true, false);
 
-		itemsStore.Insert(items);
+        itemsStore.Insert(items);
         Save();
     }
 
@@ -393,151 +389,151 @@ class DZLPlayer
         money = 0;
         Save();
     }
-	
-	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
-		DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
-		playerTarget.AddMoneyToPlayer(moneyToTransfer);
 
-		AddMoneyToPlayer(-moneyToTransfer);
-	}
-	
-	int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
-	    int moneyBankAdd = moneyToTransfer;
+    void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+        DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
+        playerTarget.AddMoneyToPlayer(moneyToTransfer);
 
-		playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
-		
-		if (money > 0) {
-			if (money < moneyToTransfer) {
-			    DZLLogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
+        AddMoneyToPlayer(-moneyToTransfer);
+    }
 
-			    if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+    int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+        int moneyBankAdd = moneyToTransfer;
+
+        playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
+
+        if (money > 0) {
+            if (money < moneyToTransfer) {
+                DZLLogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
+
+                if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
                     DZLPlayerMoney.Get(player).AddMoney(-DZLPlayerMoney.Get(player).GetMoneyAmount());
                 }
 
-				moneyToTransfer -= money;
-				money = 0;
-			} else {
-			    DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
+                moneyToTransfer -= money;
+                money = 0;
+            } else {
+                DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 
-				if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+                if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
                     DZLPlayerMoney.Get(player).AddMoney(-moneyToTransfer);
                 } else {
                     money -= moneyToTransfer;
                 }
 
-				moneyToTransfer = 0;
-			}
-		}
-		
-		if (moneyToTransfer > 0) {
-		    DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank - moneyToTransfer, moneyToTransfer * -1);
-			bank -= moneyToTransfer;
-			moneyBankAdd -= moneyToTransfer;
-		}
-		
-		Save();
-		return moneyBankAdd;
-	}
+                moneyToTransfer = 0;
+            }
+        }
 
-	string CanBuyLicence(notnull DZLCraftLicence licenceToBuy, DZLCraftLicence depLicence){
-		if(!HasEnoughMoney(licenceToBuy.price)) return "#not_enough_money";
-		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
+        if (moneyToTransfer > 0) {
+            DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank - moneyToTransfer, moneyToTransfer * -1);
+            bank -= moneyToTransfer;
+            moneyBankAdd -= moneyToTransfer;
+        }
 
-		if (!depLicence) return "";
+        Save();
+        return moneyBankAdd;
+    }
 
-		if(depLicence && HasDependencyLicense(depLicence)) return "";
+    string CanBuyLicence(notnull DZLCraftLicence licenceToBuy, DZLCraftLicence depLicence) {
+        if(!HasEnoughMoney(licenceToBuy.price)) return "#not_enough_money";
+        if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
 
-		return "#you_have_not_the_dependency_licence";
-	}
+        if (!depLicence) return "";
 
-	bool HasDependencyLicense(notnull DZLCraftLicence depLicence) {
-	    return HasLicense(depLicence);
-	}
-	
-	bool HasLicense(DZLCraftLicence licenceToBuy) {
-		foreach(string licenceId: licenceIds){
-            if(licenceId == licenceToBuy.GetId()){
+        if(depLicence && HasDependencyLicense(depLicence)) return "";
+
+        return "#you_have_not_the_dependency_licence";
+    }
+
+    bool HasDependencyLicense(notnull DZLCraftLicence depLicence) {
+        return HasLicense(depLicence);
+    }
+
+    bool HasLicense(DZLCraftLicence licenceToBuy) {
+        foreach(string licenceId: licenceIds) {
+            if(licenceId == licenceToBuy.GetId()) {
                 return true;
             }
         }
         return false;
-	}
-	
-	void BuyLicence(DZLCraftLicence licenceToBuy){
-		AddMoneyToPlayer(-licenceToBuy.price);
+    }
 
-		licenceIds.Insert(licenceToBuy.GetId());
-		Save();
-	}
+    void BuyLicence(DZLCraftLicence licenceToBuy) {
+        AddMoneyToPlayer(-licenceToBuy.price);
 
-	void AddTicket(int value, string reason) {
-		openTickets.Insert(new DZLTicket(value, reason));
-		Save();
-	}
+        licenceIds.Insert(licenceToBuy.GetId());
+        Save();
+    }
 
-	array<ref DZLTicket> GetTickets() {
-		return openTickets;
-	}
+    void AddTicket(int value, string reason) {
+        openTickets.Insert(new DZLTicket(value, reason));
+        Save();
+    }
 
-	bool HasTickets() {
-		return 0 != openTickets.Count();
-	}
+    array<ref DZLTicket> GetTickets() {
+        return openTickets;
+    }
 
-	void RemoveTicketById(string id) {
-		if (!GetGame().IsServer()) return;
+    bool HasTickets() {
+        return 0 != openTickets.Count();
+    }
 
-		foreach(int index, DZLTicket ticket: openTickets) {
-			if (id == ticket.GetId()) {
-				openTickets.Remove(index);
-				Save();
-				return;
-			}
-		}
-	}
+    void RemoveTicketById(string id) {
+        if (!GetGame().IsServer()) return;
 
-	DZLTicket GetTicketById(string id) {
-		foreach(int index, DZLTicket ticket: openTickets) {
-			if (id == ticket.GetId()) {
-				return ticket;
-			}
-		}
-		return null;
-	}
+        foreach(int index, DZLTicket ticket: openTickets) {
+            if (id == ticket.GetId()) {
+                openTickets.Remove(index);
+                Save();
+                return;
+            }
+        }
+    }
 
-	bool IsFractionBoss() {
-	    return fractionId == dayZPlayerId;
-	}
+    DZLTicket GetTicketById(string id) {
+        foreach(int index, DZLTicket ticket: openTickets) {
+            if (id == ticket.GetId()) {
+                return ticket;
+            }
+        }
+        return null;
+    }
 
-	bool IsInAnyFraction() {
-	    return "" != fractionId;
-	}
+    bool IsFractionBoss() {
+        return fractionId == dayZPlayerId;
+    }
 
-	DZLFraction GetFraction() {
-	    if (GetGame().IsServer()) {
-	        fraction = DZLDatabaseLayer.Get().GetFraction(fractionId);
-	    }
+    bool IsInAnyFraction() {
+        return "" != fractionId;
+    }
 
-	    return fraction;
-	}
+    DZLFraction GetFraction() {
+        if (GetGame().IsServer()) {
+            fraction = DZLDatabaseLayer.Get().GetFraction(fractionId);
+        }
 
-	DZLFractionMember GetFractionMember() {
-	    if (fractionId) {
+        return fraction;
+    }
+
+    DZLFractionMember GetFractionMember() {
+        if (fractionId) {
             return GetFraction().GetMember(dayZPlayerId);
-	    }
-	    return null;
-	}
+        }
+        return null;
+    }
 
-	bool HasFractionRightCanAccessFractionGarage() {
-	    return GetFraction() && GetFractionMember().canAccessFractionGarage;
-	}
+    bool HasFractionRightCanAccessFractionGarage() {
+        return GetFraction() && GetFractionMember().canAccessFractionGarage;
+    }
 
-	bool HasFractionRightCanAccessBankAccount() {
-	    return GetFraction() && GetFractionMember() && GetFractionMember().canAccessBankAccount;
-	}
+    bool HasFractionRightCanAccessBankAccount() {
+        return GetFraction() && GetFractionMember() && GetFractionMember().canAccessBankAccount;
+    }
 
-	bool HasFractionRightCanGetMoneyFromBankAccount() {
-	    return GetFraction() && GetFractionMember() && GetFractionMember().canGetMoneyFromBankAccount;
-	}
+    bool HasFractionRightCanGetMoneyFromBankAccount() {
+        return GetFraction() && GetFractionMember() && GetFractionMember().canGetMoneyFromBankAccount;
+    }
 
     void RemoveFraction(string fractionId) {
         if (this.fractionId == fractionId) {
@@ -551,19 +547,19 @@ class DZLPlayer
     void SetFraction(DZLFraction fraction) {
         this.fraction = fraction;
         this.fractionId = fraction.GetId();
-		fractionWherePlayerCanJoin = new array<string>;
+        fractionWherePlayerCanJoin = new array<string>;
 
         Save();
     }
-	
-	void UpdateFraction(DZLFraction fraction) {
+
+    void UpdateFraction(DZLFraction fraction) {
         if (fractionId != fraction.GetId()) return;
-		
+
         this.fraction = fraction;
         this.fractionId = fraction.GetId();
 
         Save();
-    }	
+    }
 
     void RemovePotentialFraction(string fractionId) {
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
@@ -619,7 +615,7 @@ class DZLPlayer
         DZLMessageDB.Get().AddContact(player);
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayer>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;
@@ -627,7 +623,7 @@ class DZLPlayer
         return false;
     }
 
-    private bool Save(){
+    private bool Save() {
         if (GetGame().IsServer()) {
             if (dayZPlayerId + ".json" != fileName) {
                 LogMessageDZL("Can not save PlayerData. There are inconsistent in your player database: Please check file:" + fileName);
@@ -640,8 +636,8 @@ class DZLPlayer
             DZLJsonFileHandler<DZLPlayer>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             fraction = fractionTemp;
 
-			return true;
+            return true;
         }
-		return false;
+        return false;
     }
 }

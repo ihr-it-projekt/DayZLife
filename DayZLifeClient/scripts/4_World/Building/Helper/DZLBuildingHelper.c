@@ -1,14 +1,13 @@
-class DZLBuildingHelper
-{
-    static ref DZLBuilding ActionTargetToDZLBuilding(ActionTarget target){
+class DZLBuildingHelper {
+    static ref DZLBuilding ActionTargetToDZLBuilding(ActionTarget target) {
         Building building = Building.Cast(target.GetObject());
         if(building) {
             return new DZLBuilding(building);
         }
         return null;
     }
-	
-	static ref DZLHouse ActionTargetToDZLHouse(ActionTarget target){
+
+    static ref DZLHouse ActionTargetToDZLHouse(ActionTarget target) {
         Building building = Building.Cast(target.GetObject());
         if(building) {
             return DZLDatabaseLayer.Get().GetHouse(building);
@@ -21,13 +20,13 @@ class DZLBuildingHelper
         array<CargoBase> proxyCargos = new array<CargoBase>;
 
         GetGame().GetObjectsAtPosition(house.GetPosition(), 2, objects, proxyCargos);
-		
+
         foreach (Object object: objects) {
             if (object.GetType() == house.GetName()) {
                 return Building.Cast(object);
             }
         }
-     	
+
         return null;
     }
 }

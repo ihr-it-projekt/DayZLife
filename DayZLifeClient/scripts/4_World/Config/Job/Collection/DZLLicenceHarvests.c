@@ -1,6 +1,5 @@
-class DZLWorkZones
-{
-	string version = "2";
+class DZLWorkZones {
+    string version = "2";
     ref array<ref DZLWorkZone> workZones;
 
     void DZLWorkZones() {
@@ -105,7 +104,7 @@ class DZLWorkZones
                 workZones.Insert(zone);
                 //Harvest Diamond end
             } else {
-             // add life config;
+                // add life config;
                 // Harvest Apple 1
                 itemsThatCanHarvest = new array<string>;
                 itemsThatNeededForHarvest = new array<string>;
@@ -344,85 +343,85 @@ class DZLWorkZones
                 itemsThatNeededForHarvest = new array<string>;
                 harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
 
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackLeft_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackLeft_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackLeft_WineRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackRight_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackRight_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackRight_WineRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_CoDriver_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_CoDriver_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_CoDriver_WineRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_Driver_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_Driver_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanDoors_Driver_WineRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanHood_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanHood_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanHood_WineRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanTrunk_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanTrunk_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_CivSedanTrunk_WineRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackDoors_CoDriver_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackDoors_CoDriver_GreenRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackDoors_CoDriver_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackDoors_Driver_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackDoors_Driver_GreenRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackDoors_Driver_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackHood_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackHood_GreenRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackHood_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackTrunk_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackTrunk_GreenRust");
-				itemsThatCanHarvest.Insert("DZL_HatchbackTrunk_WhiteRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_1_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_1_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_1_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_2_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_2_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_2_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_1_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_1_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_1_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_2_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_2_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_2_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Hood_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Hood_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Hood_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Trunk_BlackRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Trunk_BlueRust");
-				itemsThatCanHarvest.Insert("DZL_Hatchback_02_Trunk_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_1_GreyRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_1_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_1_YellowRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_2_GreyRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_2_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_2_YellowRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_1_GreyRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_1_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_1_YellowRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_2_GreyRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_2_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_2_YellowRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Hood_GreyRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Hood_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Hood_YellowRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Trunk_GreyRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Trunk_RedRust");
-				itemsThatCanHarvest.Insert("DZL_Sedan_02_Trunk_YellowRust");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Hood_Orange");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Hood_Blue");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Hood");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Door_2_1_Orange");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Door_2_1_Blue");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Door_2_1");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Door_1_1_Orange");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Door_1_1_Blue");
-				itemsThatCanHarvest.Insert("DZL_Truck_01_Door_1_1");
-				itemsThatCanHarvest.Insert("CarRadiator");
-				itemsThatCanHarvest.Insert("CarBattery");
-				itemsThatCanHarvest.Insert("TruckBattery");
-				itemsThatCanHarvest.Insert("SparkPlug");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackLeft_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackLeft_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackLeft_WineRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackRight_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackRight_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_BackRight_WineRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_CoDriver_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_CoDriver_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_CoDriver_WineRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_Driver_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_Driver_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanDoors_Driver_WineRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanHood_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanHood_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanHood_WineRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanTrunk_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanTrunk_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_CivSedanTrunk_WineRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackDoors_CoDriver_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackDoors_CoDriver_GreenRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackDoors_CoDriver_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackDoors_Driver_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackDoors_Driver_GreenRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackDoors_Driver_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackHood_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackHood_GreenRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackHood_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackTrunk_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackTrunk_GreenRust");
+                itemsThatCanHarvest.Insert("DZL_HatchbackTrunk_WhiteRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_1_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_1_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_1_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_2_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_2_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_1_2_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_1_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_1_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_1_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_2_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_2_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Door_2_2_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Hood_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Hood_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Hood_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Trunk_BlackRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Trunk_BlueRust");
+                itemsThatCanHarvest.Insert("DZL_Hatchback_02_Trunk_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_1_GreyRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_1_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_1_YellowRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_2_GreyRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_2_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_1_2_YellowRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_1_GreyRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_1_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_1_YellowRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_2_GreyRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_2_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Door_2_2_YellowRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Hood_GreyRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Hood_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Hood_YellowRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Trunk_GreyRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Trunk_RedRust");
+                itemsThatCanHarvest.Insert("DZL_Sedan_02_Trunk_YellowRust");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Hood_Orange");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Hood_Blue");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Hood");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Door_2_1_Orange");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Door_2_1_Blue");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Door_2_1");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Door_1_1_Orange");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Door_1_1_Blue");
+                itemsThatCanHarvest.Insert("DZL_Truck_01_Door_1_1");
+                itemsThatCanHarvest.Insert("CarRadiator");
+                itemsThatCanHarvest.Insert("CarBattery");
+                itemsThatCanHarvest.Insert("TruckBattery");
+                itemsThatCanHarvest.Insert("SparkPlug");
 
                 itemsThatNeededForHarvest.Insert("Wrench");
                 itemsThatNeededForHarvest.Insert("LugWrench");
@@ -460,7 +459,7 @@ class DZLWorkZones
         }
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json")) {
             JsonFileLoader<DZLWorkZones>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);
             return true;
@@ -468,7 +467,7 @@ class DZLWorkZones
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLWorkZones>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);

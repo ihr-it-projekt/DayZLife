@@ -1,5 +1,4 @@
-class DZLMessageListener
-{
+class DZLMessageListener {
     void DZLMessageListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
@@ -12,7 +11,7 @@ class DZLMessageListener
         if (rpc_type == DAY_Z_LIFE_SEND_MESSAGE) {
             PlayerBase player = PlayerBase.Cast(target);
             autoptr Param4<string, string, string, bool> paramMessage;
-            if (ctx.Read(paramMessage) && player){
+            if (ctx.Read(paramMessage) && player) {
                 string receiverId = paramMessage.param1;
                 string text = paramMessage.param2;
                 string type = paramMessage.param3;
@@ -23,7 +22,7 @@ class DZLMessageListener
                 if (!message) {
                     DZLSendMessage(sender, "#recipient_is_not_online_you_can_not_answer");
                 }
-           }
+            }
         } else if (rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {
             PlayerBase playerGetList = PlayerBase.Cast(target);
             SendOnlinePlayerList(playerGetList);

@@ -1,7 +1,6 @@
-class DZLLicencePosition
-{
+class DZLLicencePosition {
     vector position;
-	vector orientation
+    vector orientation
 
     void DZLLicencePosition(vector position, vector orientation) {
         Init(position, orientation);

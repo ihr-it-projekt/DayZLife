@@ -1,19 +1,16 @@
-class ActionRobMoneyFromDead: ActionInteractBase
-{
+class ActionRobMoneyFromDead: ActionInteractBase {
     void ActionRobMoney() {
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
+        m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
     }
 
-    override void CreateConditionComponents()
-    {
+    override void CreateConditionComponents() {
         m_ConditionTarget = new CCTMan(UAMaxDistances.DEFAULT, false);
         m_ConditionItem = new CCINone;
     }
 
-    override string GetText()
-    {
+    override string GetText() {
         return "#rob_money";
     }
 

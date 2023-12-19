@@ -1,5 +1,4 @@
-class DZLCrimeConfig
-{
+class DZLCrimeConfig {
     private string version = "1";
     int maxMoneyPerTick = 30;
     int minMoneyPerTick = 3;
@@ -36,7 +35,7 @@ class DZLCrimeConfig
 
         foreach(DZLCrimePosition position: shopPosition) {
             float distanceToPos = vector.Distance(position.position, playerPosition);
-            if (distanceToPos <= distance){
+            if (distanceToPos <= distance) {
                 return position;
             }
         }
@@ -44,7 +43,7 @@ class DZLCrimeConfig
         return null;
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json")) {
             JsonFileLoader<DZLCrimeConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
             return true;
@@ -52,7 +51,7 @@ class DZLCrimeConfig
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLCrimeConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);

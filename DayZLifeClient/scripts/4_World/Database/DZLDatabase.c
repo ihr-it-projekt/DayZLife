@@ -1,5 +1,4 @@
-class DZLDatabase
-{
+class DZLDatabase {
     private ref map<string, ref DZLHouse> dzlHouses;
     private ref map<string, ref DZLPlayer> dzlPlayers;
     private ref map<string, ref DZLPlayerHouse> dzlPlayerHouses;
@@ -14,16 +13,16 @@ class DZLDatabase
 
     void Init(DZLDatabaseLayer databaseLayer) {
         DZLPlayerIdentities dzlPlayerIdentities = databaseLayer.GetPlayerIds();
-		
-		array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
+
+        array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
         foreach(string ident: allPlayer) {
             DZLPlayer _player = databaseLayer.GetPlayerFromFiles(ident);
             dzlPlayers.Insert(ident, _player);
         }
     }
 
-	DZLPlayer GetPlayer(string playerId) {
-		if ("" == playerId) return null;
+    DZLPlayer GetPlayer(string playerId) {
+        if ("" == playerId) return null;
         DZLPlayer player;
         if (!dzlPlayers.Find(playerId, player)) {
             player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);

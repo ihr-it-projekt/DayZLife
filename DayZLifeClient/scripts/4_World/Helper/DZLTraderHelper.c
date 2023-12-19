@@ -1,5 +1,4 @@
-class DZLTraderHelper
-{
+class DZLTraderHelper {
     static bool IsStackable(EntityAI item) {
         if (item && item.ConfigGetBool("canBeSplit")) {
             return true;
@@ -9,18 +8,18 @@ class DZLTraderHelper
     }
 
 
-	static float GetQuantityPrice(float price, EntityAI item = null) {
-	    if (DZLTraderHelper.IsStackable(item)) {
-	        price = price * GetQuantity(item);
+    static float GetQuantityPrice(float price, EntityAI item = null) {
+        if (DZLTraderHelper.IsStackable(item)) {
+            price = price * GetQuantity(item);
         } else if(item) {
-	        price = price / GetQuantityMax(item) * GetQuantity(item);
-	    }
+            price = price / GetQuantityMax(item) * GetQuantity(item);
+        }
 
-		return price;
-	}
+        return price;
+    }
 
-	static float GetQuantity(EntityAI item) {
-	    int quantity = 1;
+    static float GetQuantity(EntityAI item) {
+        int quantity = 1;
         if (item) {
             quantity = item.GetQuantity();
         }
@@ -32,8 +31,8 @@ class DZLTraderHelper
         return quantity;
     }
 
-	static float GetQuantityMax(EntityAI item) {
-	    int quantity = 1;
+    static float GetQuantityMax(EntityAI item) {
+        int quantity = 1;
         if (item) {
             quantity = item.GetQuantityMax();
         }

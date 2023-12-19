@@ -1,5 +1,4 @@
-class DZLHarvestListener
-{
+class DZLHarvestListener {
     DZLJobConfig config;
     void DZLHarvestListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -30,7 +29,7 @@ class DZLHarvestListener
                     }
                     foreach(string itemsThatNeededForHarvest: relation.itemsThatNeededForHarvest) {
                         itemsThatNeededForHarvest.ToLower();
-                         if (item_in_hands_source && handItemType == itemsThatNeededForHarvest) {
+                        if (item_in_hands_source && handItemType == itemsThatNeededForHarvest) {
                             if (0 < item_in_hands_source.GetHealth()) {
                                 matchedRelations.Insert(relation);
                             }

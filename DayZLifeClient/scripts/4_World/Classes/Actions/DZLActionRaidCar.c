@@ -1,34 +1,33 @@
-class DZLActionRaidCar: ActionInteractBase
-{
+class DZLActionRaidCar: ActionInteractBase {
     ref DZLCarConfig config;
 
-	void DZLActionRaidCar(){
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
+    void DZLActionRaidCar() {
+        m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_OPENDOORFW;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
         m_HUDCursorIcon = CursorIcons.OpenDoors;
 
-        if (GetGame().IsServer()){
+        if (GetGame().IsServer()) {
             config = DZLConfig.Get().carConfig;
         }
-	}
+    }
 
-	override string GetText(){
-		return "#break_door";
-	}
-	
-	override void CreateConditionComponents(){	
-		m_ConditionItem = new CCINone;
-		m_ConditionTarget = new DZL_CCTCar(false);
-	}
+    override string GetText() {
+        return "#break_door";
+    }
 
-	override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-	    CarScript car = CarScript.Cast(target.GetParent());
+    override void CreateConditionComponents() {
+        m_ConditionItem = new CCINone;
+        m_ConditionTarget = new DZL_CCTCar(false);
+    }
+
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        CarScript car = CarScript.Cast(target.GetParent());
         if (!car) return false;
 
-	    if (!player.GetConfig() || !player.GetConfig().carConfig) return false;
+        if (!player.GetConfig() || !player.GetConfig().carConfig) return false;
 
-		config = player.GetConfig().carConfig;
-		
+        config = player.GetConfig().carConfig;
+
         array<string> raidTools = config.carRaidTools;
 
         item = player.GetItemInHands();
@@ -46,21 +45,21 @@ class DZLActionRaidCar: ActionInteractBase
             }
         }
 
-		return false;
-	}
+        return false;
+    }
 
-	override void OnEndClient(ActionData action_data) {
-	    if (g_Game.GetUIManager().GetMenu() != NULL) return;
-		CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
-		DZLCarRaidProgressBar bar = action_data.m_Player.GetRaidCarProgressBar();
-		
-		bar.SetCar(car);
+    override void OnEndClient(ActionData action_data) {
+        if (g_Game.GetUIManager().GetMenu() != NULL) return;
+        CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
+        DZLCarRaidProgressBar bar = action_data.m_Player.GetRaidCarProgressBar();
 
-		EntityAI item = action_data.m_Player.GetItemInHands();
+        bar.SetCar(car);
+
+        EntityAI item = action_data.m_Player.GetItemInHands();
         if (!item) return;
 
-		bar.SetRaidItem(item);
-		bar.SetDuration(action_data.m_Player.GetConfig().carConfig.carRaidTimeInSeconds);
-		GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
-	}
+        bar.SetRaidItem(item);
+        bar.SetDuration(action_data.m_Player.GetConfig().carConfig.carRaidTimeInSeconds);
+        GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
+    }
 };

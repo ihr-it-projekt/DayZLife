@@ -1,5 +1,4 @@
-class DZLHouseAlarm : DZLHouseExtension
-{
+class DZLHouseAlarm : DZLHouseExtension {
     void DZLHouseAlarm(string id, string type, string description, int price, int level, string message) {
         this.id = id;
         this.type = type;

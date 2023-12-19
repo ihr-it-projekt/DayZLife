@@ -1,5 +1,4 @@
-class DZLPayCheck
-{
+class DZLPayCheck {
     static void Check(PlayerBase player, DZLPaycheckConfig paycheckConfig) {
         int amount = 0;
         int onlineTime = 100000000;

@@ -1,5 +1,4 @@
-class DZLShopRaidListener
-{
+class DZLShopRaidListener {
     private DZLCrimeConfig config;
     private ref Timer robTimer;
     private int moneyForRob = 0;
@@ -33,7 +32,7 @@ class DZLShopRaidListener
 
             if (moneyForRob == 0 && !robTimer) {
                 DZLSendMessage(playerGetMoney.GetIdentity(), "#there_is_no_money_to_take");
-				return;
+                return;
             }
 
             if (playerGetMoney) {
@@ -43,20 +42,20 @@ class DZLShopRaidListener
                     dzlPlayer.AddMoneyToPlayer(moneyForRob);
                     shopPosition = null;
                     raider = null;
-					
-					if (robTimer) {
-						robTimer.Stop();
-						robTimer = null;
-					}
-					
-					lastRaidTime = new DZLDate;
-					DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
-					DZLDatabaseLayer.Get().GetCrimeData().SetLastRaidTime(lastRaidTime);
+
+                    if (robTimer) {
+                        robTimer.Stop();
+                        robTimer = null;
+                    }
+
+                    lastRaidTime = new DZLDate;
+                    DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
+                    DZLDatabaseLayer.Get().GetCrimeData().SetLastRaidTime(lastRaidTime);
 
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_got: " + moneyForRob.ToString() + "$");
-					moneyForRob = 0;
-					dzlPlayer.GetFractionMember();
-					GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, playerGetMoney.GetIdentity());
+                    moneyForRob = 0;
+                    dzlPlayer.GetFractionMember();
+                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, playerGetMoney.GetIdentity());
                 } else {
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_can_not_take_the_money_wrong_position");
                 }
@@ -64,7 +63,7 @@ class DZLShopRaidListener
         }
     }
 
-    void StartRob(PlayerBase player, DZLCrimePosition position){
+    void StartRob(PlayerBase player, DZLCrimePosition position) {
         if (robTimer) {
             DZLSendMessage(player.GetIdentity(), "#there_is_one_shop_robbery_run_at_the_moment");
             return;
@@ -73,8 +72,8 @@ class DZLShopRaidListener
             DZLSendMessage(player.GetIdentity(), "#one_shop_is_already_robt_take_the_money_there");
             return;
         }
-		
-		int raidTimeLeft = GetRaidCoolDownTime();
+
+        int raidTimeLeft = GetRaidCoolDownTime();
 
         if(raidTimeLeft > 0) {
             DZLSendMessage(player.GetIdentity(), "#raid_can_started_earliest_in " + raidTimeLeft.ToString() + " #seconds");
@@ -98,16 +97,16 @@ class DZLShopRaidListener
         DZLSendMessage(null, "#rob_raid_was_started");
         robTimer.Run(config.raidDurationTickInSeconds, this, "TickRob", null, true);
     }
-	
-	void TickRob() {
-	    if (!raider || raider.GetHealth() < 1 || raider.IsUnconscious() || raider.IsRestrained()) {
-	        raider = null;
-	        robTimer.Stop();
-	        robTimer = null;
-	        DZLSendMessage(null, "#rob_raid_was_stopped");
-	        DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
-	        return;
-	    }
+
+    void TickRob() {
+        if (!raider || raider.GetHealth() < 1 || raider.IsUnconscious() || raider.IsRestrained()) {
+            raider = null;
+            robTimer.Stop();
+            robTimer = null;
+            DZLSendMessage(null, "#rob_raid_was_stopped");
+            DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
+            return;
+        }
 
         robDuration += config.raidDurationTickInSeconds;
         moneyForRob += Math.RandomIntInclusive(config.minMoneyPerTick, config.maxMoneyPerTick);
@@ -151,16 +150,16 @@ class DZLShopRaidListener
         if (message != "") {
             DZLSendMessage(raider.GetIdentity(), message);
         }
-	}
+    }
 
-	private int GetRaidCoolDownTime() {
+    private int GetRaidCoolDownTime() {
         DZLDate currentDate = new DZLDate();
-		int wait = 0;
+        int wait = 0;
         if (lastRaidTime) {
-			wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
-			
-			if(wait > 0) return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);
-		}
+            wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
+
+            if(wait > 0) return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);
+        }
 
         if (lastRaidTime) {
             lastRaidTime = null;

@@ -1,5 +1,4 @@
-class DZLEmergency
-{
+class DZLEmergency {
     string playerId;
     vector position;
 

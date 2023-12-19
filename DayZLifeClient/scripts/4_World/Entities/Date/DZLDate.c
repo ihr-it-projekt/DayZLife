@@ -1,6 +1,5 @@
-class DZLDate
-{
-	static const int YEAR_IN_SECONDS = 31556952;
+class DZLDate {
+    static const int YEAR_IN_SECONDS = 31556952;
     static const int MONTH_IN_SECONDS = 2419200;
     static const int DAY_IN_SECONDS = 86400;
     static const int HOUR_IN_SECONDS = 3600;

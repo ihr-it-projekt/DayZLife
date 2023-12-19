@@ -1,12 +1,10 @@
-class DZLShopActionObject: DZLBaseActionObject
-{
+class DZLShopActionObject: DZLBaseActionObject {
 
     void DZLShopActionObject() {
-		isShopActionPoint = true;
-	}
+        isShopActionPoint = true;
+    }
 
-    override void SetActions()
-    {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(ActionRobShop);

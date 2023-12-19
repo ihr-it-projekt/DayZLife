@@ -1,5 +1,4 @@
-class DZLTuneOption
-{
+class DZLTuneOption {
     string car;
     ref array<ref DZLCarTuneConfig>targetCars;
 

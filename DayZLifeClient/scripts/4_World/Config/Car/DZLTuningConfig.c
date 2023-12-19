@@ -1,5 +1,4 @@
-class DZLTuningConfig
-{
+class DZLTuningConfig {
     ref array<ref DZLTuneOption> options;
     ref array<ref DZLTunerPosition> tuner;
     string version = "1";
@@ -24,21 +23,21 @@ class DZLTuningConfig
             tunedAttachments.Insert(tunedAttachment);
             option.Insert(new DZLCarTuneConfig("Hatchback_02", tunedAttachments));
 
-			tunedAttachments = new array<ref CarTuneAttachment>;
+            tunedAttachments = new array<ref CarTuneAttachment>;
             tunedAttachment = new CarTuneAttachment("hood", "Hatchback_02_Hood_Blue");
             tunedAttachments.Insert(tunedAttachment);
             tunedAttachment = new CarTuneAttachment("trunk", "Hatchback_02_Trunk_Blue");
             tunedAttachments.Insert(tunedAttachment);
             option.Insert(new DZLCarTuneConfig("Hatchback_02_Blue", tunedAttachments));
 
-			tunedAttachments = new array<ref CarTuneAttachment>;
+            tunedAttachments = new array<ref CarTuneAttachment>;
             tunedAttachment = new CarTuneAttachment("hood", "Hatchback_02_Hood_Black");
             tunedAttachments.Insert(tunedAttachment);
             tunedAttachment = new CarTuneAttachment("trunk", "Hatchback_02_Trunk_Black");
             tunedAttachments.Insert(tunedAttachment);
             option.Insert(new DZLCarTuneConfig("Hatchback_02_Black", tunedAttachments));
-			
-			DZLTuneOption tuneOption = new DZLTuneOption("Hatchback_02", option);
+
+            DZLTuneOption tuneOption = new DZLTuneOption("Hatchback_02", option);
 
             options.Insert(tuneOption);
 
@@ -67,7 +66,7 @@ class DZLTuningConfig
         return null;
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json")) {
             JsonFileLoader<DZLTuningConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json", this);
             return true;
@@ -75,7 +74,7 @@ class DZLTuningConfig
         return false;
     }
 
-    private void Save(){
+    private void Save() {
         if (GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLTuningConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json", this);

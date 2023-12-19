@@ -1,6 +1,5 @@
-class DZLCrimeData: DZLFileStore
-{
-	private string version = "1";
+class DZLCrimeData: DZLFileStore {
+    private string version = "1";
     private DZLDate lastRaidTime;
     private bool shopRaidRuns = false;
 
@@ -12,7 +11,7 @@ class DZLCrimeData: DZLFileStore
 
     void SetLastRaidTime(DZLDate date) {
         lastRaidTime = date;
-		Save();
+        Save();
     }
 
     void SetShopRaid(bool raidRuns) {

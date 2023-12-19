@@ -1,8 +1,8 @@
 class DZLJobHouseDefinition {
-	
-   	string houseType;
-	ref array<string> raidTools;
-	int raidTimeInSeconds; 
+
+    string houseType;
+    ref array<string> raidTools;
+    int raidTimeInSeconds;
 
     void DZLJobHouseDefinition(string houseType, int raidTimeInSeconds = 1200) {
         this.houseType = houseType;

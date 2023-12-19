@@ -1,6 +1,5 @@
-modded class ActionCloseDoors
-{
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item){
+modded class ActionCloseDoors {
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         bool canClose = super.ActionCondition(player, target, item);
 
         Building building = Building.Cast(target.GetObject());
@@ -11,5 +10,5 @@ modded class ActionCloseDoors
 
         return canClose;
     }
-	
+
 }

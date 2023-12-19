@@ -1,5 +1,4 @@
-class DZLConfigListener
-{
+class DZLConfigListener {
     ref DZLConfig config;
 
     void DZLConfigListener() {

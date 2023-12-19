@@ -1,5 +1,4 @@
-class DZLTunerPosition: DZLLicencePosition
-{
+class DZLTunerPosition: DZLLicencePosition {
     ref array<string>playerIdsThatCanUsePosition;
 
     void DZLTunerPosition(vector position, vector orientation, array<string> playerIdsThatCanUsePosition) {
@@ -7,8 +6,7 @@ class DZLTunerPosition: DZLLicencePosition
         this.playerIdsThatCanUsePosition = playerIdsThatCanUsePosition;
     }
 
-    bool PlayerCanDoActions(string id)
-    {
+    bool PlayerCanDoActions(string id) {
         foreach(string playerId: playerIdsThatCanUsePosition) {
             if (id == playerId) {
                 return true;

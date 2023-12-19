@@ -1,7 +1,6 @@
-class DZLPlayerEventListener
-{
+class DZLPlayerEventListener {
     private PlayerBase player;
-	private ScriptCallQueue queue;
+    private ScriptCallQueue queue;
 
     void DZLPlayerEventListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
@@ -16,18 +15,18 @@ class DZLPlayerEventListener
         if (player) {
             if (rpc_type == DAY_Z_LIFE_RECEIVE_MESSAGE) {
                 Param1 <string> dzlMessage;
-                if (ctx.Read(dzlMessage) && dzlMessage.param1){
+                if (ctx.Read(dzlMessage) && dzlMessage.param1) {
                     player.DisplayMessage(dzlMessage.param1);
                 }
             } else if (rpc_type == DAY_Z_LIFE_RECEIVE_MEDIC_MESSAGE) {
                 Param1 <string> dzlMessageMedic;
-                if (ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1){
+                if (ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1) {
                     player.DisplayMessage(dzlMessageMedic.param1);
                 }
             } else if(rpc_type == DAY_Z_LIFE_HOUSE_RAID_ALARM) {
                 Param3<ref DZLHouseExtension, string, PlayerBase> dzlAlarm;
-                if (ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param3){
-                     player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));
+                if (ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param3) {
+                    player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));
                 }
             } else if(rpc_type == DAY_Z_LIFE_ALL_WAS_HEALED_RESPONSE) {
                 player.willDie = true;
@@ -35,22 +34,22 @@ class DZLPlayerEventListener
                 PlayerRespawn();
             } else if(rpc_type == DAY_Z_LIFE_SEND_MESSAGE_SERVER) {
                 Param1<ref DZLMessage> messagesParam;
-                if (ctx.Read(messagesParam) && messagesParam.param1){
-                     DZLMessage receivedMessage = messagesParam.param1;
-                     SEffectManager.CreateSound("DZL_Message_SoundSet", player.GetPosition()).SoundPlay();
-                     player.DisplayMessage("#you_got_a_message: " + receivedMessage.GetShortText());
-                     DZLMessageDB.Get().AddMessage(receivedMessage);
-                     player.RefreshMessageSystem();
+                if (ctx.Read(messagesParam) && messagesParam.param1) {
+                    DZLMessage receivedMessage = messagesParam.param1;
+                    SEffectManager.CreateSound("DZL_Message_SoundSet", player.GetPosition()).SoundPlay();
+                    player.DisplayMessage("#you_got_a_message: " + receivedMessage.GetShortText());
+                    DZLMessageDB.Get().AddMessage(receivedMessage);
+                    player.RefreshMessageSystem();
                 }
             } else if(rpc_type == DAY_Z_LIFE_EVENT_SEND_CONTACT) {
                 Param1<ref DZLOnlinePlayer> contactParam;
-                if (ctx.Read(contactParam) && contactParam.param1){
-                     DZLOnlinePlayer newContact = contactParam.param1;
-                     DZLPlayer dzlPlayer = player.GetDZLPlayer();
-					
-					if (dzlPlayer) {
-						dzlPlayer.AddToContact(newContact);
-					}
+                if (ctx.Read(contactParam) && contactParam.param1) {
+                    DZLOnlinePlayer newContact = contactParam.param1;
+                    DZLPlayer dzlPlayer = player.GetDZLPlayer();
+
+                    if (dzlPlayer) {
+                        dzlPlayer.AddToContact(newContact);
+                    }
                 }
             }
         }
@@ -75,14 +74,14 @@ class DZLPlayerEventListener
     }
 
     void PlayerRespawn() {
-   		GetGame().GetMenuDefaultCharacterData(false).SetRandomCharacterForced(true);
-   		GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().RespawnPlayer);
+        GetGame().GetMenuDefaultCharacterData(false).SetRandomCharacterForced(true);
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().RespawnPlayer);
 
-   		MissionGameplay missionGP = MissionGameplay.Cast(GetGame().GetMission());
-   		missionGP.DestroyAllMenus();
-   		missionGP.SetPlayerRespawning(true);
-   		
-		GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().GetMission().Continue);
-   	}
+        MissionGameplay missionGP = MissionGameplay.Cast(GetGame().GetMission());
+        missionGP.DestroyAllMenus();
+        missionGP.SetPlayerRespawning(true);
+
+        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().GetMission().Continue);
+    }
 
 }

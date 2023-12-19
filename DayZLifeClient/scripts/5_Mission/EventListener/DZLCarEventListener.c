@@ -1,5 +1,4 @@
-class DZLCarEventListener
-{
+class DZLCarEventListener {
     void DZLCarEventListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }

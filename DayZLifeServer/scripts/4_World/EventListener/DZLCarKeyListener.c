@@ -1,12 +1,11 @@
-class DZLCarKeyListener
-{
-	DZLCarConfig carConfig;
-	DZLAdmin adminConfig;
-	
+class DZLCarKeyListener {
+    DZLCarConfig carConfig;
+    DZLAdmin adminConfig;
+
     void DZLCarKeyListener() {
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-		carConfig = DZLConfig.Get().carConfig;
-		adminConfig = DZLConfig.Get().adminIds;
+        carConfig = DZLConfig.Get().carConfig;
+        adminConfig = DZLConfig.Get().adminIds;
     }
 
     void ~DZLCarKeyListener() {
@@ -16,7 +15,7 @@ class DZLCarKeyListener
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if (rpc_type == DAY_Z_LIFE_GET_UPDATE_CAR_KEYS) {
             autoptr Param2<CarScript, ref array<DZLOnlinePlayer>> paramUpdateKeys;
-            if (ctx.Read(paramUpdateKeys)){
+            if (ctx.Read(paramUpdateKeys)) {
 
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
                 dzlPlayerIdentities.UpdateCarKeys(sender, paramUpdateKeys.param1, paramUpdateKeys.param2);
@@ -41,7 +40,7 @@ class DZLCarKeyListener
             CarScript.Cast(target).SynchronizeValues(sender);
         } else if (rpc_type == DAY_Z_LIFE_CHANGE_CAR_OWNER) {
             autoptr Param2<string, CarScript> paramChangeOwner;
-            if (ctx.Read(paramChangeOwner) && sender){
+            if (ctx.Read(paramChangeOwner) && sender) {
                 string receiverId = paramChangeOwner.param1;
                 CarScript carToChange = paramChangeOwner.param2;
                 if (!carToChange.IsOwner(sender) && !adminConfig.CanManageCars(sender.GetId())) {
@@ -57,22 +56,22 @@ class DZLCarKeyListener
 
                 carToChange.ChangeOwner(receiverPlayer);
                 DZLSendMessage(sender, "#owner_has_changed");
-           }
+            }
         } else if (rpc_type == DAY_Z_LIFE_EVENT_CAR_RAID) {
             Param1<EntityAI> paramRaidCar;
-            if (ctx.Read(paramRaidCar)){
+            if (ctx.Read(paramRaidCar)) {
                 int raidIndex = Math.RandomIntInclusive(1, carConfig.chanceToRaid);
-				
-				if (raidIndex == 1) {
-					CarScript raidedCar = CarScript.Cast(target);
-	               	raidedCar.isRaided = true;
-	               	raidedCar.SynchronizeValues(null);
-	               	paramRaidCar.param1.SetHealth(0);
 
-	               	DZLSendMessage(sender, "#car_was_successful_raided");
-	               	DZLLogRaid(sender.GetId(), "raid car", raidedCar.GetType(), raidedCar.GetPosition());
-					return;
-				}
+                if (raidIndex == 1) {
+                    CarScript raidedCar = CarScript.Cast(target);
+                    raidedCar.isRaided = true;
+                    raidedCar.SynchronizeValues(null);
+                    paramRaidCar.param1.SetHealth(0);
+
+                    DZLSendMessage(sender, "#car_was_successful_raided");
+                    DZLLogRaid(sender.GetId(), "raid car", raidedCar.GetType(), raidedCar.GetPosition());
+                    return;
+                }
 
                 DZLSendMessage(sender, "#car_raid_has_failed");
                 paramRaidCar.param1.SetHealth(0);

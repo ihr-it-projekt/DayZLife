@@ -1,5 +1,4 @@
-class DZLBankRaidTimer
-{
+class DZLBankRaidTimer {
     private static ref DZLBankRaidTimer bankRaidTimer;
     private ref Timer raidTimer;
     private DZLBank bank;
@@ -8,8 +7,8 @@ class DZLBankRaidTimer
         if (!bankRaidTimer) {
             bankRaidTimer = new DZLBankRaidTimer(_bank);
         }
-		
-		return bankRaidTimer;
+
+        return bankRaidTimer;
     }
 
     void DZLBankRaidTimer(DZLBank _bank) {
@@ -27,7 +26,7 @@ class DZLBankRaidTimer
     }
 
     void Start() {
-		raidTimer = new Timer;
+        raidTimer = new Timer;
         raidTimer.Run(1, bank, "CheckRaid", null, true);
     }
 

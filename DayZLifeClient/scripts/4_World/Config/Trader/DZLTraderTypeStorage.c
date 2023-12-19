@@ -1,5 +1,4 @@
-class DZLTraderTypeStorage
-{
+class DZLTraderTypeStorage {
     private string type;
     private string fileName;
     private float currentStorage = 0;
@@ -7,7 +6,7 @@ class DZLTraderTypeStorage
     private int reducePerTick;
     private int tickLengthInMinutes;
     private int maxStorage;
-	private bool mustSave = false;
+    private bool mustSave = false;
 
     void DZLTraderTypeStorage(DZLTraderType type) {
         this.type = type.type;
@@ -19,13 +18,13 @@ class DZLTraderTypeStorage
         this.reducePerTick = type.reducePerTick;
         this.tickLengthInMinutes = type.tickLengthInMinutes;
         this.maxStorage = type.maxStorage;
-		mustSave = true;
+        mustSave = true;
         Save();
     }
-	
-	string GetType() {
-		return type;
-	}
+
+    string GetType() {
+        return type;
+    }
 
     bool IsType(string type) {
         return this.type == type;
@@ -33,7 +32,7 @@ class DZLTraderTypeStorage
 
     void StorageDown() {
         currentStorage--;
-		mustSave = true;
+        mustSave = true;
     }
 
     bool IsStorageBelowZero() {
@@ -67,7 +66,7 @@ class DZLTraderTypeStorage
     void IncreaseTick() {
         if (tickLengthInMinutes == 0) return;
         lastTick++;
-		mustSave = true;
+        mustSave = true;
     }
 
     void ResetTick() {
@@ -86,10 +85,10 @@ class DZLTraderTypeStorage
         if (currentStorage > maxStorage) {
             currentStorage = maxStorage;
         }
-		mustSave = true;
+        mustSave = true;
     }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName)) {
             JsonFileLoader<DZLTraderTypeStorage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
             return true;
@@ -97,9 +96,9 @@ class DZLTraderTypeStorage
         return false;
     }
 
-    void Save(){
+    void Save() {
         if (GetGame().IsServer() && mustSave == true) {
-			mustSave = false;
+            mustSave = false;
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE);
             DZLJsonFileHandler<DZLTraderTypeStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
         }

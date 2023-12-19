@@ -1,10 +1,9 @@
-class DZLLoadoutArmyActionObject: DZLBaseActionObject
-{
+class DZLLoadoutArmyActionObject: DZLBaseActionObject {
     void DZLLoadoutArmyActionObject() {
-		this.isArmyLoadOut = true;
-	}
+        this.isArmyLoadOut = true;
+    }
 
-	override void SetActions() {
+    override void SetActions() {
         super.SetActions();
 
         AddAction(ActionOpenLoadOutMenu);

@@ -1,12 +1,11 @@
-class DZLFraction
-{
-	private string version = "1";
-	private string fileName;
-	private string name;
-	private string id;
-	private ref array<ref DZLFractionMember> members;
-	private ref array<ref DZLFractionMember> potentialMembers;
-	private int bankAccount = 0;
+class DZLFraction {
+    private string version = "1";
+    private string fileName;
+    private string name;
+    private string id;
+    private ref array<ref DZLFractionMember> members;
+    private ref array<ref DZLFractionMember> potentialMembers;
+    private int bankAccount = 0;
 
     void DZLFraction(string playerId, string name = "") {
         fileName = playerId + "fraction.json";
@@ -20,10 +19,10 @@ class DZLFraction
             Save();
         }
     }
-	
-	string GetId() {
-		return id;
-	}
+
+    string GetId() {
+        return id;
+    }
 
     void RemoveMember(string playerId) {
         foreach(int key, DZLFractionMember member: members) {
@@ -112,18 +111,18 @@ class DZLFraction
         Save();
     }
 
-	void DepositMoneyFromFractionToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
-	    playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
+    void DepositMoneyFromFractionToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
+        playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
 
-		if (moneyToTransfer > 0) {
-		    DZLLogMoneyTransaction(id, "fraction", bankAccount, bankAccount - moneyToTransfer, moneyToTransfer * -1);
-			bankAccount -= moneyToTransfer;
-		}
+        if (moneyToTransfer > 0) {
+            DZLLogMoneyTransaction(id, "fraction", bankAccount, bankAccount - moneyToTransfer, moneyToTransfer * -1);
+            bankAccount -= moneyToTransfer;
+        }
 
-		Save();
-	}
+        Save();
+    }
 
-    private bool Load(){
+    private bool Load() {
         if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName)) {
             JsonFileLoader<DZLFraction>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName, this);
             return true;
@@ -131,13 +130,13 @@ class DZLFraction
         return false;
     }
 
-    bool Save(){
+    bool Save() {
         if (GetGame().IsServer()) {
-			CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION);
-			DZLJsonFileHandler<DZLFraction>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName, this);
-			return true;
+            CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION);
+            DZLJsonFileHandler<DZLFraction>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName, this);
+            return true;
         }
-		return false;
+        return false;
     }
 
     void Delete() {

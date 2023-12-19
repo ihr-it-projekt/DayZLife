@@ -1,7 +1,6 @@
-class DZLActionTransferMoney: ActionInteractBase
-{
+class DZLActionTransferMoney: ActionInteractBase {
     void DZLActionTransferMoney() {
-		m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
+        m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
         m_HUDCursorIcon = CursorIcons.CloseHood;
     }
@@ -16,11 +15,11 @@ class DZLActionTransferMoney: ActionInteractBase
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-		if (!target.GetObject()) return false;
+        if (!target.GetObject()) return false;
         if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
-		
-		PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
-		
+
+        PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+
         if (!targetPlayer || !targetPlayer.IsDZLPlayer()) return false;
 
         return true;
@@ -32,7 +31,7 @@ class DZLActionTransferMoney: ActionInteractBase
         PlayerBase player = action_data.m_Player;
 
         DZLPlayerMoneyTransferMenu menu = player.GetPlayerMoneyTransferMenu();
-		menu.SetReceiver(targetPlayer);
-		GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+        menu.SetReceiver(targetPlayer);
+        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 }

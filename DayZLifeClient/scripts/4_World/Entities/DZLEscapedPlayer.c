@@ -1,5 +1,4 @@
-class DZLEscapedPlayer
-{
+class DZLEscapedPlayer {
     int arrestTime;
     string name;
     string arrestReason;
@@ -9,6 +8,6 @@ class DZLEscapedPlayer
         this.name = player.GetIdentity().GetName();
         this.player = player;
         this.arrestTime = player.GetDZLPlayer().arrestTimeInMinutes;
-		this.arrestReason = player.GetDZLPlayer().arrestReason;
+        this.arrestReason = player.GetDZLPlayer().arrestReason;
     }
 }
