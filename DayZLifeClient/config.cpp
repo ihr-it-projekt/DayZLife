@@ -20,7 +20,9 @@ class CfgAddons
 	{
 		class dayz
 		{
-			list[] ={};
+			list[] ={
+			    "TBRealEstateClient"
+			};
 		};
 	};
 };

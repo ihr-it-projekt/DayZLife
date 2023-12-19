@@ -4,7 +4,6 @@ modded class ActionConstructor
     {
         super.RegisterActions(actions);
 		
-		actions.Insert(ActionOpenHouseMenu);
 		actions.Insert(ActionOpenTraderMenu);
 		actions.Insert(DZLActionOpenBankingMenu);
 		actions.Insert(ActionRobMoney);
@@ -13,9 +12,7 @@ modded class ActionConstructor
 		actions.Insert(DZLActionHarvestItem);
 		actions.Insert(ActionOpenLicenseMenu);
 		actions.Insert(ActionLicenceCrafting);
-		actions.Insert(DZLActionLockDoors);
 		actions.Insert(DZLActionRaidDoors);
-		actions.Insert(DZLActionUnLockDoors);
 		actions.Insert(DZLActionTransferMoney);
 		actions.Insert(ActionOpenLoadOutMenu);
 		actions.Insert(ActionOpenArrestMenu);
@@ -32,5 +29,11 @@ modded class ActionConstructor
 		actions.Insert(ActionRobShop);
 		actions.Insert(DZLActionGiveNumber);
 		actions.Insert(DZLActionOpenTuningMenu);
+
+		#ifndef TBRealEstateClient
+		actions.Insert(DZLActionLockDoors);
+		actions.Insert(DZLActionUnLockDoors);
+		actions.Insert(ActionOpenHouseMenu);
+		#endif
     }
 }

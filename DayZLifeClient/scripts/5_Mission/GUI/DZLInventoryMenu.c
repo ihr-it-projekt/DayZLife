@@ -1,20 +1,29 @@
-modded class Inventory : LayoutHolder
+modded class Inventory
 {
     TextWidget playerArrest;
     TextWidget moneyAtBank;
     TextWidget moneyAtPlayer;
-    private Widget prisonPanel;
+    private Widget dzlHud;
 
     void Inventory(LayoutHolder parent) {
-        moneyAtPlayer = TextWidget.Cast(GetMainWidget().FindAnyWidget("DZLCash"));
-        moneyAtBank = TextWidget.Cast(GetMainWidget().FindAnyWidget("DZLBank"));
-        playerArrest = TextWidget.Cast(GetMainWidget().FindAnyWidget("playerArrest"));
-        prisonPanel = TextWidget.Cast(GetMainWidget().FindAnyWidget("prisonPanel"));
+        dzlHud = GetGame().GetWorkspace().CreateWidgets("DayZLifeClient/layout/Banking/hud.layout", GetMainWidget());
+        moneyAtPlayer = TextWidget.Cast(dzlHud.FindAnyWidget("DZLCash"));
+        moneyAtBank = TextWidget.Cast(dzlHud.FindAnyWidget("DZLBank"));
+        playerArrest = TextWidget.Cast(dzlHud.FindAnyWidget("playerArrest"));
     }
 
     override void OnShow() {
         super.OnShow();
-		
+
+		UpdateDzlValues();
+     }
+
+	override void Update(float timeslice) {
+		super.Update(timeslice);
+		UpdateDzlValues();
+	}
+	
+	private void UpdateDzlValues() {
 		DZLPlayer dzlPlayer = DZLPlayerBaseHelper.GetPlayer().GetDZLPlayer();
 
          if (dzlPlayer) {
@@ -22,5 +31,5 @@ modded class Inventory : LayoutHolder
              moneyAtPlayer.SetText(dzlPlayer.GetMoney().ToString());
              playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());
          }
-     }
+	}
 }

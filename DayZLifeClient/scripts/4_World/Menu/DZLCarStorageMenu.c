@@ -137,7 +137,7 @@ class DZLCarStorageMenu: DZLBaseMenu
                     return true;
                 }
 				
-				if(hasInsuranceWidget.IsChecked() && !dzlPlayer.HasEnoughMoneBank(config.carConfig.carInsurancePrice)) {
+				if(hasInsuranceWidget.IsChecked() && !dzlPlayer.HasEnoughMoneyBank(config.carConfig.carInsurancePrice)) {
 					player.DisplayMessage("#error_not_enough_money");
 				}
 

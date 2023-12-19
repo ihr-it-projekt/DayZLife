@@ -17,7 +17,18 @@ modded class ActionOpenDoors
 					
 				if (GetGame().IsServer()) {
 	                DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
-	                if (dzlHouse && !dzlHouse.IsDoorLooked(doorIndex) || (DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop()) || (DZLConfig.Get().adminIds.CanManageArmy(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsArmy())) {
+
+	                #ifdef TBRealEstateClient
+                    if (!super.ActionCondition(player, target, item)) return false;
+	                #endif
+
+	                if (!dzlHouse) return false;
+
+	                #ifndef TBRealEstateClient
+	                if (dzlHouse.IsDoorLooked(doorIndex)) return false;
+	                #endif
+
+                    if ((DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop()) || (DZLConfig.Get().adminIds.CanManageArmy(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsArmy())) {
 	                    return true;
 	                }
 					DZLSendMessage(player.GetIdentity(), "#door_is_looked");

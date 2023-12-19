@@ -1,4 +1,4 @@
-modded class MainMenu extends UIScriptedMenu
+modded class MainMenu
 {
 	override Widget Init()
 	{		

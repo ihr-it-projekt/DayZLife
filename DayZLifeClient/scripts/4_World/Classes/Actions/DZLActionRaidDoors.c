@@ -36,20 +36,24 @@ class DZLActionRaidDoors: ActionInteractBase
             if (DZLDatabaseLayer.Get().GetCopCount() < config.minCountOfCopsForRaid) return false;
         }
 
+
+
         DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(building, player);
 
         array<string> raidTools = new array<string>;
 
         if(!definition) {
+            #ifndef TBRealEstateClient
             DZLHouseDefinition houseDefinition = config.GetHouseDefinitionByBuilding(building);
 			if (!houseDefinition) return false;
 			
 			raidTools = houseDefinition.raidTools;
+			#endif
         } else {
             raidTools = definition.raidTools;
         }
 
-
+        if (raidTools.Count() == 0) return false;
 
         foreach(string itemType: raidTools) {
             if (item.GetType() == itemType) {

@@ -11,6 +11,8 @@ class DZLBankingConfig
 	int raidCoolDownTimeInSeconds = 300;
 	int maximumRaidDistanceToBank = 7;
 	int startCapital = 5000;
+	bool useMoneyAsObject = false;
+	ref map <string, int> currencyValues = new map<string, int>;
 	bool raidIsCopControlled = true;
 	int minCountCopsForRaid = 5;
 	bool raidTimeControlled = true;
@@ -67,6 +69,18 @@ class DZLBankingConfig
             canStartRaidIfShopRaidRuns = false;
             minCountCopsForRaid = 5;
             raidIsCopControlled = true;
+            Save();
+        }
+
+        if (version == "5") {
+            version = "6";
+            currencyValues = new map<string, int>;
+            currencyValues.Set("MoneyRuble1", 1);
+            currencyValues.Set("MoneyRuble5", 5);
+            currencyValues.Set("MoneyRuble10", 10);
+            currencyValues.Set("MoneyRuble25", 25);
+            currencyValues.Set("MoneyRuble50", 50);
+            currencyValues.Set("MoneyRuble100", 100);
             Save();
         }
     }

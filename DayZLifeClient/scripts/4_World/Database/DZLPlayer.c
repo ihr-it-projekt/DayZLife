@@ -28,9 +28,10 @@ class DZLPlayer
 	private string fractionId = "";
 	private ref array<string> fractionWherePlayerCanJoin;
 	private ref DZLFraction fraction = null;
+	[NonSerialized()] PlayerBase player;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
-        fileName = playerId + ".json";
+		fileName = playerId + ".json";
         if (!Load()) {
             bank = moneyToAdd;
             this.dayZPlayerId = playerId;
@@ -272,6 +273,12 @@ class DZLPlayer
 	void AddMoneyToPlayer(int moneyCount) {
         if (GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
+
+            if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+                DZLPlayerMoney.Get(player).AddMoney(moneyCount);
+                return;
+            }
+
 			money += moneyCount;
 		    Save();
 		}
@@ -286,14 +293,21 @@ class DZLPlayer
     }
 
     bool HasEnoughMoney(int amount) {
+        if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+            return DZLPlayerMoney.Get(player).HasEnoughMoney(amount);;
+        }
+
         return money >= amount;
     }
 
-    bool HasEnoughMoneBank(int amount) {
+    bool HasEnoughMoneyBank(int amount) {
         return bank >= amount;
     }
 
     bool HasMoney() {
+        if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+            return DZLPlayerMoney.Get(player).HasEnoughMoney(1);;
+        }
         return money > 0;
     }
 
@@ -306,11 +320,14 @@ class DZLPlayer
     }
 
     int GetMoney() {
+        if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+            return DZLPlayerMoney.Get(player).GetMoneyAmount();;
+        }
         return money;
     }
 
     int GetAllMoney() {
-        return money + bank;
+        return GetMoney() + GetBankMoney();
     }
 
     void PlayerHasDied() {
@@ -372,6 +389,7 @@ class DZLPlayer
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
         DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money * -1);
         playerTarget.AddMoneyToPlayer(money);
+
         money = 0;
         Save();
     }
@@ -379,9 +397,8 @@ class DZLPlayer
 	void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
 		DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 		playerTarget.AddMoneyToPlayer(moneyToTransfer);
-		money -= moneyToTransfer;
-		
-		Save();
+
+		AddMoneyToPlayer(-moneyToTransfer);
 	}
 	
 	int DepositMoneyToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
@@ -392,11 +409,22 @@ class DZLPlayer
 		if (money > 0) {
 			if (money < moneyToTransfer) {
 			    DZLLogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
+
+			    if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+                    DZLPlayerMoney.Get(player).AddMoney(-DZLPlayerMoney.Get(player).GetMoneyAmount());
+                }
+
 				moneyToTransfer -= money;
 				money = 0;
 			} else {
 			    DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
-				money -= moneyToTransfer;
+
+				if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+                    DZLPlayerMoney.Get(player).AddMoney(-moneyToTransfer);
+                } else {
+                    money -= moneyToTransfer;
+                }
+
 				moneyToTransfer = 0;
 			}
 		}
@@ -412,7 +440,7 @@ class DZLPlayer
 	}
 
 	string CanBuyLicence(notnull DZLCraftLicence licenceToBuy, DZLCraftLicence depLicence){
-		if(money < licenceToBuy.price) return "#not_enough_money";
+		if(!HasEnoughMoney(licenceToBuy.price)) return "#not_enough_money";
 		if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
 
 		if (!depLicence) return "";
@@ -436,7 +464,8 @@ class DZLPlayer
 	}
 	
 	void BuyLicence(DZLCraftLicence licenceToBuy){
-		money -= licenceToBuy.price;
+		AddMoneyToPlayer(-licenceToBuy.price);
+
 		licenceIds.Insert(licenceToBuy.GetId());
 		Save();
 	}
@@ -503,11 +532,11 @@ class DZLPlayer
 	}
 
 	bool HasFractionRightCanAccessBankAccount() {
-	    return GetFraction() && GetFractionMember().canAccessBankAccount;
+	    return GetFraction() && GetFractionMember() && GetFractionMember().canAccessBankAccount;
 	}
 
 	bool HasFractionRightCanGetMoneyFromBankAccount() {
-	    return GetFraction() && GetFractionMember().canGetMoneyFromBankAccount;
+	    return GetFraction() && GetFractionMember() && GetFractionMember().canGetMoneyFromBankAccount;
 	}
 
     void RemoveFraction(string fractionId) {

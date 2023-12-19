@@ -22,6 +22,7 @@ modded class PlayerBase
     private ref DZLAlmanacMenu almanacMenu;
     private ref DZLFractionMenu fractionMenu;
     private ref DZLTuningMenu tuningMenu;
+    private ref DZLPlayer dzlPlayer;
 
 	bool willHeal = false;
 	bool willDie = false;
@@ -120,17 +121,20 @@ modded class PlayerBase
     override void SetActions(out TInputActionMap InputActionMap) {
         super.SetActions(InputActionMap);
 
-        AddAction(ActionOpenHouseMenu, InputActionMap);
         AddAction(ActionRobMoney, InputActionMap);
         AddAction(ActionRobMoneyFromDead, InputActionMap);
         AddAction(DZLActionHarvestItem, InputActionMap);
-        AddAction(DZLActionLockDoors, InputActionMap);
         AddAction(DZLActionRaidDoors, InputActionMap);
-        AddAction(DZLActionUnLockDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
         AddAction(ActionOpenTicketMenu, InputActionMap);
         AddAction(DZLActionGiveNumber, InputActionMap);
+
+        #ifndef TBRealEstateClient
+        AddAction(DZLActionUnLockDoors, InputActionMap);
+        AddAction(DZLActionLockDoors, InputActionMap);
+        AddAction(ActionOpenHouseMenu, InputActionMap);
+        #endif
     }
 	
 	override void CheckDeath()
@@ -161,6 +165,8 @@ modded class PlayerBase
     }
 
     void UpdatePlayerAtDependencies() {
+        dzlPlayer = DZLPlayerClientDB.Get().GetDZLPlayer();
+        dzlPlayer.player = this;
         if (houseMenu && houseMenu.IsVisible()) {
             houseMenu.UpdatePlayer(this);
         } else if (bankingMenu && bankingMenu.IsVisible()) {
@@ -751,10 +757,17 @@ modded class PlayerBase
     }
 
     DZLPlayer GetDZLPlayer() {
+        if (dzlPlayer) return dzlPlayer;
         if (GetGame().IsServer()) {
-            return DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
+            dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
+            if (dzlPlayer) dzlPlayer.player = this;
+            return dzlPlayer;
         }
-        return DZLPlayerClientDB.Get().GetDZLPlayer();
+
+        dzlPlayer = DZLPlayerClientDB.Get().GetDZLPlayer();
+        if (dzlPlayer) dzlPlayer.player = this;
+
+        return dzlPlayer;
     }
 
     DZLPlayerHouse GetPlayerHouse() {

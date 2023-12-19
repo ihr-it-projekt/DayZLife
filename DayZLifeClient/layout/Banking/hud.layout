@@ -1,0 +1,96 @@
+PanelWidgetClass dzlPanel {
+ size 648 35
+ halign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 1
+ vexactsize 1
+ style editor_quad_dark
+ {
+  TextWidgetClass DZLBank {
+   ignorepointer 1
+   position 50 5
+   size 216 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Bold
+   text "123.456.789"
+   "text halign" right
+   "text valign" center
+  }
+  ImageWidgetClass ImageWidget2 {
+   ignorepointer 1
+   position 5 5
+   size 42 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   imageTexture "{63429AE7A994ECE2}DayZLifeClient/layout/Banking/DZLBank.edds"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass DZLCash {
+   ignorepointer 1
+   position 315 5
+   size 216 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   style Bold
+   text "123.456.789"
+   "exact text" 0
+   "size to text v" 0
+   "text halign" right
+   "text valign" center
+  }
+  ImageWidgetClass ImageWidget3 {
+   ignorepointer 1
+   position 270 5
+   size 42 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   imageTexture "{729A02D897FD10EA}DayZLifeClient/layout/Banking/DZLCash.edds"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  ImageWidgetClass prisonImageWidget {
+   ignorepointer 1
+   position 540 5
+   size 42 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   imageTexture "{BA01A4394F203C2A}DayZLifeClient/layout/Banking/Prison.edds"
+   mode blend
+   "src alpha" 1
+   "stretch mode" stretch_w_h
+  }
+  TextWidgetClass playerArrest {
+   ignorepointer 1
+   position 590 5
+   size 50 25
+   halign right_ref
+   hexactpos 1
+   vexactpos 1
+   hexactsize 1
+   vexactsize 1
+   text_proportion 0.7
+   "text halign" right
+   "text valign" center
+  }
+ }
+}

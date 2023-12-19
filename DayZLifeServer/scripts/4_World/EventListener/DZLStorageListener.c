@@ -62,7 +62,7 @@ class DZLStorageListener
                 bool withInsurance = paramGetCar.param2;
                 dzlPlayer = player.GetDZLPlayer();
 
-                if (withInsurance && !dzlPlayer.HasEnoughMoneBank(config.carInsurancePrice)) {
+                if (withInsurance && !dzlPlayer.HasEnoughMoneyBank(config.carInsurancePrice)) {
                     DZLSendMessage(sender, "#error_not_enough_money");
                     return;
                 }
