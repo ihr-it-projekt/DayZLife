@@ -23,7 +23,7 @@ modded class ActionOpenDoors {
                     if (!dzlHouse) return false;
 
 #ifndef TBRealEstateClient
-                    if (dzlHouse.IsDoorLooked(doorIndex)) return false;
+                    if (!dzlHouse.IsDoorLooked(doorIndex)) return true;
 #endif
 
                     if ((DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop()) || (DZLConfig.Get().adminIds.CanManageArmy(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsArmy())) {
