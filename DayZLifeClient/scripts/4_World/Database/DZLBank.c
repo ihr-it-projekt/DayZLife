@@ -12,13 +12,13 @@ class DZLBank {
     void DZLBank() {
         Load();
 
-        if (!version) {
+        if(!version) {
             lastRaidMoney = 0;
             version = "1";
             taxSum = 0;
         }
 
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             raidPosition = "0 0 0";
             raidRuns = false;
@@ -30,7 +30,7 @@ class DZLBank {
 
     void CheckRaid() {
         countDownRaid--;
-        if (countDownRaid <= 0) {
+        if(countDownRaid <= 0) {
             lastRaidTime = new DZLDate();
             raidRuns = false;
             DZLBankRaidTimer.Get(this).Stop();
@@ -40,7 +40,7 @@ class DZLBank {
     }
 
     void StartRaid(vector position, int _countDownRaid) {
-        if (!raidRuns) {
+        if(!raidRuns) {
             raidRuns = true;
             raidPosition = position.ToString(false);
             Save();
@@ -74,7 +74,7 @@ class DZLBank {
     }
 
     void AddTax(int _taxSum) {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             taxSum += _taxSum;
             Save();
         }
@@ -85,14 +85,14 @@ class DZLBank {
     }
 
     void AddMoney(int moneyToAdd) {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             moneyAtBank += moneyToAdd;
             Save();
         }
     }
 
     int PlayerRaidBank(DZLPlayer player, int percentage) {
-        lastRaidMoney =  Math.Round(taxSum * percentage / 100);
+        lastRaidMoney = Math.Round(taxSum * percentage / 100);
         player.AddMoneyToPlayer(lastRaidMoney);
         taxSum -= lastRaidMoney;
         raidPosition = "0 0 0";
@@ -123,9 +123,9 @@ class DZLBank {
     bool CanUseBank(int raidCoolDownTimeInSeconds) {
         DZLDate currentDate = new DZLDate();
 
-        if (lastRaidTime && (currentDate.inSeconds - lastRaidTime.inSeconds < raidCoolDownTimeInSeconds)) return false;
+        if(lastRaidTime && (currentDate.inSeconds - lastRaidTime.inSeconds < raidCoolDownTimeInSeconds)) return false;
 
-        if (lastRaidTime) {
+        if(lastRaidTime) {
             lastRaidTime = null;
             Save();
         }
@@ -134,7 +134,7 @@ class DZLBank {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
             JsonFileLoader<DZLBank>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             return true;
         }
@@ -142,7 +142,7 @@ class DZLBank {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLBank>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             return true;

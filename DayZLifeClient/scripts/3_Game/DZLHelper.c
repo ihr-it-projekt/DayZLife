@@ -1,5 +1,5 @@
 static void DebugMessageDZL(string message) {
-    if (DAY_Z_LIFE_DEBUG) {
+    if(DAY_Z_LIFE_DEBUG) {
         int hour;
         int minute;
         int second;
@@ -23,20 +23,20 @@ static void LogMessageDZL(string message) {
 }
 
 static void CheckDZLBasePath() {
-    if (!FileExist(DAY_Z_LIFE_SERVER_FOLDER_BASE)) {
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_BASE)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_BASE);
     }
 }
 
 static void CheckDZLDataPath() {
     CheckDZLBasePath();
-    if (!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA)) {
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA);
     }
 }
 static void CheckDZLConfigPath() {
     CheckDZLBasePath();
-    if (!FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG)) {
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_CONFIG);
     }
 }
@@ -44,7 +44,7 @@ static void CheckDZLConfigPath() {
 static void CheckDZLDataSubPath(string path) {
     CheckDZLBasePath();
     CheckDZLDataPath();
-    if (!FileExist(path)) {
+    if(!FileExist(path)) {
         MakeDirectory(path);
     }
 }

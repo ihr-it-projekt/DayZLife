@@ -14,9 +14,9 @@ class DZLTraderStorage {
     }
 
     DZLTraderTypeStorage GetCurrentStorageByName(string name) {
-        if (storage) {
+        if(storage) {
             foreach(DZLTraderTypeStorage itemStorage: storage) {
-                if (name == itemStorage.GetType()) {
+                if(name == itemStorage.GetType()) {
                     return itemStorage;
                 }
             }

@@ -2,7 +2,7 @@ class ActionTakeRobtMoneyShop: ActionInteractBase {
     ref DZLCrimeConfig config;
 
     DZLCrimeConfig GetConfig() {
-        if (!config) {
+        if(!config) {
             config = DZLConfig.Get().crimeConfig;
         }
 
@@ -24,9 +24,9 @@ class ActionTakeRobtMoneyShop: ActionInteractBase {
         m_ConditionTarget = new DZL_CCTActionObject;
     }
 
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-        if (GetGame().IsClient()) {
-            if (!player.GetConfig()) return false;
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if(GetGame().IsClient()) {
+            if(!player.GetConfig()) return false;
             config = player.GetConfig().crimeConfig;
         } else {
             GetConfig();
@@ -34,7 +34,7 @@ class ActionTakeRobtMoneyShop: ActionInteractBase {
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
-        if (!objectTarget || !objectTarget.IsShopActionPoint()) return false;
+        if(!objectTarget || !objectTarget.IsShopActionPoint()) return false;
 
 
         return true;
@@ -43,7 +43,7 @@ class ActionTakeRobtMoneyShop: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         PlayerBase player = action_data.m_Player;
 
-        if (player) {
+        if(player) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_PAY_ROB_MONEY_FROM_SHOP, null, true);
         }
     }

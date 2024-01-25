@@ -4,7 +4,7 @@ class DZLHouseExtensions {
     int pricePerLevelHouseInventory = 5000;
 
     void DZLHouseExtensions() {
-        if (!Load()) {
+        if(!Load()) {
             version = "3";
             extensions = new array<ref DZLHouseExtension>;
             extensions.Insert(new DZLHouseAlarm("4", "#Alarm_system", "#Alarm_system_desc_1", 10000, 1, "#Alarm_system_message_1"));
@@ -15,20 +15,20 @@ class DZLHouseExtensions {
             Save();
         }
 
-        if ("2" == version) {
+        if("2" == version) {
             version = "3";
             extensions.Insert(new DZLHouseAlarm("7", "#Alarm_system", "#Alarm_system_desc_4", 50000, 4, "#Alarm_system_message_4"));
             Save();
         }
 
-        if ("3" == version) {
+        if("3" == version) {
             version = "4";
             Save();
         }
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json")) {
             JsonFileLoader<DZLHouseExtensions>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json", this);
             return true;
         }
@@ -36,7 +36,7 @@ class DZLHouseExtensions {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLHouseExtensions>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "houseExtensions.json", this);
         }

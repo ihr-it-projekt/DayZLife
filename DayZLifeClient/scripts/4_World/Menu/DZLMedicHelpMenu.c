@@ -17,9 +17,9 @@ class DZLMedicHelpMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE) {
             autoptr Param1<int> paramMedicCount;
-            if (ctx.Read(paramMedicCount)) {
+            if(ctx.Read(paramMedicCount)) {
                 medicCountWidget.SetText(paramMedicCount.param1.ToString());
                 player.medicCount = paramMedicCount.param1;
             }
@@ -39,7 +39,7 @@ class DZLMedicHelpMenu : DZLBaseMenu {
         killTextWidget = creator.GetTextWidget("KillTextWidget");
         medicCountWidget = creator.GetTextWidget("countMedic");
 
-        if (!player.canHealInHospital || !player.canSeeKillButton) {
+        if(!player.canHealInHospital || !player.canSeeKillButton) {
             checkButtonTimer = new Timer;
             checkButtonTimer.Run(1, this, "CheckButtons", null, true);
             hospitalButton.Show(false);
@@ -59,37 +59,37 @@ class DZLMedicHelpMenu : DZLBaseMenu {
     }
 
     void CheckButtons() {
-        if (player.canHealInHospital) {
+        if(player.canHealInHospital) {
             hospitalButton.Show(true);
             healTextWidget.Show(false);
         } else {
             healTextWidget.SetText("#hospital_heal_will_enabled " + player.GetWaitTimeForHospital().ToString());
         }
 
-        if (player.canSeeKillButton) {
+        if(player.canSeeKillButton) {
             killButton.Show(true);
             killTextWidget.Show(false);
         } else {
             killTextWidget.SetText("#kill_will_enabled " + player.GetWaitTimeForKill().ToString());
         }
 
-        if (player.canSeeKillButton && player.canHealInHospital) {
+        if(player.canSeeKillButton && player.canHealInHospital) {
             checkButtonTimer.Stop();
         }
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
-        if (w == killButton) {
+        if(w == killButton) {
             player.willDie = true;
             OnHide();
-        } else if (w == healButton) {
+        } else if(w == healButton) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_MEDIC_CALL, null, true);
             healButton.Show(false);
             dzlPlayer.SetWillHealByMedic();
             OnHide();
-        } else if (w == hospitalButton) {
+        } else if(w == hospitalButton) {
             dzlPlayer.SetWillHealByHospital();
             player.willDie = true;
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, null, true);

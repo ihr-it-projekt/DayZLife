@@ -11,9 +11,9 @@ class DZLMedicHelpListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
+        if(rpc_type == DAY_Z_LIFE_EVENT_MEDIC_KILL_PLAYER) {
             DeleteMedicRequest(sender);
-        } else if (rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
+        } else if(rpc_type == DAY_Z_LIFE_MEDIC_CALL) {
             PlayerBase emergencyPlayer = PlayerBase.Cast(target);
 
             if(!emergencyPlayer) return;
@@ -21,10 +21,10 @@ class DZLMedicHelpListener {
             DZLDatabaseLayer.Get().GetEmergencies().Add(sender.GetId());
             DZLSendMessage(sender, "#medics_was_called. #Heal_menu_can_be_open_with: 2 + LCTRL");
             DZLSendMedicMessage("#there_is_a_new_emergency");
-        } else if (rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
+        } else if(rpc_type == DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER) {
             HealByHospital(PlayerBase.Cast(target), sender);
             DeleteMedicRequest(sender);
-        } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS) {
+        } else if(rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS) {
             array<Man> players = new array<Man>;
             GetGame().GetPlayers(players);
 
@@ -34,8 +34,8 @@ class DZLMedicHelpListener {
             foreach(Man _player: players) {
                 string ident = _player.GetIdentity().GetId();
 
-                if (emergencies.HasEmergency(ident)) {
-                    if (_player.GetHealth() > 1) {
+                if(emergencies.HasEmergency(ident)) {
+                    if(_player.GetHealth() > 1) {
                         emergencies.Remove(ident);
                         continue;
                     }
@@ -52,7 +52,7 @@ class DZLMedicHelpListener {
     }
 
     private void HealByHospital(PlayerBase player, PlayerIdentity sender) {
-        if (!player) return;
+        if(!player) return;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
         dzlPlayer.AddMoneyToPlayerBank(config.priceHospitalHeal * -1);
         dzlPlayer.SetWillHealByHospital();

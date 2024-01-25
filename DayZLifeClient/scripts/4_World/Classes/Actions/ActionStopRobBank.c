@@ -2,7 +2,7 @@ class ActionStopRobBank: ActionInteractBase {
     ref DZLBankingConfig config;
 
     DZLBankingConfig GetConfig() {
-        if (!config) {
+        if(!config) {
             config = DZLConfig.Get().bankConfig;
         }
 
@@ -24,9 +24,9 @@ class ActionStopRobBank: ActionInteractBase {
         m_ConditionTarget = new DZL_CCTActionObject;
     }
 
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-        if (GetGame().IsClient()) {
-            if (!player.GetConfig()) return false;
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if(GetGame().IsClient()) {
+            if(!player.GetConfig()) return false;
             config = player.GetConfig().bankConfig;
         } else {
             GetConfig();
@@ -34,10 +34,10 @@ class ActionStopRobBank: ActionInteractBase {
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
-        if (!objectTarget || !objectTarget.IsBank()) return false;
+        if(!objectTarget || !objectTarget.IsBank()) return false;
 
-        if (GetGame().IsServer()) {
-            if (DZLDatabaseLayer.Get().GetBank().RaidRuns() || DZLDatabaseLayer.Get().GetBank().HasMoneyToRaid()) {
+        if(GetGame().IsServer()) {
+            if(DZLDatabaseLayer.Get().GetBank().RaidRuns() || DZLDatabaseLayer.Get().GetBank().HasMoneyToRaid()) {
                 return true;
             }
             DZLSendMessage(player.GetIdentity(), "#no_raid_has_started");
@@ -50,10 +50,10 @@ class ActionStopRobBank: ActionInteractBase {
         GetConfig();
         PlayerBase player = action_data.m_Player;
 
-        if (player) {
+        if(player) {
             vector playerPosition = action_data.m_Player.GetPosition();
             DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-            if (bank && bank.GetRaidPosition() && vector.Distance(bank.GetRaidPosition(), playerPosition) <= config.maximumRaidDistanceToBank) {
+            if(bank && bank.GetRaidPosition() && vector.Distance(bank.GetRaidPosition(), playerPosition) <= config.maximumRaidDistanceToBank) {
                 bank.StopRaid();
                 DZLSendMessage(null, "#bank_rob_was_stopped");
                 DZLLogRaid(player.GetPlayerId(), "stop bank raid", "bank", player.GetPosition());

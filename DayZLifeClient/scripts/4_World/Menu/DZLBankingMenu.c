@@ -32,9 +32,9 @@ class DZLBankingMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE) {
             autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
-            if (ctx.Read(paramGetResponse)) {
+            if(ctx.Read(paramGetResponse)) {
                 bankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
                 playerBalanceTextWidget.SetText(paramGetResponse.param1.GetMoney().ToString());
                 playerBankBalanceTextWidget.SetText(paramGetResponse.param1.GetBankMoney().ToString());
@@ -42,7 +42,7 @@ class DZLBankingMenu : DZLBaseMenu {
             }
         } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE) {
             autoptr Param1<ref array<ref DZLPlayerBankInfo>> paramGetPlayerResponse;
-            if (ctx.Read(paramGetPlayerResponse)) {
+            if(ctx.Read(paramGetPlayerResponse)) {
                 playerListbox.ClearItems();
                 array<ref DZLPlayerBankInfo> players = paramGetPlayerResponse.param1;
 
@@ -95,7 +95,7 @@ class DZLBankingMenu : DZLBaseMenu {
     }
 
     override void OnShow() {
-        if (config) {
+        if(config) {
             super.OnShow();
             balanceTextLabelWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
             bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
@@ -115,39 +115,39 @@ class DZLBankingMenu : DZLBaseMenu {
         playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
         playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
 
-        if (player.GetBank()) {
+        if(player.GetBank()) {
             bankBalanceTextWidget.SetText(player.GetBank().moneyAtBank.ToString());
             bankTaxTextWidget.SetText(player.GetBank().GetTaxSum().ToString());
         }
 
-        if (dzlPlayer.HasFractionRightCanAccessBankAccount()) {
+        if(dzlPlayer.HasFractionRightCanAccessBankAccount()) {
             fractionBalanceTextWidget.SetText(dzlPlayer.GetFraction().GetBankAccount().ToString());
         }
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
         switch(w) {
-        case payInButton:
-            SendDeposit(-1);
-            return true;
-        case payOutButton:
-            SendDeposit(1);
-            return true;
-        case fractionPayInButton:
-            SendDepositFraction(-1);
-            return true;
-        case fractionPayOutButton:
-            SendDepositFraction(1);
-            return true;
-        case cashTransferButton:
-            SendToPlayer(false);
-            return true;
-        case fractionCashTransferButton:
-            SendToPlayer(true);
-            return true;
-        default:
-            break;
+            case payInButton:
+                SendDeposit(-1);
+                return true;
+            case payOutButton:
+                SendDeposit(1);
+                return true;
+            case fractionPayInButton:
+                SendDepositFraction(-1);
+                return true;
+            case fractionPayOutButton:
+                SendDepositFraction(1);
+                return true;
+            case cashTransferButton:
+                SendToPlayer(false);
+                return true;
+            case fractionCashTransferButton:
+                SendToPlayer(true);
+                return true;
+            default:
+                break;
         }
         return false;
     }
@@ -155,14 +155,14 @@ class DZLBankingMenu : DZLBaseMenu {
     private void SendToPlayer(bool isFraction) {
         int deposit = inputDeposit.GetText().ToInt();
 
-        if (deposit < 1) {
+        if(deposit < 1) {
             player.DisplayMessage("#error_deposit_must_be_positiv");
             return;
         }
 
         int selected = playerListbox.GetSelectedRow();
 
-        if (-1 == selected) {
+        if(-1 == selected) {
             player.DisplayMessage("#error_no_player_was_selected");
             return;
         }
@@ -171,24 +171,24 @@ class DZLBankingMenu : DZLBaseMenu {
 
         playerListbox.GetItemData(selected, 0, playerBankInfo);
 
-        if (!playerBankInfo) {
+        if(!playerBankInfo) {
             player.DisplayMessage("#error_no_player_was_selected");
             return;
         }
 
-        if (!isFraction && playerBankInfo.id == player.GetPlayerId()) {
+        if(!isFraction && playerBankInfo.id == player.GetPlayerId()) {
             player.DisplayMessage("#error_you_cant_send_money_to_yourself");
             return;
         }
 
-        if (deposit != 0) {
+        if(deposit != 0) {
             int money = dzlPlayer.GetAllMoney();
 
-            if (isFraction && dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount()) {
+            if(isFraction && dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount()) {
                 money = dzlPlayer.GetFraction().GetBankAccount();
             }
 
-            if (deposit <= money) {
+            if(deposit <= money) {
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER, new Param3<DZLPlayerBankInfo, int, bool>(playerBankInfo, deposit, isFraction), true);
                 inputDeposit.SetText("");
             } else {
@@ -201,9 +201,9 @@ class DZLBankingMenu : DZLBaseMenu {
 
 
     private void SendDeposit(int factor) {
-        if (inputDeposit.GetText().ToInt() >= 1) {
+        if(inputDeposit.GetText().ToInt() >= 1) {
             int deposit = inputDeposit.GetText().ToInt();
-            if ((deposit <= dzlPlayer.GetMoney() && factor == -1) || (deposit <= dzlPlayer.GetBankMoney() && factor == 1)) {
+            if((deposit <= dzlPlayer.GetMoney() && factor == -1) || (deposit <= dzlPlayer.GetBankMoney() && factor == 1)) {
                 deposit = factor * deposit;
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<int, bool>(deposit, false), true);
                 inputDeposit.SetText("");
@@ -218,9 +218,9 @@ class DZLBankingMenu : DZLBaseMenu {
     }
 
     private void SendDepositFraction(int factor) {
-        if (inputDeposit.GetText().ToInt() >= 1) {
+        if(inputDeposit.GetText().ToInt() >= 1) {
             int deposit = inputDeposit.GetText().ToInt();
-            if ((dzlPlayer.HasFractionRightCanAccessBankAccount() && deposit <= dzlPlayer.GetMoney() && factor == -1) || (dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && deposit <= dzlPlayer.GetFraction().GetBankAccount() && factor == 1)) {
+            if((dzlPlayer.HasFractionRightCanAccessBankAccount() && deposit <= dzlPlayer.GetMoney() && factor == -1) || (dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && deposit <= dzlPlayer.GetFraction().GetBankAccount() && factor == 1)) {
                 deposit = factor * deposit;
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<int, bool>(deposit, true), true);
                 inputDeposit.SetText("");

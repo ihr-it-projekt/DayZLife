@@ -3,14 +3,14 @@ class DZLWorkZones {
     ref array<ref DZLWorkZone> workZones;
 
     void DZLWorkZones() {
-        if (!Load()) {
+        if(!Load()) {
             workZones = new array<ref DZLWorkZone>;
             array<ref DZLHarvestItemToolRelation> harvestItemToolRelation = new array<ref DZLHarvestItemToolRelation>;
             array<string> itemsThatCanHarvest = new array<string>;
             array<string> itemsThatNeededForHarvest = new array<string>;
 
 
-            if (DAY_Z_LIFE_DEBUG) {
+            if(DAY_Z_LIFE_DEBUG) {
                 //Harvest Stone
 
                 itemsThatCanHarvest.Insert("DZL_Stone");
@@ -453,14 +453,14 @@ class DZLWorkZones {
 
             Save();
         }
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             Save();
         }
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json")) {
             JsonFileLoader<DZLWorkZones>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);
             return true;
         }
@@ -468,7 +468,7 @@ class DZLWorkZones {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLWorkZones>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);
         }

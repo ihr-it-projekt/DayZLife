@@ -2,7 +2,7 @@ class ActionRobShop: ActionInteractBase {
     DZLCrimeConfig config;
 
     DZLCrimeConfig GetConfig() {
-        if (!config) {
+        if(!config) {
             config = DZLConfig.Get().crimeConfig;
         }
 
@@ -24,9 +24,9 @@ class ActionRobShop: ActionInteractBase {
         m_ConditionTarget = new DZL_CCTActionObject;
     }
 
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-        if (GetGame().IsClient()) {
-            if (!player.GetConfig()) return false;
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if(GetGame().IsClient()) {
+            if(!player.GetConfig()) return false;
             config = player.GetConfig().crimeConfig;
         } else {
             GetConfig();
@@ -34,16 +34,16 @@ class ActionRobShop: ActionInteractBase {
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
-        if (!objectTarget || !objectTarget.IsShopActionPoint()) return false;
+        if(!objectTarget || !objectTarget.IsShopActionPoint()) return false;
 
-        if (config) {
+        if(config) {
             EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
             if(!item_in_hands_source) return false;
 
             bool hasItem = false;
-            foreach (string itemForRaid: config.robTools) {
-                if (item_in_hands_source.GetType() == itemForRaid) {
+            foreach(string itemForRaid: config.robTools) {
+                if(item_in_hands_source.GetType() == itemForRaid) {
                     hasItem = true;
                     break;
                 }
@@ -51,21 +51,21 @@ class ActionRobShop: ActionInteractBase {
 
             if(!hasItem) return false;
 
-            if (GetGame().IsServer()) {
-                if (config.raidIsCopControlled && config.minCountCopsForRaid > 0) {
-                    if (DZLDatabaseLayer.Get().GetCopCount() < config.minCountCopsForRaid) {
+            if(GetGame().IsServer()) {
+                if(config.raidIsCopControlled && config.minCountCopsForRaid > 0) {
+                    if(DZLDatabaseLayer.Get().GetCopCount() < config.minCountCopsForRaid) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_to_less_cops");
                         return false;
                     }
                 }
 
-                if (config.raidTimeControlled) {
+                if(config.raidTimeControlled) {
                     DZLDate date = new DZLDate;
 
-                    if (date.hour < config.raidStartTimeHour || date.hour > config.raidEndTimeHour) {
+                    if(date.hour < config.raidStartTimeHour || date.hour > config.raidEndTimeHour) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_wrong_time");
                         return false;
-                    } else if ((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
+                    } else if((date.hour == config.raidEndTimeHour && date.minute > config.raidEndTimeMinute) || (date.hour == config.raidStartTimeHour && date.minute < config.raidStartTimeMinute)) {
                         DZLSendMessage(player.GetIdentity(), "#raid_can_not_start_wrong_time");
                         return false;
                     }
@@ -81,7 +81,7 @@ class ActionRobShop: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         PlayerBase player = action_data.m_Player;
 
-        if (player) {
+        if(player) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_START_ROB_MONEY_FROM_SHOP, null, true);
         }
     }

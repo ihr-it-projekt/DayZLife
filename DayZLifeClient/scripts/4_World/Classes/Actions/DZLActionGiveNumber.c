@@ -19,11 +19,11 @@ class DZLActionGiveNumber: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-        if (!targetPlayer && !targetPlayer.GetDZLPlayer()) return;
+        if(!targetPlayer && !targetPlayer.GetDZLPlayer()) return;
 
         DZLPlayer dzlTargetPlayer = targetPlayer.GetDZLPlayer();
 
-        if (dzlTargetPlayer) {
+        if(dzlTargetPlayer) {
             DZLSendMessage(player.GetIdentity(), "#contact_was_send");
             DZLSendMessage(targetPlayer.GetIdentity(), "#got_new_contact");
 

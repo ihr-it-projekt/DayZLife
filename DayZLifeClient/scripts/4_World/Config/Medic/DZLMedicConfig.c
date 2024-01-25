@@ -20,12 +20,12 @@ class DZLMedicConfig {
             hospitalSpawnPoints.Insert(point.Init("3767.240234 312.504150 9011.118164", "-27.000000 0.000000 0.000000"));
             Save();
         }
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             deleteDeadBodyTimeWhenHealedByMedic = 5;
             Save();
         }
-        if (version == "2") {
+        if(version == "2") {
             version = "3";
 
             minTimeBeforeHospital = 600;
@@ -38,7 +38,7 @@ class DZLMedicConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "medic.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "medic.json")) {
             JsonFileLoader<DZLMedicConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "medic.json", this);
             return true;
         }
@@ -46,7 +46,7 @@ class DZLMedicConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLMedicConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "medic.json", this);
         }

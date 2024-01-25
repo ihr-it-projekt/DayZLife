@@ -22,7 +22,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_NEW_SPAWN_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_NEW_SPAWN_RESPONSE) {
             GetGame().GetMission().GetHud().ShowHud(true);
             GetGame().GetMission().GetHud().ShowQuickBar(true);
             OnHide();
@@ -58,15 +58,15 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         jobSelection.ClearAll();
         jobSelection.AddItem("#Civ");
 
-        if (player.GetDZLPlayer().IsMedic()) {
+        if(player.GetDZLPlayer().IsMedic()) {
             medicIndex = jobSelection.AddItem("#Medic");
         }
 
-        if (player.GetDZLPlayer().IsCop()) {
+        if(player.GetDZLPlayer().IsCop()) {
             copIndex = jobSelection.AddItem("#Cop");
         }
 
-        if (player.GetDZLPlayer().IsArmy()) {
+        if(player.GetDZLPlayer().IsArmy()) {
             armyIndex = jobSelection.AddItem("#Army");
         }
 
@@ -74,12 +74,12 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
         int index;
         DZLSpawnPoint point;
 
-        if (w == randomSpawn) {
+        if(w == randomSpawn) {
             index = Math.RandomIntInclusive(0, spawnPoints.GetNumItems() - 1);
 
             spawnPoints.GetItemData(index, 0, point);
@@ -87,20 +87,20 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
             SendSpawnLocation(point, player);
 
             return true;
-        } else if (w == spawn) {
+        } else if(w == spawn) {
             index = spawnPoints.GetSelectedRow();
 
-            if (index == -1)return true;
+            if(index == -1)return true;
 
             spawnPoints.GetItemData(index, 0, point);
 
             SendSpawnLocation(point, player);
 
             return true;
-        } else if (w == spawnPoints) {
+        } else if(w == spawnPoints) {
             index = spawnPoints.GetSelectedRow();
 
-            if (index == -1)return true;
+            if(index == -1)return true;
 
             spawnPoints.GetItemData(index, 0, point);
 
@@ -112,13 +112,13 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         } else if(w == jobSelection) {
             index = jobSelection.GetCurrentItem();
 
-            if (index == -1) return true;
+            if(index == -1) return true;
 
-            if (medicIndex == index) {
+            if(medicIndex == index) {
                 index = 1;
-            } else if (copIndex == index) {
+            } else if(copIndex == index) {
                 index = 2;
-            } else if (armyIndex == index) {
+            } else if(armyIndex == index) {
                 index = 3;
             }
 

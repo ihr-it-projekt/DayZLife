@@ -11,7 +11,7 @@ class DZLTraderTypeStorage {
     void DZLTraderTypeStorage(DZLTraderType type) {
         this.type = type.type;
         this.fileName = "typeStorage" + type.type + ".json";
-        if (!Load()) {
+        if(!Load()) {
             currentStorage = 0;
         }
 
@@ -64,7 +64,7 @@ class DZLTraderTypeStorage {
     }
 
     void IncreaseTick() {
-        if (tickLengthInMinutes == 0) return;
+        if(tickLengthInMinutes == 0) return;
         lastTick++;
         mustSave = true;
     }
@@ -74,22 +74,22 @@ class DZLTraderTypeStorage {
     }
 
     void ReduceTickAmount() {
-        if (reducePerTick == 0) return;
+        if(reducePerTick == 0) return;
 
         currentStorage = currentStorage - reducePerTick;
 
-        if (currentStorage < 0) {
+        if(currentStorage < 0) {
             currentStorage = 0;
         }
 
-        if (currentStorage > maxStorage) {
+        if(currentStorage > maxStorage) {
             currentStorage = maxStorage;
         }
         mustSave = true;
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName)) {
             JsonFileLoader<DZLTraderTypeStorage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
             return true;
         }
@@ -97,7 +97,7 @@ class DZLTraderTypeStorage {
     }
 
     void Save() {
-        if (GetGame().IsServer() && mustSave == true) {
+        if(GetGame().IsServer() && mustSave == true) {
             mustSave = false;
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE);
             DZLJsonFileHandler<DZLTraderTypeStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);

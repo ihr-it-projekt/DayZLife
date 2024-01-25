@@ -3,7 +3,7 @@ class DZLEmergencies {
     string fileName = "emergencies.json";
 
     void DZLEmergencies() {
-        if (!Load()) {
+        if(!Load()) {
             emergencies = new array<string>;
             Save();
         }
@@ -21,14 +21,14 @@ class DZLEmergencies {
     void Remove(string playerId) {
         int removeIndex = emergencies.Find(playerId);
 
-        if (removeIndex >= 0) {
+        if(removeIndex >= 0) {
             emergencies.RemoveOrdered(removeIndex);
             Save();
         }
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
             JsonFileLoader<DZLEmergencies>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             return true;
         }
@@ -36,7 +36,7 @@ class DZLEmergencies {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLEmergencies>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             return true;

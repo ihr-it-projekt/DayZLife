@@ -9,7 +9,7 @@ class DZL_CCTActionObject: CCTBase {
         if(!target) return false;
         if(!target.GetObject()) return false;
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget) return false;
+        if(!objectTarget) return false;
 
         vector playerHeadPos;
         MiscGameplayFunctions.GetHeadBonePos(player, playerHeadPos);

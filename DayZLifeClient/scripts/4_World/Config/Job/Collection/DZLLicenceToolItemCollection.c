@@ -9,7 +9,7 @@ class DZLLicenceToolItemCollection {
         map<string, int> mapCraft = new map<string, int>;
         foreach(DZLLicenceToolItem item: collection) {
             int count = 0;
-            if (!mapCraft.Find(item.GetLowerCaseType(), count)) {
+            if(!mapCraft.Find(item.GetLowerCaseType(), count)) {
                 mapCraft.Insert(item.GetLowerCaseType(), item.quantity);
             } else {
                 mapCraft.Set(item.GetLowerCaseType(), count + item.quantity);

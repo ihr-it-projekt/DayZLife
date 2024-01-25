@@ -16,10 +16,10 @@ class DZLMessage: DZLIdModel {
     private string replayedMessage;
 
     void DZLMessage(string _id = "") {
-        if (GetGame().IsClient() && _id != "" && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id))) {
+        if(GetGame().IsClient() && _id != "" && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id))) {
             JsonFileLoader<DZLMessage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id), this);
 
-            if (!senderId) {
+            if(!senderId) {
                 senderId = "";
             }
             return;
@@ -29,14 +29,14 @@ class DZLMessage: DZLIdModel {
 
     void CreateAndSend(PlayerBase _sender, PlayerIdentity _receiver, string _text, string _type, vector _position = "0 0 0", bool senderVisible = true) {
         sender = "";
-        if (senderVisible) {
+        if(senderVisible) {
             sender = _sender.GetIdentity().GetName();
             senderId = _sender.GetIdentity().GetId();
         }
         receiver = _receiver.GetId();
         type = _type;
         text = _text;
-        if (type == TYPE_COP) {
+        if(type == TYPE_COP) {
             position = _sender.GetPosition();
             if(_position != "0 0 0") {
                 position = _position;
@@ -62,7 +62,7 @@ class DZLMessage: DZLIdModel {
     }
 
     string GetShortText() {
-        if (text.Length() < 20) {
+        if(text.Length() < 20) {
             return text;
         }
 
@@ -112,7 +112,7 @@ class DZLMessage: DZLIdModel {
     }
 
     string GetReplay() {
-        if (replayedMessage) {
+        if(replayedMessage) {
             return replayedMessage;
         }
         return "";
@@ -127,7 +127,7 @@ class DZLMessage: DZLIdModel {
     }
 
     bool Save() {
-        if (GetGame().IsClient()) {
+        if(GetGame().IsClient()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLMessage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(id), this);
             return true;

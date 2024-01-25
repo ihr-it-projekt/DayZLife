@@ -17,7 +17,7 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if (g_Game.GetUIManager().GetMenu() == NULL) {
+        if(g_Game.GetUIManager().GetMenu() == NULL) {
             GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
         }
     }
@@ -27,7 +27,7 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
         if(!target.GetObject()) return false;
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget || !objectTarget.IsBank()) return false;
+        if(!objectTarget || !objectTarget.IsBank()) return false;
 
         DZLDate currentDate = new DZLDate();
         player.RequestUpdateDZLPlayer();

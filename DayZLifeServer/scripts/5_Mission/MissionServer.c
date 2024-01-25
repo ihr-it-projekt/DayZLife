@@ -29,23 +29,23 @@ modded class MissionServer {
 
     override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx) {
         DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identity.GetId());
-        if (dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
+        if(dzlPlayer.WillHealByMedic() || dzlPlayer.WillHealByHospital()) {
             DZLStoreItem playerData = dzlPlayer.GetPlayerData();
 
             string type = "SurvivorF_Judy";
-            if (playerData) {
+            if(playerData) {
                 pos = playerData.positionOfStore;
                 type = playerData.type;
             }
 
-            if (dzlPlayer.WillHealByHospital()) {
+            if(dzlPlayer.WillHealByHospital()) {
                 DZLBaseSpawnPoint spawnPoint = DZLConfig.Get().medicConfig.hospitalSpawnPoints.GetRandomElement();
                 pos = spawnPoint.point;
             }
 
             CreateCharacter(identity, pos, ctx, type);
 
-            if (playerData) {
+            if(playerData) {
                 array<ref DZLStoreItem> items = playerData.GetAttached();
                 foreach(DZLStoreItem item: items) {
                     DZLSpawnHelper.Add(m_player, item);
@@ -54,7 +54,7 @@ modded class MissionServer {
             float factorShock = 1.0;
             float factorBlood = 1.0;
             float factorHealth = 1.0;
-            if (dzlPlayer.WillHealByMedic()) {
+            if(dzlPlayer.WillHealByMedic()) {
                 factorHealth = 0.05;
                 factorBlood = 0.6;
                 factorShock = 0;

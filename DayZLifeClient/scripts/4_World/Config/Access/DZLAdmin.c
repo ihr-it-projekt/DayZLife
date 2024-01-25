@@ -3,7 +3,7 @@ class DZLAdmin {
     string version = "6";
 
     void DZLAdmin() {
-        if (!Load()) {
+        if(!Load()) {
             access = new array<ref DZLPlayerAccess>;
             access.Insert(new DZLPlayerAccess("example Id"));
             version = "6";
@@ -11,7 +11,7 @@ class DZLAdmin {
             Save();
         }
 
-        if (version == "5") {
+        if(version == "5") {
             version = "6";
 
             Save();
@@ -20,7 +20,7 @@ class DZLAdmin {
 
     bool CanManagePlayers(string ident) {
         foreach(DZLPlayerAccess playerAccess: access) {
-            if (playerAccess && playerAccess.GetIdent() == ident) {
+            if(playerAccess && playerAccess.GetIdent() == ident) {
                 return playerAccess.CanManagePlayers();
             }
         }
@@ -29,7 +29,7 @@ class DZLAdmin {
 
     bool CanManageCops(string ident) {
         foreach(DZLPlayerAccess playerAccess: access) {
-            if (playerAccess && playerAccess.GetIdent() == ident) {
+            if(playerAccess && playerAccess.GetIdent() == ident) {
                 return playerAccess.CanManageCops();
             }
         }
@@ -38,7 +38,7 @@ class DZLAdmin {
 
     bool CanManageMedic(string ident) {
         foreach(DZLPlayerAccess playerAccess: access) {
-            if (playerAccess && playerAccess.GetIdent() == ident) {
+            if(playerAccess && playerAccess.GetIdent() == ident) {
                 return playerAccess.CanManageMedic();
             }
         }
@@ -46,7 +46,7 @@ class DZLAdmin {
     }
     bool CanManageArmy(string ident) {
         foreach(DZLPlayerAccess playerAccess: access) {
-            if (playerAccess && playerAccess.GetIdent() == ident) {
+            if(playerAccess && playerAccess.GetIdent() == ident) {
                 return playerAccess.CanManageArmy();
             }
         }
@@ -55,7 +55,7 @@ class DZLAdmin {
 
     bool CanManageCars(string ident) {
         foreach(DZLPlayerAccess playerAccess: access) {
-            if (playerAccess && playerAccess.GetIdent() == ident) {
+            if(playerAccess && playerAccess.GetIdent() == ident) {
                 return playerAccess.CanManageCars();
             }
         }
@@ -63,7 +63,7 @@ class DZLAdmin {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json")) {
             JsonFileLoader<DZLAdmin>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json", this);
             return true;
         }
@@ -71,7 +71,7 @@ class DZLAdmin {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLAdmin>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json", this);
         }

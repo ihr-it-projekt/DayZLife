@@ -15,7 +15,7 @@ class ActionRobMoney: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (!DZLConfig.Get() || DZLConfig.Get().bankConfig || DZLConfig.Get().bankConfig.useMoneyAsObject) return false;
+        if(!DZLConfig.Get() || DZLConfig.Get().bankConfig || DZLConfig.Get().bankConfig.useMoneyAsObject) return false;
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
@@ -27,11 +27,11 @@ class ActionRobMoney: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-        if (targetPlayer.IsRestrained() || targetPlayer.IsUnconscious()) {
-            if (!targetPlayer && !targetPlayer.GetDZLPlayer()) return;
+        if(targetPlayer.IsRestrained() || targetPlayer.IsUnconscious()) {
+            if(!targetPlayer && !targetPlayer.GetDZLPlayer()) return;
 
             DZLPlayer dzlTargetPlayer = targetPlayer.GetDZLPlayer();
-            if (dzlTargetPlayer && dzlTargetPlayer.HasMoney()) {
+            if(dzlTargetPlayer && dzlTargetPlayer.HasMoney()) {
                 dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
 
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());

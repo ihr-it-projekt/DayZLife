@@ -15,14 +15,14 @@ class DZLLoadOutMenu: DZLBaseMenu {
     }
 
     void ~DZLLoadOutMenu() {
-        if (previewItem) {
+        if(previewItem) {
             GetGame().ObjectDelete(previewItem);
         }
         Destruct();
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_LOAD_OUT_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_LOAD_OUT_RESPONSE) {
             OnHide();
         }
     }
@@ -30,7 +30,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
     override Widget Init() {
         super.Init();
 
-        if (config) {
+        if(config) {
             equipButton = creator.GetButtonWidget("equipButton");
             loadoutListbox = creator.GetTextListboxWidget("loadoutListbox");
 
@@ -47,7 +47,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
     }
 
     override void OnShow() {
-        if (!categories) {
+        if(!categories) {
             OnHide();
             return;
         }
@@ -65,7 +65,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
         super.Update(timeslice);
         int currentSelectedItem = loadoutListbox.GetSelectedRow();
 
-        if (currentSelectedItem != lastSelectedItem) {
+        if(currentSelectedItem != lastSelectedItem) {
             UpdaterPreviewType(loadoutListbox);
             lastSelectedItem = currentSelectedItem;
         }
@@ -74,17 +74,17 @@ class DZLLoadOutMenu: DZLBaseMenu {
     override bool OnClick(Widget w, int x, int y, int button) {
         if(super.OnClick(w, x, y, button)) return true;
         switch(w) {
-        case equipButton:
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param1<string>(currentCat.name), true);
-            return true;
-        case loadoutComboBox:
-            int index = loadoutComboBox.GetCurrentItem();
+            case equipButton:
+                GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param1<string>(currentCat.name), true);
+                return true;
+            case loadoutComboBox:
+                int index = loadoutComboBox.GetCurrentItem();
 
-            currentCat = categories.Get(index);
-            UpdateCategory();
-            return true;
-        default:
-            break;
+                currentCat = categories.Get(index);
+                UpdateCategory();
+                return true;
+            default:
+                break;
         }
 
         return false;
@@ -94,7 +94,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
         if(currentCat) {
             loadoutListbox.ClearItems();
             foreach(DZLLoadOutType type: currentCat.items) {
-                if (type.displayName == "") {
+                if(type.displayName == "") {
                     type.displayName = DZLDisplayHelper.GetItemDisplayName(type.type);
                 }
 
@@ -105,18 +105,18 @@ class DZLLoadOutMenu: DZLBaseMenu {
 
     private void UpdaterPreviewType(TextListboxWidget widget) {
         int pos = widget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLLoadOutType itemType;
         widget.GetItemData(pos, 0, itemType);
 
-        if (itemType) {
+        if(itemType) {
             EntityAI currentItem = preview.GetItem();
 
-            if (currentItem && currentItem.GetType() == itemType.type) return;
+            if(currentItem && currentItem.GetType() == itemType.type) return;
 
-            if (previewItem) {
+            if(previewItem) {
                 GetGame().ObjectDelete(previewItem);
             }
 

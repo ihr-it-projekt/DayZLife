@@ -19,7 +19,7 @@ modded class CarScript {
     override void OnEngineStart() {
         super.OnEngineStart();
         Human player = CrewMember(DayZPlayerConstants.VEHICLESEAT_DRIVER);
-        if (player) {
+        if(player) {
             lastDriverId = player.GetIdentity().GetId();
         }
     }
@@ -49,7 +49,7 @@ modded class CarScript {
     }
 
     bool CheckHealth() {
-        if (GetGame().IsServer() && IsDamageDestroyed() && hasInsurance) {
+        if(GetGame().IsServer() && IsDamageDestroyed() && hasInsurance) {
             DisableInsurance();
             DZLStoragePosition storagePosition = DZLConfig.Get().carConfig.GetStorageByPosition(lastGaragePosition);
 
@@ -81,7 +81,7 @@ modded class CarScript {
     }
 
     void OwnCar(PlayerIdentity player, string _ownerId, string _ownerName) {
-        if (_ownerId != "" && _ownerName != "") {
+        if(_ownerId != "" && _ownerName != "") {
             this.ownerId = _ownerId;
             this.ownerName = _ownerName;
         } else {
@@ -141,25 +141,25 @@ modded class CarScript {
 
     bool HasPlayerAccess(PlayerBase player) {
         DZLDate currentDate = new DZLDate();
-        if (GetGame().IsClient() && currentDate.inSeconds - timeAskForDataSync > 5 && !isSync) {
+        if(GetGame().IsClient() && currentDate.inSeconds - timeAskForDataSync > 5 && !isSync) {
             GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE, null, true);
             timeAskForDataSync = currentDate.inSeconds;
         }
 
-        if (!player) return false;
+        if(!player) return false;
 
         string ident = player.GetPlayerId();
 
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-        if (!dzlPlayer) return false;
+        if(!dzlPlayer) return false;
 
         return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveAsCop() || player.GetConfig().adminIds.CanManageCars(ident) || dzlPlayer.IsActiveAsArmy();
     }
 
     void RemovePlayerAccess(string ident) {
         int index = playerAccess.Find(ident);
-        if (index != -1) {
+        if(index != -1) {
             playerAccess.Remove(index);
             SynchronizeValues(null);
         }
@@ -197,31 +197,31 @@ modded class CarScript {
     }
 
     override bool OnStoreLoad(ParamsReadContext ctx, int version) {
-        if (!super.OnStoreLoad( ctx, version))
+        if(!super.OnStoreLoad(ctx, version))
             return false;
 
         autoptr Param3<int, ref array<string>, string> store = new Param3<int, ref array<string>, string>(0, new array<string>, "");
-        if (ctx.Read(store)) {
+        if(ctx.Read(store)) {
             dzlCarId = store.param1;
             playerAccess = store.param2;
             ownerId = store.param3;
         }
 
         autoptr Param1<string> store2 = new Param1<string>("");
-        if (ctx.Read(store2)) {
+        if(ctx.Read(store2)) {
             ownerName = store2.param1;
         }
 
         autoptr Param2<bool, vector> store3 = new Param2<bool, vector>(false, "0 0 0");
-        if (ctx.Read(store3)) {
+        if(ctx.Read(store3)) {
             hasInsuranceServer = store3.param1;
-            if (hasInsuranceServer) {
+            if(hasInsuranceServer) {
                 EnableInsurance(store3.param2);
             }
         }
 
         Param1<ref DZLCarStoreItem> store4 = new Param1<ref DZLCarStoreItem>(null);
-        if (ctx.Read(store4) && store4.param1) {
+        if(ctx.Read(store4) && store4.param1) {
             carStoreItem = store4.param1;
             DZLInsuranceManager.Get().AddCar(this, carStoreItem);
         }
@@ -232,28 +232,28 @@ modded class CarScript {
     }
 
     void SynchronizeValues(PlayerIdentity sender) {
-        if (sender && ownerId == "") {
+        if(sender && ownerId == "") {
             ownerId = sender.GetId();
             ownerName = sender.GetName();
         }
 
-        if (sender && ownerName == "" && ownerId == sender.GetId()) {
+        if(sender && ownerName == "" && ownerId == sender.GetId()) {
             ownerName = sender.GetName();
         }
 
         GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param6<int, ref array<string>, string, string, bool, bool>(dzlCarId, playerAccess, ownerId, ownerName, isRaided, hasInsurance), true, sender);
     }
 
-    override void OnContact( string zoneName, vector localPos, IEntity other, Contact data ) {
+    override void OnContact(string zoneName, vector localPos, IEntity other, Contact data) {
         bool carCollisionDamage = true;
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
         } else {
             PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
             carCollisionDamage = player.GetConfig().carConfig.carCollisionDamage;
         }
 
-        if (carCollisionDamage) {
+        if(carCollisionDamage) {
             super.OnContact(zoneName, localPos, other, data);
         }
     }

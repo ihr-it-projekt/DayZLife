@@ -3,11 +3,11 @@ class DZLTraderPositionCollection {
     ref array<ref DZLTraderPosition> positions;
 
     void DZLTraderPositionCollection() {
-        if (!Load()) {
+        if(!Load()) {
             positions = new array<ref DZLTraderPosition>;
             array<string> catNames = new array<string>;
 
-            if (DAY_Z_LIFE_DEBUG) {
+            if(DAY_Z_LIFE_DEBUG) {
 
                 catNames.Insert("Tools");
                 catNames.Insert("Food");
@@ -85,11 +85,11 @@ class DZLTraderPositionCollection {
             Save();
         }
 
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             Save();
         }
-        if (version == "2") {
+        if(version == "2") {
             version = "3";
 
             Save();
@@ -97,7 +97,7 @@ class DZLTraderPositionCollection {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderPositions.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderPositions.json")) {
             JsonFileLoader<DZLTraderPositionCollection>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderPositions.json", this);
             return true;
         }
@@ -105,7 +105,7 @@ class DZLTraderPositionCollection {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLTraderPositionCollection>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderPositions.json", this);
         }

@@ -16,7 +16,7 @@ class ActionGetOwnerName: ActionInteractBase {
 
     override void OnStartClient(ActionData action_data) {
         CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
-        if (car) {
+        if(car) {
             action_data.m_Player.DisplayMessage("#owner_is: " + car.ownerName);
         }
     }

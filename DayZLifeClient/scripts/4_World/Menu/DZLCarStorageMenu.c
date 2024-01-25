@@ -44,7 +44,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         array<string> carTypes = player.GetConfig().carConfig.carTypesToStore;
         foreach(string carType: carTypes) {
             CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, false);
-            if (playerCar && !playerCar.isSold) {
+            if(playerCar && !playerCar.isSold) {
                 string name = "";
                 GetGame().ObjectGetDisplayName(playerCar, name);
                 name += " (" + playerCar.ownerName + ")";
@@ -57,11 +57,11 @@ class DZLCarStorageMenu: DZLBaseMenu {
         super.OnShow();
         insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + " $)");
 
-        if (!position) {
+        if(!position) {
             position = player.GetConfig().carConfig.GetStorageByPosition(player.GetPosition());
         }
 
-        if (!position) {
+        if(!position) {
             OnHide();
             LogMessageDZL("No Storage position found.");
             return;
@@ -71,12 +71,12 @@ class DZLCarStorageMenu: DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (w == inStoreButton || w == storeInFractionButton) {
-            if (w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
+        if(w == inStoreButton || w == storeInFractionButton) {
+            if(w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
             int index = carToStoreList.GetSelectedRow();
 
-            if (-1 == index) {
+            if(-1 == index) {
                 player.DisplayMessage("#no_car_selected");
                 return true;
             }
@@ -84,35 +84,35 @@ class DZLCarStorageMenu: DZLBaseMenu {
             CarScript car = null;
             carToStoreList.GetItemData(index, 0, car);
 
-            if (car) {
+            if(car) {
                 bool carIsEmpty = true;
-                for (int seat = 0; seat < car.CrewSize(); seat++) {
-                    if (car.CrewMember(seat)) {
+                for(int seat = 0; seat < car.CrewSize(); seat++) {
+                    if(car.CrewMember(seat)) {
                         player.DisplayMessage("#car_is_not_empty");
                         return true;
                     }
                 }
 
                 CargoBase cargo = car.GetInventory().GetCargo();
-                if (!player.GetConfig().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
+                if(!player.GetConfig().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
                     player.DisplayMessage("#car_is_not_empty");
                     return true;
                 }
 
-                if (w == inStoreButton && car.ownerId != dzlPlayer.dayZPlayerId) {
+                if(w == inStoreButton && car.ownerId != dzlPlayer.dayZPlayerId) {
                     player.DisplayMessage("#car_can_only_stored_in_fraction_garage");
                     return true;
                 }
 
-                if (w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
+                if(w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
                 GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
                 car.isSold = true;
             }
-        }  else if (w == outStoreButton) {
+        } else if(w == outStoreButton) {
             int indexOut = carInStoreList.GetSelectedRow();
 
-            if (-1 == indexOut) {
+            if(-1 == indexOut) {
                 player.DisplayMessage("#no_car_selected");
                 return true;
             }
@@ -120,18 +120,18 @@ class DZLCarStorageMenu: DZLBaseMenu {
             DZLCarStoreItem carOut = null;
             carInStoreList.GetItemData(indexOut, 0, carOut);
 
-            if (!carOut.IsOwner(dzlPlayer.dayZPlayerId) && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
+            if(!carOut.IsOwner(dzlPlayer.dayZPlayerId) && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
             string textPrivate = "";
             carInStoreList.GetItemText(indexOut, 1, textPrivate);
 
             bool isPrivateParkOut = "x" == textPrivate;
 
-            if (carOut) {
+            if(carOut) {
                 array<Object> excludedObjects = new array<Object>;
                 array<Object> nearbyObjects = new array<Object>;
 
-                if (GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)) {
+                if(GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)) {
                     player.DisplayMessage("#car_spwan_place_is_blocked");
                     return true;
                 }
@@ -142,7 +142,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
                 GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
             }
-        } else if (w == closeButton) {
+        } else if(w == closeButton) {
             OnHide();
             return true;
         }
@@ -151,9 +151,9 @@ class DZLCarStorageMenu: DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
             autoptr Param2<ref DZLCarStorage, ref DZLCarStorage> paramGetCarDataResponse;
-            if (ctx.Read(paramGetCarDataResponse)) {
+            if(ctx.Read(paramGetCarDataResponse)) {
                 DZLCarStorage carStorage = paramGetCarDataResponse.param1;
                 DZLCarStorage fractionCarStorage = paramGetCarDataResponse.param2;
                 array<ref DZLCarStoreItem> items = carStorage.items;
@@ -167,7 +167,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
                     carInStoreList.SetItem(pos, "x", item, 1);
                 }
 
-                if (fractionCarStorage) {
+                if(fractionCarStorage) {
                     array<ref DZLCarStoreItem> fractionItems = fractionCarStorage.items;
 
                     foreach(DZLCarStoreItem fractionItem: fractionItems) {
@@ -189,7 +189,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         GetGame().ConfigGetText(cfg, displayName);
 
 
-        if (displayName == "") {
+        if(displayName == "") {
             displayName = itemClassname;
         }
 

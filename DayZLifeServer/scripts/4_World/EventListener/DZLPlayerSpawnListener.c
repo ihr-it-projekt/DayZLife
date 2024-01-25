@@ -11,11 +11,11 @@ class DZLPlayerSpawnListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_NEW_SPAWN) {
+        if(rpc_type == DAY_Z_LIFE_NEW_SPAWN) {
             autoptr Param2<string, string> param;
-            if (ctx.Read(param) && param.param1 && param.param2) {
+            if(ctx.Read(param) && param.param1 && param.param2) {
                 PlayerBase player = PlayerBase.Cast(target);
-                if (!player) return;
+                if(!player) return;
                 player.RemoveAllItems();
                 player.GetDZLPlayer().LoosPlayerInventoryMoney();
 
@@ -25,7 +25,7 @@ class DZLPlayerSpawnListener {
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 dzlPlayer.UpdateActiveJob(param.param2);
 
-                if (point) {
+                if(point) {
                     foreach(string item: point.items) {
                         player.GetInventory().CreateInInventory(item);
                     }

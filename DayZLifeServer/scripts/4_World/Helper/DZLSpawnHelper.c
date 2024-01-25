@@ -2,7 +2,7 @@ class DZLSpawnHelper {
 
     static bool SpawnContainer(vector position, vector orientation, string gameObjectName) {
         Container_Base obj = Container_Base.Cast(GetGame().CreateObject(gameObjectName, position));
-        if (!obj) {
+        if(!obj) {
             return false;
         }
 
@@ -15,7 +15,7 @@ class DZLSpawnHelper {
     static Object SpawnActionPoint(vector pos, vector orientation, string gameObjectName) {
         //pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
         Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true);
-        if (!game_obj) {
+        if(!game_obj) {
             return null;
         }
 
@@ -31,8 +31,8 @@ class DZLSpawnHelper {
         game_obj.SetOrientation(game_obj.GetOrientation()); //Collision fix
         game_obj.Update();
         game_obj.SetAffectPathgraph(true, false);
-        if( game_obj.CanAffectPathgraph() ) {
-            GetGame().GetCallQueue( CALL_CATEGORY_SYSTEM ).CallLater( GetGame().UpdatePathgraphRegionByObject, 100, false, game_obj );
+        if(game_obj.CanAffectPathgraph()) {
+            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().UpdatePathgraphRegionByObject, 100, false, game_obj);
         }
     }
 
@@ -40,11 +40,11 @@ class DZLSpawnHelper {
         EntityAI item;
         bool spawnOnGround = false;
 
-        if (!inventoryLocation) {
+        if(!inventoryLocation) {
             inventoryLocation = new InventoryLocation;
         }
 
-        if (parent.GetInventory().FindFirstFreeLocationForNewEntity(itemInStock.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+        if(parent.GetInventory().FindFirstFreeLocationForNewEntity(itemInStock.type, FindInventoryLocationType.ANY, inventoryLocation)) {
             item = parent.GetInventory().CreateInInventory(itemInStock.type);
         }
 
@@ -56,12 +56,12 @@ class DZLSpawnHelper {
             item = parent.GetInventory().CreateEntityInCargo(itemInStock.type);
         }
 
-        if (!item) {
+        if(!item) {
             spawnOnGround = true;
             item = parent.SpawnEntityOnGroundPos(itemInStock.type, parent.GetPosition());
         }
 
-        if (!item) return spawnOnGround;
+        if(!item) return spawnOnGround;
 
         item.SetHealth(itemInStock.health);
 
@@ -69,24 +69,24 @@ class DZLSpawnHelper {
         if(item.IsMagazine()) {
             Magazine mag = Magazine.Cast(item);
 
-            if (!mag) {
+            if(!mag) {
                 return spawnOnGround;
             }
             mag.ServerSetAmmoCount(itemInStock.GetQuantity());
         } else if(item.IsAmmoPile()) {
             Ammunition_Base ammo = Ammunition_Base.Cast(item);
 
-            if (!ammo) {
+            if(!ammo) {
                 return spawnOnGround;
             }
             ammo.ServerSetAmmoCount(itemInStock.GetQuantity());
-        } else if (ItemBase.CastTo(castItem, item)) {
+        } else if(ItemBase.CastTo(castItem, item)) {
             castItem.SetQuantity(itemInStock.GetQuantity(), true, true);
         }
 
         if(itemInStock.attached.Count() > 0) {
             foreach(DZLStoreItem itemAttached: itemInStock.attached) {
-                if (DZLSpawnHelper.Add(item, itemAttached, inventoryLocation) && !spawnOnGround) {
+                if(DZLSpawnHelper.Add(item, itemAttached, inventoryLocation) && !spawnOnGround) {
                     spawnOnGround = true;
                 }
             }

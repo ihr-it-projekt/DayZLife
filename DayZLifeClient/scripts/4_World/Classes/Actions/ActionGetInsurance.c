@@ -16,10 +16,10 @@ class ActionGetInsurance: ActionInteractBase {
 
     override void OnStartClient(ActionData action_data) {
         CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
-        if (car) {
+        if(car) {
             string hasInsurance = "#no";
 
-            if (car.HasInsurance()) {
+            if(car.HasInsurance()) {
                 hasInsurance = "#yes";
             }
 

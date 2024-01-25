@@ -23,7 +23,7 @@ class DZLLicenceMenu : DZLBaseMenu {
         licenceListBox.ClearItems();
         foreach(DZLCraftLicence licence: licences.collection) {
             string hasLicenseText = "x";
-            if (!dzlPlayer.HasLicense(licence)) {
+            if(!dzlPlayer.HasLicense(licence)) {
                 hasLicenseText = "";
             }
 
@@ -35,9 +35,9 @@ class DZLLicenceMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_BUY_LICENCE_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_BUY_LICENCE_RESPONSE) {
             autoptr Param1<string> paramGetResponse;
-            if (ctx.Read(paramGetResponse)) {
+            if(ctx.Read(paramGetResponse)) {
                 UpdateGUI(paramGetResponse.param1);
             }
         }
@@ -54,7 +54,7 @@ class DZLLicenceMenu : DZLBaseMenu {
     }
 
     override void OnShow() {
-        if (config) {
+        if(config) {
             super.OnShow();
             buyButton.Show(false);
 
@@ -67,54 +67,54 @@ class DZLLicenceMenu : DZLBaseMenu {
     override bool OnClick(Widget w, int x, int y, int button) {
         if(super.OnClick(w, x, y, button)) return true;
         switch(w) {
-        case buyButton:
-            int position = licenceListBox.GetSelectedRow();
+            case buyButton:
+                int position = licenceListBox.GetSelectedRow();
 
-            if(-1 == position) return true;
-            DZLCraftLicence licence;
-            licenceListBox.GetItemData(position, 0, licence);
+                if(-1 == position) return true;
+                DZLCraftLicence licence;
+                licenceListBox.GetItemData(position, 0, licence);
 
-            if(!licence) return true;
+                if(!licence) return true;
 
-            DZLCraftLicence depLicence;
-            if (licence.dependencyLicence) {
-                depLicence = config.licenceConfig.licenceCollection.FindByName(licence.dependencyLicence);
-            }
+                DZLCraftLicence depLicence;
+                if(licence.dependencyLicence) {
+                    depLicence = config.licenceConfig.licenceCollection.FindByName(licence.dependencyLicence);
+                }
 
-            string message = dzlPlayer.CanBuyLicence(licence, depLicence);
+                string message = dzlPlayer.CanBuyLicence(licence, depLicence);
 
-            if(!message) {
-                buyButton.Show(false);
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param1<string>(licence.GetId()), true);
-            } else {
-                UpdateGUI(message);
-            }
+                if(!message) {
+                    buyButton.Show(false);
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param1<string>(licence.GetId()), true);
+                } else {
+                    UpdateGUI(message);
+                }
 
-            return true;
-        case licenceListBox:
-            int positionBox = licenceListBox.GetSelectedRow();
-
-            if(-1 == positionBox) return true;
-            DZLCraftLicence licenceBox;
-            licenceListBox.GetItemData(positionBox, 0, licenceBox);
-
-            if(!licenceBox) {
-                buyButton.Show(false);
                 return true;
-            }
+            case licenceListBox:
+                int positionBox = licenceListBox.GetSelectedRow();
 
-            string hasLicenceText;
-            licenceListBox.GetItemText(positionBox, 3, hasLicenceText);
+                if(-1 == positionBox) return true;
+                DZLCraftLicence licenceBox;
+                licenceListBox.GetItemData(positionBox, 0, licenceBox);
 
-            if (hasLicenceText == "x") {
-                buyButton.Show(false);
+                if(!licenceBox) {
+                    buyButton.Show(false);
+                    return true;
+                }
+
+                string hasLicenceText;
+                licenceListBox.GetItemText(positionBox, 3, hasLicenceText);
+
+                if(hasLicenceText == "x") {
+                    buyButton.Show(false);
+                    return true;
+                }
+
+                buyButton.Show(true);
                 return true;
-            }
-
-            buyButton.Show(true);
-            return true;
-        default:
-            break;
+            default:
+                break;
         }
         return false;
     }

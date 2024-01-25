@@ -48,9 +48,9 @@ class DZLCarMenu : DZLBaseMenu {
     }
 
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
-        if (w == carPanelOnlinePlayerList) {
+        if(w == carPanelOnlinePlayerList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(carPanelOnlinePlayerList, carPanelKeyOwnerList, DAY_Z_LIFE_JOB_CIVIL);
-        } else if (w == carPanelKeyOwnerList) {
+        } else if(w == carPanelKeyOwnerList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(carPanelKeyOwnerList, carPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
         }
 
@@ -58,14 +58,14 @@ class DZLCarMenu : DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
-        if (w == carKeySaveButton) {
+        if(w == carKeySaveButton) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<DZLOnlinePlayer>>(car, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(carPanelKeyOwnerList)), true);
             carKeySearchInput.SetText("");
-        } else if (w == carKeySearchButton) {
+        } else if(w == carKeySearchButton) {
             DZLDisplayHelper.SearchOnlinePlayersWithKey(carKeySearchInput.GetText(), carPanelOnlinePlayerList, carPanelKeyOwnerList, onlinePlayers, player);
-        } else if (w == changOwnerButton && selectedPlayer) {
+        } else if(w == changOwnerButton && selectedPlayer) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_CHANGE_CAR_OWNER, new Param2<string, CarScript>(selectedPlayer.id, car), true);
             OnHide();
         }
@@ -78,33 +78,33 @@ class DZLCarMenu : DZLBaseMenu {
         int currentRowKey = carPanelKeyOwnerList.GetSelectedRow();
         int currentRowPlayer = carPanelOnlinePlayerList.GetSelectedRow();
 
-        if (currentRowKey != -1 && currentRowKey != lastSelectedKeyRow) {
+        if(currentRowKey != -1 && currentRowKey != lastSelectedKeyRow) {
             carPanelKeyOwnerList.GetItemData(currentRowKey, 0, selectedPlayer);
             lastSelectedKeyRow = currentRowKey;
             newOwnerDisplay.SetText("");
-            if (selectedPlayer) {
+            if(selectedPlayer) {
                 newOwnerDisplay.SetText(selectedPlayer.name);
             }
-        } else if (currentRowPlayer != -1 && currentRowPlayer != lastSelectedPlayerRow) {
+        } else if(currentRowPlayer != -1 && currentRowPlayer != lastSelectedPlayerRow) {
             carPanelOnlinePlayerList.GetItemData(currentRowPlayer, 0, selectedPlayer);
             lastSelectedPlayerRow = currentRowPlayer;
             newOwnerDisplay.SetText("");
-            if (selectedPlayer) {
+            if(selectedPlayer) {
                 newOwnerDisplay.SetText(selectedPlayer.name);
             }
         }
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramOnlinePlayers;
-            if (ctx.Read(paramOnlinePlayers)) {
+            if(ctx.Read(paramOnlinePlayers)) {
                 keyOwner = paramOnlinePlayers.param1;
                 UpdateList();
             }
-        } else if (rpc_type == DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE) {
+        } else if(rpc_type == DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramAllPlayers;
-            if (ctx.Read(paramAllPlayers)) {
+            if(ctx.Read(paramAllPlayers)) {
                 onlinePlayers = paramAllPlayers.param1;
                 UpdateList();
             }
@@ -113,20 +113,20 @@ class DZLCarMenu : DZLBaseMenu {
 
 
     private void UpdateList() {
-        if (keyOwner && onlinePlayers) {
+        if(keyOwner && onlinePlayers) {
             carPanelKeyOwnerList.ClearItems();
             carPanelOnlinePlayerList.ClearItems();
 
             foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
                 bool hasKey = false;
                 foreach(DZLOnlinePlayer keyPlayer: keyOwner) {
-                    if (onlinePlayer.id == keyPlayer.id) {
+                    if(onlinePlayer.id == keyPlayer.id) {
                         hasKey = true;
                         break;
                     }
                 }
 
-                if (!hasKey) {
+                if(!hasKey) {
                     carPanelOnlinePlayerList.AddItem(onlinePlayer.name, onlinePlayer, 0);
                 }
             }

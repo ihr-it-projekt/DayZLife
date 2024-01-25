@@ -5,7 +5,7 @@ class DZLLicenceConfig {
     ref array<ref DZLLicencePosition> positionOfLicencePoints;
 
     void DZLLicenceConfig() {
-        if (!Load()) {
+        if(!Load()) {
             licences = new DZLLicenceCollection;
             licenceCollection = new DZLLicenceCraftingCollection;
             positionOfLicencePoints = new array<ref DZLLicencePosition>;
@@ -14,7 +14,7 @@ class DZLLicenceConfig {
             DZLLicenceToolItemCollection toolItems = new DZLLicenceToolItemCollection;
 
 
-            if (DAY_Z_LIFE_DEBUG) {
+            if(DAY_Z_LIFE_DEBUG) {
                 // Start Crafting
                 craftItems.collection.Insert(new DZLLicenceCraftItem("SmallStone", 2, 50));
                 toolItems.collection.Insert(new DZLLicenceToolItem("Sledgehammer", 1, 10));
@@ -130,7 +130,7 @@ class DZLLicenceConfig {
 
         if(licences.collection) {
             foreach(DZLLicence licence: licences.collection) {
-                if (!licence.HasCorrectId()) {
+                if(!licence.HasCorrectId()) {
                     licence.SetId();
                 }
             }
@@ -139,19 +139,19 @@ class DZLLicenceConfig {
 
         if(licenceCollection.collection) {
             foreach(DZLCraftLicence licenceCraft: licenceCollection.collection) {
-                if (!licenceCraft.HasCorrectId()) {
+                if(!licenceCraft.HasCorrectId()) {
                     licenceCraft.SetId();
                 }
             }
             Save();
         }
 
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             Save();
         }
 
-        if (version == "2") {
+        if(version == "2") {
             version = "3";
             licenceCollection = new DZLLicenceCraftingCollection;
             foreach(DZLLicence _l: licences.collection) {
@@ -163,19 +163,19 @@ class DZLLicenceConfig {
             Save();
         }
 
-        if (version == "3") {
+        if(version == "3") {
             version = "4";
             Save();
         }
 
-        if (version == "4") {
+        if(version == "4") {
             version = "5";
             Save();
         }
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json")) {
             JsonFileLoader<DZLLicenceConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json", this);
             return true;
         }
@@ -183,7 +183,7 @@ class DZLLicenceConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLLicenceConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json", this);
         }

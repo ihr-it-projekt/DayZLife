@@ -11,11 +11,11 @@ class DZLHouseExtension : DZLIdModel {
     int level;
 
     string GetMessage(PlayerBase raider, string name) {
-        if (level == 1) {
+        if(level == 1) {
             return message;
-        } else if (level == 2) {
+        } else if(level == 2) {
             return message + " " + name;
-        } else if (level == 3 || level == 4) {
+        } else if(level == 3 || level == 4) {
             return message + " " + name + " / " + raider.GetIdentity().GetName();
         }
 

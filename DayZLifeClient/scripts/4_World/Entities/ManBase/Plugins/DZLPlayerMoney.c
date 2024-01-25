@@ -2,7 +2,7 @@ class DZLPlayerMoney {
     static ref DZLPlayerMoney instance;
 
     static DZLPlayerMoney Get(PlayerBase player) {
-        if (!instance) {
+        if(!instance) {
             instance = new DZLPlayerMoney();
         }
 
@@ -28,16 +28,16 @@ class DZLPlayerMoney {
     }
 
     int GetMoneyAmount() {
-        if (!player) {
+        if(!player) {
             return 0;
         }
 
-        if (!currencyValues) {
+        if(!currencyValues) {
             config = DZLConfig.Get().bankConfig;
             currencyValues = config.currencyValues;
         }
 
-        if (!currencyValues) {
+        if(!currencyValues) {
             return 0;
         }
 
@@ -47,12 +47,12 @@ class DZLPlayerMoney {
         player.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, itemsArray);
 
         ItemBase item;
-        for (int i = 0; i < itemsArray.Count(); i++) {
+        for(int i = 0; i < itemsArray.Count(); i++) {
             Class.CastTo(item, itemsArray.Get(i));
 
             if(item && item.GetType()) {
                 int value = currencyValues.Get(item.GetType());
-                if (value) {
+                if(value) {
                     currencyAmount += value * item.GetQuantity();
                 }
             }
@@ -62,19 +62,19 @@ class DZLPlayerMoney {
     }
 
     int AddMoney(float moneyAmount) {
-        if (moneyAmount == 0) return 0;
+        if(moneyAmount == 0) return 0;
 
         array<EntityAI> itemsArray = new array<EntityAI>;
         player.GetInventory().EnumerateInventory(InventoryTraversalType.PREORDER, itemsArray);
 
         ItemBase item;
         int currencyAmount = 0;
-        for (int i = 0; i < itemsArray.Count(); i++) {
+        for(int i = 0; i < itemsArray.Count(); i++) {
             Class.CastTo(item, itemsArray.Get(i));
 
             if(item && item.GetType()) {
                 int value = currencyValues.Get(item.GetType());
-                if (value) {
+                if(value) {
                     currencyAmount += value * item.GetQuantity();
                     GetGame().ObjectDelete(item);
                 }
@@ -83,7 +83,7 @@ class DZLPlayerMoney {
 
         currencyAmount = currencyAmount + moneyAmount;
 
-        if (currencyAmount > 0) {
+        if(currencyAmount > 0) {
             currencyAmount = AddNewMoneyItemToInventory(currencyAmount);
         }
 
@@ -96,30 +96,30 @@ class DZLPlayerMoney {
         int selectedValue = 0;
         string selectedType = "";
         foreach(string type, int value: currencyValues) {
-            if (moneyAmount >= value && selectedValue < value) {
+            if(moneyAmount >= value && selectedValue < value) {
                 selectedValue = value;
                 selectedType = type;
             }
         }
 
-        if (selectedValue == 0) {
+        if(selectedValue == 0) {
             return 0;
         }
 
         EntityAI moneyEntity;
-        if (player.GetInventory().FindFirstFreeLocationForNewEntity(selectedType, FindInventoryLocationType.ANY, inventoryLocation)) {
+        if(player.GetInventory().FindFirstFreeLocationForNewEntity(selectedType, FindInventoryLocationType.ANY, inventoryLocation)) {
             moneyEntity = player.GetHumanInventory().CreateInInventory(selectedType);
         }
 
-        if (!moneyEntity && !player.GetHumanInventory().GetEntityInHands()) {
+        if(!moneyEntity && !player.GetHumanInventory().GetEntityInHands()) {
             moneyEntity = player.GetHumanInventory().CreateInHands(selectedType);
         }
 
-        if (!moneyEntity) {
+        if(!moneyEntity) {
             moneyEntity = player.SpawnEntityOnGroundPos(selectedType, player.GetPosition());
         }
 
-        if (!moneyEntity) {
+        if(!moneyEntity) {
             Print("Can not spawn: " + selectedType);
             return 0;
         }
@@ -141,7 +141,7 @@ class DZLPlayerMoney {
 
         int countAddFromType = Math.Floor(moneyToAdd / factor);
 
-        if (countAddFromType > maxAmount) {
+        if(countAddFromType > maxAmount) {
             moneyToAdd -= maxAmount * factor;
             item.SetQuantity(maxAmount);
         } else {
@@ -149,7 +149,7 @@ class DZLPlayerMoney {
             moneyToAdd -= countAddFromType * factor;
         }
 
-        if (moneyToAdd < 1) {
+        if(moneyToAdd < 1) {
             moneyToAdd = 0;
         }
 

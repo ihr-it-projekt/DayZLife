@@ -30,31 +30,31 @@ class DZLPlayerPayTicketMenu: DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
         switch(w) {
-        case payTicket:
-            int index = openTicketsList.GetSelectedRow();
+            case payTicket:
+                int index = openTicketsList.GetSelectedRow();
 
-            if (-1 == index) {
-                player.DisplayMessage("#no_ticket_selected");
-                return true;
-            }
-
-            DZLTicket ticketPay = null;
-            openTicketsList.GetItemData(index, 0, ticketPay);
-
-            if (ticketPay) {
-                if (dzlPlayer.HasEnoughMoney(ticketPay.value)) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_PAY_TICKET, new Param1<string>(ticketPay.GetId()), true);
-                } else {
-                    player.DisplayMessage("#error_not_enough_money");
+                if(-1 == index) {
+                    player.DisplayMessage("#no_ticket_selected");
+                    return true;
                 }
-            }
 
-            return true;
-        default:
-            break;
+                DZLTicket ticketPay = null;
+                openTicketsList.GetItemData(index, 0, ticketPay);
+
+                if(ticketPay) {
+                    if(dzlPlayer.HasEnoughMoney(ticketPay.value)) {
+                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_PAY_TICKET, new Param1<string>(ticketPay.GetId()), true);
+                    } else {
+                        player.DisplayMessage("#error_not_enough_money");
+                    }
+                }
+
+                return true;
+            default:
+                break;
         }
         return false;
     }

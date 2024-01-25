@@ -15,7 +15,7 @@ class DZLMessageConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "message.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "message.json")) {
             JsonFileLoader<DZLMessageConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "message.json", this);
             return true;
         }
@@ -23,7 +23,7 @@ class DZLMessageConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLMessageConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "message.json", this);
         }

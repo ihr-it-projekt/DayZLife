@@ -2,7 +2,7 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
     ref DZLBankingConfig config;
 
     DZLBankingConfig GetConfig() {
-        if (!config) {
+        if(!config) {
             config = DZLConfig.Get().bankConfig;
         }
 
@@ -24,9 +24,9 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
         m_ConditionTarget = new DZL_CCTActionObject;
     }
 
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
-        if (GetGame().IsClient()) {
-            if (!player.GetConfig()) return false;
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if(GetGame().IsClient()) {
+            if(!player.GetConfig()) return false;
             config = player.GetConfig().bankConfig;
         } else {
             GetConfig();
@@ -34,17 +34,17 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
-        if (!objectTarget || !objectTarget.IsBank()) return false;
+        if(!objectTarget || !objectTarget.IsBank()) return false;
 
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-            if (bank.RaidRuns()) {
+            if(bank.RaidRuns()) {
                 DZLSendMessage(player.GetIdentity(), "#raid_has_not_finished (" + bank.GetCountDownRaid() + "s)");
                 return false;
             }
 
 
-            if (!bank.HasMoneyToRaid()) {
+            if(!bank.HasMoneyToRaid()) {
                 DZLSendMessage(player.GetIdentity(), "#dzl_safe_is_closed");
                 return false;
             }
@@ -62,7 +62,7 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
         GetConfig();
         PlayerBase player = action_data.m_Player;
 
-        if (player) {
+        if(player) {
             DZLBank bank = DZLDatabaseLayer.Get().GetBank();
             int money = bank.PlayerRaidBank(player.GetDZLPlayer(), config.percentOfMoneyWhenRaid);
             DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());

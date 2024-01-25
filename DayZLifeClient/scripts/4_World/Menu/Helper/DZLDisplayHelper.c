@@ -10,18 +10,18 @@ class DZLDisplayHelper {
         configs.Insert("CfgAmmo");
 
         string displayName;
-        foreach (string itemName: configs) {
+        foreach(string itemName: configs) {
             string cfg = itemName + " " + itemClassname + " displayName";
             GetGame().ConfigGetText(cfg, displayName);
 
-            if (displayName != "") {
+            if(displayName != "") {
                 displayName.Replace("$UNT$", "");
 
                 break;
             }
         }
 
-        if (displayName == "") {
+        if(displayName == "") {
             displayName = itemClassname;
         }
 
@@ -37,13 +37,13 @@ class DZLDisplayHelper {
 
     static void MoveDZLOnlinePlayerFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, string job) {
         int pos = sourceWidget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLOnlinePlayer itemType;
         sourceWidget.GetItemData(pos, 0, itemType);
 
-        if (itemType) {
+        if(itemType) {
             sourceWidget.RemoveRow(pos);
 
             int posInsert = targetWidget.AddItem(itemType.name, itemType, 0);
@@ -51,7 +51,7 @@ class DZLDisplayHelper {
             DZLPaycheck paycheck = DZLConfig.Get().jobConfig.paycheck.GetFallbackPaycheckByJob(job);
             itemType.rank = paycheck.rank;
 
-            if (DAY_Z_LIFE_JOB_CIVIL != job) {
+            if(DAY_Z_LIFE_JOB_CIVIL != job) {
                 targetWidget.SetItem(posInsert, itemType.rank, itemType, 1);
             }
         }
@@ -62,12 +62,12 @@ class DZLDisplayHelper {
 
         array<ref DZLFractionMember> list = new array<ref DZLFractionMember>;
 
-        if (count > 0) {
-            for (int i = 0; i < count; ++i) {
+        if(count > 0) {
+            for(int i = 0; i < count; ++i) {
                 DZLFractionMember _player;
                 listWidget.GetItemData(i, 0, _player);
 
-                if (_player) {
+                if(_player) {
                     list.Insert(_player);
                 }
             }
@@ -78,13 +78,13 @@ class DZLDisplayHelper {
 
     static void LoadDZLOnlinePlayerAndFillRankListWidget(TextListboxWidget sourceWidget, TextListboxWidget jobRankList, string job) {
         int pos = sourceWidget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLOnlinePlayer itemType;
         sourceWidget.GetItemData(pos, 0, itemType);
 
-        if (itemType) {
+        if(itemType) {
             array<ref DZLPaycheck> paychecks = DZLConfig.Get().jobConfig.paycheck.GetPaycheckByJob(job);
 
 
@@ -93,7 +93,7 @@ class DZLDisplayHelper {
             foreach(DZLPaycheck paycheck: paychecks) {
                 jobRankList.AddItem(paycheck.rank, paycheck, 0);
 
-                if (paycheck.rank == itemType.rank) {
+                if(paycheck.rank == itemType.rank) {
                     jobRankList.SelectRow(count);
                 }
 
@@ -104,7 +104,7 @@ class DZLDisplayHelper {
 
     static void ChangeRankFromPlayer(TextListboxWidget rankWidget, TextListboxWidget playerWidget) {
         int posPlayer = playerWidget.GetSelectedRow();
-        if (posPlayer == -1) {
+        if(posPlayer == -1) {
             return;
         }
 
@@ -112,13 +112,13 @@ class DZLDisplayHelper {
         playerWidget.GetItemData(posPlayer, 0, player);
 
         int posRank = rankWidget.GetSelectedRow();
-        if (posRank == -1) {
+        if(posRank == -1) {
             return;
         }
         DZLPaycheck paycheck;
         rankWidget.GetItemData(posRank, 0, paycheck);
 
-        if (paycheck && player) {
+        if(paycheck && player) {
             player.rank = paycheck.rank;
 
             playerWidget.SetItem(posPlayer, player.name, player, 0);
@@ -132,12 +132,12 @@ class DZLDisplayHelper {
         array<DZLOnlinePlayer> list = new array<DZLOnlinePlayer>;
 
 
-        if (count > 0) {
-            for (int i = 0; i < count; ++i) {
+        if(count > 0) {
+            for(int i = 0; i < count; ++i) {
                 DZLOnlinePlayer _player;
                 listWidget.GetItemData(i, 0, _player);
 
-                if (_player) {
+                if(_player) {
                     list.Insert(_player);
                 }
             }
@@ -148,7 +148,7 @@ class DZLDisplayHelper {
 
     static DZLPlayer GetDZLPlayerFromList(TextListboxWidget sourceWidget) {
         int pos = sourceWidget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return null;
         }
         DZLPlayer itemType;
@@ -158,37 +158,37 @@ class DZLDisplayHelper {
 
 
     static void SearchOnlinePlayersWithKey(string search, TextListboxWidget target, TextListboxWidget exclude, array<ref DZLOnlinePlayer> onlinePlayers, PlayerBase player) {
-        if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        if(!onlinePlayers || onlinePlayers.Count() == 0) return;
         target.ClearItems();
         search.ToLower();
         int countPlayers = exclude.GetNumItems();
 
         foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
-            if (player.GetPlayerId() == onlinePlayer.id) continue;
+            if(player.GetPlayerId() == onlinePlayer.id) continue;
             bool hasKey = false;
 
             for(int i = 0; i < countPlayers; i ++) {
                 DZLOnlinePlayer keyPlayer;
                 exclude.GetItemData(i, 0, keyPlayer);
-                if (!keyPlayer) continue;
+                if(!keyPlayer) continue;
 
-                if (onlinePlayer.id == keyPlayer.id) {
+                if(onlinePlayer.id == keyPlayer.id) {
                     hasKey = true;
                     break;
                 }
             }
-            if (hasKey) continue;
+            if(hasKey) continue;
 
             string playerNameLow = onlinePlayer.name;
             playerNameLow.ToLower();
-            if (search == "" || playerNameLow.Contains(search)) {
+            if(search == "" || playerNameLow.Contains(search)) {
                 target.AddItem(onlinePlayer.name, onlinePlayer, 0);
             }
         }
     }
 
     static void SearchOnlinePlayers(string search, TextListboxWidget target, TextListboxWidget exclude, array<ref DZLOnlinePlayer> onlinePlayers) {
-        if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        if(!onlinePlayers || onlinePlayers.Count() == 0) return;
         target.ClearItems();
         search.ToLower();
         int countPlayers = exclude.GetNumItems();
@@ -198,47 +198,47 @@ class DZLDisplayHelper {
             for(int i = 0; i < countPlayers; i ++) {
                 DZLOnlinePlayer keyPlayer;
                 exclude.GetItemData(i, 0, keyPlayer);
-                if (!keyPlayer) continue;
+                if(!keyPlayer) continue;
 
-                if (keyPlayer.id == onlinePlayer.id) {
+                if(keyPlayer.id == onlinePlayer.id) {
                     mustExclude = true;
                     break;
                 }
             }
 
-            if (mustExclude) continue;
+            if(mustExclude) continue;
 
             string playerNameLow = onlinePlayer.name;
             playerNameLow.ToLower();
-            if (search == "" || playerNameLow.Contains(search)) {
+            if(search == "" || playerNameLow.Contains(search)) {
                 target.AddItem(onlinePlayer.name, onlinePlayer, 0);
             }
         }
     }
 
     static void SearchOnlinePlayersSingleWiget(string search, TextListboxWidget target, array<ref DZLPlayer> onlinePlayers) {
-        if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        if(!onlinePlayers || onlinePlayers.Count() == 0) return;
         target.ClearItems();
         search.ToLower();
 
         foreach(DZLPlayer onlinePlayer: onlinePlayers) {
             string playerNameLow = onlinePlayer.playerName;
             playerNameLow.ToLower();
-            if (search == "" || playerNameLow.Contains(search)) {
+            if(search == "" || playerNameLow.Contains(search)) {
                 target.AddItem(onlinePlayer.playerName, onlinePlayer, 0);
             }
         }
     }
 
     static void SearchFractionMembersSingleWiget(string search, TextListboxWidget target, array<ref DZLFractionMember> onlinePlayers) {
-        if (!onlinePlayers || onlinePlayers.Count() == 0) return;
+        if(!onlinePlayers || onlinePlayers.Count() == 0) return;
         target.ClearItems();
         search.ToLower();
 
         foreach(DZLFractionMember onlinePlayer: onlinePlayers) {
             string playerNameLow = onlinePlayer.name;
             playerNameLow.ToLower();
-            if (search == "" || playerNameLow.Contains(search)) {
+            if(search == "" || playerNameLow.Contains(search)) {
                 target.AddItem(onlinePlayer.name, onlinePlayer, 0);
             }
         }
@@ -246,13 +246,13 @@ class DZLDisplayHelper {
 
     static void MoveItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
         int pos = sourceWidget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         EntityAI item;
         sourceWidget.GetItemData(pos, 0, item);
 
-        if (item) {
+        if(item) {
             string name = "";
             sourceWidget.GetItemText(pos, 0, name);
             int index;
@@ -263,12 +263,12 @@ class DZLDisplayHelper {
 
     static void MoveStoreItemFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget) {
         int pos = sourceWidget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLStoreItem item;
         sourceWidget.GetItemData(pos, 0, item);
-        if (item) {
+        if(item) {
             string name = "";
             sourceWidget.GetItemText(pos, 0, name);
             int index;
@@ -279,18 +279,18 @@ class DZLDisplayHelper {
 
     static void UpdaterPreviewByEntityAI(TextListboxWidget widget, ItemPreviewWidget preview) {
         int pos = widget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         EntityAI item;
         widget.GetItemData(pos, 0, item);
 
-        if (item) {
+        if(item) {
             EntityAI currentItem = preview.GetItem();
 
-            if (currentItem && currentItem.GetType() == item.GetType()) return;
+            if(currentItem && currentItem.GetType() == item.GetType()) return;
 
-            if (previewItem) {
+            if(previewItem) {
                 GetGame().ObjectDelete(previewItem);
             }
 
@@ -300,18 +300,18 @@ class DZLDisplayHelper {
     }
     static void UpdaterPreviewByStoreItem(TextListboxWidget widget, ItemPreviewWidget preview) {
         int pos = widget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLStoreItem itemType;
         widget.GetItemData(pos, 0, itemType);
 
-        if (itemType) {
+        if(itemType) {
             EntityAI currentItem = preview.GetItem();
 
-            if (currentItem && currentItem.GetType() == itemType.type) return;
+            if(currentItem && currentItem.GetType() == itemType.type) return;
 
-            if (previewItem) {
+            if(previewItem) {
                 GetGame().ObjectDelete(previewItem);
             }
 
@@ -324,18 +324,18 @@ class DZLDisplayHelper {
 
     static void UpdaterPreviewType(TextListboxWidget widget, ItemPreviewWidget preview) {
         int pos = widget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLTraderType itemType;
         widget.GetItemData(pos, 0, itemType);
 
-        if (itemType) {
+        if(itemType) {
             EntityAI currentItem = preview.GetItem();
 
-            if (currentItem && currentItem.GetType() == itemType.type) return;
+            if(currentItem && currentItem.GetType() == itemType.type) return;
 
-            if (previewItem) {
+            if(previewItem) {
                 GetGame().ObjectDelete(previewItem);
             }
 

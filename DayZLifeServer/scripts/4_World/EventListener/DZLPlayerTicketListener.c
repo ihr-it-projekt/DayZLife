@@ -8,9 +8,9 @@ class DZLPlayerTicketListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_CREATE_TICKET) {
+        if(rpc_type == DAY_Z_LIFE_CREATE_TICKET) {
             autoptr Param3<PlayerBase, int, string> paramCreateTicket;
-            if (ctx.Read(paramCreateTicket)) {
+            if(ctx.Read(paramCreateTicket)) {
                 PlayerBase cop = PlayerBase.Cast(target);
                 PlayerBase ticketReceiver = paramCreateTicket.param1;
                 int ticketValue = paramCreateTicket.param2;
@@ -30,14 +30,14 @@ class DZLPlayerTicketListener {
                 DZLSendMessage(cop.GetIdentity(), "#you_gave_a_player_a_ticket: " + ticketValue.ToString());
                 DZLLogTicket(ticketReceiver.GetPlayerId(), "got a ticket", ticketValue);
             }
-        } else if (rpc_type == DAY_Z_LIFE_PAY_TICKET) {
+        } else if(rpc_type == DAY_Z_LIFE_PAY_TICKET) {
             autoptr Param1<string> paramPayTicket;
-            if (ctx.Read(paramPayTicket)) {
+            if(ctx.Read(paramPayTicket)) {
                 PlayerBase playerWhoPay = PlayerBase.Cast(target);
                 DZLPlayer dzlPayerWhoPay = playerWhoPay.GetDZLPlayer();
                 DZLTicket ticket = dzlPayerWhoPay.GetTicketById(paramPayTicket.param1);
 
-                if (ticket && dzlPayerWhoPay.HasEnoughMoney(ticket.value)) {
+                if(ticket && dzlPayerWhoPay.HasEnoughMoney(ticket.value)) {
                     dzlPayerWhoPay.AddMoneyToPlayer(ticket.value * -1);
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, playerWhoPay.GetIdentity());
                     DZLSendMessage(playerWhoPay.GetIdentity(), "#ticket_was_paid");

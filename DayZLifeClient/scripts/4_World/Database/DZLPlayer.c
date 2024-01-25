@@ -31,7 +31,7 @@ class DZLPlayer {
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         fileName = playerId + ".json";
-        if (!Load()) {
+        if(!Load()) {
             bank = moneyToAdd;
             this.dayZPlayerId = playerId;
             licenceIds = new TStringArray;
@@ -43,28 +43,28 @@ class DZLPlayer {
         DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
         idents.AddPlayer(playerId);
 
-        if (version == "3") {
+        if(version == "3") {
             activeJobGrade = "Rekrut";
             openTickets = new array<ref DZLTicket>;
         }
 
         DZLPaycheck payCheck = DZLRankHelper.getCurrentPayCheck(this, DZLConfig.Get().jobConfig.paycheck);
 
-        if (payCheck.rank != activeJobGrade) {
+        if(payCheck.rank != activeJobGrade) {
             activeJobGrade = payCheck.rank;
         }
 
-        if (version != "5") {
+        if(version != "5") {
             fractionId = "";
             fractionWherePlayerCanJoin = new array<string>;
 
             version = "5";
         }
 
-        if (IsInAnyFraction()) {
+        if(IsInAnyFraction()) {
             fraction = DZLDatabaseLayer.Get().GetFraction(fractionId);
 
-            if (!fraction) {
+            if(!fraction) {
                 fractionId = "";
             }
         }
@@ -88,7 +88,7 @@ class DZLPlayer {
     }
 
     string GetActiveJob() {
-        if (activeJob == "") {
+        if(activeJob == "") {
             activeJob = DAY_Z_LIFE_JOB_CIVIL;
             Save();
         }
@@ -98,21 +98,21 @@ class DZLPlayer {
     void SetJobGrade(string grade) {
         activeJobGrade = grade;
 
-        if (DAY_Z_LIFE_JOB_COP == activeJob) {
+        if(DAY_Z_LIFE_JOB_COP == activeJob) {
             lastCopRank = activeJobGrade;
-        } else if (DAY_Z_LIFE_JOB_MEDIC == activeJob) {
+        } else if(DAY_Z_LIFE_JOB_MEDIC == activeJob) {
             lastMedicRank = activeJobGrade;
-        } else if (DAY_Z_LIFE_JOB_ARMY == activeJob) {
+        } else if(DAY_Z_LIFE_JOB_ARMY == activeJob) {
             lastArmyRank = activeJobGrade;
         }
     }
 
     string GetLastJobRank(string job) {
-        if (DAY_Z_LIFE_JOB_COP == job) {
+        if(DAY_Z_LIFE_JOB_COP == job) {
             return lastCopRank;
-        } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
+        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
             return lastMedicRank;
-        } else if (DAY_Z_LIFE_JOB_ARMY == job) {
+        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
             return lastArmyRank;
         }
 
@@ -146,11 +146,11 @@ class DZLPlayer {
     void UpdateActiveJob(string job) {
         activeJob = job;
 
-        if (DAY_Z_LIFE_JOB_COP == job) {
+        if(DAY_Z_LIFE_JOB_COP == job) {
             activeJobGrade = lastCopRank;
-        } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
+        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
             activeJobGrade = lastMedicRank;
-        } else if (DAY_Z_LIFE_JOB_ARMY == job) {
+        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
             activeJobGrade = lastArmyRank;
         }
 
@@ -158,9 +158,9 @@ class DZLPlayer {
     }
 
     void UpdateOnlineTime() {
-        if (activeJob == DAY_Z_LIFE_JOB_COP) {
+        if(activeJob == DAY_Z_LIFE_JOB_COP) {
             onlineTimeCop++;
-        } else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+        } else if(activeJob == DAY_Z_LIFE_JOB_MEDIC) {
             onlineTimeMedic++;
         } else {
             onlineTimeCivil++;
@@ -170,9 +170,9 @@ class DZLPlayer {
     }
 
     void ResetOnlineTime() {
-        if (activeJob == DAY_Z_LIFE_JOB_COP) {
+        if(activeJob == DAY_Z_LIFE_JOB_COP) {
             onlineTimeCop = 0;
-        } else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+        } else if(activeJob == DAY_Z_LIFE_JOB_MEDIC) {
             onlineTimeMedic = 0;
         } else {
             onlineTimeCivil = 0;
@@ -182,9 +182,9 @@ class DZLPlayer {
     }
 
     int GetActiveOnlineTime() {
-        if (activeJob == DAY_Z_LIFE_JOB_COP) {
+        if(activeJob == DAY_Z_LIFE_JOB_COP) {
             return onlineTimeCop;
-        } else if (activeJob == DAY_Z_LIFE_JOB_MEDIC) {
+        } else if(activeJob == DAY_Z_LIFE_JOB_MEDIC) {
             return onlineTimeMedic;
         }
         return onlineTimeCivil;
@@ -192,9 +192,9 @@ class DZLPlayer {
 
     void UpdateCop(bool isCop, string rank) {
         this.isCop = isCop;
-        if (isCop) {
+        if(isCop) {
             this.lastCopRank = rank;
-            if (IsActiveAsCop()) {
+            if(IsActiveAsCop()) {
                 this.activeJobGrade = rank;
             }
         } else {
@@ -208,9 +208,9 @@ class DZLPlayer {
     void UpdateMedic(bool isMedic, string rank) {
         this.isMedic = isMedic;
 
-        if (isMedic) {
+        if(isMedic) {
             this.lastMedicRank = rank;
-            if (IsActiveAsMedic()) {
+            if(IsActiveAsMedic()) {
                 this.activeJobGrade = rank;
             }
         } else {
@@ -224,9 +224,9 @@ class DZLPlayer {
     void UpdateArmy(bool isArmy, string rank) {
         this.isArmy = isArmy;
 
-        if (isArmy) {
+        if(isArmy) {
             this.lastArmyRank = rank;
-            if (IsActiveAsArmy()) {
+            if(IsActiveAsArmy()) {
                 this.activeJobGrade = rank;
             }
         } else {
@@ -238,7 +238,7 @@ class DZLPlayer {
     }
 
     private void ResetJobCivil() {
-        if (IsActiveAsCivil()) {
+        if(IsActiveAsCivil()) {
             this.activeJobGrade = "Rekrut";
         }
     }
@@ -267,10 +267,10 @@ class DZLPlayer {
     }
 
     void AddMoneyToPlayer(int moneyCount) {
-        if (GetDayZGame().IsServer()) {
+        if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 
-            if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+            if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
                 DZLPlayerMoney.Get(player).AddMoney(moneyCount);
                 return;
             }
@@ -281,7 +281,7 @@ class DZLPlayer {
     }
 
     void AddMoneyToPlayerBank(int moneyCount) {
-        if (GetDayZGame().IsServer()) {
+        if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
             bank += moneyCount;
             Save();
@@ -289,7 +289,7 @@ class DZLPlayer {
     }
 
     bool HasEnoughMoney(int amount) {
-        if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+        if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
             return DZLPlayerMoney.Get(player).HasEnoughMoney(amount);;
         }
 
@@ -301,7 +301,7 @@ class DZLPlayer {
     }
 
     bool HasMoney() {
-        if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+        if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
             return DZLPlayerMoney.Get(player).HasEnoughMoney(1);;
         }
         return money > 0;
@@ -316,7 +316,7 @@ class DZLPlayer {
     }
 
     int GetMoney() {
-        if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+        if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
             return DZLPlayerMoney.Get(player).GetMoneyAmount();;
         }
         return money;
@@ -402,11 +402,11 @@ class DZLPlayer {
 
         playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
 
-        if (money > 0) {
-            if (money < moneyToTransfer) {
+        if(money > 0) {
+            if(money < moneyToTransfer) {
                 DZLLogMoneyTransaction(dayZPlayerId, "player", money, money, 0);
 
-                if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+                if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
                     DZLPlayerMoney.Get(player).AddMoney(-DZLPlayerMoney.Get(player).GetMoneyAmount());
                 }
 
@@ -415,7 +415,7 @@ class DZLPlayer {
             } else {
                 DZLLogMoneyTransaction(dayZPlayerId, "player", money, money - moneyToTransfer, moneyToTransfer * -1);
 
-                if (DZLConfig.Get().bankConfig.useMoneyAsObject) {
+                if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
                     DZLPlayerMoney.Get(player).AddMoney(-moneyToTransfer);
                 } else {
                     money -= moneyToTransfer;
@@ -425,7 +425,7 @@ class DZLPlayer {
             }
         }
 
-        if (moneyToTransfer > 0) {
+        if(moneyToTransfer > 0) {
             DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank - moneyToTransfer, moneyToTransfer * -1);
             bank -= moneyToTransfer;
             moneyBankAdd -= moneyToTransfer;
@@ -439,7 +439,7 @@ class DZLPlayer {
         if(!HasEnoughMoney(licenceToBuy.price)) return "#not_enough_money";
         if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
 
-        if (!depLicence) return "";
+        if(!depLicence) return "";
 
         if(depLicence && HasDependencyLicense(depLicence)) return "";
 
@@ -480,10 +480,10 @@ class DZLPlayer {
     }
 
     void RemoveTicketById(string id) {
-        if (!GetGame().IsServer()) return;
+        if(!GetGame().IsServer()) return;
 
         foreach(int index, DZLTicket ticket: openTickets) {
-            if (id == ticket.GetId()) {
+            if(id == ticket.GetId()) {
                 openTickets.Remove(index);
                 Save();
                 return;
@@ -493,7 +493,7 @@ class DZLPlayer {
 
     DZLTicket GetTicketById(string id) {
         foreach(int index, DZLTicket ticket: openTickets) {
-            if (id == ticket.GetId()) {
+            if(id == ticket.GetId()) {
                 return ticket;
             }
         }
@@ -509,7 +509,7 @@ class DZLPlayer {
     }
 
     DZLFraction GetFraction() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             fraction = DZLDatabaseLayer.Get().GetFraction(fractionId);
         }
 
@@ -517,7 +517,7 @@ class DZLPlayer {
     }
 
     DZLFractionMember GetFractionMember() {
-        if (fractionId) {
+        if(fractionId) {
             return GetFraction().GetMember(dayZPlayerId);
         }
         return null;
@@ -536,7 +536,7 @@ class DZLPlayer {
     }
 
     void RemoveFraction(string fractionId) {
-        if (this.fractionId == fractionId) {
+        if(this.fractionId == fractionId) {
             this.fractionId = "";
             fraction = null;
 
@@ -553,7 +553,7 @@ class DZLPlayer {
     }
 
     void UpdateFraction(DZLFraction fraction) {
-        if (fractionId != fraction.GetId()) return;
+        if(fractionId != fraction.GetId()) return;
 
         this.fraction = fraction;
         this.fractionId = fraction.GetId();
@@ -563,7 +563,7 @@ class DZLPlayer {
 
     void RemovePotentialFraction(string fractionId) {
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
-            if (fractionId == fractionIdCanJoin) {
+            if(fractionId == fractionIdCanJoin) {
                 fractionWherePlayerCanJoin.Remove(key);
                 break;
             }
@@ -573,10 +573,10 @@ class DZLPlayer {
     }
 
     void AddPotentialFraction(string fractionId) {
-        if (IsInAnyFraction()) return;
+        if(IsInAnyFraction()) return;
 
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
-            if (fractionId == fractionIdCanJoin) {
+            if(fractionId == fractionIdCanJoin) {
                 return;
             }
         }
@@ -587,10 +587,10 @@ class DZLPlayer {
     }
 
     bool HasPotentialFraction(string fractionId) {
-        if (IsInAnyFraction()) return false;
+        if(IsInAnyFraction()) return false;
 
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
-            if (fractionId == fractionIdCanJoin) {
+            if(fractionId == fractionIdCanJoin) {
                 return true;
             }
         }
@@ -616,7 +616,7 @@ class DZLPlayer {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayer>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;
         }
@@ -624,8 +624,8 @@ class DZLPlayer {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
-            if (dayZPlayerId + ".json" != fileName) {
+        if(GetGame().IsServer()) {
+            if(dayZPlayerId + ".json" != fileName) {
                 LogMessageDZL("Can not save PlayerData. There are inconsistent in your player database: Please check file:" + fileName);
                 return false;
             }

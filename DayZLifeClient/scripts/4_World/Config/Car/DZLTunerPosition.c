@@ -8,7 +8,7 @@ class DZLTunerPosition: DZLLicencePosition {
 
     bool PlayerCanDoActions(string id) {
         foreach(string playerId: playerIdsThatCanUsePosition) {
-            if (id == playerId) {
+            if(id == playerId) {
                 return true;
             }
         }

@@ -7,7 +7,7 @@ class DZLLicenceCraftingCollection {
 
     DZLCraftLicence FindById(string id) {
         foreach(DZLCraftLicence licence: collection) {
-            if (licence.GetId() == id) return licence;
+            if(licence.GetId() == id) return licence;
         }
 
         return null;
@@ -15,7 +15,7 @@ class DZLLicenceCraftingCollection {
 
     DZLCraftLicence FindByName(string name) {
         foreach(DZLCraftLicence licence: collection) {
-            if (licence.name == name) return licence;
+            if(licence.name == name) return licence;
         }
 
         return null;

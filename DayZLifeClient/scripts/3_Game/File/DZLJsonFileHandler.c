@@ -8,7 +8,7 @@ class DZLJsonFileHandler<Class T> {
         m_Serializer.WriteToString(data, DAY_Z_LIFE_DEBUG, file_content);
 
         FileHandle handle = OpenFile(filename, FileMode.WRITE);
-        if (handle == 0)return;
+        if(handle == 0)return;
 
         FPrint(handle, file_content);
 

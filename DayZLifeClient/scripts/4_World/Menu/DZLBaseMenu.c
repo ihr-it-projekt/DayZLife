@@ -48,7 +48,7 @@ class DZLBaseMenu: UIScriptedMenu {
     override Widget Init() {
         creator = new DZLUIItemCreator(layoutPath);
 
-        if (hasCloseButton) {
+        if(hasCloseButton) {
             closeButton = creator.GetButtonWidget("Button_Closed");
             closeButton.Show(true);
         }
@@ -61,14 +61,14 @@ class DZLBaseMenu: UIScriptedMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
         switch(w) {
-        case closeButton:
-            OnHide();
-            return true;
-        default:
-            break;
+            case closeButton:
+                OnHide();
+                return true;
+            default:
+                break;
         }
         return false;
     }

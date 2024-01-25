@@ -17,18 +17,18 @@ class ActionOpenHouseMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if (g_Game.GetUIManager().GetMenu() == NULL) {
+        if(g_Game.GetUIManager().GetMenu() == NULL) {
             PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
 
             if(!action_data) return;
             if(!action_data.m_Target) return;
             if(!IsBuilding(action_data.m_Target)) return;
-            if (!player.GetConfig()) return;
+            if(!player.GetConfig()) return;
 
             Building building = Building.Cast(action_data.m_Target.GetObject());
 
             DZLHouseDefinition definition = player.FindHouseDefinition(building);
-            if (definition) {
+            if(definition) {
                 player.RequestUpdateDZLPlayer();
                 GetGame().GetUIManager().ShowScriptedMenu(player.GetHouseMenu(definition, building), NULL);
             }
@@ -36,24 +36,24 @@ class ActionOpenHouseMenu: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (GetGame().IsClient()) {
+        if(GetGame().IsClient()) {
             if(!target) return false;
             if(!IsBuilding(target)) return false;
-            if (!player.GetConfig()) return false;
+            if(!player.GetConfig()) return false;
 
 
             Building _building = Building.Cast(target.GetObject());
             int doorIndex = _building.GetDoorIndex(target.GetComponentIndex());
-            if (doorIndex == -1) return false;
+            if(doorIndex == -1) return false;
 
-            if(!IsInReach(player, target, UAMaxDistances.DEFAULT) ) return false;
+            if(!IsInReach(player, target, UAMaxDistances.DEFAULT)) return false;
 
             DZLHouseDefinition definition = player.FindHouseDefinition(Building.Cast(target.GetObject()));
 
             return !!definition;
         }
 
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             return true;
         }
 

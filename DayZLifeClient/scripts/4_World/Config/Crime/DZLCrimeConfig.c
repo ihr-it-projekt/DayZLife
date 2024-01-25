@@ -19,7 +19,7 @@ class DZLCrimeConfig {
     ref array<ref DZLCrimePosition> shopPosition;
 
     void DZLCrimeConfig() {
-        if (!Load()) {
+        if(!Load()) {
             robTools = new array<string>;
             robTools.Insert("Deagle");
             shopPosition = new array<ref DZLCrimePosition>;
@@ -29,13 +29,13 @@ class DZLCrimeConfig {
     }
 
     DZLCrimePosition GetShopByPosition(vector playerPosition, int distance = 2) {
-        if (!playerPosition) {
+        if(!playerPosition) {
             return null;
         }
 
         foreach(DZLCrimePosition position: shopPosition) {
             float distanceToPos = vector.Distance(position.position, playerPosition);
-            if (distanceToPos <= distance) {
+            if(distanceToPos <= distance) {
                 return position;
             }
         }
@@ -44,7 +44,7 @@ class DZLCrimeConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json")) {
             JsonFileLoader<DZLCrimeConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
             return true;
         }
@@ -52,7 +52,7 @@ class DZLCrimeConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLCrimeConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
         }

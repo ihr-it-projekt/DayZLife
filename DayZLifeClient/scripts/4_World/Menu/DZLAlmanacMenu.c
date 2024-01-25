@@ -171,31 +171,31 @@ class DZLAlmanacMenu : DZLBaseMenu {
         super.OnShow();
         string ident = player.GetPlayerId();
 
-        if (player.GetDZLPlayer().IsActiveAsMedic()) {
+        if(player.GetDZLPlayer().IsActiveAsMedic()) {
             toggleViewWidget.AddItem("#emergencies");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, null, true);
             medicPanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if (config.adminIds.CanManageCops(ident)) {
+        if(config.adminIds.CanManageCops(ident)) {
             toggleViewWidget.AddItem("#manage_cops");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, null, true);
             copPaneId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if (config.adminIds.CanManageMedic(ident)) {
+        if(config.adminIds.CanManageMedic(ident)) {
             toggleViewWidget.AddItem("#manage_medics");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS, null, true);
             medicManagePanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if (config.adminIds.CanManageArmy(ident)) {
+        if(config.adminIds.CanManageArmy(ident)) {
             toggleViewWidget.AddItem("#manage_army");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS, null, true);
             armyManagePanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if (config.adminIds.CanManagePlayers(ident)) {
+        if(config.adminIds.CanManagePlayers(ident)) {
             toggleViewWidget.AddItem("#admin_Panel");
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ALL_PLAYERS, null, true);
             adminPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -203,7 +203,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, null, true);
 
-        if (player.GetDZLPlayer().IsActiveAsCop()) {
+        if(player.GetDZLPlayer().IsActiveAsCop()) {
             toggleViewWidget.AddItem("#cop_panel");
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS, null, true);
             internalCopPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -228,17 +228,17 @@ class DZLAlmanacMenu : DZLBaseMenu {
     }
 
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
-        if (w == copPanelOnlinePlayerList) {
+        if(w == copPanelOnlinePlayerList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelOnlinePlayerList, copPanelCopsList, DAY_Z_LIFE_JOB_COP);
-        } else if (w == copPanelCopsList) {
+        } else if(w == copPanelCopsList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelCopsList, copPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
-        } else if (w == medicPanelOnlinePlayerList) {
+        } else if(w == medicPanelOnlinePlayerList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(medicPanelOnlinePlayerList, medicPaneMedicList, DAY_Z_LIFE_JOB_MEDIC);
-        } else if (w == medicPaneMedicList) {
+        } else if(w == medicPaneMedicList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(medicPaneMedicList, medicPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
-        } else if (w == armyPanelOnlinePlayerList) {
+        } else if(w == armyPanelOnlinePlayerList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(armyPanelOnlinePlayerList, armyPanelArmyList, DAY_Z_LIFE_JOB_ARMY);
-        } else if (w == armyPanelArmyList) {
+        } else if(w == armyPanelArmyList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(armyPanelArmyList, armyPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
         }
 
@@ -246,34 +246,34 @@ class DZLAlmanacMenu : DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
         string name;
         int index;
 
-        if (w == copPanelRankList) {
+        if(w == copPanelRankList) {
             DZLDisplayHelper.ChangeRankFromPlayer(copPanelRankList, copPanelCopsList);
-        } else if (w == copPanelCopsList) {
+        } else if(w == copPanelCopsList) {
             DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(copPanelCopsList, copPanelRankList, DAY_Z_LIFE_JOB_COP);
-        } else if (w == medicPanelRankList) {
+        } else if(w == medicPanelRankList) {
             DZLDisplayHelper.ChangeRankFromPlayer(medicPanelRankList, medicPaneMedicList);
-        } else if (w == medicPaneMedicList) {
+        } else if(w == medicPaneMedicList) {
             DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(medicPaneMedicList, medicPanelRankList, DAY_Z_LIFE_JOB_MEDIC);
-        } else if (w == armyPanelRankList) {
+        } else if(w == armyPanelRankList) {
             DZLDisplayHelper.ChangeRankFromPlayer(armyPanelRankList, armyPanelArmyList);
-        } else if (w == armyPanelArmyList) {
+        } else if(w == armyPanelArmyList) {
             DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(armyPanelArmyList, armyPanelRankList, DAY_Z_LIFE_JOB_ARMY);
-        } else if (w == workingZoneList) {
+        } else if(w == workingZoneList) {
             index = workingZoneList.GetSelectedRow();
 
-            if (index == -1) return true;
+            if(index == -1) return true;
 
             DZLWorkZone zoneWZL
             workingZoneList.GetItemData(index, 0, zoneWZL);
 
-            if (!zoneWZL) return true;
+            if(!zoneWZL) return true;
 
-            if (!zoneWZL.showNotOnMapInAlmanac) {
+            if(!zoneWZL.showNotOnMapInAlmanac) {
                 DZLDisplayHelper.UpdateMap(workingZoneMap, zoneWZL.position);
             } else {
                 workingZoneMap.ClearUserMarks();
@@ -291,7 +291,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     mapRelation.Set(itemThatNeededForHarvest, relation);
                     name = DZLDisplayHelper.GetItemDisplayName(itemThatNeededForHarvest);
 
-                    if (itemUpdatePreview == "") {
+                    if(itemUpdatePreview == "") {
                         itemUpdatePreview = itemThatNeededForHarvest;
                     }
 
@@ -299,7 +299,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 }
             }
 
-            if (itemThatNeededForHarvest) {
+            if(itemThatNeededForHarvest) {
                 workingZoneToolsList.SelectRow(0);
 
                 UpdaterPreview(itemThatNeededForHarvest, workzoneToolPreview, workZobeToolPreviewItem);
@@ -309,15 +309,15 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
             return true;
 
-        } else if (w == workingZoneToolsList) {
+        } else if(w == workingZoneToolsList) {
             index = workingZoneToolsList.GetSelectedRow();
 
-            if (index == -1) return true;
+            if(index == -1) return true;
 
             map<string, DZLHarvestItemToolRelation> mapRelationTool;
             workingZoneToolsList.GetItemData(index, 0, mapRelationTool);
 
-            if (!mapRelationTool) return true;
+            if(!mapRelationTool) return true;
 
             DZLHarvestItemToolRelation relationTool = mapRelationTool.GetElement(0);
             string itemName = mapRelationTool.GetKey(0);
@@ -331,7 +331,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 workzoneYieldList.AddItem(name, data, 0);
             }
 
-            if (workzoneYieldList.GetNumItems() > 0) {
+            if(workzoneYieldList.GetNumItems() > 0) {
                 workzoneYieldList.SelectRow(0);
                 UpdaterPreviewListBox(workzoneYieldList, workzoneYieldPreview, workZobeYieldPreviewItem);
             }
@@ -347,17 +347,17 @@ class DZLAlmanacMenu : DZLBaseMenu {
             UpdaterPreviewListBoxCraftItem(licenceCraftItemList, licenceHarvestPreview, licenceHaverestPreviewItem);
 
             return true;
-        } else if (w == licenceList) {
+        } else if(w == licenceList) {
             index = licenceList.GetSelectedRow();
 
-            if (index == -1) return true;
+            if(index == -1) return true;
 
             DZLCraftLicence licence;
             licenceList.GetItemData(index, 0, licence);
 
-            if (!licence) return true;
+            if(!licence) return true;
 
-            if (!licence.showNotOnMapInAlmanac) {
+            if(!licence.showNotOnMapInAlmanac) {
                 DZLDisplayHelper.UpdateMap(licenceMap, licence.position);
             } else {
                 licenceMap.ClearUserMarks();
@@ -367,8 +367,8 @@ class DZLAlmanacMenu : DZLBaseMenu {
             name = "#no_tool_required";
 
             foreach(DZLLicenceToolItem licenceTool: licence.toolItems.collection) {
-                if (name != "#no_tool_required") {
-                    name +=", ";
+                if(name != "#no_tool_required") {
+                    name += ", ";
                 } else {
                     name = "";
                 }
@@ -387,7 +387,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
             licenceItemCraftedName.SetText(DZLDisplayHelper.GetItemDisplayName(licence.craftedItem.type));
 
-            if (licenceCraftItemList.GetNumItems() > 0) {
+            if(licenceCraftItemList.GetNumItems() > 0) {
                 licenceCraftItemList.SelectRow(0);
                 UpdaterPreviewListBoxCraftItem(licenceCraftItemList, licenceHarvestPreview, licenceHaverestPreviewItem);
             }
@@ -405,63 +405,63 @@ class DZLAlmanacMenu : DZLBaseMenu {
             medicPanelWidget.Show(medicManagePanelId == item);
             armyPanelWidget.Show(armyManagePanelId == item);
             playerOpenTicketsWidget.Show(internalCopPanelId == item);
-        } else if (w == copPanelSave) {
-            if (!config.adminIds.CanManageCops(player.GetPlayerId())) return true;
+        } else if(w == copPanelSave) {
+            if(!config.adminIds.CanManageCops(player.GetPlayerId())) return true;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param1<ref array<DZLOnlinePlayer>> (DZLDisplayHelper.GetPlayerIdsAndRanksFromList(copPanelCopsList)), true);
-        } else if (w == medicPanelSave) {
-            if (!config.adminIds.CanManageMedic(player.GetPlayerId())) return true;
+        } else if(w == medicPanelSave) {
+            if(!config.adminIds.CanManageMedic(player.GetPlayerId())) return true;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS, new Param1<ref array<DZLOnlinePlayer>>(DZLDisplayHelper.GetPlayerIdsAndRanksFromList(medicPaneMedicList)), true);
-        } else if (w == armyPanelSave) {
-            if (!config.adminIds.CanManageArmy(player.GetPlayerId())) return true;
+        } else if(w == armyPanelSave) {
+            if(!config.adminIds.CanManageArmy(player.GetPlayerId())) return true;
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_ARMY_PLAYERS, new Param1<ref array<DZLOnlinePlayer>>(DZLDisplayHelper.GetPlayerIdsAndRanksFromList(armyPanelArmyList)), true);
-        } else if (w == escapedPlayers) {
+        } else if(w == escapedPlayers) {
             int posEscaped = escapedPlayers.GetSelectedRow();
-            if (posEscaped == -1) {
+            if(posEscaped == -1) {
                 return true;
             }
 
             DayZPlayer escaped;
             escapedPlayers.GetItemData(posEscaped, 0, escaped);
 
-            if (escaped) {
+            if(escaped) {
                 escapedPlayerPreview.SetPlayer(escaped);
             }
 
             return true;
-        } else if (w == adminDeletePlayerButton) {
-            if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+        } else if(w == adminDeletePlayerButton) {
+            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
             DZLPlayer _dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
-            if (_dzlPlayer) {
+            if(_dzlPlayer) {
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_DELETE_PLAYER, new Param1<string>(_dzlPlayer.dayZPlayerId), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
-        } else if (w == adminAddMoneyToPlayerButton) {
-            if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+        } else if(w == adminAddMoneyToPlayerButton) {
+            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
             DZLPlayer __dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
-            if (__dzlPlayer) {
+            if(__dzlPlayer) {
                 int deposit = adminAddMoneyToPlayerInput.GetText().ToInt();
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(__dzlPlayer.dayZPlayerId, deposit, false), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
-        } else if (w == adminAddMoneyToPlayerButtonBank) {
-            if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+        } else if(w == adminAddMoneyToPlayerButtonBank) {
+            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
             DZLPlayer ___dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
-            if (___dzlPlayer) {
+            if(___dzlPlayer) {
                 int depositBank = adminAddMoneyToPlayerInput.GetText().ToInt();
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(___dzlPlayer.dayZPlayerId, depositBank, true), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
-        } else if (w == adminPlayers) {
-            if (!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+        } else if(w == adminPlayers) {
+            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
             DZLPlayer selectedAdminPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
-            if (selectedAdminPlayer) {
+            if(selectedAdminPlayer) {
                 adminPlayerId.SetText(selectedAdminPlayer.dayZPlayerId);
                 adminMoneyCash.SetText(selectedAdminPlayer.GetMoney().ToString());
                 adminMoneyBank.SetText(selectedAdminPlayer.GetBankMoney().ToString());
@@ -471,11 +471,11 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 adminLicenseTextListbox.ClearItems();
                 TStringArray licenceIds = selectedAdminPlayer.licenceIds;
 
-                if (licenceIds.Count() > 0) {
+                if(licenceIds.Count() > 0) {
                     array<ref DZLCraftLicence> licences = player.GetConfig().licenceConfig.licenceCollection.collection;
                     foreach(DZLCraftLicence configLicence: licences) {
                         foreach(string licenceId: licenceIds) {
-                            if (licenceId == configLicence.GetId()) {
+                            if(licenceId == configLicence.GetId()) {
                                 adminLicenseTextListbox.AddItem(configLicence.name, configLicence, 0);
                             }
                         }
@@ -485,18 +485,18 @@ class DZLAlmanacMenu : DZLBaseMenu {
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
-        } else if (w == syncButton) {
+        } else if(w == syncButton) {
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_SERVER_RESET_AT_PLAYER_BASE, null, true);
             player.DisplayMessage("#player_was_manuel_synced");
             syncButton.Show(false);
-        } else if (w == adminSearchPlayer) {
+        } else if(w == adminSearchPlayer) {
             DZLDisplayHelper.SearchOnlinePlayersSingleWiget(adminSearchPlayerInput.GetText(), adminPlayers, allPlayers);
-        } else if (w == playerNeedMedicList) {
+        } else if(w == playerNeedMedicList) {
             int indexNeedHelp = playerNeedMedicList.GetSelectedRow();
-            if (-1 != indexNeedHelp) {
+            if(-1 != indexNeedHelp) {
                 DZLOnlinePlayer emergencyPlayer;
                 playerNeedMedicList.GetItemData(indexNeedHelp, 0, emergencyPlayer);
-                if (emergencyPlayer) {
+                if(emergencyPlayer) {
                     DZLDisplayHelper.UpdateMap(medicMap, emergencyPlayer.position);
                 }
 
@@ -507,9 +507,9 @@ class DZLAlmanacMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramCopPlayers;
-            if (ctx.Read(paramCopPlayers)) {
+            if(ctx.Read(paramCopPlayers)) {
                 copPanelOnlinePlayerList.ClearItems();
 
                 array<ref DZLOnlinePlayer> onlinePlayers = paramCopPlayers.param1;
@@ -524,9 +524,9 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     copPanelCopsList.SetItem(copPlayerIndex, copPlayer.rank, copPlayer, 1);
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_ALL_NOT_MEDIC_PLAYER_ONLINE_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DAY_Z_LIFE_ALL_NOT_MEDIC_PLAYER_ONLINE_PLAYERS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramMedicPlayers;
-            if (ctx.Read(paramMedicPlayers)) {
+            if(ctx.Read(paramMedicPlayers)) {
                 medicPanelOnlinePlayerList.ClearItems();
 
                 array<ref DZLOnlinePlayer> onlinePlayersNotMedic = paramMedicPlayers.param1;
@@ -541,9 +541,9 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     medicPaneMedicList.SetItem(medicPlayerIndex, medicPlayer.rank, medicPlayer, 1);
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramArmyPlayers;
-            if (ctx.Read(paramArmyPlayers)) {
+            if(ctx.Read(paramArmyPlayers)) {
                 armyPanelOnlinePlayerList.ClearItems();
 
                 array<ref DZLOnlinePlayer> onlinePlayersNotArmy = paramArmyPlayers.param1;
@@ -559,23 +559,23 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 }
             }
         }
-        if (rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {
             autoptr Param1<ref array<ref DZLPlayer>> paramAllPlayers;
-            if (ctx.Read(paramAllPlayers)) {
+            if(ctx.Read(paramAllPlayers)) {
                 adminPlayers.ClearItems();
 
                 allPlayers = paramAllPlayers.param1;
 
                 foreach(DZLPlayer _player: allPlayers) {
-                    if (_player) {
+                    if(_player) {
                         int indexRow = adminPlayers.AddItem(_player.playerName, _player, 0);
                         adminPlayers.SetItem(indexRow, _player.lastLoginDate.ToDateString(), _player, 1);
                     }
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
             autoptr Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int> paramEscaped;
-            if (ctx.Read(paramEscaped)) {
+            if(ctx.Read(paramEscaped)) {
                 countCop.SetText(paramEscaped.param2.ToString());
                 countMedic.SetText(paramEscaped.param3.ToString());
                 countCivil.SetText(paramEscaped.param4.ToString());
@@ -588,7 +588,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 foreach(DZLEscapedPlayer escapedPlayer: escapedPlayersParam) {
                     int indexOfRow = escapedPlayers.AddItem(escapedPlayer.name, escapedPlayer.player, 0);
                     escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestReason, escapedPlayer.player, 1);
-                    if (player.GetDZLPlayer().IsActiveAsCop()) {
+                    if(player.GetDZLPlayer().IsActiveAsCop()) {
                         escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
                     } else {
                         escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 2);
@@ -596,9 +596,9 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOpenTicketPlayer>> paramUnpaidTickets;
-            if (ctx.Read(paramUnpaidTickets)) {
+            if(ctx.Read(paramUnpaidTickets)) {
                 playerOpenTicketsList.ClearItems();
 
                 array<ref DZLOpenTicketPlayer> openTicketPlayersParam = paramUnpaidTickets.param1;
@@ -609,9 +609,9 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     playerOpenTicketsList.SetItem(indexOfRowUnpaid, openTicketPlayer.valueOfTickets.ToString(), openTicketPlayer, 2);
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE) {
+        } else if(rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramEmergencies;
-            if (ctx.Read(paramEmergencies)) {
+            if(ctx.Read(paramEmergencies)) {
                 playerNeedMedicList.ClearItems();
                 array<ref DZLOnlinePlayer> emergencies = paramEmergencies.param1;
 
@@ -623,12 +623,12 @@ class DZLAlmanacMenu : DZLBaseMenu {
     }
 
     private void UpdaterPreview(string itemType, ItemPreviewWidget preview, EntityAI previewItem) {
-        if (itemType) {
+        if(itemType) {
             EntityAI currentItem = preview.GetItem();
 
-            if (currentItem && currentItem.GetType() == itemType) return;
+            if(currentItem && currentItem.GetType() == itemType) return;
 
-            if (previewItem) {
+            if(previewItem) {
                 GetGame().ObjectDelete(previewItem);
             }
 
@@ -641,7 +641,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
     private void UpdaterPreviewListBox(TextListboxWidget widget, ItemPreviewWidget preview, EntityAI previewItem) {
         int pos = widget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         array<string> itemType;
@@ -652,7 +652,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
     private void UpdaterPreviewListBoxCraftItem(TextListboxWidget widget, ItemPreviewWidget preview, EntityAI previewItem) {
         int pos = widget.GetSelectedRow();
-        if (pos == -1) {
+        if(pos == -1) {
             return;
         }
         DZLLicenceCraftItem itemType;
@@ -662,7 +662,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
     }
 
     private void ResetPreview(EntityAI previewItem) {
-        if (previewItem) {
+        if(previewItem) {
             GetGame().ObjectDelete(previewItem);
         }
     }

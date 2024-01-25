@@ -7,15 +7,15 @@ modded class ActionDefibrilateTarget {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        if (!targetPlayer) return false;
+        if(!targetPlayer) return false;
 
-        if (targetPlayer == player) {
+        if(targetPlayer == player) {
             return false;
         }
 
-        if (GetGame().IsClient() && player.GetDZLPlayer() && player.GetDZLPlayer().IsActiveAsMedic() && !targetPlayer.IsAlive()) {
+        if(GetGame().IsClient() && player.GetDZLPlayer() && player.GetDZLPlayer().IsActiveAsMedic() && !targetPlayer.IsAlive()) {
             Defibrillator defib = Defibrillator.Cast(item);
-            if (!defib) return false;
+            if(!defib) return false;
             return CanDefibrillate(defib);;
         } else if(GetGame().IsServer() && !targetPlayer.IsAlive()) {
             DZLEmergencies emergencies = DZLDatabaseLayer.Get().GetEmergencies();
@@ -32,7 +32,7 @@ modded class ActionDefibrilateTarget {
         PlayerBase target = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerIdentity targetIdent = target.GetIdentity();
 
-        if (!targetIdent) return;
+        if(!targetIdent) return;
 
         DZLPlayer dzlPlayer = target.GetDZLPlayer();
         string targetId = targetIdent.GetId();

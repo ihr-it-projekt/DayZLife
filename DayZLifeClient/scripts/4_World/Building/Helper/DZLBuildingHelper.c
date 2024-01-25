@@ -21,8 +21,8 @@ class DZLBuildingHelper {
 
         GetGame().GetObjectsAtPosition(house.GetPosition(), 2, objects, proxyCargos);
 
-        foreach (Object object: objects) {
-            if (object.GetType() == house.GetName()) {
+        foreach(Object object: objects) {
+            if(object.GetType() == house.GetName()) {
                 return Building.Cast(object);
             }
         }

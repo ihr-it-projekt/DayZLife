@@ -17,7 +17,7 @@ class ActionOpenCarStorageMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if (g_Game.GetUIManager().GetMenu() == NULL) {
+        if(g_Game.GetUIManager().GetMenu() == NULL) {
             PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
             player.RequestUpdateDZLPlayer();
             GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetCarStorageMenu(), NULL);
@@ -26,8 +26,8 @@ class ActionOpenCarStorageMenu: ActionInteractBase {
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget || !objectTarget.IsGarage()) return false;
-        if (!player.GetConfig() || !player.GetConfig().carConfig) return false;
+        if(!objectTarget || !objectTarget.IsGarage()) return false;
+        if(!player.GetConfig() || !player.GetConfig().carConfig) return false;
 
         return true;
     }

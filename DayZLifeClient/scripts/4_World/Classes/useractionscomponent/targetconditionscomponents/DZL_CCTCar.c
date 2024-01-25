@@ -10,10 +10,10 @@ class DZL_CCTCar: CCTBase {
 
     override bool Can(PlayerBase player, ActionTarget target) {
         Object targetParent = target.GetParent();
-        if (!targetParent || !player)	return false;
+        if(!targetParent || !player)	return false;
 
         CarScript carScript = CarScript.Cast(target.GetParent());
-        if (!carScript || carScript.HasPlayerAccess(player) != mustHaveAccess) return false;
+        if(!carScript || carScript.HasPlayerAccess(player) != mustHaveAccess) return false;
 
         vector playerHeadPos;
         MiscGameplayFunctions.GetHeadBonePos(player, playerHeadPos);

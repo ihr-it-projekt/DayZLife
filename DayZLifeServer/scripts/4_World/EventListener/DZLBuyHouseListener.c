@@ -14,14 +14,14 @@ class DZLBuyHouseListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
+        if(rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
             autoptr Param1<Building> paramGetBuildingProperties;
-            if (ctx.Read(paramGetBuildingProperties)) {
+            if(ctx.Read(paramGetBuildingProperties)) {
                 GetGame().RPCSingleParam(PlayerBase.Cast(target), DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param1)), true, sender);
             }
-        } else if (rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
+        } else if(rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
             autoptr Param1<Building> paramBuyHouse;
-            if (ctx.Read(paramBuyHouse)) {
+            if(ctx.Read(paramBuyHouse)) {
                 DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param1);
                 DZLHouseDefinition actualHouseDef = houseFinder.GetHouseDefinitionByBuilding(paramBuyHouse.param1);
                 PlayerBase playerOpenBuy = PlayerBase.Cast(target);
@@ -29,7 +29,7 @@ class DZLBuyHouseListener {
 
                 string message = "#error_buying_house";
 
-                if (actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
+                if(actualHouseDef && dzlBuilding && !dzlBuilding.HasOwner() && dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
                     dzlPlayer.AddMoneyToPlayer(actualHouseDef.buyPrice * -1);
                     dzlBuilding.BuyOnServer(playerOpenBuy);
 
@@ -41,21 +41,21 @@ class DZLBuyHouseListener {
                 dzlPlayer.GetFractionMember();
                 GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
             }
-        } else if (rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
+        } else if(rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
             autoptr Param1<Building> paramSellHouse;
-            if (ctx.Read(paramSellHouse)) {
+            if(ctx.Read(paramSellHouse)) {
                 DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param1);
                 DZLHouseDefinition actualHouseDefSell = houseFinder.GetHouseDefinitionByBuilding(paramSellHouse.param1);
                 string messageSell = "#error_sell_house";
                 PlayerBase playerSellHouse = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayerSellHouse = playerSellHouse.GetDZLPlayer();
 
-                if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(playerSellHouse)) {
+                if(actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(playerSellHouse)) {
                     float sellPrice = actualHouseDefSell.sellPrice;
 
                     array<ref DZLStorageTypeBought> storages = dzlBuildingSell.GetStorage();
                     foreach(DZLStorageTypeBought storage: storages) {
-                        if (!storage) continue;
+                        if(!storage) continue;
                         houseFinder.objectFinder.DeleteContainerAt(storage.position, storage.position, storage.type, paramSellHouse.param1);
 
                         sellPrice += storage.sellPrice;

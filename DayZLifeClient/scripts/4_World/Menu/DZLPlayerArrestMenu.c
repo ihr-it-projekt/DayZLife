@@ -34,39 +34,39 @@ class DZLPlayerArrestMenu : DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
         switch(w) {
-        case setArrest:
-            int arrestTime = inputArrest.GetText().ToInt();
-            string arrestReason = inputArrestReason.GetText();
+            case setArrest:
+                int arrestTime = inputArrest.GetText().ToInt();
+                string arrestReason = inputArrestReason.GetText();
 
-            if (arrestTime < 0) {
-                player.DisplayMessage("#error_arrest_time_must_be_positiv_or_null");
-                return false;
-            }
+                if(arrestTime < 0) {
+                    player.DisplayMessage("#error_arrest_time_must_be_positiv_or_null");
+                    return false;
+                }
 
-            if (!receiver) {
-                player.DisplayMessage("#error_no_player_was_selected");
-                return false;
-            }
+                if(!receiver) {
+                    player.DisplayMessage("#error_no_player_was_selected");
+                    return false;
+                }
 
-            if (arrestTime != 0) {
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_ARREST_PLAYER, new Param3<PlayerBase, int, string>(receiver, arrestTime, arrestReason), true);
-                inputArrest.SetText("");
-            } else {
-                player.DisplayMessage("#error_arrest_time_is_not_a_int");
-            }
+                if(arrestTime != 0) {
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_ARREST_PLAYER, new Param3<PlayerBase, int, string>(receiver, arrestTime, arrestReason), true);
+                    inputArrest.SetText("");
+                } else {
+                    player.DisplayMessage("#error_arrest_time_is_not_a_int");
+                }
 
-            return true;
-        default:
-            break;
+                return true;
+            default:
+                break;
         }
         return false;
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_ARREST_PLAYER_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_ARREST_PLAYER_RESPONSE) {
             OnHide();
         }
     }

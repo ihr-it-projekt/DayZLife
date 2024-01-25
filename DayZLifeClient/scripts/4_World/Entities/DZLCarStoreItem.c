@@ -20,7 +20,7 @@ class DZLCarStoreItem: DZLStoreItem {
         this.ownerId = item.ownerId;
         this.ownerName = item.ownerName;
 
-        if (!isInsuranceCase) {
+        if(!isInsuranceCase) {
             fuel = item.GetFluidFraction(CarFluid.FUEL);
             oil = item.GetFluidFraction(CarFluid.OIL);
             brake = item.GetFluidFraction(CarFluid.BRAKE);

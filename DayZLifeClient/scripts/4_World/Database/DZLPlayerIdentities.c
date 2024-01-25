@@ -3,20 +3,20 @@ class DZLPlayerIdentities {
     ref array<string> playerIdentities;
 
     void DZLPlayerIdentities() {
-        if (!Load()) {
+        if(!Load()) {
             playerIdentities = new array<string>;
         }
     }
 
     void AddPlayer(string playerId) {
-        if (-1 == playerIdentities.Find(playerId)) {
+        if(-1 == playerIdentities.Find(playerId)) {
             playerIdentities.Insert(playerId);
             Save();
         }
     }
     void RemovePlayer(string playerId) {
         int index = playerIdentities.Find(playerId);
-        if (-1 != index) {
+        if(-1 != index) {
             playerIdentities.Remove(index);
             Save();
         }
@@ -28,7 +28,7 @@ class DZLPlayerIdentities {
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if (player.IsCop()) {
+            if(player.IsCop()) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_COP)));
             }
         }
@@ -42,7 +42,7 @@ class DZLPlayerIdentities {
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if (player.IsMedic()) {
+            if(player.IsMedic()) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_MEDIC)));
             }
         }
@@ -56,7 +56,7 @@ class DZLPlayerIdentities {
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if (player.IsArmy()) {
+            if(player.IsArmy()) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_ARMY)));
             }
         }
@@ -70,7 +70,7 @@ class DZLPlayerIdentities {
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if (exclude.Count() == 0 || exclude.Find(ident) == -1) {
+            if(exclude.Count() == 0 || exclude.Find(ident) == -1) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName, ""));
             }
         }
@@ -79,14 +79,14 @@ class DZLPlayerIdentities {
     }
 
     void UpdateCops(ref array<DZLOnlinePlayer> cops) {
-        if (!cops) return;
+        if(!cops) return;
 
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
             string newRank = "";
             foreach(DZLOnlinePlayer newCop: cops) {
-                if (ident == newCop.id) {
+                if(ident == newCop.id) {
                     hasFound = true;
                     newRank = newCop.rank;
                     break;
@@ -98,14 +98,14 @@ class DZLPlayerIdentities {
     }
 
     void UpdateMedics(ref array<DZLOnlinePlayer> medics) {
-        if (!medics) return;
+        if(!medics) return;
 
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
             string newRank = "";
             foreach(DZLOnlinePlayer newMedic: medics) {
-                if (ident == newMedic.id) {
+                if(ident == newMedic.id) {
                     hasFound = true;
                     newRank = newMedic.rank;
                     break;
@@ -116,14 +116,14 @@ class DZLPlayerIdentities {
     }
 
     void UpdateArmy(ref array<DZLOnlinePlayer> army) {
-        if (!army) return;
+        if(!army) return;
 
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
             string newRank = "";
             foreach(DZLOnlinePlayer newArmy: army) {
-                if (ident == newArmy.id) {
+                if(ident == newArmy.id) {
                     hasFound = true;
                     newRank = newArmy.rank;
                     break;
@@ -134,17 +134,17 @@ class DZLPlayerIdentities {
     }
 
     void UpdateCarKeys(PlayerIdentity player, CarScript car, ref array<DZLOnlinePlayer> players) {
-        if (!players) return;
+        if(!players) return;
 
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
-        if (!car.IsOwner(player)) return;
+        if(!car.IsOwner(player)) return;
 
         car.UpdatePlayerAccessByDZLOnlinePlayer(players);
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayerIdentities>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;
         }
@@ -152,7 +152,7 @@ class DZLPlayerIdentities {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayerIdentities>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;

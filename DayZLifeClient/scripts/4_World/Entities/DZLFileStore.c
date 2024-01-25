@@ -3,14 +3,14 @@ class DZLFileStore {
     protected string fileName;
 
     protected bool Load() {
-        if (GetGame().IsServer() && FileExist(folder + fileName)) {
+        if(GetGame().IsServer() && FileExist(folder + fileName)) {
             return DoLoad();
         }
         return false;
     }
 
     protected bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(folder);
             return DoSave();
         }

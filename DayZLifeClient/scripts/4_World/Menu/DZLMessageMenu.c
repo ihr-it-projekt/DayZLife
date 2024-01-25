@@ -7,7 +7,7 @@ class DZLMessageMenu {
 
 
     void ~DZLMessageMenu() {
-        if (layoutRoot) layoutRoot.Show(false);
+        if(layoutRoot) layoutRoot.Show(false);
     }
 
 

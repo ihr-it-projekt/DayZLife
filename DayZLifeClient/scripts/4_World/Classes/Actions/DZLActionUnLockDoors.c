@@ -14,20 +14,20 @@ class DZLActionUnLockDoors: ActionInteractBase {
         return "#unlock";
     }
 
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         Building building = Building.Cast(target.GetObject());
-        if (!building) return false;
+        if(!building) return false;
 
         DZLPlayerHouse house = player.GetPlayerHouse();
 
-        if (!house) {
+        if(!house) {
             return false;
         }
 
         if(building.IsBuilding() && (house.HasHouse(building) || house.HasKey(building))) {
             int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
-            if (doorIndex != -1 ) {
-                if (GetGame().IsServer()) {
+            if(doorIndex != -1) {
+                if(GetGame().IsServer()) {
                     DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
                     if(dzlHouse && dzlHouse.CanUnLookDoor(player, doorIndex) && !building.IsDoorOpen(doorIndex)) {
                         return true;
@@ -46,7 +46,7 @@ class DZLActionUnLockDoors: ActionInteractBase {
         Building building = Building.Cast(action_data.m_Target.GetObject());
         int doorIndex = building.GetDoorIndex(action_data.m_Target.GetComponentIndex());
         DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(action_data.m_Target);
-        if (dzlHouse && doorIndex != -1) {
+        if(dzlHouse && doorIndex != -1) {
             dzlHouse.UnLookDoor(doorIndex);
             DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
             houses.Remove(dzlHouse);

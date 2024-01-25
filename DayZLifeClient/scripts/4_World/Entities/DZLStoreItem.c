@@ -21,7 +21,7 @@ class DZLStoreItem: DZLIdModel {
     private void SetItem(EntityAI item, bool withCargo, bool ignoreHealth) {
         health = item.GetHealth();
 
-        if (ignoreHealth) {
+        if(ignoreHealth) {
             health = item.GetMaxHealth();
         }
 
@@ -29,24 +29,24 @@ class DZLStoreItem: DZLIdModel {
 
         ItemBase itemCast = ItemBase.Cast(item);
 
-        if (itemCast) {
+        if(itemCast) {
             quantity = itemCast.GetQuantity();
         }
 
         if(item.IsMagazine()) {
             Magazine mag = Magazine.Cast(item);
 
-            if (!mag) return;
+            if(!mag) return;
             quantity = mag.GetAmmoCount();
         } else if(item.IsAmmoPile()) {
             Ammunition_Base ammo = Ammunition_Base.Cast(item);
 
-            if (!ammo)  return;
+            if(!ammo) return;
 
             quantity = ammo.GetAmmoCount();
         }
-        if (item.GetInventory()) {
-            for(int i = 0; i < item.GetInventory().AttachmentCount(); i++ ) {
+        if(item.GetInventory()) {
+            for(int i = 0; i < item.GetInventory().AttachmentCount(); i++) {
                 EntityAI attachment = item.GetInventory().GetAttachmentFromIndex(i);
                 if(attachment) {
                     DZLStoreItem storeItem = new DZLStoreItem();
@@ -58,7 +58,7 @@ class DZLStoreItem: DZLIdModel {
 
 
         CargoBase cargo = item.GetInventory().GetCargo();
-        if (withCargo && cargo) {
+        if(withCargo && cargo) {
             for(int z = 0; z < cargo.GetItemCount(); z++) {
                 EntityAI inventoryItem = cargo.GetItem(z);
                 if(inventoryItem) {

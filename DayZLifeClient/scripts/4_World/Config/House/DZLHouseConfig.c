@@ -174,7 +174,7 @@ class DZLHouseConfig {
 
     DZLHouseDefinition GetHouseDefinitionByBuilding(notnull Building building) {
         foreach(DZLHouseDefinition definition: houseConfigs) {
-            if (definition.houseType == building.GetType()) {
+            if(definition.houseType == building.GetType()) {
                 return definition;
             }
         }
@@ -184,7 +184,7 @@ class DZLHouseConfig {
 
     bool HasHouseDefinition(string type) {
         foreach(DZLHouseDefinition definition: houseConfigs) {
-            if (definition.houseType == type) {
+            if(definition.houseType == type) {
                 return true;
             }
         }
@@ -195,17 +195,17 @@ class DZLHouseConfig {
     DZLJobHouseDefinition GetJobHouseDefinition(notnull Building building, string job) {
         array<ref DZLJobHouseDefinition> houseJobConfig;
 
-        if (DAY_Z_LIFE_JOB_COP == job) {
+        if(DAY_Z_LIFE_JOB_COP == job) {
             houseJobConfig = copHouseConfigs;
-        } else if (DAY_Z_LIFE_JOB_MEDIC == job) {
+        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
             houseJobConfig = medicHouseConfigs;
-        } else if (DAY_Z_LIFE_JOB_ARMY == job) {
+        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
             houseJobConfig = armyHouseConfigs;
         }
 
-        if (houseJobConfig) {
+        if(houseJobConfig) {
             foreach(DZLJobHouseDefinition definition: houseJobConfig) {
-                if (definition.houseType == building.GetType()) {
+                if(definition.houseType == building.GetType()) {
                     return definition;
                 }
             }
@@ -215,7 +215,7 @@ class DZLHouseConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "house.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "house.json")) {
             JsonFileLoader<DZLHouseConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "house.json", this);
             return true;
         }
@@ -223,7 +223,7 @@ class DZLHouseConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLHouseConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "house.json", this);
         }

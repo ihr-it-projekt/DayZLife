@@ -25,7 +25,7 @@ class DZLPaycheckConfig {
             armies.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_ARMY, "Rekrut", 0, 10000000));
 
             Save();
-        } else if ("1" == version) {
+        } else if("1" == version) {
             cops = new array<ref DZLPaycheck>;
             cop.isFallbackRank = true;
             cop.rank = "Rekrut";
@@ -54,15 +54,15 @@ class DZLPaycheckConfig {
     }
 
     array<ref DZLPaycheck> GetPaycheckByJob(string job) {
-        if (DAY_Z_LIFE_JOB_MEDIC == job) {
+        if(DAY_Z_LIFE_JOB_MEDIC == job) {
             return medics;
         }
 
-        if (DAY_Z_LIFE_JOB_COP == job) {
+        if(DAY_Z_LIFE_JOB_COP == job) {
             return cops;
         }
 
-        if (DAY_Z_LIFE_JOB_ARMY == job) {
+        if(DAY_Z_LIFE_JOB_ARMY == job) {
             return armies;
         }
 
@@ -70,15 +70,15 @@ class DZLPaycheckConfig {
     }
 
     DZLPaycheck GetFallbackPaycheckByJob(string job) {
-        if (DAY_Z_LIFE_JOB_MEDIC == job) {
+        if(DAY_Z_LIFE_JOB_MEDIC == job) {
             return GetFallbackFromCollection(medics);
         }
 
-        if (DAY_Z_LIFE_JOB_COP == job) {
+        if(DAY_Z_LIFE_JOB_COP == job) {
             return GetFallbackFromCollection(cops);
         }
 
-        if (DAY_Z_LIFE_JOB_ARMY == job) {
+        if(DAY_Z_LIFE_JOB_ARMY == job) {
             return GetFallbackFromCollection(armies);
         }
 
@@ -87,7 +87,7 @@ class DZLPaycheckConfig {
 
     private DZLPaycheck GetFallbackFromCollection(array<ref DZLPaycheck> collection) {
         foreach(DZLPaycheck paycheck: collection) {
-            if (paycheck.isFallbackRank) {
+            if(paycheck.isFallbackRank) {
                 return paycheck;
             }
         }
@@ -96,7 +96,7 @@ class DZLPaycheckConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json")) {
             JsonFileLoader<DZLPaycheckConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json", this);
             return true;
         }
@@ -104,7 +104,7 @@ class DZLPaycheckConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLPaycheckConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json", this);
         }

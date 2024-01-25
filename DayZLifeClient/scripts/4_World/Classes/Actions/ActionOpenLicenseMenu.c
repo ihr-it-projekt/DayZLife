@@ -17,16 +17,16 @@ class ActionOpenLicenseMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if (g_Game.GetUIManager().GetMenu() == NULL) {
+        if(g_Game.GetUIManager().GetMenu() == NULL) {
             GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceMenu(), NULL);
         }
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget || !objectTarget.IsLicensePoint()) return false;
+        if(!objectTarget || !objectTarget.IsLicensePoint()) return false;
 
-        if (!player.GetConfig() || !player.GetConfig().licenceConfig)  return false;
+        if(!player.GetConfig() || !player.GetConfig().licenceConfig) return false;
 
         return true;
     }

@@ -15,29 +15,29 @@ class ActionOpenArrestMenu: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (!target.GetObject()) return false;
-        if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
+        if(!target.GetObject()) return false;
+        if(!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
         DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
-        if (dzlPlayerCop.IsActiveAsMedic() || dzlPlayerCop.IsActiveAsCivil()) return false;
-        if (dzlPlayerCop.arrestTimeInMinutes != 0) return false;
+        if(dzlPlayerCop.IsActiveAsMedic() || dzlPlayerCop.IsActiveAsCivil()) return false;
+        if(dzlPlayerCop.arrestTimeInMinutes != 0) return false;
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
-        if (!targetPlayer.IsDZLPlayer()) return false;
+        if(!targetPlayer.IsDZLPlayer()) return false;
 
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             if(!targetPlayer || !targetPlayer.GetIdentity()) return false;
 
             DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();
 
-            if (true == dzlPlayerPrisoner.IsActiveAsCop() && true == dzlPlayerCop.IsActiveAsCop()) return false;
-            if (true == dzlPlayerPrisoner.IsActiveAsArmy() && true == dzlPlayerCop.IsActiveAsArmy()) return false;
+            if(true == dzlPlayerPrisoner.IsActiveAsCop() && true == dzlPlayerCop.IsActiveAsCop()) return false;
+            if(true == dzlPlayerPrisoner.IsActiveAsArmy() && true == dzlPlayerCop.IsActiveAsArmy()) return false;
         }
 
         return true;
     }
 
     override void OnStartClient(ActionData action_data) {
-        if (g_Game.GetUIManager().GetMenu() != NULL) return;
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
         DZLPlayerArrestMenu menu = player.GetArrestMenu();

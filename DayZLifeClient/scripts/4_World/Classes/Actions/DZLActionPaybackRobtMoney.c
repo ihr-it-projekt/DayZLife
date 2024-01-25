@@ -2,8 +2,8 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
     ref DZLBankingConfig config;
 
     DZLBankingConfig GetConfig(PlayerBase player) {
-        if (!config) {
-            if (GetGame().IsServer()) {
+        if(!config) {
+            if(GetGame().IsServer()) {
                 config = DZLConfig.Get().bankConfig;
             } else {
                 config = player.GetConfig().bankConfig;
@@ -31,18 +31,18 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget || !objectTarget.IsBank()) return false;
+        if(!objectTarget || !objectTarget.IsBank()) return false;
 
-        if (!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) return false;
+        if(!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) return false;
 
         DZLBank bank;
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             bank = DZLDatabaseLayer.Get().GetBank();
         } else {
-            bank  = player.GetBank();
+            bank = player.GetBank();
         }
 
-        if(!bank || bank.GetLastRaidMoney() == 0)  return false;
+        if(!bank || bank.GetLastRaidMoney() == 0) return false;
 
         return true;
     }
@@ -50,16 +50,16 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
     override void OnEndServer(ActionData action_data) {
         DZLPlayer dzlPlayer = action_data.m_Player.GetDZLPlayer();
         PlayerIdentity ident = action_data.m_Player.GetIdentity();
-        if (!dzlPlayer.IsActiveAsCop()) return;
+        if(!dzlPlayer.IsActiveAsCop()) return;
 
         GetConfig(action_data.m_Player);
         DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
-        if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds / 10)) {
+        if(!bank.CanUseBank(config.raidCoolDownTimeInSeconds / 10)) {
             DZLSendMessage(ident, "#bank_can_not_be_used_in_moment");
             return;
         }
-        if (!bank.CanPaybackRobtMoney(dzlPlayer)) {
+        if(!bank.CanPaybackRobtMoney(dzlPlayer)) {
             DZLSendMessage(ident, "#error_not_enough_money_payback " + bank.GetLastRaidMoney());
             return;
         }
@@ -73,11 +73,11 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
             PlayerIdentity playerIdentity = player.GetIdentity();
-            if (!player)  continue;
+            if(!player) continue;
 
             DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
 
-            if (dzlPlayerCop.IsActiveAsCop()) {
+            if(dzlPlayerCop.IsActiveAsCop()) {
                 dzlPlayerCop.AddMoneyToPlayerBank(bonus);
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerCop), true, playerIdentity);
             }

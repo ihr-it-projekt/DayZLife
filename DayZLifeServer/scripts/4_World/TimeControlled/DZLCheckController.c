@@ -10,7 +10,7 @@ class DZLCheckController {
         GetGame().GetPlayers(allPlayers);
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
-            if (!player)   continue;
+            if(!player) continue;
             PlayerIdentity playerIdent = player.GetIdentity();
 
             DZLPayCheck.Check(player, config.jobConfig.paycheck);

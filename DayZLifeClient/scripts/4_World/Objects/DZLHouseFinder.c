@@ -16,11 +16,11 @@ class DZLHouseFinder {
 
         vector dir = GetGame().GetPointerDirection();
         vector from = GetGame().GetCurrentCameraPosition();
-        vector to = from + ( dir * 100 );
+        vector to = from + (dir * 100);
 
         Object object = objectFinder.GetObjectsAt(from, to, player);
 
-        if (!object) {
+        if(!object) {
             return null;
         }
 
@@ -28,7 +28,7 @@ class DZLHouseFinder {
 
         DZLHouseDefinition actualHouseDef = GetHouseDefinitionByBuilding(house);
 
-        if (!actualHouseDef) {
+        if(!actualHouseDef) {
             return null;
         }
 

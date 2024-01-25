@@ -15,9 +15,9 @@ class DZLBuyExtensionListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
-            autoptr  Param2<Building, string> paramBuyStorage;
-            if (ctx.Read(paramBuyStorage)) {
+        if(rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
+            autoptr Param2<Building, string> paramBuyStorage;
+            if(ctx.Read(paramBuyStorage)) {
                 PlayerBase player = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 DZLBuilding dzlBuilding = new DZLBuilding(paramBuyStorage.param1);
@@ -25,16 +25,16 @@ class DZLBuyExtensionListener {
 
                 DZLHouseExtension extension = config.GetHouseExtensionById(paramBuyStorage.param2);
 
-                if (extension && dzlBuilding.IsOwner(player)) {
+                if(extension && dzlBuilding.IsOwner(player)) {
                     string message = "#error_buying_alarm_system";
                     int buyPriceBuy = 0;
-                    if (extension.isStorage) {
+                    if(extension.isStorage) {
                         message = "#error_buying_storage";
-                        buyPriceBuy =  extension.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
+                        buyPriceBuy = extension.price * (actualHouseDef.storageBuyFactor * (dzlBuilding.GetStorage().Count() + 1));
                         vector posToSpawnRelative = dzlBuilding.GetNextFreeStoragePosition(actualHouseDef);
                         bool canNotSpawn = posToSpawnRelative == "0 0 0";
 
-                        if (canNotSpawn) {
+                        if(canNotSpawn) {
                             message = "#no_position_to_for_extension_found";
                         } else if(actualHouseDef.GetMaxStorage() <= dzlBuilding.GetStorage().Count()) {
                             message = "#max_storgage_is_allready_bought";
@@ -44,7 +44,7 @@ class DZLBuyExtensionListener {
                             vector posToSpawn = paramBuyStorage.param1.ModelToWorld(posToSpawnRelative);
                             bool hasSpawned = DZLSpawnHelper.SpawnContainer(posToSpawn, paramBuyStorage.param1.GetOrientation(), extension.type);
 
-                            if (hasSpawned) {
+                            if(hasSpawned) {
                                 dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
                                 dzlBuilding.BuyStorageOnServer(new DZLStorageTypeBought(extension, posToSpawn, buyPriceBuy, posToSpawnRelative));
                                 message = "#successfully_buy_storage";
@@ -52,24 +52,24 @@ class DZLBuyExtensionListener {
                                 message = "#strorage_can_not_spawn";
                             }
                         }
-                    } else if (extension.isHouseInventory) {
+                    } else if(extension.isHouseInventory) {
                         DZLHouseInventory inventory;
                         int currentLevel = 0;
                         float factor = 1.0;
-                        if (dzlBuilding.HasInventory()) {
+                        if(dzlBuilding.HasInventory()) {
                             inventory = DZLDatabaseLayer.Get().GetHouseInventory(dzlBuilding.GetDZLHouse().GetOwner(), dzlBuilding.GetDZLHouse().GetPosition());
                         }
 
-                        if (inventory) {
+                        if(inventory) {
                             currentLevel = inventory.GetLevel(actualHouseDef.inventoryItemsPerLevel);
                             factor = currentLevel * 10 / 100 + 1;
                         }
 
                         buyPriceBuy = config.houseExtensions.pricePerLevelHouseInventory * factor;
-                        if (dzlBuilding.CanBuyInventoryExtensionServer(actualHouseDef) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
+                        if(dzlBuilding.CanBuyInventoryExtensionServer(actualHouseDef) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
                             dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
 
-                            if (!inventory) {
+                            if(!inventory) {
                                 inventory = DZLDatabaseLayer.Get().GetHouseInventory(dzlBuilding.GetDZLHouse().GetOwner(), dzlBuilding.GetDZLHouse().GetPosition());
                                 dzlBuilding.GetDZLHouse().EnableInventory();
                             }
@@ -80,7 +80,7 @@ class DZLBuyExtensionListener {
                             GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
                         }
                     } else {
-                        if (dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy) ) {
+                        if(dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
                             buyPriceBuy = extension.price;
                             dzlPlayer.AddMoneyToPlayer(buyPriceBuy * -1);
                             dzlBuilding.SetHouseAlarm(extension);
@@ -94,9 +94,9 @@ class DZLBuyExtensionListener {
                     GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_SELL_STORAGE) {
+        } else if(rpc_type == DAY_Z_LIFE_SELL_STORAGE) {
             autoptr Param2<Building, vector> paramSellStorage;
-            if (ctx.Read(paramSellStorage)) {
+            if(ctx.Read(paramSellStorage)) {
                 PlayerBase playerSellStorage = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayerSellStorage = playerSellStorage.GetDZLPlayer();
                 DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellStorage.param1);
@@ -104,9 +104,9 @@ class DZLBuyExtensionListener {
 
                 string messageSell = "#error_sell_house";
 
-                if (actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(playerSellStorage)) {
+                if(actualHouseDefSell && dzlBuildingSell && dzlBuildingSell.IsOwner(playerSellStorage)) {
                     DZLStorageTypeBought positionToSell = dzlBuildingSell.FindStorageByPosition(paramSellStorage.param2);
-                    if (positionToSell) {
+                    if(positionToSell) {
                         houseFinder.objectFinder.DeleteContainerAt(positionToSell.position, positionToSell.position, positionToSell.type, paramSellStorage.param1);
 
                         dzlPlayerSellStorage.AddMoneyToPlayer(positionToSell.sellPrice);

@@ -4,7 +4,7 @@ class DZLCarStorage {
 
     void DZLCarStorage(string playerId) {
         fileName = "car_" + playerId + ".json";
-        if (!Load()) {
+        if(!Load()) {
             items = new array<ref DZLCarStoreItem>;
             Save();
         }
@@ -21,7 +21,7 @@ class DZLCarStorage {
 
     DZLCarStoreItem GetById(string id) {
         foreach(DZLCarStoreItem item: items) {
-            if (item.GetId() == id) {
+            if(item.GetId() == id) {
                 return item;
             }
         }
@@ -35,7 +35,7 @@ class DZLCarStorage {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + fileName)) {
             JsonFileLoader<DZLCarStorage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + fileName, this);
             return true;
         }
@@ -43,7 +43,7 @@ class DZLCarStorage {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR);
             DZLJsonFileHandler<DZLCarStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + fileName, this);
             return true;

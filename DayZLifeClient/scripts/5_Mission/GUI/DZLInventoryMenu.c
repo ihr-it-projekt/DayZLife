@@ -25,7 +25,7 @@ modded class Inventory {
     private void UpdateDzlValues() {
         DZLPlayer dzlPlayer = DZLPlayerBaseHelper.GetPlayer().GetDZLPlayer();
 
-        if (dzlPlayer) {
+        if(dzlPlayer) {
             moneyAtBank.SetText(dzlPlayer.GetBankMoney().ToString());
             moneyAtPlayer.SetText(dzlPlayer.GetMoney().ToString());
             playerArrest.SetText(dzlPlayer.arrestTimeInMinutes.ToString());

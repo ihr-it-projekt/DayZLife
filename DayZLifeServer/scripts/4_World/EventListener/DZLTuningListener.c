@@ -11,13 +11,13 @@ class DZLTuningListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_EVENT_TUNE_CAR) {
+        if(rpc_type == DAY_Z_LIFE_EVENT_TUNE_CAR) {
             autoptr Param1<string> paramTuneCar;
             CarScript car = CarScript.Cast(target);
 
-            if (car && car.IsRuined()) {
+            if(car && car.IsRuined()) {
                 DZLSendMessage(sender, "#car_can_not_tuned_is_ruined");
-            } else if (ctx.Read(paramTuneCar) && paramTuneCar.param1 && car) {
+            } else if(ctx.Read(paramTuneCar) && paramTuneCar.param1 && car) {
                 CargoBase cargo = car.GetInventory().GetCargo();
 
                 vector carPosition = car.GetPosition();
@@ -31,7 +31,7 @@ class DZLTuningListener {
                 if(!before) return;
 
                 DZLCarTuneConfig after = config.GetOptionByType(paramTuneCar.param1);
-                if (!after) return;
+                if(!after) return;
 
                 ReplaceTuningTypes(before, after, storedCar);
 
@@ -40,8 +40,8 @@ class DZLTuningListener {
 
                 CarScript carSpawned = SpawnCar(sender, storedCar, carPosition, carHeading, lastStoragePosition, hasInsurance);
 
-                if (carSpawned) {
-                    if (hasInsurance) {
+                if(carSpawned) {
+                    if(hasInsurance) {
                         DZLInsuranceManager.Get().AddCar(carSpawned, null);
                     }
                 }
@@ -54,9 +54,9 @@ class DZLTuningListener {
 
         foreach(CarTuneAttachment tuneAttachmentBefore: tuneConfigBefore.tunedAttachments) {
             foreach(CarTuneAttachment tuneAttachmentAfter: tuneConfigAfter.tunedAttachments) {
-                if (tuneAttachmentAfter.IsForSamePosition(tuneAttachmentBefore)) {
+                if(tuneAttachmentAfter.IsForSamePosition(tuneAttachmentBefore)) {
                     foreach(DZLStoreItem orgAttachment: itemInStock.attached) {
-                        if (orgAttachment.type == tuneAttachmentBefore.type) {
+                        if(orgAttachment.type == tuneAttachmentBefore.type) {
                             orgAttachment.type = tuneAttachmentAfter.type;
                             break;
                         }
@@ -76,28 +76,28 @@ class DZLTuningListener {
         il.SetGround(NULL, mat);
         EntityAI item = SpawnEntity(itemInStock.type, il, ECE_PLACE_ON_SURFACE, RF_DEFAULT);
 
-        if (!item) {
+        if(!item) {
             return null;
         }
 
         car = CarScript.Cast(item);
 
-        if (car) {
+        if(car) {
             array<ref DZLStoreItem> attached = itemInStock.attached;
             bool spawnOnGround = false;
             foreach(DZLStoreItem attach: attached) {
-                if (DZLSpawnHelper.Add(car, attach) && !spawnOnGround) {
+                if(DZLSpawnHelper.Add(car, attach) && !spawnOnGround) {
                     spawnOnGround = true;
                 }
             }
 
-            if (spawnOnGround) {
+            if(spawnOnGround) {
                 DZLSendMessage(sender, "#car_was_tuned_some_items_can_not_placed_in_car");
             } else {
                 DZLSendMessage(sender, "#car_was_tuned");
             }
 
-            if (enableInsurance) {
+            if(enableInsurance) {
                 car.EnableInsurance(lastStoragePosition);
             }
 
@@ -119,7 +119,7 @@ class DZLTuningListener {
     }
 
     private void FillFluid(CarScript car, int type, float inPercent) {
-        if (inPercent > 0) {
+        if(inPercent > 0) {
             car.Fill(type, car.GetFluidCapacity(type) * inPercent);
         }
     }
@@ -129,10 +129,10 @@ class DZLTuningListener {
         DZLCarStorage fractionStorage;
         DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
 
-        if (dzlPlayer.IsInAnyFraction()) {
+        if(dzlPlayer.IsInAnyFraction()) {
             DZLFractionMember member = dzlPlayer.GetFractionMember();
 
-            if (member) {
+            if(member) {
                 fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(member.fractionID);
             }
         }

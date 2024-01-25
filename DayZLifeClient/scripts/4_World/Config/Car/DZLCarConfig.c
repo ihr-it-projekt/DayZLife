@@ -13,7 +13,7 @@ class DZLCarConfig {
 
     void DZLCarConfig() {
         array<string> attachments;
-        if (!Load()) {
+        if(!Load()) {
             carCollisionDamage = false;
             garages = new array<ref DZLStoragePosition>;
             carRaidTools = new array<string>;
@@ -44,7 +44,7 @@ class DZLCarConfig {
             Save();
         }
 
-        if (version == "1") {
+        if(version == "1") {
             carRaidTools = new array<string>;
             carRaidTools.Insert("Lockpick");
             garages = new array<ref DZLStoragePosition>;
@@ -73,20 +73,20 @@ class DZLCarConfig {
             Save();
         }
 
-        if (version == "2") {
+        if(version == "2") {
             canGetCarsFromEveryGarage = true;
             version = "3";
             Save();
         }
 
-        if (version == "3") {
+        if(version == "3") {
             carInsurancePrice = 2000;
             version = "4";
 
             Save();
         }
 
-        if (version == "4") {
+        if(version == "4") {
             version = "5";
 
             Save();
@@ -94,13 +94,13 @@ class DZLCarConfig {
     }
 
     DZLStoragePosition GetStorageByPosition(vector playerPosition, int distance = 2) {
-        if (!playerPosition) {
+        if(!playerPosition) {
             return null;
         }
 
         foreach(DZLStoragePosition position: garages) {
             float distanceToPos = vector.Distance(position.position, playerPosition);
-            if (distanceToPos <= distance) {
+            if(distanceToPos <= distance) {
                 return position;
             }
         }
@@ -109,7 +109,7 @@ class DZLCarConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json")) {
             JsonFileLoader<DZLCarConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json", this);
             return true;
         }
@@ -117,7 +117,7 @@ class DZLCarConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLCarConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json", this);
         }

@@ -2,7 +2,7 @@ class DZLConfig {
     private static ref DZLConfig config;
 
     static DZLConfig Get() {
-        if (!config) {
+        if(!config) {
             config = new DZLConfig;
         }
 
@@ -29,7 +29,7 @@ class DZLConfig {
     ref DZLTuningConfig tuningConfig;
 
     void DZLConfig() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             houseConfig = new DZLHouseConfig;
             houseExtensions = new DZLHouseExtensions;
             bankConfig = new DZLBankingConfig;
@@ -57,11 +57,11 @@ class DZLConfig {
     }
 
     DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
-        if (searchJobId == DAY_Z_LIFE_JOB_COP) {
+        if(searchJobId == DAY_Z_LIFE_JOB_COP) {
             return copSpawnPoints;
-        } else if (searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
+        } else if(searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
             return medicSpawnPoints;
-        } else if (searchJobId == DAY_Z_LIFE_JOB_ARMY) {
+        } else if(searchJobId == DAY_Z_LIFE_JOB_ARMY) {
             return armySpawnPoints;
         }
 
@@ -69,14 +69,14 @@ class DZLConfig {
     }
 
     ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
-        if (houseConfig && houseConfig.houseConfigs) {
+        if(houseConfig && houseConfig.houseConfigs) {
             return houseConfig.houseConfigs;
         }
         return null;
     }
 
     ref array<ref DZLHouseExtension> GetExtensions() {
-        if (houseExtensions && houseExtensions.extensions) {
+        if(houseExtensions && houseExtensions.extensions) {
             return houseExtensions.extensions;
         }
         return null;
@@ -84,10 +84,10 @@ class DZLConfig {
 
     DZLHouseExtension GetHouseExtensionById(string id) {
         array<ref DZLHouseExtension> extensions = GetExtensions();
-        if (null == extensions) return null;
+        if(null == extensions) return null;
 
         foreach(DZLHouseExtension _extension: extensions) {
-            if (_extension.GetId() == id) {
+            if(_extension.GetId() == id) {
                 return _extension;
             }
         }

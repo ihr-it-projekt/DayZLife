@@ -15,18 +15,18 @@ class DZLActionTransferMoney: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if (!target.GetObject()) return false;
-        if (!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
+        if(!target.GetObject()) return false;
+        if(!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
 
-        if (!targetPlayer || !targetPlayer.IsDZLPlayer()) return false;
+        if(!targetPlayer || !targetPlayer.IsDZLPlayer()) return false;
 
         return true;
     }
 
     override void OnStartClient(ActionData action_data) {
-        if (g_Game.GetUIManager().GetMenu() != NULL) return;
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         PlayerBase player = action_data.m_Player;
 

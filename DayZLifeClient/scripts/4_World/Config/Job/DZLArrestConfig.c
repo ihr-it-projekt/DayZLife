@@ -13,7 +13,7 @@ class DZLArrestConfig {
     string job;
 
     void DZLArrestConfig() {
-        if (!Load()) {
+        if(!Load()) {
             prisonerItems = new array<string>;
             prisonerItems.Insert("Pickaxe");
             prisonerItems.Insert("PrisonerCap");
@@ -43,7 +43,7 @@ class DZLArrestConfig {
             Save();
         }
 
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             teleportArrestedIntoJail = false;
             teleportPosition = "0 0 0";
@@ -52,7 +52,7 @@ class DZLArrestConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json")) {
             JsonFileLoader<DZLArrestConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
             return true;
         }
@@ -60,7 +60,7 @@ class DZLArrestConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLArrestConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
         }

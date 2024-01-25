@@ -13,9 +13,9 @@ class DZLPreviewWindow extends Managed {
 
         previewItem = EntityAI.Cast(itemObject);
 
-        if (!previewItem) {
+        if(!previewItem) {
             widget.Show(false);
-            if (description)description.Show(false);
+            if(description)description.Show(false);
             return false;
         }
 
@@ -29,6 +29,6 @@ class DZLPreviewWindow extends Managed {
         widget.SetModelPosition(Vector(0, 0, 0.5));
 
         widget.Show(true);
-        if (description) description.Show(true);
+        if(description) description.Show(true);
     }
 }

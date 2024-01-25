@@ -40,7 +40,7 @@ class DZLDatabaseLayer {
     }
 
     static DZLDatabaseLayer Get() {
-        if (!databaseLayer) {
+        if(!databaseLayer) {
             databaseLayer = new DZLDatabaseLayer;
             databaseLayer.InitDB();
         }
@@ -73,9 +73,9 @@ class DZLDatabaseLayer {
     }
 
     DZLPlayer GetPlayerFromFiles(string playerId) {
-        if ("" == playerId) return null;
+        if("" == playerId) return null;
         DZLPlayer player;
-        if (!dzlPlayers.Find(playerId, player)) {
+        if(!dzlPlayers.Find(playerId, player)) {
             player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
             dzlPlayers.Insert(playerId, player);
         }
@@ -89,7 +89,7 @@ class DZLDatabaseLayer {
 
     DZLHouse GetHouse(Building building = null, string fileNameParam = "") {
         string fileName;
-        if (building) {
+        if(building) {
             fileName = DZLHouse.GetFileNameFromBuilding(building);
         } else {
             fileName = fileNameParam;
@@ -114,7 +114,7 @@ class DZLDatabaseLayer {
 
     DZLPlayerHouse GetPlayerHouse(string playerId) {
         DZLPlayerHouse house;
-        if (!dzlPlayerHouses.Find(playerId, house)) {
+        if(!dzlPlayerHouses.Find(playerId, house)) {
             house = new DZLPlayerHouse(playerId);
             dzlPlayerHouses.Insert(playerId, house);
         }
@@ -123,7 +123,7 @@ class DZLDatabaseLayer {
 
     DZLHouseInventory GetHouseInventory(string playerId, vector position) {
         DZLHouseInventory inventory;
-        if (!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
+        if(!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
             inventory = new DZLHouseInventory(playerId, position);
             dzlHouseInventory.Insert(playerId + position.ToString(false), inventory);
         }
@@ -132,7 +132,7 @@ class DZLDatabaseLayer {
 
     DZLFraction GetFraction(string playerId) {
         DZLFraction fraction;
-        if (!dzlFractions.Find(playerId, fraction)) {
+        if(!dzlFractions.Find(playerId, fraction)) {
             fraction = new DZLFraction(playerId);
             dzlFractions.Insert(playerId, fraction);
         }
@@ -142,7 +142,7 @@ class DZLDatabaseLayer {
 
     DZLCarStorage GetPlayerCarStorage(string playerId) {
         DZLCarStorage storageCar;
-        if (!storageCars.Find(playerId, storageCar)) {
+        if(!storageCars.Find(playerId, storageCar)) {
             storageCar = new DZLCarStorage(playerId);
             storageCars.Insert(playerId, storageCar);
         }
@@ -152,7 +152,7 @@ class DZLDatabaseLayer {
     DZLCarStorage GetFractionCarStorage(string fractionId) {
         DZLCarStorage storageCar;
         fractionId = fractionId + "fraction";
-        if (!fractionStorageCars.Find(fractionId, storageCar)) {
+        if(!fractionStorageCars.Find(fractionId, storageCar)) {
             storageCar = new DZLCarStorage(fractionId);
             fractionStorageCars.Insert(fractionId, storageCar);
         }
@@ -161,7 +161,7 @@ class DZLDatabaseLayer {
 
     void RemoveHouseInventory(string playerId, vector position) {
         DZLHouseInventory inventory;
-        if (inventory && !dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
+        if(inventory && !dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
             inventory.Delete();
             dzlHouseInventory.Remove(playerId);
         }
@@ -170,7 +170,7 @@ class DZLDatabaseLayer {
     void RemovePlayerHouse(string playerId) {
         GetPlayerHouse(playerId);
         DZLPlayerHouse house;
-        if (dzlPlayerHouses.Find(playerId, house)) {
+        if(dzlPlayerHouses.Find(playerId, house)) {
             dzlPlayerHouses.Remove(playerId);
             DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + house.fileName);
         }
@@ -178,7 +178,7 @@ class DZLDatabaseLayer {
 
     void RemoveFraction(string fractionId) {
         DZLFraction fraction = GetFraction(fractionId);
-        if (!fraction) return;
+        if(!fraction) return;
 
         DZLPlayer currentPlayer;
         array<ref DZLFractionMember>potentialMembers = fraction.GetPotentialMembers();
@@ -200,7 +200,7 @@ class DZLDatabaseLayer {
 
     void RemovePlayerCars(string playerId) {
         DZLCarStorage storageCar = GetPlayerCarStorage(playerId);;
-        if (storageCars.Find(playerId, storageCar)) {
+        if(storageCars.Find(playerId, storageCar)) {
             storageCars.Remove(playerId);
         }
 

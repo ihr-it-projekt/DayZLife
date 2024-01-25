@@ -7,7 +7,7 @@ class DZLHouseInventory {
     void DZLHouseInventory(string playerId, vector position) {
         fileName = "house_inventory" + playerId + position.ToString(false) + ".json";
 
-        if (!Load()) {
+        if(!Load()) {
             store = new array<ref DZLStoreItem>;
             Save();
         }
@@ -23,13 +23,13 @@ class DZLHouseInventory {
     }
 
     bool CanAddToStore(array<EntityAI> items) {
-        if (!items || items.Count() == 0) return false;
+        if(!items || items.Count() == 0) return false;
 
-        if (items.Count() <= GetLeftStorage()) {
+        if(items.Count() <= GetLeftStorage()) {
             foreach(EntityAI item: items) {
-                if (item.GetInventory()) {
+                if(item.GetInventory()) {
                     CargoBase cargo = item.GetInventory().GetCargo();
-                    if (cargo && cargo.GetItemCount() > 0) {
+                    if(cargo && cargo.GetItemCount() > 0) {
                         return false;
                     }
                 }
@@ -69,7 +69,7 @@ class DZLHouseInventory {
 
     DZLStoreItem GetById(string id) {
         foreach(DZLStoreItem item: store) {
-            if (item.GetId() == id) {
+            if(item.GetId() == id) {
                 return item;
             }
         }
@@ -87,7 +87,7 @@ class DZLHouseInventory {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLHouseInventory>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;
         }
@@ -95,7 +95,7 @@ class DZLHouseInventory {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLHouseInventory>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;

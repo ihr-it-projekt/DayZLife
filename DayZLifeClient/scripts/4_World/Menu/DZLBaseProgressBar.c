@@ -49,7 +49,7 @@ class DZLBaseProgressBar: UIScriptedMenu {
 
     void CheckDuration() {
         iterations++;
-        if (iterations >= duration) {
+        if(iterations >= duration) {
             progressBar.SetCurrent(100);
             status.SetText("100 %");
             SendFinishEvent();
@@ -57,12 +57,12 @@ class DZLBaseProgressBar: UIScriptedMenu {
         } else {
             vector playerPosition = player.GetPosition();
 
-            if (vector.Distance(position, playerPosition) > maxRange) {
+            if(vector.Distance(position, playerPosition) > maxRange) {
                 OnHide();
                 return;
             }
 
-            float percent = iterations / duration  * 100;
+            float percent = iterations / duration * 100;
 
             progressBar.SetCurrent(percent);
             status.SetText(Math.Round(percent).ToString() + " %");

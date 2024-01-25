@@ -23,7 +23,7 @@ class ActionRobMoneyFromDead: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-        if (!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
+        if(!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             targetPlayer.TransferFromDeadPlayer(dzlPlayer);
 
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());

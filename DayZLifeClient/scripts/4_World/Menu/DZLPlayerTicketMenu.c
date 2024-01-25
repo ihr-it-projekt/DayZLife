@@ -34,40 +34,40 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {
-        if (super.OnClick(w, x, y, button)) return true;
+        if(super.OnClick(w, x, y, button)) return true;
 
         switch(w) {
-        case createTicket:
-            int ticketValue = inputTicket.GetText().ToInt();
-            string ticketReason = inputTicketReason.GetText();
+            case createTicket:
+                int ticketValue = inputTicket.GetText().ToInt();
+                string ticketReason = inputTicketReason.GetText();
 
-            if (ticketValue < 0) {
-                player.DisplayMessage("#error_value_must_be_positiv_or_null");
-                return false;
-            }
+                if(ticketValue < 0) {
+                    player.DisplayMessage("#error_value_must_be_positiv_or_null");
+                    return false;
+                }
 
-            if (!receiver) {
-                player.DisplayMessage("#error_no_player_was_selected");
-                return false;
-            }
+                if(!receiver) {
+                    player.DisplayMessage("#error_no_player_was_selected");
+                    return false;
+                }
 
-            if (ticketValue != 0) {
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
-                inputTicket.SetText("");
-                inputTicketReason.SetText("");
-            } else {
-                player.DisplayMessage("#error_value_is_not_a_int");
-            }
+                if(ticketValue != 0) {
+                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
+                    inputTicket.SetText("");
+                    inputTicketReason.SetText("");
+                } else {
+                    player.DisplayMessage("#error_value_is_not_a_int");
+                }
 
-            return true;
-        default:
-            break;
+                return true;
+            default:
+                break;
         }
         return false;
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_CREATE_TICKET_RESPONSE) {
+        if(rpc_type == DAY_Z_LIFE_CREATE_TICKET_RESPONSE) {
             OnHide();
         }
     }

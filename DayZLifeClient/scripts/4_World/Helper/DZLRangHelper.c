@@ -1,19 +1,19 @@
 class DZLRankHelper {
     static DZLPaycheck getCurrentPayCheck(DZLPlayer dzlPlayer, DZLPaycheckConfig config) {
-        if (dzlPlayer) {
+        if(dzlPlayer) {
             if(dzlPlayer.IsActiveAsCop()) {
                 return searchPayCheck(dzlPlayer, config.cops);
             }
 
-            if (dzlPlayer.IsActiveAsMedic()) {
+            if(dzlPlayer.IsActiveAsMedic()) {
                 return searchPayCheck(dzlPlayer, config.medics);
             }
 
-            if (dzlPlayer.IsActiveAsArmy()) {
+            if(dzlPlayer.IsActiveAsArmy()) {
                 return searchPayCheck(dzlPlayer, config.armies);
             }
 
-            if (dzlPlayer.IsActiveAsCivil()) {
+            if(dzlPlayer.IsActiveAsCivil()) {
                 return searchPayCheck(dzlPlayer, config.civils);
             }
         }
@@ -25,11 +25,11 @@ class DZLRankHelper {
         DZLPaycheck defaultPaycheck = new DZLPaycheck("", "", 0, 10000000);
 
         foreach(DZLPaycheck payCheck: payChecks) {
-            if (dzlPlayer.HasJobGrade(payCheck.rank) && payCheck.amount > 0) {
+            if(dzlPlayer.HasJobGrade(payCheck.rank) && payCheck.amount > 0) {
                 return payCheck;
             }
 
-            if (payCheck.isFallbackRank) {
+            if(payCheck.isFallbackRank) {
                 defaultPaycheck = payCheck;
             }
         }

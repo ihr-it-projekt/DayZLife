@@ -5,7 +5,7 @@ class DZLPlayerHouse {
 
     void DZLPlayerHouse(string playerId) {
         fileName = playerId + "house.json";
-        if (!Load()) {
+        if(!Load()) {
             playerHouseCollection = new array<string>;
             playerHouseKeyCollection = new array<string>;
             Save();
@@ -35,14 +35,14 @@ class DZLPlayerHouse {
 
     void RemoveKey(notnull ref DZLHouse house) {
         int index = playerHouseKeyCollection.Find(house.GetFileName());
-        if (-1 != index) {
+        if(-1 != index) {
             playerHouseKeyCollection.Remove(index);
             Save();
         }
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName)) {
             JsonFileLoader<DZLPlayerHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;
         }
@@ -50,7 +50,7 @@ class DZLPlayerHouse {
     }
 
     private bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
             DZLJsonFileHandler<DZLPlayerHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + fileName, this);
             return true;

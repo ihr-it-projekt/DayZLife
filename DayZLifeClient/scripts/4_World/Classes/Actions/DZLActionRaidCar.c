@@ -6,7 +6,7 @@ class DZLActionRaidCar: ActionInteractBase {
         m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
         m_HUDCursorIcon = CursorIcons.OpenDoors;
 
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             config = DZLConfig.Get().carConfig;
         }
     }
@@ -22,9 +22,9 @@ class DZLActionRaidCar: ActionInteractBase {
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         CarScript car = CarScript.Cast(target.GetParent());
-        if (!car) return false;
+        if(!car) return false;
 
-        if (!player.GetConfig() || !player.GetConfig().carConfig) return false;
+        if(!player.GetConfig() || !player.GetConfig().carConfig) return false;
 
         config = player.GetConfig().carConfig;
 
@@ -32,11 +32,11 @@ class DZLActionRaidCar: ActionInteractBase {
 
         item = player.GetItemInHands();
 
-        if (!item) return false;
+        if(!item) return false;
 
         foreach(string itemType: raidTools) {
-            if (item.GetType() == itemType) {
-                if (GetGame().IsServer() && item.GetHealth() < 50) {
+            if(item.GetType() == itemType) {
+                if(GetGame().IsServer() && item.GetHealth() < 50) {
                     DZLSendMessage(player.GetIdentity(), "#raid_item_has_not_enough_helth");
 
                     return false;
@@ -49,14 +49,14 @@ class DZLActionRaidCar: ActionInteractBase {
     }
 
     override void OnEndClient(ActionData action_data) {
-        if (g_Game.GetUIManager().GetMenu() != NULL) return;
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
         CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
         DZLCarRaidProgressBar bar = action_data.m_Player.GetRaidCarProgressBar();
 
         bar.SetCar(car);
 
         EntityAI item = action_data.m_Player.GetItemInHands();
-        if (!item) return;
+        if(!item) return;
 
         bar.SetRaidItem(item);
         bar.SetDuration(action_data.m_Player.GetConfig().carConfig.carRaidTimeInSeconds);

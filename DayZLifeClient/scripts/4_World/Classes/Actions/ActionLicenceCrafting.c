@@ -14,17 +14,17 @@ class ActionLicenceCrafting: ActionInteractBase {
         m_ConditionTarget = new CCTNone;
     }
 
-    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item ) {
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         if(!target) return false;
         if(!target.GetObject()) return false;
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if (!objectTarget || !objectTarget.IsLicenseActionPoint()) return false;
+        if(!objectTarget || !objectTarget.IsLicenseActionPoint()) return false;
 
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             DZLCraftLicence licence = player.GetLicenceByPosition();
-            if (!licence) return false;
+            if(!licence) return false;
             string message = player.CanUseLicence(licence);
-            if (!!message) {
+            if(!!message) {
                 DZLSendMessage(player.GetIdentity(), message);
                 return false;
             }
@@ -34,7 +34,7 @@ class ActionLicenceCrafting: ActionInteractBase {
     }
 
     override void OnStartClient(ActionData action_data) {
-        if (g_Game.GetUIManager().GetMenu() != NULL) return;
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
         super.OnStartClient(action_data);
         GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceProgressBar(), NULL);
     }

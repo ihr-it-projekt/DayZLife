@@ -11,14 +11,14 @@ class DZLLoadOutListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_LOAD_OUT) {
+        if(rpc_type == DAY_Z_LIFE_LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
-            if (ctx.Read(paramLoadOut)) {
+            if(ctx.Read(paramLoadOut)) {
                 PlayerBase player = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 string categoryName = paramLoadOut.param1;
 
-                if ((dzlPlayer.IsActiveAsArmy() && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
+                if((dzlPlayer.IsActiveAsArmy() && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
                     DZLSendMessage(sender, "#error_category_not_found");
                 }
             }
@@ -27,7 +27,7 @@ class DZLLoadOutListener {
 
     private bool SearchLoadOutAndEquip(string categoryName, array<ref DZLLoadOutCategory> categories, PlayerIdentity sender, PlayerBase player) {
         foreach(DZLLoadOutCategory category: categories) {
-            if (categoryName == category.name) {
+            if(categoryName == category.name) {
                 DZLLogLoadOut(sender.GetId(), categoryName);
                 player.RemoveAllItems();
                 foreach(DZLLoadOutType type: category.items) {
@@ -45,35 +45,35 @@ class DZLLoadOutListener {
         EntityAI item;
         InventoryLocation inventoryLocation = new InventoryLocation;
 
-        if (player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
+        if(player.GetInventory().FindFirstFreeLocationForNewEntity(type.type, FindInventoryLocationType.ANY, inventoryLocation)) {
             item = player.GetHumanInventory().CreateInInventory(type.type);
-        } else if (!player.GetHumanInventory().GetEntityInHands()) {
+        } else if(!player.GetHumanInventory().GetEntityInHands()) {
             item = player.GetHumanInventory().CreateInHands(type.type);
         }
 
-        if (!item) {
+        if(!item) {
             item = player.SpawnEntityOnGroundPos(type.type, player.GetPosition());
         }
 
-        if (item && type.attachments) {
+        if(item && type.attachments) {
             AddAttachments(type, item);
         }
 
-        if (item && type.quickBarEntityShortcut != -1) {
+        if(item && type.quickBarEntityShortcut != -1) {
             player.SetQuickBarEntityShortcut(item, type.quickBarEntityShortcut, true);
         }
     }
 
     private void AddAttachments(DZLLoadOutType type, EntityAI item) {
-        if (!item) return;
+        if(!item) return;
 
         foreach(DZLLoadOutType attachment: type.attachments) {
-            if (item.GetInventory()) {
+            if(item.GetInventory()) {
                 EntityAI itemAttachment = item.GetInventory().CreateInInventory(attachment.type);
 
-                if (!itemAttachment) {
+                if(!itemAttachment) {
                     itemAttachment = item.GetInventory().CreateEntityInCargo(attachment.type);
-                    if (!itemAttachment) {
+                    if(!itemAttachment) {
                         itemAttachment = item.GetInventory().CreateAttachment(attachment.type);
                     }
                 }

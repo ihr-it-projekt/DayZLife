@@ -11,7 +11,7 @@ class DZLConfigListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG) {
+        if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG) {
             DebugMessageDZL("Send Config");
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_HOUSE, new Param1<ref DZLHouseConfig>(config.houseConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_HOUSE_EXTENSION, new Param1<ref DZLHouseExtensions>(config.houseExtensions), true, sender);
@@ -29,11 +29,11 @@ class DZLConfigListener {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CRIME, new Param1<ref DZLCrimeConfig>(config.crimeConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_MESSAGE, new Param1<ref DZLMessageConfig>(config.messageConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TUNING_CONFIG, new Param1<ref DZLTuningConfig>(config.tuningConfig), true, sender);
-        } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER) {
+        } else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER) {
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TRADER, new Param1<ref DZLTraderConfig>(config.traderConfig), true, sender);
-        } else if (rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING) {
+        } else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING) {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_BANKING, new Param1<ref DZLBankingConfig>(config.bankConfig), true, sender);
-        } else if (rpc_type == DAY_Z_LIFE_PLAYER_DATA) {
+        } else if(rpc_type == DAY_Z_LIFE_PLAYER_DATA) {
             DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());;
             dzlPlayer.UpdateName(sender.GetName());
             dzlPlayer.GetFractionMember();

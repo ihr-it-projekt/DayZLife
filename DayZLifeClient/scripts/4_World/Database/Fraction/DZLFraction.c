@@ -11,7 +11,7 @@ class DZLFraction {
         fileName = playerId + "fraction.json";
         id = playerId;
 
-        if (!Load()) {
+        if(!Load()) {
             members = new array<ref DZLFractionMember>;
             potentialMembers = new array<ref DZLFractionMember>;
             this.name = name;
@@ -26,7 +26,7 @@ class DZLFraction {
 
     void RemoveMember(string playerId) {
         foreach(int key, DZLFractionMember member: members) {
-            if (member.playerId == playerId) {
+            if(member.playerId == playerId) {
                 members.Remove(key);
                 return
             }
@@ -34,7 +34,7 @@ class DZLFraction {
     }
     void RemovePotentialMember(string playerId) {
         foreach(int key, DZLFractionMember member: potentialMembers) {
-            if (member.playerId == playerId) {
+            if(member.playerId == playerId) {
                 potentialMembers.Remove(key);
                 return
             }
@@ -42,18 +42,18 @@ class DZLFraction {
     }
 
     void AddMember(ref DZLFractionMember member) {
-        if (HasMember(member.playerId)) return;
+        if(HasMember(member.playerId)) return;
         members.Insert(member);
     }
 
     void AddPotentialMember(ref DZLFractionMember member) {
-        if (HasPotentialMember(member.playerId)) return;
+        if(HasPotentialMember(member.playerId)) return;
         potentialMembers.Insert(member);
     }
 
     DZLFractionMember GetMember(string playerId) {
         foreach(int key, DZLFractionMember member: members) {
-            if (member.playerId == playerId) {
+            if(member.playerId == playerId) {
                 return member;
             }
         }
@@ -63,7 +63,7 @@ class DZLFraction {
 
     bool HasPotentialMember(string playerId) {
         foreach(int key, DZLFractionMember member: potentialMembers) {
-            if (member.playerId == playerId) {
+            if(member.playerId == playerId) {
                 return true;
             }
         }
@@ -73,7 +73,7 @@ class DZLFraction {
 
     bool HasMember(string playerId) {
         foreach(int key, DZLFractionMember member: members) {
-            if (member.playerId == playerId) {
+            if(member.playerId == playerId) {
                 return true;
             }
         }
@@ -92,7 +92,7 @@ class DZLFraction {
     void UpdateMember(DZLFractionMember member) {
         DZLFractionMember memberFromDb = GetMember(member.playerId);
 
-        if (memberFromDb) {
+        if(memberFromDb) {
             memberFromDb.Update(member);
         }
     }
@@ -114,7 +114,7 @@ class DZLFraction {
     void DepositMoneyFromFractionToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {
         playerTarget.AddMoneyToPlayerBank(moneyToTransfer);
 
-        if (moneyToTransfer > 0) {
+        if(moneyToTransfer > 0) {
             DZLLogMoneyTransaction(id, "fraction", bankAccount, bankAccount - moneyToTransfer, moneyToTransfer * -1);
             bankAccount -= moneyToTransfer;
         }
@@ -123,7 +123,7 @@ class DZLFraction {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName)) {
             JsonFileLoader<DZLFraction>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName, this);
             return true;
         }
@@ -131,7 +131,7 @@ class DZLFraction {
     }
 
     bool Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION);
             DZLJsonFileHandler<DZLFraction>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName, this);
             return true;
@@ -140,7 +140,7 @@ class DZLFraction {
     }
 
     void Delete() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName)) {
             DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION + fileName);
         }
     }

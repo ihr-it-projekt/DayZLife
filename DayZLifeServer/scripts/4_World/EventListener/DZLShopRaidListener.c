@@ -19,31 +19,31 @@ class DZLShopRaidListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_START_ROB_MONEY_FROM_SHOP) {
+        if(rpc_type == DAY_Z_LIFE_START_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerStart = PlayerBase.Cast(target);
-            if (playerStart) {
+            if(playerStart) {
                 DZLCrimePosition positionStart = config.GetShopByPosition(playerStart.GetPosition());
-                if (positionStart) {
+                if(positionStart) {
                     StartRob(playerStart, positionStart);
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_PAY_ROB_MONEY_FROM_SHOP) {
+        } else if(rpc_type == DAY_Z_LIFE_PAY_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerGetMoney = PlayerBase.Cast(target);
 
-            if (moneyForRob == 0 && !robTimer) {
+            if(moneyForRob == 0 && !robTimer) {
                 DZLSendMessage(playerGetMoney.GetIdentity(), "#there_is_no_money_to_take");
                 return;
             }
 
-            if (playerGetMoney) {
+            if(playerGetMoney) {
                 DZLCrimePosition positionTake = config.GetShopByPosition(playerGetMoney.GetPosition());
-                if (positionTake.position == shopPosition.position) {
+                if(positionTake.position == shopPosition.position) {
                     DZLPlayer dzlPlayer = playerGetMoney.GetDZLPlayer();
                     dzlPlayer.AddMoneyToPlayer(moneyForRob);
                     shopPosition = null;
                     raider = null;
 
-                    if (robTimer) {
+                    if(robTimer) {
                         robTimer.Stop();
                         robTimer = null;
                     }
@@ -64,11 +64,11 @@ class DZLShopRaidListener {
     }
 
     void StartRob(PlayerBase player, DZLCrimePosition position) {
-        if (robTimer) {
+        if(robTimer) {
             DZLSendMessage(player.GetIdentity(), "#there_is_one_shop_robbery_run_at_the_moment");
             return;
         }
-        if (raider) {
+        if(raider) {
             DZLSendMessage(player.GetIdentity(), "#one_shop_is_already_robt_take_the_money_there");
             return;
         }
@@ -99,7 +99,7 @@ class DZLShopRaidListener {
     }
 
     void TickRob() {
-        if (!raider || raider.GetHealth() < 1 || raider.IsUnconscious() || raider.IsRestrained()) {
+        if(!raider || raider.GetHealth() < 1 || raider.IsUnconscious() || raider.IsRestrained()) {
             raider = null;
             robTimer.Stop();
             robTimer = null;
@@ -114,7 +114,7 @@ class DZLShopRaidListener {
         int factorForCopMessage = 0;
 
         string message = "";
-        if (moneyForRob >= config.maxMoneyPerRob) {
+        if(moneyForRob >= config.maxMoneyPerRob) {
             message = "#max_money_for_shop_rob_reached_take_fast_the_money";
             moneyForRob = config.maxMoneyPerRob;
             factorForCopMessage = 1;
@@ -123,7 +123,7 @@ class DZLShopRaidListener {
             DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
         }
 
-        if (robDuration >= config.maxRaidDurationInSeconds) {
+        if(robDuration >= config.maxRaidDurationInSeconds) {
             robDuration = config.maxRaidDurationInSeconds;
             message = "#max_money_for_shop_rob_reached_take_fast_the_money";
             factorForCopMessage = 1;
@@ -132,7 +132,7 @@ class DZLShopRaidListener {
             DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
         }
 
-        if (factorForCopMessage != 1) {
+        if(factorForCopMessage != 1) {
             float raidTimeDonePercent = robDuration / (config.maxRaidDurationInSeconds / 100);
             float raidMoneyDonePercent = moneyForRob / (config.maxMoneyPerRob / 100);
 
@@ -141,13 +141,13 @@ class DZLShopRaidListener {
 
         float randAlarm = Math.RandomFloatInclusive(factorForCopMessage, 1);
 
-        if (randAlarm >= config.copAlarmFactorForCopMessage && !policeMessageWasSend) {
+        if(randAlarm >= config.copAlarmFactorForCopMessage && !policeMessageWasSend) {
             DZLMessageListener.SendMessage(raider, "", "#shop_is_raided_by_sender " + raider.GetDZLPlayer().playerName, DZLMessage.TYPE_COP, shopPosition.position);
             policeMessageWasSend = true;
             message = message + " #police_was_informed_that_you_raid_the_shop";
         }
 
-        if (message != "") {
+        if(message != "") {
             DZLSendMessage(raider.GetIdentity(), message);
         }
     }
@@ -155,13 +155,13 @@ class DZLShopRaidListener {
     private int GetRaidCoolDownTime() {
         DZLDate currentDate = new DZLDate();
         int wait = 0;
-        if (lastRaidTime) {
+        if(lastRaidTime) {
             wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
 
             if(wait > 0) return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);
         }
 
-        if (lastRaidTime) {
+        if(lastRaidTime) {
             lastRaidTime = null;
             DZLDatabaseLayer.Get().GetCrimeData().SetLastRaidTime(null);
         }
@@ -170,7 +170,7 @@ class DZLShopRaidListener {
     }
 
     private bool IsBankRelevantAndOkay() {
-        if (!config.canStartRaidIfBankRaidRuns) {
+        if(!config.canStartRaidIfBankRaidRuns) {
             return !DZLDatabaseLayer.Get().GetBank().RaidRuns();
         }
         return true;

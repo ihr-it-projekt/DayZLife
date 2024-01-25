@@ -22,14 +22,14 @@ class DZLDatabase {
     }
 
     DZLPlayer GetPlayer(string playerId) {
-        if ("" == playerId) return null;
+        if("" == playerId) return null;
         DZLPlayer player;
-        if (!dzlPlayers.Find(playerId, player)) {
+        if(!dzlPlayers.Find(playerId, player)) {
             player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
             dzlPlayers.Insert(playerId, player);
         }
 
-        if (player.dayZPlayerId != playerId) {
+        if(player.dayZPlayerId != playerId) {
             LogMessageDZL("there are inconsistent in your player database: Please check file:" + player.fileName);
             player = new DZLPlayer(playerId, DZLConfig.Get().bankConfig.startCapital);
             dzlPlayers.Insert(playerId, player);
@@ -42,7 +42,7 @@ class DZLDatabase {
         GetPlayer(playerId);
 
         DZLPlayer player;
-        if (dzlPlayers.Find(playerId, player)) {
+        if(dzlPlayers.Find(playerId, player)) {
             dzlPlayers.Remove(playerId);
             DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + player.fileName);
         }

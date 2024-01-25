@@ -16,7 +16,7 @@ class DZLJobConfig {
     }
 
     DZLWorkZone FindZone(vector playerPosition) {
-        if (!playerPosition) {
+        if(!playerPosition) {
             return null;
         }
 

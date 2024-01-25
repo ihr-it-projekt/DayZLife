@@ -7,7 +7,7 @@ class DZLLicenceCollection {
 
     DZLLicence FindById(string id) {
         foreach(DZLLicence licence: collection) {
-            if (licence.GetId() == id) return licence;
+            if(licence.GetId() == id) return licence;
         }
 
         return null;
@@ -15,7 +15,7 @@ class DZLLicenceCollection {
 
     DZLLicence FindByName(string name) {
         foreach(DZLLicence licence: collection) {
-            if (licence.name == name) return licence;
+            if(licence.name == name) return licence;
         }
 
         return null;

@@ -1,4 +1,4 @@
-class DZLBaseActionObject :BuildingSuper {
+class DZLBaseActionObject : BuildingSuper {
     protected bool isBank = false;
     protected bool isTrader = false;
     protected bool isGarage = false;

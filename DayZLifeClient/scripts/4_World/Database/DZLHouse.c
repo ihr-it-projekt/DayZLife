@@ -15,13 +15,13 @@ class DZLHouse {
     private bool hasInventory = false;
 
     void DZLHouse(Building building = null, string fileName = "") {
-        if (building) {
+        if(building) {
             this.fileName = DZLHouse.GetFileNameFromBuilding(building);
         } else {
             this.fileName = fileName;
         }
 
-        if (!Load() && building) {
+        if(!Load() && building) {
             this.name = building.GetType();
             this.position = building.GetPosition();
             this.orientation = building.GetOrientation();
@@ -32,7 +32,7 @@ class DZLHouse {
             Save();
         }
 
-        if (!version) {
+        if(!version) {
             version = "1";
             hasInventory = false;
             ownerName = "";
@@ -100,8 +100,8 @@ class DZLHouse {
     }
 
     bool IsOwner(PlayerBase player) {
-        if (owner == player.GetPlayerId()) {
-            if (GetGame().IsServer()) {
+        if(owner == player.GetPlayerId()) {
+            if(GetGame().IsServer()) {
                 string playerName = player.GetIdentity().GetName();
 
                 if(ownerName != playerName) {
@@ -149,7 +149,7 @@ class DZLHouse {
 
     void RemovePlayerAccess(string ident) {
         int index = playerAccess.Find(ident);
-        if (index != -1) {
+        if(index != -1) {
             playerAccess.Remove(index);
             Save();
         }
@@ -182,13 +182,13 @@ class DZLHouse {
             bool notFound = true;
 
             foreach(DZLStorageTypeBought storageObject: storage) {
-                if (storageObject.relativePos == pos) {
+                if(storageObject.relativePos == pos) {
                     notFound = false;
                     break;
                 }
             }
 
-            if (notFound) {
+            if(notFound) {
                 return pos;
             }
         }
@@ -197,7 +197,7 @@ class DZLHouse {
 
     DZLStorageTypeBought FindStorageByPosition(vector position) {
         foreach(DZLStorageTypeBought storageObject: storage) {
-            if (storageObject.position == position) {
+            if(storageObject.position == position) {
                 return storageObject;
             }
         }
@@ -248,7 +248,7 @@ class DZLHouse {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName)) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName)) {
             JsonFileLoader<DZLHouse>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);
             return true;
         }
@@ -256,7 +256,7 @@ class DZLHouse {
     }
 
     private bool Save() {
-        if (GetGame().IsServer() && DZLConfig.Get().houseConfig.HasHouseDefinition(name)) {
+        if(GetGame().IsServer() && DZLConfig.Get().houseConfig.HasHouseDefinition(name)) {
             CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE);
             DZLJsonFileHandler<DZLHouse>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName, this);
             return true;

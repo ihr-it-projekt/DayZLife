@@ -8,25 +8,25 @@ class DZLPlayerHouseListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING) {
+        if(rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING) {
             GetGame().RPCSingleParam(target, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
-        } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS) {
+        } else if(rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS) {
             autoptr Param1<Building> paramGetKeyLists;
-            if (ctx.Read(paramGetKeyLists)) {
+            if(ctx.Read(paramGetKeyLists)) {
                 PlayerBase playerGetPlayerBuilding = PlayerBase.Cast(target);
-                if (playerGetPlayerBuilding) {
+                if(playerGetPlayerBuilding) {
                     SendUpdateList(playerGetPlayerBuilding, paramGetKeyLists.param1);
                 }
             }
-        } else if (rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE) {
+        } else if(rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE) {
             autoptr Param2<Building, ref array<DZLOnlinePlayer>> paramSaveKeyLists;
-            if (ctx.Read(paramSaveKeyLists)) {
+            if(ctx.Read(paramSaveKeyLists)) {
                 Building buildingUpdateKey = paramSaveKeyLists.param1;
                 DZLBuilding dzlBuilding = new DZLBuilding(buildingUpdateKey);
                 PlayerBase playerOwner = PlayerBase.Cast(target);
                 array<DZLOnlinePlayer> playersAccess = paramSaveKeyLists.param2;
 
-                if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
+                if(!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(playerOwner)) return;
 
                 array<string> playerMustUpdated = new array<string>;
 
@@ -50,7 +50,7 @@ class DZLPlayerHouseListener {
 
                 foreach(Man onlinePlayer: onlinePlayers) {
                     PlayerIdentity playerIdent = onlinePlayer.GetIdentity();
-                    if (-1 != playerMustUpdated.Find(playerIdent.GetId())) {
+                    if(-1 != playerMustUpdated.Find(playerIdent.GetId())) {
                         GetGame().RPCSingleParam(onlinePlayer, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(playerIdent.GetId())), true, playerIdent);
                     }
                 }
@@ -60,41 +60,41 @@ class DZLPlayerHouseListener {
                 SendUpdateList(playerOwner, buildingUpdateKey);
                 DZLSendMessage(sender, "#keys_was_updated");
             }
-        } else if (rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA) {
+        } else if(rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA) {
             autoptr Param2<string, vector> paramInventory;
-            if (ctx.Read(paramInventory)) {
+            if(ctx.Read(paramInventory)) {
                 string fileName = DZLHouse.GetFileNameByPosition(paramInventory.param2);
                 DZLHouse houseInventory = DZLDatabaseLayer.Get().GetHouse(null, fileName);
-                if (!houseInventory || !houseInventory.HasInventory()) return;
+                if(!houseInventory || !houseInventory.HasInventory()) return;
 
                 DZLHouseInventory inventoryGet = DZLDatabaseLayer.Get().GetHouseInventory(paramInventory.param1, paramInventory.param2);
 
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventoryGet), true, sender);
             }
-        } else if (rpc_type == DAY_Z_LIFE_HOUSE_STORE_ITEMS) {
+        } else if(rpc_type == DAY_Z_LIFE_HOUSE_STORE_ITEMS) {
             autoptr Param4<string, vector, ref array<string>, ref array<EntityAI>> paramStoreInventory;
-            if (ctx.Read(paramStoreInventory)) {
+            if(ctx.Read(paramStoreInventory)) {
                 array<string> storeOutItems = paramStoreInventory.param3;
                 array<EntityAI> storeInItems = paramStoreInventory.param4;
                 PlayerBase playerStore = PlayerBase.Cast(target);
 
-                if (!playerStore) return;
+                if(!playerStore) return;
                 DZLHouse houseStore = DZLDatabaseLayer.Get().GetHouse(null, DZLHouse.GetFileNameByPosition(paramStoreInventory.param2));
 
-                if (!houseStore || !houseStore.HasInventory()) return;
+                if(!houseStore || !houseStore.HasInventory()) return;
                 DZLHouseInventory inventory = DZLDatabaseLayer.Get().GetHouseInventory(paramStoreInventory.param1, paramStoreInventory.param2);
 
-                if (!inventory) return;
+                if(!inventory) return;
 
                 foreach(string itemId: storeOutItems) {
                     DZLStoreItem storeOutItem = inventory.GetById(itemId);
-                    if (!storeOutItem) continue;
+                    if(!storeOutItem) continue;
 
                     DZLSpawnHelper.Add(playerStore, storeOutItem);
                     inventory.Remove(storeOutItem);
                 }
 
-                if (storeInItems.Count() > 0 && inventory.CanAddToStore(storeInItems)) {
+                if(storeInItems.Count() > 0 && inventory.CanAddToStore(storeInItems)) {
                     inventory.AddToStore(storeInItems);
                 }
 
@@ -106,7 +106,7 @@ class DZLPlayerHouseListener {
     void SendUpdateList(PlayerBase player, Building building) {
         DZLBuilding dzlBuilding = new DZLBuilding(building);
 
-        if (!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(player)) return;
+        if(!dzlBuilding.HasOwner() || !dzlBuilding.IsOwner(player)) return;
 
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
@@ -114,7 +114,7 @@ class DZLPlayerHouseListener {
 
         array <string> accessPlayer = dzlBuilding.GetPlayerAccess();
 
-        string playerIdent =  player.GetPlayerId();
+        string playerIdent = player.GetPlayerId();
 
         accessPlayer.Insert(playerIdent);
 
@@ -123,7 +123,7 @@ class DZLPlayerHouseListener {
         array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
         foreach(string ident: allPlayer) {
             DZLPlayer _player = DZLDatabaseLayer.Get().GetPlayer(ident);
-            if (dzlBuilding.HasPlayerAccess(ident) && ident != playerIdent) {
+            if(dzlBuilding.HasPlayerAccess(ident) && ident != playerIdent) {
                 collection.Insert(new DZLOnlinePlayer(ident, _player.playerName, ""));
             }
         }

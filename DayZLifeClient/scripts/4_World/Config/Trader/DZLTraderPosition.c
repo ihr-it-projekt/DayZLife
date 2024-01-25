@@ -13,7 +13,7 @@ class DZLTraderPosition: DZLLicencePosition {
     }
 
     bool CanOpenWithJob(string job) {
-        if (forJob != "") {
+        if(forJob != "") {
             return job == forJob;
         }
 

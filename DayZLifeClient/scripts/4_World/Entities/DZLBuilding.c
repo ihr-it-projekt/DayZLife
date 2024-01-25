@@ -26,7 +26,7 @@ class DZLBuilding {
     void SellOnServer(PlayerBase player) {
         if(!GetGame().IsClient()) {
             house.RemoveOwner();
-            if (house.HasInventory()) {
+            if(house.HasInventory()) {
                 DZLDatabaseLayer.Get().RemoveHouseInventory(house.GetOwner(), house.GetPosition());
             }
             house.DisableInventory();
@@ -57,9 +57,9 @@ class DZLBuilding {
     }
 
     bool CanBuyAlarm(DZLHouseExtension alarm) {
-        if (house.HasAlarmSystem() && alarm.level == house.GetHouseAlarm().level + 1) {
+        if(house.HasAlarmSystem() && alarm.level == house.GetHouseAlarm().level + 1) {
             return true;
-        } else if (!house.HasAlarmSystem() && alarm.level == 1) {
+        } else if(!house.HasAlarmSystem() && alarm.level == 1) {
             return true;
         }
 
@@ -67,10 +67,10 @@ class DZLBuilding {
     }
 
     bool CanBuyInventoryExtensionServer(DZLHouseDefinition config) {
-        if (house.HasInventory()) {
-            if (GetGame().IsServer()) {
+        if(house.HasInventory()) {
+            if(GetGame().IsServer()) {
                 DZLHouseInventory inventory = DZLDatabaseLayer.Get().GetHouseInventory(house.GetOwner(), house.GetPosition());
-                if (inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
+                if(inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
                     return false;
                 }
             }
@@ -79,9 +79,9 @@ class DZLBuilding {
     }
 
     bool CanBuyInventoryExtensionClient(DZLHouseDefinition config, DZLHouseInventory inventory) {
-        if (house.HasInventory()) {
-            if (GetGame().IsClient()) {
-                if (inventory && inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
+        if(house.HasInventory()) {
+            if(GetGame().IsClient()) {
+                if(inventory && inventory.GetLevel(config.inventoryItemsPerLevel) >= config.maxHouseInventoryLevel) {
                     return false;
                 }
             }

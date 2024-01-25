@@ -3,7 +3,7 @@ class DZLTraderCategoryCollection {
     ref array<ref DZLTraderCategory> categories;
 
     void DZLTraderCategoryCollection() {
-        if (!Load()) {
+        if(!Load()) {
             categories = new array<ref DZLTraderCategory>;
             array<ref DZLTraderType> items = new array<ref DZLTraderType>;
 
@@ -274,7 +274,7 @@ class DZLTraderCategoryCollection {
             array<string> ids = new array<string>;
             foreach(DZLTraderCategory category: categories) {
                 foreach(DZLTraderType _items: category.items) {
-                    if (!_items.HasCorrectId()) {
+                    if(!_items.HasCorrectId()) {
                         _items.SetId();
                         mustSave = true;
                     }
@@ -288,24 +288,24 @@ class DZLTraderCategoryCollection {
                 }
             }
 
-            if (version == "") {
+            if(version == "") {
                 version = "1";
                 mustSave = true;
             }
 
-            if (version == "1") {
+            if(version == "1") {
                 version = "2";
                 mustSave = true;
             }
 
-            if (mustSave) {
+            if(mustSave) {
                 Save();
             }
         }
 
         foreach(DZLTraderCategory cat: categories) {
             foreach(DZLTraderType item: cat.items) {
-                if (item.isStorageItem) {
+                if(item.isStorageItem) {
                     DZLDatabaseLayer.Get().GetTraderStorage().Insert(item);
                 }
             }
@@ -314,7 +314,7 @@ class DZLTraderCategoryCollection {
 
     DZLTraderCategory GetCatByName(string name) {
         foreach(DZLTraderCategory cat: categories) {
-            if (cat.name == name) {
+            if(cat.name == name) {
                 return cat;
             }
         }
@@ -323,7 +323,7 @@ class DZLTraderCategoryCollection {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderCategories.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderCategories.json")) {
             JsonFileLoader<DZLTraderCategoryCollection>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderCategories.json", this);
             return true;
         }
@@ -331,7 +331,7 @@ class DZLTraderCategoryCollection {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLTraderCategoryCollection>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderCategories.json", this);
         }

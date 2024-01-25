@@ -24,13 +24,13 @@ class DZLTraderType: DZLIdModel {
     }
 
     int CalculateDynamicSellPrice(DZLTraderTypeStorage currentStorage, EntityAI item = null) {
-        if (false == isStorageItem || sellPrice <= 0 || !currentStorage) {
+        if(false == isStorageItem || sellPrice <= 0 || !currentStorage) {
             return sellPrice;
         }
 
         int maxAmountThatCanSell = maxStorage - currentStorage.getStorage();
 
-        if (maxAmountThatCanSell <= 0) {
+        if(maxAmountThatCanSell <= 0) {
             return 0;
         }
 
@@ -38,17 +38,17 @@ class DZLTraderType: DZLIdModel {
         float storageInPercent = storageLeft / maxStorage;
         float priceSpan = maxSellPrice - sellPrice;
 
-        return  Math.Round(priceSpan * storageInPercent + sellPrice);
+        return Math.Round(priceSpan * storageInPercent + sellPrice);
     }
 
     int CalculateDynamicBuyPrice(DZLTraderTypeStorage currentStorage) {
-        if (false == isStorageItem || buyPrice <= 0 || !currentStorage) {
+        if(false == isStorageItem || buyPrice <= 0 || !currentStorage) {
             return buyPrice;
         }
 
         int price = 0;
 
-        if (currentStorage.getStorage() > 0) {
+        if(currentStorage.getStorage() > 0) {
             float storageInPercent = (maxStorage - currentStorage.getStorage() - 1) / maxStorage;
             float priceSpan = maxBuyPrice - buyPrice;
             price = priceSpan * storageInPercent + buyPrice;
@@ -59,7 +59,7 @@ class DZLTraderType: DZLIdModel {
 
     string GetStorageString(DZLTraderTypeStorage currentStorage) {
         string storage = "#unlimited";
-        if (isStorageItem && currentStorage) {
+        if(isStorageItem && currentStorage) {
             storage = currentStorage.getStorage().ToString() + "/" + maxStorage.ToString();
         }
 

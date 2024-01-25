@@ -11,19 +11,19 @@ class DZLBankListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA) {
+        if(rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA) {
             autoptr Param2<int, bool> paramDeposit;
             string message = "";
-            if (ctx.Read(paramDeposit)) {
+            if(ctx.Read(paramDeposit)) {
                 DZLPlayer dzlPlayer = PlayerBase.Cast(target).GetDZLPlayer();
                 DZLBank bank = DZLDatabaseLayer.Get().GetBank();
                 message = "#error_not_enough_money_to_transfer";
-                if (!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
+                if(!bank.CanUseBank(config.raidCoolDownTimeInSeconds)) {
                     message = "#bank_can_not_be_used_in_moment";
                 } else if(!paramDeposit.param2) {
                     bool canSendMoney = paramDeposit.param1 >= dzlPlayer.GetMoney();
                     bool canTakeMoney = paramDeposit.param1 <= dzlPlayer.GetBankMoney();
-                    if (canTakeMoney || canSendMoney) {
+                    if(canTakeMoney || canSendMoney) {
                         bank.AddMoney(paramDeposit.param1 * -1);
                         dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
                         dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param1 * -1);
@@ -36,7 +36,7 @@ class DZLBankListener {
                     bool canSendMoneyToFraction = dzlPlayer.HasFractionRightCanAccessBankAccount() && paramDeposit.param1 <= dzlPlayer.GetMoney();
                     bool canTakeMoneyToFraction = dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && paramDeposit.param1 <= dzlPlayer.GetFraction().GetBankAccount();
 
-                    if (canTakeMoneyToFraction || canSendMoneyToFraction) {
+                    if(canTakeMoneyToFraction || canSendMoneyToFraction) {
                         bank.AddMoney(paramDeposit.param1 * -1);
                         dzlPlayer.AddMoneyToPlayer(paramDeposit.param1);
                         dzlPlayer.GetFraction().AddMoney(paramDeposit.param1 * -1);
@@ -49,10 +49,10 @@ class DZLBankListener {
 
                 DZLSendMessage(sender, message);
             }
-        } else if (rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER) {
+        } else if(rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER) {
             autoptr Param3<DZLPlayerBankInfo, int, bool> paramDepositPlayer;
             string messageDeposit = "";
-            if (ctx.Read(paramDepositPlayer)) {
+            if(ctx.Read(paramDepositPlayer)) {
                 DZLPlayer dzlPlayerSender = PlayerBase.Cast(target).GetDZLPlayer();
                 DZLPlayer dzlPlayerReceiver = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayer.param1.id);
 
@@ -61,30 +61,30 @@ class DZLBankListener {
 
                 Man playerFound;
                 foreach(Man player: allPlayers) {
-                    if (player.GetIdentity().GetId() == paramDepositPlayer.param1.id) {
+                    if(player.GetIdentity().GetId() == paramDepositPlayer.param1.id) {
                         playerFound = player;
                         break;
                     }
                 }
 
-                if (!playerFound) {
+                if(!playerFound) {
                     messageDeposit = "#reciver_for_deposit_is_not_longer_online";
                 }
 
                 DZLBank bankTransfer = DZLDatabaseLayer.Get().GetBank();
-                if (!bankTransfer.CanUseBank(config.raidCoolDownTimeInSeconds)) {
+                if(!bankTransfer.CanUseBank(config.raidCoolDownTimeInSeconds)) {
                     messageDeposit = "#bank_can_not_be_used_in_moment";
-                } else if ("" == messageDeposit) {
+                } else if("" == messageDeposit) {
                     int money = dzlPlayerSender.GetAllMoney();
                     bool isFractionTransaction = false;
 
-                    if (paramDepositPlayer.param3 && dzlPlayerSender.HasFractionRightCanGetMoneyFromBankAccount()) {
+                    if(paramDepositPlayer.param3 && dzlPlayerSender.HasFractionRightCanGetMoneyFromBankAccount()) {
                         money = dzlPlayerSender.GetFraction().GetBankAccount();
                         isFractionTransaction = true;
                     }
 
                     if(money >= paramDepositPlayer.param2) {
-                        if (isFractionTransaction) {
+                        if(isFractionTransaction) {
                             dzlPlayerSender.GetFraction().DepositMoneyFromFractionToOtherPlayer(dzlPlayerReceiver, paramDepositPlayer.param2);
                         } else {
                             int moneyBankAdd = dzlPlayerSender.DepositMoneyToOtherPlayer(dzlPlayerReceiver, paramDepositPlayer.param2);
@@ -102,10 +102,10 @@ class DZLBankListener {
                 }
                 GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE, new Param3<ref DZLPlayer, ref DZLBank, string>(dzlPlayerSender, bankTransfer, messageDeposit), true, sender);
             }
-        } else if (rpc_type == DAY_Z_LIFE_MONEY_TRANSFER) {
+        } else if(rpc_type == DAY_Z_LIFE_MONEY_TRANSFER) {
             autoptr Param2<PlayerBase, int> paramDepositPlayerPlayer;
             string messageDepositPP = "";
-            if (ctx.Read(paramDepositPlayerPlayer)) {
+            if(ctx.Read(paramDepositPlayerPlayer)) {
                 PlayerBase moneyGiverPlayer = PlayerBase.Cast(target);
                 PlayerBase moneyReceiverPlayer = paramDepositPlayerPlayer.param1;
                 DZLPlayer dzlPlayerSenderPP = moneyGiverPlayer.GetDZLPlayer();
@@ -121,15 +121,15 @@ class DZLBankListener {
                 }
                 DZLSendMessage(sender, messageDepositPP);
             }
-        } else if (rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
+        } else if(rpc_type == DAY_Z_LIFE_PLAYER_BANK_DATA) {
             GetGame().RPCSingleParam(PlayerBase.Cast(target), DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(DZLDatabaseLayer.Get().GetBank()), true, sender);
-        } else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA) {
+        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA) {
             array<Man> _players = new array<Man>;
             GetGame().GetPlayers(_players);
 
             array<ref DZLPlayerBankInfo> collection = new array<ref DZLPlayerBankInfo>;
 
-            if (_players) {
+            if(_players) {
                 foreach(Man _player: _players) {
                     collection.Insert(new DZLPlayerBankInfo(_player.GetIdentity().GetId(), _player.GetIdentity().GetName()));
                 }

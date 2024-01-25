@@ -9,14 +9,14 @@ class DZLMessageDB {
     private ref array<ref DZLOnlinePlayer> contacts;
 
     static DZLMessageDB Get() {
-        if (!messageDB) {
+        if(!messageDB) {
             messageDB = new DZLMessageDB;
         }
         return messageDB;
     }
 
     void DZLMessageDB() {
-        if (!Load()) {
+        if(!Load()) {
             version = "1";
             ids = new array<string>;
             contacts = new array<ref DZLOnlinePlayer>;
@@ -26,7 +26,7 @@ class DZLMessageDB {
             Save();
         }
 
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             Save();
         }
@@ -60,7 +60,7 @@ class DZLMessageDB {
     }
 
     void RemoveMessage(DZLMessage message) {
-        if (message) {
+        if(message) {
             message.Delete();
             ids.RemoveItem(message.GetId());
             messageMap.RemoveItem(message);
@@ -69,7 +69,7 @@ class DZLMessageDB {
     }
 
     void RemoveAnswer(DZLMessage message) {
-        if (message) {
+        if(message) {
             message.Delete();
             answerIds.RemoveItem(message.GetId());
             answersMap.RemoveItem(message);
@@ -89,7 +89,7 @@ class DZLMessageDB {
 
     bool HasContact(DZLOnlinePlayer player) {
         foreach(DZLOnlinePlayer onlinePlayer: contacts) {
-            if (onlinePlayer.id == player.id) return true;
+            if(onlinePlayer.id == player.id) return true;
         }
         return false;
     }
@@ -103,7 +103,7 @@ class DZLMessageDB {
     }
 
     private bool Load() {
-        if (GetGame().IsClient() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
+        if(GetGame().IsClient() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
             JsonFileLoader<DZLMessageDB>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             return true;
         }
@@ -111,7 +111,7 @@ class DZLMessageDB {
     }
 
     private bool Save() {
-        if (GetGame().IsClient()) {
+        if(GetGame().IsClient()) {
             ref array<ref DZLMessage> messageMapTemp = messageMap;
             ref array<ref DZLMessage> answerMapTemp = answersMap;
             messageMap = null;

@@ -6,13 +6,13 @@ class DZLJobSpawnPoints {
 
     void DZLJobSpawnPoints(string jobId) {
         this.jobId = jobId;
-        if (!Load()) {
+        if(!Load()) {
             spawnPoints = new array<ref DZLSpawnPoint>;
             DZLSpawnPoint point
             array<string> items = new array<string>;
 
-            if (DAY_Z_LIFE_DEBUG) {
-                if (jobId == DAY_Z_LIFE_JOB_COP) {
+            if(DAY_Z_LIFE_DEBUG) {
+                if(jobId == DAY_Z_LIFE_JOB_COP) {
                     items.Insert("PoliceVest");
                     items.Insert("PoliceJacket");
                     items.Insert("PolicePants");
@@ -21,7 +21,7 @@ class DZLJobSpawnPoints {
                     items.Insert("TelescopicBaton");
                     point = new DZLSpawnPoint("Cop", "4620 340 10350", "0 0 0", items);
                     spawnPoints.Insert(point);
-                } else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
+                } else if(jobId == DAY_Z_LIFE_JOB_MEDIC) {
                     items.Insert("KitchenKnife");
                     point = new DZLSpawnPoint("Sanitäter1", "4620 340 10370", "0 0 0", items);
                     spawnPoints.Insert(point);
@@ -41,7 +41,7 @@ class DZLJobSpawnPoints {
                     spawnPoints.Insert(point);
                 }
             } else {
-                if (jobId == DAY_Z_LIFE_JOB_COP) {
+                if(jobId == DAY_Z_LIFE_JOB_COP) {
                     items.Insert("PoliceVest");
                     items.Insert("PoliceJacket");
                     items.Insert("PolicePants");
@@ -241,7 +241,7 @@ class DZLJobSpawnPoints {
                     point = new DZLSpawnPoint("Police Outpost Krasnostav", "11060.768555 231.467606 12488.763672", "-95.663597 0 0", items);
                     spawnPoints.Insert(point);
 
-                } else if (jobId == DAY_Z_LIFE_JOB_MEDIC) {
+                } else if(jobId == DAY_Z_LIFE_JOB_MEDIC) {
                     items.Insert("ParamedicJacket_Green");
                     items.Insert("ParamedicPants_Green");
                     items.Insert("Sneakers_White");
@@ -615,7 +615,7 @@ class DZLJobSpawnPoints {
                     items.Insert("SurgicalMask");
                     point = new DZLSpawnPoint("Medic Station Zelenogorsk", "2746.510742 200.855423 5172.751953", "132.636261 0 0", items);
                     spawnPoints.Insert(point);
-                } else if (jobId == DAY_Z_LIFE_JOB_ARMY) {
+                } else if(jobId == DAY_Z_LIFE_JOB_ARMY) {
                     items = new array<string>;
                     items.Insert("BDUPants");
                     items.Insert("BDUJacket");
@@ -734,7 +734,7 @@ class DZLJobSpawnPoints {
             Save();
         }
 
-        if (version == "1") {
+        if(version == "1") {
             version = "2";
             blockTimeForJobChange = 3600;
             Save();
@@ -744,7 +744,7 @@ class DZLJobSpawnPoints {
 
     DZLSpawnPoint FindSpawnById(string id) {
         foreach(DZLSpawnPoint spawnPoint: spawnPoints) {
-            if (id == spawnPoint.GetId()) {
+            if(id == spawnPoint.GetId()) {
                 return spawnPoint;
             }
         }
@@ -754,7 +754,7 @@ class DZLJobSpawnPoints {
 
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json")) {
             JsonFileLoader<DZLJobSpawnPoints>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
             return true;
         }
@@ -762,7 +762,7 @@ class DZLJobSpawnPoints {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLJobSpawnPoints>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
         }

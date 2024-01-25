@@ -7,7 +7,7 @@ class DZLPayCheck {
         amount = payCheck.amount;
         onlineTime = payCheck.onlineMinutesForPay;
 
-        if (amount > 0) {
+        if(amount > 0) {
             dzlPlayer.UpdateOnlineTime();
             if(dzlPlayer.GetActiveOnlineTime() >= onlineTime) {
                 dzlPlayer.ResetOnlineTime();

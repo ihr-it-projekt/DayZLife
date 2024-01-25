@@ -1,6 +1,6 @@
 modded class ModItemRegisterCallbacks {
     override void RegisterFireArms(DayZPlayerType pType, DayzPlayerItemBehaviorCfg pBehavior) {
-        super.RegisterFireArms( pType, pBehavior );
+        super.RegisterFireArms(pType, pBehavior);
         pType.AddItemInHandsProfileIK("DZL_W_AK74", "dz/anims/workspaces/player/player_main/weapons/player_main_akm.asi", pBehavior, "dz/anims/anm/player/ik/weapons/akm.anm", "dz/anims/anm/player/reloads/AKM/w_akm_states.anm");
         pType.AddItemInHandsProfileIK("DZL_W_AKS74U", "dz/anims/workspaces/player/player_main/weapons/player_main_akm.asi", pBehavior, "dz/anims/anm/player/ik/weapons/akm.anm", "dz/anims/anm/player/reloads/AKM/w_akm_states.anm");
         pType.AddItemInHandsProfileIK("DZL_W_AK101", "dz/anims/workspaces/player/player_main/weapons/player_main_akm.asi", pBehavior, "dz/anims/anm/player/ik/weapons/akm.anm", "dz/anims/anm/player/reloads/AKM/w_akm_states.anm");

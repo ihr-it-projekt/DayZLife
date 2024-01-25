@@ -48,7 +48,7 @@ class DZLTuningConfig {
 
     array<ref DZLCarTuneConfig> GetTargetCarsForCar(string orgType) {
         foreach(DZLTuneOption option: options) {
-            if (orgType.Contains(option.car)) {
+            if(orgType.Contains(option.car)) {
                 return option.targetCars;
             }
         }
@@ -58,7 +58,7 @@ class DZLTuningConfig {
     DZLCarTuneConfig GetOptionByType(string searchedType) {
         foreach(DZLTuneOption option: options) {
             foreach(DZLCarTuneConfig targetConfig: option.targetCars) {
-                if (targetConfig.type == searchedType) {
+                if(targetConfig.type == searchedType) {
                     return targetConfig;
                 }
             }
@@ -67,7 +67,7 @@ class DZLTuningConfig {
     }
 
     private bool Load() {
-        if (GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json")) {
+        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json")) {
             JsonFileLoader<DZLTuningConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json", this);
             return true;
         }
@@ -75,7 +75,7 @@ class DZLTuningConfig {
     }
 
     private void Save() {
-        if (GetGame().IsServer()) {
+        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLTuningConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json", this);
         }
