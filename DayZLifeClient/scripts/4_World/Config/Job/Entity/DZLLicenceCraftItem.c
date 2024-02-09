@@ -2,7 +2,7 @@ class DZLLicenceCraftItem {
     string type;
     int quantity;
     int health;
-
+    [NonSerialized()] string lower;
 
     void DZLLicenceCraftItem(string type, int quantity, int health) {
         this.type = type;
@@ -11,7 +11,8 @@ class DZLLicenceCraftItem {
     }
 
     string GetLowerCaseType() {
-        string lower = type;
+        if(lower) return lower;
+        lower = type;
         lower.ToLower();
 
         return lower;

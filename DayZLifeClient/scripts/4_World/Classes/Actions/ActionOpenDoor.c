@@ -17,14 +17,12 @@ modded class ActionOpenDoors {
                     DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
 
 #ifdef TBRealEstateClient
-                    if(!super.ActionCondition(player, target, item)) return false;
+                    if(!canOpenByJob && !super.ActionCondition(player, target, item)) return false;
 #endif
 
                     if(!dzlHouse) return false;
 
-#ifndef TBRealEstateClient
                     if(!dzlHouse.IsDoorLooked(doorIndex)) return true;
-#endif
 
                     if((DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop()) || (DZLConfig.Get().adminIds.CanManageArmy(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsArmy())) {
                         return true;
