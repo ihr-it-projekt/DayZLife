@@ -37,6 +37,11 @@ class DZLCanDoDoorAction {
             jobFromHouse = DAY_Z_LIFE_JOB_MEDIC;
         }
 
+        #ifdef TBRealEstateClient
+            BuildingBase buildingBase = BuildingBase.Cast(building);
+            if (buildingBase.TBREIsBuildingActiveSellBuilding()) return false;
+        #endif
+
         return (definition && job == jobFromHouse) || !definition;
     }
 
