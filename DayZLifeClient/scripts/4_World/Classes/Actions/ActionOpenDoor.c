@@ -31,7 +31,6 @@ modded class ActionOpenDoors {
                     return false;
                 }
 
-
                 return canOpenByJob && !building.IsDoorOpen(doorIndex) && !building.IsDoorLocked(doorIndex));
             }
         }

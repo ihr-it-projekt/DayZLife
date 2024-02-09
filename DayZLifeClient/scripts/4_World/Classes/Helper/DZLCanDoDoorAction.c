@@ -37,7 +37,7 @@ class DZLCanDoDoorAction {
             jobFromHouse = DAY_Z_LIFE_JOB_MEDIC;
         }
 
-        return (definition && job == jobFromHouse) || !definition;
+        return definition && job == jobFromHouse;
     }
 
 
