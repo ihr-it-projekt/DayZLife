@@ -37,12 +37,12 @@ class DZLCanDoDoorAction {
             jobFromHouse = DAY_Z_LIFE_JOB_MEDIC;
         }
 
-        #ifdef TBRealEstateClient
-            BuildingBase buildingBase = BuildingBase.Cast(building);
-            if (buildingBase.TBREIsBuildingActiveSellBuilding()) {
-                if(buildingBase.TBREIsDoorLooked(doorIndex)) return false;
-            }
-        #endif
+#ifdef TBRealEstateClient
+        BuildingBase buildingBase = BuildingBase.Cast(building);
+        if(buildingBase.TBREIsBuildingActiveSellBuilding()) {
+            if(buildingBase.TBREIsDoorLooked(doorIndex)) return false;
+        }
+#endif
 
         return (definition && job == jobFromHouse) || !definition;
     }
