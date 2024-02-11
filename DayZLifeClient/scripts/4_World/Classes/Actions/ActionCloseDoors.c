@@ -5,7 +5,8 @@ modded class ActionCloseDoors {
         Building building = Building.Cast(target.GetObject());
 
         if(building && canClose) {
-            canClose = DZLCanDoDoorAction.canDoByJob(building, player);
+			int doorIndex = building.GetDoorIndex(target.GetComponentIndex());			
+            canClose = DZLCanDoDoorAction.canDoByJob(building, player, doorIndex);
         }
 
         return canClose;

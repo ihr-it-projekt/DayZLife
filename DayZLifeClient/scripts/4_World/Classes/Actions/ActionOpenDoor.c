@@ -11,7 +11,7 @@ modded class ActionOpenDoors {
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 if(!player.GetConfig()) return false;
 
-                bool canOpenByJob = DZLCanDoDoorAction.canDoByJob(building, player);
+                bool canOpenByJob = DZLCanDoDoorAction.canDoByJob(building, player, doorIndex);
 
                 if(GetGame().IsServer()) {
                     DZLHouse dzlHouse = DZLBuildingHelper.ActionTargetToDZLHouse(target);
