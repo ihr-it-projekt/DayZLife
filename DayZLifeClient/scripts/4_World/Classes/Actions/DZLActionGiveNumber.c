@@ -19,7 +19,7 @@ class DZLActionGiveNumber: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-        if(!targetPlayer && !targetPlayer.GetDZLPlayer()) return;
+        if(!targetPlayer && !targetPlayer.GetDZLPlayer() || !player.GetIdentity()) return;
 
         DZLPlayer dzlTargetPlayer = targetPlayer.GetDZLPlayer();
 
