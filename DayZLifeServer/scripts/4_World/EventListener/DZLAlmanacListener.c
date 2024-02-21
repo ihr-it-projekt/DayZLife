@@ -149,6 +149,30 @@ class DZLAlmanacListener {
 
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
     }
+	
+	void SendUpdateListTransport(PlayerBase player) {
+        if(!config.adminIds.CanManageTransport(player.GetPlayerId())) return;
+
+        array<Man> _players = new array<Man>;
+        GetGame().GetPlayers(_players);
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
+        array<ref DZLOnlinePlayer> transportIdents = dzlPlayerIdentities.GetTransportPlayerCollection();
+
+        if(_players) {
+            foreach(Man _player: _players) {
+                string ident = _player.GetIdentity().GetId();
+                DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
+
+                if(!dzlPlayer.IsTransport()) {
+                    collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRank(DAY_Z_LIFE_JOB_TRANSPORT)));
+                }
+            }
+        }
+
+        GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, transportIdents), true, player.GetIdentity());
+    }
 
     void SendUpdateListMedic(PlayerBase player) {
         if(!config.adminIds.CanManageMedic(player.GetPlayerId())) return;

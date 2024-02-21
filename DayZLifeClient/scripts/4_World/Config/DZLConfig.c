@@ -16,12 +16,14 @@ class DZLConfig {
     ref DZLLicenceConfig licenceConfig;
     ref DZLTraderConfig traderConfig;
     ref DZLJobSpawnPoints copSpawnPoints;
+    ref DZLJobSpawnPoints transportSpawnPoints;
     ref DZLJobSpawnPoints medicSpawnPoints;
     ref DZLJobSpawnPoints armySpawnPoints;
     ref DZLJobSpawnPoints civilSpawnPoints;
     ref array<string> jobIds;
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
+    ref DZLCarConfig transportConfig;
     ref DZLMedicConfig medicConfig;
     ref DZLBaseBuildingConfig baseBuildingConfig;
     ref DZLCrimeConfig crimeConfig;
@@ -37,6 +39,7 @@ class DZLConfig {
             licenceConfig = new DZLLicenceConfig;
             traderConfig = new DZLTraderConfig;
             copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
+            transportSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_TRANSPORT);
             medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
             civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
             armySpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_ARMY);
@@ -51,17 +54,29 @@ class DZLConfig {
 
         jobIds = new array<string>;
         jobIds.Insert(DAY_Z_LIFE_JOB_CIVIL);
+        jobIds.Insert(DAY_Z_LIFE_JOB_TRANSPORT);
         jobIds.Insert(DAY_Z_LIFE_JOB_MEDIC);
         jobIds.Insert(DAY_Z_LIFE_JOB_COP);
         jobIds.Insert(DAY_Z_LIFE_JOB_ARMY);
     }
 
-    DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
-        if(searchJobId == DAY_Z_LIFE_JOB_COP) {
+    DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId)
+	{
+        if (searchJobId == DAY_Z_LIFE_JOB_COP)
+		{
             return copSpawnPoints;
-        } else if(searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
+        }
+		else if (searchJobId == DAY_Z_LIFE_JOB_MEDIC)
+		{
             return medicSpawnPoints;
-        } else if(searchJobId == DAY_Z_LIFE_JOB_ARMY) {
+        }
+		
+		else if (searchJobId == DAY_Z_LIFE_JOB_TRANSPORT)
+		{
+            return transportSpawnPoints;
+        }
+		else if (searchJobId == DAY_Z_LIFE_JOB_ARMY)
+		{
             return armySpawnPoints;
         }
 

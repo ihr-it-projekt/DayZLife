@@ -9,4 +9,4 @@ class DZLTicket: DZLIdModel {
         creationDate = new DZLDate;
         SetId();
     }
-}
+};

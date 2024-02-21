@@ -6,13 +6,15 @@ class DZLJobSpawnPoints {
 
     void DZLJobSpawnPoints(string jobId) {
         this.jobId = jobId;
-        if(!Load()) {
+        if (!Load()) {
             spawnPoints = new array<ref DZLSpawnPoint>;
             DZLSpawnPoint point
             array<string> items = new array<string>;
 
-            if(DAY_Z_LIFE_DEBUG) {
-                if(jobId == DAY_Z_LIFE_JOB_COP) {
+            if (DAY_Z_LIFE_DEBUG)
+			{
+                if (jobId == DAY_Z_LIFE_JOB_COP)
+				{
                     items.Insert("PoliceVest");
                     items.Insert("PoliceJacket");
                     items.Insert("PolicePants");
@@ -21,7 +23,9 @@ class DZLJobSpawnPoints {
                     items.Insert("TelescopicBaton");
                     point = new DZLSpawnPoint("Cop", "4620 340 10350", "0 0 0", items);
                     spawnPoints.Insert(point);
-                } else if(jobId == DAY_Z_LIFE_JOB_MEDIC) {
+                }
+				else if (jobId == DAY_Z_LIFE_JOB_MEDIC)
+				{
                     items.Insert("KitchenKnife");
                     point = new DZLSpawnPoint("Sanitäter1", "4620 340 10370", "0 0 0", items);
                     spawnPoints.Insert(point);
@@ -30,7 +34,20 @@ class DZLJobSpawnPoints {
                     items.Insert("SteakKnife");
                     point = new DZLSpawnPoint("Sanitäter2", "4620 340 10390", "0 0 0", items);
                     spawnPoints.Insert(point);
-                } else {
+                }
+				else if (jobId == DAY_Z_LIFE_JOB_TRANSPORT)
+				{
+                    items.Insert("KitchenKnife");
+                    point = new DZLSpawnPoint("Transporter1", "4620 340 10370", "0 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("SteakKnife");
+                    point = new DZLSpawnPoint("Transporter2", "4620 340 10390", "0 0 0", items);
+                    spawnPoints.Insert(point);
+                }
+				else
+				{
                     items.Insert("Pickaxe");
                     point = new DZLSpawnPoint("Civil1", "4620 340 10310", "0 0 0", items);
                     spawnPoints.Insert(point);
@@ -40,8 +57,11 @@ class DZLJobSpawnPoints {
                     point = new DZLSpawnPoint("Civil2", "4620 340 10290", "0 0 0", items);
                     spawnPoints.Insert(point);
                 }
-            } else {
-                if(jobId == DAY_Z_LIFE_JOB_COP) {
+            }
+			else
+			{
+                if (jobId == DAY_Z_LIFE_JOB_COP)
+				{
                     items.Insert("PoliceVest");
                     items.Insert("PoliceJacket");
                     items.Insert("PolicePants");
@@ -241,7 +261,10 @@ class DZLJobSpawnPoints {
                     point = new DZLSpawnPoint("Police Outpost Krasnostav", "11060.768555 231.467606 12488.763672", "-95.663597 0 0", items);
                     spawnPoints.Insert(point);
 
-                } else if(jobId == DAY_Z_LIFE_JOB_MEDIC) {
+                }
+				
+				else if (jobId == DAY_Z_LIFE_JOB_TRANSPORT)
+				{
                     items.Insert("ParamedicJacket_Green");
                     items.Insert("ParamedicPants_Green");
                     items.Insert("Sneakers_White");
@@ -615,7 +638,385 @@ class DZLJobSpawnPoints {
                     items.Insert("SurgicalMask");
                     point = new DZLSpawnPoint("Medic Station Zelenogorsk", "2746.510742 200.855423 5172.751953", "132.636261 0 0", items);
                     spawnPoints.Insert(point);
-                } else if(jobId == DAY_Z_LIFE_JOB_ARMY) {
+                }
+				
+				else if (jobId == DAY_Z_LIFE_JOB_MEDIC)
+				{
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Hospital Chernogorsk", "6460.642578 9.716865 2734.174561", "-35.551224 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Hospital Elektrozavodsk", "10288.325195 12.781819 2265.676270", "174.492218 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Hospital Berezino", "11913.635742 54.291801 9056.839844", "-131.009918 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Hospital Pavlovo", "2184.552002 91.581612 3353.090332", "105.095566 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Hospital Novodmitrovsk", "11394.348633 78.513062 14602.299805", "-54.714001 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Hospital Severograd", "8019.276367 114.149002 12732.478516", "-178.702087 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Solnichniy", "13391.141602 6.642958 6325.412109", "34.405697 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Berezino", "12784.613281 6.546667 10056.283203", "132.671509 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Svetlojarsk", "13869.391602 20.997799 13126.976563", "-34.106239 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Novaya Petrovka", "3466.028809 196.958252 13164.150391", "83.904434 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Vybor", "3752.554199 312.510742 9021.624023", "-24.320047 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Stary Sobor", "5999.912598 307.862762 7686.959473", "52.903572 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Gorka", "9470.009766 304.953186 8827.878906", "-162.231049 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Staroye", "10126.196289 246.007263 5505.813965", "123.815544 0 0", items);
+                    spawnPoints.Insert(point);
+
+                    items = new array<string>;
+                    items.Insert("ParamedicJacket_Green");
+                    items.Insert("ParamedicPants_Green");
+                    items.Insert("Sneakers_White");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("BandageDressing");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Morphine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("Epinephrine");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("SalineBagIV");
+                    items.Insert("TetracyclineAntibiotics");
+                    items.Insert("CharcoalTablets");
+                    items.Insert("VitaminBottle");
+                    items.Insert("PainkillerTablets");
+                    items.Insert("SurgicalGloves_LightBlue");
+                    items.Insert("SurgicalMask");
+                    point = new DZLSpawnPoint("Medic Station Zelenogorsk", "2746.510742 200.855423 5172.751953", "132.636261 0 0", items);
+                    spawnPoints.Insert(point);
+                }
+				else if(jobId == DAY_Z_LIFE_JOB_ARMY) {
                     items = new array<string>;
                     items.Insert("BDUPants");
                     items.Insert("BDUJacket");

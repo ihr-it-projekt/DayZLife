@@ -9,6 +9,9 @@ class DZLCanDoDoorAction {
         if(!definition) {
             definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_ARMY);
         }
+		if(!definition) {
+            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_TRANSPORT);
+        }
         if(!definition) {
             definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_MEDIC);
         }
@@ -29,6 +32,10 @@ class DZLCanDoDoorAction {
         DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_COP);
 
         if(!definition) {
+            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_TRANSPORT);
+            jobFromHouse = DAY_Z_LIFE_JOB_TRANSPORT;
+        }
+		if(!definition) {
             definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_ARMY);
             jobFromHouse = DAY_Z_LIFE_JOB_ARMY;
         }

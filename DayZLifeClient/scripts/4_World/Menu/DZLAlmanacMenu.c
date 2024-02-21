@@ -32,6 +32,12 @@ class DZLAlmanacMenu : DZLBaseMenu {
     private TextListboxWidget copPanelRankList;
     private TextListboxWidget copPanelCopsList;
     private ButtonWidget copPanelSave;
+	
+	private Widget transportPanelWidget;
+    private TextListboxWidget transportPanelOnlinePlayerList;
+    private TextListboxWidget transportPanelRankList;
+    private TextListboxWidget transportPanelTransportsList;
+    private ButtonWidget transportPanelSave;
 
     private Widget armyPanelWidget;
     private TextListboxWidget armyPanelOnlinePlayerList;
@@ -227,18 +233,40 @@ class DZLAlmanacMenu : DZLBaseMenu {
         }
     }
 
-    override bool OnDoubleClick(Widget w, int x, int y, int button) {
-        if(w == copPanelOnlinePlayerList) {
+    override bool OnDoubleClick(Widget w, int x, int y, int button)
+	{
+        if (w == copPanelOnlinePlayerList)
+		{
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelOnlinePlayerList, copPanelCopsList, DAY_Z_LIFE_JOB_COP);
-        } else if(w == copPanelCopsList) {
+        }
+		else if (w == copPanelCopsList)
+		{
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(copPanelCopsList, copPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
-        } else if(w == medicPanelOnlinePlayerList) {
+        }
+		
+		else if (w == transportPanelOnlinePlayerList)
+		{
+            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(transportPanelOnlinePlayerList, transportPanelTransportsList, DAY_Z_LIFE_JOB_TRANSPORT);
+        }
+		else if (w == transportPanelTransportsList)
+		{
+            DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(transportPanelTransportsList, transportPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
+        }
+		
+		else if (w == medicPanelOnlinePlayerList)
+		{
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(medicPanelOnlinePlayerList, medicPaneMedicList, DAY_Z_LIFE_JOB_MEDIC);
-        } else if(w == medicPaneMedicList) {
+        }
+		else if (w == medicPaneMedicList)
+		{
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(medicPaneMedicList, medicPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
-        } else if(w == armyPanelOnlinePlayerList) {
+        }
+		else if (w == armyPanelOnlinePlayerList)
+		{
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(armyPanelOnlinePlayerList, armyPanelArmyList, DAY_Z_LIFE_JOB_ARMY);
-        } else if(w == armyPanelArmyList) {
+        }
+		else if (w == armyPanelArmyList)
+		{
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(armyPanelArmyList, armyPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
         }
 
