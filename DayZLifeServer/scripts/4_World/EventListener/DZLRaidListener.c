@@ -46,24 +46,15 @@ class DZLRaidListener {
 
                 int raidTime = 9999999999;
 
-                if (definition)
-				{
+                if(definition) {
                     raidTime = definition.raidTimeInSeconds;
-                }
-				else if (transportdefinition)
-				{
+                } else if(transportdefinition) {
                     raidTime = transportdefinition.raidTimeInSeconds;
-                }
-				else if (medicDefinition)
-				{
+                } else if(medicDefinition) {
                     raidTime = medicDefinition.raidTimeInSeconds;
-                }
-				else if (armyDefinition)
-				{
+                } else if(armyDefinition) {
                     raidTime = armyDefinition.raidTimeInSeconds;
-                }
-				else
-				{
+                } else {
                     DZLHouse dzlHouseRaid = DZLDatabaseLayer.Get().GetHouse(building);
 
                     if(dzlHouseRaid.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {

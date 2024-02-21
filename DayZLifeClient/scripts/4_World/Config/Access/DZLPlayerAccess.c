@@ -28,8 +28,8 @@ class DZLPlayerAccess {
     bool CanManageCops() {
         return canManageCops;
     }
-	
-	bool CanManageTransport() {
+
+    bool CanManageTransport() {
         return canManageTransport;
     }
 

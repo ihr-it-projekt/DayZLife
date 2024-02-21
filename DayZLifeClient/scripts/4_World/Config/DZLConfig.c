@@ -60,23 +60,16 @@ class DZLConfig {
         jobIds.Insert(DAY_Z_LIFE_JOB_ARMY);
     }
 
-    DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId)
-	{
-        if (searchJobId == DAY_Z_LIFE_JOB_COP)
-		{
+    DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
+        if(searchJobId == DAY_Z_LIFE_JOB_COP) {
             return copSpawnPoints;
-        }
-		else if (searchJobId == DAY_Z_LIFE_JOB_MEDIC)
-		{
+        } else if(searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
             return medicSpawnPoints;
         }
-		
-		else if (searchJobId == DAY_Z_LIFE_JOB_TRANSPORT)
-		{
+
+        else if(searchJobId == DAY_Z_LIFE_JOB_TRANSPORT) {
             return transportSpawnPoints;
-        }
-		else if (searchJobId == DAY_Z_LIFE_JOB_ARMY)
-		{
+        } else if(searchJobId == DAY_Z_LIFE_JOB_ARMY) {
             return armySpawnPoints;
         }
 

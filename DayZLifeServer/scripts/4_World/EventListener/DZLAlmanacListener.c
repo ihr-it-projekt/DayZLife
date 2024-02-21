@@ -149,8 +149,8 @@ class DZLAlmanacListener {
 
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, copIdents), true, player.GetIdentity());
     }
-	
-	void SendUpdateListTransport(PlayerBase player) {
+
+    void SendUpdateListTransport(PlayerBase player) {
         if(!config.adminIds.CanManageTransport(player.GetPlayerId())) return;
 
         array<Man> _players = new array<Man>;

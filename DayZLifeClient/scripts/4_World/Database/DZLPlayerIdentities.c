@@ -35,8 +35,8 @@ class DZLPlayerIdentities {
 
         return collection;
     }
-	
-	array<ref DZLOnlinePlayer> GetTransportPlayerCollection() {
+
+    array<ref DZLOnlinePlayer> GetTransportPlayerCollection() {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         foreach(string ident: playerIdentities) {

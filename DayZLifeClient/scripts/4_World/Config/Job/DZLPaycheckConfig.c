@@ -12,17 +12,15 @@ class DZLPaycheckConfig {
     ref array<ref DZLPaycheck>armies;
 
 
-    void DZLPaycheckConfig()
-	{
-        if (!Load())
-		{
+    void DZLPaycheckConfig() {
+        if(!Load()) {
             cops = new array<ref DZLPaycheck>;
             cops.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_COP, "Rekrut", 100, 1));
 
             medics = new array<ref DZLPaycheck>;
             medics.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_MEDIC, "Rekrut", 0, 10000000));
-			
-			transports = new array<ref DZLPaycheck>;
+
+            transports = new array<ref DZLPaycheck>;
             transports.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_TRANSPORT, "Rekrut", 0, 10000000));
 
             civils = new array<ref DZLPaycheck>;
@@ -32,15 +30,13 @@ class DZLPaycheckConfig {
             armies.Insert(new DZLPaycheck(DAY_Z_LIFE_JOB_ARMY, "Rekrut", 0, 10000000));
 
             Save();
-        }
-		else if ("1" == version)
-		{
+        } else if("1" == version) {
             cops = new array<ref DZLPaycheck>;
             cop.isFallbackRank = true;
             cop.rank = "Rekrut";
             cops.Insert(cop);
-			
-			transports = new array<ref DZLPaycheck>;
+
+            transports = new array<ref DZLPaycheck>;
             transport.isFallbackRank = true;
             transport.rank = "Rekrut";
             transports.Insert(transport);
@@ -71,8 +67,8 @@ class DZLPaycheckConfig {
         if(DAY_Z_LIFE_JOB_MEDIC == job) {
             return medics;
         }
-		
-		if(DAY_Z_LIFE_JOB_TRANSPORT == job) {
+
+        if(DAY_Z_LIFE_JOB_TRANSPORT == job) {
             return transports;
         }
 
@@ -91,8 +87,8 @@ class DZLPaycheckConfig {
         if(DAY_Z_LIFE_JOB_MEDIC == job) {
             return GetFallbackFromCollection(medics);
         }
-		
-		if(DAY_Z_LIFE_JOB_TRANSPORT == job) {
+
+        if(DAY_Z_LIFE_JOB_TRANSPORT == job) {
             return GetFallbackFromCollection(transports);
         }
 
