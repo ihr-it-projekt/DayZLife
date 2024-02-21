@@ -1,6 +1,7 @@
 class DZLJobConfig {
     ref DZLWorkZones workZones;
     ref DZLPaycheckConfig paycheck;
+    ref DZLLoadOuts loadOutsTransport;
     ref DZLLoadOuts loadOutsCops;
     ref DZLLoadOuts loadOutsMedics;
     ref DZLLoadOuts loadOutsArmy;
@@ -10,6 +11,7 @@ class DZLJobConfig {
         workZones = new DZLWorkZones;
         paycheck = new DZLPaycheckConfig;
         loadOutsCops = new DZLLoadOuts(DAY_Z_LIFE_JOB_COP);
+        loadOutsTransport = new DZLLoadOuts(DAY_Z_LIFE_JOB_TRANSPORT);
         loadOutsMedics = new DZLLoadOuts(DAY_Z_LIFE_JOB_MEDIC);
         loadOutsArmy = new DZLLoadOuts(DAY_Z_LIFE_JOB_ARMY);
         arrestConfig = new DZLArrestConfig;
@@ -27,5 +29,4 @@ class DZLJobConfig {
         }
         return null;
     }
-
-}
+};

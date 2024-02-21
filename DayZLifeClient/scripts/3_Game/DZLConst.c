@@ -149,6 +149,7 @@ static string LOCKED_HOUSES_FILE_NAME = "housesLocked.json";
 static string DAY_Z_LIFE_LOGS = "$profile:DayZLife\\Logs\\";
 
 static string DAY_Z_LIFE_JOB_COP = "Cop";
+static string DAY_Z_LIFE_JOB_TRANSPORT = "Transport";
 static string DAY_Z_LIFE_JOB_MEDIC = "Medic";
 static string DAY_Z_LIFE_JOB_CIVIL = "Civil";
 static string DAY_Z_LIFE_JOB_ARMY = "Army";

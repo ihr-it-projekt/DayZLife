@@ -35,6 +35,20 @@ class DZLPlayerIdentities {
 
         return collection;
     }
+	
+	array<ref DZLOnlinePlayer> GetTransportPlayerCollection() {
+        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
+
+            if(player.IsTransport()) {
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_TRANSPORT)));
+            }
+        }
+
+        return collection;
+    }
 
     array<ref DZLOnlinePlayer> GetMedicPlayerCollection() {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;

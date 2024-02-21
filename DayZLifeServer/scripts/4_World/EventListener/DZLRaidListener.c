@@ -14,9 +14,10 @@ class DZLRaidListener {
                 Building raidedBuilding = Building.Cast(target);
 
                 DZLJobHouseDefinition definitionRaided = DZLConfig.Get().houseConfig.GetJobHouseDefinition(raidedBuilding, DAY_Z_LIFE_JOB_COP);
+                DZLJobHouseDefinition transportdefinitionRaided = DZLConfig.Get().houseConfig.GetJobHouseDefinition(raidedBuilding, DAY_Z_LIFE_JOB_TRANSPORT);
                 DZLJobHouseDefinition medicDefinitionRaided = DZLConfig.Get().houseConfig.GetJobHouseDefinition(raidedBuilding, DAY_Z_LIFE_JOB_MEDIC);
                 DZLJobHouseDefinition armyDefinitionRaided = DZLConfig.Get().houseConfig.GetJobHouseDefinition(raidedBuilding, DAY_Z_LIFE_JOB_ARMY);
-                if(!definitionRaided && !medicDefinitionRaided && !armyDefinitionRaided) {
+                if(!definitionRaided && !medicDefinitionRaided && !armyDefinitionRaided && !transportdefinitionRaided) {
                     DZLHouse dzlHouse = DZLDatabaseLayer.Get().GetHouse(raidedBuilding);
                     dzlHouse.UnLookDoor(paramRaidDoor.param1);
                     DZLLockedHouses houses = DZLDatabaseLayer.Get().GetLockedHouses();
@@ -39,18 +40,30 @@ class DZLRaidListener {
                 Building building = paramRaidDoorDZLBuilding.param1;
 
                 DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_COP);
+                DZLJobHouseDefinition transportdefinition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_TRANSPORT);
                 DZLJobHouseDefinition medicDefinition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_MEDIC);
                 DZLJobHouseDefinition armyDefinition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_ARMY);
 
                 int raidTime = 9999999999;
 
-                if(definition) {
+                if (definition)
+				{
                     raidTime = definition.raidTimeInSeconds;
-                } else if(medicDefinition) {
+                }
+				else if (transportdefinition)
+				{
+                    raidTime = transportdefinition.raidTimeInSeconds;
+                }
+				else if (medicDefinition)
+				{
                     raidTime = medicDefinition.raidTimeInSeconds;
-                } else if(armyDefinition) {
+                }
+				else if (armyDefinition)
+				{
                     raidTime = armyDefinition.raidTimeInSeconds;
-                } else {
+                }
+				else
+				{
                     DZLHouse dzlHouseRaid = DZLDatabaseLayer.Get().GetHouse(building);
 
                     if(dzlHouseRaid.HasAlarmSystem() && dzlHouseRaid.GetHouseAlarm().message) {

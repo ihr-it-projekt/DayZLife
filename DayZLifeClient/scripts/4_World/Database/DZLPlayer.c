@@ -5,6 +5,8 @@ class DZLPlayer {
     private int bank = 0;
     private bool isCop = false;
     private string lastCopRank = "";
+	private bool isTransport = false;
+    private string lastTransportRank = "";
     private bool isMedic = false;
     private string lastMedicRank = "";
     private bool isArmy = false;
@@ -100,24 +102,44 @@ class DZLPlayer {
         return activeJob;
     }
 
-    void SetJobGrade(string grade) {
+    void SetJobGrade(string grade)
+	{
         activeJobGrade = grade;
 
-        if(DAY_Z_LIFE_JOB_COP == activeJob) {
+        if (DAY_Z_LIFE_JOB_COP == activeJob)
+		{
             lastCopRank = activeJobGrade;
-        } else if(DAY_Z_LIFE_JOB_MEDIC == activeJob) {
+        }
+		else if (DAY_Z_LIFE_JOB_TRANSPORT == activeJob)
+		{
+            lastTransportRank = activeJobGrade;
+        }
+		else if (DAY_Z_LIFE_JOB_MEDIC == activeJob)
+		{
             lastMedicRank = activeJobGrade;
-        } else if(DAY_Z_LIFE_JOB_ARMY == activeJob) {
+        }
+		else if (DAY_Z_LIFE_JOB_ARMY == activeJob)
+		{
             lastArmyRank = activeJobGrade;
         }
     }
 
-    string GetLastJobRank(string job) {
-        if(DAY_Z_LIFE_JOB_COP == job) {
+    string GetLastJobRank(string job)
+	{
+        if (DAY_Z_LIFE_JOB_COP == job)
+		{
             return lastCopRank;
-        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
+        }
+		else if (DAY_Z_LIFE_JOB_TRANSPORT == job)
+		{
+            return lastTransportRank;
+        }
+		else if (DAY_Z_LIFE_JOB_MEDIC == job)
+		{
             return lastMedicRank;
-        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
+        }
+		else if (DAY_Z_LIFE_JOB_ARMY == job)
+		{
             return lastArmyRank;
         }
 
@@ -136,7 +158,11 @@ class DZLPlayer {
         return DAY_Z_LIFE_JOB_COP == activeJob;
     }
 
-    bool IsActiveAsMedic() {
+    bool IsActiveAsTransport() {
+        return DAY_Z_LIFE_JOB_TRANSPORT == activeJob;
+    }
+	
+	bool IsActiveAsMedic() {
         return DAY_Z_LIFE_JOB_MEDIC == activeJob;
     }
 
@@ -148,14 +174,24 @@ class DZLPlayer {
         return DAY_Z_LIFE_JOB_CIVIL == activeJob || activeJob == "";
     }
 
-    void UpdateActiveJob(string job) {
+    void UpdateActiveJob(string job)
+	{
         activeJob = job;
 
-        if(DAY_Z_LIFE_JOB_COP == job) {
+        if (DAY_Z_LIFE_JOB_COP == job)
+		{
             activeJobGrade = lastCopRank;
-        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
+        }
+		else if (DAY_Z_LIFE_JOB_TRANSPORT == job)
+		{
+            activeJobGrade = lastTransportRank;
+        }
+		else if (DAY_Z_LIFE_JOB_MEDIC == job)
+		{
             activeJobGrade = lastMedicRank;
-        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
+        }
+		else if (DAY_Z_LIFE_JOB_ARMY == job)
+		{
             activeJobGrade = lastArmyRank;
         }
 
@@ -250,6 +286,10 @@ class DZLPlayer {
 
     bool IsCop() {
         return isCop;
+    }
+	
+	bool IsTransport() {
+        return isTransport;
     }
 
     bool IsMedic() {

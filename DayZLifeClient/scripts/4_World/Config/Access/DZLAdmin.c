@@ -35,6 +35,15 @@ class DZLAdmin {
         }
         return false;
     }
+	
+	bool CanManageTransport(string ident) {
+        foreach(DZLPlayerAccess playerAccess: access) {
+            if(playerAccess && playerAccess.GetIdent() == ident) {
+                return playerAccess.CanManageTransport();
+            }
+        }
+        return false;
+    }
 
     bool CanManageMedic(string ident) {
         foreach(DZLPlayerAccess playerAccess: access) {
