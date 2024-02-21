@@ -17,11 +17,20 @@ class DZLAlmanacListener {
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DAY_Z_LIFE_PLAYER_SERVER_RESET_AT_PLAYER_BASE) {
             PlayerBase.Cast(target).ResetDZLPlayer();
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS) {
+        }
+		else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS)
+		{
             SendUpdateListCops(PlayerBase.Cast(target));
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS) {
+        }
+		else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS)
+		{
             SendUpdateListMedic(PlayerBase.Cast(target));
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS) {
+        }
+		else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_TRANSPORT_PLAYERS)
+		{
+            SendUpdateListTransport(PlayerBase.Cast(target));
+        }
+		else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS) {
             SendUpdateListArmy(PlayerBase.Cast(target));
         } else if(rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
@@ -81,15 +90,30 @@ class DZLAlmanacListener {
                 DZLSendMessage(sender, "#player_data_was_deleted");
                 SendAllPlayerList(sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS) {
-            if(!config.adminIds.CanManageCops(sender.GetId())) return;
+        }
+		else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS)
+		{
+            if (!config.adminIds.CanManageCops(sender.GetId())) return;
             autoptr Param1<ref array<DZLOnlinePlayer>> paramUpdateCops;
-            if(ctx.Read(paramUpdateCops)) {
+            if (ctx.Read(paramUpdateCops))
+			{
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
                 dzlPlayerIdentities.UpdateCops(paramUpdateCops.param1);
                 DZLSendMessage(sender, "#update_cop_list_successful");
             }
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS) {
+        }
+		else if (rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_TRANSPORT_PLAYERS)
+		{
+            if (!config.adminIds.CanManageTransport(sender.GetId())) return;
+            autoptr Param1<ref array<DZLOnlinePlayer>> paramUpdateTransports;
+            if (ctx.Read(paramUpdateTransports))
+			{
+                DZLPlayerIdentities dzlPlayerIdentitiesTransport = DZLDatabaseLayer.Get().GetPlayerIds();
+                dzlPlayerIdentitiesTransport.UpdateTransports(paramUpdateTransports.param1);
+                DZLSendMessage(sender, "update transport list");
+            }
+        }
+		else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS) {
             if(!config.adminIds.CanManageMedic(sender.GetId())) return;
             autoptr Param1<ref array<DZLOnlinePlayer>> paramUpdateMedics;
             if(ctx.Read(paramUpdateMedics)) {

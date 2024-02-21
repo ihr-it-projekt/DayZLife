@@ -3,6 +3,7 @@ class DZLBaseActionObject : BuildingSuper {
     protected bool isTrader = false;
     protected bool isGarage = false;
     protected bool isCopLoadOut = false;
+    protected bool isTransportLoadOut = false;
     protected bool isMedicLoadOut = false;
     protected bool isArmyLoadOut = false;
     protected bool isLicensePoint = false;
@@ -29,6 +30,10 @@ class DZLBaseActionObject : BuildingSuper {
     bool IsMedicLoadOut() {
         return isMedicLoadOut;
     }
+	
+	bool IsTransportLoadOut() {
+        return isTransportLoadOut;
+    }
 
     bool IsArmyLoadOut() {
         return isArmyLoadOut;
@@ -39,7 +44,7 @@ class DZLBaseActionObject : BuildingSuper {
     }
 
     bool IsLoadOut() {
-        return isCopLoadOut || isMedicLoadOut || isArmyLoadOut;
+        return isCopLoadOut || isMedicLoadOut || isArmyLoadOut || isTransportLoadOut;
     }
 
     bool IsLicenseActionPoint() {

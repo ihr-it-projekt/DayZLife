@@ -36,7 +36,7 @@ class DZLMessageListener {
         if(_players) {
             foreach(Man _player: _players) {
                 PlayerBase receiver = PlayerBase.Cast(_player);
-                if((type != DZLMessage.TYPE_COP && type != DZLMessage.TYPE_MEDIC && receiverId == "") || receiverId == receiver.GetPlayerId() || (type == DZLMessage.TYPE_COP && receiver.GetDZLPlayer().IsActiveAsCop()) || (type == DZLMessage.TYPE_MEDIC && receiver.GetDZLPlayer().IsActiveAsMedic())) {
+                if((type != DZLMessage.TYPE_COP && type != DZLMessage.TYPE_MEDIC && receiverId == "") || receiverId == receiver.GetPlayerId() || (type == DZLMessage.TYPE_COP && receiver.GetDZLPlayer().IsActiveAsCop()) || (type == DZLMessage.TYPE_MEDIC && receiver.GetDZLPlayer().IsActiveAsMedic()) || (type == DZLMessage.TYPE_TRANSPORT && receiver.GetDZLPlayer().IsActiveAsTransport())) {
                     message = new DZLMessage;
                     message.CreateAndSend(player, _player.GetIdentity(), text, type, position, senderVisible);
                     if(receiverId == receiver.GetPlayerId()) {

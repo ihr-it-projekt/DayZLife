@@ -1,6 +1,7 @@
 class DZLMessage: DZLIdModel {
     static string TYPE_COP = "cop";
     static string TYPE_MEDIC = "medic";
+    static string TYPE_TRANSPORT = "transport";
     static string TYPE_GLOBAL = "global";
     static string TYPE_PRIVATE = "private";
 

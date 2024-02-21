@@ -36,6 +36,4 @@ modded class ActionOpenDoors {
         }
         return false;
     }
-
-
-}
+};

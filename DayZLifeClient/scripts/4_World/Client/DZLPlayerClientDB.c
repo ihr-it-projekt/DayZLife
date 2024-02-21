@@ -107,12 +107,22 @@ class DZLPlayerClientDB {
                 if(ctx.Read(configParamTrader) && configParamTrader.param1) {
                     config.traderConfig = configParamTrader.param1;
                 }
-            } else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_COP) {
+            }
+			else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_COP)
+			{
                 Param1 <ref DZLJobSpawnPoints> configParamCop;
                 if(ctx.Read(configParamCop) && configParamCop.param1) {
                     config.copSpawnPoints = configParamCop.param1;
                 }
-            } else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ARMY) {
+            }
+			else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TRANSPORT)
+			{
+                Param1 <ref DZLJobSpawnPoints> configParamTransport;
+                if(ctx.Read(configParamTransport) && configParamTransport.param1) {
+                    config.transportSpawnPoints = configParamTransport.param1;
+                }
+            }
+			else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ARMY) {
                 Param1 <ref DZLJobSpawnPoints> configParamArmySpawn;
                 if(ctx.Read(configParamArmySpawn) && configParamArmySpawn.param1) {
                     config.armySpawnPoints = configParamArmySpawn.param1;

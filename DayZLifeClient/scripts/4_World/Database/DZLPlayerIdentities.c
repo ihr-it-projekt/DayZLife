@@ -110,6 +110,25 @@ class DZLPlayerIdentities {
             player.UpdateCop(hasFound, newRank);
         }
     }
+	
+	void UpdateTransports(ref array<DZLOnlinePlayer> transports) {
+        if(!transports) return;
+
+        foreach(string ident: playerIdentities) {
+            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
+            bool hasFound = false;
+            string newRank = "";
+            foreach(DZLOnlinePlayer newTransport: transports) {
+                if(ident == newTransport.id) {
+                    hasFound = true;
+                    newRank = newTransport.rank;
+                    break;
+                }
+            }
+
+            player.UpdateTransport(hasFound, newRank);
+        }
+    }
 
     void UpdateMedics(ref array<DZLOnlinePlayer> medics) {
         if(!medics) return;
