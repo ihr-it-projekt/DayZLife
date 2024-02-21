@@ -30,6 +30,11 @@ class DZLPlayer {
     [NonSerialized()] PlayerBase player;
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
+        if(!playerId) {
+            Print("Can not create DZLPlayer without playerId");
+            return;
+        }
+
         fileName = playerId + ".json";
         if(!Load()) {
             bank = moneyToAdd;
@@ -266,18 +271,26 @@ class DZLPlayer {
         Save();
     }
 
-    void AddMoneyToPlayer(int moneyCount) {
+    bool AddMoneyToPlayer(int moneyCount) {
         if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 
             if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
-                DZLPlayerMoney.Get(player).AddMoney(moneyCount);
-                return;
+                moneyCount = DZLPlayerMoney.Get(player).AddMoney(moneyCount);
+
+                if(moneyCount != 0 && player && player.GetIdentity())
+                    Error("Error: Can't add/remove money to/from player transaction stopped!");
+                Error("Player ID" + dayZPlayerId);
+                DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
             }
 
-            money += moneyCount;
-            Save();
+            return moneyCount == 0;
         }
+
+        money += moneyCount;
+        Save();
+		
+		return true;
     }
 
     void AddMoneyToPlayerBank(int moneyCount) {
@@ -624,7 +637,7 @@ class DZLPlayer {
     }
 
     private bool Save() {
-        if(GetGame().IsServer()) {
+        if(GetGame().IsServer() && dayZPlayerId) {
             if(dayZPlayerId + ".json" != fileName) {
                 LogMessageDZL("Can not save PlayerData. There are inconsistent in your player database: Please check file:" + fileName);
                 return false;
