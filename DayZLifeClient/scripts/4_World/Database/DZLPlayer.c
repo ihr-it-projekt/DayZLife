@@ -278,10 +278,11 @@ class DZLPlayer {
             if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
                 moneyCount = DZLPlayerMoney.Get(player).AddMoney(moneyCount);
 
-                if(moneyCount != 0 && player && player.GetIdentity())
+                if(moneyCount != 0 && player && player.GetIdentity()) {
                     Error("Error: Can't add/remove money to/from player transaction stopped!");
-                Error("Player ID" + dayZPlayerId);
-                DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
+                    Error("Player ID" + dayZPlayerId);
+                    DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
+                }
             }
 
             return moneyCount == 0;
@@ -289,8 +290,8 @@ class DZLPlayer {
 
         money += moneyCount;
         Save();
-		
-		return true;
+
+        return true;
     }
 
     void AddMoneyToPlayerBank(int moneyCount) {
