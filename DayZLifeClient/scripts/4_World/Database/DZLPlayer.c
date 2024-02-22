@@ -283,9 +283,8 @@ class DZLPlayer {
                     Error("Player ID" + dayZPlayerId);
                     DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
                 }
+                return moneyCount == 0;
             }
-
-            return moneyCount == 0;
         }
 
         money += moneyCount;
