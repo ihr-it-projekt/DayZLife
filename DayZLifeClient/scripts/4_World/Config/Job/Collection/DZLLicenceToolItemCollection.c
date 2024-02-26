@@ -18,4 +18,5 @@ class DZLLicenceToolItemCollection {
 
         return mapCraft;
     }
+    //TODO: get type health map
 }

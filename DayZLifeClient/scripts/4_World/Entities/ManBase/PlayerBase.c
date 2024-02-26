@@ -492,10 +492,12 @@ modded class PlayerBase {
         return null;
     }
 
-    string CanUseLicence(notnull DZLCraftLicence licence) {
-        DZLLicenceValidator validator = new DZLLicenceValidator(this, licence);
+    private ref DZLLicenceValidator licenceValidator;
 
-        return validator.CanUseLicence();
+    string CanUseLicence(notnull DZLCraftLicence licence) {
+        licenceValidator = new DZLLicenceValidator(this, licence);
+
+        return licenceValidator.CanUseLicence();
     }
 
     void UseLicence(DZLCraftLicence licence) {
