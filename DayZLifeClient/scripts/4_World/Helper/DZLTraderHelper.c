@@ -19,16 +19,11 @@ class DZLTraderHelper {
     }
 
     static float GetQuantity(EntityAI item) {
-        int quantity = 1;
-        if(item) {
-            quantity = item.GetQuantity();
+        if(item.HasQuantity()) {
+            return item.GetQuantity();
         }
 
-        if(quantity == 0) {
-            quantity = 1;
-        }
-
-        return quantity;
+        return 1.0;
     }
 
     static float GetQuantityMax(EntityAI item) {

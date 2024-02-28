@@ -5,18 +5,18 @@ class DZLLicenceCraftItemCollection {
         collection = new array<ref DZLLicenceCraftItem>
     }
 
-    map<string, int> GetTypeCountMap() {
-        map<string, int> mapCraft = new map<string, int>;
+    map<string, ref DZLFoundLicenseCraftItems> GetLicenceCraftItems() {
+        map<string, ref DZLFoundLicenseCraftItems> mapCraft = new map<string, ref DZLFoundLicenseCraftItems>;
         foreach(DZLLicenceCraftItem item: collection) {
-            int count = 0;
-            if(!mapCraft.Find(item.GetLowerCaseType(), count)) {
-                mapCraft.Insert(item.GetLowerCaseType(), item.quantity);
-            } else {
-                mapCraft.Set(item.GetLowerCaseType(), count + item.quantity);
+            DZLFoundLicenseCraftItems foundItems = new DZLFoundLicenseCraftItems(item.type, item.quantity, item.health);
+            string key = item.GetKey();
+            if(!mapCraft.Find(key, foundItems)) {
+                mapCraft.Insert(key, foundItems);
+                continue;
             }
+            foundItems.quantity += item.quantity;
         }
 
         return mapCraft;
     }
-    //TODO: get type health map
 }

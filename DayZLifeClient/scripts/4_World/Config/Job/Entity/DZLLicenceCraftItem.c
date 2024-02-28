@@ -4,10 +4,14 @@ class DZLLicenceCraftItem {
     int health;
     [NonSerialized()] string lower;
 
-    void DZLLicenceCraftItem(string type, int quantity, int health) {
-        this.type = type;
-        this.quantity = quantity;
-        this.health = health;
+    void DZLLicenceCraftItem(string _type, int _quantity, int _health) {
+        type = _type;
+        quantity = _quantity;
+        health = _health;
+    }
+
+    string GetKey() {
+        return GetLowerCaseType() + health.ToString();
     }
 
     string GetLowerCaseType() {
