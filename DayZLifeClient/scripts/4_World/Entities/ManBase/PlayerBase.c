@@ -102,7 +102,7 @@ modded class PlayerBase {
     }
 
     bool CanReSpawn() {
-        return !resetCanSpawn;
+        return !resetCanSpawn && 0 == dzlPlayer.arrestTimeInMinutes;
     }
 
     string GetPlayerId() {

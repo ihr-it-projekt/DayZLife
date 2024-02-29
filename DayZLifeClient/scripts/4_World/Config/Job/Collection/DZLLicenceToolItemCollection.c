@@ -8,13 +8,14 @@ class DZLLicenceToolItemCollection {
     ref map<string, ref DZLFoundLicenseCraftItems> GetLicenceCraftItems() {
         map<string, ref DZLFoundLicenseCraftItems> mapCraft = new map<string, ref DZLFoundLicenseCraftItems>;
         foreach(DZLLicenceCraftItem item: collection) {
-            DZLFoundLicenseCraftItems foundItems = new DZLFoundLicenseCraftItems(item.type, item.quantity, item.health);
+            DZLFoundLicenseCraftItems foundItems;
             string key = item.GetKey();
             if(!mapCraft.Find(key, foundItems)) {
+                foundItems = new DZLFoundLicenseCraftItems(item.type, item.quantity, item.health);
                 mapCraft.Insert(key, foundItems);
                 continue;
             }
-            foundItems.quantity += item.quantity;
+            foundItems.foundQuantity += item.quantity;
         }
 
         return mapCraft;

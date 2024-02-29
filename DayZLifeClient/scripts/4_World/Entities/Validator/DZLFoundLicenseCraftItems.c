@@ -6,18 +6,20 @@ class DZLFoundLicenseCraftItems {
     float foundQuantity = 0;
     ref array<EntityAI> items = new array<EntityAI>();
 
-    void DZLLicenseCraftItems(string _type, int _neededQuantity, int _neededHealth) {
+    void DZLFoundLicenseCraftItems(string _type, int _neededQuantity, int _neededHealth) {
         type = _type;
-        lowerType = type.ToLower();
+        lowerType = _type;
+        lowerType.ToLower();
         neededQuantity = _neededQuantity;
         neededHealth = _neededHealth;
     }
 
     bool AddItem(EntityAI item) {
-        if (CanUsed()) return false;
-        string lowerTypeItem = item.GetType().ToLower();
-        if (lowerType != lowerTypeItem) return false;
-        if (GetGame().IsServer() && item.GetHealth() < neededHealth) return false;
+        if(CanUsed()) return false;
+        string lowerTypeItem = item.GetType();
+        lowerTypeItem.ToLower();
+        if(lowerType != lowerTypeItem) return false;
+        if(GetGame().IsServer() && item.GetHealth() < neededHealth) return false;
 
         foundQuantity += DZLTraderHelper.GetQuantity(item);
         items.Insert(item);
@@ -33,21 +35,21 @@ class DZLFoundLicenseCraftItems {
         foreach(EntityAI item: items) {
             float itemQuantity = DZLTraderHelper.GetQuantity(item);
 
-            if (itemQuantity > neededQuantity) {
-                item.SetQuantity(itemQuantity - neededQuantity);
-                DZLLogCrafting(identity.GetPlayerId(), "licence crafting reduce quantity resource", type);
+            if(itemQuantity > neededQuantity) {
+                ItemBase iBase = ItemBase.Cast(item);
+                iBase.SetQuantity(itemQuantity - neededQuantity);
+                DZLLogCrafting(identity.GetId(), "licence crafting reduce quantity resource", type);
                 break;
             }
 
             neededQuantity -= itemQuantity;
-            DZLLogCrafting(identity.GetPlayerId(), "licence crafting delete resource", type);
+            DZLLogCrafting(identity.GetId(), "licence crafting delete resource", type);
             GetGame().ObjectDelete(item);
         }
     }
 
     string GetErrorMessage() {
-        string displayName = "";
-        GetGame().ObjectGetDisplayName(playerCar, name);
-        return displayName + " #neededQuantity:" + neededQuantity +"neededHealth: " + neededHealth + " #found " + foundQuantity;
+        string displayName = DZLDisplayHelper.GetItemDisplayName(type);
+        return displayName + " #neededQuantity:" + neededQuantity + " #neededHealth: " + neededHealth + " #found " + foundQuantity + "\n";
     }
 }
