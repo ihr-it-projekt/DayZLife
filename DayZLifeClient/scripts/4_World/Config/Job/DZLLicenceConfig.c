@@ -134,7 +134,6 @@ class DZLLicenceConfig {
                     licence.SetId();
                 }
             }
-            Save();
         }
 
         if(licenceCollection.collection) {
@@ -143,12 +142,10 @@ class DZLLicenceConfig {
                     licenceCraft.SetId();
                 }
             }
-            Save();
         }
 
         if(version == "1") {
             version = "2";
-            Save();
         }
 
         if(version == "2") {
@@ -160,18 +157,16 @@ class DZLLicenceConfig {
                 licenceCollection.collection.Insert(craftLicence);
             }
             licences = null;
-            Save();
         }
 
         if(version == "3") {
             version = "4";
-            Save();
         }
 
         if(version == "4") {
             version = "5";
-            Save();
         }
+        Save();
     }
 
     private bool Load() {
