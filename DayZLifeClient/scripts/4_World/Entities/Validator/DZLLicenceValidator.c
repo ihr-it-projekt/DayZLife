@@ -69,13 +69,13 @@ class DZLLicenceValidator {
 
     private void UseItems() {
         foreach(string index, ref DZLFoundLicenseCraftItems item: craftEntities) {
-            item.Use(player.GetIdentity());
+            item.UseItems(player.GetIdentity());
         }
     }
 
     private void UseTools() {
         foreach(string index, ref DZLFoundLicenseCraftItems item: toolEntities) {
-            item.Use(player.GetIdentity());
+            item.UseTool(player.GetIdentity());
         }
     }
 

@@ -2,16 +2,18 @@ class DZLFoundLicenseCraftItems {
     string type;
     string lowerType;
     int neededQuantity = 1;
+    int reduceHealth = 0;
     int neededHealth = 100;
     float foundQuantity = 0;
     ref array<EntityAI> items = new array<EntityAI>();
 
-    void DZLFoundLicenseCraftItems(string _type, int _neededQuantity, int _neededHealth) {
+    void DZLFoundLicenseCraftItems(string _type, int _neededQuantity, int _neededHealth, int _reduceHealth) {
         type = _type;
         lowerType = _type;
         lowerType.ToLower();
         neededQuantity = _neededQuantity;
         neededHealth = _neededHealth;
+        reduceHealth = _reduceHealth;
     }
 
     bool AddItem(EntityAI item) {
@@ -31,7 +33,7 @@ class DZLFoundLicenseCraftItems {
         return foundQuantity >= neededQuantity;
     }
 
-    void Use(PlayerIdentity identity) {
+    void UseItems(PlayerIdentity identity) {
         foreach(EntityAI item: items) {
             float itemQuantity = DZLTraderHelper.GetQuantity(item);
 
@@ -45,6 +47,13 @@ class DZLFoundLicenseCraftItems {
             neededQuantity -= itemQuantity;
             DZLLogCrafting(identity.GetId(), "licence crafting delete resource", type);
             GetGame().ObjectDelete(item);
+        }
+    }
+
+    void UseTool(PlayerIdentity identity) {
+        foreach(EntityAI item: items) {
+           item.DecreaseHealth("","", reduceHealth);
+           DZLLogCrafting(identity.GetId(), "licence crafting reduce health of tool", type);
         }
     }
 

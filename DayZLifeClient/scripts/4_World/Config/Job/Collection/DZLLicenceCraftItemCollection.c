@@ -11,7 +11,7 @@ class DZLLicenceCraftItemCollection {
             DZLFoundLicenseCraftItems foundItems;
             string key = item.GetKey();
             if(!mapCraft.Find(key, foundItems)) {
-                foundItems = new DZLFoundLicenseCraftItems(item.type, item.quantity, item.health);
+                foundItems = new DZLFoundLicenseCraftItems(item.type, item.quantity, item.health, item.healthReduce);
                 mapCraft.Insert(key, foundItems);
                 continue;
             }

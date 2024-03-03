@@ -1,5 +1,5 @@
 class DZLLicenceConfig {
-    string version = "5";
+    string version = "6";
     ref DZLLicenceCollection licences;
     ref DZLLicenceCraftingCollection licenceCollection;
     ref array<ref DZLLicencePosition> positionOfLicencePoints;
@@ -165,6 +165,10 @@ class DZLLicenceConfig {
 
         if(version == "4") {
             version = "5";
+        }
+		
+        if(version == "5") {
+            version = "6";
         }
         Save();
     }
