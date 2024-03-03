@@ -17,13 +17,23 @@ class ActionOpenLoadOutMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
+        if(g_Game.GetUIManager().GetMenu() == NULL)
+		{
             DZLLoadOutMenu menu = action_data.m_Player.GetLoadOutMenu();
-            if(action_data.m_Player.GetDZLPlayer().IsActiveAsCop()) {
+            if(action_data.m_Player.GetDZLPlayer().IsActiveAsCop())
+			{
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsCops.loadOutCategories);
-            } else if(action_data.m_Player.GetDZLPlayer().IsActiveAsMedic()) {
+            }
+			else if(action_data.m_Player.GetDZLPlayer().IsActiveAsMedic())
+			{
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsMedics.loadOutCategories);
-            } else if(action_data.m_Player.GetDZLPlayer().IsActiveAsArmy()) {
+            }
+			else if(action_data.m_Player.GetDZLPlayer().IsActiveAsTransport())
+			{
+                menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsTransport.loadOutCategories);
+            }
+			else if(action_data.m_Player.GetDZLPlayer().IsActiveAsArmy())
+			{
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsArmy.loadOutCategories);
             }
 
@@ -42,6 +52,8 @@ class ActionOpenLoadOutMenu: ActionInteractBase {
             return objectTarget.IsCopLoadOut();
         } else if(dzlPlayer.IsActiveAsMedic()) {
             return objectTarget.IsMedicLoadOut();
+        } else if(dzlPlayer.IsActiveAsTransport()) {
+            return objectTarget.IsTransportLoadOut();
         } else if(dzlPlayer.IsActiveAsArmy()) {
             return objectTarget.IsArmyLoadOut();
         }

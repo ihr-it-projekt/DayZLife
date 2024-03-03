@@ -221,6 +221,21 @@ class DZLPlayer {
 
         Save();
     }
+	
+	void UpdateTransport(bool isTransport, string rank) {
+        this.isTransport = isTransport;
+        if(isTransport) {
+            this.lastTransportRank = rank;
+            if(IsActiveAsTransport()) {
+                this.activeJobGrade = rank;
+            }
+        } else {
+            this.lastCopRank = "";
+            ResetJobCivil();
+        }
+
+        Save();
+    }
 
     void UpdateMedic(bool isMedic, string rank) {
         this.isMedic = isMedic;
