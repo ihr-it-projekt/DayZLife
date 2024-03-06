@@ -166,7 +166,7 @@ class DZLLicenceConfig {
         if(version == "4") {
             version = "5";
         }
-		
+
         if(version == "5") {
             version = "6";
         }

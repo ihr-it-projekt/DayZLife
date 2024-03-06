@@ -2,7 +2,7 @@ class DZLLicenceCraftItem {
     string type;
     int quantity;
     int health;
-	int healthReduce = 0;
+    int healthReduce = 0;
     [NonSerialized()] string lower;
 
     void DZLLicenceCraftItem(string _type, int _quantity, int _health) {

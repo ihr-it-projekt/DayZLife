@@ -52,8 +52,8 @@ class DZLFoundLicenseCraftItems {
 
     void UseTool(PlayerIdentity identity) {
         foreach(EntityAI item: items) {
-           item.DecreaseHealth("","", reduceHealth);
-           DZLLogCrafting(identity.GetId(), "licence crafting reduce health of tool", type);
+            item.DecreaseHealth("", "", reduceHealth);
+            DZLLogCrafting(identity.GetId(), "licence crafting reduce health of tool", type);
         }
     }
 
