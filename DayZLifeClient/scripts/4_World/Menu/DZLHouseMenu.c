@@ -531,7 +531,7 @@ class DZLHouseMenu : DZLBaseMenu {
                     GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), building.GetPosition()), true);
                 }
             } else if(house.HasOwner() && !house.IsOwner(player)) {
-                if(indexHouseInventor == -1 && (!house.HasLockedDoors() || house.HasPlayerAccess(dzlPlayer.dayZPlayerId) || (config.adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop())) && house.HasInventory() && inventory) {
+                if(indexHouseInventor == -1 && (!house.HasLockedDoors() || house.HasPlayerAccess(dzlPlayer.dayZPlayerId) || (config.adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP))) && house.HasInventory() && inventory) {
                     selectedPanel.AddItem("#House_Storage");
                     indexHouseInventor = selectedPanel.GetNumItems() - 1;
                 } else if(indexHouseInventor != -1) {
@@ -549,7 +549,7 @@ class DZLHouseMenu : DZLBaseMenu {
                     indexHouseUpgrade = -1;
                 }
 
-                if(dzlPlayer.IsActiveAsCop()) {
+                if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP)) {
                     player.DisplayMessage("#owner_is: " + house.GetOwnerName());
                 } else {
                     player.DisplayMessage("#building_has_alrready_an_owner");

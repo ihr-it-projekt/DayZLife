@@ -33,10 +33,10 @@ class DZLPlayerArrestListener {
                 DZLPlayer copDzl = cop.GetDZLPlayer();
                 DZLPlayer prisonerDzl = prisoner.GetDZLPlayer();
 
-                if(copDzl.IsActiveAsMedic() || copDzl.IsActiveAsCivil() || copDzl.IsActiveAsTransport()) return;
+                if(copDzl.HasJob(DAY_Z_LIFE_JOB_MEDIC) || copDzl.IsActiveAsCivil() || copDzl.HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) return;
                 if(copDzl.arrestTimeInMinutes != 0) return;
-                if(true == prisonerDzl.IsActiveAsCop() && true == copDzl.IsActiveAsCop()) return;
-                if(true == prisonerDzl.IsActiveAsArmy() && true == copDzl.IsActiveAsArmy()) return;
+                if(true == prisonerDzl.HasJob(DAY_Z_LIFE_JOB_COP) && true == copDzl.HasJob(DAY_Z_LIFE_JOB_COP)) return;
+                if(true == prisonerDzl.HasJob(DAY_Z_LIFE_JOB_ARMY) && true == copDzl.HasJob(DAY_Z_LIFE_JOB_ARMY)) return;
 
                 prisonerDzl.ArrestPlayer(arrestReason, arrestTime);
 
@@ -80,15 +80,15 @@ class DZLPlayerArrestListener {
                 openTicketPlayers.Insert(new DZLOpenTicketPlayer(player));
             }
 
-            if(dzlPlayer.IsActiveAsCop()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP)) {
                 copCount ++;
             }
 
-            if(dzlPlayer.IsActiveAsTransport()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
                 transportCount ++;
             }
 
-            if(dzlPlayer.IsActiveAsArmy()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_ARMY)) {
                 armyCont ++;
             }
 
@@ -96,7 +96,7 @@ class DZLPlayerArrestListener {
                 civCount ++;
             }
 
-            if(dzlPlayer.IsActiveAsMedic()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
                 medicCount ++;
             }
 

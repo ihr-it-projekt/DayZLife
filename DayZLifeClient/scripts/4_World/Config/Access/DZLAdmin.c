@@ -1,6 +1,6 @@
 class DZLAdmin {
     ref array<ref DZLPlayerAccess> access;
-    string version = "6";
+    string version = "7";
 
     void DZLAdmin() {
         if(!Load()) {
@@ -13,6 +13,12 @@ class DZLAdmin {
 
         if(version == "5") {
             version = "6";
+
+            Save();
+        }
+
+        if(version == "6") {
+            version = "7";
 
             Save();
         }

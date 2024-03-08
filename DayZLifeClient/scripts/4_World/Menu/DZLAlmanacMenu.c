@@ -195,7 +195,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
         super.OnShow();
         string ident = player.GetPlayerId();
 
-        if(player.GetDZLPlayer().IsActiveAsMedic()) {
+        if(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
             toggleViewWidget.AddItem("#emergencies");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, null, true);
             medicPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -227,7 +227,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, null, true);
 
-        if(player.GetDZLPlayer().IsActiveAsCop()) {
+        if(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP)) {
             toggleViewWidget.AddItem("#cop_panel");
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS, null, true);
             internalCopPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -630,7 +630,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 foreach(DZLEscapedPlayer escapedPlayer: escapedPlayersParam) {
                     int indexOfRow = escapedPlayers.AddItem(escapedPlayer.name, escapedPlayer.player, 0);
                     escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestReason, escapedPlayer.player, 1);
-                    if(player.GetDZLPlayer().IsActiveAsCop()) {
+                    if(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP)) {
                         escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
                     } else {
                         escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 2);

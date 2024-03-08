@@ -19,8 +19,8 @@ class DZLPlayerTicketListener {
                 DZLPlayer copDzl = cop.GetDZLPlayer();
                 DZLPlayer prisonerDzl = ticketReceiver.GetDZLPlayer();
 
-                if(!copDzl.IsActiveAsCop()) return;
-                if(!DAY_Z_LIFE_DEBUG && prisonerDzl.IsActiveAsCop()) return;
+                if(!copDzl.HasJob(DAY_Z_LIFE_JOB_COP)) return;
+                if(!DAY_Z_LIFE_DEBUG && prisonerDzl.HasJob(DAY_Z_LIFE_JOB_COP)) return;
 
                 prisonerDzl.AddTicket(ticketValue, ticketReason);
 

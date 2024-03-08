@@ -24,7 +24,7 @@ modded class ActionOpenDoors {
 
                     if(!dzlHouse.IsDoorLooked(doorIndex)) return true;
 
-                    if((DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsCop()) || (DZLConfig.Get().adminIds.CanManageArmy(dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveAsArmy())) {
+                    if((DZLConfig.Get().adminIds.CanManageCops(dzlPlayer.dayZPlayerId) && dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP)) || (DZLConfig.Get().adminIds.CanManageArmy(dzlPlayer.dayZPlayerId) && dzlPlayer.HasJob(DAY_Z_LIFE_JOB_ARMY))) {
                         return true;
                     }
                     DZLSendMessage(player.GetIdentity(), "#door_is_looked");

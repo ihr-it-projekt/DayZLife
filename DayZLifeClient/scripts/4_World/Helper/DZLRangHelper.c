@@ -1,19 +1,19 @@
 class DZLRankHelper {
     static DZLPaycheck getCurrentPayCheck(DZLPlayer dzlPlayer, DZLPaycheckConfig config) {
         if(dzlPlayer) {
-            if(dzlPlayer.IsActiveAsCop()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP)) {
                 return searchPayCheck(dzlPlayer, config.cops);
             }
 
-            if(dzlPlayer.IsActiveAsTransport()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
                 return searchPayCheck(dzlPlayer, config.transports);
             }
 
-            if(dzlPlayer.IsActiveAsMedic()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
                 return searchPayCheck(dzlPlayer, config.medics);
             }
 
-            if(dzlPlayer.IsActiveAsArmy()) {
+            if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_ARMY)) {
                 return searchPayCheck(dzlPlayer, config.armies);
             }
 

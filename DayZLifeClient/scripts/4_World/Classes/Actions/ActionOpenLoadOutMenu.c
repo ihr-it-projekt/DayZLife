@@ -19,13 +19,13 @@ class ActionOpenLoadOutMenu: ActionInteractBase {
 
         if(g_Game.GetUIManager().GetMenu() == NULL) {
             DZLLoadOutMenu menu = action_data.m_Player.GetLoadOutMenu();
-            if(action_data.m_Player.GetDZLPlayer().IsActiveAsCop()) {
+            if(action_data.m_Player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP)) {
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsCops.loadOutCategories);
-            } else if(action_data.m_Player.GetDZLPlayer().IsActiveAsMedic()) {
+            } else if(action_data.m_Player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsMedics.loadOutCategories);
-            } else if(action_data.m_Player.GetDZLPlayer().IsActiveAsTransport()) {
+            } else if(action_data.m_Player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsTransport.loadOutCategories);
-            } else if(action_data.m_Player.GetDZLPlayer().IsActiveAsArmy()) {
+            } else if(action_data.m_Player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_ARMY)) {
                 menu.SetCategories(action_data.m_Player.GetConfig().jobConfig.loadOutsArmy.loadOutCategories);
             }
 
@@ -40,13 +40,13 @@ class ActionOpenLoadOutMenu: ActionInteractBase {
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
         if(!dzlPlayer || !player.GetConfig() || !player.GetConfig().jobConfig) return false;
 
-        if(dzlPlayer.IsActiveAsCop()) {
+        if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP)) {
             return objectTarget.IsCopLoadOut();
-        } else if(dzlPlayer.IsActiveAsMedic()) {
+        } else if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
             return objectTarget.IsMedicLoadOut();
-        } else if(dzlPlayer.IsActiveAsTransport()) {
+        } else if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
             return objectTarget.IsTransportLoadOut();
-        } else if(dzlPlayer.IsActiveAsArmy()) {
+        } else if(dzlPlayer.HasJob(DAY_Z_LIFE_JOB_ARMY)) {
             return objectTarget.IsArmyLoadOut();
         }
 

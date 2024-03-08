@@ -22,61 +22,20 @@ class DZLPlayerIdentities {
         }
     }
 
-    array<ref DZLOnlinePlayer> GetCopPlayerCollection() {
+    array<ref DZLOnlinePlayer> GetJobPlayerCollection(string jobName) {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if(player.IsCop()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_COP)));
+            if(player.HasJob(jobName)) {
+                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(jobName)));
             }
         }
 
         return collection;
     }
 
-    array<ref DZLOnlinePlayer> GetTransportPlayerCollection() {
-        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
-
-        foreach(string ident: playerIdentities) {
-            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-
-            if(player.IsTransport()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_TRANSPORT)));
-            }
-        }
-
-        return collection;
-    }
-
-    array<ref DZLOnlinePlayer> GetMedicPlayerCollection() {
-        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
-
-        foreach(string ident: playerIdentities) {
-            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-
-            if(player.IsMedic()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_MEDIC)));
-            }
-        }
-
-        return collection;
-    }
-
-    array<ref DZLOnlinePlayer> GetArmyPlayerCollection() {
-        array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
-
-        foreach(string ident: playerIdentities) {
-            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-
-            if(player.IsArmy()) {
-                collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(DAY_Z_LIFE_JOB_ARMY)));
-            }
-        }
-
-        return collection;
-    }
 
     array<ref DZLOnlinePlayer> GetPlayerCollection(array<string> exclude) {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;

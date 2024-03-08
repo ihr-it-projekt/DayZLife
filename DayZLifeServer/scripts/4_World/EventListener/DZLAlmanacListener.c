@@ -144,7 +144,7 @@ class DZLAlmanacListener {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
-        array<ref DZLOnlinePlayer> copIdents = dzlPlayerIdentities.GetCopPlayerCollection();
+        array<ref DZLOnlinePlayer> copIdents = dzlPlayerIdentities.GetJobPlayerCollection(DAY_Z_LIFE_JOB_COP);
 
         if(_players) {
             foreach(Man _player: _players) {
@@ -168,7 +168,7 @@ class DZLAlmanacListener {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
-        array<ref DZLOnlinePlayer> transportIdents = dzlPlayerIdentities.GetTransportPlayerCollection();
+        array<ref DZLOnlinePlayer> transportIdents = dzlPlayerIdentities.GetJobPlayerCollection(DAY_Z_LIFE_JOB_TRANSPORT);
 
         if(_players) {
             foreach(Man _player: _players) {
@@ -192,13 +192,13 @@ class DZLAlmanacListener {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
-        array<ref DZLOnlinePlayer> medicIdents = dzlPlayerIdentities.GetMedicPlayerCollection();
+        array<ref DZLOnlinePlayer> medicIdents = dzlPlayerIdentities.GetJobPlayerCollection(DAY_Z_LIFE_JOB_MEDIC);
 
         if(_players) {
             foreach(Man _player: _players) {
                 DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
                 if(!dzlPlayer.IsMedic()) {
-                    collection.Insert(new DZLOnlinePlayer(_player.GetIdentity().GetId(), _player.GetIdentity().GetName(), ""));
+                    collection.Insert(new DZLOnlinePlayer(_player.GetIdentity().GetId(), _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRank(DAY_Z_LIFE_JOB_MEDIC)));
                 }
             }
         }
@@ -214,7 +214,7 @@ class DZLAlmanacListener {
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
-        array<ref DZLOnlinePlayer> armyIdents = dzlPlayerIdentities.GetArmyPlayerCollection();
+        array<ref DZLOnlinePlayer> armyIdents = dzlPlayerIdentities.GetJobPlayerCollection(DAY_Z_LIFE_JOB_ARMY);
 
         if(_players) {
             foreach(Man _player: _players) {

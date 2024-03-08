@@ -138,20 +138,8 @@ class DZLPlayer {
         return activeJobGrade == grade;
     }
 
-    bool IsActiveAsCop() {
-        return DAY_Z_LIFE_JOB_COP == activeJob;
-    }
-
-    bool IsActiveAsTransport() {
-        return DAY_Z_LIFE_JOB_TRANSPORT == activeJob;
-    }
-
-    bool IsActiveAsMedic() {
-        return DAY_Z_LIFE_JOB_MEDIC == activeJob;
-    }
-
-    bool IsActiveAsArmy() {
-        return DAY_Z_LIFE_JOB_ARMY == activeJob;
+    bool HasJob(string job) {
+        return activeJob == job;
     }
 
     bool IsActiveAsCivil() {
@@ -211,7 +199,7 @@ class DZLPlayer {
         this.isCop = isCop;
         if(isCop) {
             this.lastCopRank = rank;
-            if(IsActiveAsCop()) {
+            if(HasJob(DAY_Z_LIFE_JOB_COP)) {
                 this.activeJobGrade = rank;
             }
         } else {
@@ -226,11 +214,11 @@ class DZLPlayer {
         this.isTransport = isTransport;
         if(isTransport) {
             this.lastTransportRank = rank;
-            if(IsActiveAsTransport()) {
+            if(HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
                 this.activeJobGrade = rank;
             }
         } else {
-            this.lastCopRank = "";
+            this.lastTransportRank = "";
             ResetJobCivil();
         }
 
@@ -242,7 +230,7 @@ class DZLPlayer {
 
         if(isMedic) {
             this.lastMedicRank = rank;
-            if(IsActiveAsMedic()) {
+            if(HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
                 this.activeJobGrade = rank;
             }
         } else {
@@ -258,7 +246,7 @@ class DZLPlayer {
 
         if(isArmy) {
             this.lastArmyRank = rank;
-            if(IsActiveAsArmy()) {
+            if(HasJob(DAY_Z_LIFE_JOB_ARMY)) {
                 this.activeJobGrade = rank;
             }
         } else {
@@ -270,9 +258,8 @@ class DZLPlayer {
     }
 
     private void ResetJobCivil() {
-        if(IsActiveAsCivil()) {
-            this.activeJobGrade = "Rekrut";
-        }
+        if(!IsActiveAsCivil()) return;
+        this.activeJobGrade = "Rekrut";
     }
 
     bool IsCop() {

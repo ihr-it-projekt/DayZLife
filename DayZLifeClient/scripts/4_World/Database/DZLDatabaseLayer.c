@@ -250,7 +250,7 @@ class DZLDatabaseLayer {
     }
 
     int GetCivCount() {
-        return civCount;
+        return civCount + transportCount;
     }
 
     DZLCrimeData GetCrimeData() {

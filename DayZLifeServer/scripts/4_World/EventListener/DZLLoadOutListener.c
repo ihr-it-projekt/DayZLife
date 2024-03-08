@@ -18,7 +18,7 @@ class DZLLoadOutListener {
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 string categoryName = paramLoadOut.param1;
 
-                if((dzlPlayer.IsActiveAsArmy() && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsTransport() && !SearchLoadOutAndEquip(categoryName, config.loadOutsTransport.loadOutCategories, sender, player))) {
+                if((dzlPlayer.HasJob(DAY_Z_LIFE_JOB_ARMY) && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP) && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.HasJob(DAY_Z_LIFE_JOB_MEDIC) && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player)) || (dzlPlayer.HasJob(DAY_Z_LIFE_JOB_TRANSPORT) && !SearchLoadOutAndEquip(categoryName, config.loadOutsTransport.loadOutCategories, sender, player))) {
                     DZLSendMessage(sender, "#error_category_not_found");
                 }
             }

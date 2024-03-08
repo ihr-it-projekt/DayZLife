@@ -33,7 +33,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsBank()) return false;
 
-        if(!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveAsCop()) return false;
+        if(!player.GetDZLPlayer() || !player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP)) return false;
 
         DZLBank bank;
         if(GetGame().IsServer()) {
@@ -50,7 +50,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
     override void OnEndServer(ActionData action_data) {
         DZLPlayer dzlPlayer = action_data.m_Player.GetDZLPlayer();
         PlayerIdentity ident = action_data.m_Player.GetIdentity();
-        if(!dzlPlayer.IsActiveAsCop()) return;
+        if(!dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP)) return;
 
         GetConfig(action_data.m_Player);
         DZLBank bank = DZLDatabaseLayer.Get().GetBank();
@@ -77,7 +77,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
 
             DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
 
-            if(dzlPlayerCop.IsActiveAsCop()) {
+            if(dzlPlayerCop.HasJob(DAY_Z_LIFE_JOB_COP)) {
                 dzlPlayerCop.AddMoneyToPlayerBank(bonus);
                 GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerCop), true, playerIdentity);
             }
