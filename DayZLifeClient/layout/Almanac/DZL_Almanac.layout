@@ -707,7 +707,7 @@ FrameWidgetClass Almanac {
                imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
                mode blend
                "src alpha" 1
-               stretch 1
+               "stretch mode" stretch_w_h
               }
              }
             }
@@ -871,7 +871,7 @@ FrameWidgetClass Almanac {
            imageTexture "{729A02D897FD10EA}DayZLifeClient/layout/Banking/DZLCash.edds"
            mode blend
            "src alpha" 1
-           stretch 1
+           "stretch mode" stretch_w_h
           }
           TextWidgetClass moneyCash {
            ignorepointer 1
@@ -911,7 +911,7 @@ FrameWidgetClass Almanac {
            imageTexture "{63429AE7A994ECE2}DayZLifeClient/layout/Banking/DZLBank.edds"
            mode blend
            "src alpha" 1
-           stretch 1
+           "stretch mode" stretch_w_h
           }
           TextWidgetClass moneyBank {
            ignorepointer 1
@@ -990,7 +990,7 @@ FrameWidgetClass Almanac {
            imageTexture "{BA01A4394F203C2A}DayZLifeClient/layout/Banking/Prison.edds"
            mode blend
            "src alpha" 1
-           stretch 1
+           "stretch mode" stretch_w_h
           }
           TextWidgetClass arrestTime {
            ignorepointer 1
@@ -1245,8 +1245,7 @@ FrameWidgetClass Almanac {
        imageTexture "{048ED4A53EA093A4}DayZLifeClient/layout/Almanac/PoliceIcon.edds"
        mode blend
        "src alpha" 1
-       "no wrap" 0
-       stretch 1
+       "stretch mode" stretch_w_h
       }
       TextWidgetClass countCop {
        ignorepointer 1
@@ -1270,8 +1269,7 @@ FrameWidgetClass Almanac {
        imageTexture "{39DAA9AABB8E2B03}DayZLifeClient/layout/Almanac/MedicIcon.edds"
        mode additive
        "src alpha" 1
-       "no wrap" 0
-       stretch 1
+       "stretch mode" stretch_w_h
        "flip u" 0
       }
       TextWidgetClass countMedic {
@@ -1296,7 +1294,7 @@ FrameWidgetClass Almanac {
        imageTexture "{7354D2EE62FCC049}DayZLifeClient/layout/Almanac/CivilIcon.edds"
        mode blend
        "src alpha" 1
-       stretch 1
+       "stretch mode" stretch_w_h
       }
       TextWidgetClass countCivil {
        ignorepointer 1
@@ -1320,7 +1318,7 @@ FrameWidgetClass Almanac {
        imageTexture "{C67AC3543A5B9451}DayZLifeClient/layout/Almanac/ArmyIcon.edds"
        mode blend
        "src alpha" 1
-       stretch 1
+       "stretch mode" stretch_w_h
       }
       TextWidgetClass countArmy {
        ignorepointer 1
@@ -1370,7 +1368,7 @@ FrameWidgetClass Almanac {
            imageTexture "{35E83651B6E3321F}DayZLifeClient/layout/Almanac/sync.edds"
            mode blend
            "src alpha" 1
-           stretch 1
+           "stretch mode" stretch_w_h
           }
          }
         }
@@ -1654,6 +1652,121 @@ FrameWidgetClass Almanac {
            vexactsize 0
            "title visible" 1
            colums "#Army_Rank"
+           lines 15
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass transport_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget117 {
+         ignorepointer 1
+         position 0 0
+         size 0.35 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_TransportPanel {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget118 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass transportListbox {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Transport_list;50;#Rank;50;"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget119 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_TransportPanel {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget36 {
+         ignorepointer 1
+         position 0 0
+         size 0.18918 0.77525
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass transport_RankList {
+           position 0 0
+           size 0.96078 0.97183
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Transport_Rank"
            lines 15
           }
          }
