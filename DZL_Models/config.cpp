@@ -35,13 +35,7 @@ class CfgVehicles {
     class DZLLicenseActionObject: DZLBaseActionObject {
         model = "\DZ\structures\furniture\generalstore\pultskasou.p3d";
     };
-    class DZLLoadoutMedicActionObject: DZLBaseActionObject {
-        model = "\DZL_Misc\Terminal\DZL_Terminal.p3d";
-    };
-    class DZLLoadoutCopActionObject: DZLBaseActionObject {
-        model = "\DZL_Misc\Terminal\DZL_Terminal.p3d";
-    };
-    class DZLLoadoutArmyActionObject: DZLBaseActionObject {
+    class DZLLoadoutActionObject: DZLBaseActionObject {
         model = "\DZL_Misc\Terminal\DZL_Terminal.p3d";
     };
     class DZLTuningActionObject: DZLBaseActionObject {

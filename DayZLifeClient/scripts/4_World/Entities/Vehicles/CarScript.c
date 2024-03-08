@@ -154,7 +154,7 @@ modded class CarScript {
 
         if(!dzlPlayer) return false;
 
-        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.HasJob(DAY_Z_LIFE_JOB_COP) || player.GetConfig().adminIds.CanManageCars(ident) || dzlPlayer.HasJob(DAY_Z_LIFE_JOB_ARMY);
+        return isRaided || ident == ownerId || -1 != playerAccess.Find(ident) || dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP) || player.GetConfig().adminIds.HasAccess(DAY_Z_LIFE_JOB_ARMY, ident) || dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY);
     }
 
     void RemovePlayerAccess(string ident) {

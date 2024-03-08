@@ -25,7 +25,7 @@ class ActionOpenTicketMenu: ActionInteractBase {
         if(!target.GetObject()) return false;
         if(!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
         DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
-        if(!dzlPlayerCop.HasJob(DAY_Z_LIFE_JOB_COP)) return false;
+        if(!dzlPlayerCop.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return false;
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
         if(!targetPlayer.IsDZLPlayer()) return false;
@@ -34,7 +34,7 @@ class ActionOpenTicketMenu: ActionInteractBase {
             if(!targetPlayer || !targetPlayer.GetIdentity()) return false;
 
             DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();
-            if(dzlPlayerPrisoner.HasJob(DAY_Z_LIFE_JOB_COP)) return false;
+            if(dzlPlayerPrisoner.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return false;
         }
 
         return true;

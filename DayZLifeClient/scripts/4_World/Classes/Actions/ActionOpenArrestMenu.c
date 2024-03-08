@@ -18,7 +18,7 @@ class ActionOpenArrestMenu: ActionInteractBase {
         if(!target.GetObject()) return false;
         if(!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
         DZLPlayer dzlPlayerCop = player.GetDZLPlayer();
-        if(dzlPlayerCop.HasJob(DAY_Z_LIFE_JOB_MEDIC) || dzlPlayerCop.IsActiveAsCivil()) return false;
+        if(dzlPlayerCop.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC) || dzlPlayerCop.IsActiveAsCivil()) return false;
         if(dzlPlayerCop.arrestTimeInMinutes != 0) return false;
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
@@ -29,8 +29,8 @@ class ActionOpenArrestMenu: ActionInteractBase {
 
             DZLPlayer dzlPlayerPrisoner = targetPlayer.GetDZLPlayer();
 
-            if(true == dzlPlayerPrisoner.HasJob(DAY_Z_LIFE_JOB_COP) && true == dzlPlayerCop.HasJob(DAY_Z_LIFE_JOB_COP))  return false;
-            if(true == dzlPlayerPrisoner.HasJob(DAY_Z_LIFE_JOB_ARMY) && true == dzlPlayerCop.HasJob(DAY_Z_LIFE_JOB_ARMY)) return false;
+            if(true == dzlPlayerPrisoner.IsActiveJob(DAY_Z_LIFE_JOB_COP) && true == dzlPlayerCop.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return false;
+            if(true == dzlPlayerPrisoner.IsActiveJob(DAY_Z_LIFE_JOB_ARMY) && true == dzlPlayerCop.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return false;
         }
 
         return true;

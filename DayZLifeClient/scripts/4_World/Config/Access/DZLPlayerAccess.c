@@ -1,3 +1,5 @@
+//Deprecated Remove 08.03.25
+
 class DZLPlayerAccess {
     private bool canManageCops = true;
     private bool canManageTransport = true;
@@ -27,10 +29,6 @@ class DZLPlayerAccess {
 
     bool CanManageCops() {
         return canManageCops;
-    }
-
-    bool CanManageTransport() {
-        return canManageTransport;
     }
 
     bool CanManageMedic() {

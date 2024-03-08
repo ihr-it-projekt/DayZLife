@@ -1,15 +1,12 @@
 class DZLBaseActionObject : BuildingSuper {
-    protected bool isBank = false;
-    protected bool isTrader = false;
-    protected bool isGarage = false;
-    protected bool isCopLoadOut = false;
-    protected bool isTransportLoadOut = false;
-    protected bool isMedicLoadOut = false;
-    protected bool isArmyLoadOut = false;
-    protected bool isLicensePoint = false;
-    protected bool isLicenseActionPoint = false;
-    protected bool isShopActionPoint = false;
-    protected bool isTuningPoint = false;
+    bool isBank = false;
+    bool isTrader = false;
+    bool isGarage = false;
+    bool isLicensePoint = false;
+    bool isLicenseActionPoint = false;
+    bool isShopActionPoint = false;
+    bool isTuningPoint = false;
+    string jobName;
 
     bool IsBank() {
         return isBank;
@@ -23,28 +20,14 @@ class DZLBaseActionObject : BuildingSuper {
         return isGarage;
     }
 
-    bool IsCopLoadOut() {
-        return isCopLoadOut;
-    }
-
-    bool IsMedicLoadOut() {
-        return isMedicLoadOut;
-    }
-
-    bool IsTransportLoadOut() {
-        return isTransportLoadOut;
-    }
-
-    bool IsArmyLoadOut() {
-        return isArmyLoadOut;
-    }
-
     bool IsLicensePoint() {
         return isLicensePoint;
     }
 
-    bool IsLoadOut() {
-        return isCopLoadOut || isMedicLoadOut || isArmyLoadOut || isTransportLoadOut;
+    bool IsLoadOut(string job) {
+        return jobName == job;
+
+        SetSynchDirty();
     }
 
     bool IsLicenseActionPoint() {
@@ -58,4 +41,5 @@ class DZLBaseActionObject : BuildingSuper {
     bool IsTuningPoint() {
         return isTuningPoint;
     }
+
 }

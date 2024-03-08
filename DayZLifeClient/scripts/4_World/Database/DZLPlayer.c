@@ -1,8 +1,16 @@
 class DZLPlayer {
+
+    private string version = "6";
     string fileName = "";
     string dayZPlayerId = "";
     private int money = 0;
     private int bank = 0;
+
+    private ref map<string, bool> jobMap = new map<string, bool>;
+    private ref map<string, string> jobGradeMap = new map<string, string>;
+    private ref map<string, int> onlineTimeMap = new map<string, int>;
+
+    // DEPRECATED remove 08.03.2025
     private bool isCop = false;
     private string lastCopRank = "";
     private bool isTransport = false;
@@ -11,25 +19,34 @@ class DZLPlayer {
     private string lastMedicRank = "";
     private bool isArmy = false;
     private string lastArmyRank = "";
-    private int robtMoney = 0;
+    private int onlineTimeCivil = 0;
+    private int onlineTimeMedic = 0;
+    private int onlineTimeCop = 0;
+
+    // Deprecated end
+
     string playerName = "";
-    int onlineTimeCivil = 0;
-    int onlineTimeMedic = 0;
-    int onlineTimeCop = 0;
-    int arrestTimeInMinutes = 0;
+    private int robtMoney = 0;
     string arrestReason = "";
+    int arrestTimeInMinutes = 0;
     private string activeJob = DAY_Z_LIFE_JOB_CIVIL;
     private string activeJobGrade = "Rekrut";
     ref DZLDate lastLoginDate;
     ref TStringArray licenceIds;
     private string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
     ref array<ref DZLStoreItem> itemsStore;
-    private string version = "5";
     private ref array<ref DZLTicket> openTickets;
     private string fractionId = "";
     private ref array<string> fractionWherePlayerCanJoin;
     private ref DZLFraction fraction = null;
     [NonSerialized()] PlayerBase player;
+
+    void IncreaseOnlineTime() {
+        int onlineTime = onlineTimeMap.Get(activeJob);
+        if(!onlineTime) onlineTime = 0;
+
+        onlineTimeMap.Set(activeJob, onlineTime + 1);
+    }
 
     void DZLPlayer(string playerId, int moneyToAdd = 0) {
         if(!playerId) {
@@ -76,6 +93,30 @@ class DZLPlayer {
             }
         }
 
+        if("5" == version) {
+            jobMap = new map<string, bool>;
+            jobMap.Insert(DAY_Z_LIFE_JOB_CIVIL, true);
+            jobMap.Insert(DAY_Z_LIFE_JOB_MEDIC, isMedic);
+            jobMap.Insert(DAY_Z_LIFE_JOB_COP, isCop);
+            jobMap.Insert(DAY_Z_LIFE_JOB_TRANSPORT, isTransport);
+            jobMap.Insert(DAY_Z_LIFE_JOB_ARMY, isArmy);
+
+            jobGradeMap = new map<string, string>;
+            jobGradeMap.Insert(DAY_Z_LIFE_JOB_CIVIL, "Rekrut");
+            jobGradeMap.Insert(DAY_Z_LIFE_JOB_MEDIC, lastMedicRank);
+            jobGradeMap.Insert(DAY_Z_LIFE_JOB_COP, lastCopRank);
+            jobGradeMap.Insert(DAY_Z_LIFE_JOB_TRANSPORT, lastTransportRank);
+            jobGradeMap.Insert(DAY_Z_LIFE_JOB_ARMY, lastArmyRank);
+
+            onlineTimeMap = new map<string, int>;
+            onlineTimeMap.Insert(DAY_Z_LIFE_JOB_CIVIL, onlineTimeCivil);
+            onlineTimeMap.Insert(DAY_Z_LIFE_JOB_MEDIC, onlineTimeMedic);
+            onlineTimeMap.Insert(DAY_Z_LIFE_JOB_COP, onlineTimeCop);
+            onlineTimeMap.Insert(DAY_Z_LIFE_JOB_TRANSPORT, 0);
+
+            version = "6";
+        }
+
         Save();
     }
 
@@ -104,28 +145,15 @@ class DZLPlayer {
 
     void SetJobGrade(string grade) {
         activeJobGrade = grade;
+        jobGradeMap.Set(activeJob, grade);
 
-        if(DAY_Z_LIFE_JOB_COP == activeJob) {
-            lastCopRank = activeJobGrade;
-        } else if(DAY_Z_LIFE_JOB_TRANSPORT == activeJob) {
-            lastTransportRank = activeJobGrade;
-        } else if(DAY_Z_LIFE_JOB_MEDIC == activeJob) {
-            lastMedicRank = activeJobGrade;
-        } else if(DAY_Z_LIFE_JOB_ARMY == activeJob) {
-            lastArmyRank = activeJobGrade;
-        }
+        Save();
     }
 
     string GetLastJobRank(string job) {
-        if(DAY_Z_LIFE_JOB_COP == job) {
-            return lastCopRank;
-        } else if(DAY_Z_LIFE_JOB_TRANSPORT == job) {
-            return lastTransportRank;
-        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
-            return lastMedicRank;
-        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
-            return lastArmyRank;
-        }
+        string rank = jobGradeMap.Get(job);
+        if(rank) return rank;
+
 
         return "Rekrut";
     }
@@ -133,12 +161,11 @@ class DZLPlayer {
     string GetJobGrade() {
         return activeJobGrade;
     }
-
-    bool HasJobGrade(string grade) {
+    bool IsActiveJobGrade(string grade) {
         return activeJobGrade == grade;
     }
 
-    bool HasJob(string job) {
+    bool IsActiveJob(string job) {
         return activeJob == job;
     }
 
@@ -148,111 +175,41 @@ class DZLPlayer {
 
     void UpdateActiveJob(string job) {
         activeJob = job;
-
-        if(DAY_Z_LIFE_JOB_COP == job) {
-            activeJobGrade = lastCopRank;
-        } else if(DAY_Z_LIFE_JOB_TRANSPORT == job) {
-            activeJobGrade = lastTransportRank;
-        } else if(DAY_Z_LIFE_JOB_MEDIC == job) {
-            activeJobGrade = lastMedicRank;
-        } else if(DAY_Z_LIFE_JOB_ARMY == job) {
-            activeJobGrade = lastArmyRank;
-        }
+        activeJobGrade = GetLastJobRank(job);
 
         Save();
     }
 
     void UpdateOnlineTime() {
-        if(activeJob == DAY_Z_LIFE_JOB_COP) {
-            onlineTimeCop++;
-        } else if(activeJob == DAY_Z_LIFE_JOB_MEDIC) {
-            onlineTimeMedic++;
-        } else {
-            onlineTimeCivil++;
-        }
+        int onlineTime = onlineTimeMap.Get(activeJob);
+        if(!onlineTime) onlineTime = 0;
+
+        onlineTimeMap.Set(activeJob, onlineTime + 1);
 
         Save();
     }
 
     void ResetOnlineTime() {
-        if(activeJob == DAY_Z_LIFE_JOB_COP) {
-            onlineTimeCop = 0;
-        } else if(activeJob == DAY_Z_LIFE_JOB_MEDIC) {
-            onlineTimeMedic = 0;
-        } else {
-            onlineTimeCivil = 0;
-        }
-
+        onlineTimeMap.Set(activeJob, 0);
         Save();
     }
 
     int GetActiveOnlineTime() {
-        if(activeJob == DAY_Z_LIFE_JOB_COP) {
-            return onlineTimeCop;
-        } else if(activeJob == DAY_Z_LIFE_JOB_MEDIC) {
-            return onlineTimeMedic;
-        }
-        return onlineTimeCivil;
+        int onlineTime = onlineTimeMap.Get(activeJob);
+        if(!onlineTime) onlineTime = 0;
+
+        return onlineTime;
     }
 
-    void UpdateCop(bool isCop, string rank) {
-        this.isCop = isCop;
-        if(isCop) {
-            this.lastCopRank = rank;
-            if(HasJob(DAY_Z_LIFE_JOB_COP)) {
-                this.activeJobGrade = rank;
-            }
-        } else {
-            this.lastCopRank = "";
-            ResetJobCivil();
+    void UpdateJob(string jobName, bool isJob, string rank) {
+        jobMap.Set(jobName, isJob);
+        jobGradeMap.Set(jobName, rank);
+
+        if(IsActiveJob(jobName)) {
+            this.activeJobGrade = rank;
         }
 
-        Save();
-    }
-
-    void UpdateTransport(bool isTransport, string rank) {
-        this.isTransport = isTransport;
-        if(isTransport) {
-            this.lastTransportRank = rank;
-            if(HasJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
-                this.activeJobGrade = rank;
-            }
-        } else {
-            this.lastTransportRank = "";
-            ResetJobCivil();
-        }
-
-        Save();
-    }
-
-    void UpdateMedic(bool isMedic, string rank) {
-        this.isMedic = isMedic;
-
-        if(isMedic) {
-            this.lastMedicRank = rank;
-            if(HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
-                this.activeJobGrade = rank;
-            }
-        } else {
-            this.lastMedicRank = "";
-            ResetJobCivil();
-        }
-
-        Save();
-    }
-
-    void UpdateArmy(bool isArmy, string rank) {
-        this.isArmy = isArmy;
-
-        if(isArmy) {
-            this.lastArmyRank = rank;
-            if(HasJob(DAY_Z_LIFE_JOB_ARMY)) {
-                this.activeJobGrade = rank;
-            }
-        } else {
-            this.lastArmyRank = "";
-            ResetJobCivil();
-        }
+        ResetJobCivil();
 
         Save();
     }
@@ -260,22 +217,6 @@ class DZLPlayer {
     private void ResetJobCivil() {
         if(!IsActiveAsCivil()) return;
         this.activeJobGrade = "Rekrut";
-    }
-
-    bool IsCop() {
-        return isCop;
-    }
-
-    bool IsTransport() {
-        return isTransport;
-    }
-
-    bool IsMedic() {
-        return isMedic;
-    }
-
-    bool IsArmy() {
-        return isArmy;
     }
 
     void UpdateName(string playerName) {

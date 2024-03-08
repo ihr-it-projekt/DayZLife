@@ -1,78 +1,31 @@
 class DZLAdmin {
-    ref array<ref DZLPlayerAccess> access;
+    private ref array<ref DZLPlayerAccess> access = new array<ref DZLPlayerAccess>();
+    private ref array<ref DZLAccess> playerAccesses = new array<ref DZLAccess>();
     string version = "7";
 
-    void DZLAdmin() {
-        if(!Load()) {
-            access = new array<ref DZLPlayerAccess>;
-            access.Insert(new DZLPlayerAccess("example Id"));
-            version = "6";
-
-            Save();
-        }
-
-        if(version == "5") {
-            version = "6";
-
-            Save();
-        }
-
+    void DZLAdmin(array<string> jobs) {
         if(version == "6") {
+            foreach(DZLPlayerAccess playerAccess: access) {
+                DZLAccess access = new DZLAccess(playerAccess.GetIdent(), jobs);
+
+                access.MigrateAccess(playerAccess);
+
+                playerAccesses.Insert(access);
+            }
+
             version = "7";
 
             Save();
         }
     }
 
-    bool CanManagePlayers(string ident) {
-        foreach(DZLPlayerAccess playerAccess: access) {
-            if(playerAccess && playerAccess.GetIdent() == ident) {
-                return playerAccess.CanManagePlayers();
-            }
-        }
-        return false;
-    }
+    bool HasAccess(string access, string ident) {
+        foreach(DZLAccess playerAccess: playerAccesses) {
+            if(!playerAccess) continue;
+            if(playerAccess.id != ident) continue;
 
-    bool CanManageCops(string ident) {
-        foreach(DZLPlayerAccess playerAccess: access) {
-            if(playerAccess && playerAccess.GetIdent() == ident) {
-                return playerAccess.CanManageCops();
-            }
-        }
-        return false;
-    }
+            return playerAccess.HasAccess(access);
 
-    bool CanManageTransport(string ident) {
-        foreach(DZLPlayerAccess playerAccess: access) {
-            if(playerAccess && playerAccess.GetIdent() == ident) {
-                return playerAccess.CanManageTransport();
-            }
-        }
-        return false;
-    }
-
-    bool CanManageMedic(string ident) {
-        foreach(DZLPlayerAccess playerAccess: access) {
-            if(playerAccess && playerAccess.GetIdent() == ident) {
-                return playerAccess.CanManageMedic();
-            }
-        }
-        return false;
-    }
-    bool CanManageArmy(string ident) {
-        foreach(DZLPlayerAccess playerAccess: access) {
-            if(playerAccess && playerAccess.GetIdent() == ident) {
-                return playerAccess.CanManageArmy();
-            }
-        }
-        return false;
-    }
-
-    bool CanManageCars(string ident) {
-        foreach(DZLPlayerAccess playerAccess: access) {
-            if(playerAccess && playerAccess.GetIdent() == ident) {
-                return playerAccess.CanManageCars();
-            }
         }
         return false;
     }

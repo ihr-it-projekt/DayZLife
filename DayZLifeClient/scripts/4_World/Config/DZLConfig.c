@@ -20,7 +20,6 @@ class DZLConfig {
     ref DZLJobSpawnPoints medicSpawnPoints;
     ref DZLJobSpawnPoints armySpawnPoints;
     ref DZLJobSpawnPoints civilSpawnPoints;
-    ref array<string> jobIds;
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
     ref DZLCarConfig transportConfig;
@@ -43,7 +42,7 @@ class DZLConfig {
             medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
             civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
             armySpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_ARMY);
-            adminIds = new DZLAdmin;
+            adminIds = new DZLAdmin(jobConfig.jobNames.jobNames);
             carConfig = new DZLCarConfig;
             medicConfig = new DZLMedicConfig;
             baseBuildingConfig = new DZLBaseBuildingConfig;
@@ -52,12 +51,6 @@ class DZLConfig {
             tuningConfig = new DZLTuningConfig;
         }
 
-        jobIds = new array<string>;
-        jobIds.Insert(DAY_Z_LIFE_JOB_CIVIL);
-        jobIds.Insert(DAY_Z_LIFE_JOB_TRANSPORT);
-        jobIds.Insert(DAY_Z_LIFE_JOB_MEDIC);
-        jobIds.Insert(DAY_Z_LIFE_JOB_COP);
-        jobIds.Insert(DAY_Z_LIFE_JOB_ARMY);
     }
 
     DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {

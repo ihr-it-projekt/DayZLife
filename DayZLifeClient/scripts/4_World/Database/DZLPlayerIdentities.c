@@ -28,7 +28,7 @@ class DZLPlayerIdentities {
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if(player.HasJob(jobName)) {
+            if(player.IsActiveJob(jobName)) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(jobName)));
             }
         }
@@ -51,77 +51,22 @@ class DZLPlayerIdentities {
         return collection;
     }
 
-    void UpdateCops(ref array<DZLOnlinePlayer> cops) {
-        if(!cops) return;
+    void UpdateJob(string job, ref array<DZLOnlinePlayer> players) {
+        if(!players) return;
 
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
             bool hasFound = false;
             string newRank = "";
-            foreach(DZLOnlinePlayer newCop: cops) {
-                if(ident == newCop.id) {
+            foreach(DZLOnlinePlayer dzlPlayer: players) {
+                if(ident == dzlPlayer.id) {
                     hasFound = true;
-                    newRank = newCop.rank;
+                    newRank = dzlPlayer.rank;
                     break;
                 }
             }
 
-            player.UpdateCop(hasFound, newRank);
-        }
-    }
-
-    void UpdateTransports(ref array<DZLOnlinePlayer> transports) {
-        if(!transports) return;
-
-        foreach(string ident: playerIdentities) {
-            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-            bool hasFound = false;
-            string newRank = "";
-            foreach(DZLOnlinePlayer newTransport: transports) {
-                if(ident == newTransport.id) {
-                    hasFound = true;
-                    newRank = newTransport.rank;
-                    break;
-                }
-            }
-
-            player.UpdateTransport(hasFound, newRank);
-        }
-    }
-
-    void UpdateMedics(ref array<DZLOnlinePlayer> medics) {
-        if(!medics) return;
-
-        foreach(string ident: playerIdentities) {
-            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-            bool hasFound = false;
-            string newRank = "";
-            foreach(DZLOnlinePlayer newMedic: medics) {
-                if(ident == newMedic.id) {
-                    hasFound = true;
-                    newRank = newMedic.rank;
-                    break;
-                }
-            }
-            player.UpdateMedic(hasFound, newRank);
-        }
-    }
-
-    void UpdateArmy(ref array<DZLOnlinePlayer> army) {
-        if(!army) return;
-
-        foreach(string ident: playerIdentities) {
-            DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-            bool hasFound = false;
-            string newRank = "";
-            foreach(DZLOnlinePlayer newArmy: army) {
-                if(ident == newArmy.id) {
-                    hasFound = true;
-                    newRank = newArmy.rank;
-                    break;
-                }
-            }
-            player.UpdateArmy(hasFound, newRank);
+            player.UpdateJob(job, hasFound, newRank);
         }
     }
 

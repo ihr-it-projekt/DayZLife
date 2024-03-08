@@ -163,8 +163,8 @@ class DZLMessageSystemMenu : DZLBaseMenu {
 
     override void OnShow() {
         super.OnShow();
-        sendGlobalButton.Show(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP) || player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC));
-        globalBoarder.Show(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP) || player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC));
+        sendGlobalButton.Show(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP) || player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC));
+        globalBoarder.Show(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP) || player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC));
 
         onlinePlayersWidget.Show(config.messageConfig.showOnlinePlayersInMessageMenu);
 

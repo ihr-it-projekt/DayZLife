@@ -13,7 +13,7 @@ modded class ActionDefibrilateTarget {
             return false;
         }
 
-        if(GetGame().IsClient() && player.GetDZLPlayer() && player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC) && !targetPlayer.IsAlive()) {
+        if(GetGame().IsClient() && player.GetDZLPlayer() && player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC) && !targetPlayer.IsAlive()) {
             Defibrillator defib = Defibrillator.Cast(item);
             if(!defib) return false;
             return CanDefibrillate(defib);;

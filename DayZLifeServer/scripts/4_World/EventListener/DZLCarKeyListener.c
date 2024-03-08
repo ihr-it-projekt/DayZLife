@@ -43,7 +43,7 @@ class DZLCarKeyListener {
             if(ctx.Read(paramChangeOwner) && sender) {
                 string receiverId = paramChangeOwner.param1;
                 CarScript carToChange = paramChangeOwner.param2;
-                if(!carToChange.IsOwner(sender) && !adminConfig.CanManageCars(sender.GetId())) {
+                if(!carToChange.IsOwner(sender) && !adminConfig.HasAccess(DAY_Z_LIFE_ACCESS_CARS, sender.GetId())) {
                     DZLSendMessage(sender, "#you_are_not_the_owner_can_not_change");
                     return;
                 }

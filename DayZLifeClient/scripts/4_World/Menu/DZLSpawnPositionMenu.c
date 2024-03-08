@@ -50,28 +50,28 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         GetGame().GetMission().GetHud().ShowHud(false);
         GetGame().GetMission().GetHud().ShowQuickBar(false);
 
-        jobId = config.jobIds.Get(0);
+        jobId = config.jobConfig.jobNames.jobNames.Get(0);
 
-        foreach(string configJobId: config.jobIds) {
+        foreach(string configJobId: config.jobConfig.jobNames.jobNames) {
             activeJobIds.Insert(configJobId);
         }
 
         jobSelection.ClearAll();
         jobSelection.AddItem("#Civ");
 
-        if(player.GetDZLPlayer().IsMedic()) {
+        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
             medicIndex = jobSelection.AddItem("#Medic");
         }
 
-        if(player.GetDZLPlayer().IsCop()) {
+        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
             copIndex = jobSelection.AddItem("#Cop");
         }
 
-        if(player.GetDZLPlayer().IsTransport()) {
+        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
             transportIndex = jobSelection.AddItem("Transport");
         }
 
-        if(player.GetDZLPlayer().IsArmy()) {
+        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) {
             armyIndex = jobSelection.AddItem("#Army");
         }
 

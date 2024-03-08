@@ -51,9 +51,9 @@ modded class PlayerBase {
     void SetIsSpawned() {
         int time = DZLPlayerClientDB.Get().GetConfig().civilSpawnPoints.blockTimeForJobChange;
         DZLPlayer dzlPlayer = GetDZLPlayer();
-        if(dzlPlayer.IsCop()) {
+        if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
             time = DZLPlayerClientDB.Get().GetConfig().copSpawnPoints.blockTimeForJobChange;
-        } else if(dzlPlayer.IsMedic()) {
+        } else if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
             time = DZLPlayerClientDB.Get().GetConfig().medicSpawnPoints.blockTimeForJobChange;
         }
         resetCanSpawn = new Timer;

@@ -18,7 +18,7 @@ static void DZLSendMedicMessage(string message) {
     if(_players) {
         foreach(Man _player: _players) {
             PlayerBase receiver = PlayerBase.Cast(_player);
-            if(receiver.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
+            if(receiver.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
                 GetGame().RPCSingleParam(receiver, DAY_Z_LIFE_RECEIVE_MEDIC_MESSAGE, new Param1<string>(message), true, receiver.GetIdentity());
             }
         }

@@ -195,31 +195,31 @@ class DZLAlmanacMenu : DZLBaseMenu {
         super.OnShow();
         string ident = player.GetPlayerId();
 
-        if(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_MEDIC)) {
+        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
             toggleViewWidget.AddItem("#emergencies");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, null, true);
             medicPanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if(config.adminIds.CanManageCops(ident)) {
+        if(config.adminIds.HasAccess(DAY_Z_LIFE_JOB_COP, ident)) {
             toggleViewWidget.AddItem("#manage_cops");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, null, true);
             copPaneId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if(config.adminIds.CanManageMedic(ident)) {
+        if(config.adminIds.HasAccess(DAY_Z_LIFE_JOB_MEDIC, ident)) {
             toggleViewWidget.AddItem("#manage_medics");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_MEDIC_PLAYERS, null, true);
             medicManagePanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if(config.adminIds.CanManageArmy(ident)) {
+        if(config.adminIds.HasAccess(DAY_Z_LIFE_JOB_ARMY, ident)) {
             toggleViewWidget.AddItem("#manage_army");
             GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_GET_ARMY_PLAYERS, null, true);
             armyManagePanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        if(config.adminIds.CanManagePlayers(ident)) {
+        if(config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, ident)) {
             toggleViewWidget.AddItem("#admin_Panel");
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ALL_PLAYERS, null, true);
             adminPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -227,7 +227,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
         GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, null, true);
 
-        if(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP)) {
+        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
             toggleViewWidget.AddItem("#cop_panel");
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS, null, true);
             internalCopPanelId = toggleViewWidget.GetNumItems() - 1;
@@ -444,17 +444,17 @@ class DZLAlmanacMenu : DZLBaseMenu {
             armyPanelWidget.Show(armyManagePanelId == item);
             playerOpenTicketsWidget.Show(internalCopPanelId == item);
         } else if(w == copPanelSave) {
-            if(!config.adminIds.CanManageCops(player.GetPlayerId())) return true;
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_COP_PLAYERS, new Param1<ref array<DZLOnlinePlayer>> (DZLDisplayHelper.GetPlayerIdsAndRanksFromList(copPanelCopsList)), true);
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_JOB_COP, player.GetPlayerId())) return true;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS, new Param2<string, ref array<DZLOnlinePlayer>> (DAY_Z_LIFE_JOB_COP, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(copPanelCopsList)), true);
         } else if(w == medicPanelSave) {
-            if(!config.adminIds.CanManageMedic(player.GetPlayerId())) return true;
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_MEDIC_PLAYERS, new Param1<ref array<DZLOnlinePlayer>>(DZLDisplayHelper.GetPlayerIdsAndRanksFromList(medicPaneMedicList)), true);
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_JOB_MEDIC, player.GetPlayerId())) return true;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS, new Param2<string, ref array<DZLOnlinePlayer>>(DAY_Z_LIFE_JOB_MEDIC, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(medicPaneMedicList)), true);
         } else if(w == transportPanelSave) {
-            if(!config.adminIds.CanManageTransport(player.GetPlayerId())) return true;
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_TRANSPORT_PLAYERS, new Param1<ref array<DZLOnlinePlayer>>(DZLDisplayHelper.GetPlayerIdsAndRanksFromList(transportPanelTransportsList)), true);
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_JOB_TRANSPORT, player.GetPlayerId())) return true;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS, new Param2<string, ref array<DZLOnlinePlayer>>(DAY_Z_LIFE_JOB_TRANSPORT, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(transportPanelTransportsList)), true);
         } else if(w == armyPanelSave) {
-            if(!config.adminIds.CanManageArmy(player.GetPlayerId())) return true;
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_ARMY_PLAYERS, new Param1<ref array<DZLOnlinePlayer>>(DZLDisplayHelper.GetPlayerIdsAndRanksFromList(armyPanelArmyList)), true);
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_JOB_ARMY, player.GetPlayerId())) return true;
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS, new Param2<string, ref array<DZLOnlinePlayer>>(DAY_Z_LIFE_JOB_ARMY, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(armyPanelArmyList)), true);
         } else if(w == escapedPlayers) {
             int posEscaped = escapedPlayers.GetSelectedRow();
             if(posEscaped == -1) {
@@ -470,7 +470,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
             return true;
         } else if(w == adminDeletePlayerButton) {
-            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetPlayerId())) return true;
             DZLPlayer _dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if(_dzlPlayer) {
@@ -479,7 +479,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 player.DisplayMessage("#no_player_selected");
             }
         } else if(w == adminAddMoneyToPlayerButton) {
-            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetPlayerId())) return true;
             DZLPlayer __dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if(__dzlPlayer) {
@@ -489,7 +489,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 player.DisplayMessage("#no_player_selected");
             }
         } else if(w == adminAddMoneyToPlayerButtonBank) {
-            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetPlayerId())) return true;
             DZLPlayer ___dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if(___dzlPlayer) {
@@ -499,7 +499,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 player.DisplayMessage("#no_player_selected");
             }
         } else if(w == adminPlayers) {
-            if(!config.adminIds.CanManagePlayers(player.GetPlayerId())) return true;
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetPlayerId())) return true;
             DZLPlayer selectedAdminPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if(selectedAdminPlayer) {
@@ -508,7 +508,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 adminMoneyBank.SetText(selectedAdminPlayer.GetBankMoney().ToString());
                 adminJob.SetText(selectedAdminPlayer.GetActiveJob());
                 adminArrestTime.SetText(selectedAdminPlayer.arrestTimeInMinutes.ToString());
-                adminCanCop.SetText(selectedAdminPlayer.IsCop().ToString());
+                adminCanCop.SetText(selectedAdminPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP).ToString());
                 adminLicenseTextListbox.ClearItems();
                 TStringArray licenceIds = selectedAdminPlayer.licenceIds;
 
@@ -630,7 +630,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 foreach(DZLEscapedPlayer escapedPlayer: escapedPlayersParam) {
                     int indexOfRow = escapedPlayers.AddItem(escapedPlayer.name, escapedPlayer.player, 0);
                     escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestReason, escapedPlayer.player, 1);
-                    if(player.GetDZLPlayer().HasJob(DAY_Z_LIFE_JOB_COP)) {
+                    if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
                         escapedPlayers.SetItem(indexOfRow, escapedPlayer.arrestTime.ToString(), escapedPlayer.player, 2);
                     } else {
                         escapedPlayers.SetItem(indexOfRow, "#only_for_cops", escapedPlayer.player, 2);
