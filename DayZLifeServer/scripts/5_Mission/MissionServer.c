@@ -64,8 +64,6 @@ modded class MissionServer {
                 damageZone.Insert("LeftFoot");
                 damageZone.Insert("LeftForeArmRoll");
                 damageZone.Insert("RightForeArmRoll");
-                damageZone.Insert("Neck");
-                damageZone.Insert("Spine2");
                 damageZone.Insert("Head");
 
                 int randCut = Math.RandomIntInclusive(2, 6);

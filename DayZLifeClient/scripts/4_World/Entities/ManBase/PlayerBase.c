@@ -102,7 +102,7 @@ modded class PlayerBase {
     }
 
     bool CanReSpawn() {
-        return !resetCanSpawn;
+        return !resetCanSpawn && 0 == dzlPlayer.arrestTimeInMinutes;
     }
 
     string GetPlayerId() {
@@ -492,157 +492,16 @@ modded class PlayerBase {
         return null;
     }
 
+    private ref DZLLicenceValidator licenceValidator;
+
     string CanUseLicence(notnull DZLCraftLicence licence) {
-        array<EntityAI> items = GetPlayerItems();
-        map<string, int> craft = new map<string, int>;
-        map<string, int> tools = new map<string, int>;
-        string message = "";
+        licenceValidator = new DZLLicenceValidator(this, licence);
 
-        foreach(EntityAI item: items) {
-            string itemType = item.GetType();
-            itemType.ToLower();
-
-            int quantity = DZLTraderHelper.GetQuantity(item);
-            bool isCraft = false;
-
-            foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
-                if(IsNeededItem(craftItem, item, itemType)) {
-                    int countCraft = 0;
-                    if(craft.Find(itemType, countCraft)) {
-                        craft.Set(itemType, countCraft + quantity);
-                    } else {
-                        craft.Insert(itemType, quantity);
-                    }
-                    isCraft = true;
-                    break;
-                }
-            }
-
-            if(isCraft) continue;
-
-            foreach(DZLLicenceToolItem toolItem: licence.toolItems.collection) {
-                if(IsNeededItem(toolItem, item, itemType)) {
-                    int countTools = 0;
-                    if(tools.Find(itemType, countTools)) {
-                        tools.Set(itemType, countTools + quantity);
-                    } else {
-                        tools.Insert(itemType, quantity);
-                    }
-                    break;
-                }
-            }
-        }
-
-        map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
-        map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
-
-        if(craft.Count() >= craftMap.Count() && tools.Count() >= toolMap.Count()) {
-            foreach(string type, int count: craftMap) {
-                int countFound = 0;
-                if(craft.Find(type, countFound)) {
-                    if(countFound < count) {
-                        return "#not_enough_items_to_craft";
-                    }
-                } else {
-                    return "#missing_craft_item";
-                }
-            }
-
-            foreach(string typeTool, int countTool: toolMap) {
-                int countFoundTool = 0;
-                if(tools.Find(typeTool, countFoundTool)) {
-                    if(countFoundTool < countTool) {
-                        return "#not_enough_tools_to_craft";
-                    }
-                } else {
-                    return "#missing_tool_item";
-                }
-            }
-        } else {
-            message = "#has_not_found_all_items_that_is_needed_to_craft";
-        }
-
-        return message;
+        return licenceValidator.CanUseLicence();
     }
 
     void UseLicence(DZLCraftLicence licence) {
-        array<EntityAI> items = GetPlayerItems();
-        map<string, int> craftMap = licence.craftItems.GetTypeCountMap();
-        map<string, int> toolMap = licence.toolItems.GetTypeCountMap();
-
-        array<DZLLicenceToolItem> tools = new array<DZLLicenceToolItem>;
-
-        foreach(DZLLicenceToolItem tool: licence.toolItems.collection) {
-            tools.Insert(tool);
-        }
-
-        foreach(EntityAI item: items) {
-            if(craftMap.Count() == 0 && toolMap.Count() == 0) break;
-
-            string itemType = item.GetType();
-            itemType.ToLower();
-            int quantity = DZLTraderHelper.GetQuantity(item);
-
-            bool isCraft = false;
-            foreach(DZLLicenceCraftItem craftItem: licence.craftItems.collection) {
-                if(craftMap.Count() == 0) break;
-
-                if(IsNeededItem(craftItem, item, itemType)) {
-                    int countFoundCraft = 0;
-                    if(craftMap.Find(itemType, countFoundCraft)) {
-                        if(quantity == 1) {
-                            GetGame().ObjectDelete(item);
-                            DZLLogCrafting(GetPlayerId(), "licence crafting delete resource", item.GetType());
-                            countFoundCraft -= 1;
-                            craftMap.Set(itemType, countFoundCraft);
-                        } else if(quantity > countFoundCraft) {
-                            ItemBase.Cast(item).SetQuantity(quantity - countFoundCraft);
-                            countFoundCraft = 0;
-                        } else {
-                            countFoundCraft -= quantity;
-                            GetGame().ObjectDelete(item);
-                            DZLLogCrafting(GetPlayerId(), "licence crafting delete resource", item.GetType());
-                            craftMap.Set(itemType, countFoundCraft);
-                        }
-
-                        if(0 == countFoundCraft) {
-                            craftMap.Remove(itemType);
-                        }
-
-                        isCraft = true;
-                        break;
-                    }
-                }
-            }
-
-            if(isCraft) continue;
-
-            foreach(int index, DZLLicenceToolItem toolItem: tools) {
-                if(toolMap.Count() == 0) break;
-
-                if(IsNeededItem(toolItem, item, itemType)) {
-                    int countFoundTool = 0;
-
-                    if(toolMap.Find(itemType, countFoundTool)) {
-                        int health = item.GetHealth();
-
-                        if(health >= toolItem.health) {
-                            if(quantity == 1) {
-                                craftMap.Remove(itemType);
-                            } else {
-                                craftMap.Set(itemType, craftMap.Get(itemType) - 1);
-                            }
-
-                            item.SetHealth(health - toolItem.health);
-                            DZLLogCrafting(GetPlayerId(), "licence crafting tool reduce health", item.GetType());
-                        }
-                        tools.Remove(index);
-                        break;
-                    }
-                }
-            }
-        }
-
+        licenceValidator.UseLicence();
 
         InventoryLocation inventoryLocation = new InventoryLocation;
         EntityAI itemSpawn;
@@ -665,22 +524,6 @@ modded class PlayerBase {
             itemSpawn.SetHealth(itemToCraft.health);
             ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
         }
-
-    }
-
-
-    private bool IsNeededItem(DZLLicenceCraftItem item, EntityAI itemSearch, string ItemSearchType) {
-        if(item.GetLowerCaseType() == ItemSearchType) {
-            if(GetGame().IsServer()) {
-                if(itemSearch.GetHealth() >= item.health) {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     array<EntityAI> GetPlayerItems() {
