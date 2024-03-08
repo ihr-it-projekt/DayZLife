@@ -30,8 +30,8 @@ class DZLBaseActionObject : BuildingSuper {
     bool IsMedicLoadOut() {
         return isMedicLoadOut;
     }
-	
-	bool IsTransportLoadOut() {
+
+    bool IsTransportLoadOut() {
         return isTransportLoadOut;
     }
 

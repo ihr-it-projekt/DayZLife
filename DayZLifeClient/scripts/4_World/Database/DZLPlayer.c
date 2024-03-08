@@ -221,8 +221,8 @@ class DZLPlayer {
 
         Save();
     }
-	
-	void UpdateTransport(bool isTransport, string rank) {
+
+    void UpdateTransport(bool isTransport, string rank) {
         this.isTransport = isTransport;
         if(isTransport) {
             this.lastTransportRank = rank;

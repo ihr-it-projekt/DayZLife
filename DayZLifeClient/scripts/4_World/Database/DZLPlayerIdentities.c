@@ -110,8 +110,8 @@ class DZLPlayerIdentities {
             player.UpdateCop(hasFound, newRank);
         }
     }
-	
-	void UpdateTransports(ref array<DZLOnlinePlayer> transports) {
+
+    void UpdateTransports(ref array<DZLOnlinePlayer> transports) {
         if(!transports) return;
 
         foreach(string ident: playerIdentities) {

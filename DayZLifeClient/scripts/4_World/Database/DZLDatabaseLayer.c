@@ -226,8 +226,8 @@ class DZLDatabaseLayer {
         armyCount = count;
         return this;
     }
-	
-	DZLDatabaseLayer SetTransportCount(int count) {
+
+    DZLDatabaseLayer SetTransportCount(int count) {
         transportCount = count;
         return this;
     }

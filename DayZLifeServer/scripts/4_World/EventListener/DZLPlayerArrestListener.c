@@ -83,8 +83,8 @@ class DZLPlayerArrestListener {
             if(dzlPlayer.IsActiveAsCop()) {
                 copCount ++;
             }
-			
-			if(dzlPlayer.IsActiveAsTransport()) {
+
+            if(dzlPlayer.IsActiveAsTransport()) {
                 transportCount ++;
             }
 

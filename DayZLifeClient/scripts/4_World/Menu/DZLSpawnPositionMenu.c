@@ -66,8 +66,8 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         if(player.GetDZLPlayer().IsCop()) {
             copIndex = jobSelection.AddItem("#Cop");
         }
-		
-		if(player.GetDZLPlayer().IsTransport()) {
+
+        if(player.GetDZLPlayer().IsTransport()) {
             transportIndex = jobSelection.AddItem("Transport");
         }
 
@@ -121,16 +121,11 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
             if(medicIndex == index) {
                 index = 1;
-            }
-			else if(copIndex == index)
-			{
+            } else if(copIndex == index) {
                 index = 2;
-            }
-			else if(transportIndex == index)
-			{
+            } else if(transportIndex == index) {
                 index = 2;
-            }
-			else if(armyIndex == index) {
+            } else if(armyIndex == index) {
                 index = 3;
             }
 
