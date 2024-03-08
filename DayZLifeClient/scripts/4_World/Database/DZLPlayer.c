@@ -314,9 +314,8 @@ class DZLPlayer {
                     Error("Player ID" + dayZPlayerId);
                     DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
                 }
+                return moneyCount == 0;
             }
-
-            return moneyCount == 0;
         }
 
         money += moneyCount;
@@ -431,8 +430,7 @@ class DZLPlayer {
         DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money * -1);
         playerTarget.AddMoneyToPlayer(money);
 
-        money = 0;
-        Save();
+        AddMoneyToPlayer(-money);
     }
 
     void DepositMoneyFromPlayerToOtherPlayer(DZLPlayer playerTarget, int moneyToTransfer) {

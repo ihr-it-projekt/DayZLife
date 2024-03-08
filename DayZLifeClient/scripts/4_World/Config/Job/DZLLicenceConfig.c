@@ -1,5 +1,5 @@
 class DZLLicenceConfig {
-    string version = "5";
+    string version = "6";
     ref DZLLicenceCollection licences;
     ref DZLLicenceCraftingCollection licenceCollection;
     ref array<ref DZLLicencePosition> positionOfLicencePoints;
@@ -134,7 +134,6 @@ class DZLLicenceConfig {
                     licence.SetId();
                 }
             }
-            Save();
         }
 
         if(licenceCollection.collection) {
@@ -143,12 +142,10 @@ class DZLLicenceConfig {
                     licenceCraft.SetId();
                 }
             }
-            Save();
         }
 
         if(version == "1") {
             version = "2";
-            Save();
         }
 
         if(version == "2") {
@@ -160,18 +157,20 @@ class DZLLicenceConfig {
                 licenceCollection.collection.Insert(craftLicence);
             }
             licences = null;
-            Save();
         }
 
         if(version == "3") {
             version = "4";
-            Save();
         }
 
         if(version == "4") {
             version = "5";
-            Save();
         }
+
+        if(version == "5") {
+            version = "6";
+        }
+        Save();
     }
 
     private bool Load() {

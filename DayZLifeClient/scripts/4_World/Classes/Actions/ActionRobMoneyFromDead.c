@@ -15,6 +15,7 @@ class ActionRobMoneyFromDead: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if(!DZLConfig.Get() || DZLConfig.Get().bankConfig || DZLConfig.Get().bankConfig.useMoneyAsObject) return false;
         return PlayerBase.Cast(target.GetObject()).GetMoneyPlayerIsDead() > 0;
     }
 
