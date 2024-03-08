@@ -50,9 +50,9 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         GetGame().GetMission().GetHud().ShowHud(false);
         GetGame().GetMission().GetHud().ShowQuickBar(false);
 
-        jobId = config.jobConfig.jobNames.jobNames.Get(0);
+        jobId = config.jobConfig.paycheck.jobNames.Get(0);
 
-        foreach(string configJobId: config.jobConfig.jobNames.jobNames) {
+        foreach(string configJobId: config.jobConfig.paycheck.jobNames) {
             activeJobIds.Insert(configJobId);
         }
 

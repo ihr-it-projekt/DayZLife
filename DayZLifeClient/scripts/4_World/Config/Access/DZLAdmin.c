@@ -4,16 +4,19 @@ class DZLAdmin {
     string version = "7";
 
     void DZLAdmin(array<string> jobs) {
+        if(!Load()) Save();
+
         if(version == "6") {
             foreach(DZLPlayerAccess playerAccess: access) {
-                DZLAccess access = new DZLAccess(playerAccess.GetIdent(), jobs);
+                DZLAccess newAccess = new DZLAccess(playerAccess.GetIdent(), jobs);
 
-                access.MigrateAccess(playerAccess);
+                newAccess.MigrateAccess(playerAccess);
 
-                playerAccesses.Insert(access);
+                playerAccesses.Insert(newAccess);
             }
 
             version = "7";
+            access.Clear();
 
             Save();
         }

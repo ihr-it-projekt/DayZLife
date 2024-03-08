@@ -25,6 +25,8 @@ modded class MissionServer {
         paycheckTimer.Run(60, checkController, "Check", null, true);
         storageTimer.Run(60, storageController, "Check", null, true);
         builderManager.Create();
+
+        DZLConfig.Get();
     }
 
     override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx) {

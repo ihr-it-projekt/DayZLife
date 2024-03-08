@@ -3,7 +3,7 @@ class DZLLoadOutLocationBuilder: DZLLicenceLocationBuilder {
     override void Create() {
         DZLJobConfig config = DZLConfig.Get().jobConfig;
 
-        foreach(string job: config.jobNames.jobNames) {
+        foreach(string job: config.paycheck.jobNames) {
             Build(config.GetLoadOuts(job).loadOutPosition, job);
         }
     }

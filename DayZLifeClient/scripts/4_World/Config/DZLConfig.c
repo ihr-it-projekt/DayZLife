@@ -42,7 +42,7 @@ class DZLConfig {
             medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
             civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
             armySpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_ARMY);
-            adminIds = new DZLAdmin(jobConfig.jobNames.jobNames);
+            adminIds = new DZLAdmin(jobConfig.paycheck.jobNames);
             carConfig = new DZLCarConfig;
             medicConfig = new DZLMedicConfig;
             baseBuildingConfig = new DZLBaseBuildingConfig;

@@ -85,11 +85,10 @@ class DZLDisplayHelper {
         sourceWidget.GetItemData(pos, 0, itemType);
 
         if(itemType) {
-            array<ref DZLPaycheck> paychecks = DZLConfig.Get().jobConfig.paycheck.GetPaycheckByJob(job);
-
-
             int count = 0;
             jobRankList.ClearItems();
+
+            array<ref DZLPaycheck> paychecks = DZLConfig.Get().jobConfig.paycheck.GetPaycheckByJob(job);
             foreach(DZLPaycheck paycheck: paychecks) {
                 jobRankList.AddItem(paycheck.rank, paycheck, 0);
 

@@ -11,10 +11,9 @@ class DZLJobConfig {
 
     private ref array<ref DZLLoadOuts> loadOuts = new array<ref DZLLoadOuts>;
     ref DZLArrestConfig arrestConfig = new DZLArrestConfig;
-    ref DZLJobNames jobNames = new DZLJobNames();
 
     void DZLJobConfig() {
-        foreach(string jobName: jobNames.jobNames) {
+        foreach(string jobName: paycheck.jobNames) {
             loadOuts.Insert(new DZLLoadOuts(jobName));
         }
     }

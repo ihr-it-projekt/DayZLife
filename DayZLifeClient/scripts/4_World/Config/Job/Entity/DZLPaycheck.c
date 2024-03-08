@@ -5,11 +5,11 @@ class DZLPaycheck {
     string rank;
     bool isFallbackRank = true;
 
-    void DZLPaycheck(string jobName, string rank, int amount, int onlineMinutesForPay) {
+    void DZLPaycheck(string jobName, string rank, int amount, int onlineMinutesForPay, bool _isFallbackRank = false) {
         this.jobName = jobName;
         this.rank = rank;
         this.amount = amount;
         this.onlineMinutesForPay = onlineMinutesForPay;
-        isFallbackRank = true;
+        isFallbackRank = _isFallbackRank;
     }
 }

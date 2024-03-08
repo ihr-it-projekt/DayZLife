@@ -1,25 +1,10 @@
 class DZLRankHelper {
     static DZLPaycheck getCurrentPayCheck(DZLPlayer dzlPlayer, DZLPaycheckConfig config) {
         if(dzlPlayer) {
-            if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
-                return searchPayCheck(dzlPlayer, config.cops);
-            }
+            string jobName = dzlPlayer.GetActiveJob();
 
-            if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
-                return searchPayCheck(dzlPlayer, config.transports);
-            }
-
-            if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
-                return searchPayCheck(dzlPlayer, config.medics);
-            }
-
-            if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) {
-                return searchPayCheck(dzlPlayer, config.armies);
-            }
-
-            if(dzlPlayer.IsActiveAsCivil()) {
-                return searchPayCheck(dzlPlayer, config.civils);
-            }
+            array<ref DZLPaycheck> payChecks = config.GetPaycheckByJob(jobName);
+            return searchPayCheck(dzlPlayer, payChecks);
         }
 
         return new DZLPaycheck("", "", 0, 10000000);

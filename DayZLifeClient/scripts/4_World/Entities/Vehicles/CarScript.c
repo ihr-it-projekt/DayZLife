@@ -154,12 +154,12 @@ modded class CarScript {
 
         if(!dzlPlayer) return false;
 
-        if (isRaided) return true;
-        if (ident == ownerId) return true;
-        if (-1 != playerAccess.Find(ident)) return true;
-        if (dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return true;
-        if (dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return true;
-        if (player.GetConfig().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, ident)) return true;
+        if(isRaided) return true;
+        if(ident == ownerId) return true;
+        if(-1 != playerAccess.Find(ident)) return true;
+        if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return true;
+        if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return true;
+        if(player.GetConfig().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, ident)) return true;
 
         return false;
     }
