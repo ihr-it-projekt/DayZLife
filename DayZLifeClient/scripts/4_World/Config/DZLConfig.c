@@ -15,11 +15,18 @@ class DZLConfig {
     ref DZLJobConfig jobConfig;
     ref DZLLicenceConfig licenceConfig;
     ref DZLTraderConfig traderConfig;
+
+    // deprecated remove 05.03.25
     ref DZLJobSpawnPoints copSpawnPoints;
     ref DZLJobSpawnPoints transportSpawnPoints;
     ref DZLJobSpawnPoints medicSpawnPoints;
     ref DZLJobSpawnPoints armySpawnPoints;
     ref DZLJobSpawnPoints civilSpawnPoints;
+    // end deprecated
+
+
+
+
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
     ref DZLCarConfig transportConfig;

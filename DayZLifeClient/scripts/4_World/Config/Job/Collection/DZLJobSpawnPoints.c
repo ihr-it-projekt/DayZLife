@@ -11,45 +11,7 @@ class DZLJobSpawnPoints {
             DZLSpawnPoint point
             array<string> items = new array<string>;
 
-            if(DAY_Z_LIFE_DEBUG) {
-                if(jobId == DAY_Z_LIFE_JOB_COP) {
-                    items.Insert("PoliceVest");
-                    items.Insert("PoliceJacket");
-                    items.Insert("PolicePants");
-                    items.Insert("PoliceCap");
-                    items.Insert("DressShoes_Black");
-                    items.Insert("TelescopicBaton");
-                    point = new DZLSpawnPoint("Cop", "4620 340 10350", "0 0 0", items);
-                    spawnPoints.Insert(point);
-                } else if(jobId == DAY_Z_LIFE_JOB_MEDIC) {
-                    items.Insert("KitchenKnife");
-                    point = new DZLSpawnPoint("Sanitäter1", "4620 340 10370", "0 0 0", items);
-                    spawnPoints.Insert(point);
-
-                    items = new array<string>;
-                    items.Insert("SteakKnife");
-                    point = new DZLSpawnPoint("Sanitäter2", "4620 340 10390", "0 0 0", items);
-                    spawnPoints.Insert(point);
-                } else if(jobId == DAY_Z_LIFE_JOB_TRANSPORT) {
-                    items.Insert("KitchenKnife");
-                    point = new DZLSpawnPoint("Transporter1", "4620 340 10370", "0 0 0", items);
-                    spawnPoints.Insert(point);
-
-                    items = new array<string>;
-                    items.Insert("SteakKnife");
-                    point = new DZLSpawnPoint("Transporter2", "4620 340 10390", "0 0 0", items);
-                    spawnPoints.Insert(point);
-                } else {
-                    items.Insert("Pickaxe");
-                    point = new DZLSpawnPoint("Civil1", "4620 340 10310", "0 0 0", items);
-                    spawnPoints.Insert(point);
-
-                    items = new array<string>;
-                    items.Insert("Crowbar");
-                    point = new DZLSpawnPoint("Civil2", "4620 340 10290", "0 0 0", items);
-                    spawnPoints.Insert(point);
-                }
-            } else {
+            
                 if(jobId == DAY_Z_LIFE_JOB_COP) {
                     items.Insert("PoliceVest");
                     items.Insert("PoliceJacket");
