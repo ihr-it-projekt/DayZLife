@@ -4,19 +4,10 @@ class DZLCanDoDoorAction {
 
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
         DZLHouseConfig houseConfig = player.GetConfig().houseConfig;
-        DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_COP);
 
-        if(!definition) {
-            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_ARMY);
-        }
-        if(!definition) {
-            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_TRANSPORT);
-        }
-        if(!definition) {
-            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_MEDIC);
-        }
+        if (!houseConfig) return null;
 
-        return definition;
+        return houseConfig.GetJobHouseDefinition(building);
     }
 
     static bool canDoByJob(Building building, PlayerBase player, int doorIndex) {
@@ -27,22 +18,9 @@ class DZLCanDoDoorAction {
         string job = dzlPlayer.GetActiveJob();
 
         DZLHouseConfig houseConfig = player.GetConfig().houseConfig;
+        if (!houseConfig) return false;
 
-        string jobFromHouse = DAY_Z_LIFE_JOB_COP;
-        DZLJobHouseDefinition definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_COP);
-
-        if(!definition) {
-            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_TRANSPORT);
-            jobFromHouse = DAY_Z_LIFE_JOB_TRANSPORT;
-        }
-        if(!definition) {
-            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_ARMY);
-            jobFromHouse = DAY_Z_LIFE_JOB_ARMY;
-        }
-        if(!definition) {
-            definition = DZLConfig.Get().houseConfig.GetJobHouseDefinition(building, DAY_Z_LIFE_JOB_MEDIC);
-            jobFromHouse = DAY_Z_LIFE_JOB_MEDIC;
-        }
+        DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building);
 
 #ifdef TBRealEstateClient
         BuildingBase buildingBase = BuildingBase.Cast(building);
@@ -51,7 +29,7 @@ class DZLCanDoDoorAction {
         }
 #endif
 
-        return (definition && job == jobFromHouse) || !definition;
+        return (definition && job == definition.jobId) || !definition;
     }
 
 

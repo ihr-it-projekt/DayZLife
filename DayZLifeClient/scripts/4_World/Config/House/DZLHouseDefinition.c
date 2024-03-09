@@ -1,24 +1,15 @@
 class DZLHouseDefinition {
 
     string houseType;
-    int sellPrice;
-    int buyPrice;
-    ref array<vector> storagePosition;
-    float storageBuyFactor;
-    ref array<string> raidTools;
+    int sellPrice = 50000;
+    int buyPrice = 100000;
+    ref array<string> raidTools = {"Crowbar"};
+    float storageBuyFactor = 10;
     int inventoryItemsPerLevel = 10;
     int maxHouseInventoryLevel = 20;
 
-
-    void DZLHouseDefinition(string houseType, int buyPrice, int sellPrice, ref array<vector> storagePosition, float storageBuyFactor) {
+    void DZLHouseDefinition(string _houseType) {
         this.houseType = houseType;
-        this.sellPrice = sellPrice;
-        this.buyPrice = buyPrice;
-        this.storagePosition = storagePosition;
-        this.storageBuyFactor = storageBuyFactor;
-
-        raidTools = new array<string>;
-        raidTools.Insert("Crowbar");
     }
 
     int GetMaxStorage() {

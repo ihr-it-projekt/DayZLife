@@ -35,8 +35,6 @@ class DZLActionRaidDoors: ActionInteractBase {
             if(DZLDatabaseLayer.Get().GetCopCount() < config.minCountOfCopsForRaid) return false;
         }
 
-
-
         DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(building, player);
 
         array<string> raidTools = new array<string>;

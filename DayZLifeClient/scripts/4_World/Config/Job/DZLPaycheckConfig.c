@@ -9,8 +9,7 @@ class DZLPaycheckConfig {
     // end deprecated
 
     ref array<ref DZLJobPayCheck> jobPayChecks = new array<ref DZLJobPayCheck>;
-    ref array<string> jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_TRANSPORT, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY};
-
+    ref array<string> jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY};
 
     void DZLPaycheckConfig() {
         if(!Load()) {
