@@ -18,7 +18,6 @@ class DZLDatabaseLayer {
     private int copCount = 0;
     private int civCount = 0;
     private int medicCount = 0;
-    private int transportCount = 0;
     private int armyCount = 0;
     private ref DZLDatabase database;
 
@@ -227,10 +226,6 @@ class DZLDatabaseLayer {
         return this;
     }
 
-    DZLDatabaseLayer SetTransportCount(int count) {
-        transportCount = count;
-        return this;
-    }
 
     DZLDatabaseLayer SetCivCount(int count) {
         civCount = count;
@@ -250,7 +245,7 @@ class DZLDatabaseLayer {
     }
 
     int GetCivCount() {
-        return civCount + transportCount;
+        return civCount;
     }
 
     DZLCrimeData GetCrimeData() {
