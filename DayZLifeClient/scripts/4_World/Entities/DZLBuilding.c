@@ -110,14 +110,6 @@ class DZLBuilding {
         return house.HasPlayerAccess(ident);
     }
 
-    vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
-        return house.GetNextFreeStoragePosition(definition);
-    }
-
-    DZLStorageTypeBought FindStorageByPosition(vector position) {
-        return house.FindStorageByPosition(position);
-    }
-
     array<ref DZLStorageTypeBought> GetStorage() {
         return house.GetStorage();
     }

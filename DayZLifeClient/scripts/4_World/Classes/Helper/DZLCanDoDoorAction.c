@@ -5,7 +5,7 @@ class DZLCanDoDoorAction {
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
         DZLHouseConfig houseConfig = player.GetConfig().houseConfig;
 
-        if (!houseConfig) return null;
+        if(!houseConfig) return null;
 
         return houseConfig.GetJobHouseDefinition(building);
     }
@@ -18,7 +18,7 @@ class DZLCanDoDoorAction {
         string job = dzlPlayer.GetActiveJob();
 
         DZLHouseConfig houseConfig = player.GetConfig().houseConfig;
-        if (!houseConfig) return false;
+        if(!houseConfig) return false;
 
         DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building);
 

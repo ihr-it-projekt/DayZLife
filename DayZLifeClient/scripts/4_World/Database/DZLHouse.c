@@ -175,34 +175,6 @@ class DZLHouse {
         return storage;
     }
 
-    vector GetNextFreeStoragePosition(DZLHouseDefinition definition) {
-        array<vector> storagePositions = definition.storagePosition;
-
-        foreach(vector pos: storagePositions) {
-            bool notFound = true;
-
-            foreach(DZLStorageTypeBought storageObject: storage) {
-                if(storageObject.relativePos == pos) {
-                    notFound = false;
-                    break;
-                }
-            }
-
-            if(notFound) {
-                return pos;
-            }
-        }
-        return "0 0 0";
-    }
-
-    DZLStorageTypeBought FindStorageByPosition(vector position) {
-        foreach(DZLStorageTypeBought storageObject: storage) {
-            if(storageObject.position == position) {
-                return storageObject;
-            }
-        }
-        return null;
-    }
 
     bool IsDoorLooked(int doorIndex) {
         return -1 < lockedDoors.Find(doorIndex);

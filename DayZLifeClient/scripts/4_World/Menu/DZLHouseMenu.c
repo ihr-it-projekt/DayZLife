@@ -137,7 +137,6 @@ class DZLHouseMenu : DZLBaseMenu {
 
             priceBuyTextWidget.SetText(actualHouseDef.buyPrice.ToString());
             priceSellTextWidget.SetText(actualHouseDef.sellPrice.ToString());
-            storageTextWidget.SetText(actualHouseDef.GetMaxStorage().ToString());
 
             vector mapPos;
             float scale;
@@ -199,11 +198,7 @@ class DZLHouseMenu : DZLBaseMenu {
                     int buyPriceBuy = 0;
                     bool canBuy = false;
 
-                    if(currentItemBuy.isStorage) {
-                        itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
-                        buyPriceBuy = currentItemBuy.price * (actualHouseDef.storageBuyFactor * (itemsHasBought + 1));
-                        canBuy = actualHouseDef.GetMaxStorage() > sellStorageListTextWidget.GetNumItems();
-                    } else if(currentItemBuy.isHouseInventory) {
+                    if(currentItemBuy.isHouseInventory) {
                         int currentLevel = 0;
                         float factor = 1.0;
 
@@ -260,23 +255,7 @@ class DZLHouseMenu : DZLBaseMenu {
                 bool showBuyButton = true;
 
                 upgradeDescription.SetText(currentItem.description);
-
-                if(currentItem.isStorage) {
-                    itemsHasBought = sellStorageListTextWidget.GetNumItems() + 1;
-
-                    upgradePreview.UpdatePreview(currentItem.type);
-
-                    buyPrice = currentItem.price * (actualHouseDef.storageBuyFactor * itemsHasBought);
-
-                    sellPrice = buyPrice / 2;
-
-                    sellButton.Show(false);
-                    showBuyButton = actualHouseDef.GetMaxStorage() > house.GetStorage().Count();
-
-                    if(actualHouseDef.GetMaxStorage() <= house.GetStorage().Count()) {
-                        player.DisplayMessage("#building_has_all_storrage_positions_upgraded");
-                    }
-                } else if(currentItem.isHouseInventory) {
+                if(currentItem.isHouseInventory) {
 
                     showBuyButton = house.CanBuyInventoryExtensionClient(actualHouseDef, inventory);
                     sellButton.Show(false);

@@ -11,7 +11,7 @@ class DZLJobPayCheck {
     }
 
     void MigrateV3(ref array<ref DZLPaycheck> _paychecks) {
-        paychecks = _paychecks
+        paychecks = _paychecks;
     }
 
 }

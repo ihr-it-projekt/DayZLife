@@ -1,6 +1,6 @@
 class DZLJobHouseDefinitionCollection {
     string jobId;
-    private ref array<ref DZLJobHouseDefinition> houseDefinitions = new array<ref DZLJobHouseDefinition>()
+    ref array<ref DZLJobHouseDefinition> houseDefinitions = new array<ref DZLJobHouseDefinition>();
 
     void DZLJobHouseDefinitionCollection(string _jobId) {
         jobId = _jobId;
@@ -16,8 +16,8 @@ class DZLJobHouseDefinitionCollection {
         return null;
     }
 
-    void MigrateToVersion6(sting job, array<ref DZLJobHouseDefinition> _houseDefinitions) {
-        if (jobId != job) return;
+    void MigrateToVersion6(string job, array<ref DZLJobHouseDefinition> _houseDefinitions) {
+        if(jobId != job) return;
         houseDefinitions = _houseDefinitions;
     }
 

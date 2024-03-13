@@ -3,7 +3,7 @@ class DZLJobHouseDefinition {
     string houseType;
     ref array<string> raidTools;
     int raidTimeInSeconds;
-    [NonSerialized()] jobId;
+    [NonSerialized()] string jobId;
 
     void DZLJobHouseDefinition(string houseType, int raidTimeInSeconds = 1200) {
         this.houseType = houseType;

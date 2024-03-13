@@ -12,7 +12,4 @@ class DZLHouseDefinition {
         this.houseType = houseType;
     }
 
-    int GetMaxStorage() {
-        return storagePosition.Count();
-    }
 }

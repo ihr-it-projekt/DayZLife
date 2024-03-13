@@ -24,9 +24,6 @@ class DZLConfig {
     ref DZLJobSpawnPoints civilSpawnPoints;
     // end deprecated
 
-
-
-
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
     ref DZLCarConfig transportConfig;
@@ -38,7 +35,6 @@ class DZLConfig {
 
     void DZLConfig() {
         if(GetGame().IsServer()) {
-            houseConfig = new DZLHouseConfig;
             houseExtensions = new DZLHouseExtensions;
             bankConfig = new DZLBankingConfig;
             jobConfig = new DZLJobConfig;
@@ -49,6 +45,7 @@ class DZLConfig {
             medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
             civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
             armySpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_ARMY);
+            houseConfig = new DZLHouseConfig(jobConfig.paycheck.jobNames);
             adminIds = new DZLAdmin(jobConfig.paycheck.jobNames);
             carConfig = new DZLCarConfig;
             medicConfig = new DZLMedicConfig;
