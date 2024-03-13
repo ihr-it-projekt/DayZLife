@@ -149,7 +149,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     }
 
     private void UpdateSpawnPoints() {
-        DZLJobSpawnPoints spawnPointCollection = config.GetJobSpanwPointById(jobId);
+        DZLJobSpawnPoints spawnPointCollection = config.GetJobSpawnPointsByJobId(jobId);
 
         spawnPoints.ClearItems();
         foreach(DZLSpawnPoint point: spawnPointCollection.spawnPoints) {

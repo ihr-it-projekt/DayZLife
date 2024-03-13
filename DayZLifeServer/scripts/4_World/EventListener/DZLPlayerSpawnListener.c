@@ -19,7 +19,7 @@ class DZLPlayerSpawnListener {
                 player.RemoveAllItems();
                 player.GetDZLPlayer().LoosPlayerInventoryMoney();
 
-                DZLJobSpawnPoints points = config.GetJobSpanwPointById(param.param2);
+                DZLJobSpawnPoints points = config.GetJobSpawnPointsByJobId(param.param2);
                 DZLSpawnPoint point = points.FindSpawnById(param.param1);
 
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();

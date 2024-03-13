@@ -17,12 +17,14 @@ class DZLConfig {
     ref DZLTraderConfig traderConfig;
 
     // deprecated remove 05.03.25
-    ref DZLJobSpawnPoints copSpawnPoints;
-    ref DZLJobSpawnPoints transportSpawnPoints;
-    ref DZLJobSpawnPoints medicSpawnPoints;
-    ref DZLJobSpawnPoints armySpawnPoints;
-    ref DZLJobSpawnPoints civilSpawnPoints;
+    private ref DZLJobSpawnPoints copSpawnPoints;
+    private ref DZLJobSpawnPoints transportSpawnPoints;
+    private ref DZLJobSpawnPoints medicSpawnPoints;
+    private ref DZLJobSpawnPoints armySpawnPoints;
+    private ref DZLJobSpawnPoints civilSpawnPoints;
     // end deprecated
+
+    ref array<ref DZLJobSpawnPointCollection> jobSpawnPoints = new array<ref DZLJobSpawnPointCollection>;
 
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
@@ -35,16 +37,16 @@ class DZLConfig {
 
     void DZLConfig() {
         if(GetGame().IsServer()) {
+            jobConfig = new DZLJobConfig;
             houseExtensions = new DZLHouseExtensions;
             bankConfig = new DZLBankingConfig;
-            jobConfig = new DZLJobConfig;
             licenceConfig = new DZLLicenceConfig;
             traderConfig = new DZLTraderConfig;
-            copSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_COP);
-            transportSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_TRANSPORT);
-            medicSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_MEDIC);
-            civilSpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_CIVIL);
-            armySpawnPoints = new DZLJobSpawnPoints(DAY_Z_LIFE_JOB_ARMY);
+
+            foreach(string jobId: jobConfig.paycheck.jobNames) {
+                jobSpawnPoints.Insert(new DZLJobSpawnPointCollection(jobId));
+            }
+
             houseConfig = new DZLHouseConfig(jobConfig.paycheck.jobNames);
             adminIds = new DZLAdmin(jobConfig.paycheck.jobNames);
             carConfig = new DZLCarConfig;
@@ -54,23 +56,6 @@ class DZLConfig {
             messageConfig = new DZLMessageConfig;
             tuningConfig = new DZLTuningConfig;
         }
-
-    }
-
-    DZLJobSpawnPoints GetJobSpanwPointById(string searchJobId) {
-        if(searchJobId == DAY_Z_LIFE_JOB_COP) {
-            return copSpawnPoints;
-        } else if(searchJobId == DAY_Z_LIFE_JOB_MEDIC) {
-            return medicSpawnPoints;
-        }
-
-        else if(searchJobId == DAY_Z_LIFE_JOB_TRANSPORT) {
-            return transportSpawnPoints;
-        } else if(searchJobId == DAY_Z_LIFE_JOB_ARMY) {
-            return armySpawnPoints;
-        }
-
-        return civilSpawnPoints;
     }
 
     ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
@@ -97,6 +82,15 @@ class DZLConfig {
             }
         }
 
+        return null;
+    }
+
+    DZLJobSpawnPoints GetJobSpawnPointsByJobId(string jobId) {
+        foreach(DZLJobSpawnPointCollection collection: jobSpawnPoints) {
+            if(collection.jobId == jobId) {
+                return collection.spawnPoints;
+            }
+        }
         return null;
     }
 }

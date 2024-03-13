@@ -17,11 +17,7 @@ class DZLConfigListener {
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_HOUSE_EXTENSION, new Param1<ref DZLHouseExtensions>(config.houseExtensions), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_JOB, new Param1<ref DZLJobConfig>(config.jobConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_LICENCE, new Param1<ref DZLLicenceConfig>(config.licenceConfig), true, sender);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_COP, new Param1<ref DZLJobSpawnPoints>(config.copSpawnPoints), true, sender);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_TRANSPORT, new Param1<ref DZLJobSpawnPoints>(config.transportSpawnPoints), true, sender);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_MEDIC, new Param1<ref DZLJobSpawnPoints>(config.medicSpawnPoints), true, sender);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ARMY, new Param1<ref DZLJobSpawnPoints>(config.armySpawnPoints), true, sender);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_CIV, new Param1<ref DZLJobSpawnPoints>(config.civilSpawnPoints), true, sender);
+            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_SPAWN_POINTS, new Param1<ref array<ref DZLJobSpawnPointCollection>>(config.jobSpawnPoints), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_RESPONSE_ADMIN_IDS, new Param1<ref DZLAdmin>(config.adminIds), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_CAR_RESPONSE, new Param1<ref DZLCarConfig>(config.carConfig), true, sender);
             GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CONFIG_MEDIC_RESPONSE, new Param1<ref DZLMedicConfig>(config.medicConfig), true, sender);
