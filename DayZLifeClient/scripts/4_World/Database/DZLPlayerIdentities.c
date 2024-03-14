@@ -28,7 +28,7 @@ class DZLPlayerIdentities {
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
 
-            if(player.IsActiveJob(jobName)) {
+            if(player.CanUseJob(jobName)) {
                 collection.Insert(new DZLOnlinePlayer(ident, player.playerName, player.GetLastJobRank(jobName)));
             }
         }

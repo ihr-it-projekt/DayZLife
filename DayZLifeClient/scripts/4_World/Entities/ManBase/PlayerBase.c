@@ -222,7 +222,6 @@ modded class PlayerBase {
     }
 
     private void InitMenu(DZLBaseMenu menu) {
-        menu.SetConfig(GetConfig());
         menu.SetPlayer(this);
     }
 

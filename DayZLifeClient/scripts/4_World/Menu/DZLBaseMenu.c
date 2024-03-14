@@ -24,15 +24,12 @@ class DZLBaseMenu: UIScriptedMenu {
     void SetPlayer(PlayerBase _player) {
         this.player = _player;
         this.dzlPlayer = _player.GetDZLPlayer();
+        config = player.GetConfig();
     }
 
     void UpdatePlayer(PlayerBase player) {
         SetPlayer(player);
         UpdateGUI();
-    }
-
-    void SetConfig(ref DZLConfig config) {
-        this.config = config;
     }
 
     void UpdateGUI(string message = "") {

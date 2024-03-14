@@ -23,6 +23,12 @@ class DZLAccess {
         canManage.Set(DAY_Z_LIFE_ACCESS_PLAYERS, playerAccess.CanManagePlayers());
     }
 
+    bool AddNewAccess(string type) {
+        if (canManage.Contains(type)) return false;
+        canManage.Set(type, false);
+        return true;
+    }
+
     bool HasAccess(string type) {
         return !!canManage.Get(type);
     }

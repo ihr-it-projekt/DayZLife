@@ -16,19 +16,10 @@ class DZLConfig {
     ref DZLLicenceConfig licenceConfig;
     ref DZLTraderConfig traderConfig;
 
-    // deprecated remove 05.03.25
-    private ref DZLJobSpawnPoints copSpawnPoints;
-    private ref DZLJobSpawnPoints transportSpawnPoints;
-    private ref DZLJobSpawnPoints medicSpawnPoints;
-    private ref DZLJobSpawnPoints armySpawnPoints;
-    private ref DZLJobSpawnPoints civilSpawnPoints;
-    // end deprecated
-
     ref array<ref DZLJobSpawnPointCollection> jobSpawnPoints = new array<ref DZLJobSpawnPointCollection>;
 
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
-    ref DZLCarConfig transportConfig;
     ref DZLMedicConfig medicConfig;
     ref DZLBaseBuildingConfig baseBuildingConfig;
     ref DZLCrimeConfig crimeConfig;
@@ -43,6 +34,7 @@ class DZLConfig {
             licenceConfig = new DZLLicenceConfig;
             traderConfig = new DZLTraderConfig;
 
+            jobSpawnPoints.Insert(new DZLJobSpawnPointCollection(DAY_Z_LIFE_JOB_CIVIL));
             foreach(string jobId: jobConfig.paycheck.jobNames) {
                 jobSpawnPoints.Insert(new DZLJobSpawnPointCollection(jobId));
             }

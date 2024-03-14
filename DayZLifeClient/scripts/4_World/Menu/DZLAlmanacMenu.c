@@ -54,14 +54,9 @@ class DZLAlmanacMenu : DZLBaseMenu {
     private TextListboxWidget playerNeedMedicList;
     private MapWidget medicMap;
 
-    private Widget transportWidget;
-    private TextListboxWidget playerNeedTransportList;
-    private MapWidget transportMap;
-
     private TextWidget countCivil;
     private TextWidget countMedic;
     private TextWidget countCop;
-    private TextWidget countTransport;
     private TextWidget countArmy;
     private ButtonWidget syncButton;
 
@@ -75,7 +70,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
     private ref array<ref DZLPlayer> allPlayers;
 
     private ref map<string, ref array<ref DZLOnlinePlayer>> jobPlayers = new map<string, ref array<ref DZLOnlinePlayer>>();
-    private ref array<ref DZLOnlinePlayer> onlinePlayers = new array<ref DZLOnlinePlayer>();
+    private ref map<string, ref array<ref DZLOnlinePlayer>> jobOnlinePlayers = new map<string, ref array<ref DZLOnlinePlayer>>();
 
     void DZLAlmanacMenu() {
         Construct();
@@ -138,15 +133,10 @@ class DZLAlmanacMenu : DZLBaseMenu {
         playerNeedMedicList = creator.GetTextListboxWidget("player_Listbox");
         medicMap = creator.GetMapWidget("medic_Map");
 
-        transportWidget = creator.GetWidget("transport_Panel");
-        playerNeedTransportList = creator.GetTextListboxWidget("player_Listbox");
-        transportMap = creator.GetMapWidget("transport_Map");
-
         toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 
         countCivil = creator.GetTextWidget("countCivil");
         countMedic = creator.GetTextWidget("countMedic");
-        countMedic = creator.GetTextWidget("countTransport");
         countCop = creator.GetTextWidget("countCop");
         countArmy = creator.GetTextWidget("countArmy");
 
@@ -373,6 +363,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
                 jobPanelOnlinePlayerList.ClearItems();
 
+                array<ref DZLOnlinePlayer> onlinePlayers = jobOnlinePlayers.Get(selectedJob);
                 foreach(DZLOnlinePlayer onlinePlayer: onlinePlayers) {
                     jobPanelOnlinePlayerList.AddItem(onlinePlayer.name, onlinePlayer, 0);
                 }
@@ -382,6 +373,12 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 foreach(DZLOnlinePlayer jobPlayer: jobPlayersList) {
                     int jobPlayerIndex = jobPanelJobsList.AddItem(jobPlayer.name, jobPlayer, 0);
                     jobPanelJobsList.SetItem(jobPlayerIndex, jobPlayer.rank, jobPlayer, 1);
+                }
+
+                jobPanelRankList.ClearItems();
+                array<ref DZLPaycheck> paychecks = config.jobConfig.paycheck.GetPaycheckByJob(selectedJob);
+                foreach(DZLPaycheck paycheck: paychecks) {
+                    jobPanelRankList.AddItem(paycheck.rank, paycheck, 0);
                 }
             }
         } else if(w == jobPanelSave) {
@@ -483,7 +480,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
         if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
             Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramCopPlayers;
             if(ctx.Read(paramCopPlayers)) {
-                onlinePlayers = paramCopPlayers.param2;
+                jobOnlinePlayers.Set(paramCopPlayers.param1, paramCopPlayers.param2);
                 jobPlayers.Set(paramCopPlayers.param1, paramCopPlayers.param3);
             }
         } else if(rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {

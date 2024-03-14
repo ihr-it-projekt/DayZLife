@@ -13,8 +13,6 @@ class DZLPlayer {
     // DEPRECATED remove 08.03.2025
     private bool isCop = false;
     private string lastCopRank = "";
-    private bool isTransport = false;
-    private string lastTransportRank = "";
     private bool isMedic = false;
     private string lastMedicRank = "";
     private bool isArmy = false;
@@ -67,22 +65,11 @@ class DZLPlayer {
         DZLPlayerIdentities idents = DZLDatabaseLayer.Get().GetPlayerIds();
         idents.AddPlayer(playerId);
 
-        if(version == "3") {
-            activeJobGrade = "Rekrut";
-            openTickets = new array<ref DZLTicket>;
-        }
 
         DZLPaycheck payCheck = DZLRankHelper.getCurrentPayCheck(this, DZLConfig.Get().jobConfig.paycheck);
 
         if(payCheck.rank != activeJobGrade) {
             activeJobGrade = payCheck.rank;
-        }
-
-        if(version != "5") {
-            fractionId = "";
-            fractionWherePlayerCanJoin = new array<string>;
-
-            version = "5";
         }
 
         if(IsInAnyFraction()) {
@@ -98,21 +85,18 @@ class DZLPlayer {
             jobMap.Insert(DAY_Z_LIFE_JOB_CIVIL, true);
             jobMap.Insert(DAY_Z_LIFE_JOB_MEDIC, isMedic);
             jobMap.Insert(DAY_Z_LIFE_JOB_COP, isCop);
-            jobMap.Insert(DAY_Z_LIFE_JOB_TRANSPORT, isTransport);
             jobMap.Insert(DAY_Z_LIFE_JOB_ARMY, isArmy);
 
             jobGradeMap = new map<string, string>;
             jobGradeMap.Insert(DAY_Z_LIFE_JOB_CIVIL, "Rekrut");
             jobGradeMap.Insert(DAY_Z_LIFE_JOB_MEDIC, lastMedicRank);
             jobGradeMap.Insert(DAY_Z_LIFE_JOB_COP, lastCopRank);
-            jobGradeMap.Insert(DAY_Z_LIFE_JOB_TRANSPORT, lastTransportRank);
             jobGradeMap.Insert(DAY_Z_LIFE_JOB_ARMY, lastArmyRank);
 
             onlineTimeMap = new map<string, int>;
             onlineTimeMap.Insert(DAY_Z_LIFE_JOB_CIVIL, onlineTimeCivil);
             onlineTimeMap.Insert(DAY_Z_LIFE_JOB_MEDIC, onlineTimeMedic);
             onlineTimeMap.Insert(DAY_Z_LIFE_JOB_COP, onlineTimeCop);
-            onlineTimeMap.Insert(DAY_Z_LIFE_JOB_TRANSPORT, 0);
 
             version = "6";
         }
@@ -161,6 +145,7 @@ class DZLPlayer {
     string GetJobGrade() {
         return activeJobGrade;
     }
+
     bool IsActiveJobGrade(string grade) {
         return activeJobGrade == grade;
     }
@@ -171,6 +156,10 @@ class DZLPlayer {
 
     bool IsActiveAsCivil() {
         return DAY_Z_LIFE_JOB_CIVIL == activeJob || activeJob == "";
+    }
+
+    bool CanUseJob(string job) {
+        return jobMap.Contains(job) && jobMap.Get(job);
     }
 
     void UpdateActiveJob(string job) {

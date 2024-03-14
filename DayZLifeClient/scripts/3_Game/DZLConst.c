@@ -143,14 +143,12 @@ static string LOCKED_HOUSES_FILE_NAME = "housesLocked.json";
 static string DAY_Z_LIFE_LOGS = "$profile:DayZLife\\Logs\\";
 
 static string DAY_Z_LIFE_JOB_COP = "Cop";
-static string DAY_Z_LIFE_JOB_TRANSPORT = "Transport";
 static string DAY_Z_LIFE_JOB_MEDIC = "Medic";
 static string DAY_Z_LIFE_JOB_CIVIL = "Civil";
 static string DAY_Z_LIFE_JOB_ARMY = "Army";
 
 static string DAY_Z_LIFE_ACCESS_PLAYERS = "Players";
 static string DAY_Z_LIFE_ACCESS_CARS = "Cars";
-
 
 static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE = "none";
 static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC = "MEDIC";

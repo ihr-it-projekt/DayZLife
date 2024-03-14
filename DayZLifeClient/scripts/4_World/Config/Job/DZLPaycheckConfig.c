@@ -8,8 +8,8 @@ class DZLPaycheckConfig {
     private ref array<ref DZLPaycheck>armies;
     // end deprecated
 
-    ref array<ref DZLJobPayCheck> jobPayChecks = new array<ref DZLJobPayCheck>;
     ref array<string> jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY};
+    ref array<ref DZLJobPayCheck> jobPayChecks = new array<ref DZLJobPayCheck>;
 
     void DZLPaycheckConfig() {
         if(!Load()) {
@@ -19,8 +19,8 @@ class DZLPaycheckConfig {
 
             Save();
         }
-
         if("2" == version) {
+            jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY};
             DZLJobPayCheck paycheck = new DZLJobPayCheck(DAY_Z_LIFE_JOB_COP);
             paycheck.MigrateV3(cops);
             jobPayChecks.Insert(paycheck);
@@ -42,6 +42,23 @@ class DZLPaycheckConfig {
             civils = new array<ref DZLPaycheck>;
 
             version = "3";
+            Save();
+        }
+
+        CheckAllPaychecksExist();
+    }
+
+    void CheckAllPaychecksExist() {
+        foreach(string jobName: jobNames) {
+            bool found = false;
+            foreach(DZLJobPayCheck paycheck: jobPayChecks) {
+                if(paycheck.jobId == jobName) {
+                    found = true;
+                    break;
+                }
+            }
+            if(found) continue;
+            jobPayChecks.Insert(new DZLJobPayCheck(jobName));
             Save();
         }
     }

@@ -1,5 +1,7 @@
 class DZLAdmin {
+    // Deprecated Remove 14.03.2025
     private ref array<ref DZLPlayerAccess> access = new array<ref DZLPlayerAccess>();
+    // end deprecated
     private ref array<ref DZLAccess> playerAccesses = new array<ref DZLAccess>();
     string version = "7";
 
@@ -20,6 +22,18 @@ class DZLAdmin {
 
             Save();
         }
+        CheckAllPermissionsExist(jobs);
+    }
+
+    void CheckAllPermissionsExist(array<string> jobs) {
+        bool hasChange = false;
+        foreach(string jobName: jobs) {
+            foreach(DZLAccess playerAccess: playerAccesses) {
+                if (playerAccess.AddNewAccess(jobName)) hasChange = true;
+            }
+        }
+
+        if (hasChange) Save();
     }
 
     bool HasAccess(string access, string ident) {

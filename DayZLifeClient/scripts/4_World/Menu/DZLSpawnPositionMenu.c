@@ -3,15 +3,10 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     private TextListboxWidget spawnPoints;
     private ButtonWidget randomSpawn;
     private ButtonWidget spawn;
-    private string jobId;
+    private int currentJobIndex = 0;
     private XComboBoxWidget jobSelection;
-    private ref array<string> activeJobIds;
 
-    private int medicIndex = -1;
-    private int copIndex = -1;
-    private int transportIndex = -1;
-    private int armyIndex = -1;
-
+    private ref map<int, string> jobIndex = new map<int, string>;
 
     void DZLSpawnPositionMenu() {
         hasCloseButton = false;
@@ -32,7 +27,6 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/SpawnMenu/SpawnMenu.layout";
-        activeJobIds = new array<string>;
 
         super.Init();
         spawnMap = creator.GetMapWidget("map");
@@ -50,29 +44,13 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         GetGame().GetMission().GetHud().ShowHud(false);
         GetGame().GetMission().GetHud().ShowQuickBar(false);
 
-        jobId = config.jobConfig.paycheck.jobNames.Get(0);
-
-        foreach(string configJobId: config.jobConfig.paycheck.jobNames) {
-            activeJobIds.Insert(configJobId);
-        }
-
         jobSelection.ClearAll();
-        jobSelection.AddItem("#Civ");
+        jobIndex.Insert(jobSelection.AddItem("#Civ"), DAY_Z_LIFE_JOB_CIVIL);
 
-        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
-            medicIndex = jobSelection.AddItem("#Medic");
-        }
-
-        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
-            copIndex = jobSelection.AddItem("#Cop");
-        }
-
-        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_TRANSPORT)) {
-            transportIndex = jobSelection.AddItem("Transport");
-        }
-
-        if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) {
-            armyIndex = jobSelection.AddItem("#Army");
+        foreach(string jobName: config.jobConfig.paycheck.jobNames) {
+            if(player.GetDZLPlayer().CanUseJob(jobName)) {
+                jobIndex.Insert(jobSelection.AddItem("#" + jobName), jobName);
+            }
         }
 
         UpdateSpawnPoints();
@@ -116,20 +94,9 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
             return true;
         } else if(w == jobSelection) {
             index = jobSelection.GetCurrentItem();
-
             if(index == -1) return true;
 
-            if(medicIndex == index) {
-                index = 1;
-            } else if(copIndex == index) {
-                index = 2;
-            } else if(transportIndex == index) {
-                index = 2;
-            } else if(armyIndex == index) {
-                index = 3;
-            }
-
-            jobId = activeJobIds.Get(index);
+            currentJobIndex = index;
 
             UpdateSpawnPoints();
         }
@@ -139,6 +106,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
     void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
         player.SetIsSpawned();
+        string jobId = jobIndex.Get(currentJobIndex);
         GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
     }
 
@@ -149,6 +117,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     }
 
     private void UpdateSpawnPoints() {
+        string jobId = jobIndex.Get(currentJobIndex);
         DZLJobSpawnPoints spawnPointCollection = config.GetJobSpawnPointsByJobId(jobId);
 
         spawnPoints.ClearItems();

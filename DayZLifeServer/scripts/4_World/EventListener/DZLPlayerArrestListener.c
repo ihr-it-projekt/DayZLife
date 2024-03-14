@@ -32,7 +32,7 @@ class DZLPlayerArrestListener {
                 DZLPlayer copDzl = cop.GetDZLPlayer();
                 DZLPlayer prisonerDzl = prisoner.GetDZLPlayer();
 
-                if(copDzl.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC) || copDzl.IsActiveAsCivil() || copDzl.IsActiveJob(DAY_Z_LIFE_JOB_TRANSPORT)) return;
+                if(copDzl.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC) || copDzl.IsActiveAsCivil()) return;
                 if(copDzl.arrestTimeInMinutes != 0) return;
                 if(true == prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP) && true == copDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return;
                 if(true == prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_ARMY) && true == copDzl.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return;

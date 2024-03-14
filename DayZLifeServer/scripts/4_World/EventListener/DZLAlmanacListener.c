@@ -81,7 +81,7 @@ class DZLAlmanacListener {
             }
         } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS) {
             Param2<string, ref array<DZLOnlinePlayer>> paramUpdateJobs;
-            if(ctx.Read(paramUpdateJobs)) return;
+            if(!ctx.Read(paramUpdateJobs)) return;
 
             if(!config.adminIds.HasAccess(paramUpdateJobs.param1, sender.GetId())) return;
 
@@ -124,7 +124,7 @@ class DZLAlmanacListener {
                 string ident = _player.GetIdentity().GetId();
                 DZLPlayer dzlPlayer = PlayerBase.Cast(_player).GetDZLPlayer();
 
-                if(!dzlPlayer.IsActiveJob(job)) {
+                if(!dzlPlayer.CanUseJob(job)) {
                     collection.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), dzlPlayer.GetLastJobRank(job)));
                 }
             }

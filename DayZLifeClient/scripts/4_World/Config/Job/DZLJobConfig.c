@@ -3,7 +3,6 @@ class DZLJobConfig {
     ref DZLPaycheckConfig paycheck = new DZLPaycheckConfig;
 
     // deprecated remove 08.03.2025
-    private ref DZLLoadOuts loadOutsTransport = new DZLLoadOuts(DAY_Z_LIFE_JOB_TRANSPORT);
     private ref DZLLoadOuts loadOutsCops = new DZLLoadOuts(DAY_Z_LIFE_JOB_COP);
     private ref DZLLoadOuts loadOutsMedics = new DZLLoadOuts(DAY_Z_LIFE_JOB_MEDIC);
     private ref DZLLoadOuts loadOutsArmy = new DZLLoadOuts(DAY_Z_LIFE_JOB_ARMY);
