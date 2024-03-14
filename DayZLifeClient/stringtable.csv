@@ -124,6 +124,7 @@ Civ,Civilian,Civilian,Zivilist,平民,平民,Гражданское лицо,Civ
 Civil,Civilian,Civilian,Zivilist,平民,平民,Гражданское лицо,Civilní,Cywil,Polgári,Civile,Civil,Civil,Civil,民間人,
 Cop,Police,Police,Polizist,警察,警察,Полиция,Policie,Policja,Rendőrség,Polizia,Policía,Police,Polícia,警察,
 Medic,Paramedic,Paramedic,Sanitäter,医护人员,醫護人員,Фельдшер,"záchranář, Zdravotník, zdravotnice",Sanitariusz,Rohammentős,Paramedico,Médico,Paramédical,Paramédico,救急医療,
+Army,Army,Army,Armee,军队,軍隊,Армия,Armáda,Armia,Hadsereg,Esercito,Ejército,Armée,Exército,軍,
 Player_list,Player list,Player list,Spielerliste,玩家名单,球員名單,Список игроков,Seznam hráčů,Lista graczy,Játékoslista,Elenco giocatori,Lista de jugadores,Liste des joueurs,Lista de jogadores,プレイヤーリスト,
 Cop_list,Cop list,Cop list,Polizei Liste,警察名单,警察名單,Список полицейских,Seznam policistů,Lista policjantów,Cop list,Elenco dei poliziotti,Lista de policías,Liste des flics,Lista policial,警官リスト,
 update_cop_list_successful,Police list successfully updated,Police list successfully updated,Polizei Liste erfolgreich aktualisiert,警察名单已成功更新,警察名單已成功更新,Список полицейских успешно обновлен,Policejní seznam byl úspěšně aktualizován,Lista policji została pomyślnie zaktualizowana,A rendőrség listája sikeresen frissítve,Elenco di polizia aggiornato con successo,Lista de policías actualizada correctamente,Liste de police mise à jour avec succès,Lista policial atualizada com sucesso,警察リストが正常に更新されました,
