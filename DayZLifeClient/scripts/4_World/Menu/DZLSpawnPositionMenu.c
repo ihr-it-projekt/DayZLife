@@ -18,7 +18,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_NEW_SPAWN_RESPONSE) {
+        if(rpc_type == DZL_RPC.NEW_SPAWN_RESPONSE) {
             GetGame().GetMission().GetHud().ShowHud(true);
             GetGame().GetMission().GetHud().ShowQuickBar(true);
             OnHide();
@@ -107,7 +107,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
         player.SetIsSpawned();
         string jobId = jobIndex.Get(currentJobIndex);
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
+        GetGame().RPCSingleParam(player, DZL_RPC.NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
     }
 
     override void OnHide() {

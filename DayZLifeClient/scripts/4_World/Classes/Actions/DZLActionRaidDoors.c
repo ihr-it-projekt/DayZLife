@@ -90,7 +90,7 @@ class DZLActionRaidDoors: ActionInteractBase {
             bar.SetBuilding(buildingClient, doorIndex);
 
             bar.SetRaidItem(action_data.m_MainItem);
-            GetGame().RPCSingleParam(action_data.m_Player, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR, new Param1<Building>(buildingClient), true);
+            GetGame().RPCSingleParam(action_data.m_Player, DZL_RPC.GET_DZL_BUILDING_RAID_DOOR, new Param1<Building>(buildingClient), true);
             GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
 
         }

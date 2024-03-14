@@ -15,15 +15,15 @@ class DZLAlmanacListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_PLAYER_SERVER_RESET_AT_PLAYER_BASE) {
+        if(rpc_type == DZL_RPC.PLAYER_SERVER_RESET_AT_PLAYER_BASE) {
             PlayerBase.Cast(target).ResetDZLPlayer();
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS) {
+        } else if(rpc_type == DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS) {
             Param1<string> paramJobPlayer;
             if(!ctx.Read(paramJobPlayer)) return;
             SendUpdateListJob(paramJobPlayer.param1, PlayerBase.Cast(target));
-        } else if(rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS) {
+        } else if(rpc_type == DZL_RPC.GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
-        } else if(rpc_type == DAY_Z_LIFE_DELETE_PLAYER) {
+        } else if(rpc_type == DZL_RPC.DELETE_PLAYER) {
             if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
             Param1<string> paramDeletePlayer;
             if(ctx.Read(paramDeletePlayer)) {
@@ -79,7 +79,7 @@ class DZLAlmanacListener {
                 DZLSendMessage(sender, "#player_data_was_deleted");
                 SendAllPlayerList(sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS) {
+        } else if(rpc_type == DZL_RPC.ALL_PLAYER_UPDATE_JOB_PLAYERS) {
             Param2<string, ref array<DZLOnlinePlayer>> paramUpdateJobs;
             if(!ctx.Read(paramUpdateJobs)) return;
 
@@ -88,7 +88,7 @@ class DZLAlmanacListener {
             DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
             dzlPlayerIdentities.UpdateJob(paramUpdateJobs.param1, paramUpdateJobs.param2);
             DZLSendMessage(sender, "#update_successful");
-        } else if(rpc_type == DAY_Z_LIFE_MONEY_TRANSFER_ADMIN) {
+        } else if(rpc_type == DZL_RPC.MONEY_TRANSFER_ADMIN) {
             if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
             autoptr Param3<string, int, bool> paramDepositAdminPlayer;
             string messageDepositPP = "";
@@ -130,7 +130,7 @@ class DZLAlmanacListener {
             }
         }
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(job, collection, copIdents), true, player.GetIdentity());
+        GetGame().RPCSingleParam(null, DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(job, collection, copIdents), true, player.GetIdentity());
     }
 
 
@@ -149,6 +149,6 @@ class DZLAlmanacListener {
             collection.Insert(_player);
         }
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE, new Param1<ref array<ref DZLPlayer>>(collection), true, player);
+        GetGame().RPCSingleParam(null, DZL_RPC.GET_ALL_PLAYERS_RESPONSE, new Param1<ref array<ref DZLPlayer>>(collection), true, player);
     }
 }

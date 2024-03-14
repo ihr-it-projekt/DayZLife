@@ -17,7 +17,7 @@ class DZLMedicHelpMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE) {
+        if(rpc_type == DZL_RPC.GET_MEDIC_COUNT_RESPONSE) {
             autoptr Param1<int> paramMedicCount;
             if(ctx.Read(paramMedicCount)) {
                 medicCountWidget.SetText(paramMedicCount.param1.ToString());
@@ -53,7 +53,7 @@ class DZLMedicHelpMenu : DZLBaseMenu {
             hospitalButton.Show(true);
         }
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_MEDIC_COUNT, null, true);
+        GetGame().RPCSingleParam(player, DZL_RPC.GET_MEDIC_COUNT, null, true);
 
         return layoutRoot;
     }
@@ -85,14 +85,14 @@ class DZLMedicHelpMenu : DZLBaseMenu {
             player.willDie = true;
             OnHide();
         } else if(w == healButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_MEDIC_CALL, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.MEDIC_CALL, null, true);
             healButton.Show(false);
             dzlPlayer.SetWillHealByMedic();
             OnHide();
         } else if(w == hospitalButton) {
             dzlPlayer.SetWillHealByHospital();
             player.willDie = true;
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_HOSPITAL_HEAL_PLAYER, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.EVENT_HOSPITAL_HEAL_PLAYER, null, true);
             OnHide();
         }
 

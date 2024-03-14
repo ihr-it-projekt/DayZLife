@@ -68,8 +68,8 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
             DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
             DZLLogRaid(player.GetPlayerId(), "bank raid finished", "bank", player.GetPosition());
 
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, player.GetIdentity());
+            GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+            GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, player.GetIdentity());
         }
     }
 };

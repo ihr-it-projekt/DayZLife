@@ -80,7 +80,7 @@ class DZLTuningMenu: DZLBaseMenu {
                     }
                 }
 
-                GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_TUNE_CAR, new Param1<string>(targetTuneConfig.type), true);
+                GetGame().RPCSingleParam(car, DZL_RPC.EVENT_TUNE_CAR, new Param1<string>(targetTuneConfig.type), true);
                 OnHide();
             }
         } else if(w == carFoundList) {

@@ -10,7 +10,7 @@ class DZLHarvestListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_HARVEST) {
+        if(rpc_type == DZL_RPC.HARVEST) {
             PlayerBase player = PlayerBase.Cast(target);
 
             DZLWorkZone zone = config.FindZone(player.GetPosition());

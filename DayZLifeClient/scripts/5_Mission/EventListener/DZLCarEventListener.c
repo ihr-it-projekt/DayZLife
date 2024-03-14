@@ -8,7 +8,7 @@ class DZLCarEventListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_UPDATE_CAR) {
+        if(rpc_type == DZL_RPC.UPDATE_CAR) {
             Param6<int, ref array<string>, string, string, bool, bool> carParam;
             CarScript car = CarScript.Cast(target);
             if(ctx.Read(carParam) && car) {

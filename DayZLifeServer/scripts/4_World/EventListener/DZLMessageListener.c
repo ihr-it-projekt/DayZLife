@@ -8,7 +8,7 @@ class DZLMessageListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_SEND_MESSAGE) {
+        if(rpc_type == DZL_RPC.SEND_MESSAGE) {
             PlayerBase player = PlayerBase.Cast(target);
             autoptr Param4<string, string, string, bool> paramMessage;
             if(ctx.Read(paramMessage) && player) {
@@ -23,7 +23,7 @@ class DZLMessageListener {
                     DZLSendMessage(sender, "#recipient_is_not_online_you_can_not_answer");
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS) {
+        } else if(rpc_type == DZL_RPC.RECEIVE_ONLINE_PLAYERS) {
             PlayerBase playerGetList = PlayerBase.Cast(target);
             SendOnlinePlayerList(playerGetList);
         }
@@ -64,7 +64,7 @@ class DZLMessageListener {
             }
         }
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(collection), true, player.GetIdentity());
+        GetGame().RPCSingleParam(null, DZL_RPC.RECEIVE_ONLINE_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(collection), true, player.GetIdentity());
     }
 
 }

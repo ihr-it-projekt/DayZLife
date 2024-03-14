@@ -146,8 +146,8 @@ modded class PlayerBase {
     }
 
     void RequestUpdateDZLPlayer() {
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_DATA, null, true);
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+        GetGame().RPCSingleParam(this, DZL_RPC.PLAYER_DATA, null, true);
+        GetGame().RPCSingleParam(this, DZL_RPC.PLAYER_BANK_DATA, null, true);
     }
 
     void DisplayMessage(string message) {
@@ -592,7 +592,7 @@ modded class PlayerBase {
 
     void ResetDZLPlayer() {
         if(GetGame().IsServer()) {
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
+            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
         }
     }
 }

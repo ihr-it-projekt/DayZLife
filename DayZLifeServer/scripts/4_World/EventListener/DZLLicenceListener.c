@@ -11,7 +11,7 @@ class DZLLicenceListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_BUY_LICENCE) {
+        if(rpc_type == DZL_RPC.BUY_LICENCE) {
             autoptr Param1<string> paramBuyLicence;
             if(ctx.Read(paramBuyLicence)) {
                 PlayerBase playerBuyLicence = PlayerBase.Cast(target);
@@ -29,10 +29,10 @@ class DZLLicenceListener {
                     dzlPlayer.BuyLicence(licence);
                 }
 
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
-                GetGame().RPCSingleParam(playerBuyLicence, DAY_Z_LIFE_BUY_LICENCE_RESPONSE, new Param1<string>(message), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                GetGame().RPCSingleParam(playerBuyLicence, DZL_RPC.BUY_LICENCE_RESPONSE, new Param1<string>(message), true, sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_BUY_LICENCE_USE) {
+        } else if(rpc_type == DZL_RPC.BUY_LICENCE_USE) {
             autoptr Param1<string> paramUseLicence;
             if(ctx.Read(paramUseLicence)) {
                 PlayerBase playerLicenceUse = PlayerBase.Cast(target);

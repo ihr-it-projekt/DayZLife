@@ -8,9 +8,9 @@ class DZLPlayerHouseListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_GET_PLAYER_BUILDING) {
-            GetGame().RPCSingleParam(target, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
-        } else if(rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS) {
+        if(rpc_type == DZL_RPC.GET_PLAYER_BUILDING) {
+            GetGame().RPCSingleParam(target, DZL_RPC.GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+        } else if(rpc_type == DZL_RPC.HOUSE_ACCESS_LISTS) {
             autoptr Param1<Building> paramGetKeyLists;
             if(ctx.Read(paramGetKeyLists)) {
                 PlayerBase playerGetPlayerBuilding = PlayerBase.Cast(target);
@@ -18,7 +18,7 @@ class DZLPlayerHouseListener {
                     SendUpdateList(playerGetPlayerBuilding, paramGetKeyLists.param1);
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE) {
+        } else if(rpc_type == DZL_RPC.HOUSE_ACCESS_LISTS_SAVE) {
             autoptr Param2<Building, ref array<DZLOnlinePlayer>> paramSaveKeyLists;
             if(ctx.Read(paramSaveKeyLists)) {
                 Building buildingUpdateKey = paramSaveKeyLists.param1;
@@ -51,7 +51,7 @@ class DZLPlayerHouseListener {
                 foreach(Man onlinePlayer: onlinePlayers) {
                     PlayerIdentity playerIdent = onlinePlayer.GetIdentity();
                     if(-1 != playerMustUpdated.Find(playerIdent.GetId())) {
-                        GetGame().RPCSingleParam(onlinePlayer, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(playerIdent.GetId())), true, playerIdent);
+                        GetGame().RPCSingleParam(onlinePlayer, DZL_RPC.GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(playerIdent.GetId())), true, playerIdent);
                     }
                 }
 
@@ -60,7 +60,7 @@ class DZLPlayerHouseListener {
                 SendUpdateList(playerOwner, buildingUpdateKey);
                 DZLSendMessage(sender, "#keys_was_updated");
             }
-        } else if(rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA) {
+        } else if(rpc_type == DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA) {
             autoptr Param2<string, vector> paramInventory;
             if(ctx.Read(paramInventory)) {
                 string fileName = DZLHouse.GetFileNameByPosition(paramInventory.param2);
@@ -69,9 +69,9 @@ class DZLPlayerHouseListener {
 
                 DZLHouseInventory inventoryGet = DZLDatabaseLayer.Get().GetHouseInventory(paramInventory.param1, paramInventory.param2);
 
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventoryGet), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventoryGet), true, sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_HOUSE_STORE_ITEMS) {
+        } else if(rpc_type == DZL_RPC.HOUSE_STORE_ITEMS) {
             autoptr Param4<string, vector, ref array<string>, ref array<EntityAI>> paramStoreInventory;
             if(ctx.Read(paramStoreInventory)) {
                 array<string> storeOutItems = paramStoreInventory.param3;
@@ -98,7 +98,7 @@ class DZLPlayerHouseListener {
                     inventory.AddToStore(storeInItems);
                 }
 
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
             }
         }
     }
@@ -128,6 +128,6 @@ class DZLPlayerHouseListener {
             }
         }
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, noAccessIdents), true, player.GetIdentity());
+        GetGame().RPCSingleParam(player, DZL_RPC.HOUSE_ACCESS_LISTS_RESPONSE, new Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(collection, noAccessIdents), true, player.GetIdentity());
     }
 }

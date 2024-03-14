@@ -82,7 +82,7 @@ modded class MissionServer {
             m_player.SetHealth01("GlobalHealth", "Blood", factorBlood);
         } else {
             super.OnClientNewEvent(identity, pos, ctx);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_CLIENT, null, true, identity);
+            GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_CLIENT, null, true, identity);
         }
 
         dzlPlayer.ResetDeadState();

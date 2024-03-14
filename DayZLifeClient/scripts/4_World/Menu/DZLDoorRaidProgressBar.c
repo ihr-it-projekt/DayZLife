@@ -17,7 +17,7 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE) {
+        if(rpc_type == DZL_RPC.GET_DZL_BUILDING_RAID_DOOR_RESPONSE) {
             autoptr Param1<int> paramRaidDoorResponse;
             if(ctx.Read(paramRaidDoorResponse)) {
                 SetDuration(paramRaidDoorResponse.param1);
@@ -36,6 +36,6 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar {
     }
 
     override void SendFinishEvent() {
-        GetGame().RPCSingleParam(building, DAY_Z_LIFE_RAID_DOOR, new Param2<int, EntityAI>(doorIndex, item), true);
+        GetGame().RPCSingleParam(building, DZL_RPC.RAID_DOOR, new Param2<int, EntityAI>(doorIndex, item), true);
     }
 }

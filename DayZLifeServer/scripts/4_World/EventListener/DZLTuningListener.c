@@ -11,7 +11,7 @@ class DZLTuningListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_EVENT_TUNE_CAR) {
+        if(rpc_type == DZL_RPC.EVENT_TUNE_CAR) {
             autoptr Param1<string> paramTuneCar;
             CarScript car = CarScript.Cast(target);
 
@@ -137,6 +137,6 @@ class DZLTuningListener {
             }
         }
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
     }
 }

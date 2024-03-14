@@ -8,7 +8,7 @@ class DZLRaidListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_RAID_DOOR) {
+        if(rpc_type == DZL_RPC.RAID_DOOR) {
             autoptr Param2<int, EntityAI> paramRaidDoor;
             if(ctx.Read(paramRaidDoor)) {
                 Building raidedBuilding = Building.Cast(target);
@@ -30,7 +30,7 @@ class DZLRaidListener {
                 paramRaidDoor.param2.SetHealth(0);
                 DZLLogRaid(sender.GetId(), "end raid", raidedBuilding.GetType(), raidedBuilding.GetPosition());
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR) {
+        } else if(rpc_type == DZL_RPC.GET_DZL_BUILDING_RAID_DOOR) {
             autoptr Param1<Building> paramRaidDoorDZLBuilding;
             if(ctx.Read(paramRaidDoorDZLBuilding)) {
                 PlayerBase raider = PlayerBase.Cast(target);
@@ -60,7 +60,7 @@ class DZLRaidListener {
                                 if(raider == currentPlayer) continue;
 
                                 if(dzlHouseRaid.IsOwner(currentPlayer)) {
-                                    GetGame().RPCSingleParam(currentPlayer, DAY_Z_LIFE_HOUSE_RAID_ALARM, new Param3<ref DZLHouseExtension, string, PlayerBase>(extension, dzlHouseRaid.GetName(), raider), true, currentPlayer.GetIdentity());
+                                    GetGame().RPCSingleParam(currentPlayer, DZL_RPC.HOUSE_RAID_ALARM, new Param3<ref DZLHouseExtension, string, PlayerBase>(extension, dzlHouseRaid.GetName(), raider), true, currentPlayer.GetIdentity());
                                 }
                             }
                         }
@@ -68,7 +68,7 @@ class DZLRaidListener {
                     raidTime = dzlHouseRaid.GetRaidTime();
                 }
                 DZLLogRaid(sender.GetId(), "start raid", building.GetType(), building.GetPosition());
-                GetGame().RPCSingleParam(raider, DAY_Z_LIFE_GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<int>(raidTime), true, sender);
+                GetGame().RPCSingleParam(raider, DZL_RPC.GET_DZL_BUILDING_RAID_DOOR_RESPONSE, new Param1<int>(raidTime), true, sender);
             }
         }
     }

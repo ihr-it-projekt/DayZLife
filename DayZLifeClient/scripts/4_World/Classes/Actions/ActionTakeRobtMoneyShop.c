@@ -44,7 +44,7 @@ class ActionTakeRobtMoneyShop: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
 
         if(player) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PAY_ROB_MONEY_FROM_SHOP, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.PAY_ROB_MONEY_FROM_SHOP, null, true);
         }
     }
 };

@@ -14,12 +14,12 @@ class DZLBuyHouseListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA) {
+        if(rpc_type == DZL_RPC.OPEN_GET_BUILDING_DATA) {
             autoptr Param1<Building> paramGetBuildingProperties;
             if(ctx.Read(paramGetBuildingProperties)) {
-                GetGame().RPCSingleParam(PlayerBase.Cast(target), DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param1)), true, sender);
+                GetGame().RPCSingleParam(PlayerBase.Cast(target), DZL_RPC.OPEN_GET_BUILDING_DATA_RESPONSE, new Param1<ref DZLBuilding>(new DZLBuilding(paramGetBuildingProperties.param1)), true, sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING) {
+        } else if(rpc_type == DZL_RPC.OPEN_BUY_BUILDING) {
             autoptr Param1<Building> paramBuyHouse;
             if(ctx.Read(paramBuyHouse)) {
                 DZLBuilding dzlBuilding = new DZLBuilding(paramBuyHouse.param1);
@@ -36,12 +36,12 @@ class DZLBuyHouseListener {
                     message = "#successfully_buy_house";
                     DZLLogHouseTrade(sender.GetId(), "buy house", actualHouseDef.buyPrice, dzlBuilding.GetDZLHouse().GetPosition());
                 }
-                GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
-                GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerOpenBuy, DZL_RPC.OPEN_BUY_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+                GetGame().RPCSingleParam(playerOpenBuy, DZL_RPC.GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
                 dzlPlayer.GetFractionMember();
-                GetGame().RPCSingleParam(playerOpenBuy, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+                GetGame().RPCSingleParam(playerOpenBuy, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING) {
+        } else if(rpc_type == DZL_RPC.OPEN_SELL_BUILDING) {
             autoptr Param1<Building> paramSellHouse;
             if(ctx.Read(paramSellHouse)) {
                 DZLBuilding dzlBuildingSell = new DZLBuilding(paramSellHouse.param1);
@@ -69,10 +69,10 @@ class DZLBuyHouseListener {
                     messageSell = "#successfully_sell_house";
                     DZLLogHouseTrade(sender.GetId(), "sell house", sellPrice, dzlBuildingSell.GetDZLHouse().GetPosition());
                 }
-                GetGame().RPCSingleParam(playerSellHouse, DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
-                GetGame().RPCSingleParam(playerSellHouse, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                GetGame().RPCSingleParam(playerSellHouse, DZL_RPC.OPEN_SELL_BUILDING_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuildingSell, messageSell), true, sender);
+                GetGame().RPCSingleParam(playerSellHouse, DZL_RPC.GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
                 dzlPlayerSellHouse.GetFractionMember();
-                GetGame().RPCSingleParam(playerSellHouse, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerSellHouse), true, sender);
+                GetGame().RPCSingleParam(playerSellHouse, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerSellHouse), true, sender);
             }
         }
     }

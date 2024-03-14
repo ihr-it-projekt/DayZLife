@@ -78,7 +78,7 @@ class DZLMessageSystemMenu : DZLBaseMenu {
         mapWidget.Show(false);
         mapPanelWidget.Show(false);
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS, null, true);
+        GetGame().RPCSingleParam(player, DZL_RPC.RECEIVE_ONLINE_PLAYERS, null, true);
 
         return layoutRoot;
     }
@@ -179,7 +179,7 @@ class DZLMessageSystemMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_RECEIVE_ONLINE_PLAYERS_RESPONSE) {
+        if(rpc_type == DZL_RPC.RECEIVE_ONLINE_PLAYERS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> onlinePlayersParam;
             if(ctx.Read(onlinePlayersParam)) {
                 onlinePlayers = onlinePlayersParam.param1;
@@ -380,7 +380,7 @@ class DZLMessageSystemMenu : DZLBaseMenu {
 
         bool anonym = sendAnonymousBox.IsChecked();
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_SEND_MESSAGE, new Param4<string, string, string, bool>(id, text, type, !anonym), true, player.GetIdentity());
+        GetGame().RPCSingleParam(player, DZL_RPC.SEND_MESSAGE, new Param4<string, string, string, bool>(id, text, type, !anonym), true, player.GetIdentity());
         player.DisplayMessage("#message_was_send");
         writeWidget.SetText("");
 

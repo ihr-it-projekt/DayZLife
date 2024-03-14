@@ -52,7 +52,7 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
                 }
 
                 if(ticketValue != 0) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
+                    GetGame().RPCSingleParam(player, DZL_RPC.CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
                     inputTicket.SetText("");
                     inputTicketReason.SetText("");
                 } else {
@@ -67,7 +67,7 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_CREATE_TICKET_RESPONSE) {
+        if(rpc_type == DZL_RPC.CREATE_TICKET_RESPONSE) {
             OnHide();
         }
     }

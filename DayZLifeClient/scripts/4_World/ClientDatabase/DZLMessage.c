@@ -45,7 +45,7 @@ class DZLMessage: DZLIdModel {
         SetId();
 
         date = new DZLDate;
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_SEND_MESSAGE_SERVER, new Param1<ref DZLMessage>(this), true, _receiver);
+        GetGame().RPCSingleParam(null, DZL_RPC.SEND_MESSAGE_SERVER, new Param1<ref DZLMessage>(this), true, _receiver);
     }
 
     void CreateAnswer(PlayerBase sender, string receiver, string text, DZLMessage replayedMessage) {

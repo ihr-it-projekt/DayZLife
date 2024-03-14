@@ -15,7 +15,7 @@ class DZLBuyExtensionListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_BUY_EXTENSION) {
+        if(rpc_type == DZL_RPC.BUY_EXTENSION) {
             autoptr Param2<Building, string> paramBuyStorage;
             if(ctx.Read(paramBuyStorage)) {
                 PlayerBase player = PlayerBase.Cast(target);
@@ -53,7 +53,7 @@ class DZLBuyExtensionListener {
                             inventory.IncreaseStorage(actualHouseDef.inventoryItemsPerLevel);
 
                             message = "#successfully_extend_storage";
-                            GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
+                            GetGame().RPCSingleParam(null, DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE, new Param1<ref DZLHouseInventory>(inventory), true, sender);
                         }
                     } else {
                         if(dzlBuilding.CanBuyAlarm(extension) && dzlPlayer.HasEnoughMoney(buyPriceBuy)) {
@@ -64,10 +64,10 @@ class DZLBuyExtensionListener {
                         }
                     }
 
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
+                    GetGame().RPCSingleParam(player, DZL_RPC.BUY_EXTENSION_RESPONSE, new Param2<ref DZLBuilding, string>(dzlBuilding, message), true, sender);
+                    GetGame().RPCSingleParam(player, DZL_RPC.GET_PLAYER_BUILDING_RESPONSE, new Param1<ref DZLPlayerHouse>(DZLDatabaseLayer.Get().GetPlayerHouse(sender.GetId())), true, sender);
                     dzlPlayer.GetFractionMember();
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+                    GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
                 }
             }
         }

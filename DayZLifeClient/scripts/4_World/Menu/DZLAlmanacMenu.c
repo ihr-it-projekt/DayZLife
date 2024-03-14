@@ -153,7 +153,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
         foreach(string job: jobs) {
             if(!config.adminIds.HasAccess(job, ident)) continue;
 
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS, new Param1<string>(job), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS, new Param1<string>(job), true);
             toggleViewWidget.AddItem("#manage #" + job);
             jobPanelIds.Set(toggleViewWidget.GetNumItems() - 1, job);
 
@@ -161,20 +161,20 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
         if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
             toggleViewWidget.AddItem("#emergencies");
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_EMERGENCY_CALLS, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.GET_EMERGENCY_CALLS, null, true);
             medicPanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
         if(config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, ident)) {
             toggleViewWidget.AddItem("#admin_Panel");
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ALL_PLAYERS, null, true);
+            GetGame().RPCSingleParam(null, DZL_RPC.GET_ALL_PLAYERS, null, true);
             adminPanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS, null, true);
+        GetGame().RPCSingleParam(null, DZL_RPC.GET_ESCAPED_PLAYERS, null, true);
         if(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
             toggleViewWidget.AddItem("#cop_panel");
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS, null, true);
+            GetGame().RPCSingleParam(null, DZL_RPC.GET_OPEN_TICKET_PLAYERS, null, true);
             internalCopPanelId = toggleViewWidget.GetNumItems() - 1;
         }
 
@@ -383,7 +383,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
             }
         } else if(w == jobPanelSave) {
             if(!config.adminIds.HasAccess(selectedJob, player.GetPlayerId())) return true;
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_ALL_PLAYER_UPDATE_JOB_PLAYERS, new Param2<string, ref array<DZLOnlinePlayer>> (selectedJob, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(jobPanelJobsList)), true);
+            GetGame().RPCSingleParam(null, DZL_RPC.ALL_PLAYER_UPDATE_JOB_PLAYERS, new Param2<string, ref array<DZLOnlinePlayer>> (selectedJob, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(jobPanelJobsList)), true);
         } else if(w == escapedPlayers) {
             int posEscaped = escapedPlayers.GetSelectedRow();
             if(posEscaped == -1) {
@@ -403,7 +403,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
             DZLPlayer _dzlPlayer = DZLDisplayHelper.GetDZLPlayerFromList(adminPlayers);
 
             if(_dzlPlayer) {
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_DELETE_PLAYER, new Param1<string>(_dzlPlayer.dayZPlayerId), true);
+                GetGame().RPCSingleParam(null, DZL_RPC.DELETE_PLAYER, new Param1<string>(_dzlPlayer.dayZPlayerId), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
@@ -413,7 +413,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
             if(__dzlPlayer) {
                 int deposit = adminAddMoneyToPlayerInput.GetText().ToInt();
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(__dzlPlayer.dayZPlayerId, deposit, false), true);
+                GetGame().RPCSingleParam(null, DZL_RPC.MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(__dzlPlayer.dayZPlayerId, deposit, false), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
@@ -423,7 +423,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
             if(___dzlPlayer) {
                 int depositBank = adminAddMoneyToPlayerInput.GetText().ToInt();
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(___dzlPlayer.dayZPlayerId, depositBank, true), true);
+                GetGame().RPCSingleParam(null, DZL_RPC.MONEY_TRANSFER_ADMIN, new Param3<string, int, bool>(___dzlPlayer.dayZPlayerId, depositBank, true), true);
             } else {
                 player.DisplayMessage("#no_player_selected");
             }
@@ -456,7 +456,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 player.DisplayMessage("#no_player_selected");
             }
         } else if(w == syncButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_SERVER_RESET_AT_PLAYER_BASE, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_SERVER_RESET_AT_PLAYER_BASE, null, true);
             player.DisplayMessage("#player_was_manuel_synced");
             syncButton.Show(false);
         } else if(w == adminSearchPlayer) {
@@ -477,13 +477,13 @@ class DZLAlmanacMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
+        if(rpc_type == DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS_RESPONSE) {
             Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramCopPlayers;
             if(ctx.Read(paramCopPlayers)) {
                 jobOnlinePlayers.Set(paramCopPlayers.param1, paramCopPlayers.param2);
                 jobPlayers.Set(paramCopPlayers.param1, paramCopPlayers.param3);
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_ALL_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.GET_ALL_PLAYERS_RESPONSE) {
             autoptr Param1<ref array<ref DZLPlayer>> paramAllPlayers;
             if(ctx.Read(paramAllPlayers)) {
                 adminPlayers.ClearItems();
@@ -497,7 +497,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     }
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.GET_ESCAPED_PLAYERS_RESPONSE) {
             autoptr Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int> paramEscaped;
             if(ctx.Read(paramEscaped)) {
                 countCop.SetText(paramEscaped.param2.ToString());
@@ -520,7 +520,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.GET_OPEN_TICKET_PLAYERS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOpenTicketPlayer>> paramUnpaidTickets;
             if(ctx.Read(paramUnpaidTickets)) {
                 playerOpenTicketsList.ClearItems();
@@ -533,7 +533,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     playerOpenTicketsList.SetItem(indexOfRowUnpaid, openTicketPlayer.valueOfTickets.ToString(), openTicketPlayer, 2);
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_EMERGENCY_CALLS_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.GET_EMERGENCY_CALLS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramEmergencies;
             if(ctx.Read(paramEmergencies)) {
                 playerNeedMedicList.ClearItems();

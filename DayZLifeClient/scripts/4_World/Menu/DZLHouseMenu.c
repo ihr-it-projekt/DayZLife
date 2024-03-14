@@ -116,7 +116,7 @@ class DZLHouseMenu : DZLBaseMenu {
 
         houseInventoryWidget = creator.GetWidget("housingStorageMenuPanel");
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
+        GetGame().RPCSingleParam(player, DZL_RPC.HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
 
         return layoutRoot;
     }
@@ -179,7 +179,7 @@ class DZLHouseMenu : DZLBaseMenu {
                 if(indexHouseBuy == indexPanel) {
                     if(actualHouseDef) {
                         if(dzlPlayer.HasEnoughMoney(actualHouseDef.buyPrice)) {
-                            GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_BUY_BUILDING, new Param1<Building>(building), true);
+                            GetGame().RPCSingleParam(player, DZL_RPC.OPEN_BUY_BUILDING, new Param1<Building>(building), true);
                         } else {
                             player.DisplayMessage("#error_not_enough_money");
                         }
@@ -217,7 +217,7 @@ class DZLHouseMenu : DZLBaseMenu {
                     }
 
                     if(canBuy) {
-                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_EXTENSION, new Param2<Building, string>(building, currentItemBuy.GetId()), true);
+                        GetGame().RPCSingleParam(player, DZL_RPC.BUY_EXTENSION, new Param2<Building, string>(building, currentItemBuy.GetId()), true);
                     }
 
                     buyButton.Show(false);
@@ -226,7 +226,7 @@ class DZLHouseMenu : DZLBaseMenu {
             case sellButton:
                 indexPanel = selectedPanel.GetCurrentItem();
                 if(indexHouseBuy == indexPanel && house && house.HasOwner() && house.IsOwner(player)) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_SELL_BUILDING, new Param1<Building>(building), true);
+                    GetGame().RPCSingleParam(player, DZL_RPC.OPEN_SELL_BUILDING, new Param1<Building>(building), true);
                 } else if(indexHouseUpgrade == indexPanel) {
                     int itemPosStorageSell = sellStorageListTextWidget.GetSelectedRow();
                     DZLStorageTypeBought currentItemStorageSell;
@@ -236,7 +236,7 @@ class DZLHouseMenu : DZLBaseMenu {
 
                     PlayerBase playerBaseSell = player;
                     if(house.IsOwner(playerBaseSell)) {
-                        GetGame().RPCSingleParam(playerBaseSell, DAY_Z_LIFE_SELL_STORAGE, new Param2<Building, vector>(building, currentItemStorageSell.position), true);
+                        GetGame().RPCSingleParam(playerBaseSell, DZL_RPC.SELL_STORAGE, new Param2<Building, vector>(building, currentItemStorageSell.position), true);
                     }
                 }
                 return true;
@@ -298,7 +298,7 @@ class DZLHouseMenu : DZLBaseMenu {
 
                 return true;
             case keySaveButton:
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS_SAVE, new Param2<Building, ref array<DZLOnlinePlayer>>(building, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(keyPlayerAccessList)), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.HOUSE_ACCESS_LISTS_SAVE, new Param2<Building, ref array<DZLOnlinePlayer>>(building, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(keyPlayerAccessList)), true);
                 searchInput.SetText("");
                 return true;
             case searchButton:
@@ -335,7 +335,7 @@ class DZLHouseMenu : DZLBaseMenu {
                     return true;
                 }
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_STORE_ITEMS, new Param4<string, vector, ref array<string>, ref array<EntityAI>>(house.GetDZLHouse().GetOwner(), building.GetPosition(), storeOutItems, storeInItems), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.HOUSE_STORE_ITEMS, new Param4<string, vector, ref array<string>, ref array<EntityAI>>(house.GetDZLHouse().GetOwner(), building.GetPosition(), storeOutItems, storeInItems), true);
 
                 return true;
             default:
@@ -386,32 +386,32 @@ class DZLHouseMenu : DZLBaseMenu {
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         super.HandleEventsDZL(sender, target, rpc_type, ctx);
-        if(rpc_type == DAY_Z_LIFE_OPEN_BUY_BUILDING_RESPONSE || rpc_type == DAY_Z_LIFE_OPEN_SELL_BUILDING_RESPONSE) {
+        if(rpc_type == DZL_RPC.OPEN_BUY_BUILDING_RESPONSE || rpc_type == DZL_RPC.OPEN_SELL_BUILDING_RESPONSE) {
             autoptr Param2<ref DZLBuilding, string> paramBuyHouse;
             if(ctx.Read(paramBuyHouse)) {
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.HOUSE_ACCESS_LISTS, new Param1<Building>(building), true);
                 house = paramBuyHouse.param1;
                 UpdateGUI(paramBuyHouse.param2);
             }
-        } else if(rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_DATA_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.OPEN_GET_BUILDING_DATA_RESPONSE) {
             autoptr Param1<ref DZLBuilding> paramGetBuildingProperties;
             if(ctx.Read(paramGetBuildingProperties)) {
                 house = paramGetBuildingProperties.param1;
 
                 if(house && house.HasInventory()) {
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), this.building.GetPosition()), true);
+                    GetGame().RPCSingleParam(null, DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), this.building.GetPosition()), true);
                 }
 
                 UpdateGUI();
             }
-        } else if(rpc_type == DAY_Z_LIFE_BUY_EXTENSION_RESPONSE || rpc_type == DAY_Z_LIFE_SELL_STORAGE_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.BUY_EXTENSION_RESPONSE || rpc_type == DZL_RPC.SELL_STORAGE_RESPONSE) {
             autoptr Param2<ref DZLBuilding, string> paramBuyStorageResponse;
             if(ctx.Read(paramBuyStorageResponse)) {
                 house = paramBuyStorageResponse.param1;
 
                 UpdateGUI(paramBuyStorageResponse.param2);
             }
-        } else if(rpc_type == DAY_Z_LIFE_HOUSE_ACCESS_LISTS_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.HOUSE_ACCESS_LISTS_RESPONSE) {
             autoptr Param2<ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>> paramPlayers;
             if(ctx.Read(paramPlayers)) {
                 noAccess = paramPlayers.param2;
@@ -427,7 +427,7 @@ class DZLHouseMenu : DZLBaseMenu {
                 }
                 UpdateGUI();
             }
-        } else if(rpc_type == DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA_RESPONSE) {
             autoptr Param1<ref DZLHouseInventory> paramInventoryResponse;
             if(ctx.Read(paramInventoryResponse)) {
                 inventory = paramInventoryResponse.param1;
@@ -507,7 +507,7 @@ class DZLHouseMenu : DZLBaseMenu {
                     selectedPanel.AddItem("#House_Storage");
                     indexHouseInventor = selectedPanel.GetNumItems() - 1;
                 } else if(indexHouseInventor == -1 && house.HasInventory() && !inventory) {
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), building.GetPosition()), true);
+                    GetGame().RPCSingleParam(null, DZL_RPC.OPEN_GET_BUILDING_INVENTORY_DATA, new Param2<string, vector>(house.GetDZLHouse().GetOwner(), building.GetPosition()), true);
                 }
             } else if(house.HasOwner() && !house.IsOwner(player)) {
                 if(indexHouseInventor == -1 && (!house.HasLockedDoors() || house.HasPlayerAccess(dzlPlayer.dayZPlayerId) || (config.adminIds.HasAccess(DAY_Z_LIFE_JOB_COP, dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP))) && house.HasInventory() && inventory) {
@@ -564,7 +564,7 @@ class DZLHouseMenu : DZLBaseMenu {
 
     void SetTarget(Building building) {
         this.building = building;
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_OPEN_GET_BUILDING_DATA, new Param1<Building>(this.building), true);
+        GetGame().RPCSingleParam(player, DZL_RPC.OPEN_GET_BUILDING_DATA, new Param1<Building>(this.building), true);
     }
 
     void SetHouseDefinition(DZLHouseDefinition definition) {

@@ -34,7 +34,7 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
 
         if(!player.hasBankingConfig && currentDate.inSeconds - player.timeAskForBankingConfig > 5) {
             player.timeAskForBankingConfig = currentDate.inSeconds;
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_BANKING, new Param1<PlayerBase>(player), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_BANKING, new Param1<PlayerBase>(player), true);
             return false;
         }
 

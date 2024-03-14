@@ -35,7 +35,7 @@ class DZLLicenceMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_BUY_LICENCE_RESPONSE) {
+        if(rpc_type == DZL_RPC.BUY_LICENCE_RESPONSE) {
             autoptr Param1<string> paramGetResponse;
             if(ctx.Read(paramGetResponse)) {
                 UpdateGUI(paramGetResponse.param1);
@@ -85,7 +85,7 @@ class DZLLicenceMenu : DZLBaseMenu {
 
                 if(!message) {
                     buyButton.Show(false);
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_BUY_LICENCE, new Param1<string>(licence.GetId()), true);
+                    GetGame().RPCSingleParam(player, DZL_RPC.BUY_LICENCE, new Param1<string>(licence.GetId()), true);
                 } else {
                     UpdateGUI(message);
                 }

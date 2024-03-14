@@ -11,7 +11,7 @@ class DZLPlayerSpawnListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_NEW_SPAWN) {
+        if(rpc_type == DZL_RPC.NEW_SPAWN) {
             autoptr Param2<string, string> param;
             if(ctx.Read(param) && param.param1 && param.param2) {
                 PlayerBase player = PlayerBase.Cast(target);
@@ -35,8 +35,8 @@ class DZLPlayerSpawnListener {
                 player.SetOrientation(point.orientation);
 
                 player.GetDZLPlayer().GetFractionMember();
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, sender);
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_RESPONSE, null, true, sender);
+                GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_RESPONSE, null, true, sender);
             }
         }
     }

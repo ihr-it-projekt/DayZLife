@@ -52,7 +52,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu {
                 }
 
                 if(arrestTime != 0) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_ARREST_PLAYER, new Param3<PlayerBase, int, string>(receiver, arrestTime, arrestReason), true);
+                    GetGame().RPCSingleParam(player, DZL_RPC.ARREST_PLAYER, new Param3<PlayerBase, int, string>(receiver, arrestTime, arrestReason), true);
                     inputArrest.SetText("");
                 } else {
                     player.DisplayMessage("#error_arrest_time_is_not_a_int");
@@ -66,7 +66,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_ARREST_PLAYER_RESPONSE) {
+        if(rpc_type == DZL_RPC.ARREST_PLAYER_RESPONSE) {
             OnHide();
         }
     }

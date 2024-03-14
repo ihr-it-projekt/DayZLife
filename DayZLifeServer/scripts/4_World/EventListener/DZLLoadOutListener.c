@@ -11,7 +11,7 @@ class DZLLoadOutListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_LOAD_OUT) {
+        if(rpc_type == DZL_RPC.LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
             if(ctx.Read(paramLoadOut)) {
                 PlayerBase player = PlayerBase.Cast(target);
@@ -38,7 +38,7 @@ class DZLLoadOutListener {
                 foreach(DZLLoadOutType type: category.items) {
                     Add(player, type);
                 }
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_LOAD_OUT_RESPONSE, null, true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.LOAD_OUT_RESPONSE, null, true, sender);
                 return true;;
             }
         }

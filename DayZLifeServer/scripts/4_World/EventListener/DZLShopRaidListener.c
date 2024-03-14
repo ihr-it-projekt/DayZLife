@@ -19,7 +19,7 @@ class DZLShopRaidListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_START_ROB_MONEY_FROM_SHOP) {
+        if(rpc_type == DZL_RPC.START_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerStart = PlayerBase.Cast(target);
             if(playerStart) {
                 DZLCrimePosition positionStart = config.GetShopByPosition(playerStart.GetPosition());
@@ -27,7 +27,7 @@ class DZLShopRaidListener {
                     StartRob(playerStart, positionStart);
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_PAY_ROB_MONEY_FROM_SHOP) {
+        } else if(rpc_type == DZL_RPC.PAY_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerGetMoney = PlayerBase.Cast(target);
 
             if(moneyForRob == 0 && !robTimer) {
@@ -55,7 +55,7 @@ class DZLShopRaidListener {
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_got: " + moneyForRob.ToString() + "$");
                     moneyForRob = 0;
                     dzlPlayer.GetFractionMember();
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, playerGetMoney.GetIdentity());
+                    GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, playerGetMoney.GetIdentity());
                 } else {
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_can_not_take_the_money_wrong_position");
                 }

@@ -13,15 +13,15 @@ class DZLFractionListener {
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         DZLFraction fraction;
         DZLPlayer dzlPlayer;
-        if(rpc_type == DAY_Z_LIFE_GET_FRACTION) {
+        if(rpc_type == DZL_RPC.GET_FRACTION) {
             dzlPlayer = database.Get().GetPlayer(sender.GetId());
             array<ref DZLFractionMember> notMembers;
             if(dzlPlayer.IsFractionBoss()) {
                 fraction = database.GetFraction(sender.GetId());
                 notMembers = GetPlayerNotInFractionCollection(fraction);
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_FRACTION_RESPONSE_FRACTION_OWNER, new Param2<ref DZLFraction, ref array<ref DZLFractionMember>>(fraction, notMembers), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.GET_FRACTION_RESPONSE_FRACTION_OWNER, new Param2<ref DZLFraction, ref array<ref DZLFractionMember>>(fraction, notMembers), true, sender);
             } else if(dzlPlayer.IsInAnyFraction()) {
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_FRACTION_RESPONSE_FRACTION_MEMBER, new Param1<ref DZLFractionMember>(dzlPlayer.GetFractionMember()), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.GET_FRACTION_RESPONSE_FRACTION_MEMBER, new Param1<ref DZLFractionMember>(dzlPlayer.GetFractionMember()), true, sender);
             } else {
                 array<ref DZLFractionMember> potentialFractions = new array<ref DZLFractionMember>;
                 array<string> ids = dzlPlayer.GetFractionIdsWherePlayerCanJoin();
@@ -34,9 +34,9 @@ class DZLFractionListener {
                     }
                 }
 
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_FRACTION_RESPONSE_NOT_A_FRACTION_MEMBER, new Param1<ref array<ref DZLFractionMember>>(potentialFractions), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.GET_FRACTION_RESPONSE_NOT_A_FRACTION_MEMBER, new Param1<ref array<ref DZLFractionMember>>(potentialFractions), true, sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_UPDATE_FRACTION_MEMBERS) {
+        } else if(rpc_type == DZL_RPC.GET_UPDATE_FRACTION_MEMBERS) {
             dzlPlayer = database.Get().GetPlayer(sender.GetId());
             if(dzlPlayer.IsFractionBoss()) {
                 autoptr Param2<ref array<ref DZLFractionMember>, ref array<ref DZLFractionMember>> fractionMembers;
@@ -59,18 +59,18 @@ class DZLFractionListener {
                 }
             }
 
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_UPDATE_FRACTION_MEMBERS_RESPONSE, null, true, sender);
-        } else if(rpc_type == DAY_Z_LIFE_DELETE_FRACTION) {
+            GetGame().RPCSingleParam(null, DZL_RPC.GET_UPDATE_FRACTION_MEMBERS_RESPONSE, null, true, sender);
+        } else if(rpc_type == DZL_RPC.DELETE_FRACTION) {
             dzlPlayer = database.Get().GetPlayer(sender.GetId());
             if(dzlPlayer.IsFractionBoss()) {
                 database.RemoveFraction(sender.GetId());
                 dzlPlayer.RemoveFraction(sender.GetId());
             }
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_DELETE_FRACTION_RESPONSE, null, true, sender);
+            GetGame().RPCSingleParam(null, DZL_RPC.DELETE_FRACTION_RESPONSE, null, true, sender);
             dzlPlayer.GetFractionMember();
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+            GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
 
-        } else if(rpc_type == DAY_Z_LIFE_FRACTION_MEMBER_LEAVE) {
+        } else if(rpc_type == DZL_RPC.FRACTION_MEMBER_LEAVE) {
             dzlPlayer = database.Get().GetPlayer(sender.GetId());
             if(!dzlPlayer.IsFractionBoss() && dzlPlayer.IsInAnyFraction()) {
                 fraction = dzlPlayer.GetFraction();
@@ -79,11 +79,11 @@ class DZLFractionListener {
                 dzlPlayer.RemoveFraction(fraction.GetId());
             }
 
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_FRACTION_MEMBER_LEAVE_RESPONSE, null, true, sender);
+            GetGame().RPCSingleParam(null, DZL_RPC.FRACTION_MEMBER_LEAVE_RESPONSE, null, true, sender);
             dzlPlayer.GetFractionMember();
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+            GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
 
-        } else if(rpc_type == DAY_Z_LIFE_FRACTION_MEMBER_JOIN) {
+        } else if(rpc_type == DZL_RPC.FRACTION_MEMBER_JOIN) {
             dzlPlayer = database.Get().GetPlayer(sender.GetId());
             autoptr Param1<ref DZLFractionMember> fractionMemberToJoinParam;
             if(ctx.Read(fractionMemberToJoinParam)) {
@@ -100,9 +100,9 @@ class DZLFractionListener {
             }
 
             dzlPlayer.GetFractionMember();
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_FRACTION_MEMBER_JOIN_RESPONSE, null, true, sender);
-        } else if(rpc_type == DAY_Z_LIFE_FRACTION_CREATE_FRACTION) {
+            GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+            GetGame().RPCSingleParam(null, DZL_RPC.FRACTION_MEMBER_JOIN_RESPONSE, null, true, sender);
+        } else if(rpc_type == DZL_RPC.FRACTION_CREATE_FRACTION) {
             dzlPlayer = database.Get().GetPlayer(sender.GetId());
             autoptr Param1<string> createFractionParam;
             if(ctx.Read(createFractionParam)) {
@@ -120,8 +120,8 @@ class DZLFractionListener {
                 }
 
                 dzlPlayer.GetFractionMember();
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_FRACTION_MEMBER_JOIN_RESPONSE, null, true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.FRACTION_MEMBER_JOIN_RESPONSE, null, true, sender);
             }
         }
     }

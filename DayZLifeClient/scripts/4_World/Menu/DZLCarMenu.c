@@ -43,8 +43,8 @@ class DZLCarMenu : DZLBaseMenu {
     override void OnShow() {
         super.OnShow();
 
-        GetGame().RPCSingleParam(car, DAY_Z_LIFE_GET_CAR_KEYS, null, true);
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL, null, true);
+        GetGame().RPCSingleParam(car, DZL_RPC.GET_CAR_KEYS, null, true);
+        GetGame().RPCSingleParam(null, DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL, null, true);
     }
 
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
@@ -61,12 +61,12 @@ class DZLCarMenu : DZLBaseMenu {
         if(super.OnClick(w, x, y, button)) return true;
 
         if(w == carKeySaveButton) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<DZLOnlinePlayer>>(car, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(carPanelKeyOwnerList)), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.GET_UPDATE_CAR_KEYS, new Param2<CarScript, ref array<DZLOnlinePlayer>>(car, DZLDisplayHelper.GetPlayerIdsAndRanksFromList(carPanelKeyOwnerList)), true);
             carKeySearchInput.SetText("");
         } else if(w == carKeySearchButton) {
             DZLDisplayHelper.SearchOnlinePlayersWithKey(carKeySearchInput.GetText(), carPanelOnlinePlayerList, carPanelKeyOwnerList, onlinePlayers, player);
         } else if(w == changOwnerButton && selectedPlayer) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_CHANGE_CAR_OWNER, new Param2<string, CarScript>(selectedPlayer.id, car), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.CHANGE_CAR_OWNER, new Param2<string, CarScript>(selectedPlayer.id, car), true);
             OnHide();
         }
 
@@ -96,13 +96,13 @@ class DZLCarMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_GET_CAR_KEYS_RESPONSE) {
+        if(rpc_type == DZL_RPC.GET_CAR_KEYS_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramOnlinePlayers;
             if(ctx.Read(paramOnlinePlayers)) {
                 keyOwner = paramOnlinePlayers.param1;
                 UpdateList();
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE) {
             autoptr Param1<ref array<ref DZLOnlinePlayer>> paramAllPlayers;
             if(ctx.Read(paramAllPlayers)) {
                 onlinePlayers = paramAllPlayers.param1;

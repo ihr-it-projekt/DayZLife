@@ -13,7 +13,7 @@ class DZLTraderListener {
     }
 
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_TRADE_ACTION) {
+        if(rpc_type == DZL_RPC.TRADE_ACTION) {
             autoptr Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
             if(ctx.Read(paramTrade)) {
                 array<EntityAI> playerItems = PlayerBase.Cast(target).GetPlayerItems();
@@ -131,14 +131,14 @@ class DZLTraderListener {
                     bank.AddTax(taxSum);
 
                     message = "#trade_was_successful";
-                    GetGame().RPCSingleParam(target, DAY_Z_LIFE_PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                    GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+                    GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                 }
 
-                GetGame().RPCSingleParam(target, DAY_Z_LIFE_TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
+                GetGame().RPCSingleParam(target, DZL_RPC.TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
             }
-        } else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE) {
-            GetGame().RPCSingleParam(target, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE, new Param1<ref array<ref DZLTraderTypeStorage>>(DZLDatabaseLayer.Get().GetTraderStorage().GetStorageItems()), true, sender);
+        } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE) {
+            GetGame().RPCSingleParam(target, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE, new Param1<ref array<ref DZLTraderTypeStorage>>(DZLDatabaseLayer.Get().GetTraderStorage().GetStorageItems()), true, sender);
         }
     }
 

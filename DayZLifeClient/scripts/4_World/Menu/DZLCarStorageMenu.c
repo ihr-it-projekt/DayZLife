@@ -11,7 +11,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
     void DZLCarStorageMenu() {
         Construct();
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
     }
 
     void ~DZLCarStorageMenu() {
@@ -106,7 +106,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
                 if(w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
-                GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
+                GetGame().RPCSingleParam(car, DZL_RPC.EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
                 car.isSold = true;
             }
         } else if(w == outStoreButton) {
@@ -140,7 +140,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
                     player.DisplayMessage("#error_not_enough_money");
                 }
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
             }
         } else if(w == closeButton) {
             OnHide();
@@ -151,7 +151,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
+        if(rpc_type == DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
             autoptr Param2<ref DZLCarStorage, ref DZLCarStorage> paramGetCarDataResponse;
             if(ctx.Read(paramGetCarDataResponse)) {
                 DZLCarStorage carStorage = paramGetCarDataResponse.param1;

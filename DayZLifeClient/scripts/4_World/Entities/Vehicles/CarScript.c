@@ -142,7 +142,7 @@ modded class CarScript {
     bool HasPlayerAccess(PlayerBase player) {
         DZLDate currentDate = new DZLDate();
         if(GetGame().IsClient() && currentDate.inSeconds - timeAskForDataSync > 5 && !isSync) {
-            GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR_FROM_PLAYER_SIDE, null, true);
+            GetGame().RPCSingleParam(this, DZL_RPC.UPDATE_CAR_FROM_PLAYER_SIDE, null, true);
             timeAskForDataSync = currentDate.inSeconds;
         }
 
@@ -248,7 +248,7 @@ modded class CarScript {
             ownerName = sender.GetName();
         }
 
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_UPDATE_CAR, new Param6<int, ref array<string>, string, string, bool, bool>(dzlCarId, playerAccess, ownerId, ownerName, isRaided, hasInsurance), true, sender);
+        GetGame().RPCSingleParam(this, DZL_RPC.UPDATE_CAR, new Param6<int, ref array<string>, string, string, bool, bool>(dzlCarId, playerAccess, ownerId, ownerName, isRaided, hasInsurance), true, sender);
     }
 
     override void OnContact(string zoneName, vector localPos, IEntity other, Contact data) {
