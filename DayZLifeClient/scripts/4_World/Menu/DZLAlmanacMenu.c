@@ -383,10 +383,6 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     int jobPlayerIndex = jobPanelJobsList.AddItem(jobPlayer.name, jobPlayer, 0);
                     jobPanelJobsList.SetItem(jobPlayerIndex, jobPlayer.rank, jobPlayer, 1);
                 }
-
-
-
-
             }
         } else if(w == jobPanelSave) {
             if(!config.adminIds.HasAccess(selectedJob, player.GetPlayerId())) return true;

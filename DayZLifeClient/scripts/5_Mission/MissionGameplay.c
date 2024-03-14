@@ -28,9 +28,6 @@ modded class MissionGameplay {
         if(!dzlPlayerBase) return;
         bool wasActionDone = false;
         switch(key) {
-            case KeyCode.KC_ESCAPE:
-                wasActionDone = dzlPlayerBase.CloseMenu();
-                break;
             case KeyCode.KC_RCONTROL:
                 holdRControl = false;
                 break;

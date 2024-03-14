@@ -82,6 +82,13 @@ class DZLBaseMenu: UIScriptedMenu {
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
     }
 
+    override void Update(float timeslice) {
+        super.Update(timeslice);
+        if(GetUApi() && GetUApi().GetInputByName("UAUIBack").LocalPress()) {
+            GetGame().GetUIManager().HideScriptedMenu(this);
+        }
+    }
+
     override void OnHide() {
         super.OnHide();
 
