@@ -24,7 +24,7 @@ class DZLAccess {
     }
 
     bool AddNewAccess(string type) {
-        if (canManage.Contains(type)) return false;
+        if(canManage.Contains(type)) return false;
         canManage.Set(type, false);
         return true;
     }

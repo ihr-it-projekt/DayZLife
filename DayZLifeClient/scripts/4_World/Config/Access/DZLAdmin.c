@@ -29,11 +29,11 @@ class DZLAdmin {
         bool hasChange = false;
         foreach(string jobName: jobs) {
             foreach(DZLAccess playerAccess: playerAccesses) {
-                if (playerAccess.AddNewAccess(jobName)) hasChange = true;
+                if(playerAccess.AddNewAccess(jobName)) hasChange = true;
             }
         }
 
-        if (hasChange) Save();
+        if(hasChange) Save();
     }
 
     bool HasAccess(string access, string ident) {
