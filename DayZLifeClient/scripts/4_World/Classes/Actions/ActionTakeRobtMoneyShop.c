@@ -1,7 +1,7 @@
 class ActionTakeRobtMoneyShop: ActionInteractBase {
     ref DZLCrimeConfig config;
 
-    DZLCrimeConfig GetConfig() {
+    DZLCrimeConfig GetDZLConfig() {
         if(!config) {
             config = DZLConfig.Get().crimeConfig;
         }
@@ -26,10 +26,10 @@ class ActionTakeRobtMoneyShop: ActionInteractBase {
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         if(GetGame().IsClient()) {
-            if(!player.GetConfig()) return false;
-            config = player.GetConfig().crimeConfig;
+            if(!player.GetDZLConfig()) return false;
+            config = player.GetDZLConfig().crimeConfig;
         } else {
-            GetConfig();
+            GetDZLConfig();
         }
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());

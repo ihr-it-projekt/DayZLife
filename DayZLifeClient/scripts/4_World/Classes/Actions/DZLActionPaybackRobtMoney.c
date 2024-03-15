@@ -6,7 +6,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
             if(GetGame().IsServer()) {
                 config = DZLConfig.Get().bankConfig;
             } else {
-                config = player.GetConfig().bankConfig;
+                config = player.GetDZLConfig().bankConfig;
             }
 
         }

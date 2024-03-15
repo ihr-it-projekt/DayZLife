@@ -31,7 +31,7 @@ class DZLTuningMenu: DZLBaseMenu {
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
         carFoundList.ClearItems();
-        array<ref DZLTuneOption> carTypes = player.GetConfig().tuningConfig.options;
+        array<ref DZLTuneOption> carTypes = player.GetDZLConfig().tuningConfig.options;
         foreach(DZLTuneOption carType: carTypes) {
             CarScript playerCar = DZLObjectFinder.GetCarForTuning(position.position, carType.car);
             if(playerCar && !playerCar.isSold) {

@@ -1,8 +1,8 @@
 modded class CraftFenceKit {
 
     override bool CanDo(ItemBase ingredients[], PlayerBase player) {
-        if(player.GetConfig() && player.GetConfig().baseBuildingConfig) {
-            DZLBaseBuildingConfig config = player.GetConfig().baseBuildingConfig;
+        if(player.GetDZLConfig() && player.GetDZLConfig().baseBuildingConfig) {
+            DZLBaseBuildingConfig config = player.GetDZLConfig().baseBuildingConfig;
 
             if(config.canCraftFenceKit) {
                 return super.CanDo(ingredients, player);

@@ -57,7 +57,7 @@ class DZLPlayerEventListener {
 
     void CreateSpawnMenu() {
         player = DZLPlayerBaseHelper.GetPlayer();
-        if(!player || !player.GetConfig() || !player.GetDZLPlayer()) {
+        if(!player || !player.GetDZLConfig() || !player.GetDZLPlayer()) {
             return;
         }
 

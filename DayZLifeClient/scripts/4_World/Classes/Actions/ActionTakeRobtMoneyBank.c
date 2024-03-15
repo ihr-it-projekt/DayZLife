@@ -1,7 +1,7 @@
 class ActionTakeRobtMoneyBank: ActionInteractBase {
     ref DZLBankingConfig config;
 
-    DZLBankingConfig GetConfig() {
+    DZLBankingConfig GetDZLConfig() {
         if(!config) {
             config = DZLConfig.Get().bankConfig;
         }
@@ -26,10 +26,10 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         if(GetGame().IsClient()) {
-            if(!player.GetConfig()) return false;
-            config = player.GetConfig().bankConfig;
+            if(!player.GetDZLConfig()) return false;
+            config = player.GetDZLConfig().bankConfig;
         } else {
-            GetConfig();
+            GetDZLConfig();
         }
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
@@ -59,7 +59,7 @@ class ActionTakeRobtMoneyBank: ActionInteractBase {
     }
 
     override void OnStartServer(ActionData action_data) {
-        GetConfig();
+        GetDZLConfig();
         PlayerBase player = action_data.m_Player;
 
         if(player) {

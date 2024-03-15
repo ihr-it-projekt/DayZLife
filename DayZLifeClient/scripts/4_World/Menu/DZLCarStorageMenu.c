@@ -41,7 +41,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         super.UpdateGUI(message);
         storeInFractionButtonWrapper.Show(dzlPlayer.HasFractionRightCanAccessFractionGarage());
         carToStoreList.ClearItems();
-        array<string> carTypes = player.GetConfig().carConfig.carTypesToStore;
+        array<string> carTypes = player.GetDZLConfig().carConfig.carTypesToStore;
         foreach(string carType: carTypes) {
             CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, false);
             if(playerCar && !playerCar.isSold) {
@@ -58,7 +58,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + " $)");
 
         if(!position) {
-            position = player.GetConfig().carConfig.GetStorageByPosition(player.GetPosition());
+            position = player.GetDZLConfig().carConfig.GetStorageByPosition(player.GetPosition());
         }
 
         if(!position) {
@@ -94,7 +94,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
                 }
 
                 CargoBase cargo = car.GetInventory().GetCargo();
-                if(!player.GetConfig().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
+                if(!player.GetDZLConfig().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
                     player.DisplayMessage("#car_is_not_empty");
                     return true;
                 }

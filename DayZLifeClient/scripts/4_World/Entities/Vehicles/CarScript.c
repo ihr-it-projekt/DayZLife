@@ -159,7 +159,7 @@ modded class CarScript {
         if(-1 != playerAccess.Find(ident)) return true;
         if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return true;
         if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return true;
-        if(player.GetConfig().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, ident)) return true;
+        if(player.GetDZLConfig().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, ident)) return true;
 
         return false;
     }
@@ -257,7 +257,7 @@ modded class CarScript {
             carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
         } else {
             PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
-            carCollisionDamage = player.GetConfig().carConfig.carCollisionDamage;
+            carCollisionDamage = player.GetDZLConfig().carConfig.carCollisionDamage;
         }
 
         if(carCollisionDamage) {

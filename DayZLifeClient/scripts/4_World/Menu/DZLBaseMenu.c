@@ -24,7 +24,7 @@ class DZLBaseMenu: UIScriptedMenu {
     void SetPlayer(PlayerBase _player) {
         this.player = _player;
         this.dzlPlayer = _player.GetDZLPlayer();
-        config = player.GetConfig();
+        config = player.GetDZLConfig();
     }
 
     void UpdatePlayer(PlayerBase _player) {

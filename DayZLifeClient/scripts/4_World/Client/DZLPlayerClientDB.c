@@ -23,7 +23,7 @@ class DZLPlayerClientDB {
         GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
     }
 
-    DZLConfig GetConfig() {
+    DZLConfig GetDZLConfig() {
         if(!config) {
             GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.EVENT_GET_CONFIG, null, true);
             config = DZLConfig.Get();
