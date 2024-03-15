@@ -1,16 +1,6 @@
-class DZLConfigListener {
-    ref DZLConfig config;
+class DZLConfigListener: DZLBaseEventListener {
 
-    void DZLConfigListener() {
-        config = DZLConfig.Get();
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
-
-    void ~DZLConfigListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.PLAYER_DATA) {
             DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());;
             dzlPlayer.UpdateName(sender.GetName());

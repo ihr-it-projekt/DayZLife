@@ -1,13 +1,6 @@
-class DZLPlayerTicketListener {
-    void DZLPlayerTicketListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
+class DZLPlayerTicketListener: DZLBaseEventListener {
 
-    void ~DZLPlayerTicketListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.CREATE_TICKET) {
             autoptr Param3<PlayerBase, int, string> paramCreateTicket;
             if(ctx.Read(paramCreateTicket)) {
@@ -20,7 +13,7 @@ class DZLPlayerTicketListener {
                 DZLPlayer prisonerDzl = ticketReceiver.GetDZLPlayer();
 
                 if(!copDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return;
-                if(!DAY_Z_LIFE_DEBUG && prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return;
+                if(prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return;
 
                 prisonerDzl.AddTicket(ticketValue, ticketReason);
 

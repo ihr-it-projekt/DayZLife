@@ -11,6 +11,7 @@ modded class DZLConfig {
     static void Reload() {
         config = new DZLConfig;
         config.UpdateConfig(null);
+        DZLBuilderManager.Get().Reload();
     }
 
     void DZLConfig() {
@@ -32,6 +33,8 @@ modded class DZLConfig {
         crimeConfig = new DZLCrimeConfig;
         messageConfig = new DZLMessageConfig;
         tuningConfig = new DZLTuningConfig;
+
+        DZLBuilderManager.Get().Create();
     }
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {

@@ -1,13 +1,6 @@
-class DZLMessageListener {
-    void DZLMessageListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
+class DZLMessageListener: DZLBaseEventListener {
 
-    void ~DZLMessageListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.SEND_MESSAGE) {
             PlayerBase player = PlayerBase.Cast(target);
             autoptr Param4<string, string, string, bool> paramMessage;

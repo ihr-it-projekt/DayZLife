@@ -1,26 +1,16 @@
-class DZLLicenceListener {
-    ref DZLConfig config;
+class DZLLicenceListener: DZLBaseEventListener {
 
-    void DZLLicenceListener() {
-        config = DZLConfig.Get();
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
-
-    void ~DZLLicenceListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.BUY_LICENCE) {
             autoptr Param1<string> paramBuyLicence;
             if(ctx.Read(paramBuyLicence)) {
                 PlayerBase playerBuyLicence = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = playerBuyLicence.GetDZLPlayer();
-                DZLCraftLicence licence = config.licenceConfig.licenceCollection.FindById(paramBuyLicence.param1);
+                DZLCraftLicence licence = DZLConfig.Get().licenceConfig.licenceCollection.FindById(paramBuyLicence.param1);
                 DZLCraftLicence depLicence;
 
                 if(licence.dependencyLicence) {
-                    depLicence = config.licenceConfig.licenceCollection.FindByName(licence.dependencyLicence);
+                    depLicence = DZLConfig.Get().licenceConfig.licenceCollection.FindByName(licence.dependencyLicence);
                 }
 
                 string message = dzlPlayer.CanBuyLicence(licence, depLicence);
@@ -36,7 +26,7 @@ class DZLLicenceListener {
             autoptr Param1<string> paramUseLicence;
             if(ctx.Read(paramUseLicence)) {
                 PlayerBase playerLicenceUse = PlayerBase.Cast(target);
-                DZLCraftLicence licenceUse = config.licenceConfig.licenceCollection.FindById(paramUseLicence.param1);
+                DZLCraftLicence licenceUse = DZLConfig.Get().licenceConfig.licenceCollection.FindById(paramUseLicence.param1);
 
                 if(!licenceUse) return;
 

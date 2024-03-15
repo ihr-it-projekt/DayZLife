@@ -1,16 +1,11 @@
-class DZLFractionListener {
+class DZLFractionListener: DZLBaseEventListener {
     DZLDatabaseLayer database;
 
     void DZLFractionListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         database = DZLDatabaseLayer.Get();
     }
 
-    void ~DZLFractionListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         DZLFraction fraction;
         DZLPlayer dzlPlayer;
         if(rpc_type == DZL_RPC.GET_FRACTION) {

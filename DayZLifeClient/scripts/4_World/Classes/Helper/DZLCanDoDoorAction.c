@@ -7,7 +7,7 @@ class DZLCanDoDoorAction {
         return houseConfig.GetJobHouseDefinition(building);
     }
 
-    static bool canDoByJob(Building building, PlayerBase player, int doorIndex) {
+    static bool canDoByJob(Building building, PlayerBase player) {
         DZLHouseConfig houseConfig = DZLConfig.Get().houseConfig;
         if(!houseConfig) return false;
 
@@ -16,15 +16,14 @@ class DZLCanDoDoorAction {
 
         DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building);
 
-#ifdef TBRealEstateClient
-        BuildingBase buildingBase = BuildingBase.Cast(building);
-        if(buildingBase.TBREIsBuildingActiveSellBuilding()) {
-            if(buildingBase.TBREIsDoorLooked(doorIndex)) return false;
-        }
-#endif
-
-        return (definition && job == definition.jobId) || !definition;
+        return definition && job == definition.jobId;
     }
+    static bool IsJobDoor(Building building) {
+        DZLHouseConfig houseConfig = DZLConfig.Get().houseConfig;
+        if(!houseConfig) return false;
 
+        DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building);
 
+        return !!definition;
+    }
 }

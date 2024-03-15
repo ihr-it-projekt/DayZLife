@@ -218,6 +218,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
             DZLDisplayHelper.ChangeRankFromPlayer(jobPanelRankList, jobPanelJobsList);
         } else if(w == reloadConfig) {
             GetGame().RPCSingleParam(null, DZL_RPC.RELOAD_CONFIG, null, true);
+            GetGame().GetUIManager().HideScriptedMenu(this);
         } else if(w == jobPanelJobsList) {
             DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(jobPanelJobsList, jobPanelRankList, selectedJob);
         } else if(w == workingZoneList) {

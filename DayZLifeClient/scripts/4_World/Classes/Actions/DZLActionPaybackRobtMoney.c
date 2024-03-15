@@ -21,12 +21,7 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
 
         if(!player.GetDZLPlayer() || !player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP)) return false;
 
-        DZLBank bank;
-        if(GetGame().IsServer()) {
-            bank = DZLDatabaseLayer.Get().GetBank();
-        } else {
-            bank = player.GetBank();
-        }
+        DZLBank bank = player.GetBank();
 
         if(!bank || bank.GetLastRaidMoney() == 0) return false;
 

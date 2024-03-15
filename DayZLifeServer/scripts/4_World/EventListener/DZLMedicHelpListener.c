@@ -1,16 +1,6 @@
-class DZLMedicHelpListener {
-    DZLMedicConfig config;
+class DZLMedicHelpListener: DZLBaseEventListener {
 
-    void DZLMedicHelpListener() {
-        config = DZLConfig.Get().medicConfig;
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
-
-    void ~DZLMedicHelpListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.EVENT_MEDIC_KILL_PLAYER) {
             DeleteMedicRequest(sender);
         } else if(rpc_type == DZL_RPC.MEDIC_CALL) {
@@ -54,7 +44,7 @@ class DZLMedicHelpListener {
     private void HealByHospital(PlayerBase player, PlayerIdentity sender) {
         if(!player) return;
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
-        dzlPlayer.AddMoneyToPlayerBank(config.priceHospitalHeal * -1);
+        dzlPlayer.AddMoneyToPlayerBank(DZLConfig.Get().medicConfig.priceHospitalHeal * -1);
         dzlPlayer.SetWillHealByHospital();
         dzlPlayer.SaveItems(player);
         player.Delete();

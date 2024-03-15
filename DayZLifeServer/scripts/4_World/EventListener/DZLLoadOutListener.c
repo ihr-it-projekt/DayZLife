@@ -1,16 +1,6 @@
-class DZLLoadOutListener {
-    ref DZLJobConfig config;
+class DZLLoadOutListener: DZLBaseEventListener {
 
-    void DZLLoadOutListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = DZLConfig.Get().jobConfig;
-    }
-
-    void ~DZLLoadOutListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
             if(ctx.Read(paramLoadOut)) {
@@ -24,7 +14,7 @@ class DZLLoadOutListener {
                     return;
                 }
 
-                DZLLoadOuts loadOut = config.GetLoadOuts(job);
+                DZLLoadOuts loadOut = DZLConfig.Get().jobConfig.GetLoadOuts(job);
                 SearchLoadOutAndEquip(categoryName, loadOut.loadOutCategories, sender, player);
             }
         }

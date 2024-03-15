@@ -1,16 +1,8 @@
-class DZLPlayerEventListener {
+class DZLPlayerEventListener: DZLBaseEventListener {
     private PlayerBase player;
     private ScriptCallQueue queue;
 
-    void DZLPlayerEventListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
-
-    void ~DZLPlayerEventListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         player = DZLPlayerBaseHelper.GetPlayer();
         if(player) {
             if(rpc_type == DZL_RPC.RECEIVE_MESSAGE) {

@@ -38,9 +38,7 @@ class DZLBaseMenu: UIScriptedMenu {
         }
     }
 
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-
-    }
+    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {}
 
     override Widget Init() {
         creator = new DZLUIItemCreator(layoutPath);

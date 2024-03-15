@@ -1,18 +1,6 @@
-class DZLCarKeyListener {
-    DZLCarConfig carConfig;
-    DZLAdmin adminConfig;
+class DZLCarKeyListener: DZLBaseEventListener {
 
-    void DZLCarKeyListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        carConfig = DZLConfig.Get().carConfig;
-        adminConfig = DZLConfig.Get().adminIds;
-    }
-
-    void ~DZLCarKeyListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.GET_UPDATE_CAR_KEYS) {
             autoptr Param2<CarScript, ref array<DZLOnlinePlayer>> paramUpdateKeys;
             if(ctx.Read(paramUpdateKeys)) {
@@ -43,6 +31,7 @@ class DZLCarKeyListener {
             if(ctx.Read(paramChangeOwner) && sender) {
                 string receiverId = paramChangeOwner.param1;
                 CarScript carToChange = paramChangeOwner.param2;
+                DZLAdmin adminConfig = DZLConfig.Get().adminIds;
                 if(!carToChange.IsOwner(sender) && !adminConfig.HasAccess(DAY_Z_LIFE_ACCESS_CARS, sender.GetId())) {
                     DZLSendMessage(sender, "#you_are_not_the_owner_can_not_change");
                     return;
@@ -60,6 +49,7 @@ class DZLCarKeyListener {
         } else if(rpc_type == DZL_RPC.EVENT_CAR_RAID) {
             Param1<EntityAI> paramRaidCar;
             if(ctx.Read(paramRaidCar)) {
+                DZLCarConfig carConfig = DZLConfig.Get().carConfig;
                 int raidIndex = Math.RandomIntInclusive(1, carConfig.chanceToRaid);
 
                 if(raidIndex == 1) {

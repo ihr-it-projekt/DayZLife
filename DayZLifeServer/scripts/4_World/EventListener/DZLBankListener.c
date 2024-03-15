@@ -1,16 +1,8 @@
-class DZLBankListener {
+class DZLBankListener: DZLBaseEventListener {
     ref DZLBankingConfig config;
 
-    void DZLBankListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         config = DZLConfig.Get().bankConfig;
-    }
-
-    void ~DZLBankListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.PLAYER_DEPOSIT_AT_BANK_DATA) {
             autoptr Param2<int, bool> paramDeposit;
             string message = "";

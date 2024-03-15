@@ -1,13 +1,6 @@
-class DZLAlmanacListener {
-    void DZLAlmanacListener() {
-       GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
+class DZLAlmanacListener: DZLBaseEventListener {
 
-    void ~DZLAlmanacListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.PLAYER_SERVER_RESET_AT_PLAYER_BASE) {
             PlayerBase.Cast(target).ResetDZLPlayer();
         } else if(rpc_type == DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS) {
@@ -16,7 +9,7 @@ class DZLAlmanacListener {
             SendUpdateListJob(paramJobPlayer.param1, PlayerBase.Cast(target));
         } else if(rpc_type == DZL_RPC.GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
-        }  else if(rpc_type == DZL_RPC.RELOAD_CONFIG) {
+        } else if(rpc_type == DZL_RPC.RELOAD_CONFIG) {
             if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
             DZLConfig.Reload();
             DZLSendMessage(sender, "#config_was_reloaded");

@@ -8,7 +8,7 @@ class DZLLoadOutLocationBuilder: DZLLicenceLocationBuilder {
         }
     }
 
-    private void Build(array<ref DZLLoadOutPosition> positions, string jobId) {
+    protected void Build(array<ref DZLLoadOutPosition> positions, string jobId) {
         foreach(DZLLoadOutPosition position: positions) {
 
             DZLBaseActionObject object = CreatePositions(position, "DZLLoadoutActionObject");

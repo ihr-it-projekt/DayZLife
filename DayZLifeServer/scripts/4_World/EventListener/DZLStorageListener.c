@@ -1,17 +1,8 @@
-class DZLStorageListener {
-    ref DZLCarConfig config;
+class DZLStorageListener: DZLBaseEventListener {
 
-    void DZLStorageListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = DZLConfig.Get().carConfig;
-    }
-
-    void ~DZLStorageListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         DZLPlayer dzlPlayer;
+        DZLCarConfig config = DZLConfig.Get().carConfig;
         if(rpc_type == DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE) {
             SendStorageUpdate(sender);
         } else if(rpc_type == DZL_RPC.EVENT_STORE_CAR) {
@@ -21,6 +12,7 @@ class DZLStorageListener {
             if(car && car.IsRuined()) {
                 DZLSendMessage(sender, "#car_can_not_store_is_ruined");
             } else if(ctx.Read(paramStoreCar) && paramStoreCar.param1 && car) {
+
                 DZLStoragePosition storagePosition = config.GetStorageByPosition(paramStoreCar.param1);
 
                 if(!storagePosition) return;

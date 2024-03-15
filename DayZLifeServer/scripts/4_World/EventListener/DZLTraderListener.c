@@ -1,18 +1,6 @@
-class DZLTraderListener {
-    ref DZLTraderConfig config;
-    ref DZLBankingConfig bankConfig;
+class DZLTraderListener: DZLBaseEventListener {
 
-    void DZLTraderListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = DZLConfig.Get().traderConfig;
-        bankConfig = DZLConfig.Get().bankConfig;
-    }
-
-    void ~DZLTraderListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.TRADE_ACTION) {
             autoptr Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
             if(ctx.Read(paramTrade)) {
@@ -24,7 +12,8 @@ class DZLTraderListener {
                 array<EntityAI> itemsToSell = paramTrade.param2;
                 array<int> itemsToSellPrice = new array<int>;
                 array<string> itemsToBuyParam = paramTrade.param1;
-
+                DZLTraderConfig config = DZLConfig.Get().traderConfig;
+                DZLBankingConfig bankConfig = DZLConfig.Get().bankConfig;
                 foreach(string categoryName: paramTrade.param3.categoryNames) {
                     DZLTraderCategory category = config.categories.GetCatByName(categoryName);
 

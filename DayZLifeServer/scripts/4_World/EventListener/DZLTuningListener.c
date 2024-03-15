@@ -1,16 +1,6 @@
-class DZLTuningListener {
-    ref DZLTuningConfig config;
+class DZLTuningListener: DZLBaseEventListener {
 
-    void DZLTuningListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = DZLConfig.Get().tuningConfig;
-    }
-
-    void ~DZLTuningListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.EVENT_TUNE_CAR) {
             autoptr Param1<string> paramTuneCar;
             CarScript car = CarScript.Cast(target);
@@ -27,6 +17,7 @@ class DZLTuningListener {
 
                 DZLCarStoreItem storedCar = new DZLCarStoreItem(car, "0 0 0", true, false);
 
+                DZLTuningConfig config = DZLConfig.Get().tuningConfig;
                 DZLCarTuneConfig before = config.GetOptionByType(storedCar.type);
                 if(!before) return;
 

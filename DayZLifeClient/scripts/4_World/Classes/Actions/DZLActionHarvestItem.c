@@ -4,10 +4,6 @@ class DZLActionHarvestItem: ActionInteractBase {
     void DZLActionHarvestItem() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONFB_RESTRAINTARGET;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
-
-        if(GetGame().IsServer()) {
-            config = DZLConfig.Get().jobConfig;
-        }
     }
 
     override string GetText() {

@@ -1,5 +1,5 @@
 class DZLHouseConfig {
-    string version = "6";
+    string version = "7";
     int minCountOfCopsForRaid = 3;
 
     // deprecated remove 08.03.25
@@ -25,6 +25,28 @@ class DZLHouseConfig {
             }
 
             version = "6";
+            Save();
+        }
+
+        if(version == "6") {
+            version = "7";
+            Save();
+        }
+        CheckAllHouseConfigExist(jobs);
+
+    }
+
+    private void CheckAllHouseConfigExist(array<string> jobNames) {
+        foreach(string jobName: jobNames) {
+            bool found = false;
+            foreach(DZLJobHouseDefinitionCollection jobHouseDefinition: jobHouseDefinitions) {
+                if(jobHouseDefinition.jobId == jobName) {
+                    found = true;
+                    break;
+                }
+            }
+            if(found) continue;
+            jobHouseDefinitions.Insert(new DZLJobHouseDefinitionCollection(jobName));
             Save();
         }
     }

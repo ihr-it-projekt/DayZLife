@@ -1,11 +1,7 @@
 class DZLCheckController {
-    DZLConfig config;
-
-    void DZLCheckController() {
-        config = DZLConfig.Get();
-    }
 
     void Check() {
+        DZLConfig config = DZLConfig.Get();
         array<Man> allPlayers = new array<Man>;
         GetGame().GetPlayers(allPlayers);
         foreach(Man playerMan: allPlayers) {

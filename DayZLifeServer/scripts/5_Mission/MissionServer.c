@@ -1,14 +1,12 @@
 modded class MissionServer {
 
     private ref DZLEventManager manager;
-    private ref DZLBuilderManager builderManager;
     private ref Timer paycheckTimer;
     private ref Timer storageTimer;
     private ref DZLCheckController checkController;
     private ref DZLStorageController storageController;
 
     void MissionServer() {
-        DebugMessageDZL("Load DayZLifeServer");
         paycheckTimer = new Timer;
         storageTimer = new Timer;
     }
@@ -17,13 +15,11 @@ modded class MissionServer {
         super.OnInit();
 
         manager = new DZLEventManager;
-        builderManager = new DZLBuilderManager;
         checkController = new DZLCheckController;
         storageController = new DZLStorageController;
 
         paycheckTimer.Run(60, checkController, "Check", null, true);
         storageTimer.Run(60, storageController, "Check", null, true);
-        builderManager.Create();
 
         DZLConfig.Get();
     }

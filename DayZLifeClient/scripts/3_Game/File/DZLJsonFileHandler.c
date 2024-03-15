@@ -5,7 +5,7 @@ class DZLJsonFileHandler<Class T> {
         string file_content;
         if(!m_Serializer) m_Serializer = new JsonSerializer;
 
-        m_Serializer.WriteToString(data, DAY_Z_LIFE_DEBUG, file_content);
+        m_Serializer.WriteToString(data, false, file_content);
 
         FileHandle handle = OpenFile(filename, FileMode.WRITE);
         if(handle == 0)return;

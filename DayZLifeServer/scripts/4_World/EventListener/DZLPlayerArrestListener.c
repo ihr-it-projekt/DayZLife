@@ -1,5 +1,4 @@
-class DZLPlayerArrestListener {
-    private DZLArrestConfig arrestConfig;
+class DZLPlayerArrestListener: DZLBaseEventListener {
     private ref Timer timerArrest;
     private ref array<ref DZLEscapedPlayer> escapeePlayers = new array<ref DZLEscapedPlayer>;
     private ref array<ref DZLOpenTicketPlayer> openTicketPlayers = new array<ref DZLOpenTicketPlayer>;
@@ -9,18 +8,11 @@ class DZLPlayerArrestListener {
     private int armyCont = 0;
 
     void DZLPlayerArrestListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
-
         timerArrest = new Timer;
         timerArrest.Run(60, this, "CheckPrisoners", null, true);
     }
 
-    void ~DZLPlayerArrestListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.ARREST_PLAYER) {
             autoptr Param3<PlayerBase, int, string> paramArrestPlayer;
             if(ctx.Read(paramArrestPlayer)) {
@@ -38,6 +30,8 @@ class DZLPlayerArrestListener {
                 if(true == prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_ARMY) && true == copDzl.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return;
 
                 prisonerDzl.ArrestPlayer(arrestReason, arrestTime);
+
+                DZLArrestConfig arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
 
                 ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
 
@@ -93,6 +87,7 @@ class DZLPlayerArrestListener {
 
                 bool isInPrison = false;
                 int prisonArea = -1;
+                DZLArrestConfig arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
                 foreach(int index, vector position: arrestConfig.arrestAreas) {
                     if(vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius) {
                         dzlPlayer.ArrestCountDown();
