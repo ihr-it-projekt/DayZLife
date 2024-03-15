@@ -8,16 +8,16 @@ class DZLTraderTypeStorage {
     private int maxStorage;
     private bool mustSave = false;
 
-    void DZLTraderTypeStorage(DZLTraderType type) {
-        this.type = type.type;
-        this.fileName = "typeStorage" + type.type + ".json";
+    void DZLTraderTypeStorage(DZLTraderType _type) {
+        this.type = _type.type;
+        this.fileName = "typeStorage" + _type.type + ".json";
         if(!Load()) {
             currentStorage = 0;
         }
 
-        this.reducePerTick = type.reducePerTick;
-        this.tickLengthInMinutes = type.tickLengthInMinutes;
-        this.maxStorage = type.maxStorage;
+        this.reducePerTick = _type.reducePerTick;
+        this.tickLengthInMinutes = _type.tickLengthInMinutes;
+        this.maxStorage = _type.maxStorage;
         mustSave = true;
         Save();
     }
@@ -26,8 +26,8 @@ class DZLTraderTypeStorage {
         return type;
     }
 
-    bool IsType(string type) {
-        return this.type == type;
+    bool IsType(string _type) {
+        return this.type == _type;
     }
 
     void StorageDown() {

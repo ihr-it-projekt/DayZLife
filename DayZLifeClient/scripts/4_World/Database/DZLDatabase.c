@@ -9,7 +9,7 @@ class DZLDatabase {
     }
 
     void Init(DZLDatabaseLayer databaseLayer) {
-        DZLPlayerIdentities dzlPlayerIdentities = databaseLayer.GetPlayerIds();
+        dzlPlayerIdentities = databaseLayer.GetPlayerIds();
 
         array<string> allPlayer = dzlPlayerIdentities.playerIdentities;
         foreach(string ident: allPlayer) {

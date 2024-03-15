@@ -2,9 +2,9 @@ class DZLLoadOutCategory {
     string name;
     ref array<ref DZLLoadOutType> items;
 
-    void DZLLoadOutCategory(string name, array<ref DZLLoadOutType> items) {
-        this.name = name;
-        this.items = items;
+    void DZLLoadOutCategory(string _name, array<ref DZLLoadOutType> _items) {
+        this.name = _name;
+        this.items = _items;
     }
 
 }

@@ -13,13 +13,13 @@ class DZLTraderType: DZLIdModel {
     int reducePerTick;
     int tickLengthInMinutes;
 
-    void DZLTraderType(string type, int sellPrice, int buyPrice, array<string> attachments, bool usePlayerAsSpawnPoint = true, bool isCar = false) {
-        this.type = type;
-        this.sellPrice = sellPrice;
-        this.buyPrice = buyPrice;
-        this.attachments = attachments;
-        this.usePlayerAsSpawnPoint = usePlayerAsSpawnPoint;
-        this.isCar = isCar;
+    void DZLTraderType(string _type, int _sellPrice, int _buyPrice, array<string> _attachments, bool _usePlayerAsSpawnPoint = true, bool _isCar = false) {
+        this.type = _type;
+        this.sellPrice = _sellPrice;
+        this.buyPrice = _buyPrice;
+        this.attachments = _attachments;
+        this.usePlayerAsSpawnPoint = _usePlayerAsSpawnPoint;
+        this.isCar = _isCar;
         SetId();
     }
 

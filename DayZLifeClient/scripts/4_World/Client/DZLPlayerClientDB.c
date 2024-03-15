@@ -48,9 +48,9 @@ class DZLPlayerClientDB {
         return dzlPlayer;
     }
 
-    void SetDZLPlayer(DZLPlayer dzlPlayer, string playerId) {
-        if(dzlPlayer.dayZPlayerId == playerId) {
-            this.dzlPlayer = dzlPlayer;
+    void SetDZLPlayer(DZLPlayer _dzlPlayer, string playerId) {
+        if(_dzlPlayer.dayZPlayerId == playerId) {
+            this.dzlPlayer = _dzlPlayer;
         }
     }
 

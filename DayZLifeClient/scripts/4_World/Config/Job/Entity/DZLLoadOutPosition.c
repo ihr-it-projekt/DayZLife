@@ -1,6 +1,6 @@
 class DZLLoadOutPosition: DZLLicencePosition {
-    void DZLLoadOutPosition(vector position, vector orientation) {
-        Init(position, orientation);
+    void DZLLoadOutPosition(vector _position, vector _orientation) {
+        Init(_position, _orientation);
     }
 
 }

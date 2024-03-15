@@ -208,8 +208,8 @@ class DZLPlayer {
         this.activeJobGrade = "Rekrut";
     }
 
-    void UpdateName(string playerName) {
-        this.playerName = playerName;
+    void UpdateName(string _playerName) {
+        this.playerName = _playerName;
         lastLoginDate = new DZLDate();
         Save();
     }
@@ -314,10 +314,10 @@ class DZLPlayer {
         Save();
     }
 
-    void SaveItems(PlayerBase player) {
+    void SaveItems(PlayerBase _player) {
         itemsStore = new array<ref DZLStoreItem>;
         DZLStoreItem items = new DZLStoreItem;
-        items.Init(player, player.GetPosition(), true, false);
+        items.Init(_player, _player.GetPosition(), true, false);
 
         itemsStore.Insert(items);
         Save();
@@ -495,8 +495,8 @@ class DZLPlayer {
         return GetFraction() && GetFractionMember() && GetFractionMember().canGetMoneyFromBankAccount;
     }
 
-    void RemoveFraction(string fractionId) {
-        if(this.fractionId == fractionId) {
+    void RemoveFraction(string _fractionId) {
+        if(this.fractionId == _fractionId) {
             this.fractionId = "";
             fraction = null;
 
@@ -504,26 +504,26 @@ class DZLPlayer {
         }
     }
 
-    void SetFraction(DZLFraction fraction) {
-        this.fraction = fraction;
+    void SetFraction(DZLFraction _fraction) {
+        this.fraction = _fraction;
         this.fractionId = fraction.GetId();
         fractionWherePlayerCanJoin = new array<string>;
 
         Save();
     }
 
-    void UpdateFraction(DZLFraction fraction) {
-        if(fractionId != fraction.GetId()) return;
+    void UpdateFraction(DZLFraction _fraction) {
+        if(fractionId != _fraction.GetId()) return;
 
-        this.fraction = fraction;
+        this.fraction = _fraction;
         this.fractionId = fraction.GetId();
 
         Save();
     }
 
-    void RemovePotentialFraction(string fractionId) {
+    void RemovePotentialFraction(string _fractionId) {
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
-            if(fractionId == fractionIdCanJoin) {
+            if(_fractionId == fractionIdCanJoin) {
                 fractionWherePlayerCanJoin.Remove(key);
                 break;
             }
@@ -532,25 +532,25 @@ class DZLPlayer {
         Save();
     }
 
-    void AddPotentialFraction(string fractionId) {
+    void AddPotentialFraction(string _fractionId) {
         if(IsInAnyFraction()) return;
 
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
-            if(fractionId == fractionIdCanJoin) {
+            if(_fractionId == fractionIdCanJoin) {
                 return;
             }
         }
 
-        fractionWherePlayerCanJoin.Insert(fractionId);
+        fractionWherePlayerCanJoin.Insert(_fractionId);
 
         Save();
     }
 
-    bool HasPotentialFraction(string fractionId) {
+    bool HasPotentialFraction(string _fractionId) {
         if(IsInAnyFraction()) return false;
 
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
-            if(fractionId == fractionIdCanJoin) {
+            if(_fractionId == fractionIdCanJoin) {
                 return true;
             }
         }
@@ -571,8 +571,8 @@ class DZLPlayer {
         return fractionWherePlayerCanJoin;
     }
 
-    void AddToContact(DZLOnlinePlayer player) {
-        DZLMessageDB.Get().AddContact(player);
+    void AddToContact(DZLOnlinePlayer _player) {
+        DZLMessageDB.Get().AddContact(_player);
     }
 
     private bool Load() {

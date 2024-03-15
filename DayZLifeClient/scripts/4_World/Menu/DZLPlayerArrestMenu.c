@@ -14,8 +14,8 @@ class DZLPlayerArrestMenu : DZLBaseMenu {
         Destruct();
     }
 
-    void SetReceiver(PlayerBase receiver) {
-        this.receiver = receiver;
+    void SetReceiver(PlayerBase _receiver) {
+        this.receiver = _receiver;
     }
 
     override Widget Init() {

@@ -2,12 +2,12 @@ class DZLLicencePosition {
     vector position;
     vector orientation
 
-    void DZLLicencePosition(vector position, vector orientation) {
-        Init(position, orientation);
+    void DZLLicencePosition(vector _position, vector _orientation) {
+        Init(_position, _orientation);
     }
 
-    protected void Init(vector position, vector orientation) {
-        this.position = position;
-        this.orientation = orientation;
+    protected void Init(vector _position, vector _orientation) {
+        this.position = _position;
+        this.orientation = _orientation;
     }
 }

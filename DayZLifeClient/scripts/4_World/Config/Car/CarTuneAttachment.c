@@ -2,9 +2,9 @@ class CarTuneAttachment {
     string positionName;
     string type;
 
-    void CarTuneAttachment(string positionName, string type) {
-        this.positionName = positionName;
-        this.type = type;
+    void CarTuneAttachment(string _positionName, string _type) {
+        this.positionName = _positionName;
+        this.type = _type;
     }
 
     bool IsForSamePosition(CarTuneAttachment attachment) {

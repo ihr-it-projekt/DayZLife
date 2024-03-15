@@ -28,15 +28,15 @@ modded class CarScript {
         return lastGaragePosition;
     }
 
-    void EnableInsurance(vector lastGaragePosition) {
+    void EnableInsurance(vector _lastGaragePosition) {
         hasInsurance = true;
         hasInsuranceServer = true;
-        this.lastGaragePosition = lastGaragePosition;
+        this.lastGaragePosition = _lastGaragePosition;
         carStoreItem = DZLInsuranceManager.Get().AddCar(this, null);
     }
 
-    void EnableInsuranceClient(bool hasInsurance) {
-        this.hasInsurance = hasInsurance;
+    void EnableInsuranceClient(bool _hasInsurance) {
+        this.hasInsurance = _hasInsurance;
     }
 
     bool HasInsurance() {
@@ -133,8 +133,8 @@ modded class CarScript {
         SynchronizeValues(null);
     }
 
-    void UpdatePlayerAccess(array<string> playerAccess) {
-        this.playerAccess = playerAccess;
+    void UpdatePlayerAccess(array<string> _playerAccess) {
+        this.playerAccess = _playerAccess;
 
         SynchronizeValues(null);
     }

@@ -1,9 +1,9 @@
 class DZLTunerPosition: DZLLicencePosition {
     ref array<string>playerIdsThatCanUsePosition;
 
-    void DZLTunerPosition(vector position, vector orientation, array<string> playerIdsThatCanUsePosition) {
-        Init(position, orientation);
-        this.playerIdsThatCanUsePosition = playerIdsThatCanUsePosition;
+    void DZLTunerPosition(vector _position, vector _orientation, array<string> _playerIdsThatCanUsePosition) {
+        Init(_position, _orientation);
+        this.playerIdsThatCanUsePosition = _playerIdsThatCanUsePosition;
     }
 
     bool PlayerCanDoActions(string id) {

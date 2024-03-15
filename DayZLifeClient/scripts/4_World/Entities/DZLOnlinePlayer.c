@@ -3,10 +3,10 @@ class DZLOnlinePlayer: DZLNamePlayer {
     vector position;
     string rank;
 
-    void DZLOnlinePlayer(string id, string name, string rank, vector position = "0 0 0") {
-        this.id = id;
-        this.name = name;
-        this.position = position;
-        this.rank = rank;
+    void DZLOnlinePlayer(string _id, string _name, string _rank, vector _position = "0 0 0") {
+        this.id = _id;
+        this.name = _name;
+        this.position = _position;
+        this.rank = _rank;
     }
 }

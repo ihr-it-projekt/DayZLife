@@ -36,8 +36,8 @@ class DZLCarMenu : DZLBaseMenu {
         return layoutRoot;
     }
 
-    void SetCar(CarScript car) {
-        this.car = car;
+    void SetCar(CarScript _car) {
+        this.car = _car;
     }
 
     override void OnShow() {

@@ -7,14 +7,14 @@ class DZLFraction {
     private ref array<ref DZLFractionMember> potentialMembers;
     private int bankAccount = 0;
 
-    void DZLFraction(string playerId, string name = "") {
+    void DZLFraction(string playerId, string _name = "") {
         fileName = playerId + "fraction.json";
         id = playerId;
 
         if(!Load()) {
             members = new array<ref DZLFractionMember>;
             potentialMembers = new array<ref DZLFractionMember>;
-            this.name = name;
+            this.name = _name;
 
             Save();
         }

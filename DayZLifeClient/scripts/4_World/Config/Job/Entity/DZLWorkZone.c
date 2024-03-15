@@ -9,14 +9,14 @@ class DZLWorkZone {
     bool isLegalJob;
     bool showNotOnMapInAlmanac = false;
 
-    void DZLWorkZone(int m_CommandUID, vector position, float range, string zoneDisplayName, int timeToHarvestPerItemInSeconds, int damagePerHarvestItem, array<ref DZLHarvestItemToolRelation> harvestItemToolRelation, bool isLegalJob = true) {
-        this.zoneDisplayName = zoneDisplayName;
-        this.m_CommandUID = m_CommandUID;
-        this.position = position;
-        this.range = range;
-        this.timeToHarvestPerItemInSeconds = timeToHarvestPerItemInSeconds;
-        this.harvestItemToolRelation = harvestItemToolRelation;
-        this.isLegalJob = isLegalJob;
+    void DZLWorkZone(int _m_CommandUID, vector _position, float _range, string _zoneDisplayName, int _timeToHarvestPerItemInSeconds, int _damagePerHarvestItem, array<ref DZLHarvestItemToolRelation> _harvestItemToolRelation, bool _isLegalJob = true) {
+        this.zoneDisplayName = _zoneDisplayName;
+        this.m_CommandUID = _m_CommandUID;
+        this.position = _position;
+        this.range = _range;
+        this.timeToHarvestPerItemInSeconds = _timeToHarvestPerItemInSeconds;
+        this.harvestItemToolRelation = _harvestItemToolRelation;
+        this.isLegalJob = _isLegalJob;
         this.showNotOnMapInAlmanac = false;
     }
 }

@@ -10,15 +10,15 @@ class DZLLicence: DZLIdModel {
     int durationForCrafting;
 
 
-    void DZLLicence(int price, string name, vector position, string dependencyLicence, ref DZLLicenceCraftedItem craftedItem, int durationForCrafting, DZLLicenceToolItemCollection toolItems, DZLLicenceCraftItemCollection craftItems) {
-        this.price = price;
-        this.name = name;
-        this.position = position;
-        this.dependencyLicence = dependencyLicence;
-        this.craftedItem = craftedItem;
-        this.durationForCrafting = durationForCrafting;
-        this.toolItems = toolItems;
-        this.craftItems = craftItems;
+    void DZLLicence(int _price, string _name, vector _position, string _dependencyLicence, ref DZLLicenceCraftedItem _craftedItem, int _durationForCrafting, DZLLicenceToolItemCollection _toolItems, DZLLicenceCraftItemCollection _craftItems) {
+        this.price = _price;
+        this.name = _name;
+        this.position = _position;
+        this.dependencyLicence = _dependencyLicence;
+        this.craftedItem = _craftedItem;
+        this.durationForCrafting = _durationForCrafting;
+        this.toolItems = _toolItems;
+        this.craftItems = _craftItems;
 
         SetId();
     }

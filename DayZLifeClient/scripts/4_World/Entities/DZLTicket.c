@@ -3,9 +3,9 @@ class DZLTicket: DZLIdModel {
     string reason;
     ref DZLDate creationDate;
 
-    void DZLTicket(int value, string reason) {
-        this.value = value;
-        this.reason = reason;
+    void DZLTicket(int _value, string _reason) {
+        this.value = _value;
+        this.reason = _reason;
         creationDate = new DZLDate;
         SetId();
     }

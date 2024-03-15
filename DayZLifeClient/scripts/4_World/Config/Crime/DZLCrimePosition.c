@@ -1,5 +1,5 @@
 class DZLCrimePosition: DZLLicencePosition {
-    void DZLCrimePosition(vector position, vector orientation) {
-        Init(position, orientation);
+    void DZLCrimePosition(vector _position, vector _orientation) {
+        Init(_position, _orientation);
     }
 }

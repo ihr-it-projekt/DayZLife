@@ -48,15 +48,15 @@ class DZLMessage: DZLIdModel {
         GetGame().RPCSingleParam(null, DZL_RPC.SEND_MESSAGE_SERVER, new Param1<ref DZLMessage>(this), true, _receiver);
     }
 
-    void CreateAnswer(PlayerBase sender, string receiver, string text, DZLMessage replayedMessage) {
-        this.sender = sender.GetIdentity().GetName();
-        this.senderId = sender.GetIdentity().GetId();
-        this.receiver = receiver;
+    void CreateAnswer(PlayerBase _sender, string _receiver, string _text, DZLMessage _replayedMessage) {
+        this.sender = _sender.GetIdentity().GetName();
+        this.senderId = _sender.GetIdentity().GetId();
+        this.receiver = _receiver;
         this.type = TYPE_PRIVATE;
-        this.text = text;
+        this.text = _text;
         this.SetId();
         this.date = new DZLDate;
-        this.replayedMessage = replayedMessage.text;
+        this.replayedMessage = _replayedMessage.text;
 
         Save();
     }

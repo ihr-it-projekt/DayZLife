@@ -4,8 +4,8 @@ class DZLLoadOuts {
     ref array<ref DZLLoadOutCategory> loadOutCategories;
     ref array<ref DZLLoadOutPosition> loadOutPosition;
 
-    void DZLLoadOuts(string jobId) {
-        this.jobId = jobId;
+    void DZLLoadOuts(string _jobId) {
+        this.jobId = _jobId;
         if(!Load()) {
             loadOutPosition = new array<ref DZLLoadOutPosition>;
             loadOutCategories = new array<ref DZLLoadOutCategory>;

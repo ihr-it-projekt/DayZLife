@@ -23,8 +23,8 @@ class DZLTraderMenu: DZLBaseMenu {
     private ref array<ref DZLTraderTypeStorage> storageOfItems;
 
 
-    void DZLTraderMenu(DZLTraderPosition position) {
-        this.position = position;
+    void DZLTraderMenu(DZLTraderPosition _position) {
+        this.position = _position;
         layoutPath = "DayZLifeClient/layout/Trader/Trader_Menu.layout";
         displayCategories = new map<string, ref array<ref DZLTraderType>>;
         addedCats = new array<string>;

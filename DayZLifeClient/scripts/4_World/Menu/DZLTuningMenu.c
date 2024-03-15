@@ -24,8 +24,8 @@ class DZLTuningMenu: DZLBaseMenu {
         return layoutRoot;
     }
 
-    void SetPosition(DZLTunerPosition position) {
-        this.position = position;
+    void SetPosition(DZLTunerPosition _position) {
+        this.position = _position;
     }
 
     override void UpdateGUI(string message = "") {

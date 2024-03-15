@@ -36,12 +36,12 @@ class DZLAdmin {
         if(hasChange) Save();
     }
 
-    bool HasAccess(string access, string ident) {
+    bool HasAccess(string _access, string ident) {
         foreach(DZLAccess playerAccess: playerAccesses) {
             if(!playerAccess) continue;
             if(playerAccess.id != ident) continue;
 
-            return playerAccess.HasAccess(access);
+            return playerAccess.HasAccess(_access);
 
         }
         return false;

@@ -6,14 +6,14 @@ class DZLCarRaidProgressBar: DZLBaseProgressBar {
         return super.Init();
     }
 
-    void SetCar(CarScript car) {
-        this.car = car;
+    void SetCar(CarScript _car) {
+        this.car = _car;
 
         duration = 999999999999999;
     }
 
-    void SetRaidItem(EntityAI item) {
-        this.item = item;
+    void SetRaidItem(EntityAI _item) {
+        this.item = _item;
     }
 
     override void OnHide() {

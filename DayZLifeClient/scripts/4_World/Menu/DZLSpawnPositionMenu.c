@@ -104,10 +104,10 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         return false;
     }
 
-    void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
-        player.SetIsSpawned();
+    void SendSpawnLocation(DZLSpawnPoint point, PlayerBase _player) {
+        _player.SetIsSpawned();
         string jobId = jobIndex.Get(currentJobIndex);
-        GetGame().RPCSingleParam(player, DZL_RPC.NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
+        GetGame().RPCSingleParam(_player, DZL_RPC.NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
     }
 
     override void OnHide() {

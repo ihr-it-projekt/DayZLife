@@ -47,8 +47,8 @@ modded class PlayerBase {
     }
 
     void SetIsSpawned() {
-        DZLPlayer dzlPlayer = GetDZLPlayer();
-        int time = DZLPlayerClientDB.Get().GetConfig().GetJobSpawnPointsByJobId(dzlPlayer.GetActiveJob()).blockTimeForJobChange;
+        DZLPlayer _dzlPlayer = GetDZLPlayer();
+        int time = DZLPlayerClientDB.Get().GetConfig().GetJobSpawnPointsByJobId(_dzlPlayer.GetActiveJob()).blockTimeForJobChange;
 
         resetCanSpawn = new Timer;
         resetCanSpawn.Run(time, this, "ResetSpawned");

@@ -12,9 +12,9 @@ class DZLStoreItem: DZLIdModel {
         attached = new array<ref DZLStoreItem>;
     }
 
-    void Init(EntityAI item, vector positionOfStore, bool withCargo, bool ignoreHealth) {
+    void Init(EntityAI item, vector _positionOfStore, bool withCargo, bool ignoreHealth) {
         SetItem(item, withCargo, ignoreHealth);
-        this.positionOfStore = positionOfStore;
+        this.positionOfStore = _positionOfStore;
         SetId();
     }
 
@@ -79,8 +79,8 @@ class DZLStoreItem: DZLIdModel {
         return quantity;
     }
 
-    void SetType(string type) {
-        this.type = type;
+    void SetType(string _type) {
+        this.type = _type;
     }
 
     string GetType() {

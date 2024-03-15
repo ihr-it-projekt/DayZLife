@@ -4,12 +4,12 @@ class DZLTraderPosition: DZLLicencePosition {
     vector spawnOrientationOfVehicles;
     string forJob = "";
 
-    void DZLTraderPosition(vector position, vector orientation, array<string> categoryNames, vector spawnPositionOfVehicles, vector spawnOrientationOfVehicles = "0 0 0", string forJob = "") {
-        Init(position, orientation);
-        this.categoryNames = categoryNames;
-        this.spawnPositionOfVehicles = spawnPositionOfVehicles;
-        this.spawnOrientationOfVehicles = spawnOrientationOfVehicles;
-        this.forJob = forJob;
+    void DZLTraderPosition(vector _position, vector _orientation, array<string> _categoryNames, vector _spawnPositionOfVehicles, vector _spawnOrientationOfVehicles = "0 0 0", string _forJob = "") {
+        Init(_position, _orientation);
+        this.categoryNames = _categoryNames;
+        this.spawnPositionOfVehicles = _spawnPositionOfVehicles;
+        this.spawnOrientationOfVehicles = _spawnOrientationOfVehicles;
+        this.forJob = _forJob;
     }
 
     bool CanOpenWithJob(string job) {
