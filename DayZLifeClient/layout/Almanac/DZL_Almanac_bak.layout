@@ -1,0 +1,1436 @@
+FrameWidgetClass Almanac {
+ size 0.9 0.8
+ halign center_ref
+ valign center_ref
+ hexactpos 0
+ vexactpos 0
+ hexactsize 0
+ vexactsize 0
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.6588 0.6588 0.6588 1
+   position 0 0
+   size 0.99104 0.98088
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_quad_dark
+   {
+    PanelWidgetClass PanelWidget1 {
+     visible 1
+     ignorepointer 1
+     position 0.00452 -0.00016
+     size 0.991 0.9808
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_quad_dark
+     {
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       position 0 0.00962
+       size 0.28639 0.07
+       halign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        XComboBoxWidgetClass almanac_box {
+         position 0 0
+         size 0.9593 0.852
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         items "#Workzone;#Licence;#wanted_list"
+        }
+       }
+      }
+      PanelWidgetClass workzone_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget10 {
+         ignorepointer 1
+         position 0 0
+         size 0.3209 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass workzonelist {
+           visible 1
+           position 0.01469 0
+           size 0.97062 0.97885
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Workzone_name;70;#tool_damage;30"
+           lines 30
+           "highlight row" 0
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget14 {
+         ignorepointer 1
+         position 0 0.25
+         size 0.67981 0.5
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          MapWidgetClass workzonemap {
+           size 0.4 0.9577
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        TextWidgetClass TextWidget0 {
+         visible 1
+         ignorepointer 1
+         position 0.629 0.239
+         size 0.061 0.102
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "="
+         "text halign" center
+         "text valign" center
+        }
+        PanelWidgetClass PanelWidget13 {
+         ignorepointer 1
+         position 0.31982 0.001
+         size 0.30447 0.50134
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget4 {
+           ignorepointer 1
+           position -0.03746 0.02149
+           size 0.7 0.13
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass tool_workzone {
+             ignorepointer 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Tool"
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          TextListboxWidgetClass tool_listbox {
+           position -0.18452 0.07574
+           size 0.6 0.80633
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 0
+           lines 15
+          }
+          ItemPreviewWidgetClass tool_preview {
+           ignorepointer 1
+           position 0.01448 0.07804
+           size 0.35456 0.8109
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget15 {
+         ignorepointer 1
+         position 0 0
+         size 0.30529 0.5013
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget9 {
+           ignorepointer 1
+           position 0 0.0211
+           size 0.7 0.13
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass yield_workzone {
+             ignorepointer 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Yield"
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          TextListboxWidgetClass yield_listbox {
+           position -0.18456 0.07555
+           size 0.6 0.8067
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Item;60;#chance_to_harvest;30"
+           lines 15
+          }
+          ItemPreviewWidgetClass yield_preview {
+           ignorepointer 1
+           position 0.015 0.076
+           size 0.354 0.807
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass lizenze_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9101
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget2 {
+         ignorepointer 1
+         position 0 0
+         size 0.3209 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass lizenzelist {
+           position 0.01469 0
+           size 0.97062 0.97885
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#License"
+           lines 30
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget8 {
+         ignorepointer 1
+         position 0 0.25
+         size 0.68028 0.5
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          MapWidgetClass lizenzemap {
+           size 0.4 0.9577
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget7 {
+         ignorepointer 1
+         position 0.321 0
+         size 0.42799 0.50264
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget6 {
+           ignorepointer 1
+           position 0.18942 0.02104
+           size 0.5991 0.14
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass tool_list {
+             ignorepointer 1
+             position 0 0
+             size 0.95 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          PanelWidgetClass PanelWidget5 {
+           ignorepointer 1
+           position -0.30506 0.02104
+           size 0.3678 0.14
+           halign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            TextWidgetClass lizenz_tool {
+             ignorepointer 1
+             position 0 0
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             text "#Tool"
+             "text halign" center
+             "text valign" center
+            }
+           }
+          }
+          TextListboxWidgetClass craft_itembox {
+           position 0.011 0.182
+           size 0.62747 0.797
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Item;80;#quantity;20"
+           lines 13
+          }
+          ItemPreviewWidgetClass harvestPreview {
+           ignorepointer 1
+           position 0.00798 0.08052
+           size 0.34557 0.79551
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget11 {
+         ignorepointer 1
+         position 0.0383 0.01058
+         size 0.1653 0.07
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass Yield {
+           ignorepointer 1
+           position 0 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Yield"
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        ItemPreviewWidgetClass yield_ItemPreview {
+         ignorepointer 1
+         position 0.754 0.091
+         size 0.242 0.31785
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+        }
+        PanelWidgetClass PanelWidget12 {
+         ignorepointer 1
+         position 0.0383 0.41943
+         size 0.1653 0.07
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass Item_Crafted {
+           ignorepointer 1
+           position 0 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Crafted_Item"
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass escaped_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.91076
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget20 {
+         visible 1
+         ignorepointer 1
+         size 0.357 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass escaped_TextListbox {
+           position 0 0
+           size 0.9736 0.9789
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#escapee_player;40;#arrestReason;30;#ArrestTime;30"
+           lines 35
+          }
+         }
+        }
+        PlayerPreviewWidgetClass escaped_PlayerPreview {
+         ignorepointer 1
+         size 0.27968 0.97887
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+        }
+       }
+      }
+      PanelWidgetClass admin_Panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9108
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget21 {
+         ignorepointer 1
+         position 0 0
+         size 0.3586 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass players {
+           position 0 0.03946
+           size 0.97371 0.89996
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_Name;65;#last_log_in_day;35"
+           lines 30
+          }
+          PanelWidgetClass PanelWidget25 {
+           ignorepointer 1
+           position 0.4167 0.91933
+           size 0.13707 0.0701
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad_dark
+           {
+            ButtonWidgetClass searchButton {
+             color 0.251 0.502 0 1
+             size 0.9 0.9
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style OldStyle
+             {
+              ImageWidgetClass ImageWidget4 {
+               ignorepointer 1
+               size 0.9 0.9
+               halign center_ref
+               valign center_ref
+               hexactpos 0
+               vexactpos 0
+               hexactsize 0
+               vexactsize 0
+               imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
+               mode blend
+               "src alpha" 1
+               "stretch mode" stretch_w_h
+              }
+             }
+            }
+           }
+          }
+          EditBoxWidgetClass search_input {
+           position -0.07592 0.91933
+           size 0.82187 0.0701
+           halign center_ref
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style DefaultBorder
+           font "gui/fonts/metron"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget22 {
+         ignorepointer 1
+         position 0.41029 0.00856
+         size 0.17 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass delete_Button {
+           color 0.502 0 0 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style OldStyle
+           text "#Delete_player"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget23 {
+         ignorepointer 1
+         position 0.40778 0.67774
+         size 0.1744 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass giveMoneyButton {
+           color 0.251 0.502 0 1
+           position -0.00572 -0.02697
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#Deposit_to_player"
+           text_proportion 0.6
+          }
+         }
+        }
+        EditBoxWidgetClass moneyInput {
+         position 0.40778 0.7583
+         size 0.1744 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style DefaultBorder
+        }
+        PanelWidgetClass PanelWidget24 {
+         ignorepointer 1
+         position 0.40778 0.59717
+         size 0.1744 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass giveMoneyButtonBank {
+           color 0.251 0.502 0 1
+           position -0.00355 -0.02697
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#Deposit_to_bank"
+           text_proportion 0.6
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget27 {
+         ignorepointer 1
+         position 0.1793 0.01057
+         size 0.63197 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass playerID {
+           ignorepointer 1
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "wgvdsklHJBNCKJDNFVW_EIUNCLKXJM_Cdsikfjvnikvm"
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget28 {
+         ignorepointer 1
+         position -0.0495 0.09113
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ImageWidgetClass ImageCash {
+           ignorepointer 1
+           position 0.01 0
+           size 0.17901 0.85
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{729A02D897FD10EA}DayZLifeClient/layout/Banking/DZLCash.edds"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+          TextWidgetClass moneyCash {
+           ignorepointer 1
+           position 0.02 0
+           size 0.73692 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget29 {
+         ignorepointer 1
+         position -0.0495 0.1717
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ImageWidgetClass ImageBank {
+           ignorepointer 1
+           position 0.01 0
+           size 0.17901 0.85
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{63429AE7A994ECE2}DayZLifeClient/layout/Banking/DZLBank.edds"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+          TextWidgetClass moneyBank {
+           ignorepointer 1
+           position 0.02 0
+           size 0.73692 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "text halign" right
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget210 {
+         ignorepointer 1
+         position -0.0495 0.25227
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass job {
+           ignorepointer 1
+           position 0.02 0
+           size 0.48 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "text halign" center
+           "text valign" center
+          }
+          TextWidgetClass active_job {
+           ignorepointer 1
+           position 0.01 0
+           size 0.46297 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Active_Job"
+           text_proportion 0.6
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget211 {
+         ignorepointer 1
+         position -0.0495 0.33284
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ImageWidgetClass ImageArrest {
+           ignorepointer 1
+           position 0.01 0
+           size 0.17901 0.85
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{BA01A4394F203C2A}DayZLifeClient/layout/Banking/Prison.edds"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+          TextWidgetClass arrestTime {
+           ignorepointer 1
+           position 0.2433 0
+           size 0.37847 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "text halign" right
+           "text valign" center
+          }
+          TextWidgetClass arrestmin {
+           ignorepointer 1
+           position 0 0
+           size 0.21625 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "min."
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget30 {
+         ignorepointer 1
+         position -0.04949 0.28198
+         size 0.1744 0.4149
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass licenseTextListbox {
+           position 0 0
+           size 0.9459 0.9371
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#License"
+           lines 15
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget212 {
+         ignorepointer 1
+         position -0.0495 0.4134
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass canbejobCop {
+           ignorepointer 1
+           position 0.01 0
+           size 0.70263 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Can_be_Job_Cop"
+           text_proportion 0.6
+           "text valign" center
+          }
+          TextWidgetClass copValue {
+           ignorepointer 1
+           position 0.02 0
+           size 0.24034 0.906
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget213 {
+         visible 0
+         ignorepointer 1
+         position -0.0495 0.49397
+         size 0.17438 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass canbejobMedic {
+           ignorepointer 1
+           position 0.01 0
+           size 0.70263 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Can_be_Job_Medic"
+           text_proportion 0.6
+           "text valign" center
+          }
+          TextWidgetClass medicValue {
+           ignorepointer 1
+           position 0.02 0
+           size 0.24034 0.906
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text_proportion 0.6
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget31 {
+         ignorepointer 1
+         position 0.40778 0.09114
+         size 0.1744 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextWidgetClass TextWidget1 {
+           ignorepointer 1
+           position 0 0
+           size 0.9 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Money_to_Player"
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget16 {
+       visible 1
+       ignorepointer 1
+       position 0.00471 0.00962
+       size 0.04 0.07
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass Button_Closed {
+         color 0.502 0 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         text "X"
+        }
+       }
+      }
+      PanelWidgetClass medic_Panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9108
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget26 {
+         ignorepointer 1
+         position 0 0
+         size 0.35856 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass player_Listbox {
+           position 0.00043 0
+           size 0.97286 0.97887
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 0
+           lines 20
+          }
+         }
+        }
+        MapWidgetClass medic_Map {
+         position 0.192 0
+         size 0.412 0.925
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+        }
+       }
+      }
+      ImageWidgetClass ImageWidget0 {
+       ignorepointer 1
+       position 0.00471 0.00962
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{048ED4A53EA093A4}DayZLifeClient/layout/Almanac/PoliceIcon.edds"
+       mode blend
+       "src alpha" 1
+       "stretch mode" stretch_w_h
+      }
+      TextWidgetClass countCop {
+       ignorepointer 1
+       position 0.04273 0.00962
+       size 0.04243 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      ImageWidgetClass ImageWidget1 {
+       ignorepointer 1
+       position 0.17344 0.00994
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{39DAA9AABB8E2B03}DayZLifeClient/layout/Almanac/MedicIcon.edds"
+       mode additive
+       "src alpha" 1
+       "stretch mode" stretch_w_h
+       "flip u" 0
+      }
+      TextWidgetClass countMedic {
+       ignorepointer 1
+       position 0.21094 0.00994
+       size 0.0424 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      ImageWidgetClass ImageWidget2 {
+       ignorepointer 1
+       position 0.25753 0.00994
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{7354D2EE62FCC049}DayZLifeClient/layout/Almanac/CivilIcon.edds"
+       mode blend
+       "src alpha" 1
+       "stretch mode" stretch_w_h
+      }
+      TextWidgetClass countCivil {
+       ignorepointer 1
+       position 0.29502 0.00994
+       size 0.0424 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      ImageWidgetClass ImageWidget5 {
+       ignorepointer 1
+       position 0.08935 0.00994
+       size 0.0333 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       imageTexture "{C67AC3543A5B9451}DayZLifeClient/layout/Almanac/ArmyIcon.edds"
+       mode blend
+       "src alpha" 1
+       "stretch mode" stretch_w_h
+      }
+      TextWidgetClass countArmy {
+       ignorepointer 1
+       position 0.12685 0.00994
+       size 0.0424 0.07
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "0"
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget110 {
+       visible 1
+       ignorepointer 1
+       position 0.16881 0.00962
+       size 0.04 0.07
+       halign right_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        ButtonWidgetClass sync_Button {
+         color 0.251 0.502 0 1
+         position 0 0
+         size 0.9 0.9
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style OldStyle
+         {
+          ImageWidgetClass ImageWidget3 {
+           ignorepointer 1
+           position 0 0
+           size 0.8 0.8
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{35E83651B6E3321F}DayZLifeClient/layout/Almanac/sync.edds"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass playerOpenTicketsWidget {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.91076
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget214 {
+         visible 1
+         ignorepointer 1
+         position 0 0
+         size 0.9955 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          PanelWidgetClass PanelWidget32 {
+           ignorepointer 1
+           position 0.00448 0.0102
+           size 0.40505 0.60706
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_quad
+           {
+            TextListboxWidgetClass playerOpenTicketsList {
+             position 0.00051 -0.00036
+             size 0.97474 0.97077
+             halign center_ref
+             valign center_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             "title visible" 1
+             colums "#Player;40;#count;20;#value;40"
+             lines 20
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass job_panel {
+       visible 0
+       ignorepointer 1
+       position 0 0
+       size 1 0.9108
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_quad_dark
+       {
+        PanelWidgetClass PanelWidget111 {
+         ignorepointer 1
+         position 0 0
+         size 0.35 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass playerlist_JobPanel {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#Player_list"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget112 {
+         ignorepointer 1
+         size 0.35 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass jobListbox {
+           size 0.973 0.979
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#JobName_list;50;#Rank;50;"
+           lines 20
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget113 {
+         ignorepointer 1
+         position 0 0.01058
+         size 0.137 0.063
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          ButtonWidgetClass saveButton_JobPanel {
+           position 0 0
+           size 0.98 0.9
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#Save"
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget34 {
+         ignorepointer 1
+         position 0 0
+         size 0.18918 0.77525
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style editor_quad_dark
+         {
+          TextListboxWidgetClass job_RankList {
+           position 0 0
+           size 0.96078 0.97183
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           "title visible" 1
+           colums "#JobName_Rank"
+           lines 20
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ }
+}

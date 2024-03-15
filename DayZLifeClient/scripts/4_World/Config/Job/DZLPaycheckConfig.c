@@ -61,6 +61,10 @@ class DZLPaycheckConfig {
             jobPayChecks.Insert(new DZLJobPayCheck(jobName));
             Save();
         }
+        if ("3" == version) {
+            version = "4";
+            Save();
+        }
     }
 
     array<ref DZLPaycheck> GetPaycheckByJob(string job) {
