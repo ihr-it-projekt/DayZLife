@@ -8,7 +8,7 @@ modded class DZLConfig {
         return config;
     }
 
-    static void ReloadConfig() {
+    static void Reload() {
         config = new DZLConfig;
         config.UpdateConfig(null);
     }
@@ -56,6 +56,7 @@ modded class DZLConfig {
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_CRIME, new Param1<ref DZLCrimeConfig>(crimeConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_MESSAGE, new Param1<ref DZLMessageConfig>(messageConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_TUNING_CONFIG, new Param1<ref DZLTuningConfig>(tuningConfig), true, sender);
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_HOUSE_CONFIG, new Param1<ref DZLHouseConfig>(houseConfig), true, sender);
 
         if(null == sender) {
             GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_TRADER, new Param1<ref DZLTraderConfig>(traderConfig), true, sender);

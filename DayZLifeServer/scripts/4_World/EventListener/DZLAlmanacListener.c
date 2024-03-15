@@ -1,10 +1,6 @@
 class DZLAlmanacListener {
-    ref DZLConfig config;
-
     void DZLAlmanacListener() {
-        config = DZLConfig.Get();
-
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
+       GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
 
     void ~DZLAlmanacListener() {
@@ -21,11 +17,11 @@ class DZLAlmanacListener {
         } else if(rpc_type == DZL_RPC.GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
         }  else if(rpc_type == DZL_RPC.RELOAD_CONFIG) {
-            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
-            DZLConfig.Get().Reload();
+            if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
+            DZLConfig.Reload();
             DZLSendMessage(sender, "#config_was_reloaded");
         } else if(rpc_type == DZL_RPC.DELETE_PLAYER) {
-            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
+            if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
             Param1<string> paramDeletePlayer;
             if(ctx.Read(paramDeletePlayer)) {
                 string identString = paramDeletePlayer.param1;
@@ -56,18 +52,18 @@ class DZLAlmanacListener {
             Param2<string, ref array<DZLOnlinePlayer>> paramUpdateJobs;
             if(!ctx.Read(paramUpdateJobs)) return;
 
-            if(!config.adminIds.HasAccess(paramUpdateJobs.param1, sender.GetId())) return;
+            if(!DZLConfig.Get().adminIds.HasAccess(paramUpdateJobs.param1, sender.GetId())) return;
 
             DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
             dzlPlayerIdentities.UpdateJob(paramUpdateJobs.param1, paramUpdateJobs.param2);
             DZLSendMessage(sender, "#update_successful");
         } else if(rpc_type == DZL_RPC.MONEY_TRANSFER_ADMIN) {
-            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
+            if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
             autoptr Param3<string, int, bool> paramDepositAdminPlayer;
             string messageDepositPP = "";
             if(ctx.Read(paramDepositAdminPlayer)) {
                 PlayerIdentity identMoney = sender;
-                if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, identMoney.GetId())) return;
+                if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, identMoney.GetId())) return;
 
                 DZLPlayer dzlPlayerReciverPP = DZLDatabaseLayer.Get().GetPlayer(paramDepositAdminPlayer.param1);
 
@@ -83,7 +79,7 @@ class DZLAlmanacListener {
     }
 
     void SendUpdateListJob(string job, PlayerBase player) {
-        if(!config.adminIds.HasAccess(job, player.GetPlayerId())) return;
+        if(!DZLConfig.Get().adminIds.HasAccess(job, player.GetPlayerId())) return;
 
         array<Man> _players = new array<Man>;
         GetGame().GetPlayers(_players);
@@ -111,7 +107,7 @@ class DZLAlmanacListener {
 
 
     void SendAllPlayerList(PlayerIdentity player) {
-        if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetId())) return;
+        if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetId())) return;
 
         array<ref DZLPlayer> collection = new array<ref DZLPlayer>;
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
