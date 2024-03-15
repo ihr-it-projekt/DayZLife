@@ -1,11 +1,8 @@
 class DZLAlmanacListener {
     ref DZLConfig config;
-    private ref DZLHouseFinder houseFinder;
 
     void DZLAlmanacListener() {
         config = DZLConfig.Get();
-        houseFinder = new DZLHouseFinder;
-        houseFinder.SetConfig(config);
 
         GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
     }
@@ -30,36 +27,8 @@ class DZLAlmanacListener {
                 string identString = paramDeletePlayer.param1;
                 if(DZLDatabaseLayer.Get().HasPlayer(identString)) {
                     DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(identString);
-                    DZLPlayerHouse dzlPlayerHouse = DZLDatabaseLayer.Get().GetPlayerHouse(identString);
-
-                    DZLHouse house;
-                    foreach(string fileNameHouse: dzlPlayerHouse.playerHouseCollection) {
-                        house = DZLDatabaseLayer.Get().GetHouse(null, fileNameHouse);
-
-                        array<ref DZLStorageTypeBought> storages = house.GetStorage();
-                        if(storages && storages.Count() > 0) {
-                            foreach(DZLStorageTypeBought storage: storages) {
-                                if(!storage) continue;
-                                houseFinder.objectFinder.DeleteContainerAt(storage.position, storage.position, storage.type);
-                            }
-                        }
-
-                        DZLDatabaseLayer.Get().RemoveHouseInventory(house.GetOwner(), house.GetPosition());
-                        house.RemoveOwner();
-
-                        DZLDatabaseLayer.Get().RemoveHouse(house.GetFileName());
-                        DZLDatabaseLayer.Get().GetLockedHouses().Remove(house);
-                    }
-
-                    DZLDatabaseLayer.Get().GetBank().AddMoney(dzlPlayer.GetBankMoney() * -1);
-
-                    foreach(string fileHouseAccess: dzlPlayerHouse.playerHouseKeyCollection) {
-                        house = DZLDatabaseLayer.Get().GetHouse(null, fileHouseAccess);
-                        if(house) house.RemovePlayerAccess(identString);
-                    }
 
                     DZLDatabaseLayer.Get().RemovePlayer(identString);
-                    DZLDatabaseLayer.Get().RemovePlayerHouse(identString);
                     DZLDatabaseLayer.Get().RemovePlayerCars(identString);
                     DZLDatabaseLayer.Get().GetPlayerIds().RemovePlayer(identString);
                 }

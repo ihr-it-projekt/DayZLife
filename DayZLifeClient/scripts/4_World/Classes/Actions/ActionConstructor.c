@@ -10,7 +10,6 @@ modded class ActionConstructor {
         actions.Insert(DZLActionHarvestItem);
         actions.Insert(ActionOpenLicenseMenu);
         actions.Insert(ActionLicenceCrafting);
-        actions.Insert(DZLActionRaidDoors);
         actions.Insert(DZLActionTransferMoney);
         actions.Insert(ActionOpenLoadOutMenu);
         actions.Insert(ActionOpenArrestMenu);
@@ -27,11 +26,5 @@ modded class ActionConstructor {
         actions.Insert(ActionRobShop);
         actions.Insert(DZLActionGiveNumber);
         actions.Insert(DZLActionOpenTuningMenu);
-
-#ifndef TBRealEstateClient
-        actions.Insert(DZLActionLockDoors);
-        actions.Insert(DZLActionUnLockDoors);
-        actions.Insert(ActionOpenHouseMenu);
-#endif
     }
 }

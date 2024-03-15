@@ -23,11 +23,6 @@ class DZLPlayerEventListener {
                 if(ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1) {
                     player.DisplayMessage(dzlMessageMedic.param1);
                 }
-            } else if(rpc_type == DZL_RPC.HOUSE_RAID_ALARM) {
-                Param3<ref DZLHouseExtension, string, PlayerBase> dzlAlarm;
-                if(ctx.Read(dzlAlarm) && dzlAlarm.param1 && dzlAlarm.param2 && dzlAlarm.param3) {
-                    player.DisplayMessage(dzlAlarm.param1.GetMessage(dzlAlarm.param3, dzlAlarm.param2));
-                }
             } else if(rpc_type == DZL_RPC.ALL_WAS_HEALED_RESPONSE) {
                 player.willDie = true;
                 player.CheckDeath();

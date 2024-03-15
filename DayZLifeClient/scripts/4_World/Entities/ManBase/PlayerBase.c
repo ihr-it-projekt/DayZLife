@@ -1,7 +1,6 @@
 modded class PlayerBase {
     private ref DZLLicenceMenu licenceMenu;
     private ref DZLLicenceProgressBar progressBarLicence;
-    private ref DZLDoorRaidProgressBar progressBarRaid;
     private ref DZLCarRaidProgressBar progressBarRaidCar;
     private ref DZLHarvestProgressBar progressBarHarvest;
     private ref DZLMessageMenu messageMenu;
@@ -15,7 +14,6 @@ modded class PlayerBase {
     private ref DZLCarStorageMenu carStorageMenu;
     private ref DZLMedicHelpMenu healMenu;
     private ref DZLMessageSystemMenu messageSystemMenu;
-    private ref DZLHouseMenu houseMenu;
     private ref DZLBankingMenu bankingMenu;
     private ref DZLTraderMenu traderMenu;
     private ref DZLAlmanacMenu almanacMenu;
@@ -119,17 +117,10 @@ modded class PlayerBase {
         AddAction(ActionRobMoney, InputActionMap);
         AddAction(ActionRobMoneyFromDead, InputActionMap);
         AddAction(DZLActionHarvestItem, InputActionMap);
-        AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
         AddAction(ActionOpenArrestMenu, InputActionMap);
         AddAction(ActionOpenTicketMenu, InputActionMap);
         AddAction(DZLActionGiveNumber, InputActionMap);
-
-#ifndef TBRealEstateClient
-        AddAction(DZLActionUnLockDoors, InputActionMap);
-        AddAction(DZLActionLockDoors, InputActionMap);
-        AddAction(ActionOpenHouseMenu, InputActionMap);
-#endif
     }
 
     override void CheckDeath() {
@@ -160,9 +151,7 @@ modded class PlayerBase {
     void UpdatePlayerAtDependencies() {
         dzlPlayer = DZLPlayerClientDB.Get().GetDZLPlayer();
         dzlPlayer.player = this;
-        if(houseMenu && houseMenu.IsVisible()) {
-            houseMenu.UpdatePlayer(this);
-        } else if(bankingMenu && bankingMenu.IsVisible()) {
+        if(bankingMenu && bankingMenu.IsVisible()) {
             bankingMenu.UpdatePlayer(this);
         } else if(traderMenu && traderMenu.IsVisible()) {
             traderMenu.UpdatePlayer(this);
@@ -187,16 +176,6 @@ modded class PlayerBase {
         } else if(messageSystemMenu && messageSystemMenu.IsVisible()) {
             messageSystemMenu.UpdatePlayer(this);
         }
-    }
-
-    DZLHouseMenu GetHouseMenu(DZLHouseDefinition definition, Building target) {
-        houseMenu = new DZLHouseMenu;
-        InitMenu(houseMenu);
-
-        houseMenu.SetHouseDefinition(definition);
-        houseMenu.SetTarget(target);
-
-        return houseMenu;
     }
 
     DZLCarMenu GetCarMenu(CarScript car) {
@@ -302,12 +281,6 @@ modded class PlayerBase {
         return progressBarHarvest;
     }
 
-    DZLDoorRaidProgressBar GetRaidProgressBar() {
-        progressBarRaid = new DZLDoorRaidProgressBar();
-        progressBarRaid.SetPlayer(this);
-        return progressBarRaid;
-    }
-
     DZLCarRaidProgressBar GetRaidCarProgressBar() {
         progressBarRaidCar = new DZLCarRaidProgressBar();
         progressBarRaidCar.SetPlayer(this);
@@ -336,17 +309,6 @@ modded class PlayerBase {
         if(messageSystemMenu) {
             messageSystemMenu.RefreshMessageSystem();
         }
-    }
-
-    DZLHouseDefinition FindHouseDefinition(Building building) {
-        array<ref DZLHouseDefinition> houseConfigs = GetConfig().GetHouseDefinitions();
-        if(!houseConfigs) return null;
-        foreach(DZLHouseDefinition definition: houseConfigs) {
-            if(definition.houseType == building.GetType()) {
-                return definition;
-            }
-        }
-        return null;
     }
 
     void TransferFromDeadPlayer(DZLPlayer playerTarget) {
@@ -538,13 +500,6 @@ modded class PlayerBase {
         if(dzlPlayer) dzlPlayer.player = this;
 
         return dzlPlayer;
-    }
-
-    DZLPlayerHouse GetPlayerHouse() {
-        if(GetGame().IsServer()) {
-            return DZLDatabaseLayer.Get().GetPlayerHouse(GetPlayerId());
-        }
-        return DZLPlayerClientDB.Get().GetPlayerHouse();
     }
 
     DZLBank GetBank() {

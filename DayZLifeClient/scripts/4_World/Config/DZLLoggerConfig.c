@@ -8,7 +8,6 @@ class DZLLoggerConfig {
     bool logRaid = true;
     bool logStore = true;
     bool logArrest = true;
-    bool logHouseTrade = true;
     bool logTicket = true;
 
     static DZLLoggerConfig Get() {
@@ -27,7 +26,6 @@ class DZLLoggerConfig {
             logRaid = true;
             logStore = true;
             logArrest = true;
-            logHouseTrade = true;
             Save();
         }
 

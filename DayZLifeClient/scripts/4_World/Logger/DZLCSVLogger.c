@@ -125,23 +125,6 @@ static void DZLLogTicket(string playerId, string info, int value) {
     DZLCSVLog(playerId, fileName, head, data);
 }
 
-static void DZLLogHouseTrade(string playerId, string info, int price, vector position) {
-    if(!DZLLoggerConfig.Get().logHouseTrade) return;
-    string fileName = "houseTrade_log.csv";
-
-    array<string> head = new array<string>;
-    head.Insert("info");
-    head.Insert("price");
-    head.Insert("duration");
-
-    array<string> data = new array<string>;
-    data.Insert(info);
-    data.Insert(price.ToString());
-    data.Insert(position.ToString(true));
-
-    DZLCSVLog(playerId, fileName, head, data);
-}
-
 
 static void DZLCSVLog(string playerId, string fileName, array<string> head, array<string> data) {
     if(!FileExist(DAY_Z_LIFE_LOGS)) {

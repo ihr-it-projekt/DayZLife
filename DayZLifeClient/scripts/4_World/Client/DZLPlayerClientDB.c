@@ -2,7 +2,6 @@ class DZLPlayerClientDB {
     private static ref DZLPlayerClientDB db;
 
     private ref DZLConfig config;
-    private ref DZLPlayerHouse house;
     private ref DZLPlayer dzlPlayer;
     private ref DZLBank dzlBank;
 
@@ -10,7 +9,6 @@ class DZLPlayerClientDB {
         if(!db) {
             db = new DZLPlayerClientDB;
             GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.EVENT_GET_CONFIG, null, true);
-            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.GET_PLAYER_BUILDING, null, true);
             GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
             GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
         }
@@ -32,14 +30,6 @@ class DZLPlayerClientDB {
         }
 
         return config;
-    }
-
-    DZLPlayerHouse GetPlayerHouse() {
-        if(!house) {
-            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.GET_PLAYER_BUILDING, null, true);
-        }
-
-        return house;
     }
 
     DZLBank GetBank() {
@@ -72,17 +62,7 @@ class DZLPlayerClientDB {
     void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
         if(player) {
-            if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_HOUSE) {
-                Param1 <ref DZLHouseConfig> configParamHouse;
-                if(ctx.Read(configParamHouse) && configParamHouse.param1) {
-                    config.houseConfig = configParamHouse.param1;
-                }
-            } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_HOUSE_EXTENSION) {
-                Param1 <ref DZLHouseExtensions> configParamHouseExtension;
-                if(ctx.Read(configParamHouseExtension) && configParamHouseExtension.param1) {
-                    config.houseExtensions = configParamHouseExtension.param1;
-                }
-            } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BANKING) {
+            if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BANKING) {
                 Param1 <ref DZLBankingConfig> configParamBanking;
                 if(ctx.Read(configParamBanking) && configParamBanking.param1) {
                     config.bankConfig = configParamBanking.param1;
@@ -126,11 +106,6 @@ class DZLPlayerClientDB {
                 Param1 <ref DZLMedicConfig> configParamMedic;
                 if(ctx.Read(configParamMedic) && configParamMedic.param1) {
                     config.medicConfig = configParamMedic.param1;
-                }
-            } else if(rpc_type == DZL_RPC.GET_PLAYER_BUILDING_RESPONSE) {
-                Param1 <ref DZLPlayerHouse> houseParam;
-                if(ctx.Read(houseParam) && houseParam.param1) {
-                    house = houseParam.param1;
                 }
             } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_CRIME) {
                 Param1 <ref DZLCrimeConfig> crimeParam;

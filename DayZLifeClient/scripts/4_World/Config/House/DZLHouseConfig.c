@@ -10,11 +10,8 @@ class DZLHouseConfig {
 
     private ref array<ref DZLJobHouseDefinitionCollection> jobHouseDefinitions = new array<ref DZLJobHouseDefinitionCollection>();
 
-    ref array<ref DZLHouseDefinition> houseConfigs = new array<ref DZLHouseDefinition>();
-
     void DZLHouseConfig(array <string> jobs) {
         if(!Load()) {
-            CreateCivilHouseDefinition();
             CreateJobConfigs(jobs);
 
             Save();
@@ -32,26 +29,6 @@ class DZLHouseConfig {
         }
     }
 
-    DZLHouseDefinition GetHouseDefinitionByBuilding(notnull Building building) {
-        foreach(DZLHouseDefinition definition: houseConfigs) {
-            if(definition.houseType == building.GetType()) {
-                return definition;
-            }
-        }
-
-        return null;
-    }
-
-    bool HasHouseDefinition(string type) {
-        foreach(DZLHouseDefinition definition: houseConfigs) {
-            if(definition.houseType == type) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
     DZLJobHouseDefinition GetJobHouseDefinition(notnull Building building) {
         array<ref DZLJobHouseDefinition> houseJobConfig = new array<ref DZLJobHouseDefinition>();
 
@@ -61,13 +38,6 @@ class DZLHouseConfig {
             if(definition) return definition;
         }
         return null;
-    }
-
-    private void CreateCivilHouseDefinition() {
-        array<string> civTypes = {"Land_Garage_Row_Small", "Land_Garage_Row_Small", "Land_Shed_W6", "Land_Garage_Office", "Land_Factory_Small", "Land_House_1B01_Pub", "Land_House_1W10", "Land_House_1W10_Brown", "Land_House_1W03", "Land_House_1W09_Yellow", "Land_House_1W04", "Land_House_2W01", "Land_House_1W08", "Land_House_1W08_Brown", "Land_House_2B02", "Land_House_2B01", "Land_House_1W07", "Land_House_1W11", "Land_House_1W05", "Land_House_1W05_Yellow", "Land_House_1W01", "Land_House_1W06", "Land_House_2W02", "Land_House_2W03", "Land_House_2W04", "Land_House_2W04_Yellow", "Land_House_2B03"};
-        foreach(string type: civTypes) {
-            houseConfigs.Insert(new DZLHouseDefinition(type));
-        }
     }
 
     private void CreateJobConfigs(array<string> jobs) {

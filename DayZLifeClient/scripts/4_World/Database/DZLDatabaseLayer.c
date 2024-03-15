@@ -1,13 +1,9 @@
 class DZLDatabaseLayer {
     private static ref DZLDatabaseLayer databaseLayer;
 
-    private ref map<string, ref DZLHouse> dzlHouses;
     private ref map<string, ref DZLPlayer> dzlPlayers;
-    private ref map<string, ref DZLPlayerHouse> dzlPlayerHouses;
-    private ref map<string, ref DZLHouseInventory> dzlHouseInventory;
     private ref map<string, ref DZLFraction> dzlFractions;
     private ref DZLPlayerIdentities dzlPlayerIdentities;
-    private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
     private ref map<string, ref DZLCarStorage> storageCars;
     private ref map<string, ref DZLCarStorage> fractionStorageCars;
@@ -22,14 +18,9 @@ class DZLDatabaseLayer {
     private ref DZLDatabase database;
 
     void DZLDatabaseLayer() {
-
-        dzlHouses = new map<string, ref DZLHouse>;
         dzlPlayers = new map<string, ref DZLPlayer>;
-        dzlPlayerHouses = new map<string, ref DZLPlayerHouse>;
-        dzlHouseInventory = new map<string, ref DZLHouseInventory>;
         dzlFractions = new map<string, ref DZLFraction>;
         dzlPlayerIdentities = new DZLPlayerIdentities;
-        dzlLockedHouses = new DZLLockedHouses;
         storageCars = new map<string, ref DZLCarStorage>;
         fractionStorageCars = new map<string, ref DZLCarStorage>;
         bank = new DZLBank;
@@ -60,10 +51,6 @@ class DZLDatabaseLayer {
         return emergencies;
     }
 
-    DZLLockedHouses GetLockedHouses() {
-        return dzlLockedHouses;
-    }
-
     DZLPlayerIdentities GetPlayerIds() {
         return dzlPlayerIdentities;
     }
@@ -85,49 +72,6 @@ class DZLDatabaseLayer {
 
     DZLPlayer GetPlayer(string playerId) {
         return database.GetPlayer(playerId);
-    }
-
-    DZLHouse GetHouse(Building building = null, string fileNameParam = "") {
-        string fileName;
-        if(building) {
-            fileName = DZLHouse.GetFileNameFromBuilding(building);
-        } else {
-            fileName = fileNameParam;
-        }
-
-        DZLHouse house;
-        if(!dzlHouses.Find(fileName, house)) {
-            house = new DZLHouse(building, fileName);
-            dzlHouses.Insert(fileName, house);
-        }
-
-        return house;
-    }
-
-    void RemoveHouse(string fileName) {
-        DZLHouse house;
-        if(dzlHouses.Find(fileName, house)) {
-            dzlHouses.Remove(fileName);
-            DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_HOUSE + fileName);
-        }
-    }
-
-    DZLPlayerHouse GetPlayerHouse(string playerId) {
-        DZLPlayerHouse house;
-        if(!dzlPlayerHouses.Find(playerId, house)) {
-            house = new DZLPlayerHouse(playerId);
-            dzlPlayerHouses.Insert(playerId, house);
-        }
-        return house;
-    }
-
-    DZLHouseInventory GetHouseInventory(string playerId, vector position) {
-        DZLHouseInventory inventory;
-        if(!dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
-            inventory = new DZLHouseInventory(playerId, position);
-            dzlHouseInventory.Insert(playerId + position.ToString(false), inventory);
-        }
-        return inventory;
     }
 
     DZLFraction GetFraction(string playerId) {
@@ -157,23 +101,6 @@ class DZLDatabaseLayer {
             fractionStorageCars.Insert(fractionId, storageCar);
         }
         return storageCar;
-    }
-
-    void RemoveHouseInventory(string playerId, vector position) {
-        DZLHouseInventory inventory;
-        if(inventory && !dzlHouseInventory.Find(playerId + position.ToString(false), inventory)) {
-            inventory.Delete();
-            dzlHouseInventory.Remove(playerId);
-        }
-    }
-
-    void RemovePlayerHouse(string playerId) {
-        GetPlayerHouse(playerId);
-        DZLPlayerHouse house;
-        if(dzlPlayerHouses.Find(playerId, house)) {
-            dzlPlayerHouses.Remove(playerId);
-            DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER + house.fileName);
-        }
     }
 
     void RemoveFraction(string fractionId) {

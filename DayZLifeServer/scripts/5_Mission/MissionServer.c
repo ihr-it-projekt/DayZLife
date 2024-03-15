@@ -21,7 +21,6 @@ modded class MissionServer {
         checkController = new DZLCheckController;
         storageController = new DZLStorageController;
 
-        DZLLockedHouses.OnServerStart();
         paycheckTimer.Run(60, checkController, "Check", null, true);
         storageTimer.Run(60, storageController, "Check", null, true);
         builderManager.Create();

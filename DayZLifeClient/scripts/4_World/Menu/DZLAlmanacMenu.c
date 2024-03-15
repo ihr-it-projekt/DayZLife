@@ -199,7 +199,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
     override bool OnDoubleClick(Widget w, int x, int y, int button) {
         if(w == jobPanelOnlinePlayerList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(jobPanelOnlinePlayerList, jobPanelJobsList, selectedJob);
-        } else if(w == jobPanelOnlinePlayerList) {
+        } else if(w == jobPanelJobsList) {
             DZLDisplayHelper.MoveDZLOnlinePlayerFromListWidgetToListWidget(jobPanelJobsList, jobPanelOnlinePlayerList, DAY_Z_LIFE_JOB_CIVIL);
         }
 
@@ -375,11 +375,11 @@ class DZLAlmanacMenu : DZLBaseMenu {
                     jobPanelJobsList.SetItem(jobPlayerIndex, jobPlayer.rank, jobPlayer, 1);
                 }
 
-                jobPanelRankList.ClearItems();
-                array<ref DZLPaycheck> paychecks = config.jobConfig.paycheck.GetPaycheckByJob(selectedJob);
-                foreach(DZLPaycheck paycheck: paychecks) {
-                    jobPanelRankList.AddItem(paycheck.rank, paycheck, 0);
-                }
+// jobPanelRankList.ClearItems();
+// array<ref DZLPaycheck> paychecks = config.jobConfig.paycheck.GetPaycheckByJob(selectedJob);
+// foreach(DZLPaycheck paycheck: paychecks) {
+// jobPanelRankList.AddItem(paycheck.rank, paycheck, 0);
+// }
             }
         } else if(w == jobPanelSave) {
             if(!config.adminIds.HasAccess(selectedJob, player.GetPlayerId())) return true;

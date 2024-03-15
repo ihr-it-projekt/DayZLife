@@ -1,9 +1,6 @@
 class DZLDatabase {
-    private ref map<string, ref DZLHouse> dzlHouses;
     private ref map<string, ref DZLPlayer> dzlPlayers;
-    private ref map<string, ref DZLPlayerHouse> dzlPlayerHouses;
     private ref DZLPlayerIdentities dzlPlayerIdentities;
-    private ref DZLLockedHouses dzlLockedHouses;
     private ref DZLBank bank;
     private ref DZLEmergencies emergencies;
 

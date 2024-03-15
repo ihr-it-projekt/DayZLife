@@ -10,7 +10,6 @@ class DZLConfig {
     }
 
     ref DZLHouseConfig houseConfig;
-    ref DZLHouseExtensions houseExtensions;
     ref DZLBankingConfig bankConfig;
     ref DZLJobConfig jobConfig;
     ref DZLLicenceConfig licenceConfig;
@@ -29,7 +28,6 @@ class DZLConfig {
     void DZLConfig() {
         if(GetGame().IsServer()) {
             jobConfig = new DZLJobConfig;
-            houseExtensions = new DZLHouseExtensions;
             bankConfig = new DZLBankingConfig;
             licenceConfig = new DZLLicenceConfig;
             traderConfig = new DZLTraderConfig;
@@ -48,33 +46,6 @@ class DZLConfig {
             messageConfig = new DZLMessageConfig;
             tuningConfig = new DZLTuningConfig;
         }
-    }
-
-    ref array<ref DZLHouseDefinition> GetHouseDefinitions() {
-        if(houseConfig && houseConfig.houseConfigs) {
-            return houseConfig.houseConfigs;
-        }
-        return null;
-    }
-
-    ref array<ref DZLHouseExtension> GetExtensions() {
-        if(houseExtensions && houseExtensions.extensions) {
-            return houseExtensions.extensions;
-        }
-        return null;
-    }
-
-    DZLHouseExtension GetHouseExtensionById(string id) {
-        array<ref DZLHouseExtension> extensions = GetExtensions();
-        if(null == extensions) return null;
-
-        foreach(DZLHouseExtension _extension: extensions) {
-            if(_extension.GetId() == id) {
-                return _extension;
-            }
-        }
-
-        return null;
     }
 
     DZLJobSpawnPoints GetJobSpawnPointsByJobId(string jobId) {
