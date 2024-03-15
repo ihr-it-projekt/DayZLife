@@ -33,6 +33,11 @@ class DZLConfig extends DZLBaseEventListener {
             if(ctx.Read(configParamBanking) && configParamBanking.param1) {
                 bankConfig = configParamBanking.param1;
             }
+        } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_HOUSE_CONFIG) {
+            Param1 <ref DZLHouseConfig> configParamHouse;
+            if(ctx.Read(configParamHouse) && configParamHouse.param1) {
+                houseConfig = configParamHouse.param1;
+            }
         } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BASE_BUILDING) {
             Param1 <ref DZLBaseBuildingConfig> configParamBaseBuilding;
             if(ctx.Read(configParamBaseBuilding) && configParamBaseBuilding.param1) {
