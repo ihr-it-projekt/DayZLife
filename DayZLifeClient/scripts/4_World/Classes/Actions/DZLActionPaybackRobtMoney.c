@@ -1,18 +1,4 @@
 class DZLActionPaybackRobtMoney: ActionInteractBase {
-    ref DZLBankingConfig config;
-
-    DZLBankingConfig GetConfig(PlayerBase player) {
-        if(!config) {
-            if(GetGame().IsServer()) {
-                config = DZLConfig.Get().bankConfig;
-            } else {
-                config = player.GetDZLConfig().bankConfig;
-            }
-
-        }
-
-        return config;
-    }
 
     void DZLActionPaybackRobtMoney() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
@@ -52,7 +38,8 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
         PlayerIdentity ident = action_data.m_Player.GetIdentity();
         if(!dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return;
 
-        GetConfig(action_data.m_Player);
+        ref DZLBankingConfig config = DZLConfig.Get().bankConfig;
+
         DZLBank bank = DZLDatabaseLayer.Get().GetBank();
 
         if(!bank.CanUseBank(config.raidCoolDownTimeInSeconds / 10)) {

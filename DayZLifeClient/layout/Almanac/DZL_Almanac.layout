@@ -521,7 +521,7 @@ FrameWidgetClass Almanac {
        }
       }
       PanelWidgetClass admin_Panel {
-       visible 0
+       visible 1
        ignorepointer 1
        position 0 0
        size 1 0.9108
@@ -1039,6 +1039,15 @@ FrameWidgetClass Almanac {
            "text valign" center
           }
          }
+        }
+        ButtonWidgetClass reloadConfig {
+         position 922.55499 689.83801
+         size 330.15399 48
+         hexactpos 1
+         vexactpos 1
+         hexactsize 1
+         vexactsize 1
+         text "#reload_allConfig"
         }
        }
       }

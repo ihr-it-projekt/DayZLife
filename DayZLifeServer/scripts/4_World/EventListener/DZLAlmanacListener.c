@@ -20,6 +20,10 @@ class DZLAlmanacListener {
             SendUpdateListJob(paramJobPlayer.param1, PlayerBase.Cast(target));
         } else if(rpc_type == DZL_RPC.GET_ALL_PLAYERS) {
             SendAllPlayerList(sender);
+        }  else if(rpc_type == DZL_RPC.RELOAD_CONFIG) {
+            if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
+            DZLConfig.Get().Reload();
+            DZLSendMessage(sender, "#config_was_reloaded");
         } else if(rpc_type == DZL_RPC.DELETE_PLAYER) {
             if(!config.adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
             Param1<string> paramDeletePlayer;

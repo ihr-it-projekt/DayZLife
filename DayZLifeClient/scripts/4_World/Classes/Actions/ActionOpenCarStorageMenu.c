@@ -27,7 +27,7 @@ class ActionOpenCarStorageMenu: ActionInteractBase {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsGarage()) return false;
-        if(!player.GetDZLConfig() || !player.GetDZLConfig().carConfig) return false;
+        if(!DZLConfig.Get().carConfig) return false;
 
         return true;
     }

@@ -24,9 +24,8 @@ class DZLActionRaidCar: ActionInteractBase {
         CarScript car = CarScript.Cast(target.GetParent());
         if(!car) return false;
 
-        if(!player.GetDZLConfig() || !player.GetDZLConfig().carConfig) return false;
-
-        config = player.GetDZLConfig().carConfig;
+        config = DZLConfig.Get().carConfig;
+        if(!config) return false;
 
         array<string> raidTools = config.carRaidTools;
 
@@ -59,7 +58,7 @@ class DZLActionRaidCar: ActionInteractBase {
         if(!item) return;
 
         bar.SetRaidItem(item);
-        bar.SetDuration(action_data.m_Player.GetDZLConfig().carConfig.carRaidTimeInSeconds);
+        bar.SetDuration(DZLConfig.Get().carConfig.carRaidTimeInSeconds);
         GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
     }
 };

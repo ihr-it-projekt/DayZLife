@@ -33,6 +33,6 @@ class DZLActionOpenCarMenu: ActionInteractBase {
         if(!car) return false;
         if(GetGame().IsClient() && g_Game.GetUIManager().GetMenu() != NULL) return false;
 
-        return car.IsOwner(player.GetIdentity()) || player.GetDZLConfig().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, player.GetPlayerId());
+        return car.IsOwner(player.GetIdentity()) || DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, player.GetPlayerId());
     }
 }

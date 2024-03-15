@@ -26,7 +26,7 @@ class ActionOpenLicenseMenu: ActionInteractBase {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsLicensePoint()) return false;
 
-        if(!player.GetDZLConfig() || !player.GetDZLConfig().licenceConfig) return false;
+        if(!DZLConfig.Get().licenceConfig) return false;
 
         return true;
     }

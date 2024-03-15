@@ -20,10 +20,7 @@ class DZLActionHarvestItem: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if(player && player.GetDZLConfig()) {
-            config = player.GetDZLConfig().jobConfig;
-        }
-
+        config = DZLConfig.Get().jobConfig;
         if(!config) return false;
 
         vector playerPosition = player.GetPosition();

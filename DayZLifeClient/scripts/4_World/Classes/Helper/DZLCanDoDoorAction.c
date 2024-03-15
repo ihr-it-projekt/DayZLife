@@ -1,24 +1,18 @@
 class DZLCanDoDoorAction {
     static DZLJobHouseDefinition GetJobHouseDefinition(Building building, notnull PlayerBase player) {
-        if(!player.GetDZLConfig()) return null;
-
-        DZLPlayer dzlPlayer = player.GetDZLPlayer();
-        DZLHouseConfig houseConfig = player.GetDZLConfig().houseConfig;
-
+        DZLHouseConfig houseConfig = DZLConfig.Get().houseConfig;
         if(!houseConfig) return null;
 
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
         return houseConfig.GetJobHouseDefinition(building);
     }
 
     static bool canDoByJob(Building building, PlayerBase player, int doorIndex) {
-        if(!player.GetDZLConfig()) return false;
+        DZLHouseConfig houseConfig = DZLConfig.Get().houseConfig;
+        if(!houseConfig) return false;
 
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
-
         string job = dzlPlayer.GetActiveJob();
-
-        DZLHouseConfig houseConfig = player.GetDZLConfig().houseConfig;
-        if(!houseConfig) return false;
 
         DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building);
 

@@ -48,7 +48,7 @@ modded class PlayerBase {
 
     void SetIsSpawned() {
         DZLPlayer _dzlPlayer = GetDZLPlayer();
-        int time = DZLPlayerClientDB.Get().GetDZLConfig().GetJobSpawnPointsByJobId(_dzlPlayer.GetActiveJob()).blockTimeForJobChange;
+        int time = DZLConfig.Get().GetJobSpawnPointsByJobId(_dzlPlayer.GetActiveJob()).blockTimeForJobChange;
 
         resetCanSpawn = new Timer;
         resetCanSpawn.Run(time, this, "ResetSpawned");
@@ -79,7 +79,7 @@ modded class PlayerBase {
     }
 
     int GetWaitTimeForHospital() {
-        DZLConfig config = GetDZLConfig();
+        DZLConfig config = DZLConfig.Get();
         if(medicCount >= config.medicConfig.minMedicCountForHospitalTimer) {
             return config.medicConfig.minTimeBeforeHospital - waitForHospital;
         }
@@ -87,7 +87,7 @@ modded class PlayerBase {
     }
 
     int GetWaitTimeForKill() {
-        return GetDZLConfig().medicConfig.minTimeBeforeKillButton - waitForHospital;
+        return DZLConfig.Get().medicConfig.minTimeBeforeKillButton - waitForHospital;
     }
 
     void ResetSpawned() {
@@ -326,7 +326,7 @@ modded class PlayerBase {
     }
 
     DZLCraftLicence GetLicenceByPosition() {
-        if(!GetDZLPlayer() || !GetDZLConfig() || !GetDZLConfig().licenceConfig) return null;
+        if(!GetDZLPlayer() || !DZLConfig.Get() || !DZLConfig.Get().licenceConfig) return null;
 
         vector playerPosition = GetPosition();
         if(!playerPosition) {
@@ -334,7 +334,7 @@ modded class PlayerBase {
         }
 
         foreach(string licenceId: GetDZLPlayer().licenceIds) {
-            DZLCraftLicence licence = GetDZLConfig().licenceConfig.licenceCollection.FindById(licenceId);
+            DZLCraftLicence licence = DZLConfig.Get().licenceConfig.licenceCollection.FindById(licenceId);
 
             if(!licence) continue;
 
@@ -350,11 +350,11 @@ modded class PlayerBase {
 
     DZLTraderPosition GetTraderByPosition(int distance = 3) {
         vector playerPosition = GetPosition();
-        if(!playerPosition || !GetDZLConfig() || !GetDZLConfig().traderConfig) {
+        if(!playerPosition || !DZLConfig.Get() || !DZLConfig.Get().traderConfig) {
             return null;
         }
 
-        array<ref DZLTraderPosition> positions = GetDZLConfig().traderConfig.positions.positions;
+        array<ref DZLTraderPosition> positions = DZLConfig.Get().traderConfig.positions.positions;
 
         foreach(DZLTraderPosition position: positions) {
             float distanceToPos = vector.Distance(position.position, playerPosition);
@@ -368,11 +368,11 @@ modded class PlayerBase {
 
     DZLTunerPosition GetTunerPositionByPosition(int distance = 3) {
         vector playerPosition = GetPosition();
-        if(!playerPosition || !GetDZLConfig() || !GetDZLConfig().tuningConfig) {
+        if(!playerPosition || !DZLConfig.Get() || !DZLConfig.Get().tuningConfig) {
             return null;
         }
 
-        array<ref DZLTunerPosition> positions = GetDZLConfig().tuningConfig.tuner;
+        array<ref DZLTunerPosition> positions = DZLConfig.Get().tuningConfig.tuner;
 
         foreach(DZLTunerPosition position: positions) {
             float distanceToPos = vector.Distance(position.position, playerPosition);
@@ -465,7 +465,7 @@ modded class PlayerBase {
                 if(g_Game.GetUIManager().GetMenu()) {
                     g_Game.GetUIManager().GetMenu().Close();
                 }
-                DZLConfig config = GetDZLConfig();
+                DZLConfig config = DZLConfig.Get();
                 if(config && config.medicConfig && medicHelpMenuWasShown == false) {
                     GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
                     medicHelpMenuWasShown = true;
@@ -479,13 +479,6 @@ modded class PlayerBase {
             medicHelpMenuWasShown = false;
             ShowHealMenu();
         }
-    }
-
-    DZLConfig GetDZLConfig() {
-        if(GetGame().IsServer()) {
-            return DZLConfig.Get();
-        }
-        return DZLPlayerClientDB.Get().GetDZLConfig();
     }
 
     DZLPlayer GetDZLPlayer() {
@@ -512,16 +505,16 @@ modded class PlayerBase {
     bool CanOpenMessageMenu() {
         if(IsRestrained()) return false;
         if(IsUnconscious()) return false;
-        if(!GetDZLConfig()) return false;
-        if(!GetDZLConfig().messageConfig) return false;
+        if(!DZLConfig.Get()) return false;
+        if(!DZLConfig.Get().messageConfig) return false;
 
-        if(!GetDZLConfig().messageConfig.mustHavePersonalRadio) return true;
+        if(!DZLConfig.Get().messageConfig.mustHavePersonalRadio) return true;
 
         array<EntityAI> radios = GetItemsByTypeFromInventory("PersonalRadio");
 
         if(radios.Count() < 1) return false;
 
-        if(!GetDZLConfig().messageConfig.radioMustHaveBattery) return true;
+        if(!DZLConfig.Get().messageConfig.radioMustHaveBattery) return true;
 
         foreach(EntityAI radio: radios) {
             if(radio.GetInventory()) {

@@ -1,12 +1,9 @@
 modded class CraftTerritoryFlagKit {
     override bool CanDo(ItemBase ingredients[], PlayerBase player) {
-        if(player.GetDZLConfig() && player.GetDZLConfig().baseBuildingConfig) {
-            DZLBaseBuildingConfig config = player.GetDZLConfig().baseBuildingConfig;
+        DZLBaseBuildingConfig config = DZLConfig.Get().baseBuildingConfig;
+        if(!config) return false;
+        if(config.canCraftTerritoryFlagKit) return super.CanDo(ingredients, player);
 
-            if(config.canCraftTerritoryFlagKit) {
-                return super.CanDo(ingredients, player);
-            }
-        }
 
         return false;
     }

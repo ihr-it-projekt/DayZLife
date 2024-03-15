@@ -1,14 +1,6 @@
 class ActionRobShop: ActionInteractBase {
     DZLCrimeConfig config;
 
-    DZLCrimeConfig GetDZLConfig() {
-        if(!config) {
-            config = DZLConfig.Get().crimeConfig;
-        }
-
-        return config;
-    }
-
     void ActionRobShop() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
@@ -25,12 +17,8 @@ class ActionRobShop: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if(GetGame().IsClient()) {
-            if(!player.GetDZLConfig()) return false;
-            config = player.GetDZLConfig().crimeConfig;
-        } else {
-            GetDZLConfig();
-        }
+        config = DZLConfig.Get().crimeConfig;
+        if(!config) return false;
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 

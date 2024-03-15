@@ -1,14 +1,6 @@
 class ActionRobBank: ActionInteractBase {
     ref DZLBankingConfig config;
 
-    DZLBankingConfig GetDZLConfig() {
-        if(!config) {
-            config = DZLConfig.Get().bankConfig;
-        }
-
-        return config;
-    }
-
     void ActionRobBank() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
@@ -25,12 +17,8 @@ class ActionRobBank: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if(GetGame().IsClient()) {
-            if(!player.GetDZLConfig()) return false;
-            config = player.GetDZLConfig().bankConfig;
-        } else {
-            GetDZLConfig();
-        }
+        config = DZLConfig.Get().bankConfig;
+        if(!config) return false;
 
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
 
@@ -96,7 +84,6 @@ class ActionRobBank: ActionInteractBase {
     }
 
     override void OnStartServer(ActionData action_data) {
-        GetDZLConfig();
         PlayerBase player = action_data.m_Player;
 
         if(player) {

@@ -309,3 +309,4 @@ update_successful,"Update successful","Update successful","Aktualisierung erfolg
 manage,Manage,Manage,Verwalten,管理,管理,Управлять,Spravovat,Zarządzaj,Kezel,Amministra,Gestionar,Gérer,Administrar,管理,
 JobName_Rank,"Rank","Rank","Rang","排名","排名","Ранг","Hodnost","Ranga","Rang","Grado","Rango","Rang","Classificação","ランク",
 JobName_list,"Player list","Player list","Spielerliste","玩家列表","玩家列表","Список игроков","Seznam hráčů","Lista graczy","Játékos lista","Elenco giocatori","Lista de jugadores","Liste des joueurs","Lista de jogadores","プレイヤーリスト",
+config_was_reloaded,"Config was reloaded","Config was reloaded","Konfiguration neu geladen","配置已重新加载","配置已重新加載","Конфигурация была перезагружена","Konfigurace byla znovu načtena","Konfiguracja została ponownie załadowana","A konfiguráció újra lett töltve","La configurazione è stata ricaricata","La configuración fue recargada","La configuration a été rechargée","A configuração foi recarregada","設定が再読み込みされました",

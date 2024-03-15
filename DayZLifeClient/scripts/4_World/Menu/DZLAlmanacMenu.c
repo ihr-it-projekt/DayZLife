@@ -59,6 +59,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
     private TextWidget countCop;
     private TextWidget countArmy;
     private ButtonWidget syncButton;
+    private ButtonWidget reloadConfig;
 
     private XComboBoxWidget toggleViewWidget;
 
@@ -141,6 +142,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
         countArmy = creator.GetTextWidget("countArmy");
 
         syncButton = creator.GetButtonWidget("sync_Button");
+        reloadConfig = creator.GetButtonWidget("reloadConfig");
 
         return layoutRoot;
     }
@@ -214,6 +216,8 @@ class DZLAlmanacMenu : DZLBaseMenu {
 
         if(w == jobPanelRankList) {
             DZLDisplayHelper.ChangeRankFromPlayer(jobPanelRankList, jobPanelJobsList);
+        } else if(w == reloadConfig) {
+            GetGame().RPCSingleParam(null, DZL_RPC.RELOAD_CONFIG, null, true);
         } else if(w == jobPanelJobsList) {
             DZLDisplayHelper.LoadDZLOnlinePlayerAndFillRankListWidget(jobPanelJobsList, jobPanelRankList, selectedJob);
         } else if(w == workingZoneList) {
@@ -442,7 +446,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
                 TStringArray licenceIds = selectedAdminPlayer.licenceIds;
 
                 if(licenceIds.Count() > 0) {
-                    array<ref DZLCraftLicence> licences = player.GetDZLConfig().licenceConfig.licenceCollection.collection;
+                    array<ref DZLCraftLicence> licences = DZLConfig.Get().licenceConfig.licenceCollection.collection;
                     foreach(DZLCraftLicence configLicence: licences) {
                         foreach(string licenceId: licenceIds) {
                             if(licenceId == configLicence.GetId()) {

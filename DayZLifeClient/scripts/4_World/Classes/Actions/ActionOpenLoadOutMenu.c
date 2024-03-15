@@ -21,7 +21,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase {
             DZLLoadOutMenu menu = action_data.m_Player.GetLoadOutMenu();
 
             string job = action_data.m_Player.GetDZLPlayer().GetActiveJob();
-            menu.SetCategories(action_data.m_Player.GetDZLConfig().jobConfig.GetLoadOuts(job).loadOutCategories);
+            menu.SetCategories(DZLConfig.Get().jobConfig.GetLoadOuts(job).loadOutCategories);
             GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
         }
     }
@@ -34,7 +34,7 @@ class ActionOpenLoadOutMenu: ActionInteractBase {
 
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
 
-        if(!dzlPlayer || !player.GetDZLConfig() || !player.GetDZLConfig().jobConfig) return false;
+        if(!dzlPlayer || !DZLConfig.Get().jobConfig) return false;
 
         string job = dzlPlayer.GetActiveJob();
         if(job == DAY_Z_LIFE_JOB_CIVIL) return false;
