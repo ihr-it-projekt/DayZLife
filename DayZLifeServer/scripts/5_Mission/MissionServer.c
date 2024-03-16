@@ -22,6 +22,7 @@ modded class MissionServer {
         storageTimer.Run(60, storageController, "Check", null, true);
 
         DZLConfig.Get();
+        DZLBuilderManager.Get().Create();
     }
 
     override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx) {

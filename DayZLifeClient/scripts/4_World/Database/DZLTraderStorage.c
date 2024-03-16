@@ -3,14 +3,9 @@ class DZLTraderStorage {
 
     void Insert(DZLTraderType item) {
         storage.Insert(new DZLTraderTypeStorage(item));
-        Print(storage);
-        Print(storage.Count());
-
     }
 
     ref array<ref DZLTraderTypeStorage> GetStorageItems() {
-        Print(storage);
-        Print(storage.Count());
         return storage;
     }
 
