@@ -17,16 +17,15 @@ class DZLActionOpenTuningMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
-            DZLTuningMenu menu = action_data.m_Player.GetTuningMenu();
-            DZLTunerPosition tunerPosition = action_data.m_Player.GetTunerPositionByPosition();
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
+        DZLTuningMenu menu = action_data.m_Player.GetTuningMenu();
+        DZLTunerPosition tunerPosition = action_data.m_Player.GetTunerPositionByPosition();
 
-            if(!tunerPosition) return;
+        if(!tunerPosition) return;
 
-            menu.SetPosition(tunerPosition);
+        menu.SetPosition(tunerPosition);
 
-            GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
-        }
+        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {

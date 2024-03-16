@@ -1,5 +1,5 @@
-class ActionOpenTraderMenu: ActionInteractBase {
-    void ActionOpenTraderMenu() {
+class DZLActionOpenTraderMenu: ActionInteractBase {
+    void DZLActionOpenTraderMenu() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
@@ -26,23 +26,15 @@ class ActionOpenTraderMenu: ActionInteractBase {
             return;
         }
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
-            GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(position), NULL);
-        }
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
+
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_TRADER, new Param1<PlayerBase>(action_data.m_Player), true);
+        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(position), NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsTrader()) return false;
-
-        DZLDate currentDate = new DZLDate();
-
-        if(!DZLConfig.Get().traderConfig && currentDate.inSeconds - player.timeAskForTraderConfig > 5) {
-            player.timeAskForTraderConfig = currentDate.inSeconds;
-            GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_TRADER, new Param1<PlayerBase>(player), true);
-            GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
-            return false;
-        }
 
         return true;
     }

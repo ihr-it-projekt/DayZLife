@@ -1,14 +1,11 @@
 modded class ActionDetach {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if(target) {
-            CarScript carScript = CarScript.Cast(target.GetParent());
-            if(carScript && carScript.HasPlayerAccess(player)) {
-                return super.ActionCondition(player, target, item);
-            } else if(carScript) {
-                return false;
-            }
-        }
+        if(!super.ActionCondition(player, target, item)) return false;
+        if(!target) return false;
 
-        return super.ActionCondition(player, target, item);
+        CarScript carScript = CarScript.Cast(target.GetParent());
+        if(carScript) return carScript.HasPlayerAccess(player);
+
+        return true;
     }
 };

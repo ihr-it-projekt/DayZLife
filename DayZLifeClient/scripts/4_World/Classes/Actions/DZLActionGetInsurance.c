@@ -1,5 +1,5 @@
-class ActionGetInsurance: ActionInteractBase {
-    void ActionGetOwnerName() {
+class DZLActionGetInsurance: ActionInteractBase {
+    void DZLActionGetInsurance() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ERECT | DayZPlayerConstants.STANCEMASK_CROUCH;
         m_HUDCursorIcon = CursorIcons.CloseHood;
@@ -16,14 +16,11 @@ class ActionGetInsurance: ActionInteractBase {
 
     override void OnStartClient(ActionData action_data) {
         CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
-        if(car) {
-            string hasInsurance = "#no";
+        if(!car) return;
 
-            if(car.HasInsurance()) {
-                hasInsurance = "#yes";
-            }
+        string hasInsurance = "#no";
+        if(car.HasInsurance()) hasInsurance = "#yes";
 
-            action_data.m_Player.DisplayMessage("#has_insurance: " + hasInsurance);
-        }
+        action_data.m_Player.DisplayMessage("#has_insurance: " + hasInsurance);
     }
 };

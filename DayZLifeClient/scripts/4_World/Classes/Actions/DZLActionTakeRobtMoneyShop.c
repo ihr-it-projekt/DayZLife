@@ -1,7 +1,7 @@
-class ActionTakeRobtMoneyShop: ActionInteractBase {
+class DZLActionTakeRobtMoneyShop: ActionInteractBase {
     ref DZLCrimeConfig config;
 
-    void ActionTakeRobtMoneyBank() {
+    void DZLActionTakeRobtMoneyShop() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;

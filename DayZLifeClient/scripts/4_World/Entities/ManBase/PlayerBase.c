@@ -34,9 +34,6 @@ modded class PlayerBase {
     int waitForHospital = 0;
     int medicCount = 0;
 
-    int timeAskForTraderConfig = 0;
-    int timeAskForBankingConfig = 0;
-    bool hasBankingConfig = false;
     float deltaTimeLastUpdate = 0;
 
     private string playerUID;
@@ -114,12 +111,12 @@ modded class PlayerBase {
     override void SetActions(out TInputActionMap InputActionMap) {
         super.SetActions(InputActionMap);
 
-        AddAction(ActionRobMoney, InputActionMap);
-        AddAction(ActionRobMoneyFromDead, InputActionMap);
+        AddAction(DZLActionRobMoney, InputActionMap);
+        AddAction(DZLActionRobMoneyFromDead, InputActionMap);
         AddAction(DZLActionHarvestItem, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
-        AddAction(ActionOpenArrestMenu, InputActionMap);
-        AddAction(ActionOpenTicketMenu, InputActionMap);
+        AddAction(DZLActionOpenArrestMenu, InputActionMap);
+        AddAction(DZLActionOpenTicketMenu, InputActionMap);
         AddAction(DZLActionGiveNumber, InputActionMap);
     }
 

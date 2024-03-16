@@ -7,9 +7,9 @@ class DZLBankActionObjectBlue: DZLBaseActionObject {
         super.SetActions();
 
         AddAction(DZLActionOpenBankingMenu);
-        AddAction(ActionRobBank);
+        AddAction(DZLActionRobBank);
         AddAction(DZLActionPaybackRobtMoney);
-        AddAction(ActionStopRobBank);
-        AddAction(ActionTakeRobtMoneyBank);
+        AddAction(DZLActionStopRobBank);
+        AddAction(DZLActionTakeRobtMoneyBank);
     }
 }

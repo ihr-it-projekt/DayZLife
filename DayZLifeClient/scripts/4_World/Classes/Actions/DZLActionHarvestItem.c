@@ -21,32 +21,29 @@ class DZLActionHarvestItem: ActionInteractBase {
 
         vector playerPosition = player.GetPosition();
         DZLWorkZone zone = config.FindZone(playerPosition);
-        if(zone) {
-            m_CommandUID = zone.m_CommandUID;
-            EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
+        if(!zone) return false;
+        m_CommandUID = zone.m_CommandUID;
+        EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
-            if(item_in_hands_source) {
-                string handItemType = item_in_hands_source.GetType();
-                handItemType.ToLower();
-            }
+        if(item_in_hands_source) {
+            string handItemType = item_in_hands_source.GetType();
+            handItemType.ToLower();
+        }
 
-            foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
-                if(0 == relation.itemsThatNeededForHarvest.Count()) return true;
+        foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
+            if(0 == relation.itemsThatNeededForHarvest.Count()) return true;
+            if(!handItemType) return false;
 
-                if(!handItemType) return false;
-
-                foreach(string itemToHarvest: relation.itemsThatNeededForHarvest) {
-                    itemToHarvest.ToLower();
-                    if(handItemType == itemToHarvest) {
-                        if(GetGame().IsServer()) {
-                            return 0 < item_in_hands_source.GetHealth();
-                        }
-                        return true;
+            foreach(string itemToHarvest: relation.itemsThatNeededForHarvest) {
+                itemToHarvest.ToLower();
+                if(handItemType == itemToHarvest) {
+                    if(GetGame().IsServer()) {
+                        return 0 < item_in_hands_source.GetHealth();
                     }
+                    return true;
                 }
             }
         }
-
         return false;
     }
 

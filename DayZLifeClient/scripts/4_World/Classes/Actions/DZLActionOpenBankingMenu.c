@@ -17,9 +17,13 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
-            GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
-        }
+        if(g_Game.GetUIManager().GetMenu() == NULL) return;
+
+        action_data.m_Player.RequestUpdateDZLPlayer();
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_BANKING, new Param1<PlayerBase>(action_data.m_Player), true);
+
+        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
+
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
@@ -29,15 +33,8 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsBank()) return false;
 
-        DZLDate currentDate = new DZLDate();
-        player.RequestUpdateDZLPlayer();
-
-        if(!player.hasBankingConfig && currentDate.inSeconds - player.timeAskForBankingConfig > 5) {
-            player.timeAskForBankingConfig = currentDate.inSeconds;
-            GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_BANKING, new Param1<PlayerBase>(player), true);
-            return false;
-        }
-
         return true;
     }
+
+
 }

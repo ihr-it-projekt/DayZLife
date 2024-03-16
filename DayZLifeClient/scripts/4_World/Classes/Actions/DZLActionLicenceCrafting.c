@@ -1,5 +1,5 @@
-class ActionLicenceCrafting: ActionInteractBase {
-    void ActionLicenceCrafting() {
+class DZLActionLicenceCrafting: ActionInteractBase {
+    void DZLActionLicenceCrafting() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
@@ -17,18 +17,12 @@ class ActionLicenceCrafting: ActionInteractBase {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         if(!target) return false;
         if(!target.GetObject()) return false;
+
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsLicenseActionPoint()) return false;
 
-        if(GetGame().IsServer()) {
-            DZLCraftLicence licence = player.GetLicenceByPosition();
-            if(!licence) return false;
-            string message = player.CanUseLicence(licence);
-            if(!!message) {
-                DZLSendMessage(player.GetIdentity(), message);
-                return false;
-            }
-        }
+        DZLCraftLicence licence = player.GetLicenceByPosition();
+        if(!licence) return false;
 
         return true;
     }

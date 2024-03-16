@@ -1,5 +1,5 @@
-class ActionOpenLicenseMenu: ActionInteractBase {
-    void ActionOpenLicenseMenu() {
+class DZLActionOpenCarStorageMenu: ActionInteractBase {
+    void DZLActionOpenCarStorageMenu() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONMOD_INTERACTONCE;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_ALL;
         m_HUDCursorIcon = CursorIcons.None;
@@ -11,22 +11,22 @@ class ActionOpenLicenseMenu: ActionInteractBase {
     }
 
     override string GetText() {
-        return "#open_licence_menu";
+        return "#open_car_garage_menu";
     }
 
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
-            GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceMenu(), NULL);
-        }
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
+        PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
+        player.RequestUpdateDZLPlayer();
+        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetCarStorageMenu(), NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
-        if(!objectTarget || !objectTarget.IsLicensePoint()) return false;
-
-        if(!DZLConfig.Get().licenceConfig) return false;
+        if(!objectTarget || !objectTarget.IsGarage()) return false;
+        if(!DZLConfig.Get().carConfig) return false;
 
         return true;
     }

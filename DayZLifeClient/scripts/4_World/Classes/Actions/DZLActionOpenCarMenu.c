@@ -15,16 +15,14 @@ class DZLActionOpenCarMenu: ActionInteractBase {
     }
 
     override void OnStartClient(ActionData action_data) {
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
-            PlayerBase player = action_data.m_Player;
-            CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
+        PlayerBase player = action_data.m_Player;
+        CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
 
 
-            if(car) {
-                player.RequestUpdateDZLPlayer();
-                GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
-            }
-        }
+        if(!car) return;
+        player.RequestUpdateDZLPlayer();
+        GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {

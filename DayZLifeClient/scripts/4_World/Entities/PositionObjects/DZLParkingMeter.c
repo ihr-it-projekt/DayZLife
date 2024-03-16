@@ -6,6 +6,6 @@ class DZLParkingMeter: DZLBaseActionObject {
     override void SetActions() {
         super.SetActions();
 
-        AddAction(ActionOpenCarStorageMenu);
+        AddAction(DZLActionOpenCarStorageMenu);
     }
 }

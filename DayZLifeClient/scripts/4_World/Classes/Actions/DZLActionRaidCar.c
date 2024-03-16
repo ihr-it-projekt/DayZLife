@@ -23,25 +23,17 @@ class DZLActionRaidCar: ActionInteractBase {
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         CarScript car = CarScript.Cast(target.GetParent());
         if(!car) return false;
+        if(!car.CanRaidDoor(player)) return false;
+
+        item = player.GetItemInHands();
+        if(!item) return false;
+        if(item.IsRuined()) return false;
 
         config = DZLConfig.Get().carConfig;
         if(!config) return false;
 
-        array<string> raidTools = config.carRaidTools;
-
-        item = player.GetItemInHands();
-
-        if(!item) return false;
-
-        foreach(string itemType: raidTools) {
-            if(item.GetType() == itemType) {
-                if(GetGame().IsServer() && item.GetHealth() < 50) {
-                    DZLSendMessage(player.GetIdentity(), "#raid_item_has_not_enough_helth");
-
-                    return false;
-                }
-                return car.CanRaidDoor(player);
-            }
+        foreach(string itemType: config.carRaidTools) {
+            if(item.GetType() == itemType) return true;
         }
 
         return false;
@@ -50,15 +42,13 @@ class DZLActionRaidCar: ActionInteractBase {
     override void OnEndClient(ActionData action_data) {
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
         CarScript car = CarScript.Cast(action_data.m_Target.GetParent());
-        DZLCarRaidProgressBar bar = action_data.m_Player.GetRaidCarProgressBar();
-
-        bar.SetCar(car);
-
         EntityAI item = action_data.m_Player.GetItemInHands();
-        if(!item) return;
 
+        DZLCarRaidProgressBar bar = action_data.m_Player.GetRaidCarProgressBar();
+        bar.SetCar(car);
         bar.SetRaidItem(item);
         bar.SetDuration(DZLConfig.Get().carConfig.carRaidTimeInSeconds);
+
         GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
     }
 };

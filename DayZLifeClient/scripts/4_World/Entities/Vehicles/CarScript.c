@@ -67,8 +67,8 @@ modded class CarScript {
         super.SetActions();
 
         AddAction(DZLActionOpenCarMenu);
-        AddAction(ActionGetOwnerName);
-        AddAction(ActionGetInsurance);
+        AddAction(DZLActionGetOwnerName);
+        AddAction(DZLActionGetInsurance);
         AddAction(DZLActionRaidCar);
     }
 
