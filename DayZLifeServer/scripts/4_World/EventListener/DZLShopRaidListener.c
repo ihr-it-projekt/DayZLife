@@ -7,11 +7,8 @@ class DZLShopRaidListener: DZLBaseEventListener {
     private bool policeMessageWasSend = false;
     private ref DZLDate lastRaidTime;
 
-    void DZLShopRaidListener() {
-        lastRaidTime = DZLDatabaseLayer.Get().GetCrimeData().GetLastRaidTime();
-    }
-
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        lastRaidTime = DZLDatabaseLayer.Get().GetCrimeData().GetLastRaidTime();
         if(rpc_type == DZL_RPC.START_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerStart = PlayerBase.Cast(target);
             if(playerStart) {
@@ -147,20 +144,19 @@ class DZLShopRaidListener: DZLBaseEventListener {
 
     private int GetRaidCoolDownTime() {
         DZLDate currentDate = new DZLDate();
+        lastRaidTime = DZLDatabaseLayer.Get().GetCrimeData().GetLastRaidTime();
         int wait = 0;
-        if(lastRaidTime) {
-            DZLCrimeConfig config = DZLConfig.Get().crimeConfig;
-            wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
+        if(!lastRaidTime) return 0;
 
-            if(wait > 0) return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);
-        }
+        DZLCrimeConfig config = DZLConfig.Get().crimeConfig;
+        wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
 
-        if(lastRaidTime) {
-            lastRaidTime = null;
+        if(wait < 0) {
             DZLDatabaseLayer.Get().GetCrimeData().SetLastRaidTime(null);
+            return 0;
         }
 
-        return 0;
+        return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);;
     }
 
     private bool IsBankRelevantAndOkay() {

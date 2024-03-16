@@ -1,34 +1,21 @@
 class DZLDatabaseLayer {
     private static ref DZLDatabaseLayer databaseLayer;
 
-    private ref map<string, ref DZLPlayer> dzlPlayers;
-    private ref map<string, ref DZLFraction> dzlFractions;
-    private ref DZLPlayerIdentities dzlPlayerIdentities;
-    private ref DZLBank bank;
-    private ref map<string, ref DZLCarStorage> storageCars;
-    private ref map<string, ref DZLCarStorage> fractionStorageCars;
-    private ref DZLEmergencies emergencies;
-    private ref DZLCrimeData crimeData;
-    private ref DZLTraderStorage traderStorage;
+    private ref map<string, ref DZLPlayer> dzlPlayers = new map<string, ref DZLPlayer>;
+    private ref map<string, ref DZLFraction> dzlFractions = new map<string, ref DZLFraction>;
+    private ref DZLPlayerIdentities dzlPlayerIdentities = new DZLPlayerIdentities;
+    private ref DZLBank bank = new DZLBank;
+    private ref map<string, ref DZLCarStorage> storageCars = new map<string, ref DZLCarStorage>;
+    private ref map<string, ref DZLCarStorage> fractionStorageCars = new map<string, ref DZLCarStorage>;
+    private ref DZLEmergencies emergencies = new DZLEmergencies;
+    private ref DZLCrimeData crimeData = new DZLCrimeData;
+    private ref DZLTraderStorage traderStorage = new DZLTraderStorage;
+    private ref DZLDatabase database = new DZLDatabase;
 
     private int copCount = 0;
     private int civCount = 0;
     private int medicCount = 0;
     private int armyCount = 0;
-    private ref DZLDatabase database;
-
-    void DZLDatabaseLayer() {
-        dzlPlayers = new map<string, ref DZLPlayer>;
-        dzlFractions = new map<string, ref DZLFraction>;
-        dzlPlayerIdentities = new DZLPlayerIdentities;
-        storageCars = new map<string, ref DZLCarStorage>;
-        fractionStorageCars = new map<string, ref DZLCarStorage>;
-        bank = new DZLBank;
-        emergencies = new DZLEmergencies;
-        crimeData = new DZLCrimeData;
-        traderStorage = new DZLTraderStorage;
-        database = new DZLDatabase;
-    }
 
     static DZLDatabaseLayer Get() {
         if(!databaseLayer) {
@@ -37,6 +24,19 @@ class DZLDatabaseLayer {
         }
 
         return databaseLayer;
+    }
+
+    static void Reload() {
+        databaseLayer = new DZLDatabaseLayer;
+        databaseLayer.InitDB();
+
+        array<Man> allPlayers = new array<Man>;
+        GetGame().GetPlayers(allPlayers);
+        foreach(Man playerMan: allPlayers) {
+            PlayerBase player = PlayerBase.Cast(playerMan);
+            if(!player) continue;
+            player.Reload();
+        }
     }
 
     void InitDB() {

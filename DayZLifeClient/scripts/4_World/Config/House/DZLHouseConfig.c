@@ -24,6 +24,11 @@ class DZLHouseConfig {
                 definition.MigrateToVersion6(DAY_Z_LIFE_JOB_ARMY, armyHouseConfigs);
             }
 
+            copHouseConfigs = {};
+            medicHouseConfigs = {};
+            armyHouseConfigs = {};
+
+
             version = "6";
             Save();
         }

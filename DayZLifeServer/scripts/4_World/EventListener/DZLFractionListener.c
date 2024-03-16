@@ -1,11 +1,8 @@
 class DZLFractionListener: DZLBaseEventListener {
     DZLDatabaseLayer database;
 
-    void DZLFractionListener() {
-        database = DZLDatabaseLayer.Get();
-    }
-
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        database = DZLDatabaseLayer.Get();;
         DZLFraction fraction;
         DZLPlayer dzlPlayer;
         if(rpc_type == DZL_RPC.GET_FRACTION) {

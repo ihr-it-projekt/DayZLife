@@ -288,25 +288,15 @@ class DZLTraderCategoryCollection {
                 }
             }
 
-            if(version == "") {
-                version = "1";
-                mustSave = true;
-            }
-
-            if(version == "1") {
-                version = "2";
-                mustSave = true;
-            }
-
             if(mustSave) {
                 Save();
             }
         }
-
+        DZLTraderStorage storage = DZLDatabaseLayer.Get().GetTraderStorage();
         foreach(DZLTraderCategory cat: categories) {
             foreach(DZLTraderType item: cat.items) {
                 if(item.isStorageItem) {
-                    DZLDatabaseLayer.Get().GetTraderStorage().Insert(item);
+                    storage.Insert(item);
                 }
             }
         }

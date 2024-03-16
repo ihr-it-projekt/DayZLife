@@ -16,61 +16,50 @@ class DZLTraderListener: DZLBaseEventListener {
                 DZLBankingConfig bankConfig = DZLConfig.Get().bankConfig;
                 foreach(string categoryName: paramTrade.param3.categoryNames) {
                     DZLTraderCategory category = config.categories.GetCatByName(categoryName);
-
                     if(!category) continue;
 
                     foreach(DZLTraderType type: category.items) {
-                        bool mustSave = false;
+                        if(itemsToBuyParam.Count() <= 0) continue;
                         DZLTraderTypeStorage storage = DZLDatabaseLayer.Get().GetTraderStorage().GetCurrentStorageByName(type.type);
-                        if(itemsToBuyParam.Count() > 0) {
-                            foreach(string traderType: itemsToBuyParam) {
-                                if(traderType == type.GetId()) {
-                                    typesToBuy.Insert(type);
-                                    sum += type.CalculateDynamicBuyPrice(storage);
-                                    if(storage) storage.StorageDown();
-                                    mustSave = true;
+                        foreach(string traderType: itemsToBuyParam) {
+                            if(traderType != type.GetId()) continue;
+                            if(storage) {
+                                if(storage.IsStorageBelowZero()) {
+                                    DZLSendMessage(sender, "#you_buy_too_much");
+                                    break;
                                 }
+                                storage.StorageDown();
+                                storage.Save();
                             }
+
+                            typesToBuy.Insert(type);
+                            sum += type.CalculateDynamicBuyPrice(storage);
                         }
-                        if(itemsToSell.Count() > 0) {
-                            foreach(EntityAI item: itemsToSell) {
-                                CarScript carsScript = CarScript.Cast(item);
+                        if(itemsToSell.Count() <= 0) continue;
+                        foreach(EntityAI item: itemsToSell) {
+                            CarScript carsScript = CarScript.Cast(item);
 
-                                if(carsScript && carsScript.ownerId != sender.GetId()) {
-                                    continue;
+                            if(carsScript && carsScript.ownerId != sender.GetId()) continue;
+                            if(!item || !type) continue;
+                            if(item.GetType() != type.type) continue;
+
+                            if(storage) {
+                                if(storage.IsStorageOverFilled()) {
+                                    DZLSendMessage(sender, "#you_sell_too_much");
+                                    break;
                                 }
-
-                                if(!item || !type) {
-                                    continue;
-                                }
-
-                                if(item.GetType() == type.type) {
-                                    float itemPrice = type.CalculateDynamicSellPrice(storage, item);
-                                    itemPrice = DZLTraderHelper.GetQuantityPrice(itemPrice, item);
-
-                                    float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
-
-                                    sum -= Math.Round(itemPrice - itemTax);
-                                    taxSum += Math.Round(itemTax);
-
-                                    countSellItems++;
-                                    itemsToSellPrice.Insert(type.sellPrice);
-                                    if(storage) storage.StorageUp(DZLTraderHelper.GetQuantity(item));
-                                    mustSave = true;
-                                }
+                                storage.StorageUp(DZLTraderHelper.GetQuantity(item));
+                                storage.Save();
                             }
-                        }
+                            itemsToSellPrice.Insert(type.sellPrice);
+                            float itemPrice = type.CalculateDynamicSellPrice(storage, item);
+                            itemPrice = DZLTraderHelper.GetQuantityPrice(itemPrice, item);
 
-                        if(storage && storage.IsStorageBelowZero()) {
-                            DZLSendMessage(sender, "#you_buy_too_much");
-                            return;
+                            float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
+                            countSellItems++;
+                            sum -= Math.Round(itemPrice - itemTax);
+                            taxSum += Math.Round(itemTax);
                         }
-                        if(storage && storage.IsStorageOverFilled()) {
-                            DZLSendMessage(sender, "#you_sell_too_much");
-                            return;
-                        }
-
-                        if(mustSave && storage) storage.Save();
                     }
                 }
 
@@ -98,19 +87,14 @@ class DZLTraderListener: DZLBaseEventListener {
 
                             int tmpIndex = itemsToSell.Count() - 1;
 
-                            if(tmpIndex == index) {
-                                itemsToSell.Remove(index);
-                            }
+                            if(tmpIndex == index) itemsToSell.Remove(index);
 
                             CarScript car = CarScript.Cast(itemSell);
-                            if(car) {
-                                DZLInsuranceManager.Get().RemoveCar(car);
-                            }
+                            if(car) DZLInsuranceManager.Get().RemoveCar(car);
 
                             index = itemsToSell.Count() - 1;
-                            if(index == -1) {
-                                break;
-                            }
+                            if(index == -1) break;
+
                             itemSell = itemsToSell.Get(index);
                         }
                     }
@@ -130,7 +114,6 @@ class DZLTraderListener: DZLBaseEventListener {
             GetGame().RPCSingleParam(target, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE, new Param1<ref array<ref DZLTraderTypeStorage>>(DZLDatabaseLayer.Get().GetTraderStorage().GetStorageItems()), true, sender);
         }
     }
-
 
     private bool Add(PlayerBase player, DZLTraderType type, DZLTraderPosition position) {
         EntityAI item;
@@ -155,14 +138,11 @@ class DZLTraderListener: DZLBaseEventListener {
                 ItemBase itemBase = ItemBase.Cast(item);
                 itemBase.SetQuantity(1);
             }
-
         }
 
-        if(item) {
+        if(item && item.GetInventory()) {
             foreach(string attachment: type.attachments) {
-                if(item.GetInventory()) {
-                    item.GetInventory().CreateAttachment(attachment);
-                }
+                item.GetInventory().CreateAttachment(attachment);
             }
         }
 
@@ -180,7 +160,6 @@ class DZLTraderListener: DZLBaseEventListener {
             car.Fill(CarFluid.USER4, car.GetFluidCapacity(CarFluid.USER4));
 
             CarScript _car = CarScript.Cast(car);
-
             if(_car) {
                 _car.OwnCar(player.GetIdentity(), "", "");
             }

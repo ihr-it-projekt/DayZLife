@@ -18,6 +18,7 @@ class DZLCanDoDoorAction {
 
         return definition && job == definition.jobId;
     }
+
     static bool IsJobDoor(Building building) {
         DZLHouseConfig houseConfig = DZLConfig.Get().houseConfig;
         if(!houseConfig) return false;

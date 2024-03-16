@@ -6,7 +6,7 @@ class DZLTraderTypeStorage {
     private int reducePerTick;
     private int tickLengthInMinutes;
     private int maxStorage;
-    private bool mustSave = false;
+    [NonSerialized()]private bool mustSave = false;
 
     void DZLTraderTypeStorage(DZLTraderType _type) {
         this.type = _type.type;
@@ -53,6 +53,7 @@ class DZLTraderTypeStorage {
 
     void StorageUp(float downValue) {
         currentStorage = currentStorage + downValue;
+        mustSave = true;
     }
 
     float getStorage() {
@@ -71,6 +72,7 @@ class DZLTraderTypeStorage {
 
     void ResetTick() {
         lastTick = 0;
+        mustSave = true;
     }
 
     void ReduceTickAmount() {

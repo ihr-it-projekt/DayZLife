@@ -9,6 +9,7 @@ modded class DZLConfig {
     }
 
     static void Reload() {
+        DZLDatabaseLayer.Reload();
         config = new DZLConfig;
         config.UpdateConfig(null);
         DZLBuilderManager.Get().Reload();

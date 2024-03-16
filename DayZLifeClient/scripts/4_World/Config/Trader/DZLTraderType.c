@@ -1,6 +1,6 @@
 class DZLTraderType: DZLIdModel {
     string type;
-    string displayName = "";
+    [NonSerialized()]string displayName = "";
     int sellPrice;
     int buyPrice;
     ref array<string> attachments;

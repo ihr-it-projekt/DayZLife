@@ -12,7 +12,6 @@ class DZLJobHouseDefinitionCollection {
             definition.jobId = jobId;
             return definition;
         }
-
         return null;
     }
 
