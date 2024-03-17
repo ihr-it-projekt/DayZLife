@@ -23,7 +23,7 @@ modded class DZLBank {
         Save();
     }
 
-    override void StartRaid(vector position, int _countDownRaid) {
+    void StartRaid(vector position, int _countDownRaid) {
         if(!raidRuns) {
             raidRuns = true;
             raidPosition = position.ToString(false);
@@ -33,7 +33,7 @@ modded class DZLBank {
         }
     }
 
-    override void StopRaid() {
+    void StopRaid() {
         DZLSendMessage(null, "#bank_rob_was_canceled");
         raidRuns = false;
         raidPosition = "0 0 0";
@@ -55,7 +55,7 @@ modded class DZLBank {
         }
     }
 
-    override int PlayerRaidBank(DZLPlayer player, int percentage) {
+    int PlayerRaidBank(DZLPlayer player, int percentage) {
         lastRaidMoney = Math.Round(taxSum * percentage / 100);
         player.AddMoneyToPlayer(lastRaidMoney);
         taxSum -= lastRaidMoney;
@@ -65,7 +65,7 @@ modded class DZLBank {
         return lastRaidMoney;
     }
 
-    override int PaybackRobtMoney(DZLPlayer player) {
+    int PaybackRobtMoney(DZLPlayer player) {
         player.AddMoneyToPlayer(lastRaidMoney * -1);
         taxSum += lastRaidMoney;
         int moneyBack = lastRaidMoney;
@@ -76,7 +76,7 @@ modded class DZLBank {
         return moneyBack;
     }
 
-    override bool CanUseBank(int raidCoolDownTimeInSeconds) {
+    bool CanUseBank(int raidCoolDownTimeInSeconds) {
         DZLDate currentDate = new DZLDate();
 
         if(lastRaidTime && (currentDate.inSeconds - lastRaidTime.inSeconds < raidCoolDownTimeInSeconds)) return false;

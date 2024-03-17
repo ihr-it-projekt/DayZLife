@@ -19,7 +19,7 @@ class DZLActionGetInsurance: ActionInteractBase {
         if(!car) return;
 
         string hasInsurance = "#no";
-        if(car.HasInsurance()) hasInsurance = "#yes";
+        if(car.hasInsurance) hasInsurance = "#yes";
 
         action_data.m_Player.DisplayMessage("#has_insurance: " + hasInsurance);
     }

@@ -9,7 +9,6 @@ modded class MissionGameplay {
     private bool holdSix = false;
 
     private ref DZLPlayerEventListener playerEventListener;
-    private ref DZLCarEventListener carEventListener;
     private ref DZLMessageDB messageDB;
 
     PlayerBase dzlPlayerBase;
@@ -17,7 +16,6 @@ modded class MissionGameplay {
     override void OnInit() {
         super.OnInit();
         playerEventListener = new DZLPlayerEventListener;
-        carEventListener = new DZLCarEventListener;
         messageDB = new DZLMessageDB;
         DZLPlayerClientDB.Get();
     }

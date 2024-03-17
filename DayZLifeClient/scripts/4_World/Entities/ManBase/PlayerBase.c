@@ -478,12 +478,6 @@ modded class PlayerBase {
         }
     }
 
-    void Reload() {
-        if(!GetGame().IsServer()) return;
-        dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
-        if(dzlPlayer) dzlPlayer.player = this;
-    }
-
     DZLPlayer GetDZLPlayer() {
         if(dzlPlayer) return dzlPlayer;
 
@@ -494,9 +488,6 @@ modded class PlayerBase {
     }
 
     DZLBank GetBank() {
-        if(GetGame().IsServer()) {
-            return DZLDatabaseLayer.Get().GetBank();
-        }
         return DZLPlayerClientDB.Get().GetBank();
     }
 

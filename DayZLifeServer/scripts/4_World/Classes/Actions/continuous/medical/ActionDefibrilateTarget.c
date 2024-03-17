@@ -1,5 +1,14 @@
 modded class ActionDefibrilateTarget {
 
+    override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
+        if(!super.ActionCondition(player, target, item)) return false;
+
+        DZLEmergencies emergencies = DZLDatabaseLayer.Get().GetEmergencies();
+        PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
+
+        return emergencies.HasEmergency(targetPlayer.GetPlayerId()));
+    }
+
     override void OnFinishProgressServer(ActionData action_data) {
         super.OnFinishProgressServer(action_data);
         DZLEmergencies emergencies = DZLDatabaseLayer.Get().GetEmergencies();

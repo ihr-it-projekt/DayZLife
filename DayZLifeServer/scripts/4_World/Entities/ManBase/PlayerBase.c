@@ -13,4 +13,14 @@ modded class PlayerBase {
         super.OnStoreSave(ctx);
         dzlPlayer.Save();
     }
+
+    override DZLBank GetBank() {
+        return DZLDatabaseLayer.Get().GetBank();
+    }
+
+    void Reload() {
+        if(!GetGame().IsServer()) return;
+        dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
+        if(dzlPlayer) dzlPlayer.player = this;
+    }
 }

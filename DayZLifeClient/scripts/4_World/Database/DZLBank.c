@@ -36,9 +36,4 @@ class DZLBank: DZLFileSerializer {
         return lastRaidMoney;
     }
 
-    void StartRaid(vector position, int _countDownRaid) {};
-    void StopRaid() {};
-    int PlayerRaidBank(DZLPlayer player, int percentage) {};
-    bool CanUseBank(int raidCoolDownTimeInSeconds) {};
-    int PaybackRobtMoney(DZLPlayer player) {};
 }

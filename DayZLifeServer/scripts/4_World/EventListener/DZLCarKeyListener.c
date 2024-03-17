@@ -24,8 +24,6 @@ class DZLCarKeyListener: DZLBaseEventListener {
         } else if(rpc_type == DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL) {
             array<ref DZLOnlinePlayer> players = DZLDatabaseLayer.Get().GetPlayerIds().GetPlayerCollection(new array<string>);
             GetGame().RPCSingleParam(null, DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(players), true, sender);
-        } else if(rpc_type == DZL_RPC.UPDATE_CAR_FROM_PLAYER_SIDE) {
-            CarScript.Cast(target).SynchronizeValues(sender);
         } else if(rpc_type == DZL_RPC.CHANGE_CAR_OWNER) {
             autoptr Param2<string, CarScript> paramChangeOwner;
             if(ctx.Read(paramChangeOwner) && sender) {
