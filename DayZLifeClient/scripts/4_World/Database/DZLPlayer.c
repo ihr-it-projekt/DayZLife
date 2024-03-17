@@ -236,7 +236,6 @@ class DZLPlayer: DZLFileSerializer {
         DZLMessageDB.Get().AddContact(_player);
     }
 
-    void DZLPlayer(string playerId, int moneyToAdd = 0) {};
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {};
     void AddMoneyToPlayerBank(int moneyCount) {};
     void SetWillHealByMedic() {};

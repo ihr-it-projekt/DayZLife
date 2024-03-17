@@ -12,11 +12,11 @@ modded class DZLCarStorage {
         Load();
     }
 
-    override void Add(CarScript entity, vector storagePosition, bool withCargo, bool isInsuranceCase) {
+    void Add(CarScript entity, vector storagePosition, bool withCargo, bool isInsuranceCase) {
         AddDZLCarStoreItem(new DZLCarStoreItem(entity, storagePosition, withCargo, isInsuranceCase));
     }
 
-    override void AddDZLCarStoreItem(DZLCarStoreItem carStoreItem) {
+    void AddDZLCarStoreItem(DZLCarStoreItem carStoreItem) {
         items.Insert(carStoreItem);
         Save();
     }

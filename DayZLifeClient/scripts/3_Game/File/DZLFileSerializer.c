@@ -9,7 +9,7 @@ class DZLFileSerializer {
     }
 
     void Save() {
-        if(FileExist(path + fileName)) DeleteFile(path + fileName);
+        Delete();
 
         FileSerializer serial = new FileSerializer();
         serial.Open(path + fileName, FileMode.WRITE);
@@ -32,6 +32,10 @@ class DZLFileSerializer {
         serial.Close();
 
         return isOkay;
+    }
+
+    void Delete() {
+        if(FileExist(path + fileName)) DeleteFile(path + fileName);
     }
 
     protected bool Read(FileSerializer ctx) {}

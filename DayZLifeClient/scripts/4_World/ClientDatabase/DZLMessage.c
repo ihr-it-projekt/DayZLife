@@ -19,9 +19,7 @@ class DZLMessage: DZLIdModel {
         if(GetGame().IsClient() && _id != "" && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id))) {
             JsonFileLoader<DZLMessage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id), this);
 
-            if(!senderId) {
-                senderId = "";
-            }
+            if(!senderId) senderId = "";
             return;
         }
         return;
