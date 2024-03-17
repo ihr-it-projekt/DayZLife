@@ -214,8 +214,6 @@ modded class DZLPlayer {
         money = 0;
     }
 
-
-
     void SetBetweenState() {
         deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_BETWEEN;
     }
