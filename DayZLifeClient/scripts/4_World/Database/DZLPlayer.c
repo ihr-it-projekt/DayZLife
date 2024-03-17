@@ -236,14 +236,12 @@ class DZLPlayer: DZLFileSerializer {
         DZLMessageDB.Get().AddContact(_player);
     }
 
-    void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {};
-    void AddMoneyToPlayerBank(int moneyCount) {};
-    void SetWillHealByMedic() {};
-    void SaveItems(PlayerBase _player) {};
-    bool AddMoneyToPlayer(int moneyCount) {};
-    void RemovePotentialFraction(string _fractionId) {};
-    void AddPotentialFraction(string _fractionId) {};
-    void RemoveFraction(string _fractionId) {};
-    void PlayerHasDied() {};
-    void SetWillHealByHospital() {};
+    void SetWillHealByMedic() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
+    }
+
+    void SetWillHealByHospital() {
+        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
+    }
+
 }

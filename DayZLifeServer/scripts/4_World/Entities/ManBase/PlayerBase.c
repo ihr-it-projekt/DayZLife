@@ -23,4 +23,9 @@ modded class PlayerBase {
         dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
         if(dzlPlayer) dzlPlayer.player = this;
     }
+
+    void TransferFromDeadPlayer(DZLPlayer playerTarget) {
+        playerTarget.AddMoneyToPlayer(moneyPlayerIsDead);
+        moneyPlayerIsDead = 0;
+    }
 }

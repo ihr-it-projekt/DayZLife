@@ -181,7 +181,7 @@ modded class DZLPlayer {
         money = 0;
     }
 
-    override bool AddMoneyToPlayer(int moneyCount) {
+    bool AddMoneyToPlayer(int moneyCount) {
         if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 
@@ -202,25 +202,19 @@ modded class DZLPlayer {
         return true;
     }
 
-    override void AddMoneyToPlayerBank(int moneyCount) {
+    void AddMoneyToPlayerBank(int moneyCount) {
         if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
             bank += moneyCount;
         }
     }
 
-    override void PlayerHasDied() {
+    void PlayerHasDied() {
         DZLLogMoneyTransaction(dayZPlayerId, "has died", money, 0, money * -1);
         money = 0;
     }
 
-    override void SetWillHealByMedic() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
-    }
 
-    override void SetWillHealByHospital() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
-    }
 
     void SetBetweenState() {
         deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_BETWEEN;
@@ -231,7 +225,7 @@ modded class DZLPlayer {
         itemsStore = new array<ref DZLStoreItem>;;
     }
 
-    override void SaveItems(PlayerBase _player) {
+    void SaveItems(PlayerBase _player) {
         itemsStore = new array<ref DZLStoreItem>;
         DZLStoreItem items = new DZLStoreItem;
         items.Init(_player, _player.GetPosition(), true, false);
@@ -239,7 +233,7 @@ modded class DZLPlayer {
         itemsStore.Insert(items);
     }
 
-    override void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
+    void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
         DZLLogMoneyTransaction(dayZPlayerId, "player", money, 0, money * -1);
         playerTarget.AddMoneyToPlayer(money);
 
@@ -315,7 +309,7 @@ modded class DZLPlayer {
         return fraction;
     }
 
-    override void RemoveFraction(string _fractionId) {
+    void RemoveFraction(string _fractionId) {
         if(this.fractionId == _fractionId) {
             this.fractionId = "";
             fraction = null;
@@ -335,7 +329,7 @@ modded class DZLPlayer {
         this.fractionId = fraction.GetId();
     }
 
-    override void RemovePotentialFraction(string _fractionId) {
+    void RemovePotentialFraction(string _fractionId) {
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
             if(_fractionId == fractionIdCanJoin) {
                 fractionWherePlayerCanJoin.Remove(key);
@@ -344,7 +338,7 @@ modded class DZLPlayer {
         }
     }
 
-    override void AddPotentialFraction(string _fractionId) {
+    void AddPotentialFraction(string _fractionId) {
         if(IsInAnyFraction()) return;
 
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {

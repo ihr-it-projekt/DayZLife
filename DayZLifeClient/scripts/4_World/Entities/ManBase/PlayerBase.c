@@ -303,15 +303,10 @@ modded class PlayerBase {
     }
 
     void RefreshMessageSystem() {
-        if(messageSystemMenu) {
-            messageSystemMenu.RefreshMessageSystem();
-        }
+        if(messageSystemMenu) messageSystemMenu.RefreshMessageSystem();
     }
 
-    void TransferFromDeadPlayer(DZLPlayer playerTarget) {
-        playerTarget.AddMoneyToPlayer(moneyPlayerIsDead);
-        moneyPlayerIsDead = 0;
-    }
+
 
     float GetMoneyPlayerIsDead() {
         return moneyPlayerIsDead;

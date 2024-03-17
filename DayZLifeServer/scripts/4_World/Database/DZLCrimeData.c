@@ -1,12 +1,11 @@
-class DZLCrimeData: DZLFileStore {
+class DZLCrimeData: DZLFileSerializer {
     private string version = "1";
     private DZLDate lastRaidTime;
     private bool shopRaidRuns = false;
 
     void DZLCrimeData() {
-        fileName = "crimeData.json";
-        folder = DAY_Z_LIFE_SERVER_FOLDER_DATA;
-        shopRaidRuns = false;
+        Init(DAY_Z_LIFE_SERVER_FOLDER_DATA, "crimeData");
+        Load();
     }
 
     void SetLastRaidTime(DZLDate date) {
@@ -26,13 +25,14 @@ class DZLCrimeData: DZLFileStore {
         return lastRaidTime;
     }
 
-    override protected bool DoSave() {
-        DZLJsonFileHandler<DZLCrimeData>.JsonSaveFile(folder + fileName, this);
-        return true;
-    };
+    override protected bool Read(FileSerializer ctx) {
+        if(!ctx.Read(version)) return false;
+        if(!ctx.Read(lastRaidTime)) return false;
 
-    override protected bool DoLoad() {
-        JsonFileLoader<DZLCrimeData>.JsonLoadFile(folder + fileName, this);
         return true;
-    };
+    }
+    override protected void Write(FileSerializer ctx) {
+        ctx.Write(version);
+        ctx.Write(lastRaidTime);
+    }
 }
