@@ -11,7 +11,6 @@ modded class CarScript {
 
     void CarScript() {
         RegisterNetSyncVariableInt("dzlCarId");
-        RegisterNetSyncVariableBool("isSync");
         RegisterNetSyncVariableBool("isSold");
         RegisterNetSyncVariableBool("isRaided");
         RegisterNetSyncVariableBool("hasInsuranceServer");
