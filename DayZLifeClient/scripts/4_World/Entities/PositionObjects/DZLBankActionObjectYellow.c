@@ -1,5 +1,5 @@
-class DZLBankAutomate_Blue: DZLBaseActionObject {
-    void DZLBankAutomate_Blue() {
+class DZLBankAutomate_Yellow: DZLBaseActionObject {
+    void DZLBankAutomate_Yellow() {
         isBank = true;
     }
 
