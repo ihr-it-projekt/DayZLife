@@ -17,7 +17,7 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) return;
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
 
         action_data.m_Player.RequestUpdateDZLPlayer();
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_BANKING, new Param1<PlayerBase>(action_data.m_Player), true);
