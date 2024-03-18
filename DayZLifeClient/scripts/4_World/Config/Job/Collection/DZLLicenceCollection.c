@@ -1,9 +1,5 @@
 class DZLLicenceCollection {
-    ref array<ref DZLLicence> collection;
-
-    void DZLLicenceCollection() {
-        collection = new array<ref DZLLicence>;
-    }
+    ref array<ref DZLLicence> collection = new array<ref DZLLicence> collection;
 
     DZLLicence FindById(string id) {
         foreach(DZLLicence licence: collection) {

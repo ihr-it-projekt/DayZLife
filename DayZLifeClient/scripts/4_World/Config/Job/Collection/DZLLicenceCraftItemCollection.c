@@ -1,9 +1,5 @@
 class DZLLicenceCraftItemCollection {
-    ref array<ref DZLLicenceCraftItem> collection;
-
-    void DZLLicenceCraftItemCollection() {
-        collection = new array<ref DZLLicenceCraftItem>
-    }
+    ref array<ref DZLLicenceCraftItem> collection = new array<ref DZLLicenceCraftItem>;
 
     map<string, ref DZLFoundLicenseCraftItems> GetLicenceCraftItems() {
         map<string, ref DZLFoundLicenseCraftItems> mapCraft = new map<string, ref DZLFoundLicenseCraftItems>;
