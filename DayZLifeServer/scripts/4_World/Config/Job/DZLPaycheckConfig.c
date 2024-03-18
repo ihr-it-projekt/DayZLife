@@ -53,7 +53,7 @@ modded class DZLPaycheckConfig {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json")) {
             JsonFileLoader<DZLPaycheckConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json", this);
             return true;
         }
@@ -61,9 +61,7 @@ modded class DZLPaycheckConfig {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLPaycheckConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json", this);
-        }
     }
 }

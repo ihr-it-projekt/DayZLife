@@ -29,7 +29,7 @@ modded class DZLCrimeConfig {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json")) {
             JsonFileLoader<DZLCrimeConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
             return true;
         }
@@ -37,9 +37,7 @@ modded class DZLCrimeConfig {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLCrimeConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
-        }
     }
 }

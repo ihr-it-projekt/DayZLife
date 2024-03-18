@@ -36,7 +36,7 @@ modded class DZLCarStorage {
     }
 
     private bool LoadJSON(string tmpFileName) {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + tmpFileName)) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + tmpFileName)) {
             JsonFileLoader<DZLCarStorage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + tmpFileName, this);
             DeleteFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR + tmpFileName);
             return true;

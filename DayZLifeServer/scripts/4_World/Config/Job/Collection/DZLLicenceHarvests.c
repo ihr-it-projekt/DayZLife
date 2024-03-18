@@ -365,7 +365,7 @@ modded class DZLWorkZones {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json")) {
             JsonFileLoader<DZLWorkZones>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);
             return true;
         }
@@ -373,9 +373,7 @@ modded class DZLWorkZones {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLWorkZones>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);
-        }
     }
 }

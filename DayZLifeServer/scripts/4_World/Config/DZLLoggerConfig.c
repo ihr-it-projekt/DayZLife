@@ -37,7 +37,7 @@ class DZLLoggerConfig {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "logger.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "logger.json")) {
             JsonFileLoader<DZLLoggerConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "logger.json", this);
             return true;
         }
@@ -45,9 +45,7 @@ class DZLLoggerConfig {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLLoggerConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "logger.json", this);
-        }
     }
 }

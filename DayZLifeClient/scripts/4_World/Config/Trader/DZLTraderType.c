@@ -13,16 +13,6 @@ class DZLTraderType: DZLIdModel {
     int reducePerTick;
     int tickLengthInMinutes;
 
-    void DZLTraderType(string _type, int _sellPrice, int _buyPrice, array<string> _attachments, bool _usePlayerAsSpawnPoint = true, bool _isCar = false) {
-        this.type = _type;
-        this.sellPrice = _sellPrice;
-        this.buyPrice = _buyPrice;
-        this.attachments = _attachments;
-        this.usePlayerAsSpawnPoint = _usePlayerAsSpawnPoint;
-        this.isCar = _isCar;
-        SetId();
-    }
-
     int CalculateDynamicSellPrice(DZLTraderTypeStorage currentStorage, EntityAI item = null) {
         if(false == isStorageItem || sellPrice <= 0 || !currentStorage) {
             return sellPrice;

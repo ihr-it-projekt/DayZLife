@@ -42,17 +42,13 @@ modded class DZLBank {
     }
 
     void AddTax(int _taxSum) {
-        if(GetGame().IsServer()) {
             taxSum += _taxSum;
             Save();
-        }
     }
 
     void AddMoney(int moneyToAdd) {
-        if(GetGame().IsServer()) {
             moneyAtBank += moneyToAdd;
             Save();
-        }
     }
 
     int PlayerRaidBank(DZLPlayer player, int percentage) {

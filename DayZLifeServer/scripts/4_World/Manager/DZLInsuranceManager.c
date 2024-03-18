@@ -19,7 +19,7 @@ class DZLInsuranceManager {
     }
 
     ref DZLCarStoreItem AddCar(CarScript car, ref DZLCarStoreItem storeItem) {
-        if(GetGame().IsServer() && car.ownerId != "" && car.dzlCarId && !cars.Contains(car.dzlCarId)) {
+        if(car.ownerId != "" && car.dzlCarId && !cars.Contains(car.dzlCarId)) {
             if(!storeItem) {
                 storeItem = new DZLCarStoreItem(car, car.GetLastStoragePosition(), false, true);
             }
@@ -33,7 +33,7 @@ class DZLInsuranceManager {
     }
 
     void RemoveCar(CarScript car) {
-        if(GetGame().IsServer() && cars.Contains(car.dzlCarId)) {
+        if(cars.Contains(car.dzlCarId)) {
             cars.Remove(car.dzlCarId);
             scriptCars.Remove(car.dzlCarId);
             ownerIds.Remove(car.dzlCarId);

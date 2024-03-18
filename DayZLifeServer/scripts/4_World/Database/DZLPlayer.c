@@ -182,7 +182,6 @@ modded class DZLPlayer {
     }
 
     bool AddMoneyToPlayer(int moneyCount) {
-        if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 
             if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
@@ -194,7 +193,6 @@ modded class DZLPlayer {
                     DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
                 }
                 return moneyCount == 0;
-            }
         }
 
         money += moneyCount;
@@ -203,10 +201,8 @@ modded class DZLPlayer {
     }
 
     void AddMoneyToPlayerBank(int moneyCount) {
-        if(GetDayZGame().IsServer()) {
             DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
             bank += moneyCount;
-        }
     }
 
     void PlayerHasDied() {

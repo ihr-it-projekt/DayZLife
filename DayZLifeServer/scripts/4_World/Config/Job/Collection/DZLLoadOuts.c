@@ -143,7 +143,7 @@ modded class DZLLoadOuts {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json")) {
             JsonFileLoader<DZLLoadOuts>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);
             return true;
         }
@@ -151,9 +151,7 @@ modded class DZLLoadOuts {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLLoadOuts>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);
-        }
     }
 }

@@ -5,7 +5,7 @@ modded class DZLBaseBuildingConfig {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "BaseBuilding.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "BaseBuilding.json")) {
             JsonFileLoader<DZLBaseBuildingConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "BaseBuilding.json", this);
             return true;
         }
@@ -13,9 +13,7 @@ modded class DZLBaseBuildingConfig {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLBaseBuildingConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "BaseBuilding.json", this);
-        }
     }
 }

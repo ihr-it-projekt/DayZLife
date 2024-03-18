@@ -44,7 +44,7 @@ modded class DZLTuningConfig {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json")) {
             JsonFileLoader<DZLTuningConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json", this);
             return true;
         }
@@ -52,9 +52,7 @@ modded class DZLTuningConfig {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLTuningConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarTuningConfig.json", this);
-        }
     }
 }

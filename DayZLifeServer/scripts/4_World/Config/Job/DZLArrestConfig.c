@@ -39,7 +39,7 @@ modded class DZLArrestConfig {
     }
 
     private bool Load() {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json")) {
             JsonFileLoader<DZLArrestConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
             return true;
         }
@@ -47,10 +47,8 @@ modded class DZLArrestConfig {
     }
 
     private void Save() {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLArrestConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
-        }
     }
 
 }

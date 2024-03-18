@@ -176,7 +176,7 @@ modded class DZLJobSpawnPoints {
     }
 
     private bool Load(string jobId) {
-        if(GetGame().IsServer() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json")) {
+        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json")) {
             JsonFileLoader<DZLJobSpawnPoints>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
             return true;
         }
@@ -184,9 +184,7 @@ modded class DZLJobSpawnPoints {
     }
 
     private void Save(string jobId) {
-        if(GetGame().IsServer()) {
             CheckDZLConfigPath();
             JsonFileLoader<DZLJobSpawnPoints>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
-        }
     }
 }
