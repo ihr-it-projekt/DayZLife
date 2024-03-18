@@ -26,8 +26,6 @@ class DZLBaseActionObject : BuildingSuper {
 
     bool IsLoadOut(string job) {
         return jobName == job;
-
-        SetSynchDirty();
     }
 
     bool IsLicenseActionPoint() {

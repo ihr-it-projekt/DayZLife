@@ -1,39 +1,5 @@
 class DZLObjectFinder {
 
-
-    void DeleteContainerAt(vector from, vector to, string typeToSearch, Object ignore = NULL, float radius = 0, Object with = NULL, int tries = 0) {
-        vector contact_pos;
-        vector contact_dir;
-        int contact_component;
-
-        set< Object > geom = new set< Object >;
-
-        DayZPhysics.RaycastRV(from, to, contact_pos, contact_dir, contact_component, geom, with, ignore, false, false, ObjIntersectGeom, radius);
-        Object obj;
-
-        if(0 == geom.Count()) {
-            if(tries == 3) {
-                return;
-            }
-            DeleteContainerAt(from, to, typeToSearch, obj, radius + 0.5, null, tries + 1);
-            return;
-        } else {
-            for(int newObject = 0; newObject < geom.Count(); ++newObject) {
-                obj = geom.Get(newObject);
-                if(obj.GetType() == typeToSearch) {
-                    GetGame().ObjectDelete(obj);
-                    return;
-                } else {
-                    if(tries == 3) {
-                        return;
-                    }
-                    DeleteContainerAt(from, to, typeToSearch, obj, radius + 0.5, null, tries + 1);
-                    return;
-                }
-            }
-        }
-    }
-
     static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, DZLPlayer player, bool byOwner = false) {
         array<Object> excludedObjects = new array<Object>;
         array<Object> nearbyObjects = new array<Object>;
@@ -77,6 +43,4 @@ class DZLObjectFinder {
 
         return null;
     }
-
-
 }
