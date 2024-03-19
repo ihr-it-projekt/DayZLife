@@ -1,4 +1,24 @@
 modded class PlayerBase {
+    private ref Timer resetCanSpawn;
+
+    void SetIsSpawned() {
+        DZLPlayer _dzlPlayer = GetDZLPlayer();
+        int time = DZLConfig.Get().GetJobSpawnPointsByJobId(_dzlPlayer.GetActiveJob()).blockTimeForJobChange;
+
+        resetCanSpawn = new Timer;
+        resetCanSpawn.Run(time, this, "ResetSpawned");
+        canRespawn = false;
+        SetSynchDirty();
+    }
+
+    void ResetSpawned() {
+        resetCanSpawn.Stop();
+        resetCanSpawn = null;
+
+        canRespawn = true;
+        SetSynchDirty();
+    }
+
     override bool OnStoreLoad(ParamsReadContext ctx, int version) {
         bool isOkay = super.OnStoreLoad(ctx, version);
         if(!isOkay) return false;
@@ -59,6 +79,12 @@ modded class PlayerBase {
             DZLLogCrafting(GetPlayerId(), "licence crafting get item", itemToCraft.type);
             itemSpawn.SetHealth(itemToCraft.health);
             ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
+        }
+    }
+
+    void ResetDZLPlayer() {
+        if(GetGame().IsServer()) {
+            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
         }
     }
 

@@ -27,7 +27,7 @@ modded class PlayerBase {
     bool isOnHarvest = false;
     bool isPolice = false;
     bool medicHelpMenuWasShown = false;
-    private ref Timer resetCanSpawn;
+    private bool canRespawn = true;
     private ref Timer enableToHospital;
     bool canHealInHospital = false;
     bool canSeeKillButton = false;
@@ -41,14 +41,7 @@ modded class PlayerBase {
     override void Init() {
         super.Init();
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-    }
-
-    void SetIsSpawned() {
-        DZLPlayer _dzlPlayer = GetDZLPlayer();
-        int time = DZLConfig.Get().GetJobSpawnPointsByJobId(_dzlPlayer.GetActiveJob()).blockTimeForJobChange;
-
-        resetCanSpawn = new Timer;
-        resetCanSpawn.Run(time, this, "ResetSpawned");
+        RegisterNetSyncVariableBool("canRespawn");
     }
 
     void EnableTimerEnableHospital() {
@@ -87,13 +80,8 @@ modded class PlayerBase {
         return DZLConfig.Get().medicConfig.minTimeBeforeKillButton - waitForHospital;
     }
 
-    void ResetSpawned() {
-        resetCanSpawn.Stop();
-        resetCanSpawn = null;
-    }
-
     bool CanReSpawn() {
-        return !resetCanSpawn && 0 == dzlPlayer.arrestTimeInMinutes;
+        return !canRespawn && 0 == dzlPlayer.arrestTimeInMinutes;
     }
 
     string GetPlayerId() {
@@ -306,8 +294,6 @@ modded class PlayerBase {
         if(messageSystemMenu) messageSystemMenu.RefreshMessageSystem();
     }
 
-
-
     float GetMoneyPlayerIsDead() {
         return moneyPlayerIsDead;
     }
@@ -375,9 +361,6 @@ modded class PlayerBase {
 
         return null;
     }
-
-
-
 
     array<EntityAI> GetPlayerItems() {
         array<EntityAI> itemsArray = new array<EntityAI>;
@@ -491,9 +474,4 @@ modded class PlayerBase {
         return false;
     }
 
-    void ResetDZLPlayer() {
-        if(GetGame().IsServer()) {
-            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
-        }
-    }
 }

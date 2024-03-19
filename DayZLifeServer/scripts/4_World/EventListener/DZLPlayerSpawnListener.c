@@ -6,6 +6,7 @@ class DZLPlayerSpawnListener: DZLBaseEventListener {
             if(ctx.Read(param) && param.param1 && param.param2) {
                 PlayerBase player = PlayerBase.Cast(target);
                 if(!player) return;
+
                 player.RemoveAllItems();
                 player.GetDZLPlayer().LoosPlayerInventoryMoney();
 
@@ -23,6 +24,7 @@ class DZLPlayerSpawnListener: DZLBaseEventListener {
 
                 player.SetPosition(point.point);
                 player.SetOrientation(point.orientation);
+                player.SetIsSpawned();
 
                 player.GetDZLPlayer().GetFractionMember();
                 GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, sender);
