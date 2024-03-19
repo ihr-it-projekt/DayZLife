@@ -1,4 +1,7 @@
 class DZLPayCheck {
+
+    void DZLPaycheck(string _jobName = "", string _rank = "", int _amount = 0, int _onlineMinutesForPay = 9999999, bool _isFallbackRank = false) {}
+
     static void Check(PlayerBase player, DZLPaycheckConfig paycheckConfig) {
         int amount = 0;
         int onlineTime = 100000000;

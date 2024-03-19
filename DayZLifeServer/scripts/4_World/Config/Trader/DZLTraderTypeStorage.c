@@ -14,12 +14,12 @@ modded class DZLTraderTypeStorage {
         Save();
     }
 
-    void StorageDown() {
+    override void StorageDown() {
         currentStorage--;
         mustSave = true;
     }
 
-    void StorageUp(float downValue) {
+    override void StorageUp(float downValue) {
         currentStorage = currentStorage + downValue;
         mustSave = true;
     }

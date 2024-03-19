@@ -29,6 +29,6 @@ class DZLPaycheckConfig {
             }
         }
 
-        return new DZLPaycheck("", "", 0, 100000000);
+        return new DZLPaycheck("", "", 0, 999999);
     }
 }

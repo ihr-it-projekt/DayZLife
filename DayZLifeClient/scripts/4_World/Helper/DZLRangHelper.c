@@ -7,11 +7,11 @@ class DZLRankHelper {
             return searchPayCheck(dzlPlayer, payChecks);
         }
 
-        return new DZLPaycheck("", "", 0, 10000000);
+        return new DZLPaycheck("", "", 0, 999999);
     }
 
     private static DZLPaycheck searchPayCheck(DZLPlayer dzlPlayer, ref array<ref DZLPaycheck> payChecks) {
-        DZLPaycheck defaultPaycheck = new DZLPaycheck("", "", 0, 10000000);
+        DZLPaycheck defaultPaycheck = new DZLPaycheck("", "", 0, 999999);
 
         foreach(DZLPaycheck payCheck: payChecks) {
             if(dzlPlayer.IsActiveJobGrade(payCheck.rank) && payCheck.amount > 0) {

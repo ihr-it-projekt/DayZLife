@@ -35,4 +35,11 @@ class DZLTraderTypeStorage {
     float getStorage() {
         return currentStorage;
     }
+    void StorageDown() {
+        currentStorage--;
+    }
+
+    void StorageUp(float downValue) {
+        currentStorage = currentStorage + downValue;
+    }
 }
