@@ -15,7 +15,7 @@ modded class DZLMessageConfig {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLMessageConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "message.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLMessageConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "message.json", this);
     }
 }

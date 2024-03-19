@@ -42,8 +42,8 @@ modded class DZLTraderPositionCollection {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLTraderPositionCollection>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderPositions.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLTraderPositionCollection>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderPositions.json", this);
     }
 
 

@@ -13,7 +13,7 @@ modded class DZLBaseBuildingConfig {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLBaseBuildingConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "BaseBuilding.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLBaseBuildingConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "BaseBuilding.json", this);
     }
 }

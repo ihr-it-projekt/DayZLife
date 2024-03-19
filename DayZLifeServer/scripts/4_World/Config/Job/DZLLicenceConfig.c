@@ -142,8 +142,8 @@ modded class DZLLicenceConfig {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLLicenceConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLLicenceConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "licence.json", this);
     }
 
 }

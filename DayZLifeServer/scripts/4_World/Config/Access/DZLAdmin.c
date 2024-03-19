@@ -40,7 +40,7 @@ modded class DZLAdmin {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLAdmin>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLAdmin>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "adminIds.json", this);
     }
 }

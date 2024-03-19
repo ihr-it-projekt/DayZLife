@@ -35,7 +35,7 @@ modded class DZLMedicConfig {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLMedicConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "medic.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLMedicConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "medic.json", this);
     }
 }

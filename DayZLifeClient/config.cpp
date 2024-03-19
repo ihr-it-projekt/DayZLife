@@ -89,32 +89,32 @@ class CfgVehicles {
     class DZLBankAutomate_Blue: HouseNoDestruct {
         scope = 1;
         model = "DayZLifeClient\model\ATM\DZL_ATM.p3d";
-		hiddenSelections[]=  {
-			"camoDZL"
+        hiddenSelections[] = {
+            "camoDZL"
         };
-		hiddenSelectionsTextures[]= {
-			"DayZLifeClient\model\ATM\Data\ATM_Blue.paa"
-		};
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\ATM\Data\ATM_Blue.paa"
+        };
     };
     class DZLBankAutomate_Red: HouseNoDestruct {
         scope = 1;
         model = "DayZLifeClient\model\ATM\DZL_ATM.p3d";
-		hiddenSelections[]=  {
-			"camoDZL"
+        hiddenSelections[] = {
+            "camoDZL"
         };
-		hiddenSelectionsTextures[]= {
-			"DayZLifeClient\model\ATM\Data\ATM_Red.paa"
-		};
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\ATM\Data\ATM_Red.paa"
+        };
     };
     class DZLBankAutomate_Yellow: HouseNoDestruct {
         scope = 1;
         model = "DayZLifeClient\model\ATM\DZL_ATM.p3d";
-		hiddenSelections[]=  {
-			"camoDZL"
+        hiddenSelections[] = {
+            "camoDZL"
         };
-		hiddenSelectionsTextures[]= {
-			"DayZLifeClient\model\ATM\Data\ATM_Yellow.paa"
-		};
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\ATM\Data\ATM_Yellow.paa"
+        };
     };
 };
 class CfgVehicles {
@@ -122,31 +122,31 @@ class CfgVehicles {
     class DZLBankAutomate_Blue: HouseNoDestruct {
         scope = 1;
         model = "DayZLifeClient\model\ATM\DZL_ATM.p3d";
-		hiddenSelections[]=  {
-			"camoDZL"
+        hiddenSelections[] = {
+            "camoDZL"
         };
-		hiddenSelectionsTextures[]= {
-			"DayZLifeClient\model\ATM\Data\ATM_Blue.paa"
-		};
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\ATM\Data\ATM_Blue.paa"
+        };
     };
     class DZLBankAutomate_Red: HouseNoDestruct {
         scope = 1;
         model = "DayZLifeClient\model\ATM\DZL_ATM.p3d";
-		hiddenSelections[]=  {
-			"camoDZL"
+        hiddenSelections[] = {
+            "camoDZL"
         };
-		hiddenSelectionsTextures[]= {
-			"DayZLifeClient\model\ATM\Data\ATM_Red.paa"
-		};
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\ATM\Data\ATM_Red.paa"
+        };
     };
     class DZLBankAutomate_Yellow: HouseNoDestruct {
         scope = 1;
         model = "DayZLifeClient\model\ATM\DZL_ATM.p3d";
-		hiddenSelections[]=  {
-			"camoDZL"
+        hiddenSelections[] = {
+            "camoDZL"
         };
-		hiddenSelectionsTextures[]= {
-			"DayZLifeClient\model\ATM\Data\ATM_Yellow.paa"
-		};
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\ATM\Data\ATM_Yellow.paa"
+        };
     };
 };

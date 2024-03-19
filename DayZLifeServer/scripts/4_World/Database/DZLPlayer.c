@@ -182,17 +182,17 @@ modded class DZLPlayer {
     }
 
     bool AddMoneyToPlayer(int moneyCount) {
-            DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
+        DZLLogMoneyTransaction(dayZPlayerId, "player", money, money + moneyCount, moneyCount);
 
-            if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
-                moneyCount = DZLPlayerMoney.Get(player).AddMoney(moneyCount);
+        if(DZLConfig.Get().bankConfig.useMoneyAsObject) {
+            moneyCount = DZLPlayerMoney.Get(player).AddMoney(moneyCount);
 
-                if(moneyCount != 0 && player && player.GetIdentity()) {
-                    Error("Error: Can't add/remove money to/from player transaction stopped!");
-                    Error("Player ID" + dayZPlayerId);
-                    DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
-                }
-                return moneyCount == 0;
+            if(moneyCount != 0 && player && player.GetIdentity()) {
+                Error("Error: Can't add/remove money to/from player transaction stopped!");
+                Error("Player ID" + dayZPlayerId);
+                DZLSendMessage(player.GetIdentity(), "#pls_restart_your_dayz");
+            }
+            return moneyCount == 0;
         }
 
         money += moneyCount;
@@ -201,8 +201,8 @@ modded class DZLPlayer {
     }
 
     void AddMoneyToPlayerBank(int moneyCount) {
-            DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
-            bank += moneyCount;
+        DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
+        bank += moneyCount;
     }
 
     void PlayerHasDied() {

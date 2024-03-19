@@ -42,13 +42,13 @@ modded class DZLBank {
     }
 
     void AddTax(int _taxSum) {
-            taxSum += _taxSum;
-            Save();
+        taxSum += _taxSum;
+        Save();
     }
 
     void AddMoney(int moneyToAdd) {
-            moneyAtBank += moneyToAdd;
-            Save();
+        moneyAtBank += moneyToAdd;
+        Save();
     }
 
     int PlayerRaidBank(DZLPlayer player, int percentage) {

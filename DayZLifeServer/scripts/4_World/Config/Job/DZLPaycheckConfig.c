@@ -61,7 +61,7 @@ modded class DZLPaycheckConfig {
     }
 
     private void Save() {
-            CheckDZLConfigPath();
-            JsonFileLoader<DZLPaycheckConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json", this);
+        CheckDZLConfigPath();
+        JsonFileLoader<DZLPaycheckConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "paycheck.json", this);
     }
 }

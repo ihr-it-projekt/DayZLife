@@ -11,7 +11,7 @@ class DZLPlayerMoney {
         return instance;
     }
 
-    private PlayerBase player;
+    PlayerBase player;
     private bool useMoneyFromLBMasterATM = false;
 
     bool HasEnoughMoney(int sum) {
