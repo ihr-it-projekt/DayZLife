@@ -459,8 +459,6 @@ modded class PlayerBase {
                     if(attachment && attachment.GetType() == "Battery9V") {
                         Battery9V itemCast = Battery9V.Cast(attachment);
 
-
-
                         if(itemCast && itemCast.GetQuantity() > 0) {
                             float energy = itemCast.GetCompEM().GetEnergy();
 
