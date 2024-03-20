@@ -89,7 +89,6 @@ FrameWidgetClass rootFrame {
       ImageWidgetClass closeIcon {
        ignorepointer 1
        color 0.502 0 0 1
-       position -0.025 0.02778
        size 1 1
        halign center_ref
        valign center_ref
