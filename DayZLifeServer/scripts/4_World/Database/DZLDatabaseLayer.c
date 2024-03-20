@@ -7,7 +7,6 @@ class DZLDatabaseLayer {
     private ref DZLBank bank = new DZLBank;
     private ref map<string, ref DZLCarStorage> storageCars = new map<string, ref DZLCarStorage>;
     private ref map<string, ref DZLCarStorage> fractionStorageCars = new map<string, ref DZLCarStorage>;
-    private ref DZLEmergencies emergencies = new DZLEmergencies;
     private ref DZLCrimeData crimeData = new DZLCrimeData;
     private ref DZLTraderStorage traderStorage = new DZLTraderStorage;
     private ref DZLDatabase database = new DZLDatabase;
@@ -45,10 +44,6 @@ class DZLDatabaseLayer {
 
     DZLBank GetBank() {
         return bank;
-    }
-
-    DZLEmergencies GetEmergencies() {
-        return emergencies;
     }
 
     DZLPlayerIdentities GetPlayerIds() {

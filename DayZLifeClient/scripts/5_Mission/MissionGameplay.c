@@ -106,8 +106,6 @@ modded class MissionGameplay {
         if(holdLControl && g_Game.GetUIManager().GetMenu() == NULL) {
             if(holdRControl || holdOne) {
                 GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetAlmanacMenu(), NULL);
-            } else if(holdTow) {
-                dzlPlayerBase.ShowHealMenuFromMission();
             } else if(holdTree && dzlPlayerBase.CanReSpawn() && !dzlPlayerBase.IsRestrained()) {
                 GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(), NULL);
             } else if(holdFour && dzlPlayerBase.CanOpenMessageMenu()) {

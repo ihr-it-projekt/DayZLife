@@ -21,7 +21,6 @@ class DZLConfig extends DZLBaseEventListener {
     ref array<ref DZLJobSpawnPointCollection> jobSpawnPoints = new array<ref DZLJobSpawnPointCollection>;
     ref DZLAdmin adminIds;
     ref DZLCarConfig carConfig;
-    ref DZLMedicConfig medicConfig;
     ref DZLBaseBuildingConfig baseBuildingConfig;
     ref DZLCrimeConfig crimeConfig;
     ref DZLMessageConfig messageConfig;
@@ -72,11 +71,6 @@ class DZLConfig extends DZLBaseEventListener {
             Param1 <ref DZLCarConfig> configParamCar;
             if(ctx.Read(configParamCar) && configParamCar.param1) {
                 carConfig = configParamCar.param1;
-            }
-        } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_MEDIC_RESPONSE) {
-            Param1 <ref DZLMedicConfig> configParamMedic;
-            if(ctx.Read(configParamMedic) && configParamMedic.param1) {
-                medicConfig = configParamMedic.param1;
             }
         } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_RESPONSE_CRIME) {
             Param1 <ref DZLCrimeConfig> crimeParam;

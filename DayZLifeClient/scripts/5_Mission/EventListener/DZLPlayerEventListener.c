@@ -6,6 +6,7 @@ class DZLPlayerEventListener: DZLBaseEventListener {
         if(rpc_type == DZL_RPC.NEW_SPAWN_CLIENT) {
             queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
             queue.CallLater(CreateSpawnMenu, 1750, true);
+            return;
         }
 
         player = DZLPlayerBaseHelper.GetPlayer();
@@ -21,10 +22,6 @@ class DZLPlayerEventListener: DZLBaseEventListener {
             if(ctx.Read(dzlMessageMedic) && dzlMessageMedic.param1) {
                 player.DisplayMessage(dzlMessageMedic.param1);
             }
-        } else if(rpc_type == DZL_RPC.ALL_WAS_HEALED_RESPONSE) {
-            player.willDie = true;
-            player.CheckDeath();
-            PlayerRespawn();
         } else if(rpc_type == DZL_RPC.SEND_MESSAGE_SERVER) {
             Param1<ref DZLMessage> messagesParam;
             if(ctx.Read(messagesParam) && messagesParam.param1) {

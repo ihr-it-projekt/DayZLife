@@ -12,7 +12,6 @@ modded class PlayerBase {
     private ref DZLPlayerPayTicketMenu payTicketMenu;
     private ref DZLCarMenu carMenu;
     private ref DZLCarStorageMenu carStorageMenu;
-    private ref DZLMedicHelpMenu healMenu;
     private ref DZLMessageSystemMenu messageSystemMenu;
     private ref DZLBankingMenu bankingMenu;
     private ref DZLTraderMenu traderMenu;
@@ -29,9 +28,6 @@ modded class PlayerBase {
     bool medicHelpMenuWasShown = false;
     private bool canRespawn = true;
     private ref Timer enableToHospital;
-    bool canHealInHospital = false;
-    bool canSeeKillButton = false;
-    int waitForHospital = 0;
     int medicCount = 0;
 
     float deltaTimeLastUpdate = 0;
@@ -42,42 +38,6 @@ modded class PlayerBase {
         super.Init();
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
         RegisterNetSyncVariableBool("canRespawn");
-    }
-
-    void EnableTimerEnableHospital() {
-        enableToHospital = new Timer;
-        enableToHospital.Run(1, this, "EnableToHospital", null, true);
-        waitForHospital = 0;
-    }
-
-    void EnableToHospital() {
-        ++waitForHospital;
-        if(GetWaitTimeForHospital() < 1) {
-            canHealInHospital = true;
-        }
-        if(GetWaitTimeForKill() < 1) {
-            canSeeKillButton = true;
-        }
-
-        if(canHealInHospital && canSeeKillButton) {
-            enableToHospital.Stop();
-        }
-    }
-
-    int IsKillButtonOn() {
-        return waitForHospital;
-    }
-
-    int GetWaitTimeForHospital() {
-        DZLConfig config = DZLConfig.Get();
-        if(medicCount >= config.medicConfig.minMedicCountForHospitalTimer) {
-            return config.medicConfig.minTimeBeforeHospital - waitForHospital;
-        }
-        return config.medicConfig.minTimeBeforeHospitalWhenMinMedicNotOnline - waitForHospital;
-    }
-
-    int GetWaitTimeForKill() {
-        return DZLConfig.Get().medicConfig.minTimeBeforeKillButton - waitForHospital;
     }
 
     bool CanReSpawn() {
@@ -106,19 +66,6 @@ modded class PlayerBase {
         AddAction(DZLActionOpenArrestMenu, InputActionMap);
         AddAction(DZLActionOpenTicketMenu, InputActionMap);
         AddAction(DZLActionGiveNumber, InputActionMap);
-    }
-
-    override void CheckDeath() {
-        if(IsPlayerSelected() && !IsAlive()) {
-            if(!medicHelpMenuWasShown) {
-                ShowHealMenu();
-                EnableTimerEnableHospital();
-                PPEffects.SetUnconsciousnessVignette(1000);
-            } else if(willDie) {
-                SimulateDeath(true);
-                m_DeathCheckTimer.Stop();
-            }
-        }
     }
 
     void RequestUpdateDZLPlayer() {
@@ -156,8 +103,6 @@ modded class PlayerBase {
             carMenu.UpdatePlayer(this);
         } else if(carStorageMenu && carStorageMenu.IsVisible()) {
             carStorageMenu.UpdatePlayer(this);
-        } else if(healMenu && healMenu.IsVisible()) {
-            healMenu.UpdatePlayer(this);
         } else if(messageSystemMenu && messageSystemMenu.IsVisible()) {
             messageSystemMenu.UpdatePlayer(this);
         }
@@ -169,13 +114,6 @@ modded class PlayerBase {
         carMenu.SetCar(car);
 
         return carMenu;
-    }
-
-    DZLMedicHelpMenu GetMedicHealMenu() {
-        healMenu = new DZLMedicHelpMenu;
-        InitMenu(healMenu);
-
-        return healMenu;
     }
 
     DZLCarStorageMenu GetCarStorageMenu() {
@@ -400,28 +338,6 @@ modded class PlayerBase {
             if(item && !item.IsInherited(SurvivorBase)) {
                 GetGame().ObjectDelete(item);
             }
-        }
-    }
-
-    void ShowHealMenu() {
-        if(GetGame().IsClient()) {
-            if(!healMenu && medicHelpMenuWasShown == false) {
-                if(g_Game.GetUIManager().GetMenu()) {
-                    g_Game.GetUIManager().GetMenu().Close();
-                }
-                DZLConfig config = DZLConfig.Get();
-                if(config && config.medicConfig && medicHelpMenuWasShown == false) {
-                    GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
-                    medicHelpMenuWasShown = true;
-                }
-            }
-        }
-    }
-
-    void ShowHealMenuFromMission() {
-        if(GetGame().IsClient() && medicHelpMenuWasShown) {
-            medicHelpMenuWasShown = false;
-            ShowHealMenu();
         }
     }
 

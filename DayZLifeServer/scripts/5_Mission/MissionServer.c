@@ -37,8 +37,7 @@ modded class MissionServer {
             }
 
             if(dzlPlayer.WillHealByHospital()) {
-                DZLBaseSpawnPoint spawnPoint = DZLConfig.Get().medicConfig.hospitalSpawnPoints.GetRandomElement();
-                pos = spawnPoint.point;
+                pos = TBRReviveConfig.Get().hospitalSpawnPoints.GetRandomElement().point;
             }
 
             CreateCharacter(identity, pos, ctx, type);
@@ -82,7 +81,9 @@ modded class MissionServer {
         }
 
         dzlPlayer.ResetDeadState();
-        DZLDatabaseLayer.Get().GetEmergencies().Remove(identity.GetId());
+#ifdef TBRevivePlayerClient
+        TBREmergencies.Get().Remove(identity.GetId());
+#endif
 
         return m_player;
     }

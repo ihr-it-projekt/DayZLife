@@ -8,7 +8,7 @@ modded class DayZPlayerImplement {
 
             if(dzlPlayer) {
                 if(dzlPlayer.WillHealByMedic()) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, DZLConfig.Get().medicConfig.deleteDeadBodyTimeWhenHealedByMedic * 1000);
+                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, TBRReviveConfig.Get().deleteDeadBodyTimeWhenHealedByPlayer * 1000);
                     player.RemoveAllItems();
                 } else if(dzlPlayer.WillHealByHospital()) {
                     GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);

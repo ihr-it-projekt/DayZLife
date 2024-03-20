@@ -29,7 +29,6 @@ modded class DZLConfig {
         houseConfig = new DZLHouseConfig(jobConfig.paycheck.jobNames);
         adminIds = new DZLAdmin(jobConfig.paycheck.jobNames);
         carConfig = new DZLCarConfig;
-        medicConfig = new DZLMedicConfig;
         baseBuildingConfig = new DZLBaseBuildingConfig;
         crimeConfig = new DZLCrimeConfig;
         messageConfig = new DZLMessageConfig;
@@ -52,7 +51,6 @@ modded class DZLConfig {
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_SPAWN_POINTS, new Param1<ref array<ref DZLJobSpawnPointCollection>>(jobSpawnPoints), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_ADMIN_IDS, new Param1<ref DZLAdmin>(adminIds), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_CAR_RESPONSE, new Param1<ref DZLCarConfig>(carConfig), true, sender);
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_MEDIC_RESPONSE, new Param1<ref DZLMedicConfig>(medicConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BANKING, new Param1<ref DZLBankingConfig>(bankConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BASE_BUILDING, new Param1<ref DZLBaseBuildingConfig>(baseBuildingConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_CRIME, new Param1<ref DZLCrimeConfig>(crimeConfig), true, sender);
