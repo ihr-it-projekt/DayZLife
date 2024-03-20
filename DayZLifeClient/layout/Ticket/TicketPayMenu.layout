@@ -1,154 +1,115 @@
 FrameWidgetClass rootFrame {
- position 0.00049 0.00092
- size 0.49437 0.49114
+ position 0 0
+ size 900 400
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
-   position 0 0.00962
-   size 0.97455 0.99116
+   color 0.5176 0.5176 0.5176 0.3137
+   position 0 0
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget1 {
+    TextWidgetClass giveTicketMenu {
+     disabled 0
+     clipchildren 1
+     inheritalpha 0
      ignorepointer 1
-     position 0 -0.0013
-     size 0.9739 0.9735
+     keepsafezone 0
+     position 0 0.02
+     size 0.8 0.09
      halign center_ref
-     valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     draggable 0
+     text "#pay_ticket"
+     "exact text" 1
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.00889 0.02
+     size 0.05 0.09
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
      {
-      PanelWidgetClass PanelWidget2 {
+      ImageWidgetClass closeIcon {
        ignorepointer 1
-       position -0.00214 0
-       size 0.99573 0.10053
+       color 0.502 0 0 1
+       size 1 1
        halign center_ref
+       valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        PanelWidgetClass PanelWidget3 {
-         ignorepointer 1
-         position -0.08042 0.00112
-         size 0.79677 0.78074
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass giveTicketMenu {
-           disabled 0
-           clipchildren 1
-           inheritalpha 0
-           ignorepointer 1
-           keepsafezone 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           draggable 0
-           text "#pay_ticket"
-           "exact text" 0
-           text_proportion 0.7
-           "size to text h" 0
-           "size to text v" 0
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget16 {
-         ignorepointer 1
-         position 0.0212 0.11075
-         size 0.14178 0.7785
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass Button_Closed {
-           color 0.502 0 0 1
-           position 0 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style OldStyle
-           text "X"
-           text_proportion 0.7
-          }
-         }
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget5 {
-       ignorepointer 1
-       position -0.00562 0.02932
-       size 0.96455 0.12713
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass payTicketButton {
-         color 0.251 0.502 0 1
-         position 0 0.02696
-         size 0.98 0.92608
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#pay_ticket"
-         text_proportion 0.7
-        }
-       }
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
       }
      }
+    }
+    ButtonWidgetClass payTicketButton {
+     color 0.251 0.502 0 1
+     position 0 0.02
+     size 0.8 0.09
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "no focus" 1
+     text "#pay_ticket"
+    }
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0.15
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
     }
    }
   }
   TextListboxWidgetClass openTicketsList {
-   position 0.03643 0.14145
-   size 0.91754 0.67916
+   position -0 0.02
+   size 0.98222 0.7
+   halign center_ref
+   valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
    "title visible" 1
-   colums "#reason;40;#dunning_fee;30;#date;30"
+   colums "#reason;40;#dunning_fee;45;#date;15"
    lines 15
   }
  }

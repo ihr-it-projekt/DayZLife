@@ -1,302 +1,221 @@
 FrameWidgetClass rootFrame {
- size 0.4067 0.4919
+ size 800 600
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
+   color 0.5176 0.5176 0.5176 0.3137
    position 0 0
-   size 0.98738 0.97669
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget1 {
+    TextWidgetClass garageText {
      ignorepointer 1
-     position 0 0
-     size 0.98722 0.97614
+     position 0 0.01
+     size 0.8 0.07
      halign center_ref
-     valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     text "#Garage"
+     "exact text" 1
+     "size to text h" 1
+     "text halign" center
+     "text valign" center
      {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
-       position 0 0.01222
-       size 0.22954 0.08222
-       halign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass garageText {
-         ignorepointer 1
-         size 0.99 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#Garage"
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget3 {
-       ignorepointer 1
        position 0 0
-       size 1 0.88555
+       size 1 0.03
        halign center_ref
        valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
+       style editor_selection
+      }
+     }
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.01 0.01333
+     size 0.055 0.07
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget5 {
+     ignorepointer 1
+     size 0.5 0.87167
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextListboxWidgetClass tostoreTextListbox {
+       position 0 -0.085
+       size 0.96 0.79941
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       "title visible" 1
+       colums "#Car_to_Stored"
+       lines 20
+      }
+      ButtonWidgetClass storeinFractionButton {
+       color 0.251 0.502 0 1
+       position 0 0.1
+       size 0.95 0.07
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style OldStyle
+       text "#Store_in_Fraction"
+      }
+      ButtonWidgetClass storeinButton {
+       color 0.251 0.502 0 1
+       position 0 0.02
+       size 0.95 0.07
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style OldStyle
+       text "#Store_in"
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget6 {
+     ignorepointer 1
+     position 0 0
+     size 0.5 0.87167
+     halign right_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextListboxWidgetClass isstoredTextListbox {
+       position 0 -0.085
+       size 0.98 0.7994
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       "title visible" 1
+       colums "#Cars_in_Sored;50;#Privat;25;#Fraction;25"
+       lines 20
+      }
+      PanelWidgetClass PanelWidget11 {
+       ignorepointer 1
+       position 0 0.1
+       size 0.95 0.07
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
        {
-        PanelWidgetClass PanelWidget5 {
+        TextWidgetClass insurranceTextBox {
          ignorepointer 1
-         position 0 0
-         size 0.5 1
+         size 0.89 1
          valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style editor_quad_dark
-         {
-          TextListboxWidgetClass tostoreTextListbox {
-           position 0 -0.18167
-           size 0.964 0.60866
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           "title visible" 1
-           colums "#Car_to_Stored"
-           lines 20
-          }
-          PanelWidgetClass PanelWidget10 {
-           ignorepointer 1
-           position 0 0
-           size 1 0.3247
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            PanelWidgetClass PanelWidget7 {
-             ignorepointer 1
-             position 0 0.1089
-             size 0.8 0.3
-             halign center_ref
-             valign bottom_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style editor_quad_dark
-             {
-              ButtonWidgetClass storeinButton {
-               color 0.251 0.502 0 1
-               position 0 0
-               size 0.98 0.9
-               halign center_ref
-               valign center_ref
-               hexactpos 0
-               vexactpos 0
-               hexactsize 0
-               vexactsize 0
-               style OldStyle
-               text "#Store_in"
-              }
-             }
-            }
-            PanelWidgetClass storeInFractionButtonWrapper {
-             ignorepointer 1
-             position 0 0.5389
-             size 0.8 0.3
-             halign center_ref
-             valign bottom_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style editor_quad_dark
-             {
-              ButtonWidgetClass storeinFractionButton {
-               color 0.251 0.502 0 1
-               position 0 0
-               size 0.98 0.9
-               halign center_ref
-               valign center_ref
-               hexactpos 0
-               vexactpos 0
-               hexactsize 0
-               vexactsize 0
-               style OldStyle
-               text "#Store_in_Fraction"
-              }
-             }
-            }
-           }
-          }
-         }
+         text "#out_parking_with_insurance"
+         text_proportion 0.5
+         "text valign" center
         }
-        PanelWidgetClass PanelWidget6 {
-         ignorepointer 1
-         position 0 0
-         size 0.5 1
+        CheckBoxWidgetClass insuranceCheckBox {
+         size 0.1 1
          halign right_ref
          valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style editor_quad_dark
-         {
-          TextListboxWidgetClass isstoredTextListbox {
-           position 0 -0.12957
-           size 0.9491 0.71286
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           "title visible" 1
-           colums "#Cars_in_Sored;50;#Privat;25;#Fraction;25"
-           lines 17
-          }
-          PanelWidgetClass PanelWidget9 {
-           ignorepointer 1
-           position 0 0
-           size 1 0.1298
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            PanelWidgetClass PanelWidget8 {
-             ignorepointer 1
-             position 0 0.17885
-             size 0.6 0.6423
-             halign center_ref
-             valign bottom_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style editor_quad_dark
-             {
-              ButtonWidgetClass storeoutButton {
-               color 0 0.1255 0.502 1
-               position 0 0
-               size 0.98 0.9
-               halign center_ref
-               valign center_ref
-               hexactpos 0
-               vexactpos 0
-               hexactsize 0
-               vexactsize 0
-               style OldStyle
-               text "#Store_out"
-              }
-             }
-            }
-           }
-          }
-          PanelWidgetClass PanelWidget11 {
-           ignorepointer 1
-           position 0 0.31
-           size 1 0.1289
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass insurranceTextBox {
-             ignorepointer 1
-             position 0.02102 0
-             size 0.68382 0.72325
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             text "#out_parking_with_insurance"
-             text_proportion 0.5
-             "text valign" center
-            }
-            CheckBoxWidgetClass insuranceCheckBox {
-             position 0.726 0.138
-             size 0.143 0.723
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-         }
         }
        }
       }
-      PanelWidgetClass PanelWidget4 {
-       visible 1
-       ignorepointer 1
-       position 0.01051 0.01579
-       size 0.04842 0.07
-       halign right_ref
+      ButtonWidgetClass storeoutButton {
+       color 0 0.1255 0.502 1
+       position 0 0.02
+       size 0.95 0.07
+       halign center_ref
+       valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass Button_Closed {
-         color 0.502 0 0 1
-         position 0 0
-         size 0.9 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "X"
-        }
-       }
+       style OldStyle
+       text "#Store_out"
       }
      }
+    }
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0.11
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
     }
    }
   }

@@ -64,7 +64,6 @@ FrameWidgetClass License_Menu {
       ImageWidgetClass closeIcon {
        ignorepointer 1
        color 0.502 0 0 1
-       position -0.025 0.02778
        size 1 1
        halign center_ref
        valign center_ref
@@ -95,7 +94,7 @@ FrameWidgetClass License_Menu {
     }
     TextWidgetClass TextWidget1 {
      ignorepointer 1
-     position 0 0.23
+     position 0.359 0.757
      size 0.25 0.065
      halign center_ref
      hexactpos 0
@@ -109,7 +108,7 @@ FrameWidgetClass License_Menu {
     }
     TextWidgetClass newOwnerDisplay {
      ignorepointer 1
-     position 0 0.31
+     position 0.359 0.838
      size 0.25 0.065
      halign center_ref
      hexactpos 0
@@ -122,7 +121,7 @@ FrameWidgetClass License_Menu {
     }
     ButtonWidgetClass changOwnerButton {
      color 0.251 0.502 0 1
-     position 0 0.391
+     position 0.359 0.919
      size 0.25 0.065
      halign center_ref
      hexactpos 0
@@ -134,7 +133,7 @@ FrameWidgetClass License_Menu {
     }
     ButtonWidgetClass safeKeylist {
      color 0.251 0.502 0 1
-     position 0 0.016
+     position 0.359 0.708
      size 0.25 0.065
      halign center_ref
      valign bottom_ref
@@ -143,7 +142,7 @@ FrameWidgetClass License_Menu {
      hexactsize 0
      vexactsize 0
      style Default
-     text "#save"
+     text "#save_keys"
     }
     EditBoxWidgetClass search_input {
      position 0.008 0.141
@@ -168,7 +167,7 @@ FrameWidgetClass License_Menu {
      lines 20
     }
     TextListboxWidgetClass playerhaveKeylist {
-     position 0.008 0.1055
+     position 0.288 0.1005
      size 0.348 0.757
      halign right_ref
      valign center_ref

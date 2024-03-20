@@ -1,173 +1,136 @@
 FrameWidgetClass rootFrame {
- size 0.42561 0.49638
+ size 800 600
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
+   color 0.5176 0.5176 0.5176 0.3137
    position 0 0
-   size 0.98252 0.96918
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget2 {
+    TextWidgetClass loadoutMenu {
      ignorepointer 1
-     position 0.00904 0.0159
-     size 0.98192 0.9682
-     valign bottom_ref
+     position 0 0.01
+     size 0.8 0.07
+     halign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     text "#Loadout"
+     "size to text h" 1
+     "text halign" center
+     "text valign" center
      {
-      PanelWidgetClass PanelWidget1 {
-       ignorepointer 1
-       position 0 0.01642
-       size 0.3 0.09252
-       halign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass loadoutMenu {
-         ignorepointer 1
-         size 1 1
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#Loadout"
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget4 {
+      PanelWidgetClass PanelWidget6 {
        ignorepointer 1
        position 0 0
-       size 0.5 0.87464
+       size 1 0.05
+       halign center_ref
        valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        PanelWidgetClass PanelWidget3 {
-         ignorepointer 1
-         position 0 0.01877
-         size 0.95941 0.11
-         halign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          XComboBoxWidgetClass loadoutComboBox {
-           position 0 0
-           size 1 1
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-          }
-         }
-        }
-        TextListboxWidgetClass loadoutListbox {
-         position 0.0203 0.06379
-         size 0.96317 0.83368
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         "title visible" 0
-         lines 15
-        }
-       }
+       style editor_selection
       }
-      PanelWidgetClass PanelWidget5 {
+     }
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.01 0.01333
+     size 0.045 0.06
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
        ignorepointer 1
-       position 0.087 0.01642
-       size 0.298 0.099
-       halign right_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass equipButton {
-         color 0.251 0.502 0 1
-         position 0 0
-         size 0.98 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#Equip"
-        }
-       }
-      }
-      ItemPreviewWidgetClass itemPreview {
-       ignorepointer 1
-       position 0.02798 -0.00313
-       size 0.41605 0.67879
-       halign right_ref
+       color 0.502 0 0 1
+       size 1 1
+       halign center_ref
        valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-      }
-      PanelWidgetClass PanelWidget7 {
-       ignorepointer 1
-       position 0.01015 0.0159
-       size 0.06671 0.09355
-       halign right_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass Button_Closed {
-         color 0.502 0 0 1
-         position 0 0
-         size 0.9 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "X"
-        }
-       }
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
       }
      }
+    }
+    XComboBoxWidgetClass loadoutComboBox {
+     position -0.265 0.11833
+     size 0.45 0.07
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    TextListboxWidgetClass loadoutListbox {
+     position 0.01 0.05918
+     size 0.45 0.71498
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "title visible" 0
+     lines 15
+    }
+    ItemPreviewWidgetClass itemPreview {
+     ignorepointer 1
+     position 0.01 0.0525
+     size 0.52 0.86833
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+    }
+    ButtonWidgetClass equipButton {
+     color 0.251 0.502 0 1
+     position 0.03 0.01
+     size 0.41 0.06
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "#Equip"
+    }
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0.1
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
     }
    }
   }
