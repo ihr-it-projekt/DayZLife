@@ -1,65 +1,55 @@
 FrameWidgetClass Processing_bar {
- size 1 1
+ position 0 120
+ size 1000 30
  halign center_ref
- valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ valign bottom_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
-  PanelWidgetClass PanelWidget0 {
+  PanelWidgetClass PanelWidget1 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
-   position 0 0.01
-   size 0.3 0.05352
+   color 0.5176 0.5176 0.5176 0.3137
+   position 0 0
+   size 1 1
    halign center_ref
    valign bottom_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget1 {
+    ProgressBarWidgetClass Status_bar {
      ignorepointer 1
-     size 0.99 0.91
+     position 0 0
+     size 1 1
      halign center_ref
      valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     style Loading
+     current 48
+     vertical 0
+     flipped 0
      {
-      ProgressBarWidgetClass Status_bar {
+      TextWidgetClass Status {
        ignorepointer 1
-       position 0 0
-       size 0.9719 0.7287
+       color 0 0 0 1
+       size 0.2 1
        halign center_ref
        valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style Loading
-       current 48
-       {
-        TextWidgetClass Status {
-         ignorepointer 1
-         color 0 0 0 1
-         size 0.217 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style Bold
-         text "50%"
-         "text halign" center
-         "text valign" center
-        }
-       }
+       style Bold
+       text "50%"
+       "text halign" center
+       "text valign" center
       }
      }
     }
