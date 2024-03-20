@@ -1,258 +1,200 @@
 FrameWidgetClass rootFrame {
  position 0 0
- size 0.35211 0.40599
+ size 600 400
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
-   position 0 0.00962
-   size 0.97455 0.99116
+   color 0.5176 0.5176 0.5176 1
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget1 {
+    TextWidgetClass giveArrestMenu {
+     disabled 0
+     clipchildren 1
+     inheritalpha 0
      ignorepointer 1
-     position 0 0.00121
-     size 0.9739 0.9735
+     keepsafezone 0
+     position 0 0.02
+     size 0.8 0.08
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     draggable 0
+     text "#Give_Arrest_Menu"
+     font "gui/fonts/metron"
+     "exact text" 0
+     "size to text h" 1
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+     {
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       size 1 0.06
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style EditorPanel
+      }
+     }
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.01333 0.02
+     size 0.07 0.09
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       position 0 0
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
+      }
+     }
+    }
+    TextWidgetClass prisonerName {
+     position 0 0.15
+     size 0.9 0.1
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Normal
+     font "gui/fonts/metron"
+     "exact text" 1
+    }
+    TextWidgetClass giveArrestMenu0 {
+     disabled 0
+     clipchildren 1
+     inheritalpha 0
+     ignorepointer 1
+     keepsafezone 0
+     position 0.04667 -0.17
+     size 0.5933 0.1
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     draggable 0
+     text "#arrestTime"
+     "exact text" 0
+     text_proportion 0.6
+     "size to text h" 0
+     "size to text v" 0
+     "text valign" center
+    }
+    PanelWidgetClass PanelWidget2 {
+     ignorepointer 1
+     position 0 0.25
+     size 0.9 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
+    }
+    EditBoxWidgetClass input_arrest {
+     position 0.0467 -0.17
+     size 0.3 0.1
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style EditorProperty
+     font "gui/fonts/metron"
+    }
+    TextWidgetClass giveArrestMenu1 {
+     disabled 0
+     clipchildren 1
+     inheritalpha 0
+     ignorepointer 1
+     keepsafezone 0
+     position 0 -0.02
+     size 0.9 0.11
      halign center_ref
      valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
-     {
-      PanelWidgetClass PanelWidget2 {
-       ignorepointer 1
-       position 0 0
-       size 1 0.15679
-       halign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        PanelWidgetClass PanelWidget3 {
-         ignorepointer 1
-         position -0.00986 0
-         size 0.77704 0.74903
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass giveArrestMenu {
-           disabled 0
-           clipchildren 1
-           inheritalpha 0
-           ignorepointer 1
-           keepsafezone 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           draggable 0
-           text "#Give_Arrest_Menu"
-           font "gui/fonts/metron"
-           "exact text" 0
-           text_proportion 0.7
-           "size to text h" 0
-           "size to text v" 0
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget16 {
-         ignorepointer 1
-         position 0.00987 0.12549
-         size 0.07054 0.74903
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass Button_Closed {
-           color 0.502 0 0 1
-           position 0 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style OldStyle
-           text "X"
-           text_proportion 0.7
-          }
-         }
-        }
-       }
-      }
-      EditBoxWidgetClass input_arrest {
-       position 0.21893 0.5955
-       size 0.5424 0.11
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style DefaultBorder
-       font "gui/fonts/metron"
-      }
-      PanelWidgetClass PanelWidget5 {
-       ignorepointer 1
-       position 0 0.04553
-       size 0.72918 0.11893
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass giveArrestButton {
-         color 0.251 0.502 0 1
-         position 0 0.02696
-         size 0.98 0.92608
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#give_arrest"
-         text_proportion 0.7
-         font "gui/fonts/metron"
-        }
-       }
-      }
-      TextWidgetClass prisonerName {
-       position 0 0.72517
-       size 0.9576 0.09837
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style Normal
-       font "gui/fonts/metron"
-       "exact text" 1
-      }
-      PanelWidgetClass PanelWidget4 {
-       ignorepointer 1
-       position -0.27613 -0.1505
-       size 0.428 0.11
-       halign center_ref
-       valign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass giveArrestMenu0 {
-         disabled 0
-         clipchildren 1
-         inheritalpha 0
-         ignorepointer 1
-         keepsafezone 0
-         position 0 0
-         size 1 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         draggable 0
-         text "#arrestTime"
-         "exact text" 0
-         text_proportion 0.6
-         "size to text h" 0
-         "size to text v" 0
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget6 {
-       ignorepointer 1
-       position 0 0.08451
-       size 0.428 0.11
-       halign center_ref
-       valign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass giveArrestMenu1 {
-         disabled 0
-         clipchildren 1
-         inheritalpha 0
-         ignorepointer 1
-         keepsafezone 0
-         position 0 0
-         size 1 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         draggable 0
-         text "#arrestReason"
-         font "gui/fonts/metron"
-         "exact text" 0
-         text_proportion 0.6
-         "size to text h" 0
-         "size to text v" 0
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      EditBoxWidgetClass arrest_reason {
-       position 0.00002 0.21035
-       size 0.9803 0.11
-       halign center_ref
-       valign bottom_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style DefaultBorder
-       "Use default text" 0
-       "exact text" 0
-       font "gui/fonts/metron"
-      }
-     }
+     draggable 0
+     text "#arrestReason"
+     font "gui/fonts/metron"
+     "exact text" 0
+     text_proportion 0.6
+     "size to text h" 0
+     "size to text v" 0
+     "text halign" center
+     "text valign" center
+    }
+    EditBoxWidgetClass arrest_reason {
+     position 0 0.15
+     size 0.9 0.32
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 1
+     style EditorProperty
+     "limit visible" 1
+     "exact text" 1
+     font "gui/fonts/metronblack14"
+    }
+    ButtonWidgetClass giveArrestButton {
+     color 0.251 0.502 0 1
+     position 0 0.02
+     size 0.9 0.0961
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "#give_arrest"
+     text_proportion 0.7
+     font "gui/fonts/metron"
     }
    }
   }
