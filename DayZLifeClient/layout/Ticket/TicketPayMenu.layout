@@ -36,8 +36,7 @@ FrameWidgetClass rootFrame {
      vexactsize 0
      draggable 0
      text "#pay_ticket"
-     "exact text" 0
-     text_proportion 0.7
+     "exact text" 1
      "size to text h" 0
      "size to text v" 0
      "text halign" center
@@ -84,8 +83,8 @@ FrameWidgetClass rootFrame {
      vexactpos 0
      hexactsize 0
      vexactsize 0
+     "no focus" 1
      text "#pay_ticket"
-     text_proportion 0.7
     }
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
