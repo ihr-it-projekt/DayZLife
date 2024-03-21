@@ -11,6 +11,7 @@ class CfgPatches {
 
 class CfgVehicles {
     class Inventory_Base;
+    class Stone;
     class DZLStoneOre_ColorBase: Inventory_Base {
         model = "\dz\gear\consumables\Stone.p3d";
         animClass = "NoFireClass";
@@ -129,7 +130,7 @@ class CfgVehicles {
             };
         };
     };
-    class DZL_Stone: DZLStoneOre_ColorBase {
+    class DZL_Stone: Stone {
         scope = 2;
         displayName = "$STR_CfgVehicles_Stone0";
         descriptionShort = "$STR_CfgVehicles_Stone1";
@@ -139,7 +140,7 @@ class CfgVehicles {
         displayName = "#Gold";
         descriptionShort = "#Gold_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Gold\Gold_Stone.paa"
+            "DayZLifeClient\model\Ore\Gold\DZL_Gold_Stone.paa"
         };
     };
     class DZL_Gold: DZLOre_ColorBase {
@@ -147,7 +148,7 @@ class CfgVehicles {
         displayName = "#Gold";
         descriptionShort = "#Gold_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Gold\Gold_Stone_Small.paa"
+            "DayZLifeClient\model\Ore\Gold\DZL_Gold.paa"
         };
     };
     class DZL_Ore_Copper: DZLStoneOre_ColorBase {
@@ -155,7 +156,7 @@ class CfgVehicles {
         displayName = "#Copper_ore";
         descriptionShort = "#Copper_ore_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Copper\Copper_Stone.paa"
+            "DayZLifeClient\model\Ore\Copper\DZL_Copper_Stone.paa"
         };
     };
     class DZL_Copper: DZLOre_ColorBase {
@@ -163,7 +164,7 @@ class CfgVehicles {
         displayName = "#Copper";
         descriptionShort = "#Copper_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Copper\Copper.paa"
+            "DayZLifeClient\model\Ore\Copper\DZL_Copper.paa"
         };
     };
     class DZL_Coal: DZLStoneOre_ColorBase {
@@ -171,7 +172,7 @@ class CfgVehicles {
         displayName = "#Coal";
         descriptionShort = "#Coal_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Coal\coal_stone.paa"
+            "DayZLifeClient\model\Ore\Copper\DZL_Coal_Stone.paa"
         };
     };
     class DZL_Ore_Iron: DZLStoneOre_ColorBase {
@@ -179,7 +180,7 @@ class CfgVehicles {
         displayName = "#Iron_ore";
         descriptionShort = "#Iron_ore_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Iron\iron_stone.paa"
+            "DayZLifeClient\model\Ore\Iron\DZL_Iron_Stone.paa"
         };
     };
     class DZL_Iron: DZLOre_ColorBase {
@@ -187,7 +188,7 @@ class CfgVehicles {
         displayName = "#Iron";
         descriptionShort = "#Iron_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Iron\Iron.paa"
+            "DayZLifeClient\model\Ore\Iron\DZL_Iron.paa"
         };
     };
     class DZL_Ore_Diamond: DZLOre_ColorBase {

@@ -36,7 +36,7 @@ class CfgVehicles {
         scope = 2;
         displayName = "#Counterfeit_money";
         descriptionShort = "#Counterfeit_money";
-        model = "DZL_Misc\Money\DZL_Money.p3d";
+        model = "\DayZLifeClient\model\Money\DZL_Money.p3d";
         isMeleeWeapon = 0;
         weight = 2;
         absorbency = 1;

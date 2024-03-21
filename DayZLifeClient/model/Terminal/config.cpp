@@ -11,7 +11,8 @@ class CfgPatches {
 
 class CfgVehicles {
     class HouseNoDestruct;
-    class DZL_Terminal_Blue: HouseNoDestruct {
+    class DZLLoadoutActionObject: HouseNoDestruct {};
+    class DZL_Terminal_Blue: DZLLoadoutActionObject {
         scope = 1;
         model = "\DZL_Misc\Terminal\DZL_Terminal.p3d";
         hiddenSelections[] = {
@@ -21,7 +22,7 @@ class CfgVehicles {
             "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Blue.paa"
         };
     };
-    class DZL_Terminal_Red: HouseNoDestruct {
+    class DZL_Terminal_Red: DZLLoadoutActionObject {
         scope = 1;
         model = "\DZL_Misc\Terminal\DZL_Terminal.p3d";
         hiddenSelections[] = {
@@ -31,7 +32,7 @@ class CfgVehicles {
             "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Red.paa"
         };
     };
-    class DZL_Terminal_Yellow: HouseNoDestruct {
+    class DZL_Terminal_Yellow: DZLLoadoutActionObject {
         scope = 1;
         model = "\DZL_Misc\Terminal\DZL_Terminal.p3d";
         hiddenSelections[] = {

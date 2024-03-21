@@ -12,15 +12,15 @@ class CfgVehicles {
     class Barrel_ColorBase;
     class Inventory_Base;
     class DZL_Oil_Barrel: Barrel_ColorBase {
-        displayName = "Fass mit Ölschlamm";
-        descriptionShort = "Kann zu Öl oder Plastik weiter verarbeitet werden";
+        displayName = "#Barrel_Crude_Oil";
+        descriptionShort = "#Barrel_Crude_Oil_Desc";
         canBeDigged = 0;
         itemSize[] = {2, 2};
         carveNavmesh = 1;
         quantityBar = 1;
         scope = 2;
         hiddenSelectionsTextures[] = {
-            "\DZL_Misc\Oil\Data\RustyBarrel.paa"
+            "DayZLifeClient\model\Oil\Data\RustyBarrel.paa"
         };
         class Cargo {
             itemsCargoSize[] = {0, 0};
@@ -30,7 +30,7 @@ class CfgVehicles {
     };
     class DZL_Oil: Inventory_Base {
         scope = 2;
-        displayName = "10L Oil";
+        displayName = "#10L_Canister_Oil";
         descriptionShort = "";
         model = "\dz\vehicles\parts\oil_bottle.p3d";
         weight = 5000;
