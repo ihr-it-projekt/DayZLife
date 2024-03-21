@@ -1,11 +1,18 @@
 modded class DZLAdmin {
 
     void DZLAdmin(array<string> jobs) {
-        if(!Load()) Save();
+        DZLAccess newAccess;
+        if(!Load()) {
+            version = "7";
+
+            newAccess = new DZLAccess("ExampleDayZId", jobs);
+            playerAccesses.Insert(newAccess);
+            Save();
+        }
 
         if(version == "6") {
             foreach(DZLPlayerAccess playerAccess: access) {
-                DZLAccess newAccess = new DZLAccess(playerAccess.GetIdent(), jobs);
+                newAccess = new DZLAccess(playerAccess.GetIdent(), jobs);
 
                 newAccess.MigrateAccess(playerAccess);
 

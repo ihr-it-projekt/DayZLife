@@ -24,13 +24,5 @@ modded class MissionServer {
         DZLConfig.Get();
         DZLBuilderManager.Get().Create();
     }
-    override PlayerBase OnClientNewEvent(PlayerIdentity identity, vector pos, ParamsReadContext ctx) {
 
-        m_player = super.OnClientNewEvent(identity, pos, ctx);
-#ifdef TBRevivePlayerServer
-        GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_CLIENT, null, true, identity);
-#endif
-
-        return m_player;
-    }
 }

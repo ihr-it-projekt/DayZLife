@@ -95,10 +95,6 @@ class DZLAlmanacListener: DZLBaseEventListener {
         GetGame().RPCSingleParam(null, DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(job, collection, copIdents), true, player.GetIdentity());
     }
 
-
-
-
-
     void SendAllPlayerList(PlayerIdentity player) {
         if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, player.GetId())) return;
 
