@@ -77,7 +77,6 @@ modded class DZLPlayer {
         if(!ctx.Read(activeJobGrade)) return false;
         if(!ctx.Read(lastLoginDate)) return false;
         if(!ctx.Read(licenceIds)) return false;
-        if(!ctx.Read(deadState)) return false;
         if(!ctx.Read(itemsStore)) return false;
         if(!ctx.Read(openTickets)) return false;
         if(!ctx.Read(fractionId)) return false;
@@ -103,7 +102,6 @@ modded class DZLPlayer {
         ctx.Write(activeJobGrade);
         ctx.Write(lastLoginDate);
         ctx.Write(licenceIds);
-        ctx.Write(deadState);
         ctx.Write(itemsStore);
         ctx.Write(openTickets);
         ctx.Write(fractionId);
@@ -208,15 +206,6 @@ modded class DZLPlayer {
     void PlayerHasDied() {
         DZLLogMoneyTransaction(dayZPlayerId, "has died", money, 0, money * -1);
         money = 0;
-    }
-
-    void SetBetweenState() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_BETWEEN;
-    }
-
-    void ResetDeadState() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-        itemsStore = new array<ref DZLStoreItem>;;
     }
 
     void SaveItems(PlayerBase _player) {
