@@ -14,6 +14,8 @@ modded class MissionServer {
     override void OnInit() {
         super.OnInit();
 
+        CheckDZLDataPath();
+        CheckDZLConfigPath();
         manager = new DZLEventManager;
         checkController = new DZLCheckController;
         storageController = new DZLStorageController;

@@ -93,7 +93,6 @@ modded class DZLCarConfig {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLCarConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CarConfig.json", this);
     }
 }

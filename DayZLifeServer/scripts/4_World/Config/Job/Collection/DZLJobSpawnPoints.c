@@ -184,7 +184,6 @@ modded class DZLJobSpawnPoints {
     }
 
     private void Save(string jobId) {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLJobSpawnPoints>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
     }
 }

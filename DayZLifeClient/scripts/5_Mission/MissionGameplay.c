@@ -15,6 +15,7 @@ modded class MissionGameplay {
 
     override void OnInit() {
         super.OnInit();
+        CheckDZLDataPath();
         playerEventListener = new DZLPlayerEventListener;
         messageDB = new DZLMessageDB;
         DZLPlayerClientDB.Get();

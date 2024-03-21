@@ -45,7 +45,6 @@ class DZLLoggerConfig {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLLoggerConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "logger.json", this);
     }
 }

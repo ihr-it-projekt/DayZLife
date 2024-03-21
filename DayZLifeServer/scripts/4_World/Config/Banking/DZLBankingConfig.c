@@ -66,7 +66,6 @@ modded class DZLBankingConfig {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLBankingConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "banking.json", this);
     }
 }

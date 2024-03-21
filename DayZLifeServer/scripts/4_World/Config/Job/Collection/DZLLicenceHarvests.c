@@ -373,7 +373,6 @@ modded class DZLWorkZones {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLWorkZones>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "workZone.json", this);
     }
 }

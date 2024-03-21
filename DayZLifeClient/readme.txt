@@ -1,3 +1,9 @@
+fixen
+- spawn menu läst sich bei initial spawn schließen mit esc
+- trader geht nicht auf
+
+
+
 RandomZurviver
 
 ToDos:

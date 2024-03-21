@@ -87,7 +87,6 @@ modded class DZLHouseConfig {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLHouseConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "house.json", this);
     }
 

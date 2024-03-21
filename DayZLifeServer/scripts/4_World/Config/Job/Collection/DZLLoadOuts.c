@@ -151,7 +151,6 @@ modded class DZLLoadOuts {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLLoadOuts>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);
     }
 }

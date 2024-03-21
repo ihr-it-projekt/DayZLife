@@ -47,7 +47,6 @@ modded class DZLArrestConfig {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLArrestConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "arrest.json", this);
     }
 

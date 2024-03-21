@@ -37,7 +37,6 @@ modded class DZLCrimeConfig {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLCrimeConfig>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
     }
 }

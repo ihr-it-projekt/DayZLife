@@ -309,7 +309,6 @@ modded class DZLTraderCategoryCollection {
     }
 
     private void Save() {
-        CheckDZLConfigPath();
         JsonFileLoader<DZLTraderCategoryCollection>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "traderCategories.json", this);
     }
 }

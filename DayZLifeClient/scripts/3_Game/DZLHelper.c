@@ -17,20 +17,24 @@ static void CheckDZLBasePath() {
 
 static void CheckDZLDataPath() {
     CheckDZLBasePath();
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_BASE_DATA)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_BASE_DATA);
+    }
     if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA);
     }
 }
 static void CheckDZLConfigPath() {
     CheckDZLBasePath();
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_BASE_CONFIG)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_BASE_CONFIG);
+    }
     if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_CONFIG);
     }
 }
 
 static void CheckDZLDataSubPath(string path) {
-    CheckDZLBasePath();
-    CheckDZLDataPath();
     if(!FileExist(path)) {
         MakeDirectory(path);
     }
