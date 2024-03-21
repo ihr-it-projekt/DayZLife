@@ -3,22 +3,18 @@ modded class DayZPlayerImplement {
         bool isDead = super.HandleDeath(pCurrentCommandID);
         PlayerBase player = PlayerBase.Cast(this);
 
-        if(player && player.GetIdentity() && player.GetDZLPlayer()) {
-            DZLPlayer dzlPlayer = player.GetDZLPlayer();
+        if(!player) return isDead;
+        if(!player.GetIdentity()) return isDead;
 
-            if(dzlPlayer) {
-                if(dzlPlayer.WillHealByMedic()) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, TBRReviveConfig.Get().deleteDeadBodyTimeWhenHealedByPlayer * 1000);
-                    player.RemoveAllItems();
-                } else if(dzlPlayer.WillHealByHospital()) {
-                    GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(Delete, 2500);
-                    player.RemoveAllItems();
-                } else if(isDead && dzlPlayer.HasMoney()) {
-                    player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
-                    dzlPlayer.PlayerHasDied();
-                }
-            }
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
+        if(!dzlPlayer) return isDead;
+
+        if(isDead && dzlPlayer.HasMoney()) {
+            player.SetMoneyPlayerIsDead(dzlPlayer.GetMoney());
+            dzlPlayer.PlayerHasDied();
+            return isDead;
         }
+
         return isDead;
     }
 }

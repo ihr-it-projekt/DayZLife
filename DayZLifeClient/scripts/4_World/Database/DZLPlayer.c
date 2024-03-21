@@ -28,7 +28,6 @@ class DZLPlayer: DZLFileSerializer {
     protected string activeJobGrade = "Rekrut";
     ref DZLDate lastLoginDate = new DZLDate;
     ref TStringArray licenceIds = new TStringArray;
-    protected string deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
     ref array<ref DZLStoreItem> itemsStore = new array<ref DZLStoreItem>;
     protected ref array<ref DZLTicket> openTickets = new array<ref DZLTicket>;
     protected string fractionId = "";
@@ -125,22 +124,6 @@ class DZLPlayer: DZLFileSerializer {
         return itemsStore.Get(0);
     }
 
-    bool WillHealByMedic() {
-        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
-    }
-
-    bool WillHealByHospital() {
-        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
-    }
-
-    bool HasNoDieState() {
-        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE;
-    }
-
-    bool HasBetweenState() {
-        return deadState == DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_IS_BETWEEN;
-    }
-
     string CanBuyLicence(notnull DZLCraftLicence licenceToBuy, DZLCraftLicence depLicence) {
         if(!HasEnoughMoney(licenceToBuy.price)) return "#not_enough_money";
         if(HasLicense(licenceToBuy)) return "#your_already_have_the_licence";
@@ -234,14 +217,6 @@ class DZLPlayer: DZLFileSerializer {
 
     void AddToContact(DZLOnlinePlayer _player) {
         DZLMessageDB.Get().AddContact(_player);
-    }
-
-    void SetWillHealByMedic() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_MEDIC;
-    }
-
-    void SetWillHealByHospital() {
-        deadState = DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NEW_SPAWN_HOSPITAL;
     }
 
 }
