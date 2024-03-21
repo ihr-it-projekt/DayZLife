@@ -134,7 +134,7 @@ class CfgVehicles {
         displayName = "$STR_CfgVehicles_Stone0";
         descriptionShort = "$STR_CfgVehicles_Stone1";
     };
-    class DZL_Gold: DZLStoneOre_ColorBase {
+    class DZL_Ore_Gold: DZLStoneOre_ColorBase {
         scope = 2;
         displayName = "#Gold";
         descriptionShort = "#Gold_desc";
@@ -150,7 +150,7 @@ class CfgVehicles {
             "DayZLifeClient\model\Ore\Gold\Gold_Stone_Small.paa"
         };
     };
-    class DZL_Copper: DZLStoneOre_ColorBase {
+    class DZL_Ore_Copper: DZLStoneOre_ColorBase {
         scope = 2;
         displayName = "#Copper_ore";
         descriptionShort = "#Copper_ore_desc";
