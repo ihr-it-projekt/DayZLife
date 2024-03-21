@@ -88,4 +88,15 @@ modded class PlayerBase {
         }
     }
 
+    override DZLPlayer GetDZLPlayer() {
+        if(dzlPlayer) return dzlPlayer;
+        string playerId = GetPlayerId();
+        if(!playerId) return null;
+
+        dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(playerId);
+        if(dzlPlayer) dzlPlayer.player = this;
+
+        return dzlPlayer;
+    }
+
 }
