@@ -8,6 +8,7 @@ class DZLBaseMenu: UIScriptedMenu {
     protected bool hasCloseButton = true;
     protected bool hideCourser = true;
     protected bool showCourser = true;
+    protected bool canClose = true;
 
 
     protected void Construct() {
@@ -79,7 +80,7 @@ class DZLBaseMenu: UIScriptedMenu {
 
     override void Update(float timeslice) {
         super.Update(timeslice);
-        if(GetUApi() && GetUApi().GetInputByName("UAUIBack").LocalPress()) {
+        if(canClose && GetUApi() && GetUApi().GetInputByName("UAUIBack").LocalPress()) {
             GetGame().GetUIManager().HideScriptedMenu(this);
         }
     }

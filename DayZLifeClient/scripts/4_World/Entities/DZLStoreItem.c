@@ -1,5 +1,5 @@
 class DZLStoreItem: DZLIdModel {
-    float health
+    float health;
     string type;
     float quantity;
     ref array<ref DZLStoreItem> attached = new array<ref DZLStoreItem>;

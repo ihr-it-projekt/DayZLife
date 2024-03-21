@@ -26,7 +26,7 @@ class DZLMessageSystemMenu : DZLBaseMenu {
     private TextListboxWidget messageListWidget;
     private MultilineTextWidget readWidget;
     private EditBoxWidget writeWidget;
-    private Widget mapButtonBoarder
+    private Widget mapButtonBoarder;
     private Widget mapPanelWidget;
     private Widget onlinePlayersWidget;
     private vector messagePosition;

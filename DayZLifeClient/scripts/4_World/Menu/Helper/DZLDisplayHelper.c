@@ -32,7 +32,7 @@ class DZLDisplayHelper {
         mapWidget.ClearUserMarks();
         mapWidget.SetScale(0.1);
         mapWidget.SetMapPos(pos);
-        mapWidget.AddUserMark(pos, "", ARGB(255, 0, 255, 0), "set:dayz_gui image:cartridge_pistol");
+        mapWidget.AddUserMark(pos, "", ARGB(255, 255, 0, 0), "DayZLifeClient\\layout\\pin.paa");
     }
 
     static void MoveDZLOnlinePlayerFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, string job) {

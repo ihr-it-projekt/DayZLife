@@ -48,7 +48,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
     private TextWidget adminJob;
     private TextWidget adminArrestTime;
     private TextWidget adminCanCop;
-    private TextListboxWidget adminLicenseTextListbox
+    private TextListboxWidget adminLicenseTextListbox;
 
     private Widget medicWidget;
     private TextListboxWidget playerNeedMedicList;

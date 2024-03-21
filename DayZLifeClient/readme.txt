@@ -1,7 +1,7 @@
 fixen
 - spawn menu läst sich bei initial spawn schließen mit esc
 - trader geht nicht auf
-
+- sync money after money transfer
 
 
 RandomZurviver

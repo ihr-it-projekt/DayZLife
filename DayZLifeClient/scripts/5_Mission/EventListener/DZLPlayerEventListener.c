@@ -52,7 +52,7 @@ class DZLPlayerEventListener: DZLBaseEventListener {
         queue.Remove(CreateSpawnMenu);
 
         GetGame().GetUIManager().CloseAll();
-        GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(), null);
+        GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(false), null);
     }
 
     void PlayerRespawn() {

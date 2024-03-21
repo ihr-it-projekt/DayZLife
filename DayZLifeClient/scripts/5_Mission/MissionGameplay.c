@@ -108,7 +108,7 @@ modded class MissionGameplay {
             if(holdRControl || holdOne) {
                 GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetAlmanacMenu(), NULL);
             } else if(holdTree && dzlPlayerBase.CanReSpawn() && !dzlPlayerBase.IsRestrained()) {
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(), NULL);
+                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(true), NULL);
             } else if(holdFour && dzlPlayerBase.CanOpenMessageMenu()) {
                 GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetMessageSystemMenu(), NULL);
             } else if(holdFive && !dzlPlayerBase.IsUnconscious()) {

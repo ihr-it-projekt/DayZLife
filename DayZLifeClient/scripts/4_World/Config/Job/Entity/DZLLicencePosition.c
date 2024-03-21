@@ -1,5 +1,5 @@
 class DZLLicencePosition {
     vector position;
-    vector orientation
+    vector orientation;
 
 }

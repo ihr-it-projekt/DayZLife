@@ -102,8 +102,8 @@ class DZLPlayerArrestListener: DZLBaseEventListener {
                 continue;
             }
 
-            if (!isInPrison) continue;
-            if (dzlPlayer.IsPlayerInArrest()) continue;
+            if(!isInPrison) continue;
+            if(dzlPlayer.IsPlayerInArrest()) continue;
 
             ChangeItems(PlayerBase.Cast(player), arrestConfig.exPrisonerItems, arrestConfig.shouldDeleteAllItemsOnExPrissoner);
             vector randPosition = arrestConfig.exPrisonerAreas.Get(prisonArea);

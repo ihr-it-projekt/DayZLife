@@ -1,6 +1,6 @@
 class DZLPlayerPayTicketMenu: DZLBaseMenu {
     private ButtonWidget payTicket;
-    private TextListboxWidget openTicketsList
+    private TextListboxWidget openTicketsList;
 
     void DZLPlayerPayTicketMenu() {
         layoutPath = "DayZLifeClient/layout/Ticket/TicketPayMenu.layout";

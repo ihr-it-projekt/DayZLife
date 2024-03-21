@@ -210,9 +210,10 @@ modded class PlayerBase {
         return progressBarRaidCar;
     }
 
-    DZLSpawnPositionMenu GetSpawnPositionMenu() {
+    DZLSpawnPositionMenu GetSpawnPositionMenu(bool isOpenOverMenu) {
         spawnPositionMenu = new DZLSpawnPositionMenu();
         InitMenu(spawnPositionMenu);
+        spawnPositionMenu.isOpenOverMenu = isOpenOverMenu;
         return spawnPositionMenu;
     }
 

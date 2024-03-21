@@ -12,15 +12,49 @@ FrameWidgetClass rootFrame {
    ignorepointer 1
    color 0.5176 0.5176 0.5176 0.3137
    position 0 0
-   size 1920 1080
+   size 1 1
    halign center_ref
    valign center_ref
-   hexactpos 1
-   vexactpos 1
-   hexactsize 1
-   vexactsize 1
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
    style editor_selection
    {
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0 0
+     size 0.03 0.05
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     priority 10
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       position 0.0072 0.02546
+       size 1.0209 1.0139
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       priority 10
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
+      }
+     }
+    }
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
      size 1 1
@@ -97,21 +131,21 @@ FrameWidgetClass rootFrame {
        }
       }
       MapWidgetClass map {
-       position 0.0042 0.00776
-       size 0.7423 0.88483
+       position 0 0.05
+       size 0.75 0.95
        halign right_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
+       priority 11
       }
       TextWidgetClass warnText {
        ignorepointer 1
        color 0.502 0 0 1
-       position 0.00418 0.0074
-       size 0.7412 0.0926
+       position 0.03 0
+       size 0.72 0.05
        halign right_ref
-       valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0

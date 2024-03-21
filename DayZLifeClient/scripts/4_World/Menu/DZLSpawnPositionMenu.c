@@ -5,11 +5,13 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     private ButtonWidget spawn;
     private int currentJobIndex = 0;
     private XComboBoxWidget jobSelection;
+    private Widget warnText;
+    bool isOpenOverMenu = false;
 
     private ref map<int, string> jobIndex = new map<int, string>;
 
     void DZLSpawnPositionMenu() {
-        hasCloseButton = false;
+        canClose = false;
         Construct();
     }
 
@@ -34,6 +36,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         randomSpawn = creator.GetButtonWidget("randomButton");
         spawn = creator.GetButtonWidget("spawnButton");
         jobSelection = creator.GetXComboBoxWidget("spawn");
+        warnText = creator.GetWidget("warnText");
 
         spawn.Show(false);
         return layoutRoot;
@@ -41,6 +44,8 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
     override void OnShow() {
         super.OnShow();
+        closeButton.Show(isOpenOverMenu);
+        warnText.Show(isOpenOverMenu);
         GetGame().GetMission().GetHud().ShowHud(false);
         GetGame().GetMission().GetHud().ShowQuickBar(false);
 

@@ -13,7 +13,6 @@ modded class CarScript {
         RegisterNetSyncVariableInt("dzlCarId");
         RegisterNetSyncVariableBool("isSold");
         RegisterNetSyncVariableBool("isRaided");
-        RegisterNetSyncVariableBool("hasInsuranceServer");
     }
 
     override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx) {
