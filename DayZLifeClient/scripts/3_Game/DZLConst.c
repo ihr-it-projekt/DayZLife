@@ -14,5 +14,3 @@ static string DAY_Z_LIFE_JOB_ARMY = "Army";
 
 static string DAY_Z_LIFE_ACCESS_PLAYERS = "Players";
 static string DAY_Z_LIFE_ACCESS_CARS = "Cars";
-
-static string DAY_Z_LIFE_DZL_PLAYER_DEAD_STATE_NONE = "none";

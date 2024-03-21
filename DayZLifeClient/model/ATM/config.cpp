@@ -1,10 +1,10 @@
 class CfgPatches {
     class DZL_ATM {
-		units[] = {};
-		weapons[] = {};
-		requiredVersion = 0.1;
-		requiredAddons[] = {
-		    "DZ_Data"
+        units[] = {};
+        weapons[] = {};
+        requiredVersion = 0.1;
+        requiredAddons[] = {
+            "DZ_Data"
         };
     };
 };
