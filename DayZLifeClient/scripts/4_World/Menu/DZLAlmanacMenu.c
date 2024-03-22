@@ -73,12 +73,6 @@ class DZLAlmanacMenu : DZLBaseMenu {
     private ref map<string, ref array<ref DZLOnlinePlayer>> jobPlayers = new map<string, ref array<ref DZLOnlinePlayer>>();
     private ref map<string, ref array<ref DZLOnlinePlayer>> jobOnlinePlayers = new map<string, ref array<ref DZLOnlinePlayer>>();
 
-    void DZLAlmanacMenu() {
-        Construct();
-    }
-    void ~DZLAlmanacMenu() {
-        Destruct();
-    }
 
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/Almanac/DZL_Almanac.layout";

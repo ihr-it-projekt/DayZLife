@@ -10,12 +10,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
     private Widget storeInFractionButtonWrapper;
 
     void DZLCarStorageMenu() {
-        Construct();
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
-    }
-
-    void ~DZLCarStorageMenu() {
-        Destruct();
     }
 
     override Widget Init() {

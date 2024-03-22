@@ -9,11 +9,6 @@ class DZLLicenceMenu : DZLBaseMenu {
 
     void DZLLicenceMenu() {
         layoutPath = "DayZLifeClient/layout/Licence/Licence_Menu.layout";
-        Construct();
-    }
-
-    void ~DZLLicenceMenu() {
-        Destruct();
     }
 
     override void UpdateGUI(string message = "") {

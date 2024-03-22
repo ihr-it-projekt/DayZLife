@@ -16,6 +16,7 @@ class DZLActionOpenTraderMenu: ActionInteractBase {
 
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_TRADER, new Param1<PlayerBase>(action_data.m_Player), true);
 
         DZLTraderPosition position = action_data.m_Player.GetTraderByPosition();
 
@@ -28,7 +29,6 @@ class DZLActionOpenTraderMenu: ActionInteractBase {
 
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
 
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_TRADER, new Param1<PlayerBase>(action_data.m_Player), true);
         GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(position), NULL);
     }
 

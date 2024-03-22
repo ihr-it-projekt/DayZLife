@@ -7,11 +7,6 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
 
     void DZLPlayerTicketMenu() {
         layoutPath = "DayZLifeClient/layout/Ticket/TicketMenu.layout";
-        Construct();
-    }
-
-    void ~DZLPlayerTicketMenu() {
-        Destruct();
     }
 
     void SetReceiver(PlayerBase _receiver) {

@@ -4,11 +4,6 @@ class DZLPlayerPayTicketMenu: DZLBaseMenu {
 
     void DZLPlayerPayTicketMenu() {
         layoutPath = "DayZLifeClient/layout/Ticket/TicketPayMenu.layout";
-        Construct();
-    }
-
-    void ~DZLPlayerPayTicketMenu() {
-        Destruct();
     }
 
     override Widget Init() {

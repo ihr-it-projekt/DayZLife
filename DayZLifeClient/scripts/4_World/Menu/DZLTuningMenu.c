@@ -4,14 +4,6 @@ class DZLTuningMenu: DZLBaseMenu {
     private ButtonWidget tuneButton;
     private DZLTunerPosition position;
 
-    void DZLTuningMenu() {
-        Construct();
-    }
-
-    void ~DZLTuningMenu() {
-        Destruct();
-    }
-
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/Tuner/DZLTuner.layout";
         super.Init();

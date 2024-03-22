@@ -19,7 +19,6 @@ class DZLTraderListener: DZLBaseEventListener {
                     if(!category) continue;
 
                     foreach(DZLTraderType type: category.items) {
-                        if(itemsToBuyParam.Count() <= 0) continue;
                         DZLTraderTypeStorage storage = DZLDatabaseLayer.Get().GetTraderStorage().GetCurrentStorageByName(type.type);
                         foreach(string traderType: itemsToBuyParam) {
                             if(traderType != type.GetId()) continue;
@@ -35,7 +34,6 @@ class DZLTraderListener: DZLBaseEventListener {
                             typesToBuy.Insert(type);
                             sum += type.CalculateDynamicBuyPrice(storage);
                         }
-                        if(itemsToSell.Count() <= 0) continue;
                         foreach(EntityAI item: itemsToSell) {
                             CarScript carsScript = CarScript.Cast(item);
 

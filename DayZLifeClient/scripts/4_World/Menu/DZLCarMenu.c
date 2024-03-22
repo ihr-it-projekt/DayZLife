@@ -13,12 +13,6 @@ class DZLCarMenu : DZLBaseMenu {
     private int lastSelectedPlayerRow = -1;
     private int lastSelectedKeyRow = -1;
 
-    void DZLCarMenu() {
-        Construct();
-    }
-    void ~DZLCarMenu() {
-        Destruct();
-    }
 
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/CarKey/DZL_CarKey.layout";

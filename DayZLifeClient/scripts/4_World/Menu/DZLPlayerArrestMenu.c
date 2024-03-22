@@ -7,11 +7,6 @@ class DZLPlayerArrestMenu : DZLBaseMenu {
 
     void DZLPlayerArrestMenu() {
         layoutPath = "DayZLifeClient/layout/Arrest/ArrestMenu.layout";
-        Construct();
-    }
-
-    void ~DZLPlayerArrestMenu() {
-        Destruct();
     }
 
     void SetReceiver(PlayerBase _receiver) {

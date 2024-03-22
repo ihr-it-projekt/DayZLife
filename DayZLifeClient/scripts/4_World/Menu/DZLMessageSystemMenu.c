@@ -37,11 +37,6 @@ class DZLMessageSystemMenu : DZLBaseMenu {
 
     void DZLMessageSystemMenu() {
         layoutPath = "DayZLifeClient/layout/Message/DZL_Message_Menu.layout";
-        Construct();
-    }
-
-    void ~DZLMessageSystemMenu() {
-        Destruct();
     }
 
     override Widget Init() {

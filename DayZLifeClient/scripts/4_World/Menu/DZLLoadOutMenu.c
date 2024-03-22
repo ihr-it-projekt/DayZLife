@@ -11,14 +11,12 @@ class DZLLoadOutMenu: DZLBaseMenu {
 
     void DZLLoadOutMenu() {
         layoutPath = "DayZLifeClient/layout/LoadoutMenu/LoadoutMenu.layout";
-        Construct();
     }
 
     void ~DZLLoadOutMenu() {
         if(previewItem) {
             GetGame().ObjectDelete(previewItem);
         }
-        Destruct();
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {

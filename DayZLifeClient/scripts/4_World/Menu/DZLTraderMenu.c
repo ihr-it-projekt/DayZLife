@@ -11,7 +11,7 @@ class DZLTraderMenu: DZLBaseMenu {
     private TextWidget credits;
     private TextWidget tax;
     private ItemPreviewWidget preview;
-    private DZLTraderPosition position;
+    private ref DZLTraderPosition position;
 
     private int lastSelectedInventory;
     private int lastSelectedSellCard;
@@ -23,17 +23,18 @@ class DZLTraderMenu: DZLBaseMenu {
     private ref array<ref DZLTraderTypeStorage> storageOfItems;
 
 
-    void DZLTraderMenu(DZLTraderPosition _position) {
-        this.position = _position;
+    void DZLTraderMenu(ref DZLTraderPosition _position) {
+        position = _position;
         layoutPath = "DayZLifeClient/layout/Trader/Trader_Menu.layout";
         displayCategories = new map<string, ref array<ref DZLTraderType>>;
         addedCats = new array<string>;
-        Construct();
+
+        showHud = false;
+        showQuickBar = false;
     }
 
     void ~DZLTraderMenu() {
         DZLDisplayHelper.DeletePreviewItem();
-        Destruct();
     }
 
     override Widget Init() {

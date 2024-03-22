@@ -9,15 +9,17 @@ class DZLBaseMenu: UIScriptedMenu {
     protected bool hideCourser = true;
     protected bool showCourser = true;
     protected bool canClose = true;
+    protected bool showHud = true;
+    protected bool showQuickBar = true;
 
 
-    protected void Construct() {
+    void DZLBaseMenu() {
         if(GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         }
     }
 
-    protected void Destruct() {
+    void ~DZLBaseMenu() {
         OnHide();
         GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
     }
@@ -76,6 +78,9 @@ class DZLBaseMenu: UIScriptedMenu {
 
         GetGame().GetInput().ChangeGameFocus(1);
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
+
+        GetGame().GetMission().GetHud().ShowHud(showHud);
+        GetGame().GetMission().GetHud().ShowQuickBar(showQuickBar);
     }
 
     override void Update(float timeslice) {
@@ -91,6 +96,8 @@ class DZLBaseMenu: UIScriptedMenu {
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
+        GetGame().GetMission().GetHud().ShowHud(true);
+        GetGame().GetMission().GetHud().ShowQuickBar(true);
         Close();
     }
 }

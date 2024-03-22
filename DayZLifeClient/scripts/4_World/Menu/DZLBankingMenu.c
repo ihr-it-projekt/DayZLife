@@ -24,11 +24,6 @@ class DZLBankingMenu : DZLBaseMenu {
 
     void DZLBankingMenu() {
         layoutPath = "DayZLifeClient/layout/Banking/DZLBanking.layout";
-        Construct();
-    }
-
-    void ~DZLBankingMenu() {
-        Destruct();
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {

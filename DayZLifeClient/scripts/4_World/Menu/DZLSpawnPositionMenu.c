@@ -12,11 +12,8 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
     void DZLSpawnPositionMenu() {
         canClose = false;
-        Construct();
-    }
-
-    void ~DZLSpawnPositionMenu() {
-        Destruct();
+        showHud = false;
+        showQuickBar = false;
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
@@ -46,8 +43,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         super.OnShow();
         closeButton.Show(isOpenOverMenu);
         warnText.Show(isOpenOverMenu);
-        GetGame().GetMission().GetHud().ShowHud(false);
-        GetGame().GetMission().GetHud().ShowQuickBar(false);
+
 
         jobSelection.ClearAll();
         jobIndex.Insert(jobSelection.AddItem("#Civ"), DAY_Z_LIFE_JOB_CIVIL);

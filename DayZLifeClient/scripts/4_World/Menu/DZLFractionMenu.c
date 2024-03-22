@@ -45,13 +45,6 @@ class DZLFractionMenu : DZLBaseMenu {
     private CheckBoxWidget displayAccessGarageRight;
 
 
-    void DZLFractionMenu() {
-        Construct();
-    }
-    void ~DZLFractionMenu() {
-        Destruct();
-    }
-
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/FractionMenu/DZL_FractionMenu.layout";
         super.Init();
