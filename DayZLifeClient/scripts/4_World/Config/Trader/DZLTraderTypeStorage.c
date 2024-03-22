@@ -1,6 +1,5 @@
-class DZLTraderTypeStorage {
+class DZLTraderTypeStorage: DZLFileSerializer {
     private string type;
-    private string fileName;
     private float currentStorage = 0;
     private int lastTick;
     private int reducePerTick;

@@ -1,15 +1,16 @@
 modded class DZLTraderTypeStorage {
 
     void DZLTraderTypeStorage(DZLTraderType _type) {
-        this.type = _type.type;
-        this.fileName = "typeStorage" + _type.type + ".json";
+        type = _type.type;
+        Init(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE, "typeStorage" + type);
+
         if(!Load()) {
             currentStorage = 0;
         }
 
-        this.reducePerTick = _type.reducePerTick;
-        this.tickLengthInMinutes = _type.tickLengthInMinutes;
-        this.maxStorage = _type.maxStorage;
+        reducePerTick = _type.reducePerTick;
+        tickLengthInMinutes = _type.tickLengthInMinutes;
+        maxStorage = _type.maxStorage;
         mustSave = true;
         Save();
     }
@@ -54,18 +55,20 @@ modded class DZLTraderTypeStorage {
         mustSave = true;
     }
 
-    private bool Load() {
-        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName)) {
-            JsonFileLoader<DZLTraderTypeStorage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
-            return true;
+    override void Save() {
+        if(mustSave) {
+            super.Save();
         }
-        return false;
     }
 
-    void Save() {
-        if(mustSave == true) {
-            mustSave = false;
-            DZLJsonFileHandler<DZLTraderTypeStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
-        }
+    override protected bool Read(FileSerializer ctx) {
+        if(!ctx.Read(currentStorage)) return false;
+        if(!ctx.Read(lastTick)) return false;
+        return true;
+    }
+
+    override protected void Write(FileSerializer ctx) {
+        ctx.Write(currentStorage);
+        ctx.Write(lastTick);
     }
 }
