@@ -11,7 +11,8 @@ class CfgPatches {
 
 class CfgVehicles {
     class HouseNoDestruct;
-    class DZLLoadoutActionObject: HouseNoDestruct {};
+    class DZLBaseActionObject: HouseNoDestruct {};
+    class DZLLoadoutActionObject: DZLBaseActionObject {};
     class DZL_Terminal_Blue: DZLLoadoutActionObject {
         scope = 1;
         model = "\DayZLifeClient\model\Terminal\DZL_Terminal.p3d";
