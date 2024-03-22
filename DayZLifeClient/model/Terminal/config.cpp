@@ -12,18 +12,17 @@ class CfgPatches {
 class CfgVehicles {
     class HouseNoDestruct;
     class DZLBaseActionObject: HouseNoDestruct {};
-    class DZLLoadoutActionObject: DZLBaseActionObject {};
-    class DZL_Terminal_Blue: DZLLoadoutActionObject {
+    class DZLLoadoutActionObject: DZLBaseActionObject {
         scope = 1;
         model = "\DayZLifeClient\model\Terminal\DZL_Terminal.p3d";
         hiddenSelections[] = {
             "camoDZL"
         };
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Blue.paa"
+            "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Yellow.paa"
         };
     };
-    class DZL_Terminal_Red: DZLLoadoutActionObject {
+    class DZLTuningActionObject: DZLBaseActionObject {
         scope = 1;
         model = "\DayZLifeClient\model\Terminal\DZL_Terminal.p3d";
         hiddenSelections[] = {
@@ -31,26 +30,6 @@ class CfgVehicles {
         };
         hiddenSelectionsTextures[] = {
             "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Red.paa"
-        };
-    };
-    class DZL_Terminal_Yellow: DZLLoadoutActionObject {
-        scope = 1;
-        model = "\DayZLifeClient\model\Terminal\DZL_Terminal.p3d";
-        hiddenSelections[] = {
-            "camoDZL"
-        };
-        hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Yellow.paa"
-        };
-    };
-    class DZL_Terminal: DZL_Terminal_Yellow {
-        scope = 1;
-        model = "\DayZLifeClient\model\Terminal\DZL_Terminal.p3d";
-        hiddenSelections[] = {
-            "camoDZL"
-        };
-        hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Yellow.paa"
         };
     };
 };
