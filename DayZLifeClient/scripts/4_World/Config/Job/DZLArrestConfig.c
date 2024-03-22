@@ -10,6 +10,4 @@ class DZLArrestConfig {
     ref array<vector> arrestAreas;
     ref array<vector> exPrisonerAreas;
     int arrestAreaRadius = 110;
-    string job;
-
 }

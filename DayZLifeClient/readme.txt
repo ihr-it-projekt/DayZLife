@@ -15,7 +15,7 @@ ToDos:
 - Drogenkonsum
 - Alkoholkonsum
 - Drogenentzug mit medic Hilfe
-
++
 - Wohnung mieten
     - key management
     - miete im vorrausbezahlen

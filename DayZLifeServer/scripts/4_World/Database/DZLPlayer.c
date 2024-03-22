@@ -351,8 +351,8 @@ modded class DZLPlayer {
     }
 
     void UpdateDZLPlayerAtPlayer() {
-        if(!player) return:
-        PlayerIdentity playerIdentity = player.GetIdentity();
+if(!player) return:
+                              PlayerIdentity playerIdentity = player.GetIdentity();
         if(!playerIdentity) return;
 
         GetFraction();

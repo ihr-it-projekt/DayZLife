@@ -88,14 +88,6 @@ modded class DZLLicenceConfig {
             Save();
         }
 
-        if(licences.collection) {
-            foreach(DZLLicence licence: licences.collection) {
-                if(!licence.HasCorrectId()) {
-                    licence.SetId();
-                }
-            }
-        }
-
         if(licenceCollection.collection) {
             foreach(DZLCraftLicence licenceCraft: licenceCollection.collection) {
                 if(!licenceCraft.HasCorrectId()) {
@@ -104,24 +96,6 @@ modded class DZLLicenceConfig {
             }
         }
 
-        if(version == "1") {
-            version = "2";
-        }
-
-        if(version == "2") {
-            version = "3";
-            licenceCollection = new DZLLicenceCraftingCollection;
-            foreach(DZLLicence _l: licences.collection) {
-                DZLCraftLicence craftLicence = new DZLCraftLicence(_l.price, _l.name, _l.position, _l.dependencyLicence, _l.craftedItem, _l.durationForCrafting, _l.toolItems, _l.craftItems);
-                craftLicence.SetId(_l.GetId());
-                licenceCollection.collection.Insert(craftLicence);
-            }
-            licences = null;
-        }
-
-        if(version == "3") {
-            version = "4";
-        }
 
         if(version == "4") {
             version = "5";
