@@ -286,13 +286,14 @@ modded class DZLPlayer {
 
     override DZLFraction GetFraction() {
         fraction = DZLDatabaseLayer.Get().GetFraction(fractionId);
+        if(!fraction) fractionId = "";
 
         return fraction;
     }
 
     void RemoveFraction(string _fractionId) {
-        if(this.fractionId == _fractionId) {
-            this.fractionId = "";
+        if(fractionId == _fractionId) {
+            fractionId = "";
             fraction = null;
         }
         UpdateDZLPlayerAtPlayer();
@@ -350,9 +351,12 @@ modded class DZLPlayer {
     }
 
     void UpdateDZLPlayerAtPlayer() {
-if(!player) return:
-                              PlayerIdentity playerIdentity = player.GetIdentity();
+        if(!player) return:
+        PlayerIdentity playerIdentity = player.GetIdentity();
         if(!playerIdentity) return;
+
+        GetFraction();
+
         GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(this), true, playerIdentity);
     }
 }
