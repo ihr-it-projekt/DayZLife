@@ -203,8 +203,54 @@ class CfgVehicles {
         scope = 2;
         displayName = "#Diamond_cut";
         descriptionShort = "#Diamond_cut_desc";
-        hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Diamond\Diamond_Stone.paa"
+        model = "\DayZLifeClient\model\Ore\Diamond\DZL_Diamond.p3d";
+        class DamageSystem {
+        class GlobalHealth {
+            class Health {
+                hitpoints = 100;
+                healthLevels[] = {
+
+                    {
+                        1,
+
+                        {
+                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                        }
+                    },
+
+                    {
+                        0.7,
+
+                        {
+                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                        }
+                    },
+
+                    {
+                        0.5,
+
+                        {
+                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                        }
+                    },
+
+                    {
+                        0.3,
+
+                        {
+                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                        }
+                    },
+
+                    {
+                        0,
+
+                        {
+                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                        }
+                    }
+                };
+            };
         };
     };
 };
