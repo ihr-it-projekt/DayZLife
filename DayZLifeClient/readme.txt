@@ -1,3 +1,7 @@
+Autos wenn spieler aus fraction fielg, autos des spieler in normale garage umparken
+
+
+
 ToDos:
 
 - Wenn spieler sterben dann wieder in der Zelle spawnen

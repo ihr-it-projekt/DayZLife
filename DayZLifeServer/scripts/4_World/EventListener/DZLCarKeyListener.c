@@ -53,7 +53,7 @@ class DZLCarKeyListener: DZLBaseEventListener {
                 if(raidIndex == 1) {
                     CarScript raidedCar = CarScript.Cast(target);
                     raidedCar.isRaided = true;
-                    raidedCar.SynchronizeValues(null);
+                    raidedCar.SetSynchDirty();
                     paramRaidCar.param1.SetHealth(0);
 
                     DZLSendMessage(sender, "#car_was_successful_raided");
