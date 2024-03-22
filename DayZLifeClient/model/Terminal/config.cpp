@@ -42,4 +42,5 @@ class CfgVehicles {
             "DayZLifeClient\model\Terminal\Data\DZL_Terminal_Yellow.paa"
         };
     };
+    class DZL_Terminal: DZL_Terminal_Yellow {};
 };
