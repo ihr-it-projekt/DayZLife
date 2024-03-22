@@ -205,50 +205,51 @@ class CfgVehicles {
         descriptionShort = "#Diamond_cut_desc";
         model = "\DayZLifeClient\model\Ore\Diamond\DZL_Diamond.p3d";
         class DamageSystem {
-        class GlobalHealth {
-            class Health {
-                hitpoints = 100;
-                healthLevels[] = {
-
-                    {
-                        1,
+            class GlobalHealth {
+                class Health {
+                    hitpoints = 100;
+                    healthLevels[] = {
 
                         {
-                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
-                        }
-                    },
+                            1,
 
-                    {
-                        0.7,
-
-                        {
-                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
-                        }
-                    },
-
-                    {
-                        0.5,
+                            {
+                                "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                            }
+                        },
 
                         {
-                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
-                        }
-                    },
+                            0.7,
 
-                    {
-                        0.3,
-
-                        {
-                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
-                        }
-                    },
-
-                    {
-                        0,
+                            {
+                                "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                            }
+                        },
 
                         {
-                            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                            0.5,
+
+                            {
+                                "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                            }
+                        },
+
+                        {
+                            0.3,
+
+                            {
+                                "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                            }
+                        },
+
+                        {
+                            0,
+
+                            {
+                                "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond.rvmat"
+                            }
                         }
-                    }
+                    };
                 };
             };
         };
