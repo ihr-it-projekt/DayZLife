@@ -10,7 +10,7 @@ FrameWidgetClass License_Menu {
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.5176 0.5176 0.5176 1
+   color 0.5176 0.5176 0.5176 0.7098
    position 0 0
    size 1 1
    halign center_ref
