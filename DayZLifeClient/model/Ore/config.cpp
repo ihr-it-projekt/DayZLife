@@ -196,7 +196,7 @@ class CfgVehicles {
         displayName = "#raw_Diamond";
         descriptionShort = "#raw_Diamond_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Diamond\Diamond_Stone.paa"
+            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond_Stone.paa"
         };
     };
     class DZL_Diamond_Polished: DZLOre_ColorBase {
@@ -204,6 +204,12 @@ class CfgVehicles {
         displayName = "#Diamond_cut";
         descriptionShort = "#Diamond_cut_desc";
         model = "\DayZLifeClient\model\Ore\Diamond\DZL_Diamond.p3d";
+        hiddenSelections[] = {
+            "camoDZL"
+        };
+        hiddenSelectionsTextures[] = {
+            "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond_Glass.paa"
+        };
         class DamageSystem {
             class GlobalHealth {
                 class Health {

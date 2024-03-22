@@ -37,7 +37,7 @@ class Stage3 {
 	};
 };
 class Stage4 {
-	texture = "#(argb,8,8,3)color(1,1,1,1,AS)";
+	texture = "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond_Glass_as.paa";
 	uvSource = "tex";
 	class uvTransform {
 		aside[] = { 1, 0, 0 };
@@ -47,7 +47,7 @@ class Stage4 {
 	};
 };
 class Stage5 {
-	texture = "#(argb,8,8,3)color(1,1,1,1,SMDI)";
+	texture = "DayZLifeClient\model\Ore\Diamond\Data\DZL_Diamond_Glass_smdi.paa";
 	uvSource = "tex";
 	class uvTransform {
 		aside[] = { 1, 0, 0 };
@@ -67,16 +67,6 @@ class Stage6 {
 	};
 };
 class Stage7 {
-	texture = "a3\data_f\env_land_ca.paa";
-	useWorldEnvMap = "true";
-	uvSource = "tex";
-	class uvTransform {
-		aside[] = { 1, 0, 0 };
-		up[] = { 0, 1, 0 };
-		dir[] = { 0, 0, 1 };
-		pos[] = { 0, 0, 0 };
-	};
-};
-class StageTI {
-	texture = "a3\data_f\default_vehicle_ti_ca.paa";
+	texture="dz\data\data\env_co.paa";
+	uvSource="none";
 };
