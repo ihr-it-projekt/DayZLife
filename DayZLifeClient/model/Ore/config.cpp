@@ -172,7 +172,7 @@ class CfgVehicles {
         displayName = "#Coal";
         descriptionShort = "#Coal_desc";
         hiddenSelectionsTextures[] = {
-            "DayZLifeClient\model\Ore\Copper\DZL_Coal_Stone.paa"
+            "DayZLifeClient\model\Ore\Coal\DZL_Coal_Stone.paa"
         };
     };
     class DZL_Ore_Iron: DZLStoneOre_ColorBase {
