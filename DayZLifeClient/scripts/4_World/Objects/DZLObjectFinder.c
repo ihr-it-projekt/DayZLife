@@ -3,7 +3,7 @@ class DZLObjectFinder {
     static CarScript GetCar(vector carSpawnPosition, vector orientation, string carType, DZLPlayer player, bool byOwner = false) {
         array<Object> excludedObjects = new array<Object>;
         array<Object> nearbyObjects = new array<Object>;
-        if(GetGame().IsBoxColliding(carSpawnPosition, orientation, "3 5 9", excludedObjects, nearbyObjects)) {
+        if(GetGame().IsBoxColliding(carSpawnPosition, orientation, "10 10 10", excludedObjects, nearbyObjects)) {
             foreach(Object object: nearbyObjects) {
                 if(object.GetType() == carType) {
                     CarScript carsScript = CarScript.Cast(object);

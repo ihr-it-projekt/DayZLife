@@ -184,7 +184,7 @@ class DZLPlayer: DZLFileSerializer {
     }
 
     bool HasFractionRightCanAccessFractionGarage() {
-        return GetFraction() && GetFractionMember().canAccessFractionGarage;
+        return GetFraction() && (IsFractionBoss() || GetFractionMember().canAccessFractionGarage);
     }
 
     bool HasFractionRightCanAccessBankAccount() {
