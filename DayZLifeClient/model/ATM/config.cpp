@@ -41,4 +41,5 @@ class CfgVehicles {
             "DayZLifeClient\model\ATM\Data\ATM_Yellow.paa"
         };
     };
+    class DZLBankActionObjectYellow: DZLBankAutomate_Yellow {};
 };

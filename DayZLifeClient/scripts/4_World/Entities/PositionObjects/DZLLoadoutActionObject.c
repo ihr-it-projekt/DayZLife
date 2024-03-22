@@ -5,5 +5,4 @@ class DZLLoadoutActionObject: DZLBaseActionObject {
 
         AddAction(DZLActionOpenLoadOutMenu);
     }
-
 }
