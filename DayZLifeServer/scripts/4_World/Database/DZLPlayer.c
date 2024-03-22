@@ -118,6 +118,7 @@ modded class DZLPlayer {
 
     void ArrestCountDown() {
         --arrestTimeInMinutes;
+        UpdateDZLPlayerAtPlayer();
     }
 
     void ArrestPlayer(string reason, int time) {
@@ -128,7 +129,6 @@ modded class DZLPlayer {
     override string GetActiveJob() {
         if(activeJob == "") {
             activeJob = DAY_Z_LIFE_JOB_CIVIL;
-            Save();
         }
         return activeJob;
     }
@@ -136,11 +136,13 @@ modded class DZLPlayer {
     void SetJobGrade(string grade) {
         activeJobGrade = grade;
         jobGradeMap.Set(activeJob, grade);
+        UpdateDZLPlayerAtPlayer();
     }
 
     void UpdateActiveJob(string job) {
         activeJob = job;
         activeJobGrade = GetLastJobRank(job);
+        UpdateDZLPlayerAtPlayer();
     }
 
     void UpdateOnlineTime() {
@@ -163,6 +165,7 @@ modded class DZLPlayer {
         }
 
         ResetJobCivil();
+        UpdateDZLPlayerAtPlayer();
     }
 
     private void ResetJobCivil() {
@@ -195,25 +198,19 @@ modded class DZLPlayer {
 
         money += moneyCount;
 
+        UpdateDZLPlayerAtPlayer();
         return true;
     }
 
     void AddMoneyToPlayerBank(int moneyCount) {
         DZLLogMoneyTransaction(dayZPlayerId, "bank", bank, bank + moneyCount, moneyCount);
         bank += moneyCount;
+        UpdateDZLPlayerAtPlayer();
     }
 
     void PlayerHasDied() {
         DZLLogMoneyTransaction(dayZPlayerId, "has died", money, 0, money * -1);
         money = 0;
-    }
-
-    void SaveItems(PlayerBase _player) {
-        itemsStore = new array<ref DZLStoreItem>;
-        DZLStoreItem items = new DZLStoreItem;
-        items.Init(_player, _player.GetPosition(), true, false);
-
-        itemsStore.Insert(items);
     }
 
     void TransferFromPlayerToOtherPlayer(DZLPlayer playerTarget) {
@@ -268,19 +265,20 @@ modded class DZLPlayer {
     }
 
     void BuyLicence(DZLCraftLicence licenceToBuy) {
-        AddMoneyToPlayer(-licenceToBuy.price);
         licenceIds.Insert(licenceToBuy.GetId());
+        AddMoneyToPlayer(-licenceToBuy.price);
     }
 
     void AddTicket(int value, string reason) {
         openTickets.Insert(new DZLTicket(value, reason));
+        UpdateDZLPlayerAtPlayer();
     }
 
     void RemoveTicketById(string id) {
         foreach(int index, DZLTicket ticket: openTickets) {
             if(id == ticket.GetId()) {
                 openTickets.Remove(index);
-                Save();
+                UpdateDZLPlayerAtPlayer();
                 return;
             }
         }
@@ -297,12 +295,14 @@ modded class DZLPlayer {
             this.fractionId = "";
             fraction = null;
         }
+        UpdateDZLPlayerAtPlayer();
     }
 
     void SetFraction(DZLFraction _fraction) {
         this.fraction = _fraction;
         this.fractionId = fraction.GetId();
         fractionWherePlayerCanJoin = new array<string>;
+        UpdateDZLPlayerAtPlayer();
     }
 
     void UpdateFraction(DZLFraction _fraction) {
@@ -310,12 +310,14 @@ modded class DZLPlayer {
 
         this.fraction = _fraction;
         this.fractionId = fraction.GetId();
+        UpdateDZLPlayerAtPlayer();
     }
 
     void RemovePotentialFraction(string _fractionId) {
         foreach(int key, string fractionIdCanJoin: fractionWherePlayerCanJoin) {
             if(_fractionId == fractionIdCanJoin) {
                 fractionWherePlayerCanJoin.Remove(key);
+                UpdateDZLPlayerAtPlayer();
                 break;
             }
         }
@@ -331,6 +333,7 @@ modded class DZLPlayer {
         }
 
         fractionWherePlayerCanJoin.Insert(_fractionId);
+        UpdateDZLPlayerAtPlayer();
     }
 
     void ResetPotentialFractions() {
@@ -346,4 +349,10 @@ modded class DZLPlayer {
         return false;
     }
 
+    void UpdateDZLPlayerAtPlayer() {
+if(!player) return:
+                              PlayerIdentity playerIdentity = player.GetIdentity();
+        if(!playerIdentity) return;
+        GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(this), true, playerIdentity);
+    }
 }

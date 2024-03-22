@@ -7,7 +7,6 @@ class DZLCarStorageMenu: DZLBaseMenu {
     private DZLStoragePosition position;
     private CheckBoxWidget hasInsuranceWidget;
     private TextWidget insuranceText;
-    private Widget storeInFractionButtonWrapper;
 
     void DZLCarStorageMenu() {
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
@@ -27,14 +26,13 @@ class DZLCarStorageMenu: DZLBaseMenu {
         hasInsuranceWidget = creator.GetCheckBoxWidget("insuranceCheckBox");
         insuranceText = creator.GetTextWidget("insurranceTextBox");
 
-        storeInFractionButtonWrapper = creator.GetWidget("storeInFractionButtonWrapper");
 
         return layoutRoot;
     }
 
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
-        storeInFractionButtonWrapper.Show(dzlPlayer.HasFractionRightCanAccessFractionGarage());
+        storeInFractionButton.Show(dzlPlayer.HasFractionRightCanAccessFractionGarage());
         carToStoreList.ClearItems();
         array<string> carTypes = DZLConfig.Get().carConfig.carTypesToStore;
         foreach(string carType: carTypes) {

@@ -80,6 +80,7 @@ class DZLFractionMenu : DZLBaseMenu {
         fractionInvitationList = creator.GetTextListboxWidget("fractionInvitationList");
         fractionInvitationList.Show(false);
         acceptInvitation = creator.GetButtonWidget("acceptInvitation");
+        acceptInvitation.Show(false);
         fractionLeave = creator.GetButtonWidget("fractionLeave");
         createFaction = creator.GetButtonWidget("createFaction");
         fractionNameEdit = creator.GetEditBoxWidget("fractionNameEdit");
@@ -235,6 +236,7 @@ class DZLFractionMenu : DZLBaseMenu {
                 }
 
                 fractionInvitationList.Show(true);
+                acceptInvitation.Show(paramNotFractionMember.param1.Count() > 0);
                 wrapperInvite.Show(true);
                 wrapperName.Show(true);
                 wrapperCreate.Show(true);

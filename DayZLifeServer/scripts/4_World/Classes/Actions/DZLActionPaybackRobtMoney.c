@@ -32,7 +32,6 @@ modded class DZLActionPaybackRobtMoney {
             if(!dzlPlayerCop.IsActiveJob(DAY_Z_LIFE_JOB_COP)) continue;
 
             dzlPlayerCop.AddMoneyToPlayerBank(bonus);
-            GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayerCop), true, playerIdentity);
         }
 
         GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
