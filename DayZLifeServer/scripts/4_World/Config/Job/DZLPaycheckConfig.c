@@ -9,7 +9,7 @@ modded class DZLPaycheckConfig {
             Save();
         }
         if("2" == version) {
-            jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY};
+            jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY, DAY_Z_LIFE_JOB_MECHANIC};
             DZLJobPayCheck paycheck = new DZLJobPayCheck(DAY_Z_LIFE_JOB_COP);
             paycheck.MigrateV3(cops);
             jobPayChecks.Insert(paycheck);

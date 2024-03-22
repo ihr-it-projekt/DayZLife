@@ -2,30 +2,24 @@ class DZLTuningMenu: DZLBaseMenu {
     private TextListboxWidget carFoundList;
     private TextListboxWidget carTuningOptionList;
     private ButtonWidget tuneButton;
-    private DZLTunerPosition position;
 
     override Widget Init() {
-        layoutPath = "DayZLifeClient/layout/Tuner/DZLTuner.layout";
+        layoutPath = "DayZLifeClient/layout/Tuning/Tuning.layout";
         super.Init();
 
         carFoundList = creator.GetTextListboxWidget("carFoundList");
         carTuningOptionList = creator.GetTextListboxWidget("carTuningOptionList");
-
         tuneButton = creator.GetButtonWidget("tuneButton");
 
         return layoutRoot;
     }
 
-    void SetPosition(DZLTunerPosition _position) {
-        this.position = _position;
-    }
-
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
         carFoundList.ClearItems();
-        array<ref DZLTuneOption> carTypes = DZLConfig.Get().tuningConfig.options;
+        ref array<ref DZLTuneOption> carTypes = DZLConfig.Get().tuningConfig.options;
         foreach(DZLTuneOption carType: carTypes) {
-            CarScript playerCar = DZLObjectFinder.GetCarForTuning(position.position, carType.car);
+            CarScript playerCar = DZLObjectFinder.GetCarForTuning(player.GetPosition(), carType.car);
             if(playerCar && !playerCar.isSold) {
                 string name = "";
                 GetGame().ObjectGetDisplayName(playerCar, name);

@@ -46,4 +46,9 @@ static void CheckDZLConfigPath() {
     }
 }
 
+static void CheckDZLDataSubPath(string path) {
+    if(!FileExist(path)) {
+        MakeDirectory(path);
+    }
+}
 

@@ -8,7 +8,7 @@ class DZLPaycheckConfig {
     private ref array<ref DZLPaycheck>armies;
     // end deprecated
 
-    ref array<string> jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY};
+    ref array<string> jobNames = {DAY_Z_LIFE_JOB_COP, DAY_Z_LIFE_JOB_MEDIC, DAY_Z_LIFE_JOB_ARMY, DAY_Z_LIFE_JOB_MECHANIC};
     ref array<ref DZLJobPayCheck> jobPayChecks = new array<ref DZLJobPayCheck>;
 
     array<ref DZLPaycheck> GetPaycheckByJob(string job) {

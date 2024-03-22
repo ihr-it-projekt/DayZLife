@@ -2,6 +2,8 @@ modded class DZLLoadOuts {
 
     void DZLLoadOuts(string _jobId) {
         this.jobId = _jobId;
+        folderPath = DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "\\";
+        CheckDZLDataSubPath(folderPath);
         if(!Load()) {
             array<ref DZLLoadOutType> loadOutSubAttachments = new array<ref DZLLoadOutType>;
             array<ref DZLLoadOutType> loadOutTypes = new array<ref DZLLoadOutType>;
@@ -143,14 +145,14 @@ modded class DZLLoadOuts {
     }
 
     private bool Load() {
-        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json")) {
-            JsonFileLoader<DZLLoadOuts>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);
+        if(FileExist(folderPath + "LoadOut.json")) {
+            JsonFileLoader<DZLLoadOuts>.JsonLoadFile(folderPath + "LoadOut.json", this);
             return true;
         }
         return false;
     }
 
     private void Save() {
-        JsonFileLoader<DZLLoadOuts>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "LoadOut.json", this);
+        JsonFileLoader<DZLLoadOuts>.JsonSaveFile(folderPath + "LoadOut.json", this);
     }
 }

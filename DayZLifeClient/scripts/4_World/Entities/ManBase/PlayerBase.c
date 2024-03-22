@@ -283,24 +283,6 @@ modded class PlayerBase {
         return null;
     }
 
-    DZLTunerPosition GetTunerPositionByPosition(int distance = 3) {
-        vector playerPosition = GetPosition();
-        if(!playerPosition || !DZLConfig.Get() || !DZLConfig.Get().tuningConfig) {
-            return null;
-        }
-
-        array<ref DZLTunerPosition> positions = DZLConfig.Get().tuningConfig.tuner;
-
-        foreach(DZLTunerPosition position: positions) {
-            float distanceToPos = vector.Distance(position.position, playerPosition);
-            if(distanceToPos <= distance) {
-                return position;
-            }
-        }
-
-        return null;
-    }
-
     array<EntityAI> GetPlayerItems() {
         array<EntityAI> itemsArray = new array<EntityAI>;
         GetInventory().EnumerateInventory(InventoryTraversalType.INORDER, itemsArray);

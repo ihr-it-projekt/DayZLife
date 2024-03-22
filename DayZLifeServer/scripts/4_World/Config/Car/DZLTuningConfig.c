@@ -2,11 +2,7 @@ modded class DZLTuningConfig {
 
     void DZLTuningConfig() {
         if(!Load()) {
-            tuner = new array<ref DZLTunerPosition>;
-
-            array<string> ids = new array<string>;
-
-            DZLTunerPosition position = DZLTunerPosition("6572.2 7.2 2466.7", "0.0 0.0 0.0", ids);
+            DZLTunerPosition position = DZLTunerPosition("6572.2 7.2 2466.7", "0.0 0.0 0.0");
             tuner.Insert(position);
 
             options = new array<ref DZLTuneOption>;
@@ -39,6 +35,11 @@ modded class DZLTuningConfig {
             options.Insert(tuneOption);
 
             version = "1";
+            Save();
+        }
+
+        if("1" == version) {
+            version = "2";
             Save();
         }
     }

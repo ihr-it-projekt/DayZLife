@@ -1,7 +1,9 @@
 modded class DZLJobSpawnPoints {
 
     void DZLJobSpawnPoints(string jobId) {
-        if(!Load(jobId)) {
+        folderPath = DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "\\";
+        CheckDZLDataSubPath(folderPath);
+        if(!Load()) {
             DZLSpawnPoint point;
             array<string> items = new array<string>;
 
@@ -165,25 +167,25 @@ modded class DZLJobSpawnPoints {
                 point = new DZLSpawnPoint("Train Station Balota", "4407.020996 6.351238 2313.319336", "17.710466 0 0", items);
                 spawnPoints.Insert(point);
             }
-            Save(jobId);
+            Save();
         }
 
         if(version == "1") {
             version = "2";
             blockTimeForJobChange = 3600;
-            Save(jobId);
+            Save();
         }
     }
 
-    private bool Load(string jobId) {
-        if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json")) {
-            JsonFileLoader<DZLJobSpawnPoints>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
+    private bool Load() {
+        if(FileExist(folderPath + "SpawnPoints.json")) {
+            JsonFileLoader<DZLJobSpawnPoints>.JsonLoadFile(folderPath + "SpawnPoints.json", this);
             return true;
         }
         return false;
     }
 
-    private void Save(string jobId) {
-        JsonFileLoader<DZLJobSpawnPoints>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + jobId + "JobSpawnPoints.json", this);
+    private void Save() {
+        JsonFileLoader<DZLJobSpawnPoints>.JsonSaveFile(folderPath + "SpawnPoints.json", this);
     }
 }

@@ -1,6 +1,5 @@
 modded class DZLTunerPosition {
-    void DZLTunerPosition(vector _position, vector _orientation, array<string> _playerIdsThatCanUsePosition) {
+    void DZLTunerPosition(vector _position, vector _orientation) {
         Init(_position, _orientation);
-        this.playerIdsThatCanUsePosition = _playerIdsThatCanUsePosition;
     }
 }
