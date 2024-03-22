@@ -184,15 +184,15 @@ class DZLPlayer: DZLFileSerializer {
     }
 
     bool HasFractionRightCanAccessFractionGarage() {
-        return GetFraction() && GetFractionMember().canAccessFractionGarage;
+        return GetFraction() && GetFractionMember() && GetFractionMember().canAccessFractionGarage;
     }
 
     bool HasFractionRightCanAccessBankAccount() {
-        return GetFraction() && GetFractionMember().canAccessBankAccount;
+        return GetFraction() && GetFractionMember() && GetFractionMember().canAccessBankAccount;
     }
 
     bool HasFractionRightCanGetMoneyFromBankAccount() {
-        return GetFraction() && GetFractionMember().canGetMoneyFromBankAccount;
+        return GetFraction() && GetFractionMember() && GetFractionMember().canGetMoneyFromBankAccount;
     }
 
     bool HasPotentialFraction(string _fractionId) {
