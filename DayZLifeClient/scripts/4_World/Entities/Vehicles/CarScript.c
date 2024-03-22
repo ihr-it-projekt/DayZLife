@@ -15,6 +15,14 @@ modded class CarScript {
         RegisterNetSyncVariableBool("isRaided");
     }
 
+    override void EEInit() {
+        super.EEInit();
+
+        RPCSingleParam(DZL_RPC.REQUEST_UPDATE_CAR, null, true);
+
+        SetAllowDamage(true);
+    }
+
     override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx) {
         super.OnRPC(sender, rpc_type, ctx);
 
@@ -103,8 +111,6 @@ modded class CarScript {
 
         return super.IsInventoryVisible() && HasPlayerAccess(player);
     }
-
-
 
     override void OnContact(string zoneName, vector localPos, IEntity other, Contact data) {
         bool carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;

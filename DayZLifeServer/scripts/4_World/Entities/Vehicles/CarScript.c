@@ -19,6 +19,16 @@ modded class CarScript {
         RPCSingleParam(DZL_RPC.UPDATE_CAR_LAST_DRIVER, new Param1<string>(lastDriverId), true);
     }
 
+    override void OnRPC(PlayerIdentity sender, int rpc_type, ParamsReadContext ctx) {
+        super.OnRPC(sender, rpc_type, ctx);
+        switch(rpc_type) {
+            case(DZL_RPC.REQUEST_UPDATE_CAR): {
+                SynchronizeValues(sender);
+                return;
+            }
+        }
+    }
+
     override void OnStoreSave(ParamsWriteContext ctx) {
         super.OnStoreSave(ctx);
 

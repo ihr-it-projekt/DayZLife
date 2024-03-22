@@ -157,11 +157,8 @@ class DZLStorageListener: DZLBaseEventListener {
         DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());
 
         if(dzlPlayer.IsInAnyFraction()) {
-            DZLFractionMember member = dzlPlayer.GetFractionMember();
-
-            if(member) {
-                fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(member.fractionID);
-            }
+            string id = dzlPlayer.GetFractionId();
+            if(id) fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(id);
         }
 
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);

@@ -8,15 +8,11 @@ class DZLObjectFinder {
                 if(object.GetType() == carType) {
                     CarScript carsScript = CarScript.Cast(object);
                     if(!carsScript) continue;
-
-                    if(!byOwner) {
-                        if(player.IsInAnyFraction() && (player.GetFraction() && !player.GetFraction().HasMember(carsScript.ownerId))) {
-                            continue;
-                        } else if(!player.IsInAnyFraction() && carsScript.ownerId != player.dayZPlayerId) {
-                            continue;
-                        }
-                    } else {
+                    if(byOwner) {
                         if(carsScript.ownerId != player.dayZPlayerId) continue;
+                    } else {
+                        if(player.IsInAnyFraction() && !player.HasFractionRightCanAccessFractionGarage()) continue;
+                        if(!player.IsInAnyFraction() && carsScript.ownerId != player.dayZPlayerId) continue;
                     }
 
                     return carsScript;

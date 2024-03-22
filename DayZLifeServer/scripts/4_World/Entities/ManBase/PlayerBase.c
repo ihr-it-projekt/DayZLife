@@ -17,6 +17,7 @@ modded class PlayerBase {
 
         canRespawn = true;
         SetSynchDirty();
+        s
     }
 
     override bool OnStoreLoad(ParamsReadContext ctx, int version) {

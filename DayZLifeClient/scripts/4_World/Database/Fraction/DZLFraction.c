@@ -11,6 +11,14 @@ class DZLFraction: DZLFileSerializer {
     }
 
     DZLFractionMember GetMember(string playerId) {
+        if(playerId == id) {
+            DZLFractionMember boss = new DZLFractionMember(id, id, "", name, true);
+            boss.canAccessBankAccount = true;
+            boss.canGetMoneyFromBankAccount = true;
+            boss.canAccessFractionGarage = true;
+
+            return boss;
+        }
         foreach(int key, DZLFractionMember member: members) {
             if(member.playerId == playerId) {
                 return member;
