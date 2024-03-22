@@ -126,7 +126,6 @@ class DZLMessage: DZLIdModel {
 
     bool Save() {
         if(GetGame().IsClient()) {
-            CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLMessage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(id), this);
             return true;
         }

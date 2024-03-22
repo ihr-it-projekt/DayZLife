@@ -23,6 +23,18 @@ static void CheckDZLDataPath() {
     if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA);
     }
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE);
+    }
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA_PLAYER);
+    }
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR);
+    }
+    if(!FileExist(DAY_Z_LIFE_LOGS)) {
+        MakeDirectory(DAY_Z_LIFE_LOGS);
+    }
 }
 static void CheckDZLConfigPath() {
     CheckDZLBasePath();
@@ -31,12 +43,6 @@ static void CheckDZLConfigPath() {
     }
     if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_CONFIG);
-    }
-}
-
-static void CheckDZLDataSubPath(string path) {
-    if(!FileExist(path)) {
-        MakeDirectory(path);
     }
 }
 

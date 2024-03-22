@@ -65,7 +65,6 @@ modded class DZLTraderTypeStorage {
     void Save() {
         if(mustSave == true) {
             mustSave = false;
-            CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE);
             DZLJsonFileHandler<DZLTraderTypeStorage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA_ITEM_STORAGE + fileName, this);
         }
     }

@@ -1,16 +1,4 @@
-fixen
-- spawn menu läst sich bei initial spawn schließen mit esc
-- trader geht nicht auf
-- sync money after money transfer
-
-
-RandomZurviver
-
 ToDos:
-
-- send position when send message chckbox
-
-
 
 - Wenn spieler sterben dann wieder in der Zelle spawnen
 

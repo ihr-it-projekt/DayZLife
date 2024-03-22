@@ -1,6 +1,5 @@
 modded class DZLFraction {
 
-
     void DZLFraction(string playerId, string _name = "") {
         id = playerId;
         Init(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION, playerId + "fraction");

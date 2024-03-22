@@ -127,10 +127,6 @@ static void DZLLogTicket(string playerId, string info, int value) {
 
 
 static void DZLCSVLog(string playerId, string fileName, array<string> head, array<string> data) {
-    if(!FileExist(DAY_Z_LIFE_LOGS)) {
-        MakeDirectory(DAY_Z_LIFE_LOGS);
-    }
-
     string path = DAY_Z_LIFE_LOGS + playerId + "\\";
 
     if(!FileExist(path)) {
