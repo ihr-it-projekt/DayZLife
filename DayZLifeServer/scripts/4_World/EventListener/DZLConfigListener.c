@@ -4,7 +4,7 @@ class DZLConfigListener: DZLBaseEventListener {
         if(rpc_type == DZL_RPC.PLAYER_DATA) {
             DZLPlayer dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(sender.GetId());;
             dzlPlayer.UpdateName(sender.GetName());
-            GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, sender);
+            dzlPlayer.UpdateDZLPlayerAtPlayer();
         }
     }
 }

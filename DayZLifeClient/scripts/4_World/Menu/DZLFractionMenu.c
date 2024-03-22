@@ -261,6 +261,7 @@ class DZLFractionMenu : DZLBaseMenu {
         }
 
         foreach(DZLFractionMember fractionMember: fractionMembers) {
+            if (fraction.GetId() == fractionMember.playerId) continue;
             fractionPanelPlayerList.AddItem(fractionMember.name, fractionMember, 0);
         }
     }

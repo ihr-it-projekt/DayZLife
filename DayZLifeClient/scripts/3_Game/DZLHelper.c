@@ -32,6 +32,9 @@ static void CheckDZLDataPath() {
     if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR)) {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA_CAR);
     }
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_DATA_FRACTION);
+    }
     if(!FileExist(DAY_Z_LIFE_LOGS)) {
         MakeDirectory(DAY_Z_LIFE_LOGS);
     }

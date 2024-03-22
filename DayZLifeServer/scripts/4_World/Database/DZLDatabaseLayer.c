@@ -73,6 +73,14 @@ class DZLDatabaseLayer {
         DZLFraction fraction;
         if(!dzlFractions.Find(playerId, fraction)) {
             fraction = new DZLFraction(playerId);
+			
+			if (fraction.GetId() != playerId) {
+			    DZLPlayer boss = GetPlayer(playerId);
+			    if (boss && !boss.IsInAnyFraction()) {
+			        return null;
+			    }
+			}
+			
             dzlFractions.Insert(playerId, fraction);
         }
 

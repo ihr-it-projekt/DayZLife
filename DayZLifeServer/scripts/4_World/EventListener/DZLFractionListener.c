@@ -166,7 +166,7 @@ class DZLFractionListener: DZLBaseEventListener {
         ref array<string> playerIdentities = DZLDatabaseLayer.Get().GetPlayerIds().playerIdentities;
         foreach(string ident: playerIdentities) {
             DZLPlayer player = DZLDatabaseLayer.Get().GetPlayer(ident);
-
+			player.GetFraction();
             if(!player.IsInAnyFraction() && !fraction.HasPotentialMember(ident)) {
                 collection.Insert(new DZLFractionMember("", ident, player.playerName, "", false));
             }

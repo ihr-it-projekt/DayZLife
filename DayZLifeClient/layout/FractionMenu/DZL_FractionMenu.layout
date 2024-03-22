@@ -21,7 +21,7 @@ FrameWidgetClass License_Menu {
    style editor_quad_dark
    {
     PanelWidgetClass fractionAccessPanel {
-     visible 0
+     visible 1
      ignorepointer 1
      position 0 0
      size 1 0.88
@@ -45,18 +45,6 @@ FrameWidgetClass License_Menu {
        colums ""
        lines 20
       }
-      TextListboxWidgetClass fractionMembers {
-       position 0.00805 0.01515
-       size 0.3081 0.47
-       halign right_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       "title visible" 1
-       colums "#Player"
-       lines 13
-      }
       PanelWidgetClass PanelWidget4 {
        ignorepointer 1
        position 0 0
@@ -72,7 +60,7 @@ FrameWidgetClass License_Menu {
         PanelWidgetClass PanelWidget8 {
          visible 1
          ignorepointer 1
-         position 0 0.3
+         position 0 0.01
          size 0.95 0.07
          halign center_ref
          valign bottom_ref
@@ -100,9 +88,10 @@ FrameWidgetClass License_Menu {
         }
         PanelWidgetClass wrapperFractionPlayer {
          ignorepointer 1
-         position 0 0.03
+         position 0 0.43
          size 0.95 0.07
          halign center_ref
+         valign bottom_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -128,9 +117,10 @@ FrameWidgetClass License_Menu {
         }
         PanelWidgetClass wrapperBankRight {
          ignorepointer 1
-         position 0 0.1624
+         position 0 0.34
          size 1 0.07
          halign center_ref
+         valign bottom_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -167,9 +157,10 @@ FrameWidgetClass License_Menu {
         }
         PanelWidgetClass wrapperBankMoneyRight {
          ignorepointer 1
-         position 0 0.24
+         position 0 0.27
          size 1 0.07
          halign center_ref
+         valign bottom_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -178,6 +169,7 @@ FrameWidgetClass License_Menu {
          {
           TextWidgetClass rights1 {
            ignorepointer 1
+           position 0 0
            size 0.89 1
            valign center_ref
            hexactpos 0
@@ -206,9 +198,10 @@ FrameWidgetClass License_Menu {
         }
         PanelWidgetClass wrapperGarageRight {
          ignorepointer 1
-         position 0 0.32
+         position 0 0.2
          size 1 0.07
          halign center_ref
+         valign bottom_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
@@ -217,6 +210,7 @@ FrameWidgetClass License_Menu {
          {
           TextWidgetClass rights2 {
            ignorepointer 1
+           position 0 0
            size 0.89 1
            valign center_ref
            hexactpos 0
@@ -243,58 +237,17 @@ FrameWidgetClass License_Menu {
           }
          }
         }
-        PanelWidgetClass PanelWidget23 {
-         ignorepointer 1
-         color 0.6235 0.1569 0.1569 1
-         position 0 0.01
-         size 0.95 0.07
-         halign center_ref
-         valign bottom_ref
+        TextListboxWidgetClass fractionMembers {
+         position 0.03 0
+         size 0.95 0.48
+         halign right_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style editor_selection
-         {
-          CheckBoxWidgetClass deleteAccept {
-           size 0.1 1
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-          }
-          PanelWidgetClass PanelWidget22 {
-           visible 1
-           ignorepointer 1
-           color 0.502 0 0 1
-           position 0 0
-           size 0.88 1
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style blank
-           {
-            ButtonWidgetClass fractionDelete {
-             disabled 1
-             ignorepointer 0
-             color 0.502 0 0 1
-             size 1 1
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-             text "#Fraction_Delete"
-            }
-           }
-          }
-         }
+         "title visible" 1
+         colums "#Player"
+         lines 13
         }
        }
       }
@@ -341,7 +294,7 @@ FrameWidgetClass License_Menu {
        }
       }
       EditBoxWidgetClass search_input {
-       position -0.36311 0.89502
+       position -0.3631 0.895
        size 0.25962 0.08879
        halign center_ref
        valign bottom_ref
@@ -350,9 +303,10 @@ FrameWidgetClass License_Menu {
        hexactsize 0
        vexactsize 0
        style EditorProperty
+       font "gui/fonts/amorserifpro"
       }
       TextListboxWidgetClass openInvitations {
-       position 0.00815 0.01515
+       position 0.0092 0.51683
        size 0.308 0.47
        halign right_ref
        valign bottom_ref
@@ -364,10 +318,64 @@ FrameWidgetClass License_Menu {
        colums "#Open_Invitations"
        lines 13
       }
+      PanelWidgetClass PanelWidget23 {
+       ignorepointer 1
+       color 0.6235 0.1569 0.1569 1
+       position 0.01 0.01
+       size 0.3 0.07
+       halign right_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
+       {
+        CheckBoxWidgetClass deleteAccept {
+         size 0.1 1
+         halign right_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+        }
+        PanelWidgetClass PanelWidget22 {
+         visible 1
+         ignorepointer 1
+         color 0.502 0 0 1
+         position 0 0
+         size 0.88 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          ButtonWidgetClass fractionDelete {
+           disabled 1
+           ignorepointer 0
+           color 0.502 0 0 1
+           position 0 0
+           size 1 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#Fraction_Delete"
+          }
+         }
+        }
+       }
+      }
      }
     }
     PanelWidgetClass fractionPanel {
-     visible 1
+     visible 0
      ignorepointer 1
      color 0.5176 0.5176 0.5176 0.3137
      size 1 0.88
@@ -409,7 +417,7 @@ FrameWidgetClass License_Menu {
       }
       PanelWidgetClass wrapperCreate {
        ignorepointer 1
-       position 0 0.44985
+       position 0 -0.35549
        size 0.3 0.07
        halign center_ref
        valign center_ref
@@ -696,7 +704,7 @@ FrameWidgetClass License_Menu {
       }
       PanelWidgetClass wrapperName {
        ignorepointer 1
-       position -0 0.41985
+       position 0 0.90365
        size 0.3 0.07
        halign center_ref
        valign bottom_ref
@@ -707,6 +715,7 @@ FrameWidgetClass License_Menu {
        style blank
        {
         EditBoxWidgetClass fractionNameEdit {
+         position 0 0
          size 1 1
          halign center_ref
          valign center_ref
@@ -714,7 +723,8 @@ FrameWidgetClass License_Menu {
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style EditorProperty
+         style DefaultBorder
+         font "gui/fonts/amorserifpro"
         }
        }
       }

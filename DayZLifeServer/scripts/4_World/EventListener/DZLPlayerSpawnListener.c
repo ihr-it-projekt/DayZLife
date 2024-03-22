@@ -26,7 +26,7 @@ class DZLPlayerSpawnListener: DZLBaseEventListener {
                 player.SetOrientation(point.orientation);
                 player.SetIsSpawned();
 
-                GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, sender);
+                dzlPlayer.UpdateDZLPlayerAtPlayer();
                 GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_RESPONSE, null, true, sender);
             }
         }
