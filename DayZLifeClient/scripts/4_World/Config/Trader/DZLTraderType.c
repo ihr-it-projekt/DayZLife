@@ -1,6 +1,6 @@
 class DZLTraderType: DZLIdModel {
     string type;
-    string displayName = "";
+    [NonSerialized()]string displayName = "";
     int sellPrice;
     int buyPrice;
     ref array<string> attachments;
@@ -12,16 +12,6 @@ class DZLTraderType: DZLIdModel {
     int maxSellPrice;
     int reducePerTick;
     int tickLengthInMinutes;
-
-    void DZLTraderType(string type, int sellPrice, int buyPrice, array<string> attachments, bool usePlayerAsSpawnPoint = true, bool isCar = false) {
-        this.type = type;
-        this.sellPrice = sellPrice;
-        this.buyPrice = buyPrice;
-        this.attachments = attachments;
-        this.usePlayerAsSpawnPoint = usePlayerAsSpawnPoint;
-        this.isCar = isCar;
-        SetId();
-    }
 
     int CalculateDynamicSellPrice(DZLTraderTypeStorage currentStorage, EntityAI item = null) {
         if(false == isStorageItem || sellPrice <= 0 || !currentStorage) {

@@ -1,9 +1,9 @@
 class DZLBankRaidTimer {
     private static ref DZLBankRaidTimer bankRaidTimer;
     private ref Timer raidTimer;
-    private DZLBank bank;
+    private ref DZLBank bank;
 
-    static DZLBankRaidTimer Get(DZLBank _bank) {
+    static DZLBankRaidTimer Get(ref DZLBank _bank) {
         if(!bankRaidTimer) {
             bankRaidTimer = new DZLBankRaidTimer(_bank);
         }
@@ -11,7 +11,7 @@ class DZLBankRaidTimer {
         return bankRaidTimer;
     }
 
-    void DZLBankRaidTimer(DZLBank _bank) {
+    void DZLBankRaidTimer(ref DZLBank _bank) {
         bank = _bank;
 
         raidTimer = new Timer;

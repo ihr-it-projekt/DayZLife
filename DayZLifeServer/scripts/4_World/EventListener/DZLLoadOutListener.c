@@ -1,26 +1,21 @@
-class DZLLoadOutListener {
-    ref DZLJobConfig config;
+class DZLLoadOutListener: DZLBaseEventListener {
 
-    void DZLLoadOutListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = DZLConfig.Get().jobConfig;
-    }
-
-    void ~DZLLoadOutListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_LOAD_OUT) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if(rpc_type == DZL_RPC.LOAD_OUT) {
             autoptr Param1<string> paramLoadOut;
             if(ctx.Read(paramLoadOut)) {
                 PlayerBase player = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 string categoryName = paramLoadOut.param1;
 
-                if((dzlPlayer.IsActiveAsArmy() && !SearchLoadOutAndEquip(categoryName, config.loadOutsArmy.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsCop() && !SearchLoadOutAndEquip(categoryName, config.loadOutsCops.loadOutCategories, sender, player)) || (dzlPlayer.IsActiveAsMedic() && !SearchLoadOutAndEquip(categoryName, config.loadOutsMedics.loadOutCategories, sender, player))) {
+                string job = dzlPlayer.GetActiveJob();
+                if(DAY_Z_LIFE_JOB_CIVIL == job) {
                     DZLSendMessage(sender, "#error_category_not_found");
+                    return;
                 }
+
+                DZLLoadOuts loadOut = DZLConfig.Get().jobConfig.GetLoadOuts(job);
+                SearchLoadOutAndEquip(categoryName, loadOut.loadOutCategories, sender, player);
             }
         }
     }
@@ -33,7 +28,7 @@ class DZLLoadOutListener {
                 foreach(DZLLoadOutType type: category.items) {
                     Add(player, type);
                 }
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_LOAD_OUT_RESPONSE, null, true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.LOAD_OUT_RESPONSE, null, true, sender);
                 return true;;
             }
         }

@@ -17,24 +17,23 @@ class DZLActionOpenTuningMenu: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
 
-        if(g_Game.GetUIManager().GetMenu() == NULL) {
-            DZLTuningMenu menu = action_data.m_Player.GetTuningMenu();
-            DZLTunerPosition tunerPosition = action_data.m_Player.GetTunerPositionByPosition();
+        if(g_Game.GetUIManager().GetMenu() != NULL) return;
+        DZLTuningMenu menu = action_data.m_Player.GetTuningMenu();
 
-            if(!tunerPosition) return;
-
-            menu.SetPosition(tunerPosition);
-
-            GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
-        }
+        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         DZLBaseActionObject objectTarget = DZLBaseActionObject.Cast(target.GetObject());
         if(!objectTarget || !objectTarget.IsTuningPoint()) return false;
 
-        DZLTunerPosition tunerPosition = player.GetTunerPositionByPosition();
+        DZLPlayer dzlPlayer = player.GetDZLPlayer();
+        if(!dzlPlayer) return false;
 
-        return tunerPosition && tunerPosition.PlayerCanDoActions(player.GetPlayerId());
+        DZLTuningConfig config = DZLConfig.Get().tuningConfig;
+        if(!config) return false;
+
+
+        return dzlPlayer.IsActiveJob(config.requiredJob);
     }
 }

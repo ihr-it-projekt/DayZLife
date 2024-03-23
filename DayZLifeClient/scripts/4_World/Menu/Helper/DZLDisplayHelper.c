@@ -32,7 +32,7 @@ class DZLDisplayHelper {
         mapWidget.ClearUserMarks();
         mapWidget.SetScale(0.1);
         mapWidget.SetMapPos(pos);
-        mapWidget.AddUserMark(pos, "", ARGB(255, 0, 255, 0), "set:dayz_gui image:cartridge_pistol");
+        mapWidget.AddUserMark(pos, "", ARGB(255, 255, 0, 0), "DayZLifeClient\\layout\\pin.paa");
     }
 
     static void MoveDZLOnlinePlayerFromListWidgetToListWidget(TextListboxWidget sourceWidget, TextListboxWidget targetWidget, string job) {
@@ -85,11 +85,10 @@ class DZLDisplayHelper {
         sourceWidget.GetItemData(pos, 0, itemType);
 
         if(itemType) {
-            array<ref DZLPaycheck> paychecks = DZLConfig.Get().jobConfig.paycheck.GetPaycheckByJob(job);
-
-
             int count = 0;
             jobRankList.ClearItems();
+
+            array<ref DZLPaycheck> paychecks = DZLConfig.Get().jobConfig.paycheck.GetPaycheckByJob(job);
             foreach(DZLPaycheck paycheck: paychecks) {
                 jobRankList.AddItem(paycheck.rank, paycheck, 0);
 

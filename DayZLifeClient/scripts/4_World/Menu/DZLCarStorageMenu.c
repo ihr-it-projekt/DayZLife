@@ -7,15 +7,9 @@ class DZLCarStorageMenu: DZLBaseMenu {
     private DZLStoragePosition position;
     private CheckBoxWidget hasInsuranceWidget;
     private TextWidget insuranceText;
-    private Widget storeInFractionButtonWrapper;
 
     void DZLCarStorageMenu() {
-        Construct();
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
-    }
-
-    void ~DZLCarStorageMenu() {
-        Destruct();
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
     }
 
     override Widget Init() {
@@ -32,16 +26,15 @@ class DZLCarStorageMenu: DZLBaseMenu {
         hasInsuranceWidget = creator.GetCheckBoxWidget("insuranceCheckBox");
         insuranceText = creator.GetTextWidget("insurranceTextBox");
 
-        storeInFractionButtonWrapper = creator.GetWidget("storeInFractionButtonWrapper");
 
         return layoutRoot;
     }
 
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
-        storeInFractionButtonWrapper.Show(dzlPlayer.HasFractionRightCanAccessFractionGarage());
+        storeInFractionButton.Show(dzlPlayer.HasFractionRightCanAccessFractionGarage());
         carToStoreList.ClearItems();
-        array<string> carTypes = player.GetConfig().carConfig.carTypesToStore;
+        array<string> carTypes = DZLConfig.Get().carConfig.carTypesToStore;
         foreach(string carType: carTypes) {
             CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, false);
             if(playerCar && !playerCar.isSold) {
@@ -58,7 +51,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         insuranceText.SetText("#out_parking_with_insurance (" + config.carConfig.carInsurancePrice + " $)");
 
         if(!position) {
-            position = player.GetConfig().carConfig.GetStorageByPosition(player.GetPosition());
+            position = DZLConfig.Get().carConfig.GetStorageByPosition(player.GetPosition());
         }
 
         if(!position) {
@@ -94,7 +87,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
                 }
 
                 CargoBase cargo = car.GetInventory().GetCargo();
-                if(!player.GetConfig().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
+                if(!DZLConfig.Get().carConfig.canStoreCarsWithGoods && cargo.GetItemCount() > 0) {
                     player.DisplayMessage("#car_is_not_empty");
                     return true;
                 }
@@ -106,7 +99,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
                 if(w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
-                GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
+                GetGame().RPCSingleParam(car, DZL_RPC.EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
                 car.isSold = true;
             }
         } else if(w == outStoreButton) {
@@ -140,7 +133,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
                     player.DisplayMessage("#error_not_enough_money");
                 }
 
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
             }
         } else if(w == closeButton) {
             OnHide();
@@ -151,7 +144,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
+        if(rpc_type == DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
             autoptr Param2<ref DZLCarStorage, ref DZLCarStorage> paramGetCarDataResponse;
             if(ctx.Read(paramGetCarDataResponse)) {
                 DZLCarStorage carStorage = paramGetCarDataResponse.param1;

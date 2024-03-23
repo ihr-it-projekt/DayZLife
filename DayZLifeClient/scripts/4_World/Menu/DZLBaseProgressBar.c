@@ -10,19 +10,19 @@ class DZLBaseProgressBar: UIScriptedMenu {
     protected int maxRange;
     protected vector position;
 
-    void SetPlayer(PlayerBase player) {
-        this.player = player;
+    void SetPlayer(PlayerBase _player) {
+        this.player = _player;
         this.dzlPlayer = player.GetDZLPlayer();
         maxRange = 2;
         position = player.GetPosition();
     }
 
-    void UpdatePlayer(PlayerBase player) {
-        SetPlayer(player);
+    void UpdatePlayer(PlayerBase _player) {
+        SetPlayer(_player);
     }
 
-    void SetDuration(int duration) {
-        this.duration = duration;
+    void SetDuration(int _duration) {
+        this.duration = _duration;
     }
 
 

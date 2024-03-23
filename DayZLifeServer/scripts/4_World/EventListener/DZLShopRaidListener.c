@@ -1,5 +1,4 @@
-class DZLShopRaidListener {
-    private DZLCrimeConfig config;
+class DZLShopRaidListener: DZLBaseEventListener {
     private ref Timer robTimer;
     private int moneyForRob = 0;
     private PlayerBase raider;
@@ -8,26 +7,17 @@ class DZLShopRaidListener {
     private bool policeMessageWasSend = false;
     private ref DZLDate lastRaidTime;
 
-    void DZLShopRaidListener() {
-        config = DZLConfig.Get().crimeConfig;
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         lastRaidTime = DZLDatabaseLayer.Get().GetCrimeData().GetLastRaidTime();
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
-
-    void ~DZLShopRaidListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_START_ROB_MONEY_FROM_SHOP) {
+        if(rpc_type == DZL_RPC.START_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerStart = PlayerBase.Cast(target);
             if(playerStart) {
-                DZLCrimePosition positionStart = config.GetShopByPosition(playerStart.GetPosition());
+                DZLCrimePosition positionStart = DZLConfig.Get().crimeConfig.GetShopByPosition(playerStart.GetPosition());
                 if(positionStart) {
                     StartRob(playerStart, positionStart);
                 }
             }
-        } else if(rpc_type == DAY_Z_LIFE_PAY_ROB_MONEY_FROM_SHOP) {
+        } else if(rpc_type == DZL_RPC.PAY_ROB_MONEY_FROM_SHOP) {
             PlayerBase playerGetMoney = PlayerBase.Cast(target);
 
             if(moneyForRob == 0 && !robTimer) {
@@ -36,7 +26,7 @@ class DZLShopRaidListener {
             }
 
             if(playerGetMoney) {
-                DZLCrimePosition positionTake = config.GetShopByPosition(playerGetMoney.GetPosition());
+                DZLCrimePosition positionTake = DZLConfig.Get().crimeConfig.GetShopByPosition(playerGetMoney.GetPosition());
                 if(positionTake.position == shopPosition.position) {
                     DZLPlayer dzlPlayer = playerGetMoney.GetDZLPlayer();
                     dzlPlayer.AddMoneyToPlayer(moneyForRob);
@@ -54,8 +44,6 @@ class DZLShopRaidListener {
 
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_got: " + moneyForRob.ToString() + "$");
                     moneyForRob = 0;
-                    dzlPlayer.GetFractionMember();
-                    GetGame().RPCSingleParam(null, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(dzlPlayer), true, playerGetMoney.GetIdentity());
                 } else {
                     DZLSendMessage(playerGetMoney.GetIdentity(), "#you_can_not_take_the_money_wrong_position");
                 }
@@ -95,7 +83,7 @@ class DZLShopRaidListener {
         DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(true);
 
         DZLSendMessage(null, "#rob_raid_was_started");
-        robTimer.Run(config.raidDurationTickInSeconds, this, "TickRob", null, true);
+        robTimer.Run(DZLConfig.Get().crimeConfig.raidDurationTickInSeconds, this, "TickRob", null, true);
     }
 
     void TickRob() {
@@ -107,7 +95,7 @@ class DZLShopRaidListener {
             DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
             return;
         }
-
+        DZLCrimeConfig config = DZLConfig.Get().crimeConfig;
         robDuration += config.raidDurationTickInSeconds;
         moneyForRob += Math.RandomIntInclusive(config.minMoneyPerTick, config.maxMoneyPerTick);
 
@@ -154,23 +142,23 @@ class DZLShopRaidListener {
 
     private int GetRaidCoolDownTime() {
         DZLDate currentDate = new DZLDate();
+        lastRaidTime = DZLDatabaseLayer.Get().GetCrimeData().GetLastRaidTime();
         int wait = 0;
-        if(lastRaidTime) {
-            wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
+        if(!lastRaidTime) return 0;
 
-            if(wait > 0) return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);
-        }
+        DZLCrimeConfig config = DZLConfig.Get().crimeConfig;
+        wait = currentDate.inSeconds - lastRaidTime.inSeconds < config.raidCoolDownTimeInSeconds;
 
-        if(lastRaidTime) {
-            lastRaidTime = null;
+        if(wait < 0) {
             DZLDatabaseLayer.Get().GetCrimeData().SetLastRaidTime(null);
+            return 0;
         }
 
-        return 0;
+        return config.raidCoolDownTimeInSeconds - (currentDate.inSeconds - lastRaidTime.inSeconds);;
     }
 
     private bool IsBankRelevantAndOkay() {
-        if(!config.canStartRaidIfBankRaidRuns) {
+        if(!DZLConfig.Get().crimeConfig.canStartRaidIfBankRaidRuns) {
             return !DZLDatabaseLayer.Get().GetBank().RaidRuns();
         }
         return true;

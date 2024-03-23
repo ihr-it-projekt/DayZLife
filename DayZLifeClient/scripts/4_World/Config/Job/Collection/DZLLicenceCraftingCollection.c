@@ -1,9 +1,5 @@
 class DZLLicenceCraftingCollection {
-    ref array<ref DZLCraftLicence> collection;
-
-    void DZLLicenceCraftingCollection() {
-        collection = new array<ref DZLCraftLicence>;
-    }
+    ref array<ref DZLCraftLicence> collection = new array<ref DZLCraftLicence>;
 
     DZLCraftLicence FindById(string id) {
         foreach(DZLCraftLicence licence: collection) {

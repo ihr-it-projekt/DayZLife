@@ -1,20 +1,15 @@
 class DZLStoreItem: DZLIdModel {
-    float health
+    float health;
     string type;
     float quantity;
-    ref array<ref DZLStoreItem> attached;
+    ref array<ref DZLStoreItem> attached = new array<ref DZLStoreItem>;
     bool isCar = false;
     vector positionOfStore;
     string parentId = "";
 
-
-    void DZLStoreItem() {
-        attached = new array<ref DZLStoreItem>;
-    }
-
-    void Init(EntityAI item, vector positionOfStore, bool withCargo, bool ignoreHealth) {
+    void Init(EntityAI item, vector _positionOfStore, bool withCargo, bool ignoreHealth) {
         SetItem(item, withCargo, ignoreHealth);
-        this.positionOfStore = positionOfStore;
+        this.positionOfStore = _positionOfStore;
         SetId();
     }
 
@@ -79,8 +74,8 @@ class DZLStoreItem: DZLIdModel {
         return quantity;
     }
 
-    void SetType(string type) {
-        this.type = type;
+    void SetType(string _type) {
+        this.type = _type;
     }
 
     string GetType() {

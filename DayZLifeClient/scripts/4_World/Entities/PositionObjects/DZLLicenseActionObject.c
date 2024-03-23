@@ -6,6 +6,6 @@ class DZLLicenseActionObject: DZLBaseActionObject {
     override void SetActions() {
         super.SetActions();
 
-        AddAction(ActionOpenLicenseMenu);
+        AddAction(DZLActionOpenLicenseMenu);
     }
 }

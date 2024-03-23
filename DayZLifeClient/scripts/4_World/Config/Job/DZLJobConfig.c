@@ -1,19 +1,24 @@
 class DZLJobConfig {
-    ref DZLWorkZones workZones;
-    ref DZLPaycheckConfig paycheck;
-    ref DZLLoadOuts loadOutsCops;
-    ref DZLLoadOuts loadOutsMedics;
-    ref DZLLoadOuts loadOutsArmy;
-    ref DZLArrestConfig arrestConfig;
+    ref DZLWorkZones workZones = new DZLWorkZones;
+    ref DZLPaycheckConfig paycheck = new DZLPaycheckConfig;
 
-    void DZLJobConfig() {
-        workZones = new DZLWorkZones;
-        paycheck = new DZLPaycheckConfig;
-        loadOutsCops = new DZLLoadOuts(DAY_Z_LIFE_JOB_COP);
-        loadOutsMedics = new DZLLoadOuts(DAY_Z_LIFE_JOB_MEDIC);
-        loadOutsArmy = new DZLLoadOuts(DAY_Z_LIFE_JOB_ARMY);
-        arrestConfig = new DZLArrestConfig;
+    // deprecated remove 08.03.2025
+    private ref DZLLoadOuts loadOutsCops;
+    private ref DZLLoadOuts loadOutsMedics;
+    private ref DZLLoadOuts loadOutsArmy;
+    // deprecated end
+
+    private ref array<ref DZLLoadOuts> loadOuts = new array<ref DZLLoadOuts>;
+    ref DZLArrestConfig arrestConfig = new DZLArrestConfig;
+
+    DZLLoadOuts GetLoadOuts(string jobName) {
+        foreach(DZLLoadOuts loadOut: loadOuts) {
+            if(loadOut.jobId == jobName) return loadOut;
+        }
+
+        return new DZLLoadOuts("");
     }
+
 
     DZLWorkZone FindZone(vector playerPosition) {
         if(!playerPosition) {
@@ -27,5 +32,4 @@ class DZLJobConfig {
         }
         return null;
     }
-
-}
+};

@@ -1,5 +1,4 @@
-class DZLPlayerArrestListener {
-    private DZLArrestConfig arrestConfig;
+class DZLPlayerArrestListener: DZLBaseEventListener {
     private ref Timer timerArrest;
     private ref array<ref DZLEscapedPlayer> escapeePlayers = new array<ref DZLEscapedPlayer>;
     private ref array<ref DZLOpenTicketPlayer> openTicketPlayers = new array<ref DZLOpenTicketPlayer>;
@@ -9,19 +8,12 @@ class DZLPlayerArrestListener {
     private int armyCont = 0;
 
     void DZLPlayerArrestListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
-
         timerArrest = new Timer;
         timerArrest.Run(60, this, "CheckPrisoners", null, true);
     }
 
-    void ~DZLPlayerArrestListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_ARREST_PLAYER) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if(rpc_type == DZL_RPC.ARREST_PLAYER) {
             autoptr Param3<PlayerBase, int, string> paramArrestPlayer;
             if(ctx.Read(paramArrestPlayer)) {
                 PlayerBase cop = PlayerBase.Cast(target);
@@ -32,12 +24,14 @@ class DZLPlayerArrestListener {
                 DZLPlayer copDzl = cop.GetDZLPlayer();
                 DZLPlayer prisonerDzl = prisoner.GetDZLPlayer();
 
-                if(copDzl.IsActiveAsMedic() || copDzl.IsActiveAsCivil()) return;
+                if(copDzl.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC) || copDzl.IsActiveAsCivil()) return;
                 if(copDzl.arrestTimeInMinutes != 0) return;
-                if(true == prisonerDzl.IsActiveAsCop() && true == copDzl.IsActiveAsCop()) return;
-                if(true == prisonerDzl.IsActiveAsArmy() && true == copDzl.IsActiveAsArmy()) return;
+                if(true == prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP) && true == copDzl.IsActiveJob(DAY_Z_LIFE_JOB_COP)) return;
+                if(true == prisonerDzl.IsActiveJob(DAY_Z_LIFE_JOB_ARMY) && true == copDzl.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) return;
 
                 prisonerDzl.ArrestPlayer(arrestReason, arrestTime);
+
+                DZLArrestConfig arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
 
                 ChangeItems(prisoner, arrestConfig.prisonerItems, arrestConfig.shouldDeleteAllItemsOnPrissoner);
 
@@ -45,18 +39,18 @@ class DZLPlayerArrestListener {
                     prisoner.SetPosition(arrestConfig.teleportPosition.ToVector());
                 }
 
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, prisoner.GetIdentity());
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_ARREST_PLAYER_RESPONSE, null, true, sender);
+                GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, prisoner.GetIdentity());
+                GetGame().RPCSingleParam(null, DZL_RPC.ARREST_PLAYER_RESPONSE, null, true, sender);
                 DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
                 DZLSendMessage(cop.GetIdentity(), "#you_set_arrest_to_player_in_minutes: " + arrestTime.ToString());
                 DZLLogArrest(prisoner.GetPlayerId(), "got arrest", arrestTime);
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_ESCAPED_PLAYERS) {
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_ESCAPED_PLAYERS_RESPONSE, new Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int>(escapeePlayers, copCount, medicCount, civCount, armyCont), true, sender);
-        } else if(rpc_type == DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS) {
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_OPEN_TICKET_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOpenTicketPlayer>>(openTicketPlayers), true, sender);
-        } else if(rpc_type == DAY_Z_LIFE_GET_MEDIC_COUNT) {
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true, sender);
+        } else if(rpc_type == DZL_RPC.GET_ESCAPED_PLAYERS) {
+            GetGame().RPCSingleParam(null, DZL_RPC.GET_ESCAPED_PLAYERS_RESPONSE, new Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int>(escapeePlayers, copCount, medicCount, civCount, armyCont), true, sender);
+        } else if(rpc_type == DZL_RPC.GET_OPEN_TICKET_PLAYERS) {
+            GetGame().RPCSingleParam(null, DZL_RPC.GET_OPEN_TICKET_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOpenTicketPlayer>>(openTicketPlayers), true, sender);
+        } else if(rpc_type == DZL_RPC.GET_MEDIC_COUNT) {
+            GetGame().RPCSingleParam(null, DZL_RPC.GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true, sender);
         }
     }
 
@@ -73,61 +67,52 @@ class DZLPlayerArrestListener {
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
             DZLPlayer dzlPlayer = player.GetDZLPlayer();
+            if(!dzlPlayer) continue;
 
-            if(dzlPlayer.HasTickets()) {
-                openTicketPlayers.Insert(new DZLOpenTicketPlayer(player));
-            }
+            if(dzlPlayer.HasTickets()) openTicketPlayers.Insert(new DZLOpenTicketPlayer(player));
 
-            if(dzlPlayer.IsActiveAsCop()) {
+            if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) {
                 copCount ++;
-            }
-
-            if(dzlPlayer.IsActiveAsArmy()) {
+            } else if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY)) {
                 armyCont ++;
-            }
-
-            if(dzlPlayer.IsActiveAsCivil()) {
+            } else if(dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_MEDIC)) {
+                medicCount ++;
+            } else {
                 civCount ++;
             }
 
-            if(dzlPlayer.IsActiveAsMedic()) {
-                medicCount ++;
-            }
+            if(!dzlPlayer.IsPlayerInArrest()) continue;
+            vector playerPosition = player.GetPosition();
 
-            if(dzlPlayer.IsPlayerInArrest()) {
-                vector playerPosition = player.GetPosition();
-
-                bool isInPrison = false;
-                int prisonArea = -1;
-                foreach(int index, vector position: arrestConfig.arrestAreas) {
-                    if(vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius) {
-                        dzlPlayer.ArrestCountDown();
-                        GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
-                        isInPrison = true;
-                        prisonArea = index;
-                        break;
-                    }
-                }
-                if(!isInPrison) {
-                    escapeePlayers.Insert(new DZLEscapedPlayer(player));
-                    continue;
-                }
-
-                if(isInPrison && !dzlPlayer.IsPlayerInArrest()) {
-                    ChangeItems(PlayerBase.Cast(player), arrestConfig.exPrisonerItems, arrestConfig.shouldDeleteAllItemsOnExPrissoner);
-
-
-                    vector randPosition = arrestConfig.exPrisonerAreas.Get(prisonArea);
-
-                    if(randPosition) {
-                        player.SetPosition(randPosition);
-                    }
+            bool isInPrison = false;
+            int prisonArea = -1;
+            DZLArrestConfig arrestConfig = DZLConfig.Get().jobConfig.arrestConfig;
+            foreach(int index, vector position: arrestConfig.arrestAreas) {
+                if(vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius) {
+                    dzlPlayer.ArrestCountDown();
+                    GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
+                    isInPrison = true;
+                    prisonArea = index;
+                    break;
                 }
             }
+
+            if(!isInPrison) {
+                escapeePlayers.Insert(new DZLEscapedPlayer(player));
+                continue;
+            }
+
+            if(!isInPrison) continue;
+            if(dzlPlayer.IsPlayerInArrest()) continue;
+
+            ChangeItems(PlayerBase.Cast(player), arrestConfig.exPrisonerItems, arrestConfig.shouldDeleteAllItemsOnExPrissoner);
+            vector randPosition = arrestConfig.exPrisonerAreas.Get(prisonArea);
+
+            if(randPosition) player.SetPosition(randPosition);
         }
         DZLDatabaseLayer.Get().SetCopCount(copCount).SetMedicCount(medicCount).SetCivCount(civCount).SetArmyCount(armyCont);
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
+        GetGame().RPCSingleParam(null, DZL_RPC.GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
     }
 
     private void ChangeItems(PlayerBase prisoner, array<string> items, bool shouldDeleteAllItems) {

@@ -45,13 +45,6 @@ class DZLFractionMenu : DZLBaseMenu {
     private CheckBoxWidget displayAccessGarageRight;
 
 
-    void DZLFractionMenu() {
-        Construct();
-    }
-    void ~DZLFractionMenu() {
-        Destruct();
-    }
-
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/FractionMenu/DZL_FractionMenu.layout";
         super.Init();
@@ -87,6 +80,7 @@ class DZLFractionMenu : DZLBaseMenu {
         fractionInvitationList = creator.GetTextListboxWidget("fractionInvitationList");
         fractionInvitationList.Show(false);
         acceptInvitation = creator.GetButtonWidget("acceptInvitation");
+        acceptInvitation.Show(false);
         fractionLeave = creator.GetButtonWidget("fractionLeave");
         createFaction = creator.GetButtonWidget("createFaction");
         fractionNameEdit = creator.GetEditBoxWidget("fractionNameEdit");
@@ -108,7 +102,7 @@ class DZLFractionMenu : DZLBaseMenu {
 
         changRightsButton = creator.GetButtonWidget("fractionChangRightsButton");
 
-        GetGame().RPCSingleParam(null, DAY_Z_LIFE_GET_FRACTION, null, true);
+        GetGame().RPCSingleParam(null, DZL_RPC.GET_FRACTION, null, true);
 
         return layoutRoot;
     }
@@ -149,7 +143,7 @@ class DZLFractionMenu : DZLBaseMenu {
         if(w == fractionSaveButton) {
             fractionMembers = DZLDisplayHelper.GetDZLFractionMemberFromList(fractionPanelPlayerList);
             potentialMembers = DZLDisplayHelper.GetDZLFractionMemberFromList(openInvitations);
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_GET_UPDATE_FRACTION_MEMBERS, new Param2<ref array<ref DZLFractionMember>, ref array<ref DZLFractionMember>>(fractionMembers, potentialMembers), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.GET_UPDATE_FRACTION_MEMBERS, new Param2<ref array<ref DZLFractionMember>, ref array<ref DZLFractionMember>>(fractionMembers, potentialMembers), true);
             fractionSearchInput.SetText("");
             wasDone = true;
             ResetSelectedMember();
@@ -181,21 +175,21 @@ class DZLFractionMenu : DZLBaseMenu {
             wasDone = true;
         } else if(w == fractionDelete && deleteAccept.IsChecked()) {
             ResetSelectedMember();
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_DELETE_FRACTION, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.DELETE_FRACTION, null, true);
             wasDone = true;
         } else if(w == fractionLeave) {
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_FRACTION_MEMBER_LEAVE, null, true);
+            GetGame().RPCSingleParam(player, DZL_RPC.FRACTION_MEMBER_LEAVE, null, true);
             wasDone = true;
         } else if(w == acceptInvitation) {
             DZLFractionMember member = GetMarkedMember(fractionInvitationList);
 
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_FRACTION_MEMBER_JOIN, new Param1<ref DZLFractionMember>(member), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.FRACTION_MEMBER_JOIN, new Param1<ref DZLFractionMember>(member), true);
             wasDone = true;
         } else if(w == createFaction) {
             string fractionName = fractionNameEdit.GetText();
 
             if(fractionName && fractionName != "") {
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_FRACTION_CREATE_FRACTION, new Param1<string>(fractionName), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.FRACTION_CREATE_FRACTION, new Param1<string>(fractionName), true);
             }
             wasDone = true;
         }
@@ -204,7 +198,7 @@ class DZLFractionMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_GET_FRACTION_RESPONSE_FRACTION_OWNER) {
+        if(rpc_type == DZL_RPC.GET_FRACTION_RESPONSE_FRACTION_OWNER) {
             autoptr Param2<ref DZLFraction, ref array<ref DZLFractionMember>> paramFractionOwner;
             if(ctx.Read(paramFractionOwner)) {
                 fraction = paramFractionOwner.param1;
@@ -213,15 +207,15 @@ class DZLFractionMenu : DZLBaseMenu {
                 fractionNotMembers = paramFractionOwner.param2;
                 UpdateList();
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_UPDATE_FRACTION_MEMBERS_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.GET_UPDATE_FRACTION_MEMBERS_RESPONSE) {
             OnHide();
-        } else if(rpc_type == DAY_Z_LIFE_FRACTION_MEMBER_LEAVE_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.FRACTION_MEMBER_LEAVE_RESPONSE) {
             OnHide();
-        } else if(rpc_type == DAY_Z_LIFE_FRACTION_MEMBER_JOIN_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.FRACTION_MEMBER_JOIN_RESPONSE) {
             OnHide();
-        } else if(rpc_type == DAY_Z_LIFE_DELETE_FRACTION_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.DELETE_FRACTION_RESPONSE) {
             OnHide();
-        } else if(rpc_type == DAY_Z_LIFE_GET_FRACTION_RESPONSE_FRACTION_MEMBER) {
+        } else if(rpc_type == DZL_RPC.GET_FRACTION_RESPONSE_FRACTION_MEMBER) {
             autoptr Param1<ref DZLFractionMember> paramFractionMember;
             if(ctx.Read(paramFractionMember)) {
                 DZLFractionMember member = paramFractionMember.param1;
@@ -233,7 +227,7 @@ class DZLFractionMenu : DZLBaseMenu {
                 fractionPanel.Show(true);
                 wrapperLeave.Show(true);
             }
-        } else if(rpc_type == DAY_Z_LIFE_GET_FRACTION_RESPONSE_NOT_A_FRACTION_MEMBER) {
+        } else if(rpc_type == DZL_RPC.GET_FRACTION_RESPONSE_NOT_A_FRACTION_MEMBER) {
             autoptr Param1<ref array<ref DZLFractionMember>> paramNotFractionMember;
             if(ctx.Read(paramNotFractionMember)) {
                 fractionInvitationList.ClearItems();
@@ -242,6 +236,7 @@ class DZLFractionMenu : DZLBaseMenu {
                 }
 
                 fractionInvitationList.Show(true);
+                acceptInvitation.Show(paramNotFractionMember.param1.Count() > 0);
                 wrapperInvite.Show(true);
                 wrapperName.Show(true);
                 wrapperCreate.Show(true);
@@ -266,6 +261,7 @@ class DZLFractionMenu : DZLBaseMenu {
         }
 
         foreach(DZLFractionMember fractionMember: fractionMembers) {
+            if(fraction.GetId() == fractionMember.playerId) continue;
             fractionPanelPlayerList.AddItem(fractionMember.name, fractionMember, 0);
         }
     }

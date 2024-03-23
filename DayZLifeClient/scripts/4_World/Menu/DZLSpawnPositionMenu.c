@@ -3,26 +3,21 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     private TextListboxWidget spawnPoints;
     private ButtonWidget randomSpawn;
     private ButtonWidget spawn;
-    private string jobId;
+    private int currentJobIndex = 0;
     private XComboBoxWidget jobSelection;
-    private ref array<string> activeJobIds;
+    private Widget warnText;
+    bool isOpenOverMenu = false;
 
-    private int medicIndex = -1;
-    private int copIndex = -1;
-    private int armyIndex = -1;
-
+    private ref map<int, string> jobIndex = new map<int, string>;
 
     void DZLSpawnPositionMenu() {
-        hasCloseButton = false;
-        Construct();
-    }
-
-    void ~DZLSpawnPositionMenu() {
-        Destruct();
+        canClose = false;
+        showHud = false;
+        showQuickBar = false;
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_NEW_SPAWN_RESPONSE) {
+        if(rpc_type == DZL_RPC.NEW_SPAWN_RESPONSE) {
             GetGame().GetMission().GetHud().ShowHud(true);
             GetGame().GetMission().GetHud().ShowQuickBar(true);
             OnHide();
@@ -31,7 +26,6 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
     override Widget Init() {
         layoutPath = "DayZLifeClient/layout/SpawnMenu/SpawnMenu.layout";
-        activeJobIds = new array<string>;
 
         super.Init();
         spawnMap = creator.GetMapWidget("map");
@@ -39,6 +33,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         randomSpawn = creator.GetButtonWidget("randomButton");
         spawn = creator.GetButtonWidget("spawnButton");
         jobSelection = creator.GetXComboBoxWidget("spawn");
+        warnText = creator.GetWidget("warnText");
 
         spawn.Show(false);
         return layoutRoot;
@@ -46,28 +41,17 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
     override void OnShow() {
         super.OnShow();
-        GetGame().GetMission().GetHud().ShowHud(false);
-        GetGame().GetMission().GetHud().ShowQuickBar(false);
+        closeButton.Show(isOpenOverMenu);
+        warnText.Show(isOpenOverMenu);
 
-        jobId = config.jobIds.Get(0);
-
-        foreach(string configJobId: config.jobIds) {
-            activeJobIds.Insert(configJobId);
-        }
 
         jobSelection.ClearAll();
-        jobSelection.AddItem("#Civ");
+        jobIndex.Insert(jobSelection.AddItem("#Civ"), DAY_Z_LIFE_JOB_CIVIL);
 
-        if(player.GetDZLPlayer().IsMedic()) {
-            medicIndex = jobSelection.AddItem("#Medic");
-        }
-
-        if(player.GetDZLPlayer().IsCop()) {
-            copIndex = jobSelection.AddItem("#Cop");
-        }
-
-        if(player.GetDZLPlayer().IsArmy()) {
-            armyIndex = jobSelection.AddItem("#Army");
+        foreach(string jobName: config.jobConfig.paycheck.jobNames) {
+            if(player.GetDZLPlayer().CanUseJob(jobName)) {
+                jobIndex.Insert(jobSelection.AddItem("#" + jobName), jobName);
+            }
         }
 
         UpdateSpawnPoints();
@@ -111,18 +95,9 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
             return true;
         } else if(w == jobSelection) {
             index = jobSelection.GetCurrentItem();
-
             if(index == -1) return true;
 
-            if(medicIndex == index) {
-                index = 1;
-            } else if(copIndex == index) {
-                index = 2;
-            } else if(armyIndex == index) {
-                index = 3;
-            }
-
-            jobId = activeJobIds.Get(index);
+            currentJobIndex = index;
 
             UpdateSpawnPoints();
         }
@@ -130,9 +105,9 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
         return false;
     }
 
-    void SendSpawnLocation(DZLSpawnPoint point, PlayerBase player) {
-        player.SetIsSpawned();
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
+    void SendSpawnLocation(DZLSpawnPoint point, PlayerBase _player) {
+        string jobId = jobIndex.Get(currentJobIndex);
+        GetGame().RPCSingleParam(_player, DZL_RPC.NEW_SPAWN, new Param2<string, string>(point.GetId(), jobId), true);
     }
 
     override void OnHide() {
@@ -142,7 +117,8 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
     }
 
     private void UpdateSpawnPoints() {
-        DZLJobSpawnPoints spawnPointCollection = config.GetJobSpanwPointById(jobId);
+        string jobId = jobIndex.Get(currentJobIndex);
+        DZLJobSpawnPoints spawnPointCollection = config.GetJobSpawnPointsByJobId(jobId);
 
         spawnPoints.ClearItems();
         foreach(DZLSpawnPoint point: spawnPointCollection.spawnPoints) {

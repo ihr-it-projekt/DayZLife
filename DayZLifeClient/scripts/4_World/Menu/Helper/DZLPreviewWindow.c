@@ -3,9 +3,9 @@ class DZLPreviewWindow extends Managed {
     private MultilineTextWidget description;
     private EntityAI previewItem;
 
-    void DZLPreviewWindow(ItemPreviewWidget widget, MultilineTextWidget description = null) {
-        this.widget = widget;
-        this.description = description;
+    void DZLPreviewWindow(ItemPreviewWidget _widget, MultilineTextWidget _description = null) {
+        this.widget = _widget;
+        this.description = _description;
     }
 
     bool UpdatePreview(string type) {
@@ -24,8 +24,8 @@ class DZLPreviewWindow extends Managed {
         return true;
     }
 
-    private void Update(EntityAI previewItem) {
-        widget.SetItem(previewItem);
+    private void Update(EntityAI _previewItem) {
+        widget.SetItem(_previewItem);
         widget.SetModelPosition(Vector(0, 0, 0.5));
 
         widget.Show(true);

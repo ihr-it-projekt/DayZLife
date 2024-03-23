@@ -1,18 +1,17 @@
 FrameWidgetClass License_Menu {
  visible 1
- position 0 -0.00146
- size 1 1
+ size 1000 600
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
-  PanelWidgetClass PanelWidget0 {
+  PanelWidgetClass PanelWidget1 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
-   size 0.59425 0.51574
+   color 0.5176 0.5176 0.5176 0.7098
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
@@ -21,61 +20,251 @@ FrameWidgetClass License_Menu {
    vexactsize 0
    style editor_quad_dark
    {
-    PanelWidgetClass PanelWidget1 {
+    PanelWidgetClass fractionAccessPanel {
+     visible 1
      ignorepointer 1
      position 0 0
-     size 0.99 0.987
+     size 1 0.88
      halign center_ref
-     valign center_ref
+     valign bottom_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     style blank
      {
-      PanelWidgetClass PanelWidget2 {
-       ignorepointer 1
-       position 0 0.01455
-       size 0.28826 0.075
-       halign center_ref
+      TextListboxWidgetClass playerList {
+       position 0.00708 0.05248
+       size 0.31 0.86263
+       valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
+       "title visible" 0
+       colums ""
+       lines 20
+      }
+      PanelWidgetClass PanelWidget4 {
+       ignorepointer 1
+       position 0 0
+       size 0.3517 1
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
        {
-        TextWidgetClass fractionMenuHeadLine {
+        PanelWidgetClass PanelWidget8 {
          visible 1
          ignorepointer 1
-         size 0.98 0.9
+         position 0 0.01
+         size 0.95 0.07
          halign center_ref
-         valign center_ref
+         valign bottom_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style Normal
-         text "#FractionMenu"
-         text_proportion 0.7
-         "text halign" center
-         "text valign" center
+         style blank
+         {
+          ButtonWidgetClass fractionSafeMembers {
+           color 0.251 0.502 0 1
+           position 0 0
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           "no focus" 1
+           text "#save"
+          }
+         }
+        }
+        PanelWidgetClass wrapperFractionPlayer {
+         ignorepointer 1
+         position 0 0.43
+         size 0.95 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass fractionPlayer {
+           visible 1
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#FractionPlayer"
+           "text halign" center
+           "text valign" center
+          }
+         }
+        }
+        PanelWidgetClass wrapperBankRight {
+         ignorepointer 1
+         position 0 0.34
+         size 1 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass rights0 {
+           ignorepointer 1
+           size 0.89 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#Access_Bank_Account"
+           "exact text" 0
+           text_proportion 0.6
+           "size to text h" 0
+           "size to text v" 0
+           "text valign" center
+          }
+          CheckBoxWidgetClass accessBankAccountCheckbox {
+           position 0 0
+           size 0.1 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        PanelWidgetClass wrapperBankMoneyRight {
+         ignorepointer 1
+         position 0 0.27
+         size 1 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass rights1 {
+           ignorepointer 1
+           position 0 0
+           size 0.89 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#Get_Money_From_Bank"
+           "exact text" 0
+           text_proportion 0.6
+           "size to text h" 0
+           "size to text v" 0
+           "text valign" center
+          }
+          CheckBoxWidgetClass accessBankGetMoneyCheckbox {
+           position 0 0
+           size 0.1 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        PanelWidgetClass wrapperGarageRight {
+         ignorepointer 1
+         position 0 0.2
+         size 1 0.07
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass rights2 {
+           ignorepointer 1
+           position 0 0
+           size 0.89 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#Access_Fraction_Garage"
+           "exact text" 0
+           text_proportion 0.6
+           "size to text h" 0
+           "size to text v" 0
+           "text valign" center
+          }
+          CheckBoxWidgetClass accessFractionGarage {
+           position 0 0
+           size 0.1 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+         }
+        }
+        TextListboxWidgetClass fractionMembers {
+         position 0.03 0
+         size 0.95 0.48
+         halign right_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         "title visible" 1
+         colums "#Player"
+         lines 13
         }
        }
       }
-      PanelWidgetClass PanelWidget7 {
+      PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position 0.00708 0.01184
-       size 0.04672 0.07463
-       halign right_ref
+       position -0.20457 0.89502
+       size 0.0433 0.08879
+       halign center_ref
+       valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
+       style blank
        {
-        ButtonWidgetClass Button_Closed {
-         color 0.502 0 0 1
-         position 0 0
+        ButtonWidgetClass searchButton {
+         color 0.251 0.502 0 1
          size 0.9 0.9
          halign center_ref
          valign center_ref
@@ -83,688 +272,534 @@ FrameWidgetClass License_Menu {
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style OldStyle
-         text "X"
+         style Default
+         "no focus" 1
+         {
+          ImageWidgetClass ImageWidget0 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
+           mode blend
+           "src alpha" 1
+           "stretch mode" stretch_w_h
+          }
+         }
         }
        }
       }
-      PanelWidgetClass fractionAccessPanel {
-       visible 0
-       ignorepointer 1
-       position 0 0
-       size 1 0.899
+      EditBoxWidgetClass search_input {
+       position -0.3631 0.895
+       size 0.25962 0.08879
        halign center_ref
        valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
+       style EditorProperty
+       font "gui/fonts/amorserifpro"
+      }
+      TextListboxWidgetClass openInvitations {
+       position 0.0092 0.51683
+       size 0.308 0.47
+       halign right_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       "title visible" 1
+       colums "#Open_Invitations"
+       lines 13
+      }
+      PanelWidgetClass PanelWidget23 {
+       ignorepointer 1
+       color 0.6235 0.1569 0.1569 1
+       position 0.01 0.01
+       size 0.3 0.07
+       halign right_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
        {
-        TextListboxWidgetClass playerList {
-         position 0.00708 0.05248
-         size 0.31 0.86263
+        CheckBoxWidgetClass deleteAccept {
+         size 0.1 1
+         halign right_ref
          valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         "title visible" 0
-         colums ""
-         lines 20
+         style Default
         }
-        TextListboxWidgetClass fractionMembers {
-         position 0.00708 -0.26766
-         size 0.31 0.43229
-         halign right_ref
+        PanelWidgetClass PanelWidget22 {
+         visible 1
+         ignorepointer 1
+         color 0.502 0 0 1
+         position 0 0
+         size 0.88 1
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          ButtonWidgetClass fractionDelete {
+           disabled 1
+           ignorepointer 0
+           color 0.502 0 0 1
+           position 0 0
+           size 1 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Default
+           text "#Fraction_Delete"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+    PanelWidgetClass fractionPanel {
+     visible 0
+     ignorepointer 1
+     color 0.5176 0.5176 0.5176 0.3137
+     size 1 0.88
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
+     {
+      PanelWidgetClass wrapperInvite {
+       ignorepointer 1
+       position 0 -0.12515
+       size 0.3 0.07
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
+       {
+        ButtonWidgetClass acceptInvitation {
+         color 0.251 0.502 0 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+         "no focus" 1
+         text "#Accept_Invitation"
+        }
+       }
+      }
+      PanelWidgetClass wrapperCreate {
+       ignorepointer 1
+       position 0 -0.35549
+       size 0.3 0.07
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
+       {
+        ButtonWidgetClass createFaction {
+         color 0.251 0.502 0 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+         text "#Create_Faction"
+         text_proportion 0.6
+        }
+       }
+      }
+      PanelWidgetClass wrapperLeave {
+       ignorepointer 1
+       position 0 -0.04
+       size 0.3 0.07
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
+       {
+        ButtonWidgetClass fractionLeave {
+         color 0.251 0.502 0 1
+         position 0 0
+         size 1 1
+         halign center_ref
+         valign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+         "no focus" 1
+         text "#Fraction_Leave"
+        }
+       }
+      }
+      PanelWidgetClass myRightsWidget {
+       ignorepointer 1
+       position 0 -0.00001
+       size 0.32962 0.99998
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
+       {
+        PanelWidgetClass PanelWidget14 {
+         ignorepointer 1
+         size 1 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass TextWidget0 {
+           ignorepointer 1
+           size 1 1
+           halign center_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           text "#My_rights"
+           "exact text" 1
+           "size to text h" 1
+           "text halign" center
+           "text valign" center
+           {
+            PanelWidgetClass PanelWidget3 {
+             ignorepointer 1
+             position 0 0
+             size 1 0.03
+             halign center_ref
+             valign bottom_ref
+             hexactpos 0
+             vexactpos 0
+             hexactsize 0
+             vexactsize 0
+             style editor_selection
+            }
+           }
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget15 {
+         ignorepointer 1
+         position 0 0.14
+         size 1 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass rights3 {
+           ignorepointer 1
+           size 0.89 1
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#Access_Bank_Account"
+           "exact text" 0
+           text_proportion 0.6
+           "size to text h" 0
+           "size to text v" 0
+           "text valign" center
+          }
+          CheckBoxWidgetClass displayBankAccessRight {
+           disabled 1
+           position 0 0
+           size 0.1 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+          PanelWidgetClass PanelWidget6 {
+           ignorepointer 1
+           position 0 0.1
+           size 0.98 0.05
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_selection
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget16 {
+         ignorepointer 1
+         position 0 0.22
+         size 1 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass displayBankGetMoney {
+           ignorepointer 1
+           size 0.89 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#Get_Money_From_Bank"
+           "exact text" 0
+           text_proportion 0.6
+           "size to text h" 0
+           "size to text v" 0
+           "text valign" center
+          }
+          CheckBoxWidgetClass displayBankGetMoneyRight {
+           disabled 1
+           size 0.1 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+          PanelWidgetClass PanelWidget7 {
+           ignorepointer 1
+           position 0 0.1
+           size 0.98 0.05
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_selection
+          }
+         }
+        }
+        PanelWidgetClass PanelWidget17 {
+         ignorepointer 1
+         position 0 0.3
+         size 1 0.07
+         halign center_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style blank
+         {
+          TextWidgetClass rights5 {
+           ignorepointer 1
+           size 0.89 0.9
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style Normal
+           text "#Access_Fraction_Garage"
+           "exact text" 0
+           text_proportion 0.6
+           "size to text h" 0
+           "size to text v" 0
+           "text valign" center
+          }
+          CheckBoxWidgetClass displayAccessGarageRight {
+           disabled 1
+           position 0 0
+           size 0.1 0.9
+           halign right_ref
+           valign center_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+          }
+          PanelWidgetClass PanelWidget9 {
+           ignorepointer 1
+           position 0 0.1
+           size 0.98 0.05
+           valign bottom_ref
+           hexactpos 0
+           vexactpos 0
+           hexactsize 0
+           vexactsize 0
+           style editor_selection
+          }
+         }
+        }
+       }
+      }
+      PanelWidgetClass PanelWidget19 {
+       ignorepointer 1
+       size 0.327 1
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style blank
+       {
+        TextListboxWidgetClass fractionInvitationList {
+         position 0.02166 0
+         size 0.9567 0.9676
          valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
          "title visible" 1
-         colums "#Player"
-         lines 10
-        }
-        PanelWidgetClass PanelWidget4 {
-         ignorepointer 1
-         position 0 0
-         size 0.3517 1
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          PanelWidgetClass PanelWidget8 {
-           visible 1
-           ignorepointer 1
-           position 0 0.3
-           size 0.66 0.1
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass fractionSafeMembers {
-             color 0.251 0.502 0 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-             text "#save"
-            }
-           }
-          }
-          PanelWidgetClass wrapperFractionPlayer {
-           ignorepointer 1
-           position 0 0.0346
-           size 0.7583 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass fractionPlayer {
-             visible 1
-             ignorepointer 1
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#FractionPlayer"
-             "text halign" center
-             "text valign" center
-            }
-           }
-          }
-          PanelWidgetClass wrapperBankRight {
-           ignorepointer 1
-           position 0 0.1624
-           size 1 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass rights0 {
-             ignorepointer 1
-             position -0.04 0
-             size 0.87 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#Access_Bank_Account"
-             "exact text" 0
-             text_proportion 0.6
-             "size to text h" 0
-             "size to text v" 0
-             "text valign" center
-            }
-            CheckBoxWidgetClass accessBankAccountCheckbox {
-             position 0 0
-             size 0.1 0.9
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-          PanelWidgetClass wrapperBankMoneyRight {
-           ignorepointer 1
-           position 0 0.255
-           size 1 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass rights1 {
-             ignorepointer 1
-             position -0.04 0
-             size 0.87 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#Get_Money_From_Bank"
-             "exact text" 0
-             text_proportion 0.6
-             "size to text h" 0
-             "size to text v" 0
-             "text valign" center
-            }
-            CheckBoxWidgetClass accessBankGetMoneyCheckbox {
-             position 0 0
-             size 0.1 0.9
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-          PanelWidgetClass wrapperGarageRight {
-           ignorepointer 1
-           position 0 0.35
-           size 1 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass rights2 {
-             ignorepointer 1
-             position -0.04 0
-             size 0.87 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#Access_Fraction_Garage"
-             "exact text" 0
-             text_proportion 0.6
-             "size to text h" 0
-             "size to text v" 0
-             "text valign" center
-            }
-            CheckBoxWidgetClass accessFractionGarage {
-             position 0 0
-             size 0.1 0.9
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-          PanelWidgetClass PanelWidget23 {
-           ignorepointer 1
-           position 0 0
-           size 1 0.143
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            CheckBoxWidgetClass deleteAccept {
-             size 0.1 0.6882
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-            }
-            PanelWidgetClass PanelWidget22 {
-             visible 1
-             ignorepointer 1
-             color 0.502 0 0 1
-             size 0.75 0.7
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style editor_quad_dark
-             {
-              ButtonWidgetClass fractionDelete {
-               disabled 1
-               ignorepointer 0
-               color 0.502 0 0 1
-               position 0 0
-               size 0.96 0.79
-               halign center_ref
-               valign center_ref
-               hexactpos 0
-               vexactpos 0
-               hexactsize 0
-               vexactsize 0
-               style Default
-               text "#Fraction_Delete"
-              }
-             }
-            }
-           }
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget5 {
-         ignorepointer 1
-         position -0.20457 0.89502
-         size 0.0433 0.08879
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass searchButton {
-           color 0.251 0.502 0 1
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           {
-            ImageWidgetClass ImageWidget0 {
-             ignorepointer 1
-             size 0.9 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
-             mode blend
-             "src alpha" 1
-             stretch 1
-            }
-           }
-          }
-         }
-        }
-        EditBoxWidgetClass search_input {
-         position -0.36311 0.89502
-         size 0.25962 0.08879
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style DefaultBorder
-        }
-        PanelWidgetClass PanelWidget21 {
-         ignorepointer 1
-         position 0 0
-         size 0.325 0.53532
-         halign right_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextListboxWidgetClass openInvitations {
-           position 0 0
-           size 0.95642 0.93953
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           "title visible" 1
-           colums "#Open_Invitations"
-           lines 13
-          }
-         }
+         colums "#Fraction_Invitations"
+         lines 20
         }
        }
       }
-      PanelWidgetClass fractionPanel {
-       visible 1
+      PanelWidgetClass wrapperName {
        ignorepointer 1
-       position 0 0
-       size 1 0.899
+       position 0 0.90365
+       size 0.3 0.07
        halign center_ref
        valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
+       style blank
        {
-        PanelWidgetClass wrapperInvite {
-         ignorepointer 1
-         position 0 -0.17
-         size 0.2596 0.1
+        EditBoxWidgetClass fractionNameEdit {
+         position 0 0
+         size 1 1
          halign center_ref
          valign center_ref
          hexactpos 0
          vexactpos 0
          hexactsize 0
          vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass acceptInvitation {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 1 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           text "#Accept_Invitation"
-           text_proportion 0.6
-          }
-         }
-        }
-        PanelWidgetClass wrapperCreate {
-         ignorepointer 1
-         position 0 0.39
-         size 0.2596 0.1
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass createFaction {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 1 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           text "#Create_Faction"
-           text_proportion 0.6
-          }
-         }
-        }
-        PanelWidgetClass wrapperLeave {
-         ignorepointer 1
-         position 0 -0.03
-         size 0.2596 0.1
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass fractionLeave {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 1 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           text "#Fraction_Leave"
-           text_proportion 0.6
-          }
-         }
-        }
-        PanelWidgetClass myRightsWidget {
-         ignorepointer 1
-         position 0 -0.00001
-         size 0.32962 0.99998
-         halign right_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          PanelWidgetClass PanelWidget14 {
-           ignorepointer 1
-           position 0 0.01619
-           size 0.95703 0.097
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass TextWidget0 {
-             ignorepointer 1
-             size 0.95 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             text "#My_rights"
-             "text halign" center
-             "text valign" center
-            }
-           }
-          }
-          PanelWidgetClass PanelWidget15 {
-           ignorepointer 1
-           position 0 0.1624
-           size 1 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass rights3 {
-             ignorepointer 1
-             position -0.04 0
-             size 0.87 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#Access_Bank_Account"
-             "exact text" 0
-             text_proportion 0.6
-             "size to text h" 0
-             "size to text v" 0
-             "text valign" center
-            }
-            CheckBoxWidgetClass displayBankAccessRight {
-             disabled 1
-             position 0 0
-             size 0.1 0.9
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-          PanelWidgetClass PanelWidget16 {
-           ignorepointer 1
-           position 0 0.255
-           size 1 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass displayBankGetMoney {
-             ignorepointer 1
-             position -0.04 0
-             size 0.87 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#Get_Money_From_Bank"
-             "exact text" 0
-             text_proportion 0.6
-             "size to text h" 0
-             "size to text v" 0
-             "text valign" center
-            }
-            CheckBoxWidgetClass displayBankGetMoneyRight {
-             disabled 1
-             position 0 0.03181
-             size 0.1 0.9
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-          PanelWidgetClass PanelWidget17 {
-           ignorepointer 1
-           position 0 0.35
-           size 1 0.1
-           halign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            TextWidgetClass rights5 {
-             ignorepointer 1
-             position -0.04 0
-             size 0.87 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Normal
-             text "#Access_Fraction_Garage"
-             "exact text" 0
-             text_proportion 0.6
-             "size to text h" 0
-             "size to text v" 0
-             "text valign" center
-            }
-            CheckBoxWidgetClass displayAccessGarageRight {
-             disabled 1
-             position 0 0
-             size 0.1 0.9
-             halign right_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-            }
-           }
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget19 {
-         ignorepointer 1
-         size 0.327 1
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextListboxWidgetClass fractionInvitationList {
-           position 0.02166 0
-           size 0.9567 0.9676
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           "title visible" 1
-           colums "#Fraction_Invitations"
-           lines 20
-          }
-         }
-        }
-        PanelWidgetClass wrapperName {
-         ignorepointer 1
-         position -0.0013 0.1862
-         size 0.3292 0.081
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          EditBoxWidgetClass fractionNameEdit {
-           size 0.98 0.95
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-          }
-         }
+         style DefaultBorder
+         font "gui/fonts/amorserifpro"
         }
        }
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget0 {
+     ignorepointer 1
+     position 0 0.1
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
+    }
+    TextWidgetClass fractionMenuHeadLine {
+     visible 1
+     ignorepointer 1
+     position 0 0.01
+     size 0.8 0.07
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Normal
+     text "#FractionMenu"
+     "exact text" 1
+     "size to text h" 1
+     "text halign" center
+     "text valign" center
+     {
+      PanelWidgetClass PanelWidget2 {
+       ignorepointer 1
+       position 0 0
+       size 1 0.02
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
+      }
+     }
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.008 0.01333
+     size 0.04 0.06
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
       }
      }
     }

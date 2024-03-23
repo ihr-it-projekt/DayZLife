@@ -7,7 +7,7 @@ class DZLShopActionObject: DZLBaseActionObject {
     override void SetActions() {
         super.SetActions();
 
-        AddAction(ActionRobShop);
-        AddAction(ActionTakeRobtMoneyShop);
+        AddAction(DZLActionRobShop);
+        AddAction(DZLActionTakeRobtMoneyShop);
     }
 }

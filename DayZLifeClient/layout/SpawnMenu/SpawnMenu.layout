@@ -10,7 +10,7 @@ FrameWidgetClass rootFrame {
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
+   color 0.5176 0.5176 0.5176 0.7098
    position 0 0
    size 1 1
    halign center_ref
@@ -19,19 +19,52 @@ FrameWidgetClass rootFrame {
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0 0
+     size 0.03 0.05
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     priority 10
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       position 0.0072 0.02546
+       size 1.0209 1.0139
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       priority 10
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
+      }
+     }
+    }
     PanelWidgetClass PanelWidget1 {
      ignorepointer 1
-     position -0.00004 -0.00011
-     size 0.9916 0.98496
+     size 1 1
      halign center_ref
      valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     style blank
      {
       PanelWidgetClass PanelWidget2 {
        ignorepointer 1
@@ -42,11 +75,11 @@ FrameWidgetClass rootFrame {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
+       style blank
        {
         TextListboxWidgetClass spawnPoints {
-         position 0.00003 0
-         size 0.96605 0.985
+         position 0 -0.075
+         size 0.96605 0.83508
          halign center_ref
          valign center_ref
          hexactpos 0
@@ -56,123 +89,73 @@ FrameWidgetClass rootFrame {
          style Default
          "title visible" 1
          colums "#SpawnPoints"
-         lines 25
+         lines 32
+        }
+        XComboBoxWidgetClass spawn {
+         position 0 0.11
+         size 0.9 0.04
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         style Default
+         items "#Civ;#Cop;#Medic;#Army"
+        }
+        ButtonWidgetClass randomButton {
+         color 0 0.1255 0.502 1
+         position 0 0.01
+         size 0.9 0.04
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         text "#Random"
+        }
+        ButtonWidgetClass spawnButton {
+         color 0.251 0.502 0 1
+         position 0 0.06
+         size 0.9 0.04
+         halign center_ref
+         valign bottom_ref
+         hexactpos 0
+         vexactpos 0
+         hexactsize 0
+         vexactsize 0
+         "no focus" 1
+         text "#Spawn"
         }
        }
       }
       MapWidgetClass map {
-       position 0.0042 0.00776
-       size 0.7423 0.79355
+       position 0 0.05
+       size 0.75 0.95
        halign right_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
+       priority 11
       }
-      PanelWidgetClass PanelWidget3 {
+      TextWidgetClass warnText {
        ignorepointer 1
-       position 0.12459 0.00112
-       size 0.75 0.1913
-       halign center_ref
-       valign bottom_ref
+       color 0.502 0 0 1
+       position 0.03 0
+       size 0.72 0.05
+       halign right_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        PanelWidgetClass PanelWidget4 {
-         ignorepointer 1
-         position 0.0168 0.18
-         size 0.25 0.36
-         halign right_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass spawnButton {
-           color 0.251 0.502 0 1
-           position 0 0
-           size 0.98 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Spawn"
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget5 {
-         ignorepointer 1
-         position 0.2788 0.18
-         size 0.25 0.3605
-         halign right_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass randomButton {
-           color 0 0.1255 0.502 1
-           position 0 0
-           size 0.98 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Random"
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget6 {
-         ignorepointer 1
-         position 0.049 0.18
-         size 0.281 0.36
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          XComboBoxWidgetClass spawn {
-           position 0 0
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           items "#Civ;#Cop;#Medic;#Army"
-          }
-         }
-        }
-        TextWidgetClass warnText {
-         ignorepointer 1
-         color 0.502 0 0 1
-         position 0.0056 0.03931
-         size 0.9888 0.4
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         text "#you_will_loose_all_money_on_you_char"
-         text_proportion 0.7
-         "text halign" center
-         "text valign" center
-        }
-       }
+       style Bold
+       text "#you_will_loose_all_money_on_you_char"
+       text_proportion 0.7
+       "size to text h" 0
+       "text halign" center
+       "text valign" center
       }
      }
     }

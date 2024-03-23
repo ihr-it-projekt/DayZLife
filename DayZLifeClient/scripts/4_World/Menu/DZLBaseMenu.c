@@ -8,15 +8,18 @@ class DZLBaseMenu: UIScriptedMenu {
     protected bool hasCloseButton = true;
     protected bool hideCourser = true;
     protected bool showCourser = true;
+    protected bool canClose = true;
+    protected bool showHud = true;
+    protected bool showQuickBar = true;
 
 
-    protected void Construct() {
+    void DZLBaseMenu() {
         if(GetGame().IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         }
     }
 
-    protected void Destruct() {
+    void ~DZLBaseMenu() {
         OnHide();
         GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
     }
@@ -24,15 +27,12 @@ class DZLBaseMenu: UIScriptedMenu {
     void SetPlayer(PlayerBase _player) {
         this.player = _player;
         this.dzlPlayer = _player.GetDZLPlayer();
+        config = DZLConfig.Get();
     }
 
-    void UpdatePlayer(PlayerBase player) {
-        SetPlayer(player);
+    void UpdatePlayer(PlayerBase _player) {
+        SetPlayer(_player);
         UpdateGUI();
-    }
-
-    void SetConfig(ref DZLConfig config) {
-        this.config = config;
     }
 
     void UpdateGUI(string message = "") {
@@ -41,9 +41,7 @@ class DZLBaseMenu: UIScriptedMenu {
         }
     }
 
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-
-    }
+    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {}
 
     override Widget Init() {
         creator = new DZLUIItemCreator(layoutPath);
@@ -80,6 +78,16 @@ class DZLBaseMenu: UIScriptedMenu {
 
         GetGame().GetInput().ChangeGameFocus(1);
         GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
+
+        GetGame().GetMission().GetHud().ShowHud(showHud);
+        GetGame().GetMission().GetHud().ShowQuickBar(showQuickBar);
+    }
+
+    override void Update(float timeslice) {
+        super.Update(timeslice);
+        if(canClose && GetUApi() && GetUApi().GetInputByName("UAUIBack").LocalPress()) {
+            GetGame().GetUIManager().HideScriptedMenu(this);
+        }
     }
 
     override void OnHide() {
@@ -88,6 +96,8 @@ class DZLBaseMenu: UIScriptedMenu {
         GetGame().GetUIManager().ShowCursor(false);
         GetGame().GetInput().ResetGameFocus();
         GetGame().GetMission().PlayerControlEnable(true);
+        GetGame().GetMission().GetHud().ShowHud(true);
+        GetGame().GetMission().GetHud().ShowQuickBar(true);
         Close();
     }
 }

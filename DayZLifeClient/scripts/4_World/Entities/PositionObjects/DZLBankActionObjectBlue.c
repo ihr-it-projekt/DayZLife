@@ -1,5 +1,5 @@
-class DZLBankActionObjectBlue: DZLBaseActionObject {
-    void DZLBankActionObjectBlue() {
+class DZLBankAutomate_Blue: DZLBaseActionObject {
+    void DZLBankAutomate_Blue() {
         isBank = true;
     }
 
@@ -7,9 +7,9 @@ class DZLBankActionObjectBlue: DZLBaseActionObject {
         super.SetActions();
 
         AddAction(DZLActionOpenBankingMenu);
-        AddAction(ActionRobBank);
+        AddAction(DZLActionRobBank);
         AddAction(DZLActionPaybackRobtMoney);
-        AddAction(ActionStopRobBank);
-        AddAction(ActionTakeRobtMoneyBank);
+        AddAction(DZLActionStopRobBank);
+        AddAction(DZLActionTakeRobtMoneyBank);
     }
 }

@@ -24,15 +24,10 @@ class DZLBankingMenu : DZLBaseMenu {
 
     void DZLBankingMenu() {
         layoutPath = "DayZLifeClient/layout/Banking/DZLBanking.layout";
-        Construct();
-    }
-
-    void ~DZLBankingMenu() {
-        Destruct();
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER_RESPONSE) {
+        if(rpc_type == DZL_RPC.PLAYER_DEPOSIT_TO_PLAYER_RESPONSE) {
             autoptr Param3<ref DZLPlayer, ref DZLBank, string> paramGetResponse;
             if(ctx.Read(paramGetResponse)) {
                 bankBalanceTextWidget.SetText(paramGetResponse.param2.moneyAtBank.ToString());
@@ -40,7 +35,7 @@ class DZLBankingMenu : DZLBaseMenu {
                 playerBankBalanceTextWidget.SetText(paramGetResponse.param1.GetBankMoney().ToString());
                 player.DisplayMessage(paramGetResponse.param3);
             }
-        } else if(rpc_type == DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.ALL_PLAYER_IDENT_DATA_RESPONSE) {
             autoptr Param1<ref array<ref DZLPlayerBankInfo>> paramGetPlayerResponse;
             if(ctx.Read(paramGetPlayerResponse)) {
                 playerListbox.ClearItems();
@@ -89,7 +84,7 @@ class DZLBankingMenu : DZLBaseMenu {
 
         playerListbox = creator.GetTextListboxWidget("Player_list");
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_ALL_PLAYER_IDENT_DATA, null, true);
+        GetGame().RPCSingleParam(player, DZL_RPC.ALL_PLAYER_IDENT_DATA, null, true);
 
         return layoutRoot;
     }
@@ -189,7 +184,7 @@ class DZLBankingMenu : DZLBaseMenu {
             }
 
             if(deposit <= money) {
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_TO_PLAYER, new Param3<DZLPlayerBankInfo, int, bool>(playerBankInfo, deposit, isFraction), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DEPOSIT_TO_PLAYER, new Param3<DZLPlayerBankInfo, int, bool>(playerBankInfo, deposit, isFraction), true);
                 inputDeposit.SetText("");
             } else {
                 player.DisplayMessage("#error_not_enough_money_to_transfer");
@@ -205,7 +200,7 @@ class DZLBankingMenu : DZLBaseMenu {
             int deposit = inputDeposit.GetText().ToInt();
             if((deposit <= dzlPlayer.GetMoney() && factor == -1) || (deposit <= dzlPlayer.GetBankMoney() && factor == 1)) {
                 deposit = factor * deposit;
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<int, bool>(deposit, false), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<int, bool>(deposit, false), true);
                 inputDeposit.SetText("");
             } else {
                 player.DisplayMessage("#error_not_enough_money_to_transfer");
@@ -222,7 +217,7 @@ class DZLBankingMenu : DZLBaseMenu {
             int deposit = inputDeposit.GetText().ToInt();
             if((dzlPlayer.HasFractionRightCanAccessBankAccount() && deposit <= dzlPlayer.GetMoney() && factor == -1) || (dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount() && deposit <= dzlPlayer.GetFraction().GetBankAccount() && factor == 1)) {
                 deposit = factor * deposit;
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<int, bool>(deposit, true), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_DEPOSIT_AT_BANK_DATA, new Param2<int, bool>(deposit, true), true);
                 inputDeposit.SetText("");
             } else {
                 player.DisplayMessage("#error_not_enough_money_to_transfer");
