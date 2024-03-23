@@ -1,0 +1,120 @@
+FrameWidgetClass rootFrame {
+ size 600 600
+ halign center_ref
+ valign center_ref
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
+ {
+  PanelWidgetClass PanelWidget0 {
+   ignorepointer 1
+   color 0.5176 0.5176 0.5176 1
+   position 0 0
+   size 1 1
+   halign center_ref
+   valign center_ref
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style editor_selection
+   {
+    TextWidgetClass TextWidget0 {
+     ignorepointer 1
+     position 0 0.01
+     size 0.8 0.08
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "#TuningMenu"
+     "size to text h" 1
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.01333 0.01333
+     size 0.06333 0.06
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget1 {
+     ignorepointer 1
+     position 0 0.12
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
+    }
+    TextListboxWidgetClass carFoundList {
+     position 0.01 0.08333
+     size 0.48 0.7867
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "title visible" 0
+     colums ""
+     lines 20
+    }
+    TextListboxWidgetClass carTuningOptionList {
+     position 0.01 0.08333
+     size 0.48 0.78667
+     halign right_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "title visible" 0
+     colums ""
+     lines 20
+    }
+    ButtonWidgetClass tuneButton {
+     color 0.251 0.502 0 1
+     position 0 0.01
+     size 0.7 0.06
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style MenuDefault
+     text "#tune"
+    }
+   }
+  }
+ }
+}

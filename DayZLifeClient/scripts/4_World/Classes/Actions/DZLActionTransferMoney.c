@@ -19,7 +19,6 @@ class DZLActionTransferMoney: ActionInteractBase {
         if(!EntityAI.Cast(target.GetObject()).IsPlayer()) return false;
 
         PlayerBase targetPlayer = PlayerBase.Cast(target.GetObject());
-
         if(!targetPlayer || !targetPlayer.IsDZLPlayer()) return false;
 
         return true;

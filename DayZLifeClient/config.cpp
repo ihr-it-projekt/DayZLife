@@ -16,7 +16,8 @@ class CfgAddons {
     class PreloadAddons {
         class dayz {
             list[] = {
-                "TBRealEstateClient"
+                "TBRealEstateClient",
+                "TBRevivePlayerClient"
             };
         };
     };

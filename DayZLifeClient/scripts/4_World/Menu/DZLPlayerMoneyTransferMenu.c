@@ -11,8 +11,8 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu {
         OnHide();
     }
 
-    void SetReceiver(PlayerBase receiver) {
-        this.receiver = receiver;
+    void SetReceiver(PlayerBase _receiver) {
+        this.receiver = _receiver;
     }
 
     override Widget Init() {
@@ -43,7 +43,7 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu {
 
                 if(deposit != 0) {
                     if(deposit <= dzlPlayer.GetMoney()) {
-                        GetGame().RPCSingleParam(player, DAY_Z_LIFE_MONEY_TRANSFER, new Param2<PlayerBase, int>(receiver, deposit), true);
+                        GetGame().RPCSingleParam(player, DZL_RPC.MONEY_TRANSFER, new Param2<PlayerBase, int>(receiver, deposit), true);
                         inputDeposit.SetText("");
                         OnHide();
                     } else {

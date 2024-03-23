@@ -11,18 +11,16 @@ class DZLLoadOutMenu: DZLBaseMenu {
 
     void DZLLoadOutMenu() {
         layoutPath = "DayZLifeClient/layout/LoadoutMenu/LoadoutMenu.layout";
-        Construct();
     }
 
     void ~DZLLoadOutMenu() {
         if(previewItem) {
             GetGame().ObjectDelete(previewItem);
         }
-        Destruct();
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_LOAD_OUT_RESPONSE) {
+        if(rpc_type == DZL_RPC.LOAD_OUT_RESPONSE) {
             OnHide();
         }
     }
@@ -75,7 +73,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
         if(super.OnClick(w, x, y, button)) return true;
         switch(w) {
             case equipButton:
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_LOAD_OUT, new Param1<string>(currentCat.name), true);
+                GetGame().RPCSingleParam(player, DZL_RPC.LOAD_OUT, new Param1<string>(currentCat.name), true);
                 return true;
             case loadoutComboBox:
                 int index = loadoutComboBox.GetCurrentItem();

@@ -1,9 +1,5 @@
 class DZLTraderConfig {
-    ref DZLTraderPositionCollection positions;
-    ref DZLTraderCategoryCollection categories;
+    ref DZLTraderPositionCollection positions = new DZLTraderPositionCollection;
+    ref DZLTraderCategoryCollection categories = new DZLTraderCategoryCollection;
 
-    void DZLTraderConfig() {
-        this.positions = new DZLTraderPositionCollection;
-        this.categories = new DZLTraderCategoryCollection;
-    }
 }

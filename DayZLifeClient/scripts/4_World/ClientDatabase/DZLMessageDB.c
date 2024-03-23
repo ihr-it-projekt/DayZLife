@@ -116,7 +116,6 @@ class DZLMessageDB {
             ref array<ref DZLMessage> answerMapTemp = answersMap;
             messageMap = null;
             answersMap = null;
-            CheckDZLDataSubPath(DAY_Z_LIFE_SERVER_FOLDER_DATA);
             DZLJsonFileHandler<DZLMessageDB>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             messageMap = messageMapTemp;
             answersMap = answerMapTemp;

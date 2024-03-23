@@ -2,38 +2,24 @@ class DZLTuningMenu: DZLBaseMenu {
     private TextListboxWidget carFoundList;
     private TextListboxWidget carTuningOptionList;
     private ButtonWidget tuneButton;
-    private DZLTunerPosition position;
-
-    void DZLTuningMenu() {
-        Construct();
-    }
-
-    void ~DZLTuningMenu() {
-        Destruct();
-    }
 
     override Widget Init() {
-        layoutPath = "DayZLifeClient/layout/Tuner/DZLTuner.layout";
+        layoutPath = "DayZLifeClient/layout/Tuning/Tuning.layout";
         super.Init();
 
         carFoundList = creator.GetTextListboxWidget("carFoundList");
         carTuningOptionList = creator.GetTextListboxWidget("carTuningOptionList");
-
         tuneButton = creator.GetButtonWidget("tuneButton");
 
         return layoutRoot;
     }
 
-    void SetPosition(DZLTunerPosition position) {
-        this.position = position;
-    }
-
     override void UpdateGUI(string message = "") {
         super.UpdateGUI(message);
         carFoundList.ClearItems();
-        array<ref DZLTuneOption> carTypes = player.GetConfig().tuningConfig.options;
+        ref array<ref DZLTuneOption> carTypes = DZLConfig.Get().tuningConfig.options;
         foreach(DZLTuneOption carType: carTypes) {
-            CarScript playerCar = DZLObjectFinder.GetCarForTuning(position.position, carType.car);
+            CarScript playerCar = DZLObjectFinder.GetCarForTuning(player.GetPosition(), carType.car);
             if(playerCar && !playerCar.isSold) {
                 string name = "";
                 GetGame().ObjectGetDisplayName(playerCar, name);
@@ -80,7 +66,7 @@ class DZLTuningMenu: DZLBaseMenu {
                     }
                 }
 
-                GetGame().RPCSingleParam(car, DAY_Z_LIFE_EVENT_TUNE_CAR, new Param1<string>(targetTuneConfig.type), true);
+                GetGame().RPCSingleParam(car, DZL_RPC.EVENT_TUNE_CAR, new Param1<string>(targetTuneConfig.type), true);
                 OnHide();
             }
         } else if(w == carFoundList) {

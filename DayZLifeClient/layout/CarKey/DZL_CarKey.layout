@@ -1,276 +1,209 @@
 FrameWidgetClass License_Menu {
  position 0 0
- size 1 1
+ size 1000 500
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
-   size 0.59425 0.51574
+   color 0.5176 0.5176 0.5176 0.7098
+   position 0 0
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget1 {
+    TextWidgetClass carKey {
      ignorepointer 1
-     position 0 0
-     size 0.99 0.987
+     position 0 0.01
+     size 0.8 0.08
      halign center_ref
-     valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     style Normal
+     text "#CarKey"
+     "size to text h" 1
+     "text halign" center
+     "text valign" center
      {
-      PanelWidgetClass PanelWidget2 {
+      PanelWidgetClass PanelWidget9 {
        ignorepointer 1
-       position 0 0.01455
-       size 0.28826 0.075
-       halign center_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass carKey {
-         ignorepointer 1
-         size 0.98 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style Normal
-         text "#CarKey"
-         "text halign" center
-         "text valign" center
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget7 {
-       ignorepointer 1
-       position 0.00708 0.01184
-       size 0.04672 0.07463
-       halign right_ref
-       hexactpos 0
-       vexactpos 0
-       hexactsize 0
-       vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass Button_Closed {
-         color 0.502 0 0 1
-         position 0 0
-         size 0.9 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "X"
-        }
-       }
-      }
-      PanelWidgetClass PanelWidget3 {
-       ignorepointer 1
-       position -0.00042 0
-       size 1 0.89898
+       position 0 0
+       size 1 0.04
        halign center_ref
        valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        TextListboxWidgetClass playerList {
-         position 0.00708 0.05248
-         size 0.31 0.86263
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         "title visible" 0
-         colums ""
-         lines 20
-        }
-        TextListboxWidgetClass playerhaveKeylist {
-         position 0.00708 0
-         size 0.31 0.9676
-         halign right_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         "title visible" 0
-         colums ""
-         lines 20
-        }
-        PanelWidgetClass PanelWidget4 {
-         ignorepointer 1
-         position 0 0.00318
-         size 0.35167 1
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          PanelWidgetClass PanelWidget8 {
-           ignorepointer 1
-           position 0 0.01619
-           size 0.66 0.1
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass safeKeylist {
-             color 0.251 0.502 0 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-             text "#save"
-            }
-           }
-          }
-          TextWidgetClass newOwnerDisplay {
-           ignorepointer 1
-           position 0.06733 0.22462
-           size 0.8679 0.0862
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text_proportion 0.7
-           "text halign" center
-           "text valign" center
-          }
-          TextWidgetClass TextWidget1 {
-           ignorepointer 1
-           position 0.06733 0.11965
-           size 0.8679 0.0862
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#change_owner_to"
-           text_proportion 0.7
-           "text halign" center
-           "text valign" center
-          }
-          PanelWidgetClass PanelWidget6 {
-           ignorepointer 1
-           position 0.00251 0.55376
-           size 0.86621 0.1
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass changOwnerButton {
-             color 0.251 0.502 0 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-             text "#change_owner"
-            }
-           }
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget5 {
-         ignorepointer 1
-         position -0.20457 0.89502
-         size 0.0433 0.08879
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          ButtonWidgetClass searchButton {
-           color 0.251 0.502 0 1
-           size 0.9 0.9
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           {
-            ImageWidgetClass ImageWidget0 {
-             ignorepointer 1
-             size 0.9 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
-             mode blend
-             "src alpha" 1
-             stretch 1
-            }
-           }
-          }
-         }
-        }
-        EditBoxWidgetClass search_input {
-         position -0.36311 0.89502
-         size 0.25962 0.08879
-         halign center_ref
-         valign bottom_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style DefaultBorder
-         font "gui/fonts/metron"
-        }
-       }
+       style editor_selection
       }
      }
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.008 0.016
+     size 0.045 0.07
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
+       ignorepointer 1
+       color 0.502 0 0 1
+       size 1 1
+       halign center_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget2 {
+     ignorepointer 1
+     position 0 0.12
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
+    }
+    TextWidgetClass TextWidget1 {
+     ignorepointer 1
+     position 0.359 0.757
+     size 0.25 0.065
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text "#change_owner_to"
+     text_proportion 0.7
+     "text halign" center
+     "text valign" center
+    }
+    TextWidgetClass newOwnerDisplay {
+     ignorepointer 1
+     position 0.359 0.838
+     size 0.25 0.065
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     text_proportion 0.7
+     "text halign" center
+     "text valign" center
+    }
+    ButtonWidgetClass changOwnerButton {
+     color 0.251 0.502 0 1
+     position 0.359 0.919
+     size 0.25 0.065
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Default
+     text "#change_owner"
+    }
+    ButtonWidgetClass safeKeylist {
+     color 0.251 0.502 0 1
+     position 0.359 0.708
+     size 0.25 0.065
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Default
+     text "#save_keys"
+    }
+    EditBoxWidgetClass search_input {
+     position 0.008 0.141
+     size 0.3 0.07
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style DefaultBorder
+     font "gui/fonts/metron"
+    }
+    TextListboxWidgetClass playerList {
+     position 0.008 0.10292
+     size 0.348 0.76215
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "title visible" 0
+     colums ""
+     lines 20
+    }
+    TextListboxWidgetClass playerhaveKeylist {
+     position 0.288 0.1005
+     size 0.348 0.757
+     halign right_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "title visible" 0
+     colums ""
+     lines 20
+    }
+   }
+  }
+  ButtonWidgetClass searchButton {
+   color 0.251 0.502 0 1
+   position 0.316 0.145
+   size 0.04 0.065
+   hexactpos 0
+   vexactpos 0
+   hexactsize 0
+   vexactsize 0
+   style Default
+   {
+    ImageWidgetClass ImageWidget0 {
+     ignorepointer 1
+     size 0.9 0.9
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     imageTexture "{23E23D49A646AE19}DayZLifeClient/layout/CarKey/search.edds"
+     mode blend
+     "src alpha" 1
+     "stretch mode" stretch_w_h
     }
    }
   }

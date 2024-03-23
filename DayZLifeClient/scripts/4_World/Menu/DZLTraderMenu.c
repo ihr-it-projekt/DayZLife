@@ -11,7 +11,7 @@ class DZLTraderMenu: DZLBaseMenu {
     private TextWidget credits;
     private TextWidget tax;
     private ItemPreviewWidget preview;
-    private DZLTraderPosition position;
+    private ref DZLTraderPosition position;
 
     private int lastSelectedInventory;
     private int lastSelectedSellCard;
@@ -23,17 +23,18 @@ class DZLTraderMenu: DZLBaseMenu {
     private ref array<ref DZLTraderTypeStorage> storageOfItems;
 
 
-    void DZLTraderMenu(DZLTraderPosition position) {
-        this.position = position;
+    void DZLTraderMenu(ref DZLTraderPosition _position) {
+        position = _position;
         layoutPath = "DayZLifeClient/layout/Trader/Trader_Menu.layout";
         displayCategories = new map<string, ref array<ref DZLTraderType>>;
         addedCats = new array<string>;
-        Construct();
+
+        showHud = false;
+        showQuickBar = false;
     }
 
     void ~DZLTraderMenu() {
         DZLDisplayHelper.DeletePreviewItem();
-        Destruct();
     }
 
     override Widget Init() {
@@ -56,7 +57,7 @@ class DZLTraderMenu: DZLBaseMenu {
 
         preview = creator.GetItemPreviewWidget("previewItem");
 
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
+        GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
 
         return layoutRoot;
     }
@@ -327,7 +328,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 return true;
             }
 
-            GetGame().RPCSingleParam(player, DAY_Z_LIFE_TRADE_ACTION, new Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition>(buyItems, sellItems, position), true);
+            GetGame().RPCSingleParam(player, DZL_RPC.TRADE_ACTION, new Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition>(buyItems, sellItems, position), true);
         } else if(w == itemCategory) {
             int categoryIndex = itemCategory.GetCurrentItem();
             string name = addedCats.Get(categoryIndex);
@@ -367,12 +368,12 @@ class DZLTraderMenu: DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_TRADE_ACTION_RESPONSE) {
+        if(rpc_type == DZL_RPC.TRADE_ACTION_RESPONSE) {
             autoptr Param1<string> paramGetResponse;
             if(ctx.Read(paramGetResponse)) {
                 UpdateGUI(paramGetResponse.param1);
             }
-        } else if(rpc_type == DAY_Z_LIFE_EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE) {
+        } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE) {
             autoptr Param1<ref array<ref DZLTraderTypeStorage>> traderStorageResponse;
             if(ctx.Read(traderStorageResponse)) {
                 storageOfItems = traderStorageResponse.param1;

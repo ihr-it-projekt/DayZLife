@@ -1,18 +1,9 @@
-class DZLHarvestListener {
-    DZLJobConfig config;
-    void DZLHarvestListener() {
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-        config = DZLConfig.Get().jobConfig;
-    }
+class DZLHarvestListener: DZLBaseEventListener {
 
-    void ~DZLHarvestListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_HARVEST) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if(rpc_type == DZL_RPC.HARVEST) {
             PlayerBase player = PlayerBase.Cast(target);
-
+            DZLJobConfig config = DZLConfig.Get().jobConfig;
             DZLWorkZone zone = config.FindZone(player.GetPosition());
             if(zone) {
                 EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();

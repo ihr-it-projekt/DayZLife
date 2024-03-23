@@ -6,6 +6,6 @@ class DZLLicenceCraftingActionObject: DZLBaseActionObject {
     override void SetActions() {
         super.SetActions();
 
-        AddAction(ActionLicenceCrafting);
+        AddAction(DZLActionLicenceCrafting);
     }
 }

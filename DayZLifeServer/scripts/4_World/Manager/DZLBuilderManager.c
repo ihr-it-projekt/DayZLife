@@ -1,23 +1,33 @@
 class DZLBuilderManager {
-    private ref DZLBankingLocationBuilder bankingBuilder;
-    private ref DZLLicenceLocationBuilder licenceBuilder;
-    private ref DZLTraderLocationBuilder traderBuilder;
-    private ref DZLLoadOutLocationBuilder loadOutBuilder;
-    private ref DZLGarageLocationBuilder garageBuilder;
-    private ref DZLShopLocationBuilder shopBuilder;
-    private ref DZLTuningLocationBuilder tuningBuilder;
+    private static ref DZLBuilderManager instance;
 
-    private ref Timer checkTimer;
+    static DZLBuilderManager Get() {
+        if(!instance) {
+            instance = new DZLBuilderManager;
+        }
 
-    void DZLBuilderManager() {
-        checkTimer = new Timer;
-        bankingBuilder = new DZLBankingLocationBuilder();
-        licenceBuilder = new DZLLicenceLocationBuilder();
-        traderBuilder = new DZLTraderLocationBuilder();
-        loadOutBuilder = new DZLLoadOutLocationBuilder();
-        garageBuilder = new DZLGarageLocationBuilder();
-        shopBuilder = new DZLShopLocationBuilder();
-        tuningBuilder = new DZLTuningLocationBuilder();
+        return instance;
+    }
+
+    private ref DZLBankingLocationBuilder bankingBuilder = new DZLBankingLocationBuilder();
+    private ref DZLLicenceLocationBuilder licenceBuilder = new DZLLicenceLocationBuilder();
+    private ref DZLTraderLocationBuilder traderBuilder = new DZLTraderLocationBuilder();
+    private ref DZLLoadOutLocationBuilder loadOutBuilder = new DZLLoadOutLocationBuilder();
+    private ref DZLGarageLocationBuilder garageBuilder = new DZLGarageLocationBuilder();
+    private ref DZLShopLocationBuilder shopBuilder = new DZLShopLocationBuilder();
+    private ref DZLTuningLocationBuilder tuningBuilder = new DZLTuningLocationBuilder();
+
+    private ref Timer checkTimer = new Timer;
+
+
+    void Reload() {
+        bankingBuilder.Reload();
+        licenceBuilder.Reload();
+        traderBuilder.Reload();
+        loadOutBuilder.Reload();
+        garageBuilder.Reload();
+        shopBuilder.Reload();
+        tuningBuilder.Reload();
     }
 
     void Create() {

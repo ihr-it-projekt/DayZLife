@@ -1,3 +1,5 @@
+//Deprecated Remove 08.03.25
+
 class DZLPlayerAccess {
     private bool canManageCops = true;
     private bool canManagePlayers = true;
@@ -6,8 +8,8 @@ class DZLPlayerAccess {
     private bool canManageCars = true;
     private string ident;
 
-    void DZLPlayerAccess(string ident) {
-        this.ident = ident;
+    void DZLPlayerAccess(string _ident) {
+        this.ident = _ident;
         canManageCops = true;
         canManagePlayers = true;
         canManageMedic = true;

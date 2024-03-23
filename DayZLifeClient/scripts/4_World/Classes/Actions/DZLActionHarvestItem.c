@@ -4,10 +4,6 @@ class DZLActionHarvestItem: ActionInteractBase {
     void DZLActionHarvestItem() {
         m_CommandUID = DayZPlayerConstants.CMD_ACTIONFB_RESTRAINTARGET;
         m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
-
-        if(GetGame().IsServer()) {
-            config = DZLConfig.Get().jobConfig;
-        }
     }
 
     override string GetText() {
@@ -20,40 +16,34 @@ class DZLActionHarvestItem: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-        if(player && player.GetConfig()) {
-            config = player.GetConfig().jobConfig;
-        }
-
+        config = DZLConfig.Get().jobConfig;
         if(!config) return false;
 
         vector playerPosition = player.GetPosition();
         DZLWorkZone zone = config.FindZone(playerPosition);
-        if(zone) {
-            m_CommandUID = zone.m_CommandUID;
-            EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
+        if(!zone) return false;
+        m_CommandUID = zone.m_CommandUID;
+        EntityAI item_in_hands_source = player.GetHumanInventory().GetEntityInHands();
 
-            if(item_in_hands_source) {
-                string handItemType = item_in_hands_source.GetType();
-                handItemType.ToLower();
-            }
+        if(item_in_hands_source) {
+            string handItemType = item_in_hands_source.GetType();
+            handItemType.ToLower();
+        }
 
-            foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
-                if(0 == relation.itemsThatNeededForHarvest.Count()) return true;
+        foreach(DZLHarvestItemToolRelation relation: zone.harvestItemToolRelation) {
+            if(0 == relation.itemsThatNeededForHarvest.Count()) return true;
+            if(!handItemType) return false;
 
-                if(!handItemType) return false;
-
-                foreach(string itemToHarvest: relation.itemsThatNeededForHarvest) {
-                    itemToHarvest.ToLower();
-                    if(handItemType == itemToHarvest) {
-                        if(GetGame().IsServer()) {
-                            return 0 < item_in_hands_source.GetHealth();
-                        }
-                        return true;
+            foreach(string itemToHarvest: relation.itemsThatNeededForHarvest) {
+                itemToHarvest.ToLower();
+                if(handItemType == itemToHarvest) {
+                    if(GetGame().IsServer()) {
+                        return 0 < item_in_hands_source.GetHealth();
                     }
+                    return true;
                 }
             }
         }
-
         return false;
     }
 

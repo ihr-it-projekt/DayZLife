@@ -1,25 +1,16 @@
-class DZLPlayerSpawnListener {
-    ref DZLConfig config;
+class DZLPlayerSpawnListener: DZLBaseEventListener {
 
-    void DZLPlayerSpawnListener() {
-        config = DZLConfig.Get();
-        GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
-    }
-
-    void ~DZLPlayerSpawnListener() {
-        GetDayZGame().Event_OnRPC.Remove(HandleEventsDZL);
-    }
-
-    void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_NEW_SPAWN) {
+    override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
+        if(rpc_type == DZL_RPC.NEW_SPAWN) {
             autoptr Param2<string, string> param;
             if(ctx.Read(param) && param.param1 && param.param2) {
                 PlayerBase player = PlayerBase.Cast(target);
                 if(!player) return;
+
                 player.RemoveAllItems();
                 player.GetDZLPlayer().LoosPlayerInventoryMoney();
 
-                DZLJobSpawnPoints points = config.GetJobSpanwPointById(param.param2);
+                DZLJobSpawnPoints points = DZLConfig.Get().GetJobSpawnPointsByJobId(param.param2);
                 DZLSpawnPoint point = points.FindSpawnById(param.param1);
 
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
@@ -33,10 +24,10 @@ class DZLPlayerSpawnListener {
 
                 player.SetPosition(point.point);
                 player.SetOrientation(point.orientation);
+                player.SetIsSpawned();
 
-                player.GetDZLPlayer().GetFractionMember();
-                GetGame().RPCSingleParam(player, DAY_Z_LIFE_PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(player.GetDZLPlayer()), true, sender);
-                GetGame().RPCSingleParam(null, DAY_Z_LIFE_NEW_SPAWN_RESPONSE, null, true, sender);
+                dzlPlayer.UpdateDZLPlayerAtPlayer();
+                GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_RESPONSE, null, true, sender);
             }
         }
     }

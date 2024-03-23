@@ -9,15 +9,14 @@ modded class MissionGameplay {
     private bool holdSix = false;
 
     private ref DZLPlayerEventListener playerEventListener;
-    private ref DZLCarEventListener carEventListener;
     private ref DZLMessageDB messageDB;
 
     PlayerBase dzlPlayerBase;
 
     override void OnInit() {
         super.OnInit();
+        CheckDZLDataPath();
         playerEventListener = new DZLPlayerEventListener;
-        carEventListener = new DZLCarEventListener;
         messageDB = new DZLMessageDB;
         DZLPlayerClientDB.Get();
     }
@@ -28,9 +27,6 @@ modded class MissionGameplay {
         if(!dzlPlayerBase) return;
         bool wasActionDone = false;
         switch(key) {
-            case KeyCode.KC_ESCAPE:
-                wasActionDone = dzlPlayerBase.CloseMenu();
-                break;
             case KeyCode.KC_RCONTROL:
                 holdRControl = false;
                 break;
@@ -111,10 +107,8 @@ modded class MissionGameplay {
         if(holdLControl && g_Game.GetUIManager().GetMenu() == NULL) {
             if(holdRControl || holdOne) {
                 GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetAlmanacMenu(), NULL);
-            } else if(holdTow) {
-                dzlPlayerBase.ShowHealMenuFromMission();
             } else if(holdTree && dzlPlayerBase.CanReSpawn() && !dzlPlayerBase.IsRestrained()) {
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(), NULL);
+                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(true), NULL);
             } else if(holdFour && dzlPlayerBase.CanOpenMessageMenu()) {
                 GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetMessageSystemMenu(), NULL);
             } else if(holdFive && !dzlPlayerBase.IsUnconscious()) {

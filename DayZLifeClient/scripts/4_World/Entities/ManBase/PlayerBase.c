@@ -1,7 +1,6 @@
 modded class PlayerBase {
     private ref DZLLicenceMenu licenceMenu;
     private ref DZLLicenceProgressBar progressBarLicence;
-    private ref DZLDoorRaidProgressBar progressBarRaid;
     private ref DZLCarRaidProgressBar progressBarRaidCar;
     private ref DZLHarvestProgressBar progressBarHarvest;
     private ref DZLMessageMenu messageMenu;
@@ -13,9 +12,7 @@ modded class PlayerBase {
     private ref DZLPlayerPayTicketMenu payTicketMenu;
     private ref DZLCarMenu carMenu;
     private ref DZLCarStorageMenu carStorageMenu;
-    private ref DZLMedicHelpMenu healMenu;
     private ref DZLMessageSystemMenu messageSystemMenu;
-    private ref DZLHouseMenu houseMenu;
     private ref DZLBankingMenu bankingMenu;
     private ref DZLTraderMenu traderMenu;
     private ref DZLAlmanacMenu almanacMenu;
@@ -29,16 +26,10 @@ modded class PlayerBase {
     bool isOnHarvest = false;
     bool isPolice = false;
     bool medicHelpMenuWasShown = false;
-    private ref Timer resetCanSpawn;
+    private bool canRespawn = true;
     private ref Timer enableToHospital;
-    bool canHealInHospital = false;
-    bool canSeeKillButton = false;
-    int waitForHospital = 0;
     int medicCount = 0;
 
-    int timeAskForTraderConfig = 0;
-    int timeAskForBankingConfig = 0;
-    bool hasBankingConfig = false;
     float deltaTimeLastUpdate = 0;
 
     private string playerUID;
@@ -46,63 +37,11 @@ modded class PlayerBase {
     override void Init() {
         super.Init();
         RegisterNetSyncVariableInt("moneyPlayerIsDead", 0, 99999999999);
-    }
-
-    void SetIsSpawned() {
-        int time = DZLPlayerClientDB.Get().GetConfig().civilSpawnPoints.blockTimeForJobChange;
-        DZLPlayer dzlPlayer = GetDZLPlayer();
-        if(dzlPlayer.IsCop()) {
-            time = DZLPlayerClientDB.Get().GetConfig().copSpawnPoints.blockTimeForJobChange;
-        } else if(dzlPlayer.IsMedic()) {
-            time = DZLPlayerClientDB.Get().GetConfig().medicSpawnPoints.blockTimeForJobChange;
-        }
-        resetCanSpawn = new Timer;
-        resetCanSpawn.Run(time, this, "ResetSpawned");
-    }
-
-    void EnableTimerEnableHospital() {
-        enableToHospital = new Timer;
-        enableToHospital.Run(1, this, "EnableToHospital", null, true);
-        waitForHospital = 0;
-    }
-
-    void EnableToHospital() {
-        ++waitForHospital;
-        if(GetWaitTimeForHospital() < 1) {
-            canHealInHospital = true;
-        }
-        if(GetWaitTimeForKill() < 1) {
-            canSeeKillButton = true;
-        }
-
-        if(canHealInHospital && canSeeKillButton) {
-            enableToHospital.Stop();
-        }
-    }
-
-    int IsKillButtonOn() {
-        return waitForHospital;
-    }
-
-    int GetWaitTimeForHospital() {
-        DZLConfig config = GetConfig();
-        if(medicCount >= config.medicConfig.minMedicCountForHospitalTimer) {
-            return config.medicConfig.minTimeBeforeHospital - waitForHospital;
-        }
-        return config.medicConfig.minTimeBeforeHospitalWhenMinMedicNotOnline - waitForHospital;
-    }
-
-    int GetWaitTimeForKill() {
-        return GetConfig().medicConfig.minTimeBeforeKillButton - waitForHospital;
-    }
-
-    void ResetSpawned() {
-        resetCanSpawn.Stop();
-        resetCanSpawn = null;
+        RegisterNetSyncVariableBool("canRespawn");
     }
 
     bool CanReSpawn() {
-        return !resetCanSpawn && 0 == dzlPlayer.arrestTimeInMinutes;
+        return canRespawn && 0 == dzlPlayer.arrestTimeInMinutes;
     }
 
     string GetPlayerId() {
@@ -120,38 +59,18 @@ modded class PlayerBase {
     override void SetActions(out TInputActionMap InputActionMap) {
         super.SetActions(InputActionMap);
 
-        AddAction(ActionRobMoney, InputActionMap);
-        AddAction(ActionRobMoneyFromDead, InputActionMap);
+        AddAction(DZLActionRobMoney, InputActionMap);
+        AddAction(DZLActionRobMoneyFromDead, InputActionMap);
         AddAction(DZLActionHarvestItem, InputActionMap);
-        AddAction(DZLActionRaidDoors, InputActionMap);
         AddAction(DZLActionTransferMoney, InputActionMap);
-        AddAction(ActionOpenArrestMenu, InputActionMap);
-        AddAction(ActionOpenTicketMenu, InputActionMap);
+        AddAction(DZLActionOpenArrestMenu, InputActionMap);
+        AddAction(DZLActionOpenTicketMenu, InputActionMap);
         AddAction(DZLActionGiveNumber, InputActionMap);
-
-#ifndef TBRealEstateClient
-        AddAction(DZLActionUnLockDoors, InputActionMap);
-        AddAction(DZLActionLockDoors, InputActionMap);
-        AddAction(ActionOpenHouseMenu, InputActionMap);
-#endif
-    }
-
-    override void CheckDeath() {
-        if(IsPlayerSelected() && !IsAlive()) {
-            if(!medicHelpMenuWasShown) {
-                ShowHealMenu();
-                EnableTimerEnableHospital();
-                PPEffects.SetUnconsciousnessVignette(1000);
-            } else if(willDie) {
-                SimulateDeath(true);
-                m_DeathCheckTimer.Stop();
-            }
-        }
     }
 
     void RequestUpdateDZLPlayer() {
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_DATA, null, true);
-        GetGame().RPCSingleParam(this, DAY_Z_LIFE_PLAYER_BANK_DATA, null, true);
+        GetGame().RPCSingleParam(this, DZL_RPC.PLAYER_DATA, null, true);
+        GetGame().RPCSingleParam(this, DZL_RPC.PLAYER_BANK_DATA, null, true);
     }
 
     void DisplayMessage(string message) {
@@ -164,9 +83,7 @@ modded class PlayerBase {
     void UpdatePlayerAtDependencies() {
         dzlPlayer = DZLPlayerClientDB.Get().GetDZLPlayer();
         dzlPlayer.player = this;
-        if(houseMenu && houseMenu.IsVisible()) {
-            houseMenu.UpdatePlayer(this);
-        } else if(bankingMenu && bankingMenu.IsVisible()) {
+        if(bankingMenu && bankingMenu.IsVisible()) {
             bankingMenu.UpdatePlayer(this);
         } else if(traderMenu && traderMenu.IsVisible()) {
             traderMenu.UpdatePlayer(this);
@@ -186,21 +103,9 @@ modded class PlayerBase {
             carMenu.UpdatePlayer(this);
         } else if(carStorageMenu && carStorageMenu.IsVisible()) {
             carStorageMenu.UpdatePlayer(this);
-        } else if(healMenu && healMenu.IsVisible()) {
-            healMenu.UpdatePlayer(this);
         } else if(messageSystemMenu && messageSystemMenu.IsVisible()) {
             messageSystemMenu.UpdatePlayer(this);
         }
-    }
-
-    DZLHouseMenu GetHouseMenu(DZLHouseDefinition definition, Building target) {
-        houseMenu = new DZLHouseMenu;
-        InitMenu(houseMenu);
-
-        houseMenu.SetHouseDefinition(definition);
-        houseMenu.SetTarget(target);
-
-        return houseMenu;
     }
 
     DZLCarMenu GetCarMenu(CarScript car) {
@@ -211,13 +116,6 @@ modded class PlayerBase {
         return carMenu;
     }
 
-    DZLMedicHelpMenu GetMedicHealMenu() {
-        healMenu = new DZLMedicHelpMenu;
-        InitMenu(healMenu);
-
-        return healMenu;
-    }
-
     DZLCarStorageMenu GetCarStorageMenu() {
         carStorageMenu = new DZLCarStorageMenu;
         InitMenu(carStorageMenu);
@@ -226,7 +124,6 @@ modded class PlayerBase {
     }
 
     private void InitMenu(DZLBaseMenu menu) {
-        menu.SetConfig(GetConfig());
         menu.SetPlayer(this);
     }
 
@@ -307,21 +204,16 @@ modded class PlayerBase {
         return progressBarHarvest;
     }
 
-    DZLDoorRaidProgressBar GetRaidProgressBar() {
-        progressBarRaid = new DZLDoorRaidProgressBar();
-        progressBarRaid.SetPlayer(this);
-        return progressBarRaid;
-    }
-
     DZLCarRaidProgressBar GetRaidCarProgressBar() {
         progressBarRaidCar = new DZLCarRaidProgressBar();
         progressBarRaidCar.SetPlayer(this);
         return progressBarRaidCar;
     }
 
-    DZLSpawnPositionMenu GetSpawnPositionMenu() {
+    DZLSpawnPositionMenu GetSpawnPositionMenu(bool isOpenOverMenu) {
         spawnPositionMenu = new DZLSpawnPositionMenu();
         InitMenu(spawnPositionMenu);
+        spawnPositionMenu.isOpenOverMenu = isOpenOverMenu;
         return spawnPositionMenu;
     }
 
@@ -338,90 +230,7 @@ modded class PlayerBase {
     }
 
     void RefreshMessageSystem() {
-        if(messageSystemMenu) {
-            messageSystemMenu.RefreshMessageSystem();
-        }
-    }
-
-    bool CloseMenu() {
-        bool hasDoAction = false;
-
-        if(houseMenu && houseMenu.IsVisible()) {
-            houseMenu.OnHide();
-            hasDoAction = true;
-        } else if(bankingMenu && bankingMenu.IsVisible()) {
-            bankingMenu.OnHide();
-            hasDoAction = true;
-        } else if(traderMenu && traderMenu.IsVisible()) {
-            traderMenu.OnHide();
-            hasDoAction = true;
-        } else if(licenceMenu && licenceMenu.IsVisible()) {
-            licenceMenu.OnHide();
-            hasDoAction = true;
-        } else if(loadOutMenu && loadOutMenu.IsVisible()) {
-            loadOutMenu.OnHide();
-            hasDoAction = true;
-        } else if(arrestMenu && arrestMenu.IsVisible()) {
-            arrestMenu.OnHide();
-            hasDoAction = true;
-        } else if(ticketMenu && ticketMenu.IsVisible()) {
-            ticketMenu.OnHide();
-            hasDoAction = true;
-        } else if(payTicketMenu && payTicketMenu.IsVisible()) {
-            payTicketMenu.OnHide();
-            hasDoAction = true;
-        } else if(progressBarLicence && progressBarLicence.IsVisible()) {
-            progressBarLicence.OnHide();
-            hasDoAction = true;
-        } else if(almanacMenu && almanacMenu.IsVisible()) {
-            almanacMenu.OnHide();
-            hasDoAction = true;
-        } else if(fractionMenu && fractionMenu.IsVisible()) {
-            fractionMenu.OnHide();
-            hasDoAction = true;
-        } else if(progressBarRaid && progressBarRaid.IsVisible()) {
-            progressBarRaid.OnHide();
-            hasDoAction = true;
-        } else if(progressBarRaidCar && progressBarRaidCar.IsVisible()) {
-            progressBarRaidCar.OnHide();
-            hasDoAction = true;
-        } else if(moneyTransferMenu && moneyTransferMenu.IsVisible()) {
-            moneyTransferMenu.OnHide();
-            hasDoAction = true;
-        } else if(carMenu && carMenu.IsVisible()) {
-            carMenu.OnHide();
-            hasDoAction = true;
-        } else if(carStorageMenu && carStorageMenu.IsVisible()) {
-            carStorageMenu.OnHide();
-            hasDoAction = true;
-        } else if(healMenu && healMenu.IsVisible()) {
-            healMenu.OnHide();
-            hasDoAction = true;
-        } else if(spawnPositionMenu && spawnPositionMenu.IsVisible()) {
-            spawnPositionMenu.OnHide();
-            hasDoAction = true;
-        } else if(messageSystemMenu && messageSystemMenu.IsVisible()) {
-            messageSystemMenu.OnHide();
-            hasDoAction = true;
-        }
-
-        return hasDoAction;
-    }
-
-    DZLHouseDefinition FindHouseDefinition(Building building) {
-        array<ref DZLHouseDefinition> houseConfigs = GetConfig().GetHouseDefinitions();
-        if(!houseConfigs) return null;
-        foreach(DZLHouseDefinition definition: houseConfigs) {
-            if(definition.houseType == building.GetType()) {
-                return definition;
-            }
-        }
-        return null;
-    }
-
-    void TransferFromDeadPlayer(DZLPlayer playerTarget) {
-        playerTarget.AddMoneyToPlayer(moneyPlayerIsDead);
-        moneyPlayerIsDead = 0;
+        if(messageSystemMenu) messageSystemMenu.RefreshMessageSystem();
     }
 
     float GetMoneyPlayerIsDead() {
@@ -434,7 +243,7 @@ modded class PlayerBase {
     }
 
     DZLCraftLicence GetLicenceByPosition() {
-        if(!GetDZLPlayer() || !GetConfig() || !GetConfig().licenceConfig) return null;
+        if(!GetDZLPlayer() || !DZLConfig.Get() || !DZLConfig.Get().licenceConfig) return null;
 
         vector playerPosition = GetPosition();
         if(!playerPosition) {
@@ -442,7 +251,7 @@ modded class PlayerBase {
         }
 
         foreach(string licenceId: GetDZLPlayer().licenceIds) {
-            DZLCraftLicence licence = GetConfig().licenceConfig.licenceCollection.FindById(licenceId);
+            DZLCraftLicence licence = DZLConfig.Get().licenceConfig.licenceCollection.FindById(licenceId);
 
             if(!licence) continue;
 
@@ -456,13 +265,13 @@ modded class PlayerBase {
         return null;
     }
 
-    DZLTraderPosition GetTraderByPosition(int distance = 3) {
+    ref DZLTraderPosition GetTraderByPosition(int distance = 3) {
         vector playerPosition = GetPosition();
-        if(!playerPosition || !GetConfig() || !GetConfig().traderConfig) {
+        if(!playerPosition || !DZLConfig.Get() || !DZLConfig.Get().traderConfig) {
             return null;
         }
 
-        array<ref DZLTraderPosition> positions = GetConfig().traderConfig.positions.positions;
+        array<ref DZLTraderPosition> positions = DZLConfig.Get().traderConfig.positions.positions;
 
         foreach(DZLTraderPosition position: positions) {
             float distanceToPos = vector.Distance(position.position, playerPosition);
@@ -472,58 +281,6 @@ modded class PlayerBase {
         }
 
         return null;
-    }
-
-    DZLTunerPosition GetTunerPositionByPosition(int distance = 3) {
-        vector playerPosition = GetPosition();
-        if(!playerPosition || !GetConfig() || !GetConfig().tuningConfig) {
-            return null;
-        }
-
-        array<ref DZLTunerPosition> positions = GetConfig().tuningConfig.tuner;
-
-        foreach(DZLTunerPosition position: positions) {
-            float distanceToPos = vector.Distance(position.position, playerPosition);
-            if(distanceToPos <= distance) {
-                return position;
-            }
-        }
-
-        return null;
-    }
-
-    private ref DZLLicenceValidator licenceValidator;
-
-    string CanUseLicence(notnull DZLCraftLicence licence) {
-        licenceValidator = new DZLLicenceValidator(this, licence);
-
-        return licenceValidator.CanUseLicence();
-    }
-
-    void UseLicence(DZLCraftLicence licence) {
-        licenceValidator.UseLicence();
-
-        InventoryLocation inventoryLocation = new InventoryLocation;
-        EntityAI itemSpawn;
-        DZLLicenceCraftedItem itemToCraft = licence.craftedItem;
-
-        if(itemToCraft.spawnOnGround) {
-            itemSpawn = SpawnEntityOnGroundPos(itemToCraft.type, itemToCraft.positionIfSpawnOnGround.ToVector());
-        } else {
-            if(GetInventory().FindFirstFreeLocationForNewEntity(itemToCraft.type, FindInventoryLocationType.ANY, inventoryLocation)) {
-                itemSpawn = GetHumanInventory().CreateInInventory(itemToCraft.type);
-            } else if(GetHumanInventory().GetEntityInHands()) {
-                itemSpawn = GetHumanInventory().CreateInHands(itemToCraft.type);
-            } else {
-                itemSpawn = SpawnEntityOnGroundPos(itemToCraft.type, GetPosition());
-            }
-        }
-
-        if(itemSpawn) {
-            DZLLogCrafting(GetPlayerId(), "licence crafting get item", itemToCraft.type);
-            itemSpawn.SetHealth(itemToCraft.health);
-            ItemBase.Cast(itemSpawn).SetQuantity(itemToCraft.quantity);
-        }
     }
 
     array<EntityAI> GetPlayerItems() {
@@ -567,42 +324,8 @@ modded class PlayerBase {
         }
     }
 
-    void ShowHealMenu() {
-        if(GetGame().IsClient()) {
-            if(!healMenu && medicHelpMenuWasShown == false) {
-                if(g_Game.GetUIManager().GetMenu()) {
-                    g_Game.GetUIManager().GetMenu().Close();
-                }
-                DZLConfig config = GetConfig();
-                if(config && config.medicConfig && medicHelpMenuWasShown == false) {
-                    GetGame().GetUIManager().ShowScriptedMenu(GetMedicHealMenu(), NULL);
-                    medicHelpMenuWasShown = true;
-                }
-            }
-        }
-    }
-
-    void ShowHealMenuFromMission() {
-        if(GetGame().IsClient() && medicHelpMenuWasShown) {
-            medicHelpMenuWasShown = false;
-            ShowHealMenu();
-        }
-    }
-
-    DZLConfig GetConfig() {
-        if(GetGame().IsServer()) {
-            return DZLConfig.Get();
-        }
-        return DZLPlayerClientDB.Get().GetConfig();
-    }
-
     DZLPlayer GetDZLPlayer() {
         if(dzlPlayer) return dzlPlayer;
-        if(GetGame().IsServer()) {
-            dzlPlayer = DZLDatabaseLayer.Get().GetPlayer(GetPlayerId());
-            if(dzlPlayer) dzlPlayer.player = this;
-            return dzlPlayer;
-        }
 
         dzlPlayer = DZLPlayerClientDB.Get().GetDZLPlayer();
         if(dzlPlayer) dzlPlayer.player = this;
@@ -610,33 +333,23 @@ modded class PlayerBase {
         return dzlPlayer;
     }
 
-    DZLPlayerHouse GetPlayerHouse() {
-        if(GetGame().IsServer()) {
-            return DZLDatabaseLayer.Get().GetPlayerHouse(GetPlayerId());
-        }
-        return DZLPlayerClientDB.Get().GetPlayerHouse();
-    }
-
     DZLBank GetBank() {
-        if(GetGame().IsServer()) {
-            return DZLDatabaseLayer.Get().GetBank();
-        }
         return DZLPlayerClientDB.Get().GetBank();
     }
 
     bool CanOpenMessageMenu() {
         if(IsRestrained()) return false;
         if(IsUnconscious()) return false;
-        if(!GetConfig()) return false;
-        if(!GetConfig().messageConfig) return false;
+        if(!DZLConfig.Get()) return false;
+        if(!DZLConfig.Get().messageConfig) return false;
 
-        if(!GetConfig().messageConfig.mustHavePersonalRadio) return true;
+        if(!DZLConfig.Get().messageConfig.mustHavePersonalRadio) return true;
 
         array<EntityAI> radios = GetItemsByTypeFromInventory("PersonalRadio");
 
         if(radios.Count() < 1) return false;
 
-        if(!GetConfig().messageConfig.radioMustHaveBattery) return true;
+        if(!DZLConfig.Get().messageConfig.radioMustHaveBattery) return true;
 
         foreach(EntityAI radio: radios) {
             if(radio.GetInventory()) {
@@ -644,8 +357,6 @@ modded class PlayerBase {
                     EntityAI attachment = radio.GetInventory().GetAttachmentFromIndex(i);
                     if(attachment && attachment.GetType() == "Battery9V") {
                         Battery9V itemCast = Battery9V.Cast(attachment);
-
-
 
                         if(itemCast && itemCast.GetQuantity() > 0) {
                             float energy = itemCast.GetCompEM().GetEnergy();
@@ -660,9 +371,4 @@ modded class PlayerBase {
         return false;
     }
 
-    void ResetDZLPlayer() {
-        if(GetGame().IsServer()) {
-            GetGame().RPCSingleParam(null, DAY_Z_LIFE_EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
-        }
-    }
 }

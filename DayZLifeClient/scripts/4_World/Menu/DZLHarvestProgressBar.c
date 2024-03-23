@@ -1,9 +1,9 @@
 class DZLHarvestProgressBar: DZLBaseProgressBar {
 
-    override void SetPlayer(PlayerBase player) {
-        super.SetPlayer(player);
+    override void SetPlayer(PlayerBase _player) {
+        super.SetPlayer(_player);
 
-        DZLWorkZone zone = player.GetConfig().jobConfig.FindZone(player.GetPosition());
+        DZLWorkZone zone = DZLConfig.Get().jobConfig.FindZone(player.GetPosition());
 
         if(!zone) {
             OnHide();
@@ -17,6 +17,6 @@ class DZLHarvestProgressBar: DZLBaseProgressBar {
     }
 
     override void SendFinishEvent() {
-        GetGame().RPCSingleParam(player, DAY_Z_LIFE_HARVEST, null, true);
+        GetGame().RPCSingleParam(player, DZL_RPC.HARVEST, null, true);
     }
 }

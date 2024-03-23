@@ -1,593 +1,545 @@
 FrameWidgetClass Banking {
- position 0.00124 -0.00291
- size 1 1
+ size 1000 600
  halign center_ref
  valign center_ref
- hexactpos 0
- vexactpos 0
- hexactsize 0
- vexactsize 0
+ hexactpos 1
+ vexactpos 1
+ hexactsize 1
+ vexactsize 1
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.6588 0.6588 0.6588 1
+   color 0.5176 0.5176 0.5176 0.7098
    position 0 0
-   size 0.65779 0.68741
+   size 1 1
    halign center_ref
    valign center_ref
    hexactpos 0
    vexactpos 0
    hexactsize 0
    vexactsize 0
-   style editor_quad_dark
+   style editor_selection
    {
-    PanelWidgetClass PanelWidget1 {
+    TextWidgetClass Banking_Menu {
      ignorepointer 1
      position 0 0
-     size 0.985 0.98
+     size 0.8 0.08
      halign center_ref
-     valign center_ref
      hexactpos 0
      vexactpos 0
      hexactsize 0
      vexactsize 0
-     style editor_quad_dark
+     style Bold
+     text "#Banking_Menue"
+     "size to text h" 1
+     "text halign" center
+     "text valign" center
      {
-      PanelWidgetClass PanelWidget2 {
+      PanelWidgetClass PanelWidget5 {
        ignorepointer 1
-       position 0 0.012
-       size 0.37 0.07
+       position 0 0
+       size 1 0.06
        halign center_ref
+       valign bottom_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        TextWidgetClass Banking_Menu {
-         ignorepointer 1
-         size 1 1
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style Bold
-         text "#Banking_Menue"
-         "text halign" center
-         "text valign" center
-        }
-       }
+       style editor_selection
       }
-      PanelWidgetClass PanelWidget3 {
+     }
+    }
+    ButtonWidgetClass Button_Closed {
+     color 0.502 0 0 1
+     position 0.008 0.01333
+     size 0.04 0.06
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style OldStyle
+     {
+      ImageWidgetClass closeIcon {
        ignorepointer 1
-       position 0 0.04079
-       size 0.98308 0.89238
+       color 0.502 0 0 1
+       position -0.025 0.02778
+       size 1 1
        halign center_ref
        valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        PanelWidgetClass PanelWidget11 {
-         ignorepointer 1
-         position 0 0
-         size 0.4 1
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextListboxWidgetClass Player_list {
-           visible 1
-           size 0.95 0.98
-           halign center_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style Default
-           "title visible" 0
-           lines 15
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget12 {
-         ignorepointer 1
-         position 0 0
-         size 0.602 0.07847
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass DZLBank_Cash {
-           visible 1
-           ignorepointer 1
-           position 0.08387 0.01316
-           size 0.41613 0.71229
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "123.456.789.000"
-           "text halign" right
-           "text valign" center
-          }
-          TextWidgetClass Cash_at_Bank {
-           ignorepointer 1
-           position 0.01087 0.01317
-           size 0.4748 0.7123
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Cash_at_Bank"
-           "text valign" center
-          }
-          TextWidgetClass TextWidget0 {
-           ignorepointer 1
-           position 8.00366 0
-           size 30.83 39.612
-           halign right_ref
-           valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Bold
-           text "$"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget13 {
-         ignorepointer 1
-         position 0 0.1448
-         size 0.602 0.0785
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass DZLBank {
-           ignorepointer 1
-           position 0.08449 0.01311
-           size 0.41551 0.71229
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "123.456.789"
-           "text halign" right
-           "text valign" center
-          }
-          TextWidgetClass Player_Bank {
-           ignorepointer 1
-           position 0.01087 0.01311
-           size 0.47355 0.71229
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Player_Bank"
-           "text valign" center
-          }
-          TextWidgetClass TextWidget1 {
-           ignorepointer 1
-           position 8.00366 0
-           size 30.83 39.612
-           halign right_ref
-           valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Bold
-           text "$"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget14 {
-         ignorepointer 1
-         position 0 0.0746
-         size 0.602 0.0785
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass bankTextWidget {
-           ignorepointer 1
-           position 0.01087 0.01311
-           size 0.47483 0.71229
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Tax"
-           "text valign" center
-          }
-          TextWidgetClass bankTaxTextWidget {
-           ignorepointer 1
-           position 0.0845 0.01312
-           size 0.4155 0.7123
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "123.456.789"
-           "text halign" right
-           "text valign" center
-          }
-          TextWidgetClass TextWidget2 {
-           ignorepointer 1
-           position 8.0037 0
-           size 30.83 39.612
-           halign right_ref
-           valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Bold
-           text "$"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget16 {
-         ignorepointer 1
-         position 0 0.08732
-         size 0.602 0.25373
-         halign right_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          PanelWidgetClass PanelWidget8 {
-           ignorepointer 1
-           position 0.01462 0.05188
-           size 0.3 0.24
-           halign right_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass Button_Deposit {
-             color 0 0.502 0.1255 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-             text "#Deposit"
-             text_proportion 0.5
-            }
-           }
-          }
-          PanelWidgetClass PanelWidget9 {
-           ignorepointer 1
-           position 0 0.05188
-           size 0.3 0.24
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass Button_Pay_out {
-             color 0 0.1255 0.502 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             text "#Pay_out"
-             text_proportion 0.5
-            }
-           }
-          }
-          EditBoxWidgetClass Input_Deposit {
-           position 0.25715 -0.30729
-           size 0.4857 0.245
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style DefaultBorder
-           font "gui/fonts/metron"
-          }
-          PanelWidgetClass PanelWidget4 {
-           visible 1
-           ignorepointer 1
-           position 0.01087 0.05188
-           size 0.3 0.24
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass Button_Cash_Transfer {
-             color 0.502 0 0 1
-             position 0 -0.01363
-             size 0.98 0.9273
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             text "#Cash_Transfer"
-             text_proportion 0.5
-            }
-           }
-          }
-          PanelWidgetClass wrapper_Button_Pay_out_Fraction {
-           ignorepointer 1
-           position 0 0.33623
-           size 0.3 0.24
-           halign center_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass Button_Pay_out_Fraction {
-             color 0 0.1255 0.502 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             text "#Pay_out_Fraction"
-             text_proportion 0.5
-            }
-           }
-          }
-          PanelWidgetClass wrapper_Button_Deposit_Fraction {
-           ignorepointer 1
-           position 0.01462 0.33623
-           size 0.3 0.24
-           halign right_ref
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass Button_Deposit_Fraction {
-             color 0 0.502 0.1255 1
-             position 0 0
-             size 0.98 0.9
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             style Default
-             text "#Deposit_Fraction"
-             text_proportion 0.5
-            }
-           }
-          }
-          PanelWidgetClass wrapper_Button_Cash_Transfer_Fraction {
-           visible 1
-           ignorepointer 1
-           position 0.01087 0.33623
-           size 0.3 0.24
-           valign bottom_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           style editor_quad_dark
-           {
-            ButtonWidgetClass Button_Cash_Transfer_Fraction {
-             color 0.502 0 0 1
-             position 0 -0.0136
-             size 0.98 0.9273
-             halign center_ref
-             valign center_ref
-             hexactpos 0
-             vexactpos 0
-             hexactsize 0
-             vexactsize 0
-             scaled 1
-             text "#Cash_Transfer_Fraction"
-             text_proportion 0.5
-            }
-           }
-          }
-         }
-        }
-        PanelWidgetClass PanelWidget10 {
-         ignorepointer 1
-         position 0 0.22104
-         size 0.602 0.0785
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass Player_Cash {
-           ignorepointer 1
-           position 0.01087 0.01311
-           size 0.47483 0.71229
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Player_Cash"
-           "text valign" center
-          }
-          TextWidgetClass DZLCash {
-           ignorepointer 1
-           position 0.0845 0.01312
-           size 0.4155 0.7123
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "123.456.789"
-           "text halign" right
-           "text valign" center
-          }
-          TextWidgetClass TextWidget3 {
-           ignorepointer 1
-           position 8.00366 0
-           size 30.83 39.612
-           halign right_ref
-           valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Bold
-           text "$"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-        PanelWidgetClass wrapperFractionCash {
-         ignorepointer 1
-         position 0 0.29492
-         size 0.602 0.0785
-         halign right_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style editor_quad_dark
-         {
-          TextWidgetClass Fraction_Cash {
-           ignorepointer 1
-           position 0.01087 0.01311
-           size 0.47483 0.71229
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "#Fraction_Cash"
-           "text valign" center
-          }
-          TextWidgetClass DZLFractionCash {
-           ignorepointer 1
-           position 0.0845 0.01312
-           size 0.4155 0.7123
-           halign right_ref
-           valign center_ref
-           hexactpos 0
-           vexactpos 0
-           hexactsize 0
-           vexactsize 0
-           text "123.456.789"
-           "text halign" right
-           "text valign" center
-          }
-          TextWidgetClass TextWidget4 {
-           ignorepointer 1
-           position 8.00366 0
-           size 30.83 39.612
-           halign right_ref
-           valign center_ref
-           hexactpos 1
-           vexactpos 1
-           hexactsize 1
-           vexactsize 1
-           style Bold
-           text "$"
-           "text halign" center
-           "text valign" center
-          }
-         }
-        }
-       }
+       image0 "set:dayz_gui image:exit"
+       mode blend
+       "src alpha" 1
+       "clamp mode" invalid
+       "flip u" 0
+       filter 1
+       nocache 0
       }
-      PanelWidgetClass PanelWidget7 {
+     }
+    }
+    PanelWidgetClass PanelWidget2 {
+     ignorepointer 1
+     position 0 0.11
+     size 1 0.005
+     halign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
+    }
+    TextListboxWidgetClass Player_list {
+     visible 1
+     position 0.008 0.01333
+     size 0.36 0.8583
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Default
+     "title visible" 0
+     lines 15
+    }
+    PanelWidgetClass PanelWidget12 {
+     ignorepointer 1
+     position 0.016 0.12833
+     size 0.602 0.065
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextWidgetClass DZLBank_Cash {
+       visible 1
        ignorepointer 1
-       position 0.01 0.012
-       size 0.048 0.07
+       position 0.07 0
+       size 0.4161 0.7123
        halign right_ref
+       valign center_ref
        hexactpos 0
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       style editor_quad_dark
-       {
-        ButtonWidgetClass Button_Closed {
-         color 0.502 0 0 1
-         position 0 0
-         size 0.9 0.9
-         halign center_ref
-         valign center_ref
-         hexactpos 0
-         vexactpos 0
-         hexactsize 0
-         vexactsize 0
-         style OldStyle
-         text "X"
-        }
-       }
+       text "123.456.789.000"
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass Cash_at_Bank {
+       ignorepointer 1
+       size 0.48913 0.7123
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "#Cash_at_Bank"
+       "text valign" center
+      }
+      TextWidgetClass TextWidget0 {
+       ignorepointer 1
+       position 0 0
+       size 0.05 1
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Bold
+       text "$"
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget11 {
+       ignorepointer 1
+       position 0 0.06
+       size 1 0.04
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
       }
      }
+    }
+    PanelWidgetClass PanelWidget13 {
+     ignorepointer 1
+     position 0.016 0.285
+     size 0.602 0.065
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextWidgetClass DZLBank {
+       ignorepointer 1
+       position 0.07 0
+       size 0.4155 0.7123
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "123.456.789"
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass Player_Bank {
+       ignorepointer 1
+       size 0.48913 0.71229
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "#Player_Bank"
+       "text valign" center
+      }
+      TextWidgetClass TextWidget1 {
+       ignorepointer 1
+       position 0 0
+       size 0.05 1
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Bold
+       text "$"
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget7 {
+       ignorepointer 1
+       position 0 0.06
+       size 1 0.04
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget14 {
+     ignorepointer 1
+     position 0.016 0.20667
+     size 0.602 0.065
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextWidgetClass bankTextWidget {
+       ignorepointer 1
+       size 0.4891 0.7123
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "#Tax"
+       "text valign" center
+      }
+      TextWidgetClass bankTaxTextWidget {
+       ignorepointer 1
+       position 0.07 0
+       size 0.4155 0.7123
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "123.456.789"
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget2 {
+       ignorepointer 1
+       position 0 0
+       size 0.05 1
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Bold
+       text "$"
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget6 {
+       ignorepointer 1
+       position 0 0.06
+       size 1 0.04
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
+      }
+     }
+    }
+    PanelWidgetClass PanelWidget10 {
+     ignorepointer 1
+     position 0.016 0.36333
+     size 0.602 0.065
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextWidgetClass Player_Cash {
+       ignorepointer 1
+       size 0.48913 0.71229
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "#Player_Cash"
+       "text valign" center
+      }
+      TextWidgetClass DZLCash {
+       ignorepointer 1
+       position 0.07 0
+       size 0.4155 0.7123
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "123.456.789"
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget3 {
+       ignorepointer 1
+       position 0 0
+       size 0.05 1
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Bold
+       text "$"
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget3 {
+       ignorepointer 1
+       position 0 0.06
+       size 1 0.04
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
+      }
+     }
+    }
+    PanelWidgetClass wrapperFractionCash {
+     ignorepointer 1
+     position 0.016 0.44166
+     size 0.602 0.065
+     halign right_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style blank
+     {
+      TextWidgetClass Fraction_Cash {
+       ignorepointer 1
+       size 0.48913 0.71229
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "#Fraction_Cash"
+       "text valign" center
+      }
+      TextWidgetClass DZLFractionCash {
+       ignorepointer 1
+       position 0.07 0
+       size 0.4155 0.7123
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       text "123.456.789"
+       "text halign" right
+       "text valign" center
+      }
+      TextWidgetClass TextWidget4 {
+       ignorepointer 1
+       size 0.05 1
+       halign right_ref
+       valign center_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style Bold
+       text "$"
+       "text halign" center
+       "text valign" center
+      }
+      PanelWidgetClass PanelWidget1 {
+       ignorepointer 1
+       position 0 0.06
+       size 1 0.04
+       halign center_ref
+       valign bottom_ref
+       hexactpos 0
+       vexactpos 0
+       hexactsize 0
+       vexactsize 0
+       style editor_selection
+      }
+     }
+    }
+    EditBoxWidgetClass Input_Deposit {
+     position 0.183 0.075
+     size 0.397 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style DefaultBorder
+     font "gui/fonts/metron"
+    }
+    ButtonWidgetClass Button_Cash_Transfer {
+     color 0.502 0 0 1
+     position 0.025 0.35917
+     size 0.28 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "no focus" 1
+     text "#Cash_Transfer"
+     text_proportion 0.5
+    }
+    ButtonWidgetClass Button_Cash_Transfer_Fraction {
+     color 0.502 0 0 1
+     position 0.341 0.35917
+     size 0.28 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     scaled 1
+     "no focus" 1
+     text "#Cash_Transfer_Fraction"
+     text_proportion 0.5
+    }
+    ButtonWidgetClass Button_Deposit_Fraction {
+     color 0 0.502 0.1255 1
+     position 0.341 0.29083
+     size 0.28 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Default
+     "no focus" 1
+     text "#Deposit_Fraction"
+     text_proportion 0.5
+    }
+    ButtonWidgetClass Button_Pay_out_Fraction {
+     color 0 0.1255 0.502 1
+     position 0.025 0.29083
+     size 0.28 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "no focus" 1
+     text "#Pay_out_Fraction"
+     text_proportion 0.5
+    }
+    ButtonWidgetClass Button_Pay_out {
+     color 0 0.1255 0.502 1
+     position 0.025 0.2225
+     size 0.28 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     "no focus" 1
+     text "#Pay_out"
+     text_proportion 0.5
+    }
+    ButtonWidgetClass Button_Deposit {
+     color 0 0.502 0.1255 1
+     position 0.341 0.2225
+     size 0.28 0.055
+     halign center_ref
+     valign bottom_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style Default
+     "no focus" 1
+     text "#Deposit"
+     text_proportion 0.5
+    }
+    PanelWidgetClass PanelWidget4 {
+     ignorepointer 1
+     position 0.183 0.07
+     size 0.602 0.005
+     halign center_ref
+     valign center_ref
+     hexactpos 0
+     vexactpos 0
+     hexactsize 0
+     vexactsize 0
+     style editor_selection
     }
    }
   }

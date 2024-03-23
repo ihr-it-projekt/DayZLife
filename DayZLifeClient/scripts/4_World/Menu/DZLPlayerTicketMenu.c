@@ -7,15 +7,10 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
 
     void DZLPlayerTicketMenu() {
         layoutPath = "DayZLifeClient/layout/Ticket/TicketMenu.layout";
-        Construct();
     }
 
-    void ~DZLPlayerTicketMenu() {
-        Destruct();
-    }
-
-    void SetReceiver(PlayerBase receiver) {
-        this.receiver = receiver;
+    void SetReceiver(PlayerBase _receiver) {
+        this.receiver = _receiver;
     }
 
     override Widget Init() {
@@ -52,7 +47,7 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
                 }
 
                 if(ticketValue != 0) {
-                    GetGame().RPCSingleParam(player, DAY_Z_LIFE_CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
+                    GetGame().RPCSingleParam(player, DZL_RPC.CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
                     inputTicket.SetText("");
                     inputTicketReason.SetText("");
                 } else {
@@ -67,7 +62,7 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
     }
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
-        if(rpc_type == DAY_Z_LIFE_CREATE_TICKET_RESPONSE) {
+        if(rpc_type == DZL_RPC.CREATE_TICKET_RESPONSE) {
             OnHide();
         }
     }
