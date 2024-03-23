@@ -89,7 +89,7 @@ FrameWidgetClass Almanac {
            hexactsize 0
            vexactsize 0
            "title visible" 1
-           colums "#Workzone_name;70;#tool_damage;30"
+           colums "#Workzone;70;#tool_damage;30"
            lines 30
            "highlight row" 0
           }
