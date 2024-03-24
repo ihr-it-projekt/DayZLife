@@ -167,7 +167,7 @@ class CfgVehicles {
             "DayZLifeClient\model\Ore\Copper\DZL_Copper.paa"
         };
     };
-    class DZL_Coal: DZLStoneOre_ColorBase {
+    class DZL_Ore_Coal: DZLStoneOre_ColorBase {
         scope = 2;
         displayName = "#Coal";
         descriptionShort = "#Coal_desc";

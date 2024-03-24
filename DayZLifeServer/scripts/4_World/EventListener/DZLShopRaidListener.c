@@ -83,6 +83,7 @@ class DZLShopRaidListener: DZLBaseEventListener {
         DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(true);
 
         DZLSendMessage(null, "#rob_raid_was_started");
+        DZLSendMessage(player.GetIdentity(), "#rob_raid_was_started_raider");
         robTimer.Run(DZLConfig.Get().crimeConfig.raidDurationTickInSeconds, this, "TickRob", null, true);
     }
 

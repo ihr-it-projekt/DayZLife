@@ -46,7 +46,7 @@ class DZLSpawnPositionMenu : DZLBaseMenu {
 
 
         jobSelection.ClearAll();
-        jobIndex.Insert(jobSelection.AddItem("#Civ"), DAY_Z_LIFE_JOB_CIVIL);
+        jobIndex.Insert(jobSelection.AddItem("#Civil"), DAY_Z_LIFE_JOB_CIVIL);
 
         foreach(string jobName: config.jobConfig.paycheck.jobNames) {
             if(player.GetDZLPlayer().CanUseJob(jobName)) {
