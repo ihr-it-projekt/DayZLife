@@ -89,6 +89,7 @@ FrameWidgetClass rootFrame {
      vexactsize 0
     }
     TextListboxWidgetClass loadoutListbox {
+     color 0 0.1255 0.502 1
      position 0.01 0.05918
      size 0.45 0.71498
      valign center_ref

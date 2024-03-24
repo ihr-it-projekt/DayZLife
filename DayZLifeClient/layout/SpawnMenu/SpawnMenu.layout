@@ -36,7 +36,7 @@ FrameWidgetClass rootFrame {
       ImageWidgetClass closeIcon {
        ignorepointer 1
        color 0.502 0 0 1
-       position 0.0072 0.02546
+       position 0 0
        size 1.0209 1.0139
        halign center_ref
        valign center_ref
@@ -78,6 +78,7 @@ FrameWidgetClass rootFrame {
        style blank
        {
         TextListboxWidgetClass spawnPoints {
+         color 0 0.1255 0.502 1
          position 0 -0.075
          size 0.96605 0.83508
          halign center_ref

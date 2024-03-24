@@ -34,6 +34,7 @@ FrameWidgetClass License_Menu {
      style blank
      {
       TextListboxWidgetClass playerList {
+       color 0 0.1255 0.502 1
        position 0.00708 0.05248
        size 0.31 0.86263
        valign center_ref
@@ -238,6 +239,7 @@ FrameWidgetClass License_Menu {
          }
         }
         TextListboxWidgetClass fractionMembers {
+         color 0 0.1255 0.502 1
          position 0.03 0
          size 0.95 0.48
          halign right_ref
@@ -306,6 +308,7 @@ FrameWidgetClass License_Menu {
        font "gui/fonts/amorserifpro"
       }
       TextListboxWidgetClass openInvitations {
+       color 0 0.1255 0.502 1
        position 0.0092 0.51683
        size 0.308 0.47
        halign right_ref

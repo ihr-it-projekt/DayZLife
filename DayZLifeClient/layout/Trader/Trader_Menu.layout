@@ -233,7 +233,7 @@ FrameWidgetClass Trader_Menu {
          text "#trade"
         }
         TextListboxWidgetClass sell_card {
-         color 0 0.6824 0.9373 1
+         color 0 0.1255 0.502 1
          position 0 0
          size 1 0.4
          halign center_ref
@@ -247,7 +247,7 @@ FrameWidgetClass Trader_Menu {
          lines 20
         }
         TextListboxWidgetClass buy_card {
-         color 0.502 0 0 1
+         color 0 0.1255 0.502 1
          position 0 0.19
          size 1 0.4
          halign center_ref
@@ -264,7 +264,7 @@ FrameWidgetClass Trader_Menu {
        }
       }
       TextListboxWidgetClass Inventory {
-       color 0.502 0 0 1
+       color 0 0.1255 0.502 1
        position 0.00417 0.00889
        size 0.36903 0.98222
        hexactpos 0
@@ -276,7 +276,7 @@ FrameWidgetClass Trader_Menu {
        lines 40
       }
       XComboBoxWidgetClass xcombobox_categorys {
-       color 0 0.6824 0.9373 1
+       color 0 0.1255 0.502 1
        position 0.052 0.0089
        size 0.35 0.05
        halign center_ref
@@ -286,7 +286,7 @@ FrameWidgetClass Trader_Menu {
        vexactsize 0
        scriptclass ""
        style debugUI
-       font "gui/fonts/metron"
+       font "gui/fonts/metron22"
       }
      }
     }
@@ -357,7 +357,7 @@ FrameWidgetClass Trader_Menu {
      }
     }
     TextListboxWidgetClass Trader_Item_list {
-     color 0.502 0 0 1
+     color 0 0.1255 0.502 1
      position 0.052 0.16
      size 0.35 0.624
      halign center_ref

@@ -197,6 +197,7 @@ FrameWidgetClass rootFrame {
        }
       }
       TextListboxWidgetClass contactsListbox {
+       color 0 0.1255 0.502 1
        position 0 0.06284
        size 0.9508 0.823
        halign center_ref
@@ -222,7 +223,8 @@ FrameWidgetClass rootFrame {
      vexactsize 0
      {
       TextListboxWidgetClass allPlayerListbox {
-       position -0 0.06284
+       color 0 0.1255 0.502 1
+       position 0 0.06284
        size 0.95077 0.82295
        halign center_ref
        valign center_ref
@@ -342,7 +344,7 @@ FrameWidgetClass rootFrame {
        }
       }
       EditBoxWidgetClass writeMessage {
-       position -0 0.45771
+       position 0 0.45771
        size 0.9747 0.06
        halign center_ref
        valign center_ref

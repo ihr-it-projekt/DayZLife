@@ -91,6 +91,7 @@ FrameWidgetClass rootFrame {
      style blank
      {
       TextListboxWidgetClass tostoreTextListbox {
+       color 0 0.1255 0.502 1
        position 0 -0.085
        size 0.96 0.79941
        halign center_ref
@@ -144,6 +145,7 @@ FrameWidgetClass rootFrame {
      style blank
      {
       TextListboxWidgetClass isstoredTextListbox {
+       color 0 0.1255 0.502 1
        position 0 -0.085
        size 0.98 0.7994
        halign center_ref

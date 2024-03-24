@@ -94,6 +94,7 @@ FrameWidgetClass Banking {
     }
     TextListboxWidgetClass Player_list {
      visible 1
+     color 0 0.1255 0.502 1
      position 0.008 0.01333
      size 0.36 0.8583
      valign bottom_ref

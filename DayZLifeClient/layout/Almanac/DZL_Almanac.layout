@@ -23,6 +23,7 @@ FrameWidgetClass Almanac {
    style editor_selection
    {
     XComboBoxWidgetClass almanac_box {
+     color 0 0.1255 0.502 1
      position 0 0.01
      size 0.3 0.065
      halign center_ref
@@ -30,6 +31,8 @@ FrameWidgetClass Almanac {
      vexactpos 0
      hexactsize 0
      vexactsize 0
+     style debugUI
+     font "gui/fonts/metron48"
      items "#Workzone;#Licence;#wanted_list"
      {
       PanelWidgetClass colorLine1 {
@@ -264,6 +267,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass tool_listbox {
+         color 0 0.1255 0.502 1
          size 0.7 0.85
          valign bottom_ref
          hexactpos 0
@@ -325,6 +329,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass yield_listbox {
+         color 0 0.1255 0.502 1
          size 0.7 0.85
          valign bottom_ref
          hexactpos 0
@@ -399,6 +404,7 @@ FrameWidgetClass Almanac {
        {
         TextListboxWidgetClass workzonelist {
          visible 1
+         color 0 0.1255 0.502 1
          size 0.98 0.98
          halign center_ref
          valign center_ref
@@ -440,6 +446,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass lizenzelist {
+         color 0 0.1255 0.502 1
          size 0.98 0.98
          halign center_ref
          valign center_ref
@@ -503,6 +510,7 @@ FrameWidgetClass Almanac {
          }
         }
         TextListboxWidgetClass craft_itembox {
+         color 0 0.1255 0.502 1
          size 0.7 0.8
          valign bottom_ref
          hexactpos 0
@@ -617,6 +625,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass player_Listbox {
+         color 0 0.1255 0.502 1
          size 0.98 0.98
          halign center_ref
          valign center_ref
@@ -666,6 +675,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass playerlist_JobPanel {
+         color 0 0.1255 0.502 1
          size 0.98 0.98
          halign center_ref
          valign center_ref
@@ -693,6 +703,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass jobListbox {
+         color 0 0.1255 0.502 1
          size 0.98 0.98
          halign center_ref
          valign center_ref
@@ -719,6 +730,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass job_RankList {
+         color 0 0.1255 0.502 1
          position 0 0.01111
          size 0.96235 0.90778
          halign center_ref
@@ -760,6 +772,7 @@ FrameWidgetClass Almanac {
      style editor_selection
      {
       TextListboxWidgetClass playerOpenTicketsList {
+       color 0 0.1255 0.502 1
        position 0 0
        size 0.99 0.9
        halign center_ref
@@ -831,6 +844,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass escaped_TextListbox {
+         color 0 0.1255 0.502 1
          position 0 0
          size 0.98118 0.97778
          halign center_ref
@@ -913,6 +927,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass players {
+         color 0 0.1255 0.502 1
          position 0 0.03084
          size 0.98 0.91724
          halign center_ref
@@ -1073,6 +1088,7 @@ FrameWidgetClass Almanac {
        style editor_selection
        {
         TextListboxWidgetClass licenseTextListbox {
+         color 0 0.1255 0.502 1
          position 0 0
          size 0.9627 0.9755
          halign center_ref
@@ -1422,7 +1438,7 @@ FrameWidgetClass Almanac {
        }
       }
       ButtonWidgetClass reloadConfig {
-       color 0.0706 0.1922 0.5608 1
+       color 0 0.1255 0.502 1
        position 0.187 0.0111
        size 0.2 0.06
        halign center_ref

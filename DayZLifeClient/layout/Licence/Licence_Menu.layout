@@ -83,7 +83,8 @@ FrameWidgetClass License_Menu {
     }
     TextListboxWidgetClass Licence_ListBox {
      disabled 0
-     position -0 0.0075
+     color 0 0.1255 0.502 1
+     position 0 0.0075
      size 0.97714 0.773
      halign center_ref
      valign center_ref

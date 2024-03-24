@@ -155,6 +155,7 @@ FrameWidgetClass License_Menu {
      font "gui/fonts/metron"
     }
     TextListboxWidgetClass playerList {
+     color 0 0.1255 0.502 1
      position 0.008 0.10292
      size 0.348 0.76215
      valign center_ref
@@ -167,6 +168,7 @@ FrameWidgetClass License_Menu {
      lines 20
     }
     TextListboxWidgetClass playerhaveKeylist {
+     color 0 0.1255 0.502 1
      position 0.288 0.1005
      size 0.348 0.757
      halign right_ref
