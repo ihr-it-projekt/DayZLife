@@ -199,7 +199,7 @@ class DZLTraderMenu: DZLBaseMenu {
                     }
 
                     GetGame().ObjectGetDisplayName(item, name);
-                    int sumItem = type.CalculateDynamicSellPrice(storage, item);
+                    int sumItem = type.CalculateDynamicSellPrice(storage);
                     sumItem = DZLTraderHelper.GetQuantityPrice(sumItem, item);
                     quantity = DZLTraderHelper.GetQuantity(item);
 
@@ -515,7 +515,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 } else {
                     EntityAI item;
                     widgetToChange.GetItemData(x, 0, item);
-                    sellPrice = itemType.CalculateDynamicSellPrice(storage, item);
+                    sellPrice = itemType.CalculateDynamicSellPrice(storage);
                     sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice, item);
 
 

@@ -8,7 +8,7 @@ FrameWidgetClass Trader_Menu {
  {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
-   color 0.5176 0.5176 0.5176 0.7098
+   color 0.5176 0.5176 0.5176 0.7843
    size 1 1
    halign center_ref
    valign center_ref
@@ -92,6 +92,7 @@ FrameWidgetClass Trader_Menu {
     PanelWidgetClass PannelWidget {
      visible 1
      ignorepointer 1
+     position 0 0.00087
      size 1 0.9
      halign center_ref
      valign bottom_ref
@@ -232,7 +233,8 @@ FrameWidgetClass Trader_Menu {
          text "#trade"
         }
         TextListboxWidgetClass sell_card {
-         color 0.502 0 0 1
+         color 0 0.6824 0.9373 1
+         position 0 0
          size 1 0.4
          halign center_ref
          hexactpos 0
@@ -274,7 +276,7 @@ FrameWidgetClass Trader_Menu {
        lines 40
       }
       XComboBoxWidgetClass xcombobox_categorys {
-       color 0.502 0 0 1
+       color 0 0.6824 0.9373 1
        position 0.052 0.0089
        size 0.35 0.05
        halign center_ref
@@ -283,7 +285,8 @@ FrameWidgetClass Trader_Menu {
        hexactsize 0
        vexactsize 0
        scriptclass ""
-       style Default
+       style debugUI
+       font "gui/fonts/metron"
       }
      }
     }
@@ -368,10 +371,10 @@ FrameWidgetClass Trader_Menu {
      colums "#Item;40;#Buy;22;#Sell;22;#Trader_Storage;10"
      lines 30
     }
-    MultilineTextWidgetClass discription {
+    ItemPreviewWidgetClass previewItem {
      ignorepointer 1
-     position 0.052 0.01
-     size 0.35 0.2
+     position 0.05 0.01
+     size 0.3 0.2
      halign center_ref
      valign bottom_ref
      hexactpos 0

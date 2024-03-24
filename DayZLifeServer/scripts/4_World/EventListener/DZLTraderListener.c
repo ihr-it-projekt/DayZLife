@@ -50,7 +50,7 @@ class DZLTraderListener: DZLBaseEventListener {
                                 storage.Save();
                             }
                             itemsToSellPrice.Insert(type.sellPrice);
-                            float itemPrice = type.CalculateDynamicSellPrice(storage, item);
+                            float itemPrice = type.CalculateDynamicSellPrice(storage);
                             itemPrice = DZLTraderHelper.GetQuantityPrice(itemPrice, item);
 
                             float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
