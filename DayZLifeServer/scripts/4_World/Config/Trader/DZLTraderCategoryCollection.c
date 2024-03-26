@@ -290,6 +290,11 @@ modded class DZLTraderCategoryCollection {
                 Save();
             }
         }
+        LoadStorage();
+    }
+
+
+    private void LoadStorage() {
         DZLTraderStorage storage = DZLDatabaseLayer.Get().GetTraderStorage();
         foreach(DZLTraderCategory cat: categories) {
             foreach(DZLTraderType item: cat.items) {

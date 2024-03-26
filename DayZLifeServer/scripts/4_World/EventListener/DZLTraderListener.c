@@ -2,112 +2,18 @@ class DZLTraderListener: DZLBaseEventListener {
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.TRADE_ACTION) {
-            autoptr Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
-            if(ctx.Read(paramTrade)) {
-                array<EntityAI> playerItems = PlayerBase.Cast(target).GetPlayerItems();
-                int sum = 0;
-                int taxSum = 0;
-                int countSellItems = 0;
-                array<DZLTraderType> typesToBuy = new array<DZLTraderType>;
-                array<EntityAI> itemsToSell = paramTrade.param2;
-                array<int> itemsToSellPrice = new array<int>;
-                array<string> itemsToBuyParam = paramTrade.param1;
-                DZLTraderConfig config = DZLConfig.Get().traderConfig;
-                DZLBankingConfig bankConfig = DZLConfig.Get().bankConfig;
-                foreach(string categoryName: paramTrade.param3.categoryNames) {
-                    DZLTraderCategory category = config.categories.GetCatByName(categoryName);
-                    if(!category) continue;
+            Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition> paramTrade;
+            if(!ctx.Read(paramTrade)) return;
 
-                    foreach(DZLTraderType type: category.items) {
-                        DZLTraderTypeStorage storage = DZLDatabaseLayer.Get().GetTraderStorage().GetCurrentStorageByName(type.type);
-                        foreach(string traderType: itemsToBuyParam) {
-                            if(traderType != type.GetId()) continue;
-                            if(storage) {
-                                if(storage.IsStorageBelowZero()) {
-                                    DZLSendMessage(sender, "#you_buy_too_much");
-                                    break;
-                                }
-                                storage.StorageDown();
-                                storage.Save();
-                            }
+            DZLTradeObject tradeObject = new DZLTradeObject(PlayerBase.Cast(target), paramTrade.param2, paramTrade.param1, paramTrade.param3);
 
-                            typesToBuy.Insert(type);
-                            sum += type.CalculateDynamicBuyPrice(storage);
-                        }
-                        foreach(EntityAI item: itemsToSell) {
-                            CarScript carsScript = CarScript.Cast(item);
+            tradeObject.CheckCategories();
+            if(!tradeObject.CanTrade()) return;
 
-                            if(carsScript && carsScript.ownerId != sender.GetId()) continue;
-                            if(!item || !type) continue;
-                            if(item.GetType() != type.type) continue;
-
-                            if(storage) {
-                                if(storage.IsStorageOverFilled()) {
-                                    DZLSendMessage(sender, "#you_sell_too_much");
-                                    break;
-                                }
-                                storage.StorageUp(DZLTraderHelper.GetQuantity(item));
-                                storage.Save();
-                            }
-                            itemsToSellPrice.Insert(type.sellPrice);
-                            float itemPrice = type.CalculateDynamicSellPrice(storage);
-                            itemPrice = DZLTraderHelper.GetQuantityPrice(itemPrice, item);
-
-                            float itemTax = itemPrice / 100 * bankConfig.sellTradingTax;
-                            countSellItems++;
-                            sum -= Math.Round(itemPrice - itemTax);
-                            taxSum += Math.Round(itemTax);
-                        }
-                    }
-                }
-
-                PlayerBase player = PlayerBase.Cast(target);
-                DZLPlayer dzlPlayer = player.GetDZLPlayer();
-                string message = "#error_not_enough_money";
-
-                if(typesToBuy.Count() == 0 && countSellItems == 0) {
-                    message = "#you_have_to_trade_minimum_one_item";
-                } else if(typesToBuy.Count() != itemsToBuyParam.Count() && countSellItems != itemsToSell.Count()) {
-                    message = "#not_all_items_found_that_you_want_to_trade";
-                } else if(dzlPlayer.HasEnoughMoney(sum)) {
-                    foreach(DZLTraderType _traderType: typesToBuy) {
-                        DZLLogTraderTransaction(sender.GetId(), "buy", _traderType.type, _traderType.buyPrice);
-                        Add(player, _traderType, paramTrade.param3);
-                    }
-
-                    int index = itemsToSell.Count() - 1;
-                    if(index > -1) {
-                        EntityAI itemSell = itemsToSell.Get(index);
-                        int itemSellPrice = itemsToSellPrice.Get(index);
-                        while(itemSell) {
-                            DZLLogTraderTransaction(sender.GetId(), "sell", itemSell.GetType(), itemSellPrice);
-                            GetGame().ObjectDelete(itemSell);
-
-                            int tmpIndex = itemsToSell.Count() - 1;
-
-                            if(tmpIndex == index) itemsToSell.Remove(index);
-
-                            CarScript car = CarScript.Cast(itemSell);
-                            if(car) DZLInsuranceManager.Get().RemoveCar(car);
-
-                            index = itemsToSell.Count() - 1;
-                            if(index == -1) break;
-
-                            itemSell = itemsToSell.Get(index);
-                        }
-                    }
-
-                    dzlPlayer.AddMoneyToPlayer(sum * -1);
-                    DZLBank bank = DZLDatabaseLayer.Get().GetBank();
-                    bank.AddTax(taxSum);
-
-                    message = "#trade_was_successful";
-                    GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-                    GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
-                }
-
-                GetGame().RPCSingleParam(target, DZL_RPC.TRADE_ACTION_RESPONSE, new Param1<string>(message), true, sender);
-            }
+            tradeObject.Trade();
+            tradeObject.SaveStorage();
+            tradeObject.LogTrades();
+            tradeObject.SendTraderResponse();
         } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE) {
             GetGame().RPCSingleParam(target, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE, new Param1<ref array<ref DZLTraderTypeStorage>>(DZLDatabaseLayer.Get().GetTraderStorage().GetStorageItems()), true, sender);
         }

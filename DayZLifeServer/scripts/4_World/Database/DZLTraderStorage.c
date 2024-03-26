@@ -1,5 +1,7 @@
 modded class DZLTraderStorage {
     void Insert(DZLTraderType item) {
-        storage.Insert(new DZLTraderTypeStorage(item));
+        DZLTraderTypeStorage type = new DZLTraderTypeStorage(item);
+        storageArray.Insert(type);
+        storageMap.Set(type.GetType(), type);
     }
 }
