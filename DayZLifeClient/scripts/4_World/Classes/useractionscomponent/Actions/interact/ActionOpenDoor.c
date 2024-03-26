@@ -14,9 +14,7 @@ modded class ActionOpenDoors {
         BuildingBase building = BuildingBase.Cast(target.GetObject());
         int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
 
-        if(DZLCanDoDoorAction.IsJobDoor(building)) {
-            if(!DZLCanDoDoorAction.canDoByJob(building, player)) return false;
-        }
+        if(DZLCanDoDoorAction.IsJobDoor(building) && DZLCanDoDoorAction.canDoByJob(building, player)) return true;
 
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
         if(DZLConfig.Get() && (DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_JOB_COP, dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_COP)) || (DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_JOB_ARMY, dzlPlayer.dayZPlayerId) && dzlPlayer.IsActiveJob(DAY_Z_LIFE_JOB_ARMY))) {
