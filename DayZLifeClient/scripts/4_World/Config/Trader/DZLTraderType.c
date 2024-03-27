@@ -8,20 +8,20 @@ class DZLTraderType: DZLIdModel {
     bool isCar;
     bool isStorageItem = false;
     int maxStorage = 0;
-    int maxBuyPrice;
     int maxSellPrice;
+    int maxBuyPrice;
     int reducePerTick;
     int tickLengthInMinutes;
 
     int CalculateDynamicBuyPrice(DZLTraderTypeStorage currentStorage) {
-        if(false == isStorageItem || sellPrice <= 0 || !currentStorage) return buyPrice;
+        if(false == isStorageItem || buyPrice <= 0 || !currentStorage) return buyPrice;
         int storage = currentStorage.getStorage();
 
         return Math.Round(maxBuyPrice - ((storage / maxStorage) * (maxBuyPrice - buyPrice)));
     }
 
     int CalculateDynamicSellPrice(DZLTraderTypeStorage currentStorage) {
-        if(false == isStorageItem || buyPrice <= 0 || !currentStorage) return sellPrice;
+        if(false == isStorageItem || sellPrice <= 0 || !currentStorage) return sellPrice;
         int storage = currentStorage.getStorage();
 
         return Math.Round(maxSellPrice - ((storage / maxStorage) * (maxSellPrice - sellPrice)));
