@@ -112,9 +112,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 }
 
                 foreach(EntityAI item: playerItems) {
-                    if(item.GetType() != type.type) {
-                        continue;
-                    }
+                    if(item.GetType() != type.type) continue;
 
                     GetGame().ObjectGetDisplayName(item, name);
 
@@ -164,7 +162,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 type.displayName = name;
                 int sellPrice = type.CalculateDynamicSellPrice(storage);
                 sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice);
-                if(!hasAddFirstCategory && type.buyPrice > 0) {
+                if(!hasAddFirstCategory) {
                     index = traderItemList.AddItem(name, type, 0);
 
                     int buyPrice = type.CalculateDynamicBuyPrice(storage);
@@ -445,13 +443,10 @@ class DZLTraderMenu: DZLBaseMenu {
         sourceWidget.GetItemData(pos, 0, itemType);
 
         DZLTraderTypeStorage storage = GetCurrentStorageByName(itemType.type);
-
-        if(!itemType || itemType.isStorageItem && storage && storage.IsStorageEmpty() && !removeRow) {
-            return null;
-        }
-
         int buyPrice = itemType.CalculateDynamicBuyPrice(storage);
 
+        if(!itemType || itemType.isStorageItem && storage && storage.IsStorageEmpty() && !removeRow) return null;
+        if (buyPrice <= 0) return null;
 
         sumInt = sumInt + buyPrice * factor;
         UpdateSum();
@@ -517,7 +512,6 @@ class DZLTraderMenu: DZLBaseMenu {
                     widgetToChange.GetItemData(x, 0, item);
                     sellPrice = itemType.CalculateDynamicSellPrice(storage);
                     sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice, item);
-
 
                     widgetToChange.SetItem(x, sellPrice.ToString(), itemType, 1);
                     widgetToChange.SetItem(x, itemType.GetStorageString(storage), item, 3);

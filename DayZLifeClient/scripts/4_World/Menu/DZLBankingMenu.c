@@ -110,14 +110,22 @@ class DZLBankingMenu : DZLBaseMenu {
         playerBalanceTextWidget.SetText(dzlPlayer.GetMoney().ToString());
         playerBankBalanceTextWidget.SetText(dzlPlayer.GetBankMoney().ToString());
 
-        if(player.GetBank()) {
-            bankBalanceTextWidget.SetText(player.GetBank().moneyAtBank.ToString());
-            bankTaxTextWidget.SetText(player.GetBank().GetTaxSum().ToString());
-        }
-
         if(dzlPlayer.HasFractionRightCanAccessBankAccount()) {
             fractionBalanceTextWidget.SetText(dzlPlayer.GetFraction().GetBankAccount().ToString());
         }
+
+        LoadBankData();
+    }
+
+    void LoadBankData() {
+        DZLBank bank = player.GetBank();
+        if (!bank) {
+            GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(LoadBankData, 1000);
+            return;
+        }
+
+        bankBalanceTextWidget.SetText(bank.moneyAtBank.ToString());
+        bankTaxTextWidget.SetText(bank.GetTaxSum().ToString());
     }
 
     override bool OnClick(Widget w, int x, int y, int button) {

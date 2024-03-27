@@ -38,10 +38,6 @@ modded class DZLConfig {
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.EVENT_GET_CONFIG) {
             UpdateConfig(sender);
-        } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_TRADER) {
-            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_TRADER, new Param1<ref DZLTraderConfig>(traderConfig), true, sender);
-        } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_BANKING) {
-            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BANKING, new Param1<ref DZLBankingConfig>(bankConfig), true, sender);
         }
     }
 
@@ -57,6 +53,8 @@ modded class DZLConfig {
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_MESSAGE, new Param1<ref DZLMessageConfig>(messageConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_TUNING_CONFIG, new Param1<ref DZLTuningConfig>(tuningConfig), true, sender);
         GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_HOUSE_CONFIG, new Param1<ref DZLHouseConfig>(houseConfig), true, sender);
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_TRADER, new Param1<ref DZLTraderConfig>(traderConfig), true, sender);
+        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_BANKING, new Param1<ref DZLBankingConfig>(bankConfig), true, sender);
 
         if(null == sender) {
             GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CONFIG_RESPONSE_TRADER, new Param1<ref DZLTraderConfig>(traderConfig), true, sender);

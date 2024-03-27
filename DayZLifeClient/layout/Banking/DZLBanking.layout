@@ -10,7 +10,7 @@ FrameWidgetClass Banking {
   PanelWidgetClass PanelWidget0 {
    ignorepointer 1
    color 0.5176 0.5176 0.5176 0.7098
-   position 0 0
+   position 0.00095 0
    size 1 1
    halign center_ref
    valign center_ref
@@ -128,7 +128,7 @@ FrameWidgetClass Banking {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       text "123.456.789.000"
+       text "-"
        "text halign" right
        "text valign" center
       }
@@ -193,7 +193,7 @@ FrameWidgetClass Banking {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       text "123.456.789"
+       text "-"
        "text halign" right
        "text valign" center
       }
@@ -269,7 +269,7 @@ FrameWidgetClass Banking {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       text "123.456.789"
+       text "-"
        "text halign" right
        "text valign" center
       }
@@ -334,7 +334,7 @@ FrameWidgetClass Banking {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       text "123.456.789"
+       text "-"
        "text halign" right
        "text valign" center
       }
@@ -399,7 +399,7 @@ FrameWidgetClass Banking {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       text "123.456.789"
+       text "-"
        "text halign" right
        "text valign" center
       }
