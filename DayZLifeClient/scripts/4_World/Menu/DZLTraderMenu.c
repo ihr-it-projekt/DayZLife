@@ -240,9 +240,8 @@ class DZLTraderMenu: DZLBaseMenu {
 
         if(items) {
             foreach(DZLTraderType type: items) {
-                if(type.buyPrice <= 0) continue
 
-                    int sellPrice = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type));
+                int sellPrice = type.CalculateDynamicSellPrice(GetCurrentStorageByName(type.type));
                 sellPrice = DZLTraderHelper.GetQuantityPrice(sellPrice);
                 int buyPrice = type.CalculateDynamicBuyPrice(GetCurrentStorageByName(type.type));
 
