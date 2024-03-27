@@ -35,7 +35,7 @@ class CfgMods {
         versionPath = "DayZLifeServer/scripts/Data/Version.hpp";
         author = "TheBuster Sense";
         authorID = "76561198196317725";
-        version = "1.1.0";
+        version = "1.1.1";
         extra = 0;
         type = "mod";
 
