@@ -16,6 +16,7 @@ class DZLEventManager {
     ref DZLPlayerTicketListener playerTicketListener;
     ref DZLFractionListener fractionListener;
     ref DZLTuningListener tuningListener;
+    ref DZLRaidListener raidListener;
 
     void DZLEventManager() {
         config = new DZLConfigListener;
@@ -35,5 +36,6 @@ class DZLEventManager {
         playerTicketListener = new DZLPlayerTicketListener;
         fractionListener = new DZLFractionListener;
         tuningListener = new DZLTuningListener;
+        raidListener = new DZLRaidListener;
     }
 }

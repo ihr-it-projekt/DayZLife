@@ -110,6 +110,7 @@ static void DZLLogArrest(string playerId, string info, int duration) {
 
     DZLCSVLog(playerId, fileName, head, data);
 }
+
 static void DZLLogTicket(string playerId, string info, int value) {
     if(!DZLLoggerConfig.Get().logTicket) return;
     string fileName = "ticket_log.csv";
@@ -124,7 +125,6 @@ static void DZLLogTicket(string playerId, string info, int value) {
 
     DZLCSVLog(playerId, fileName, head, data);
 }
-
 
 static void DZLCSVLog(string playerId, string fileName, array<string> head, array<string> data) {
     string path = DAY_Z_LIFE_LOGS + playerId + "\\";

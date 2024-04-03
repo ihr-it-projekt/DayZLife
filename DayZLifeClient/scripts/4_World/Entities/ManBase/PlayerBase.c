@@ -3,6 +3,7 @@ modded class PlayerBase {
     private ref DZLLicenceProgressBar progressBarLicence;
     private ref DZLCarRaidProgressBar progressBarRaidCar;
     private ref DZLHarvestProgressBar progressBarHarvest;
+    private ref DZLDoorRaidProgressBar progressBarRaid;
     private ref DZLMessageMenu messageMenu;
     private ref DZLPlayerMoneyTransferMenu moneyTransferMenu;
     private ref DZLSpawnPositionMenu spawnPositionMenu;
@@ -227,6 +228,12 @@ modded class PlayerBase {
         tuningMenu = new DZLTuningMenu();
         InitMenu(tuningMenu);
         return tuningMenu;
+    }
+
+    DZLDoorRaidProgressBar GetDZLRaidProgressBar() {
+        progressBarRaid = new DZLDoorRaidProgressBar();
+        progressBarRaid.SetPlayer(this);
+        return progressBarRaid;
     }
 
     void RefreshMessageSystem() {

@@ -58,6 +58,7 @@ class DZLBaseProgressBar: UIScriptedMenu {
             vector playerPosition = player.GetPosition();
 
             if(vector.Distance(position, playerPosition) > maxRange) {
+                SendInterruptEvent();
                 OnHide();
                 return;
             }
@@ -70,12 +71,15 @@ class DZLBaseProgressBar: UIScriptedMenu {
     }
 
     override void OnHide() {
-        layoutRoot.Show(false);
-        timer.Stop();
+        if(layoutRoot) layoutRoot.Show(false);
+                if(timer) timer.Stop();
         super.OnHide();
         Close();
     }
 
     void SendFinishEvent() {
+    }
+
+    void SendInterruptEvent() {
     }
 }
