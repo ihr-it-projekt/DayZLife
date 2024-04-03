@@ -7,7 +7,7 @@ class DZLActionRaidDoors: ActionInteractBase {
     }
 
     override string GetText() {
-        return "#tb_break_door";
+        return "#break_door";
     }
 
     override void CreateConditionComponents() {

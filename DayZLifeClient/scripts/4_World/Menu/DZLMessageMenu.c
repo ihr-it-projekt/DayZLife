@@ -10,7 +10,6 @@ class DZLMessageMenu {
         if(layoutRoot) layoutRoot.Show(false);
     }
 
-
     void Init() {
         creator = new DZLUIItemCreator("DayZLifeClient/layout/DZL_Message.layout");
         message = creator.GetMultilineTextWidget("Announcements");
@@ -21,7 +20,7 @@ class DZLMessageMenu {
     }
 
     void SetText(string text) {
-        messageText = text;
+        messageText = Widget.TranslateString(text);
     }
 
     void Show() {

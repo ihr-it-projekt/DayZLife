@@ -64,7 +64,10 @@ class DZLMessage: DZLIdModel {
             return text;
         }
 
-        return text.Substring(0, 20);
+        string shortText = text;
+        if (GetGame().IsClient()) shortText = Widget.TranslateString(text);
+
+        return shortText.Substring(0, 20);
     }
 
     string GetText() {
