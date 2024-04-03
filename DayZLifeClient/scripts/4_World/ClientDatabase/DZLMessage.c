@@ -60,14 +60,14 @@ class DZLMessage: DZLIdModel {
     }
 
     string GetShortText() {
-        if(text.Length() < 20) {
+        if(text.Length() < 30) {
             return text;
         }
 
         string shortText = text;
-        if (GetGame().IsClient()) shortText = Widget.TranslateString(text);
+        if(GetGame().IsClient()) shortText = Widget.TranslateString(text);
 
-        return shortText.Substring(0, 20);
+        return shortText.Substring(0, 30);
     }
 
     string GetText() {

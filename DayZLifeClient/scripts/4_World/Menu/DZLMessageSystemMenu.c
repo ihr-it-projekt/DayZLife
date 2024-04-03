@@ -30,7 +30,6 @@ class DZLMessageSystemMenu : DZLBaseMenu {
     private Widget mapPanelWidget;
     private Widget onlinePlayersWidget;
     private vector messagePosition;
-    private Widget globalBoarder;
     private ref array<ref DZLOnlinePlayer> onlinePlayers;
 
     private CheckBoxWidget sendAnonymousBox;
@@ -50,7 +49,6 @@ class DZLMessageSystemMenu : DZLBaseMenu {
         mapButtonBoarder = creator.GetWidget("mapPanel");
         mapPanelWidget = creator.GetWidget("mapPanelWidget");
         onlinePlayersWidget = creator.GetWidget("onlinePlayersWidget");
-        globalBoarder = creator.GetWidget("PanelWidget13");
         searchContactWidget = creator.GetEditBoxWidget("searchKontakt");
         searchContactButton = creator.GetButtonWidget("searchKontaktButton");
         searchOnlineWidget = creator.GetEditBoxWidget("addKontakt");
@@ -159,7 +157,6 @@ class DZLMessageSystemMenu : DZLBaseMenu {
     override void OnShow() {
         super.OnShow();
         sendGlobalButton.Show(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP) || player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC));
-        globalBoarder.Show(player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_COP) || player.GetDZLPlayer().IsActiveJob(DAY_Z_LIFE_JOB_MEDIC));
 
         onlinePlayersWidget.Show(config.messageConfig.showOnlinePlayersInMessageMenu);
 
