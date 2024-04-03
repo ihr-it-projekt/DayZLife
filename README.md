@@ -7,8 +7,8 @@ A role play mod for DayZ. See website https://dayz-life.net/en/ for detailed inf
 - create your changes
 - test your code
 - format your code
-  - install astyle https://astyle.sourceforge.net/astyle.html
-  - run `c:\path\to\astyle.exe --recursive  .cpp.c --suffix=none --style=java --pad-comma --attach-return-type --mode=c --pad-comma --unpad-paren --indent-switches --indent-preproc-block --pad-oper --squeeze-ws`on cli
+  - install astyle https://astyle.sourceforge.net/astyle.html (Download https://sourceforge.net/projects/astyle/files/latest/download)
+  - run `c:\path\to\astyle.exe --recursive  *.cpp,*.c --suffix=none --style=java --pad-comma --attach-return-type --mode=c --pad-comma --unpad-paren --indent-switches --indent-preproc-block --pad-oper --squeeze-ws` on cli
 - create a pull request
   - write in the pull request what is the intention of your changes
 

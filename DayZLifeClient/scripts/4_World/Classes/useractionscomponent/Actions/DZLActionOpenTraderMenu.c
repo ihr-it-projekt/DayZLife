@@ -16,8 +16,8 @@ class DZLActionOpenTraderMenu: ActionInteractBase {
 
     override void OnStartClient(ActionData action_data) {
         super.OnStartClient(action_data);
-        
-		DZLTraderPosition position = action_data.m_Player.GetTraderByPosition();
+
+        DZLTraderPosition position = action_data.m_Player.GetTraderByPosition();
 
         if(!position) return;
 

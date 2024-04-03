@@ -72,7 +72,7 @@ class DZLBaseProgressBar: UIScriptedMenu {
 
     override void OnHide() {
         if(layoutRoot) layoutRoot.Show(false);
-                if(timer) timer.Stop();
+        if(timer) timer.Stop();
         super.OnHide();
         Close();
     }

@@ -445,7 +445,7 @@ class DZLTraderMenu: DZLBaseMenu {
         int buyPrice = itemType.CalculateDynamicBuyPrice(storage);
 
         if(!itemType || itemType.isStorageItem && storage && storage.IsStorageEmpty() && !removeRow) return null;
-        if (buyPrice <= 0) return null;
+        if(buyPrice <= 0) return null;
 
         sumInt = sumInt + buyPrice * factor;
         UpdateSum();

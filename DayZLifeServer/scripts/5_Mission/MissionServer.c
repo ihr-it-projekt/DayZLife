@@ -16,6 +16,8 @@ modded class MissionServer {
 
         CheckDZLDataPath();
         CheckDZLConfigPath();
+        CheckDZLLogPath();
+
         manager = new DZLEventManager;
         checkController = new DZLCheckController;
         storageController = new DZLStorageController;

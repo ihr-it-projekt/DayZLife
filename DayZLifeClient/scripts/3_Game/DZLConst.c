@@ -1,5 +1,6 @@
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE = "$profile:TBMods\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE_CONFIG = "$profile:TBMods\\Config\\";
+static string DAY_Z_LIFE_SERVER_FOLDER_BASE_LOGS = "$profile:TBMods\\Logs\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_CONFIG = "$profile:TBMods\\Config\\DayZLife\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_BASE_DATA = "$profile:TBMods\\Data\\";
 static string DAY_Z_LIFE_SERVER_FOLDER_DATA = "$profile:TBMods\\Data\\DayZLife\\";

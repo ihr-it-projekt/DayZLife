@@ -76,7 +76,7 @@ static void DZLLogRaid(string playerId, string info, string target, vector posit
     data.Insert(target);
     data.Insert(position.ToString(true));
 
-    DZLCSVLog(playerId, fileName, head, data);
+    DZLCSVLog("Raid", fileName, head, data);
 }
 
 static void DZLLogStore(string playerId, string info, string target, vector position) {

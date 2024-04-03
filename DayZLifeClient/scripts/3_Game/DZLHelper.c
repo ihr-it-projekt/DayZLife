@@ -48,6 +48,15 @@ static void CheckDZLConfigPath() {
         MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_CONFIG);
     }
 }
+static void CheckDZLLogPath() {
+    CheckDZLBasePath();
+    if(!FileExist(DAY_Z_LIFE_SERVER_FOLDER_BASE_LOGS)) {
+        MakeDirectory(DAY_Z_LIFE_SERVER_FOLDER_BASE_LOGS);
+    }
+    if(!FileExist(DAY_Z_LIFE_LOGS)) {
+        MakeDirectory(DAY_Z_LIFE_LOGS);
+    }
+}
 
 static void CheckDZLDataSubPath(string path) {
     if(!FileExist(path)) {

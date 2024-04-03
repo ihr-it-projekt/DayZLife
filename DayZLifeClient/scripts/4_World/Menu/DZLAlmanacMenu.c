@@ -127,7 +127,7 @@ class DZLAlmanacMenu : DZLBaseMenu {
         medicWidget = creator.GetWidget("medic_Panel");
         playerNeedMedicList = creator.GetTextListboxWidget("player_Listbox");
         medicMap = creator.GetMapWidget("medic_Map");
-		medicMap.Show(true);
+        medicMap.Show(true);
 
         toggleViewWidget = creator.GetXComboBoxWidget("almanac_box");
 

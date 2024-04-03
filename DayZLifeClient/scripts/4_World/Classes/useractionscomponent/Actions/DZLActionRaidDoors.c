@@ -16,22 +16,22 @@ class DZLActionRaidDoors: ActionInteractBase {
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
-		BuildingBase building = BuildingBase.Cast(target.GetObject());
+        BuildingBase building = BuildingBase.Cast(target.GetObject());
         if(!building) return false;
-		
+
         if(!DZLCanDoDoorAction.IsJobDoor(building)) return false;
-        if (DZLCanDoDoorAction.canDoByJob(building, player)) return false;
+        if(DZLCanDoDoorAction.canDoByJob(building, player)) return false;
 
         int doorIndex = building.GetDoorIndex(target.GetComponentIndex());
         if(doorIndex == -1) return false;
 
-        if (!IsInReach(player, target, UAMaxDistances.DEFAULT)) return false;
-        if (!building.IsDoorOpen(doorIndex)) return false;
+        if(!IsInReach(player, target, UAMaxDistances.DEFAULT)) return false;
+        if(building.IsDoorOpen(doorIndex)) return false;
 
         item = player.GetItemInHands();
         if(!item) return false;
-		
-		if (item.IsRuined()) return false;
+
+        if(item.IsRuined()) return false;
 
         string type = item.GetType();
 
@@ -41,7 +41,7 @@ class DZLActionRaidDoors: ActionInteractBase {
         bool foundRaidTool = false;
         foreach(string jobRaidTool: definition.raidTools) {
             if(jobRaidTool != type) continue;
-			
+
             foundRaidTool = true;
             break;
         }
@@ -58,8 +58,8 @@ class DZLActionRaidDoors: ActionInteractBase {
 
         int doorIndex = buildingClient.GetDoorIndex(action_data.m_Target.GetComponentIndex());
         if(doorIndex == -1) return;
-		
-		DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(buildingClient, action_data.m_Player);
+
+        DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(buildingClient, action_data.m_Player);
 
         bar.SetBuilding(buildingClient, doorIndex, definition);
         GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);

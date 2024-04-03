@@ -16,7 +16,7 @@ class DZLRaidListener: DZLBaseEventListener {
     }
 
     static void StartRaidDoor(PlayerBase raider, BuildingBase building, int doorIndex) {
-        DZLMessageListener.SendMessage(raider, "", "#cop_message_house_alarm", DZLMessage.TYPE_COP, building.GetPosition(), false);
+        DZLMessageListener.SendMessage(raider, "", "#cop_message_job_house_alarm", DZLMessage.TYPE_COP, building.GetPosition(), false);
         DZLLogRaid(raider.GetIdentity().GetId(), "start raid", building.GetType(), building.GetPosition());
     }
 
@@ -26,7 +26,7 @@ class DZLRaidListener: DZLBaseEventListener {
 
         BuildingBase building = BuildingBase.Cast(target);
 
-        if(building.IsDoorLocked(param.param1))            building.UnlockDoor(param.param1);
+        if(building.IsDoorLocked(param.param1)) building.UnlockDoor(param.param1);
         building.OpenDoor(param.param1);
 
         param.param2.SetHealth(0);

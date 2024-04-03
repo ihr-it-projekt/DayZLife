@@ -119,7 +119,7 @@ class DZLBankingMenu : DZLBaseMenu {
 
     void LoadBankData() {
         DZLBank bank = player.GetBank();
-        if (!bank) {
+        if(!bank) {
             GetGame().GetCallQueue(CALL_CATEGORY_GUI).CallLater(LoadBankData, 1000);
             return;
         }

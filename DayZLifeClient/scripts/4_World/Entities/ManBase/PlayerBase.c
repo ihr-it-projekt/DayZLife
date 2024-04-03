@@ -76,6 +76,12 @@ modded class PlayerBase {
     }
 
     void DisplayMessage(string message) {
+#ifdef TBLibClient
+        TBLibDisplayMessage(message);
+        s
+        return;
+#endif
+
         GetMessageMenu();
         messageMenu.SetText(message);
         messageMenu.Init();
