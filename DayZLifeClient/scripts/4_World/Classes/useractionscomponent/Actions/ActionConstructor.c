@@ -26,5 +26,6 @@ modded class ActionConstructor {
         actions.Insert(DZLActionRobShop);
         actions.Insert(DZLActionGiveNumber);
         actions.Insert(DZLActionOpenTuningMenu);
+        actions.Insert(DZLActionRaidDoors);
     }
 }

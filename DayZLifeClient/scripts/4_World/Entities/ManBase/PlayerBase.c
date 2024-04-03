@@ -67,6 +67,7 @@ modded class PlayerBase {
         AddAction(DZLActionOpenArrestMenu, InputActionMap);
         AddAction(DZLActionOpenTicketMenu, InputActionMap);
         AddAction(DZLActionGiveNumber, InputActionMap);
+        AddAction(DZLActionRaidDoors, InputActionMap);
     }
 
     void RequestUpdateDZLPlayer() {
