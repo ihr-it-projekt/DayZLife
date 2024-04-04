@@ -14,9 +14,9 @@ class DZLCanDoDoorAction {
         DZLPlayer dzlPlayer = player.GetDZLPlayer();
         string job = dzlPlayer.GetActiveJob();
 
-        DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building);
+        DZLJobHouseDefinition definition = houseConfig.GetJobHouseDefinition(building, job);
 
-        return definition && job == definition.jobId;
+        return !!definition;
     }
 
     static bool IsJobDoor(Building building) {
