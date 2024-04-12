@@ -21,5 +21,16 @@ class DZLHouseConfig {
         return null;
     }
 
+    DZLJobHouseDefinition GetJobHouseDefinition(notnull Building building, string jobId) {
+        array<ref DZLJobHouseDefinition> houseJobConfig = new array<ref DZLJobHouseDefinition>();
+
+        foreach(DZLJobHouseDefinitionCollection collection: jobHouseDefinitions) {
+            DZLJobHouseDefinition definition = collection.GetDefinitionByType(building.GetType());
+
+            if(definition && definition.jobId == jobId) return definition;
+        }
+        return null;
+    }
+
 
 }

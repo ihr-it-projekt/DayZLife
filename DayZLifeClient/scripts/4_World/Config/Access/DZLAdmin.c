@@ -6,6 +6,7 @@ class DZLAdmin {
     string version = "7";
 
     bool HasAccess(string _access, string ident) {
+        Print(playerAccesses.Count());
         foreach(DZLAccess playerAccess: playerAccesses) {
             if(!playerAccess) continue;
             if(playerAccess.id != ident) continue;
