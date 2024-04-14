@@ -4,7 +4,8 @@ class CfgPatches {
         weapons[] = {};
         requiredVersion = 0.1;
         requiredAddons[] = {
-            "DZ_Data"
+            "DZ_Data",
+            "DZ_Vehicles_Wheeled"
         };
     };
 };
