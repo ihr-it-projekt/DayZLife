@@ -101,7 +101,15 @@ class DZLStorageListener: DZLBaseEventListener {
     private CarScript SpawnCar(PlayerBase player, DZLCarStoreItem itemInStock, DZLStoragePosition storagePositionCar, bool enableInsurance) {
         EntityAI item;
         CarScript car;
-        item = player.SpawnEntityOnGroundPos(itemInStock.type, storagePositionCar.spawnPositionOfVehicles);
+
+        vector spawnPosition = storagePositionCar.spawnPositionOfVehicles;
+        vector orientation = storagePositionCar.spawnOrientationOfVehicles;
+
+        DZLZone libZone = DZLSpawnHelper.DZLSearchForFreePositionAndOrientation(spawnPosition, orientation);
+        spawnPosition = libZone.position;
+        orientation = libZone.orientation;
+
+        item = player.SpawnEntityOnGroundPos(itemInStock.type, spawnPosition);
 
         if(!item) {
             return null;
@@ -127,6 +135,8 @@ class DZLStorageListener: DZLBaseEventListener {
             if(enableInsurance) {
                 car.EnableInsurance(storagePositionCar.position);
             }
+
+            GetGame().RemoteObjectCreate(car);
 
             car.OwnCar(player.GetIdentity(), itemInStock.ownerId, itemInStock.ownerName);
             car.UpdatePlayerAccess(itemInStock.playerAccess);

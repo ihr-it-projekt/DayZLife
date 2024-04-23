@@ -298,10 +298,6 @@ class DZLTraderMenu: DZLBaseMenu {
                     if(buyItem.isCar) {
                         array<Object> excludedObjects = new array<Object>;
                         array<Object> nearbyObjects = new array<Object>;
-                        if(GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)) {
-                            player.DisplayMessage("#you_can_not_buy_a_car_spwan_place_is_blocked");
-                            return true;
-                        }
 
                         if(carBuy) {
                             player.DisplayMessage("#you_can_only_buy_one_car_per_trade");

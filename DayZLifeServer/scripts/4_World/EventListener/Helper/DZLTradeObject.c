@@ -186,9 +186,14 @@ class DZLTradeObject {
         EntityAI item = CreateItem(type);
         if(!item) return false;
 
+        ItemBase itemBase = ItemBase.Cast(item);
         if(DZLTraderHelper.IsStackable(item)) {
-            ItemBase itemBase = ItemBase.Cast(item);
             itemBase.SetQuantity(1);
+        }
+
+        if(itemBase && itemBase.HasQuantity()) {
+            int max = DZLTraderHelper.GetQuantityMax(itemBase);
+            if(max > 1) itemBase.SetQuantity(max);
         }
 
         if(item.GetInventory()) {
@@ -205,9 +210,20 @@ class DZLTradeObject {
     private EntityAI CreateItem(DZLTraderType type) {
         EntityAI item;
         if(!type.usePlayerAsSpawnPoint) {
-            item = player.SpawnEntityOnGroundPos(type.type, traderPosition.spawnPositionOfVehicles);
+            vector spawnPosition = traderPosition.spawnPositionOfVehicles;
+            vector orientation = traderPosition.spawnOrientationOfVehicles;
+
+            DZLZone libZone = DZLSpawnHelper.DZLSearchForFreePositionAndOrientation(spawnPosition, orientation);
+            spawnPosition = libZone.position;
+            orientation = libZone.orientation;
+
+            item = EntityAI.Cast(GetGame().CreateObjectEx(type.type, spawnPosition, ECE_LOCAL | ECE_CREATEPHYSICS | ECE_TRACE));
             if(!item) return null;
-            item.SetOrientation(traderPosition.spawnOrientationOfVehicles);
+            GetGame().RemoteObjectCreate(item);
+
+            item.SetPosition(spawnPosition);
+            item.SetOrientation(orientation);
+            item.SetDirection(item.GetDirection());
         }
 
         InventoryLocation inventoryLocation = new InventoryLocation;
@@ -240,6 +256,7 @@ class DZLTradeObject {
         car.Fill(CarFluid.USER3, car.GetFluidCapacity(CarFluid.USER3));
         car.Fill(CarFluid.USER4, car.GetFluidCapacity(CarFluid.USER4));
 
+        car.SetLifetime(3888000);
         CarScript carScript = CarScript.Cast(car);
         if(carScript) carScript.OwnCar(player.GetIdentity(), "", "");
     }

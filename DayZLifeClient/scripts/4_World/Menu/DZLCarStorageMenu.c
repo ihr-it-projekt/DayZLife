@@ -124,11 +124,6 @@ class DZLCarStorageMenu: DZLBaseMenu {
                 array<Object> excludedObjects = new array<Object>;
                 array<Object> nearbyObjects = new array<Object>;
 
-                if(GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)) {
-                    player.DisplayMessage("#car_spwan_place_is_blocked");
-                    return true;
-                }
-
                 if(hasInsuranceWidget.IsChecked() && !dzlPlayer.HasEnoughMoneyBank(config.carConfig.carInsurancePrice)) {
                     player.DisplayMessage("#error_not_enough_money");
                 }
