@@ -42,6 +42,14 @@ class DZLTraderListener: DZLBaseEventListener {
                 ItemBase itemBase = ItemBase.Cast(item);
                 itemBase.SetQuantity(1);
             }
+
+            if (item.HasQuantity()) {
+                int max = DZLTraderHelper.GetQuantityMax();
+                if (max > 1) {
+                    ItemBase itemBase = ItemBase.Cast(item);
+                    itemBase.SetQuantity(max);
+                }
+            }
         }
 
         if(item && item.GetInventory()) {
