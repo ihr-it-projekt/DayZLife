@@ -36,7 +36,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         carToStoreList.ClearItems();
         array<string> carTypes = DZLConfig.Get().carConfig.carTypesToStore;
         foreach(string carType: carTypes) {
-            CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, false);
+            CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, true);
             if(playerCar && !playerCar.isSold) {
                 string name = "";
                 GetGame().ObjectGetDisplayName(playerCar, name);

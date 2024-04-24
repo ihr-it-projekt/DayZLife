@@ -97,7 +97,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 addInventoryTypes.Insert(type.type);
 
                 if(type.isCar) {
-                    CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer);
+                    CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer, true);
 
                     if(playerCar && !playerCar.isSold) {
                         quant = DZLTraderHelper.GetQuantity(playerCar).ToString();
@@ -179,7 +179,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 if(type.sellPrice <= 0) continue
 
                     if(type.isCar) {
-                        CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer);
+                        CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer, true);
 
                         if(playerCar && !playerCar.isSold) {
                             GetGame().ObjectGetDisplayName(playerCar, name);
