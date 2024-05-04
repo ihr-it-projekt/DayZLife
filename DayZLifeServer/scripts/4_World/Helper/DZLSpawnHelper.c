@@ -98,6 +98,7 @@ class DZLSpawnHelper {
 
 static ref DZLZone DZLSearchForFreePositionAndOrientation(vector position, vector orientation = "0 0 0", vector boxForDetection = "5.0 3.5 5.0", int tries = 1) {
     position[1] = GetGame().SurfaceY(position[0], position[2]);
+    position[1] = position[1] + 1.8;
 
     array<Object> excludedObjects = new array<Object>;
     array<Object> nearbyObjects = new array<Object>;
