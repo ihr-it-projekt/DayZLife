@@ -2,8 +2,6 @@ class DZLBankingMenu : DZLBaseMenu {
     private TextListboxWidget playerListbox;
 
     private Widget wrapperFractionButtonCashToPlayer;
-    private Widget wrapperFractionButtonPayout;
-    private Widget wrapperFractionButtonDeposit;
     private Widget wrapperFractionCash;
 
     private ButtonWidget payInButton;
@@ -63,12 +61,9 @@ class DZLBankingMenu : DZLBaseMenu {
         fractionPayInButton = creator.GetButtonWidget("Button_Deposit_Fraction");
         fractionCashTransferButton = creator.GetButtonWidget("Button_Cash_Transfer_Fraction");
 
-        wrapperFractionButtonCashToPlayer = creator.GetWidget("wrapper_Button_Cash_Transfer_Fraction");
-        wrapperFractionButtonPayout = creator.GetWidget("wrapper_Button_Pay_out_Fraction");
-        wrapperFractionButtonDeposit = creator.GetWidget("wrapper_Button_Deposit_Fraction");
         wrapperFractionCash = creator.GetWidget("wrapperFractionCash");
-        wrapperFractionButtonCashToPlayer.Show(false);
-        wrapperFractionButtonPayout.Show(false);
+        fractionPayInButton.Show(false);
+        fractionPayOutButton.Show(false);
         wrapperFractionCash.Show(false);
 
         playerBankBalanceTextWidget = creator.GetTextWidget("DZLBank");
@@ -96,9 +91,8 @@ class DZLBankingMenu : DZLBaseMenu {
             bankBalanceTextWidget.Show(config.bankConfig.showSumOfStoredCashInBank);
 
             wrapperFractionCash.Show(dzlPlayer.HasFractionRightCanAccessBankAccount());
-            wrapperFractionButtonDeposit.Show(dzlPlayer.HasFractionRightCanAccessBankAccount());
-            wrapperFractionButtonCashToPlayer.Show(dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount());
-            wrapperFractionButtonPayout.Show(dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount());
+            fractionPayOutButton.Show(dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount());
+            fractionPayInButton.Show(dzlPlayer.HasFractionRightCanGetMoneyFromBankAccount());
 
             UpdateGUI();
         } else {
