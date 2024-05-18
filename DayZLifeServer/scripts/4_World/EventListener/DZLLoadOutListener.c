@@ -21,7 +21,7 @@ class DZLLoadOutListener: DZLBaseEventListener {
                 }
 
                 if (IsCooldownActive(player)) {
-                    DZLSendMessage(sender, "#cooldown_active");
+                    DZLSendMessage(sender, "You need to wait one hour to pickup Loadout again");
                     return;
                 }
 
