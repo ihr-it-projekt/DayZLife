@@ -21,20 +21,29 @@ class DZLLoadOutListener: DZLBaseEventListener {
     }
 
     private bool SearchLoadOutAndEquip(string categoryName, array<ref DZLLoadOutCategory> categories, PlayerIdentity sender, PlayerBase player) {
-        foreach(DZLLoadOutCategory category: categories) {
-            if(categoryName == category.name) {
-                DZLLogLoadOut(sender.GetId(), categoryName);
-                player.RemoveAllItems();
-                foreach(DZLLoadOutType type: category.items) {
-                    Add(player, type);
-                }
-                GetGame().RPCSingleParam(null, DZL_RPC.LOAD_OUT_RESPONSE, null, true, sender);
-                return true;;
-            }
+    foreach (DZLLoadOutCategory category : categories) {
+        if (categoryName == category.name) {
+            DZLLogLoadOut(sender.GetId(), categoryName);
+            player.RemoveAllItems();
+            ScheduleItemAddition(player, category.items, 0);
+            GetGame().RPCSingleParam(null, DZL_RPC.LOAD_OUT_RESPONSE, null, true, sender);
+            return true;
         }
-
-        return false;
     }
+    return false;
+}
+
+    private void ScheduleItemAddition(PlayerBase player, array<ref DZLLoadOutType> items, int index) {
+        if (index < items.Count()) {
+            Add(player, items[index]);
+            GetGame().GetCallQueue(CALL_CATEGORY_GAMEPLAY).CallLater(this, "ScheduleItemAdditionCallback", 1000 * 60 * 180, false, player, items, index + 1);
+        }
+    }
+
+    void ScheduleItemAdditionCallback(PlayerBase player, array<ref DZLLoadOutType> items, int index) {
+        ScheduleItemAddition(player, items, index);
+    }
+
 
     private void Add(PlayerBase player, DZLLoadOutType type) {
         EntityAI item;
@@ -57,6 +66,7 @@ class DZLLoadOutListener: DZLBaseEventListener {
         if(item && type.quickBarEntityShortcut != -1) {
             player.SetQuickBarEntityShortcut(item, type.quickBarEntityShortcut, true);
         }
+
     }
 
     private void AddAttachments(DZLLoadOutType type, EntityAI item) {
