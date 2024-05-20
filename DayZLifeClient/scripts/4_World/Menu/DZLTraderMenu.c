@@ -97,7 +97,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 addInventoryTypes.Insert(type.type);
 
                 if(type.isCar) {
-                    CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer);
+                    CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer, true);
 
                     if(playerCar && !playerCar.isSold) {
                         quant = DZLTraderHelper.GetQuantity(playerCar).ToString();
@@ -179,7 +179,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 if(type.sellPrice <= 0) continue
 
                     if(type.isCar) {
-                        CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer);
+                        CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer, true);
 
                         if(playerCar && !playerCar.isSold) {
                             GetGame().ObjectGetDisplayName(playerCar, name);
@@ -298,10 +298,6 @@ class DZLTraderMenu: DZLBaseMenu {
                     if(buyItem.isCar) {
                         array<Object> excludedObjects = new array<Object>;
                         array<Object> nearbyObjects = new array<Object>;
-                        if(GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)) {
-                            player.DisplayMessage("#you_can_not_buy_a_car_spwan_place_is_blocked");
-                            return true;
-                        }
 
                         if(carBuy) {
                             player.DisplayMessage("#you_can_only_buy_one_car_per_trade");

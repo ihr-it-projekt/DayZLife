@@ -94,4 +94,52 @@ class DZLSpawnHelper {
 
         return spawnOnGround;
     }
+
+
+    static ref DZLZone DZLSearchForFreePositionAndOrientation(vector position, vector orientation = "0 0 0", vector boxForDetection = "5.0 3.5 5.0", int tries = 1) {
+        position[1] = GetGame().SurfaceY(position[0], position[2]);
+        position[1] = position[1] + 1.8;
+
+        array<Object> excludedObjects = new array<Object>;
+        array<Object> nearbyObjects = new array<Object>;
+
+        bool colliding = GetGame().IsBoxColliding(position, orientation, boxForDetection, excludedObjects, nearbyObjects);
+        if(!colliding) return new DZLZone(position, orientation);
+
+        excludedObjects = null;
+        nearbyObjects = null;
+
+        if(DZLSearchRotation(position, orientation, boxForDetection)) return new DZLZone(position, orientation);
+
+        if(10 < tries) ++tries;
+        if(20 < tries) ++tries;
+        if(30 < tries) ++tries;
+        if(40 < tries) ++tries;
+        ++tries;
+
+        float x = 0.1 * tries * Math.Cos(tries);
+        float y = 0.1 * tries * Math.Sin(tries);
+
+        position[0] = position[0] + x;
+        position[2] = position[2] + y;
+
+        return DZLSearchForFreePositionAndOrientation(position, orientation, boxForDetection, tries);
+    }
+
+    static bool DZLSearchRotation(vector position, out vector orientation, vector boxForDetection = "3.0 3.0 3.0", int tries = 1) {
+        position[1] = GetGame().SurfaceY(position[0], position[2]);
+        array<Object> excludedObjects = new array<Object>;
+        array<Object> nearbyObjects = new array<Object>;
+        bool colliding = GetGame().IsBoxColliding(position, orientation, boxForDetection, excludedObjects, nearbyObjects);
+        if(!colliding) return true;
+
+        excludedObjects = null;
+        nearbyObjects = null;
+
+        orientation[0] = orientation[0] + 10.0;
+
+        if(orientation[0] > 360) return false;
+
+        return DZLSearchRotation(position, orientation, boxForDetection, tries + 1);
+    }
 }

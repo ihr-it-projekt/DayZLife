@@ -36,7 +36,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
         carToStoreList.ClearItems();
         array<string> carTypes = DZLConfig.Get().carConfig.carTypesToStore;
         foreach(string carType: carTypes) {
-            CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, false);
+            CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, true);
             if(playerCar && !playerCar.isSold) {
                 string name = "";
                 GetGame().ObjectGetDisplayName(playerCar, name);
@@ -123,11 +123,6 @@ class DZLCarStorageMenu: DZLBaseMenu {
             if(carOut) {
                 array<Object> excludedObjects = new array<Object>;
                 array<Object> nearbyObjects = new array<Object>;
-
-                if(GetGame().IsBoxColliding(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, "2 2 0", excludedObjects, nearbyObjects)) {
-                    player.DisplayMessage("#car_spwan_place_is_blocked");
-                    return true;
-                }
 
                 if(hasInsuranceWidget.IsChecked() && !dzlPlayer.HasEnoughMoneyBank(config.carConfig.carInsurancePrice)) {
                     player.DisplayMessage("#error_not_enough_money");
