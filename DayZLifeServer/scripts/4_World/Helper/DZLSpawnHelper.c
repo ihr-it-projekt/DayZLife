@@ -1,7 +1,7 @@
 class DZLSpawnHelper {
 
     static bool SpawnContainer(vector position, vector orientation, string gameObjectName) {
-        Container_Base obj = Container_Base.Cast(GetGame().CreateObject(gameObjectName, position));
+        Container_Base obj = Container_Base.Cast(g_Game.CreateObject(gameObjectName, position));
         if(!obj) {
             return false;
         }
@@ -13,8 +13,8 @@ class DZLSpawnHelper {
     }
 
     static Object SpawnActionPoint(vector pos, vector orientation, string gameObjectName) {
-        //pos[1] = GetGame().SurfaceY(pos[0], pos[2]);
-        Object game_obj = GetGame().CreateObject(gameObjectName, pos, false, false, true);
+        //pos[1] = g_Game.SurfaceY(pos[0], pos[2]);
+        Object game_obj = g_Game.CreateObject(gameObjectName, pos, false, false, true);
         if(!game_obj) {
             return null;
         }
@@ -32,7 +32,7 @@ class DZLSpawnHelper {
         game_obj.Update();
         game_obj.SetAffectPathgraph(true, false);
         if(game_obj.CanAffectPathgraph()) {
-            GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(GetGame().UpdatePathgraphRegionByObject, 100, false, game_obj);
+            g_Game.GetCallQueue(CALL_CATEGORY_SYSTEM).CallLater(g_Game.UpdatePathgraphRegionByObject, 100, false, game_obj);
         }
     }
 
@@ -97,13 +97,13 @@ class DZLSpawnHelper {
 
 
     static ref DZLZone DZLSearchForFreePositionAndOrientation(vector position, vector orientation = "0 0 0", vector boxForDetection = "5.0 3.5 5.0", int tries = 1) {
-        position[1] = GetGame().SurfaceY(position[0], position[2]);
+        position[1] = g_Game.SurfaceY(position[0], position[2]);
         position[1] = position[1] + 1.8;
 
         array<Object> excludedObjects = new array<Object>;
         array<Object> nearbyObjects = new array<Object>;
 
-        bool colliding = GetGame().IsBoxColliding(position, orientation, boxForDetection, excludedObjects, nearbyObjects);
+        bool colliding = g_Game.IsBoxColliding(position, orientation, boxForDetection, excludedObjects, nearbyObjects);
         if(!colliding) return new DZLZone(position, orientation);
 
         excludedObjects = null;
@@ -127,10 +127,10 @@ class DZLSpawnHelper {
     }
 
     static bool DZLSearchRotation(vector position, out vector orientation, vector boxForDetection = "3.0 3.0 3.0", int tries = 1) {
-        position[1] = GetGame().SurfaceY(position[0], position[2]);
+        position[1] = g_Game.SurfaceY(position[0], position[2]);
         array<Object> excludedObjects = new array<Object>;
         array<Object> nearbyObjects = new array<Object>;
-        bool colliding = GetGame().IsBoxColliding(position, orientation, boxForDetection, excludedObjects, nearbyObjects);
+        bool colliding = g_Game.IsBoxColliding(position, orientation, boxForDetection, excludedObjects, nearbyObjects);
         if(!colliding) return true;
 
         excludedObjects = null;

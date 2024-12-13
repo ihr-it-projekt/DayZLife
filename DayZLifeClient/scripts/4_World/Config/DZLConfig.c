@@ -10,7 +10,7 @@ class DZLConfig extends DZLBaseEventListener {
     }
 
     void DZLConfig() {
-        GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.EVENT_GET_CONFIG, null, true);
+        g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.EVENT_GET_CONFIG, null, true);
     }
 
     ref DZLHouseConfig houseConfig;

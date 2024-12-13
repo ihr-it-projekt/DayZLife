@@ -20,7 +20,7 @@ class DZLActionOpenCarStorageMenu: ActionInteractBase {
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
         PlayerBase player = DZLPlayerBaseHelper.GetPlayer();
         player.RequestUpdateDZLPlayer();
-        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetCarStorageMenu(), NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(action_data.m_Player.GetCarStorageMenu(), NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {

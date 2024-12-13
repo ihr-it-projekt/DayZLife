@@ -6,7 +6,7 @@ static void LogMessageDZL(string message) {
 
     GetHourMinuteSecondUTC(hour, minute, second);
     Print("[DayZLife] " + hour.ToString() + ":" + minute.ToString() + ":" + second.ToString() + ": " + message);
-    GetGame().AdminLog("[DayZLife] " + hour.ToString() + ":" + minute.ToString() + ":" + second.ToString() + ": " + message);
+    g_Game.AdminLog("[DayZLife] " + hour.ToString() + ":" + minute.ToString() + ":" + second.ToString() + ": " + message);
 }
 
 static void CheckDZLBasePath() {

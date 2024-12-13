@@ -4,7 +4,7 @@ class DZLBankListener: DZLBaseEventListener {
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         config = DZLConfig.Get().bankConfig;
         if(rpc_type == DZL_RPC.PLAYER_DEPOSIT_AT_BANK_DATA) {
-            autoptr Param2<int, bool> paramDeposit;
+            Param2<int, bool> paramDeposit;
             string message = "";
             if(ctx.Read(paramDeposit)) {
                 DZLPlayer dzlPlayer = PlayerBase.Cast(target).GetDZLPlayer();
@@ -23,8 +23,8 @@ class DZLBankListener: DZLBaseEventListener {
                         bank.AddMoney(paramDeposit.param1 * -1);
                         dzlPlayer.AddMoneyToPlayerBank(paramDeposit.param1 * -1);
 
-                        GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-                        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                        g_Game.RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+                        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                         message = "#money_transfer_successful";
                     }
                 } else if(paramDeposit.param2) {
@@ -36,8 +36,8 @@ class DZLBankListener: DZLBaseEventListener {
                         bank.AddMoney(paramDeposit.param1 * -1);
                         dzlPlayer.GetFraction().AddMoney(paramDeposit.param1 * -1);
 
-                        GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-                        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                        g_Game.RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+                        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                         message = "#money_transfer_successful";
                     }
                 }
@@ -45,14 +45,14 @@ class DZLBankListener: DZLBaseEventListener {
                 DZLSendMessage(sender, message);
             }
         } else if(rpc_type == DZL_RPC.PLAYER_DEPOSIT_TO_PLAYER) {
-            autoptr Param3<DZLPlayerBankInfo, int, bool> paramDepositPlayer;
+            Param3<DZLPlayerBankInfo, int, bool> paramDepositPlayer;
             string messageDeposit = "";
             if(ctx.Read(paramDepositPlayer)) {
                 DZLPlayer dzlPlayerSender = PlayerBase.Cast(target).GetDZLPlayer();
                 DZLPlayer dzlPlayerReceiver = DZLDatabaseLayer.Get().GetPlayer(paramDepositPlayer.param1.id);
 
                 array<Man> allPlayers = new array<Man>;
-                GetGame().GetPlayers(allPlayers);
+                g_Game.GetPlayers(allPlayers);
 
                 Man playerFound;
                 foreach(Man player: allPlayers) {
@@ -86,19 +86,19 @@ class DZLBankListener: DZLBaseEventListener {
                             bankTransfer.AddMoney(moneyBankAdd);
                         }
 
-                        GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bankTransfer), true);
-                        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
-                        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, playerFound.GetIdentity());
+                        g_Game.RPCSingleParam(target, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bankTransfer), true);
+                        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, playerFound.GetIdentity());
                     } else {
                         messageDeposit = "#error_not_enough_money_to_transfer";
                     }
 
                     messageDeposit = "#money_transfer_successful";
                 }
-                GetGame().RPCSingleParam(target, DZL_RPC.PLAYER_DEPOSIT_TO_PLAYER_RESPONSE, new Param3<ref DZLPlayer, ref DZLBank, string>(dzlPlayerSender, bankTransfer, messageDeposit), true, sender);
+                g_Game.RPCSingleParam(target, DZL_RPC.PLAYER_DEPOSIT_TO_PLAYER_RESPONSE, new Param3<ref DZLPlayer, ref DZLBank, string>(dzlPlayerSender, bankTransfer, messageDeposit), true, sender);
             }
         } else if(rpc_type == DZL_RPC.MONEY_TRANSFER) {
-            autoptr Param2<PlayerBase, int> paramDepositPlayerPlayer;
+            Param2<PlayerBase, int> paramDepositPlayerPlayer;
             string messageDepositPP = "";
             if(ctx.Read(paramDepositPlayerPlayer)) {
                 PlayerBase moneyGiverPlayer = PlayerBase.Cast(target);
@@ -109,18 +109,18 @@ class DZLBankListener: DZLBaseEventListener {
                 if(dzlPlayerSenderPP.GetMoney() >= paramDepositPlayerPlayer.param2) {
                     messageDepositPP = "#money_transfer_successful";
                     dzlPlayerSenderPP.DepositMoneyFromPlayerToOtherPlayer(dzlPlayerReceiverPP, paramDepositPlayerPlayer.param2);
-                    GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
-                    GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, moneyReceiverPlayer.GetIdentity());
+                    g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                    g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, moneyReceiverPlayer.GetIdentity());
                 } else {
                     messageDepositPP = "#error_not_enough_money_to_transfer";
                 }
                 DZLSendMessage(sender, messageDepositPP);
             }
         } else if(rpc_type == DZL_RPC.PLAYER_BANK_DATA) {
-            GetGame().RPCSingleParam(PlayerBase.Cast(target), DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(DZLDatabaseLayer.Get().GetBank()), true, sender);
+            g_Game.RPCSingleParam(PlayerBase.Cast(target), DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(DZLDatabaseLayer.Get().GetBank()), true, sender);
         } else if(rpc_type == DZL_RPC.ALL_PLAYER_IDENT_DATA) {
             array<Man> _players = new array<Man>;
-            GetGame().GetPlayers(_players);
+            g_Game.GetPlayers(_players);
 
             array<ref DZLPlayerBankInfo> collection = new array<ref DZLPlayerBankInfo>;
 
@@ -130,7 +130,7 @@ class DZLBankListener: DZLBaseEventListener {
                 }
             }
 
-            GetGame().RPCSingleParam(target, DZL_RPC.ALL_PLAYER_IDENT_DATA_RESPONSE, new Param1<ref array<ref DZLPlayerBankInfo>>(collection), true, sender);
+            g_Game.RPCSingleParam(target, DZL_RPC.ALL_PLAYER_IDENT_DATA_RESPONSE, new Param1<ref array<ref DZLPlayerBankInfo>>(collection), true, sender);
         }
     }
 }

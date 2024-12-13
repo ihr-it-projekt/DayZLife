@@ -37,7 +37,7 @@ class DZLActionHarvestItem: ActionInteractBase {
             foreach(string itemToHarvest: relation.itemsThatNeededForHarvest) {
                 itemToHarvest.ToLower();
                 if(handItemType == itemToHarvest) {
-                    if(GetGame().IsServer()) {
+                    if(g_Game.IsServer()) {
                         return 0 < item_in_hands_source.GetHealth();
                     }
                     return true;
@@ -50,7 +50,7 @@ class DZLActionHarvestItem: ActionInteractBase {
     override void OnEndClient(ActionData action_data) {
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
         DZLHarvestProgressBar bar = action_data.m_Player.GetHarvestProgressBar();
-        GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(bar, NULL);
     }
 
 };

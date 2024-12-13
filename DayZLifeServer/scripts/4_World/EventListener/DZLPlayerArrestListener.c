@@ -14,7 +14,7 @@ class DZLPlayerArrestListener: DZLBaseEventListener {
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.ARREST_PLAYER) {
-            autoptr Param3<PlayerBase, int, string> paramArrestPlayer;
+            Param3<PlayerBase, int, string> paramArrestPlayer;
             if(ctx.Read(paramArrestPlayer)) {
                 PlayerBase cop = PlayerBase.Cast(target);
                 PlayerBase prisoner = paramArrestPlayer.param1;
@@ -39,24 +39,24 @@ class DZLPlayerArrestListener: DZLBaseEventListener {
                     prisoner.SetPosition(arrestConfig.teleportPosition.ToVector());
                 }
 
-                GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, prisoner.GetIdentity());
-                GetGame().RPCSingleParam(null, DZL_RPC.ARREST_PLAYER_RESPONSE, null, true, sender);
+                g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, prisoner.GetIdentity());
+                g_Game.RPCSingleParam(null, DZL_RPC.ARREST_PLAYER_RESPONSE, null, true, sender);
                 DZLSendMessage(prisoner.GetIdentity(), "#you_got_arrest_in_minutes: " + arrestTime.ToString());
                 DZLSendMessage(cop.GetIdentity(), "#you_set_arrest_to_player_in_minutes: " + arrestTime.ToString());
                 DZLLogArrest(prisoner.GetPlayerId(), "got arrest", arrestTime);
             }
         } else if(rpc_type == DZL_RPC.GET_ESCAPED_PLAYERS) {
-            GetGame().RPCSingleParam(null, DZL_RPC.GET_ESCAPED_PLAYERS_RESPONSE, new Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int>(escapeePlayers, copCount, medicCount, civCount, armyCont), true, sender);
+            g_Game.RPCSingleParam(null, DZL_RPC.GET_ESCAPED_PLAYERS_RESPONSE, new Param5<ref array<ref DZLEscapedPlayer>, int, int, int, int>(escapeePlayers, copCount, medicCount, civCount, armyCont), true, sender);
         } else if(rpc_type == DZL_RPC.GET_OPEN_TICKET_PLAYERS) {
-            GetGame().RPCSingleParam(null, DZL_RPC.GET_OPEN_TICKET_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOpenTicketPlayer>>(openTicketPlayers), true, sender);
+            g_Game.RPCSingleParam(null, DZL_RPC.GET_OPEN_TICKET_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOpenTicketPlayer>>(openTicketPlayers), true, sender);
         } else if(rpc_type == DZL_RPC.GET_MEDIC_COUNT) {
-            GetGame().RPCSingleParam(null, DZL_RPC.GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true, sender);
+            g_Game.RPCSingleParam(null, DZL_RPC.GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true, sender);
         }
     }
 
     void CheckPrisoners() {
         array<Man> allPlayers = new array<Man>;
-        GetGame().GetPlayers(allPlayers);
+        g_Game.GetPlayers(allPlayers);
         escapeePlayers.Clear();
         openTicketPlayers.Clear();
         civCount = 0;
@@ -90,7 +90,7 @@ class DZLPlayerArrestListener: DZLBaseEventListener {
             foreach(int index, vector position: arrestConfig.arrestAreas) {
                 if(vector.Distance(position, playerPosition) < arrestConfig.arrestAreaRadius) {
                     dzlPlayer.ArrestCountDown();
-                    GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
+                    g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
                     isInPrison = true;
                     prisonArea = index;
                     break;
@@ -112,7 +112,7 @@ class DZLPlayerArrestListener: DZLBaseEventListener {
         }
         DZLDatabaseLayer.Get().SetCopCount(copCount).SetMedicCount(medicCount).SetCivCount(civCount).SetArmyCount(armyCont);
 
-        GetGame().RPCSingleParam(null, DZL_RPC.GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
+        g_Game.RPCSingleParam(null, DZL_RPC.GET_MEDIC_COUNT_RESPONSE, new Param1<int>(medicCount), true);
     }
 
     private void ChangeItems(PlayerBase prisoner, array<string> items, bool shouldDeleteAllItems) {

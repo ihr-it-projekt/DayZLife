@@ -106,16 +106,16 @@ modded class MissionGameplay {
     private void CheckOpenMenu() {
         if(holdLControl && g_Game.GetUIManager().GetMenu() == NULL) {
             if(holdRControl || holdOne) {
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetAlmanacMenu(), NULL);
+                g_Game.GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetAlmanacMenu(), NULL);
             } else if(holdTree && dzlPlayerBase.CanReSpawn() && !dzlPlayerBase.IsRestrained()) {
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(true), NULL);
+                g_Game.GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetSpawnPositionMenu(true), NULL);
             } else if(holdFour && dzlPlayerBase.CanOpenMessageMenu()) {
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetMessageSystemMenu(), NULL);
+                g_Game.GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetMessageSystemMenu(), NULL);
             } else if(holdFive && !dzlPlayerBase.IsUnconscious()) {
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetPayTicketMenu(), NULL);
+                g_Game.GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetPayTicketMenu(), NULL);
             } else if(holdSix) {
                 dzlPlayerBase.RequestUpdateDZLPlayer();
-                GetGame().GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetFractionMenu(), NULL);
+                g_Game.GetUIManager().ShowScriptedMenu(dzlPlayerBase.GetFractionMenu(), NULL);
             }
         }
     }

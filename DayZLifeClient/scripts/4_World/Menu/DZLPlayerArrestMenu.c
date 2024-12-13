@@ -47,7 +47,7 @@ class DZLPlayerArrestMenu : DZLBaseMenu {
                 }
 
                 if(arrestTime != 0) {
-                    GetGame().RPCSingleParam(player, DZL_RPC.ARREST_PLAYER, new Param3<PlayerBase, int, string>(receiver, arrestTime, arrestReason), true);
+                    g_Game.RPCSingleParam(player, DZL_RPC.ARREST_PLAYER, new Param3<PlayerBase, int, string>(receiver, arrestTime, arrestReason), true);
                     inputArrest.SetText("");
                 } else {
                     player.DisplayMessage("#error_arrest_time_is_not_a_int");

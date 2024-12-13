@@ -18,7 +18,7 @@ class DZLActionOpenLicenseMenu: ActionInteractBase {
         super.OnStartClient(action_data);
 
         if(g_Game.GetUIManager().GetMenu() == NULL) {
-            GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceMenu(), NULL);
+            g_Game.GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceMenu(), NULL);
         }
     }
 

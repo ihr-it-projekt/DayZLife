@@ -2,7 +2,7 @@ class DZLTuningListener: DZLBaseEventListener {
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.EVENT_TUNE_CAR) {
-            autoptr Param1<string> paramTuneCar;
+            Param1<string> paramTuneCar;
             CarScript car = CarScript.Cast(target);
             if(!car) return;
 
@@ -33,7 +33,7 @@ class DZLTuningListener: DZLBaseEventListener {
             ReplaceTuningTypes(before, after, storedCar);
 
             DZLInsuranceManager.Get().RemoveCar(car);
-            GetGame().ObjectDelete(car);
+            g_Game.ObjectDelete(car);
 
             CarScript carSpawned = SpawnCar(sender, storedCar, carPosition, carHeading, lastStoragePosition, hasInsurance);
 
@@ -118,6 +118,6 @@ class DZLTuningListener: DZLBaseEventListener {
             if(member) fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(member.fractionID);
         }
 
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
     }
 }

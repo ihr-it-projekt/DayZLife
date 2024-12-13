@@ -432,7 +432,7 @@ FrameWidgetClass Banking {
      }
     }
     EditBoxWidgetClass Input_Deposit {
-     position 0.183 0.075
+     position 0.183 0.345
      size 0.397 0.055
      halign center_ref
      valign bottom_ref
@@ -441,11 +441,13 @@ FrameWidgetClass Banking {
      hexactsize 0
      vexactsize 0
      style DefaultBorder
+     "limit visible" 0
+     "Use default text" 0
      font "gui/fonts/metron"
     }
     ButtonWidgetClass Button_Cash_Transfer {
      color 0.502 0 0 1
-     position 0.025 0.35917
+     position 0.025 0.1192
      size 0.28 0.055
      halign center_ref
      valign bottom_ref
@@ -459,7 +461,7 @@ FrameWidgetClass Banking {
     }
     ButtonWidgetClass Button_Cash_Transfer_Fraction {
      color 0.502 0 0 1
-     position 0.341 0.35917
+     position 0.341 0.1192
      size 0.28 0.055
      halign center_ref
      valign bottom_ref
@@ -474,7 +476,7 @@ FrameWidgetClass Banking {
     }
     ButtonWidgetClass Button_Deposit_Fraction {
      color 0 0.502 0.1255 1
-     position 0.341 0.29083
+     position 0.341 0.2508
      size 0.28 0.055
      halign center_ref
      valign bottom_ref
@@ -489,7 +491,7 @@ FrameWidgetClass Banking {
     }
     ButtonWidgetClass Button_Pay_out_Fraction {
      color 0 0.1255 0.502 1
-     position 0.025 0.29083
+     position 0.025 0.2508
      size 0.28 0.055
      halign center_ref
      valign bottom_ref
@@ -503,7 +505,7 @@ FrameWidgetClass Banking {
     }
     ButtonWidgetClass Button_Pay_out {
      color 0 0.1255 0.502 1
-     position 0.025 0.2225
+     position 0.025 0.1825
      size 0.28 0.055
      halign center_ref
      valign bottom_ref
@@ -517,7 +519,7 @@ FrameWidgetClass Banking {
     }
     ButtonWidgetClass Button_Deposit {
      color 0 0.502 0.1255 1
-     position 0.341 0.2225
+     position 0.341 0.1825
      size 0.28 0.055
      halign center_ref
      valign bottom_ref

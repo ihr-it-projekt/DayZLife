@@ -15,7 +15,7 @@ class DZLMedicHelpListener: DZLBaseEventListener {
         }
         if(rpc_type == DZL_RPC.GET_EMERGENCY_CALLS) {
             array<Man> players = new array<Man>;
-            GetGame().GetPlayers(players);
+            g_Game.GetPlayers(players);
 
             TBREmergencies emergencies = TBREmergencies.Get();
             array<ref DZLOnlinePlayer> onlineEmergencies = new array<ref DZLOnlinePlayer>;
@@ -30,7 +30,7 @@ class DZLMedicHelpListener: DZLBaseEventListener {
 
                 onlineEmergencies.Insert(new DZLOnlinePlayer(ident, _player.GetIdentity().GetName(), "", _player.GetPosition()));
             }
-            GetGame().RPCSingleParam(null, DZL_RPC.GET_EMERGENCY_CALLS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(onlineEmergencies), true, sender);
+            g_Game.RPCSingleParam(null, DZL_RPC.GET_EMERGENCY_CALLS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(onlineEmergencies), true, sender);
         }
     }
 #endif

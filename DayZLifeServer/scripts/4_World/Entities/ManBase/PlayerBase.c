@@ -83,8 +83,8 @@ modded class PlayerBase {
     }
 
     void ResetDZLPlayer() {
-        if(GetGame().IsServer()) {
-            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
+        if(g_Game.IsServer()) {
+            g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, GetIdentity());
         }
     }
 

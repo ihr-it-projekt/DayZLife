@@ -3,7 +3,7 @@ class DZLCheckController {
     void Check() {
         DZLConfig config = DZLConfig.Get();
         array<Man> allPlayers = new array<Man>;
-        GetGame().GetPlayers(allPlayers);
+        g_Game.GetPlayers(allPlayers);
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
             if(!player) continue;

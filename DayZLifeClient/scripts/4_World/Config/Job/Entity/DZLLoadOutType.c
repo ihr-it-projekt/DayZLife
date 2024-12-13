@@ -3,5 +3,4 @@ class DZLLoadOutType {
     string displayName = "";
     ref array<ref DZLLoadOutType> attachments;
     int quickBarEntityShortcut;
-
 }

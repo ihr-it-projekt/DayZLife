@@ -27,7 +27,7 @@ class DZLPlayerSpawnListener: DZLBaseEventListener {
                 player.SetIsSpawned();
 
                 dzlPlayer.UpdateDZLPlayerAtPlayer();
-                GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_RESPONSE, null, true, sender);
+                g_Game.RPCSingleParam(null, DZL_RPC.NEW_SPAWN_RESPONSE, null, true, sender);
             }
         }
     }

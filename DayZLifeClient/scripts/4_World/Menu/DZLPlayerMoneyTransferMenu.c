@@ -43,7 +43,7 @@ class DZLPlayerMoneyTransferMenu : DZLBaseMenu {
 
                 if(deposit != 0) {
                     if(deposit <= dzlPlayer.GetMoney()) {
-                        GetGame().RPCSingleParam(player, DZL_RPC.MONEY_TRANSFER, new Param2<PlayerBase, int>(receiver, deposit), true);
+                        g_Game.RPCSingleParam(player, DZL_RPC.MONEY_TRANSFER, new Param2<PlayerBase, int>(receiver, deposit), true);
                         inputDeposit.SetText("");
                         OnHide();
                     } else {

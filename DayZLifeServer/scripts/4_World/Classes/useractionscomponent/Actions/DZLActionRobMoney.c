@@ -12,7 +12,7 @@ modded class DZLActionRobMoney {
         if(!dzlTargetPlayer.HasMoney()) return;
 
         dzlTargetPlayer.TransferFromPlayerToOtherPlayer(dzlPlayer);
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, targetPlayer.GetIdentity());
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, targetPlayer.GetIdentity());
     }
 }

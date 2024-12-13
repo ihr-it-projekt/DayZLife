@@ -5,7 +5,7 @@ modded class Inventory {
     private Widget dzlHud;
 
     void Inventory(LayoutHolder parent) {
-        dzlHud = GetGame().GetWorkspace().CreateWidgets("DayZLifeClient/layout/Banking/hud.layout", GetMainWidget());
+        dzlHud = g_Game.GetWorkspace().CreateWidgets("DayZLifeClient/layout/Banking/hud.layout", GetMainWidget());
         moneyAtPlayer = TextWidget.Cast(dzlHud.FindAnyWidget("DZLCash"));
         moneyAtBank = TextWidget.Cast(dzlHud.FindAnyWidget("DZLBank"));
         playerArrest = TextWidget.Cast(dzlHud.FindAnyWidget("playerArrest"));

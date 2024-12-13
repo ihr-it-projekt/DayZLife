@@ -6,7 +6,7 @@ class DZLStorageListener: DZLBaseEventListener {
         if(rpc_type == DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE) {
             SendStorageUpdate(sender);
         } else if(rpc_type == DZL_RPC.EVENT_STORE_CAR) {
-            autoptr Param2<vector, bool> paramStoreCar;
+            Param2<vector, bool> paramStoreCar;
             CarScript car = CarScript.Cast(target);
 
             if(car && car.IsRuined()) {
@@ -41,12 +41,12 @@ class DZLStorageListener: DZLBaseEventListener {
                 DZLInsuranceManager.Get().RemoveCar(car);
 
                 DZLLogStore(sender.GetId(), "store in", car.GetType(), storagePosition.position);
-                GetGame().ObjectDelete(car);
+                g_Game.ObjectDelete(car);
                 DZLSendMessage(sender, "#car_was_parked");
                 SendStorageUpdate(sender);
             }
         } else if(rpc_type == DZL_RPC.EVENT_GET_CAR_FROM_STORAGE) {
-            autoptr Param3<string, bool, bool> paramGetCar;
+            Param3<string, bool, bool> paramGetCar;
             PlayerBase player = PlayerBase.Cast(target);
             if(ctx.Read(paramGetCar) && player) {
                 string itemId = paramGetCar.param1;
@@ -90,7 +90,7 @@ class DZLStorageListener: DZLBaseEventListener {
                     if(withInsurance) {
                         dzlPlayer.AddMoneyToPlayerBank(config.carInsurancePrice * -1);
                         DZLInsuranceManager.Get().AddCar(carSpawned, null);
-                        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
+                        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                     }
                 }
             }
@@ -132,11 +132,11 @@ class DZLStorageListener: DZLBaseEventListener {
                 DZLSendMessage(player.GetIdentity(), "#car_was_parked_out");
             }
 
+            g_Game.RemoteObjectCreate(car);
+
             if(enableInsurance) {
                 car.EnableInsurance(storagePositionCar.position);
             }
-
-            GetGame().RemoteObjectCreate(car);
 
             car.OwnCar(player.GetIdentity(), itemInStock.ownerId, itemInStock.ownerName);
             car.UpdatePlayerAccess(itemInStock.playerAccess);
@@ -171,6 +171,6 @@ class DZLStorageListener: DZLBaseEventListener {
             if(id) fractionStorage = DZLDatabaseLayer.Get().GetFractionCarStorage(id);
         }
 
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE, new Param2<ref DZLCarStorage, ref DZLCarStorage>(playerStorage, fractionStorage), true, sender);
     }
 }

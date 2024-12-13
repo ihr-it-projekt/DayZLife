@@ -20,7 +20,7 @@ class DZLActionOpenTuningMenu: ActionInteractBase {
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
         DZLTuningMenu menu = action_data.m_Player.GetTuningMenu();
 
-        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {

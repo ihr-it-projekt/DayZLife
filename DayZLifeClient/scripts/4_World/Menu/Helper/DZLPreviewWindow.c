@@ -9,7 +9,7 @@ class DZLPreviewWindow extends Managed {
     }
 
     bool UpdatePreview(string type) {
-        Object itemObject = GetGame().CreateObject(type, "0 0 0", true);
+        Object itemObject = g_Game.CreateObject(type, "0 0 0", true);
 
         previewItem = EntityAI.Cast(itemObject);
 

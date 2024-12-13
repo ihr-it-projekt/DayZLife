@@ -27,7 +27,7 @@ class DZLAlmanacListener: DZLBaseEventListener {
                 }
 
                 array<Man> _players = new array<Man>;
-                GetGame().GetPlayers(_players);
+                g_Game.GetPlayers(_players);
 
                 if(_players) {
                     foreach(Man _player: _players) {
@@ -52,7 +52,7 @@ class DZLAlmanacListener: DZLBaseEventListener {
             DZLSendMessage(sender, "#update_successful");
         } else if(rpc_type == DZL_RPC.MONEY_TRANSFER_ADMIN) {
             if(!DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_PLAYERS, sender.GetId())) return;
-            autoptr Param3<string, int, bool> paramDepositAdminPlayer;
+            Param3<string, int, bool> paramDepositAdminPlayer;
             string messageDepositPP = "";
             if(ctx.Read(paramDepositAdminPlayer)) {
                 PlayerIdentity identMoney = sender;
@@ -75,7 +75,7 @@ class DZLAlmanacListener: DZLBaseEventListener {
         if(!DZLConfig.Get().adminIds.HasAccess(job, player.GetPlayerId())) return;
 
         array<Man> _players = new array<Man>;
-        GetGame().GetPlayers(_players);
+        g_Game.GetPlayers(_players);
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -92,7 +92,7 @@ class DZLAlmanacListener: DZLBaseEventListener {
             }
         }
 
-        GetGame().RPCSingleParam(null, DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(job, collection, copIdents), true, player.GetIdentity());
+        g_Game.RPCSingleParam(null, DZL_RPC.ALL_PLAYER_ONLINE_PLAYERS_RESPONSE, new Param3<string, ref array<ref DZLOnlinePlayer>, ref array<ref DZLOnlinePlayer>>(job, collection, copIdents), true, player.GetIdentity());
     }
 
     void SendAllPlayerList(PlayerIdentity player) {
@@ -107,6 +107,6 @@ class DZLAlmanacListener: DZLBaseEventListener {
             collection.Insert(_player);
         }
 
-        GetGame().RPCSingleParam(null, DZL_RPC.GET_ALL_PLAYERS_RESPONSE, new Param1<ref array<ref DZLPlayer>>(collection), true, player);
+        g_Game.RPCSingleParam(null, DZL_RPC.GET_ALL_PLAYERS_RESPONSE, new Param1<ref array<ref DZLPlayer>>(collection), true, player);
     }
 }

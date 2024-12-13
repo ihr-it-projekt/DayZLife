@@ -2,7 +2,7 @@ class DZLLoadOutListener: DZLBaseEventListener {
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.LOAD_OUT) {
-            autoptr Param1<string> paramLoadOut;
+            Param1<string> paramLoadOut;
             if(ctx.Read(paramLoadOut)) {
                 PlayerBase player = PlayerBase.Cast(target);
                 DZLPlayer dzlPlayer = player.GetDZLPlayer();
@@ -28,7 +28,7 @@ class DZLLoadOutListener: DZLBaseEventListener {
                 foreach(DZLLoadOutType type: category.items) {
                     Add(player, type);
                 }
-                GetGame().RPCSingleParam(null, DZL_RPC.LOAD_OUT_RESPONSE, null, true, sender);
+                g_Game.RPCSingleParam(null, DZL_RPC.LOAD_OUT_RESPONSE, null, true, sender);
                 return true;;
             }
         }

@@ -14,7 +14,7 @@ class DZLBaseMenu: UIScriptedMenu {
 
 
     void DZLBaseMenu() {
-        if(GetGame().IsClient()) {
+        if(g_Game.IsClient()) {
             GetDayZGame().Event_OnRPC.Insert(HandleEventsDZL);
         }
     }
@@ -74,30 +74,30 @@ class DZLBaseMenu: UIScriptedMenu {
     override void OnShow() {
         super.OnShow();
 
-        GetGame().GetUIManager().ShowCursor(true);
+        g_Game.GetUIManager().ShowCursor(true);
 
-        GetGame().GetInput().ChangeGameFocus(1);
-        GetGame().GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
+        g_Game.GetInput().ChangeGameFocus(1);
+        g_Game.GetMission().PlayerControlDisable(INPUT_EXCLUDE_INVENTORY);
 
-        GetGame().GetMission().GetHud().ShowHud(showHud);
-        GetGame().GetMission().GetHud().ShowQuickBar(showQuickBar);
+        g_Game.GetMission().GetHud().ShowHud(showHud);
+        g_Game.GetMission().GetHud().ShowQuickBar(showQuickBar);
     }
 
     override void Update(float timeslice) {
         super.Update(timeslice);
         if(canClose && GetUApi() && GetUApi().GetInputByName("UAUIBack").LocalPress()) {
-            GetGame().GetUIManager().HideScriptedMenu(this);
+            g_Game.GetUIManager().HideScriptedMenu(this);
         }
     }
 
     override void OnHide() {
         super.OnHide();
 
-        GetGame().GetUIManager().ShowCursor(false);
-        GetGame().GetInput().ResetGameFocus();
-        GetGame().GetMission().PlayerControlEnable(true);
-        GetGame().GetMission().GetHud().ShowHud(true);
-        GetGame().GetMission().GetHud().ShowQuickBar(true);
+        g_Game.GetUIManager().ShowCursor(false);
+        g_Game.GetInput().ResetGameFocus();
+        g_Game.GetMission().PlayerControlEnable(true);
+        g_Game.GetMission().GetHud().ShowHud(true);
+        g_Game.GetMission().GetHud().ShowQuickBar(true);
         Close();
     }
 }

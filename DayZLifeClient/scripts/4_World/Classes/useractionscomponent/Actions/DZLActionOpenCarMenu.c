@@ -22,14 +22,14 @@ class DZLActionOpenCarMenu: ActionInteractBase {
 
         if(!car) return;
         player.RequestUpdateDZLPlayer();
-        GetGame().GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(player.GetCarMenu(car), NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {
         CarScript car = CarScript.Cast(target.GetParent());
 
         if(!car) return false;
-        if(GetGame().IsClient() && g_Game.GetUIManager().GetMenu() != NULL) return false;
+        if(g_Game.IsClient() && g_Game.GetUIManager().GetMenu() != NULL) return false;
 
         return car.IsOwner(player.GetIdentity()) || DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, player.GetPlayerId());
     }

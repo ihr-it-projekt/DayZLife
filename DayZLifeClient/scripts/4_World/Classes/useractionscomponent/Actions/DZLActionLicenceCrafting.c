@@ -30,6 +30,6 @@ class DZLActionLicenceCrafting: ActionInteractBase {
     override void OnStartClient(ActionData action_data) {
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
         super.OnStartClient(action_data);
-        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceProgressBar(), NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceProgressBar(), NULL);
     }
 };

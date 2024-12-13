@@ -16,6 +16,6 @@ modded class DZLActionGiveNumber: ActionInteractBase {
 
         DZLOnlinePlayer onlinePlayer = new DZLOnlinePlayer(player.GetIdentity().GetId(), player.GetIdentity().GetName(), DZLDatabaseLayer.Get().GetPlayer(player.GetIdentity().GetId()).GetJobGrade());
 
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_SEND_CONTACT, new Param1<ref DZLOnlinePlayer>(onlinePlayer), true, targetPlayer.GetIdentity());
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_SEND_CONTACT, new Param1<ref DZLOnlinePlayer>(onlinePlayer), true, targetPlayer.GetIdentity());
     }
 }

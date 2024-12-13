@@ -57,7 +57,7 @@ class DZLTraderMenu: DZLBaseMenu {
 
         preview = creator.GetItemPreviewWidget("previewItem");
 
-        GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
+        g_Game.RPCSingleParam(player, DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE, null, true);
 
         return layoutRoot;
     }
@@ -102,7 +102,7 @@ class DZLTraderMenu: DZLBaseMenu {
                     if(playerCar && !playerCar.isSold) {
                         quant = DZLTraderHelper.GetQuantity(playerCar).ToString();
 
-                        GetGame().ObjectGetDisplayName(playerCar, name);
+                        g_Game.ObjectGetDisplayName(playerCar, name);
                         index = inventory.AddItem(name, playerCar, 0);
                         inventory.SetItem(index, price.ToString(), type, 1);
                         inventory.SetItem(index, quant, playerCar, 2);
@@ -114,7 +114,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 foreach(EntityAI item: playerItems) {
                     if(item.GetType() != type.type) continue;
 
-                    GetGame().ObjectGetDisplayName(item, name);
+                    g_Game.ObjectGetDisplayName(item, name);
 
                     quant = DZLTraderHelper.GetQuantity(item).ToString();
                     price = DZLTraderHelper.GetQuantityPrice(price, item);
@@ -182,7 +182,7 @@ class DZLTraderMenu: DZLBaseMenu {
                         CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, type.type, dzlPlayer, true);
 
                         if(playerCar && !playerCar.isSold) {
-                            GetGame().ObjectGetDisplayName(playerCar, name);
+                            g_Game.ObjectGetDisplayName(playerCar, name);
                             index = inventory.AddItem(name, playerCar, 0);
                             inventory.SetItem(index, sellPrice.ToString(), type, 1);
                             inventory.SetItem(index, "1", playerCar, 2);
@@ -196,7 +196,7 @@ class DZLTraderMenu: DZLBaseMenu {
                         continue;
                     }
 
-                    GetGame().ObjectGetDisplayName(item, name);
+                    g_Game.ObjectGetDisplayName(item, name);
                     int sumItem = type.CalculateDynamicSellPrice(storage);
                     sumItem = DZLTraderHelper.GetQuantityPrice(sumItem, item);
                     quantity = DZLTraderHelper.GetQuantity(item);
@@ -321,7 +321,7 @@ class DZLTraderMenu: DZLBaseMenu {
                 return true;
             }
 
-            GetGame().RPCSingleParam(player, DZL_RPC.TRADE_ACTION, new Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition>(buyItems, sellItems, position), true);
+            g_Game.RPCSingleParam(player, DZL_RPC.TRADE_ACTION, new Param3<ref array<string>, ref array<EntityAI>, ref DZLTraderPosition>(buyItems, sellItems, position), true);
         } else if(w == itemCategory) {
             int categoryIndex = itemCategory.GetCurrentItem();
             string name = addedCats.Get(categoryIndex);
@@ -362,12 +362,12 @@ class DZLTraderMenu: DZLBaseMenu {
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.TRADE_ACTION_RESPONSE) {
-            autoptr Param1<string> paramGetResponse;
+            Param1<string> paramGetResponse;
             if(ctx.Read(paramGetResponse)) {
                 UpdateGUI(paramGetResponse.param1);
             }
         } else if(rpc_type == DZL_RPC.EVENT_GET_CONFIG_TRADER_STORAGE_RESPONSE) {
-            autoptr Param1<ref array<ref DZLTraderTypeStorage>> traderStorageResponse;
+            Param1<ref array<ref DZLTraderTypeStorage>> traderStorageResponse;
             if(ctx.Read(traderStorageResponse)) {
                 storageOfItems = traderStorageResponse.param1;
 

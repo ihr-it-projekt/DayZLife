@@ -6,7 +6,7 @@ class DZLActionRaidCar: ActionInteractBase {
         m_StanceMask = DayZPlayerConstants.STANCEMASK_CROUCH | DayZPlayerConstants.STANCEMASK_ERECT;
         m_HUDCursorIcon = CursorIcons.OpenDoors;
 
-        if(GetGame().IsServer()) {
+        if(g_Game.IsServer()) {
             config = DZLConfig.Get().carConfig;
         }
     }
@@ -49,6 +49,6 @@ class DZLActionRaidCar: ActionInteractBase {
         bar.SetRaidItem(item);
         bar.SetDuration(DZLConfig.Get().carConfig.carRaidTimeInSeconds);
 
-        GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(bar, NULL);
     }
 };

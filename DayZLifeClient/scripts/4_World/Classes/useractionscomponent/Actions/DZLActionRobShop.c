@@ -44,7 +44,7 @@ class DZLActionRobShop: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
 
         if(player) {
-            GetGame().RPCSingleParam(player, DZL_RPC.START_ROB_MONEY_FROM_SHOP, null, true);
+            g_Game.RPCSingleParam(player, DZL_RPC.START_ROB_MONEY_FROM_SHOP, null, true);
         }
     }
 };

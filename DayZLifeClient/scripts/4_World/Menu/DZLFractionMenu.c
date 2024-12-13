@@ -102,7 +102,7 @@ class DZLFractionMenu : DZLBaseMenu {
 
         changRightsButton = creator.GetButtonWidget("fractionChangRightsButton");
 
-        GetGame().RPCSingleParam(null, DZL_RPC.GET_FRACTION, null, true);
+        g_Game.RPCSingleParam(null, DZL_RPC.GET_FRACTION, null, true);
 
         return layoutRoot;
     }
@@ -143,7 +143,7 @@ class DZLFractionMenu : DZLBaseMenu {
         if(w == fractionSaveButton) {
             fractionMembers = DZLDisplayHelper.GetDZLFractionMemberFromList(fractionPanelPlayerList);
             potentialMembers = DZLDisplayHelper.GetDZLFractionMemberFromList(openInvitations);
-            GetGame().RPCSingleParam(player, DZL_RPC.GET_UPDATE_FRACTION_MEMBERS, new Param2<ref array<ref DZLFractionMember>, ref array<ref DZLFractionMember>>(fractionMembers, potentialMembers), true);
+            g_Game.RPCSingleParam(player, DZL_RPC.GET_UPDATE_FRACTION_MEMBERS, new Param2<ref array<ref DZLFractionMember>, ref array<ref DZLFractionMember>>(fractionMembers, potentialMembers), true);
             fractionSearchInput.SetText("");
             wasDone = true;
             ResetSelectedMember();
@@ -175,21 +175,21 @@ class DZLFractionMenu : DZLBaseMenu {
             wasDone = true;
         } else if(w == fractionDelete && deleteAccept.IsChecked()) {
             ResetSelectedMember();
-            GetGame().RPCSingleParam(player, DZL_RPC.DELETE_FRACTION, null, true);
+            g_Game.RPCSingleParam(player, DZL_RPC.DELETE_FRACTION, null, true);
             wasDone = true;
         } else if(w == fractionLeave) {
-            GetGame().RPCSingleParam(player, DZL_RPC.FRACTION_MEMBER_LEAVE, null, true);
+            g_Game.RPCSingleParam(player, DZL_RPC.FRACTION_MEMBER_LEAVE, null, true);
             wasDone = true;
         } else if(w == acceptInvitation) {
             DZLFractionMember member = GetMarkedMember(fractionInvitationList);
 
-            GetGame().RPCSingleParam(player, DZL_RPC.FRACTION_MEMBER_JOIN, new Param1<ref DZLFractionMember>(member), true);
+            g_Game.RPCSingleParam(player, DZL_RPC.FRACTION_MEMBER_JOIN, new Param1<ref DZLFractionMember>(member), true);
             wasDone = true;
         } else if(w == createFaction) {
             string fractionName = fractionNameEdit.GetText();
 
             if(fractionName && fractionName != "") {
-                GetGame().RPCSingleParam(player, DZL_RPC.FRACTION_CREATE_FRACTION, new Param1<string>(fractionName), true);
+                g_Game.RPCSingleParam(player, DZL_RPC.FRACTION_CREATE_FRACTION, new Param1<string>(fractionName), true);
             }
             wasDone = true;
         }
@@ -199,7 +199,7 @@ class DZLFractionMenu : DZLBaseMenu {
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.GET_FRACTION_RESPONSE_FRACTION_OWNER) {
-            autoptr Param2<ref DZLFraction, ref array<ref DZLFractionMember>> paramFractionOwner;
+            Param2<ref DZLFraction, ref array<ref DZLFractionMember>> paramFractionOwner;
             if(ctx.Read(paramFractionOwner)) {
                 fraction = paramFractionOwner.param1;
                 fractionMembers = fraction.GetMembers();
@@ -216,7 +216,7 @@ class DZLFractionMenu : DZLBaseMenu {
         } else if(rpc_type == DZL_RPC.DELETE_FRACTION_RESPONSE) {
             OnHide();
         } else if(rpc_type == DZL_RPC.GET_FRACTION_RESPONSE_FRACTION_MEMBER) {
-            autoptr Param1<ref DZLFractionMember> paramFractionMember;
+            Param1<ref DZLFractionMember> paramFractionMember;
             if(ctx.Read(paramFractionMember)) {
                 DZLFractionMember member = paramFractionMember.param1;
                 fractionMenuHeadLine.SetText(member.fractionName);
@@ -228,7 +228,7 @@ class DZLFractionMenu : DZLBaseMenu {
                 wrapperLeave.Show(true);
             }
         } else if(rpc_type == DZL_RPC.GET_FRACTION_RESPONSE_NOT_A_FRACTION_MEMBER) {
-            autoptr Param1<ref array<ref DZLFractionMember>> paramNotFractionMember;
+            Param1<ref array<ref DZLFractionMember>> paramNotFractionMember;
             if(ctx.Read(paramNotFractionMember)) {
                 fractionInvitationList.ClearItems();
                 foreach(DZLFractionMember potentialMember: paramNotFractionMember.param1) {

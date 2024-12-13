@@ -33,7 +33,7 @@ modded class MissionServer {
         PlayerBase player = super.OnClientNewEvent(identity, pos, ctx);
 
 #ifndef TBRevivePlayerServer
-        GetGame().RPCSingleParam(null, DZL_RPC.NEW_SPAWN_CLIENT, null, true, identity);
+        g_Game.RPCSingleParam(null, DZL_RPC.NEW_SPAWN_CLIENT, null, true, identity);
 #endif
 
         return player;

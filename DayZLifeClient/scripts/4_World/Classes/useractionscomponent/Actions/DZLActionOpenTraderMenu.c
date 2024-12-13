@@ -28,7 +28,7 @@ class DZLActionOpenTraderMenu: ActionInteractBase {
 
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
 
-        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(position), NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(action_data.m_Player.GetTraderMenu(position), NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {

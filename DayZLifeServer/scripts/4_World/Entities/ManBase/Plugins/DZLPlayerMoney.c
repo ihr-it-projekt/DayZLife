@@ -16,7 +16,7 @@ modded class DZLPlayerMoney {
                 int value = config.currencyValues.Get(item.GetType());
                 if(value) {
                     currencyAmount += value * item.GetQuantity();
-                    GetGame().ObjectDelete(item);
+                    g_Game.ObjectDelete(item);
                 }
             }
         }

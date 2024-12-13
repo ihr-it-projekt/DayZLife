@@ -47,7 +47,7 @@ class DZLPlayerTicketMenu : DZLBaseMenu {
                 }
 
                 if(ticketValue != 0) {
-                    GetGame().RPCSingleParam(player, DZL_RPC.CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
+                    g_Game.RPCSingleParam(player, DZL_RPC.CREATE_TICKET, new Param3<PlayerBase, int, string>(receiver, ticketValue, ticketReason), true);
                     inputTicket.SetText("");
                     inputTicketReason.SetText("");
                 } else {

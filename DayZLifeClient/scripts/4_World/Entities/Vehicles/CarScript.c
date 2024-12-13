@@ -13,6 +13,7 @@ modded class CarScript {
         RegisterNetSyncVariableInt("dzlCarId");
         RegisterNetSyncVariableBool("isSold");
         RegisterNetSyncVariableBool("isRaided");
+        RegisterNetSyncVariableBool("hasInsurance");
     }
 
     override void EEInit() {

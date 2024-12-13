@@ -148,9 +148,9 @@ class DZLTradeObject {
 
         if(error) message = error;
 
-        GetGame().RPCSingleParam(player, DZL_RPC.TRADE_ACTION_RESPONSE, new Param1<string>(message), true, playerIdentity);
-        GetGame().RPCSingleParam(player, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, playerIdentity);
+        g_Game.RPCSingleParam(player, DZL_RPC.TRADE_ACTION_RESPONSE, new Param1<string>(message), true, playerIdentity);
+        g_Game.RPCSingleParam(player, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, playerIdentity);
     }
 
     void Trade() {
@@ -163,7 +163,7 @@ class DZLTradeObject {
         }
 
         foreach(EntityAI item: entitiesToSell) {
-            GetGame().ObjectDelete(item);
+            g_Game.ObjectDelete(item);
         }
     }
 
@@ -217,9 +217,9 @@ class DZLTradeObject {
             spawnPosition = libZone.position;
             orientation = libZone.orientation;
 
-            item = EntityAI.Cast(GetGame().CreateObjectEx(type.type, spawnPosition, ECE_LOCAL | ECE_CREATEPHYSICS | ECE_TRACE));
+            item = EntityAI.Cast(g_Game.CreateObjectEx(type.type, spawnPosition, ECE_LOCAL | ECE_CREATEPHYSICS | ECE_TRACE));
             if(!item) return null;
-            GetGame().RemoteObjectCreate(item);
+            g_Game.RemoteObjectCreate(item);
 
             item.SetPosition(spawnPosition);
             item.SetOrientation(orientation);

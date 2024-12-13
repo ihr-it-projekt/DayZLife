@@ -62,6 +62,6 @@ class DZLActionRaidDoors: ActionInteractBase {
         DZLJobHouseDefinition definition = DZLCanDoDoorAction.GetJobHouseDefinition(buildingClient, action_data.m_Player);
 
         bar.SetBuilding(buildingClient, doorIndex, definition);
-        GetGame().GetUIManager().ShowScriptedMenu(bar, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(bar, NULL);
     }
 };

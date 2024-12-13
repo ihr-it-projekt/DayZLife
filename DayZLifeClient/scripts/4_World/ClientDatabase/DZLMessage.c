@@ -16,7 +16,7 @@ class DZLMessage: DZLIdModel {
     private string replayedMessage;
 
     void DZLMessage(string _id = "") {
-        if(GetGame().IsClient() && _id != "" && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id))) {
+        if(g_Game.IsClient() && _id != "" && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id))) {
             JsonFileLoader<DZLMessage>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(_id), this);
 
             if(!senderId) senderId = "";
@@ -43,7 +43,7 @@ class DZLMessage: DZLIdModel {
         SetId();
 
         date = new DZLDate;
-        GetGame().RPCSingleParam(null, DZL_RPC.SEND_MESSAGE_SERVER, new Param1<ref DZLMessage>(this), true, _receiver);
+        g_Game.RPCSingleParam(null, DZL_RPC.SEND_MESSAGE_SERVER, new Param1<ref DZLMessage>(this), true, _receiver);
     }
 
     void CreateAnswer(PlayerBase _sender, string _receiver, string _text, DZLMessage _replayedMessage) {
@@ -65,7 +65,7 @@ class DZLMessage: DZLIdModel {
         }
 
         string shortText = text;
-        if(GetGame().IsClient()) shortText = Widget.TranslateString(text);
+        if(g_Game.IsClient()) shortText = Widget.TranslateString(text);
 
         if(!shortText) return text.Substring(0, 30);
 
@@ -130,7 +130,7 @@ class DZLMessage: DZLIdModel {
     }
 
     bool Save() {
-        if(GetGame().IsClient()) {
+        if(g_Game.IsClient()) {
             DZLJsonFileHandler<DZLMessage>.JsonSaveFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + GetFileName(id), this);
             return true;
         }

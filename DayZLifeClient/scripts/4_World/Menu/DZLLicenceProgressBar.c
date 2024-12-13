@@ -9,6 +9,6 @@ class DZLLicenceProgressBar: DZLBaseProgressBar {
     }
 
     override void SendFinishEvent() {
-        GetGame().RPCSingleParam(player, DZL_RPC.BUY_LICENCE_USE, new Param1<string>(licence.GetId()), true);
+        g_Game.RPCSingleParam(player, DZL_RPC.BUY_LICENCE_USE, new Param1<string>(licence.GetId()), true);
     }
 }

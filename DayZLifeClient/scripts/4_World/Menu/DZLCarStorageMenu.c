@@ -9,7 +9,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
     private TextWidget insuranceText;
 
     void DZLCarStorageMenu() {
-        GetGame().RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
+        g_Game.RPCSingleParam(null, DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE, null, true);
     }
 
     override Widget Init() {
@@ -39,7 +39,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
             CarScript playerCar = DZLObjectFinder.GetCar(position.spawnPositionOfVehicles, position.spawnOrientationOfVehicles, carType, dzlPlayer, true);
             if(playerCar && !playerCar.isSold) {
                 string name = "";
-                GetGame().ObjectGetDisplayName(playerCar, name);
+                g_Game.ObjectGetDisplayName(playerCar, name);
                 name += " (" + playerCar.ownerName + ")";
                 carToStoreList.AddItem(name, playerCar, 0);
             }
@@ -99,7 +99,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
                 if(w == storeInFractionButton && !dzlPlayer.HasFractionRightCanAccessFractionGarage()) return true;
 
-                GetGame().RPCSingleParam(car, DZL_RPC.EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
+                g_Game.RPCSingleParam(car, DZL_RPC.EVENT_STORE_CAR, new Param2<vector, bool>(player.GetPosition(), w == storeInFractionButton), true);
                 car.isSold = true;
             }
         } else if(w == outStoreButton) {
@@ -128,7 +128,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
                     player.DisplayMessage("#error_not_enough_money");
                 }
 
-                GetGame().RPCSingleParam(player, DZL_RPC.EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
+                g_Game.RPCSingleParam(player, DZL_RPC.EVENT_GET_CAR_FROM_STORAGE, new Param3<string, bool, bool>(carOut.GetId(), hasInsuranceWidget.IsChecked(), isPrivateParkOut), true);
             }
         } else if(w == closeButton) {
             OnHide();
@@ -140,7 +140,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
     override void HandleEventsDZL(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.EVENT_GET_CAR_DATA_FROM_STORAGE_RESPONSE) {
-            autoptr Param2<ref DZLCarStorage, ref DZLCarStorage> paramGetCarDataResponse;
+            Param2<ref DZLCarStorage, ref DZLCarStorage> paramGetCarDataResponse;
             if(ctx.Read(paramGetCarDataResponse)) {
                 DZLCarStorage carStorage = paramGetCarDataResponse.param1;
                 DZLCarStorage fractionCarStorage = paramGetCarDataResponse.param2;
@@ -174,7 +174,7 @@ class DZLCarStorageMenu: DZLBaseMenu {
 
         cfg = CFG_VEHICLESPATH + " " + itemClassname + " displayName";
 
-        GetGame().ConfigGetText(cfg, displayName);
+        g_Game.ConfigGetText(cfg, displayName);
 
 
         if(displayName == "") {

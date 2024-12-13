@@ -15,7 +15,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
 
     void ~DZLLoadOutMenu() {
         if(previewItem) {
-            GetGame().ObjectDelete(previewItem);
+            g_Game.ObjectDelete(previewItem);
         }
     }
 
@@ -73,7 +73,7 @@ class DZLLoadOutMenu: DZLBaseMenu {
         if(super.OnClick(w, x, y, button)) return true;
         switch(w) {
             case equipButton:
-                GetGame().RPCSingleParam(player, DZL_RPC.LOAD_OUT, new Param1<string>(currentCat.name), true);
+                g_Game.RPCSingleParam(player, DZL_RPC.LOAD_OUT, new Param1<string>(currentCat.name), true);
                 return true;
             case loadoutComboBox:
                 int index = loadoutComboBox.GetCurrentItem();
@@ -115,10 +115,10 @@ class DZLLoadOutMenu: DZLBaseMenu {
             if(currentItem && currentItem.GetType() == itemType.type) return;
 
             if(previewItem) {
-                GetGame().ObjectDelete(previewItem);
+                g_Game.ObjectDelete(previewItem);
             }
 
-            previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
+            previewItem = EntityAI.Cast(g_Game.CreateObject(itemType.type, "0 0 0", true, false, false));
 
             preview.SetItem(previewItem);
             preview.SetModelPosition(Vector(0, 0, 0.5));

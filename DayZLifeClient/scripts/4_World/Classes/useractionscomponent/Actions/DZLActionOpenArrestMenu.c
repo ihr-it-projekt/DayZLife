@@ -34,6 +34,6 @@ class DZLActionOpenArrestMenu: ActionInteractBase {
         PlayerBase player = action_data.m_Player;
         DZLPlayerArrestMenu menu = player.GetArrestMenu();
         menu.SetReceiver(targetPlayer);
-        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 }

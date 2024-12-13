@@ -71,8 +71,8 @@ modded class PlayerBase {
     }
 
     void RequestUpdateDZLPlayer() {
-        GetGame().RPCSingleParam(this, DZL_RPC.PLAYER_DATA, null, true);
-        GetGame().RPCSingleParam(this, DZL_RPC.PLAYER_BANK_DATA, null, true);
+        g_Game.RPCSingleParam(this, DZL_RPC.PLAYER_DATA, null, true);
+        g_Game.RPCSingleParam(this, DZL_RPC.PLAYER_BANK_DATA, null, true);
     }
 
     void DisplayMessage(string message) {
@@ -272,7 +272,7 @@ modded class PlayerBase {
                 return licence;
             }
         }
-        if(GetGame().IsServer()) {
+        if(g_Game.IsServer()) {
             DZLSendMessage(GetIdentity(), "#you_have_not_the_dependency_licence");
         }
         return null;
@@ -332,7 +332,7 @@ modded class PlayerBase {
         for(int i = 0; i < itemsArray.Count(); i++) {
             Class.CastTo(item, itemsArray.Get(i));
             if(item && !item.IsInherited(SurvivorBase)) {
-                GetGame().ObjectDelete(item);
+                g_Game.ObjectDelete(item);
             }
         }
     }

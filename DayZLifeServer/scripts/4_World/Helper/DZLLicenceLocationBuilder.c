@@ -15,7 +15,7 @@ class DZLLicenceLocationBuilder {
 
     void Reload() {
         foreach(Object object: objects) {
-            if(object) GetGame().ObjectDelete(object);
+            if(object) g_Game.ObjectDelete(object);
         }
         Create();
     }

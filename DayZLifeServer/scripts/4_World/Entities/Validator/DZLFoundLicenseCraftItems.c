@@ -13,7 +13,7 @@ modded class DZLFoundLicenseCraftItems {
 
             neededQuantity -= itemQuantity;
             DZLLogCrafting(identity.GetId(), "licence crafting delete resource", type);
-            GetGame().ObjectDelete(item);
+            g_Game.ObjectDelete(item);
         }
     }
 

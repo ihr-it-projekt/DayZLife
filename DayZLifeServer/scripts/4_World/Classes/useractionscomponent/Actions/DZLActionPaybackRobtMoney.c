@@ -20,7 +20,7 @@ modded class DZLActionPaybackRobtMoney {
         int bonus = moneyPaidBack / 100 * config.bonusPerCopWhenRobtMoneyWillPaidBackInPercent;
 
         array<Man> allPlayers = new array<Man>;
-        GetGame().GetPlayers(allPlayers);
+        g_Game.GetPlayers(allPlayers);
 
         foreach(Man playerMan: allPlayers) {
             PlayerBase player = PlayerBase.Cast(playerMan);
@@ -34,7 +34,7 @@ modded class DZLActionPaybackRobtMoney {
             dzlPlayerCop.AddMoneyToPlayerBank(bonus);
         }
 
-        GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+        g_Game.RPCSingleParam(null, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
         DZLSendMessage(ident, "#payback_was_successful " + moneyPaidBack);
     }
 };

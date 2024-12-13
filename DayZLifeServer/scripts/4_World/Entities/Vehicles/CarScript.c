@@ -53,12 +53,12 @@ modded class CarScript {
             ownerId = store.param3;
         }
 
-        autoptr Param1<string> store2 = new Param1<string>("");
+        Param1<string> store2 = new Param1<string>("");
         if(ctx.Read(store2)) {
             ownerName = store2.param1;
         }
 
-        autoptr Param2<bool, vector> store3 = new Param2<bool, vector>(false, "0 0 0");
+        Param2<bool, vector> store3 = new Param2<bool, vector>(false, "0 0 0");
         if(ctx.Read(store3)) {
             hasInsurance = store3.param1;
             if(hasInsurance) EnableInsurance(store3.param2);

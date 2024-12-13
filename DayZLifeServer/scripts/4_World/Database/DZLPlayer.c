@@ -357,6 +357,6 @@ if(!player) return:
 
         GetFraction();
 
-        GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(this), true, playerIdentity);
+        g_Game.RPCSingleParam(null, DZL_RPC.PLAYER_DATA_RESPONSE, new Param1<ref DZLPlayer>(this), true, playerIdentity);
     }
 }

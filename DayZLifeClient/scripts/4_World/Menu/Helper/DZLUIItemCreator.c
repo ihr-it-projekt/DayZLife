@@ -3,7 +3,7 @@ class DZLUIItemCreator {
     Widget layoutRoot;
 
     void DZLUIItemCreator(string layoutRootPath) {
-        this.layoutRoot = GetGame().GetWorkspace().CreateWidgets(layoutRootPath);
+        this.layoutRoot = g_Game.GetWorkspace().CreateWidgets(layoutRootPath);
     }
 
     Widget GetLayoutRoot() {

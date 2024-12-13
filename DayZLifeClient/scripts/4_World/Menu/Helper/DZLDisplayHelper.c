@@ -12,7 +12,7 @@ class DZLDisplayHelper {
         string displayName;
         foreach(string itemName: configs) {
             string cfg = itemName + " " + itemClassname + " displayName";
-            GetGame().ConfigGetText(cfg, displayName);
+            g_Game.ConfigGetText(cfg, displayName);
 
             if(displayName != "") {
                 displayName.Replace("$UNT$", "");
@@ -290,7 +290,7 @@ class DZLDisplayHelper {
             if(currentItem && currentItem.GetType() == item.GetType()) return;
 
             if(previewItem) {
-                GetGame().ObjectDelete(previewItem);
+                g_Game.ObjectDelete(previewItem);
             }
 
             preview.SetItem(item);
@@ -311,10 +311,10 @@ class DZLDisplayHelper {
             if(currentItem && currentItem.GetType() == itemType.type) return;
 
             if(previewItem) {
-                GetGame().ObjectDelete(previewItem);
+                g_Game.ObjectDelete(previewItem);
             }
 
-            previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
+            previewItem = EntityAI.Cast(g_Game.CreateObject(itemType.type, "0 0 0", true, false, false));
 
             preview.SetItem(previewItem);
             preview.SetModelPosition(Vector(0, 0, 0.5));
@@ -335,10 +335,10 @@ class DZLDisplayHelper {
             if(currentItem && currentItem.GetType() == itemType.type) return;
 
             if(previewItem) {
-                GetGame().ObjectDelete(previewItem);
+                g_Game.ObjectDelete(previewItem);
             }
 
-            previewItem = EntityAI.Cast(GetGame().CreateObject(itemType.type, "0 0 0", true, false, false));
+            previewItem = EntityAI.Cast(g_Game.CreateObject(itemType.type, "0 0 0", true, false, false));
 
             preview.SetItem(previewItem);
             preview.SetModelPosition(Vector(0, 0, 0.5));
@@ -347,7 +347,7 @@ class DZLDisplayHelper {
 
     static void DeletePreviewItem() {
         if(previewItem) {
-            GetGame().ObjectDelete(previewItem);
+            g_Game.ObjectDelete(previewItem);
         }
     }
 

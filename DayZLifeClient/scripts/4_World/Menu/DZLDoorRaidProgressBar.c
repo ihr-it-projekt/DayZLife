@@ -30,10 +30,10 @@ class DZLDoorRaidProgressBar: DZLBaseProgressBar {
     }
 
     override void SendFinishEvent() {
-        GetGame().RPCSingleParam(building, DZL_RPC.RAID_DOOR, new Param2<int, ItemBase>(doorIndex, item), true);
+        g_Game.RPCSingleParam(building, DZL_RPC.RAID_DOOR, new Param2<int, ItemBase>(doorIndex, item), true);
     }
 
     override void SendInterruptEvent() {
-        GetGame().RPCSingleParam(building, DZL_RPC.RAID_DOOR_INTERRUPTED, new Param1<int>(doorIndex), true);
+        g_Game.RPCSingleParam(building, DZL_RPC.RAID_DOOR_INTERRUPTED, new Param1<int>(doorIndex), true);
     }
 }

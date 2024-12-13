@@ -33,6 +33,6 @@ class DZLActionOpenTicketMenu: ActionInteractBase {
         DZLPlayerTicketMenu menu = player.GetTicketMenu();
         menu.SetReceiver(targetPlayer);
 
-        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 }

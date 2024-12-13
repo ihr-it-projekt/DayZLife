@@ -4,7 +4,7 @@ class DZLPlayerEventListener: DZLBaseEventListener {
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.NEW_SPAWN_CLIENT) {
-            queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
+            queue = g_Game.GetCallQueue(CALL_CATEGORY_SYSTEM);
             queue.CallLater(CreateSpawnMenu, 1750, true);
             return;
         }
@@ -48,22 +48,22 @@ class DZLPlayerEventListener: DZLBaseEventListener {
         player = DZLPlayerBaseHelper.GetPlayer();
         if(!player || !DZLConfig.Get() || !player.GetDZLPlayer()) return;
 
-        queue = GetGame().GetCallQueue(CALL_CATEGORY_SYSTEM);
+        queue = g_Game.GetCallQueue(CALL_CATEGORY_SYSTEM);
         queue.Remove(CreateSpawnMenu);
 
-        GetGame().GetUIManager().CloseAll();
-        GetGame().GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(false), null);
+        g_Game.GetUIManager().CloseAll();
+        g_Game.GetUIManager().ShowScriptedMenu(player.GetSpawnPositionMenu(false), null);
     }
 
     void PlayerRespawn() {
-        GetGame().GetMenuDefaultCharacterData(false).SetRandomCharacterForced(true);
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().RespawnPlayer);
+        g_Game.GetMenuDefaultCharacterData(false).SetRandomCharacterForced(true);
+        g_Game.GetCallQueue(CALL_CATEGORY_GUI).Call(g_Game.RespawnPlayer);
 
-        MissionGameplay missionGP = MissionGameplay.Cast(GetGame().GetMission());
+        MissionGameplay missionGP = MissionGameplay.Cast(g_Game.GetMission());
         missionGP.DestroyAllMenus();
         missionGP.SetPlayerRespawning(true);
 
-        GetGame().GetCallQueue(CALL_CATEGORY_GUI).Call(GetGame().GetMission().Continue);
+        g_Game.GetCallQueue(CALL_CATEGORY_GUI).Call(g_Game.GetMission().Continue);
     }
 
 }

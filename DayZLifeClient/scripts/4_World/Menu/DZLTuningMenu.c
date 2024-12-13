@@ -22,7 +22,7 @@ class DZLTuningMenu: DZLBaseMenu {
             CarScript playerCar = DZLObjectFinder.GetCarForTuning(player.GetPosition(), carType.car);
             if(playerCar && !playerCar.isSold) {
                 string name = "";
-                GetGame().ObjectGetDisplayName(playerCar, name);
+                g_Game.ObjectGetDisplayName(playerCar, name);
                 name += " (" + playerCar.GetType() + ",";
                 name += " " + playerCar.ownerName + ")";
                 carFoundList.AddItem(name, playerCar, 0);
@@ -66,7 +66,7 @@ class DZLTuningMenu: DZLBaseMenu {
                     }
                 }
 
-                GetGame().RPCSingleParam(car, DZL_RPC.EVENT_TUNE_CAR, new Param1<string>(targetTuneConfig.type), true);
+                g_Game.RPCSingleParam(car, DZL_RPC.EVENT_TUNE_CAR, new Param1<string>(targetTuneConfig.type), true);
                 OnHide();
             }
         } else if(w == carFoundList) {
@@ -106,7 +106,7 @@ class DZLTuningMenu: DZLBaseMenu {
 
         cfg = CFG_VEHICLESPATH + " " + itemClassname + " displayName";
 
-        GetGame().ConfigGetText(cfg, displayName);
+        g_Game.ConfigGetText(cfg, displayName);
 
 
         if(displayName == "") {

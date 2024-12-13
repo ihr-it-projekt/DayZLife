@@ -20,7 +20,7 @@ class DZLActionOpenBankingMenu: ActionInteractBase {
         if(g_Game.GetUIManager().GetMenu() != NULL) return;
 
         action_data.m_Player.RequestUpdateDZLPlayer();
-        GetGame().GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(action_data.m_Player.GetBankingMenu(), NULL);
 
     }
 

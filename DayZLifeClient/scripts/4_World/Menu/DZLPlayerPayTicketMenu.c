@@ -41,7 +41,7 @@ class DZLPlayerPayTicketMenu: DZLBaseMenu {
 
                 if(ticketPay) {
                     if(dzlPlayer.HasEnoughMoney(ticketPay.value)) {
-                        GetGame().RPCSingleParam(player, DZL_RPC.PAY_TICKET, new Param1<string>(ticketPay.GetId()), true);
+                        g_Game.RPCSingleParam(player, DZL_RPC.PAY_TICKET, new Param1<string>(ticketPay.GetId()), true);
                     } else {
                         player.DisplayMessage("#error_not_enough_money");
                     }

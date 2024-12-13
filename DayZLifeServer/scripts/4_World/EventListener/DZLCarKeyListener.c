@@ -2,7 +2,7 @@ class DZLCarKeyListener: DZLBaseEventListener {
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.GET_UPDATE_CAR_KEYS) {
-            autoptr Param2<CarScript, ref array<DZLOnlinePlayer>> paramUpdateKeys;
+            Param2<CarScript, ref array<DZLOnlinePlayer>> paramUpdateKeys;
             if(ctx.Read(paramUpdateKeys)) {
 
                 DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -20,12 +20,12 @@ class DZLCarKeyListener: DZLBaseEventListener {
                 keyOwner.Insert(new DZLOnlinePlayer(dPlayer.dayZPlayerId, dPlayer.playerName, dPlayer.GetJobGrade()));
             }
 
-            GetGame().RPCSingleParam(null, DZL_RPC.GET_CAR_KEYS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(keyOwner), true, sender);
+            g_Game.RPCSingleParam(null, DZL_RPC.GET_CAR_KEYS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(keyOwner), true, sender);
         } else if(rpc_type == DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL) {
             array<ref DZLOnlinePlayer> players = DZLDatabaseLayer.Get().GetPlayerIds().GetPlayerCollection(new array<string>);
-            GetGame().RPCSingleParam(null, DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(players), true, sender);
+            g_Game.RPCSingleParam(null, DZL_RPC.GET_DAY_Z_LIFE_ALL_PLAYER_ONLINE_PLAYERS_FOR_ALL_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(players), true, sender);
         } else if(rpc_type == DZL_RPC.CHANGE_CAR_OWNER) {
-            autoptr Param2<string, CarScript> paramChangeOwner;
+            Param2<string, CarScript> paramChangeOwner;
             if(ctx.Read(paramChangeOwner) && sender) {
                 string receiverId = paramChangeOwner.param1;
                 CarScript carToChange = paramChangeOwner.param2;

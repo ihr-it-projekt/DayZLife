@@ -21,7 +21,7 @@ class DZLFoundLicenseCraftItems {
         string lowerTypeItem = item.GetType();
         lowerTypeItem.ToLower();
         if(lowerType != lowerTypeItem) return false;
-        if(GetGame().IsServer() && item.GetHealth() < neededHealth) return false;
+        if(g_Game.IsServer() && item.GetHealth() < neededHealth) return false;
 
         foundQuantity += DZLTraderHelper.GetQuantity(item);
         items.Insert(item);

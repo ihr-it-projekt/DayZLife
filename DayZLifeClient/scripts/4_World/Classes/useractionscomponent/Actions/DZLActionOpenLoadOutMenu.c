@@ -23,7 +23,7 @@ class DZLActionOpenLoadOutMenu: ActionInteractBase {
 
         string job = action_data.m_Player.GetDZLPlayer().GetActiveJob();
         menu.SetCategories(DZLConfig.Get().jobConfig.GetLoadOuts(job).loadOutCategories);
-        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 
     override bool ActionCondition(PlayerBase player, ActionTarget target, ItemBase item) {

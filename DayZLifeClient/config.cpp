@@ -31,7 +31,7 @@ class CfgMods {
         credits = "TheBuster, Sense";
         author = "TheBuster Sense";
         authorID = "76561198196317725";
-        version = "1.1.4";
+        version = "1.3.0";
         extra = 0;
         type = "mod";
 

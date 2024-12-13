@@ -8,21 +8,21 @@ class DZLPlayerClientDB: DZLBaseEventListener {
     static DZLPlayerClientDB Get() {
         if(!db) {
             db = new DZLPlayerClientDB;
-            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.EVENT_GET_CONFIG, null, true);
-            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
-            GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
+            g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.EVENT_GET_CONFIG, null, true);
+            g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
+            g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
         }
         return db;
     }
 
     DZLBank GetBank() {
-        if(!dzlBank) GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
+        if(!dzlBank) g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
 
         return dzlBank;
     }
 
     DZLPlayer GetDZLPlayer() {
-        if(!dzlPlayer) GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
+        if(!dzlPlayer) g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
 
         return dzlPlayer;
     }
@@ -33,8 +33,8 @@ class DZLPlayerClientDB: DZLBaseEventListener {
     }
 
     void RequestUpdateDZLPlayer() {
-        GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
-        GetGame().RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
+        g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_DATA, null, true);
+        g_Game.RPCSingleParam(DZLPlayerBaseHelper.GetPlayer(), DZL_RPC.PLAYER_BANK_DATA, null, true);
     }
 
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {

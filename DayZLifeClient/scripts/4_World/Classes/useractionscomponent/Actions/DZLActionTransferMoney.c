@@ -31,6 +31,6 @@ class DZLActionTransferMoney: ActionInteractBase {
 
         DZLPlayerMoneyTransferMenu menu = player.GetPlayerMoneyTransferMenu();
         menu.SetReceiver(targetPlayer);
-        GetGame().GetUIManager().ShowScriptedMenu(menu, NULL);
+        g_Game.GetUIManager().ShowScriptedMenu(menu, NULL);
     }
 }

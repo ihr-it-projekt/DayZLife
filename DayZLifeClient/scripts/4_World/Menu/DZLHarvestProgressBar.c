@@ -17,6 +17,6 @@ class DZLHarvestProgressBar: DZLBaseProgressBar {
     }
 
     override void SendFinishEvent() {
-        GetGame().RPCSingleParam(player, DZL_RPC.HARVEST, null, true);
+        g_Game.RPCSingleParam(player, DZL_RPC.HARVEST, null, true);
     }
 }

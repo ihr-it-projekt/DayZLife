@@ -3,7 +3,7 @@ class DZLMessageListener: DZLBaseEventListener {
     override void OnRPC(PlayerIdentity sender, Object target, int rpc_type, ParamsReadContext ctx) {
         if(rpc_type == DZL_RPC.SEND_MESSAGE) {
             PlayerBase player = PlayerBase.Cast(target);
-            autoptr Param4<string, string, string, bool> paramMessage;
+            Param4<string, string, string, bool> paramMessage;
             if(ctx.Read(paramMessage) && player) {
                 string receiverId = paramMessage.param1;
                 string text = paramMessage.param2;
@@ -24,7 +24,7 @@ class DZLMessageListener: DZLBaseEventListener {
 
     static DZLMessage SendMessage(PlayerBase player, string receiverId, string text, string type, vector position = "0 0 0", bool senderVisible = true) {
         array<Man> _players = new array<Man>;
-        GetGame().GetPlayers(_players);
+        g_Game.GetPlayers(_players);
         DZLMessage message;
         if(_players) {
             foreach(Man _player: _players) {
@@ -44,7 +44,7 @@ class DZLMessageListener: DZLBaseEventListener {
 
     private void SendOnlinePlayerList(PlayerBase player) {
         array<Man> _players = new array<Man>;
-        GetGame().GetPlayers(_players);
+        g_Game.GetPlayers(_players);
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;
 
         DZLPlayerIdentities dzlPlayerIdentities = DZLDatabaseLayer.Get().GetPlayerIds();
@@ -57,7 +57,7 @@ class DZLMessageListener: DZLBaseEventListener {
             }
         }
 
-        GetGame().RPCSingleParam(null, DZL_RPC.RECEIVE_ONLINE_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(collection), true, player.GetIdentity());
+        g_Game.RPCSingleParam(null, DZL_RPC.RECEIVE_ONLINE_PLAYERS_RESPONSE, new Param1<ref array<ref DZLOnlinePlayer>>(collection), true, player.GetIdentity());
     }
 
 }

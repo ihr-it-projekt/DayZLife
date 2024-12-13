@@ -30,6 +30,6 @@ modded class DZLActionTakeRobtMoneyBank {
         DZLSendMessage(null, "#bank_rob_was_successful " + money.ToString());
         DZLLogRaid(player.GetPlayerId(), "bank raid finished", "bank", player.GetPosition());
 
-        GetGame().RPCSingleParam(null, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
+        g_Game.RPCSingleParam(null, DZL_RPC.PLAYER_BANK_DATA_RESPONSE, new Param1<ref DZLBank>(bank), true);
     }
 };

@@ -103,7 +103,7 @@ class DZLMessageDB {
     }
 
     private bool Load() {
-        if(GetGame().IsClient() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
+        if(g_Game.IsClient() && FileExist(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName)) {
             JsonFileLoader<DZLMessageDB>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_DATA + fileName, this);
             return true;
         }
@@ -111,7 +111,7 @@ class DZLMessageDB {
     }
 
     private bool Save() {
-        if(GetGame().IsClient()) {
+        if(g_Game.IsClient()) {
             ref array<ref DZLMessage> messageMapTemp = messageMap;
             ref array<ref DZLMessage> answerMapTemp = answersMap;
             messageMap = null;

@@ -8,7 +8,7 @@ modded class DZLActionRobMoneyFromDead {
         if(!targetPlayer.IsAlive() && targetPlayer.GetMoneyPlayerIsDead() > 0) {
             targetPlayer.TransferFromDeadPlayer(dzlPlayer);
 
-            GetGame().RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
+            g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, player.GetIdentity());
         }
     }
 
