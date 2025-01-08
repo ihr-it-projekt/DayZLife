@@ -88,7 +88,7 @@ class DZLShopRaidListener: DZLBaseEventListener {
     }
 
     void TickRob() {
-        if(!raider || raider.GetHealth() < 1 || raider.IsUnconscious() || raider.IsRestrained()) {
+        if(!raider || raider.GetHealth() < 1 || raider.IsUnconscious() || raider.IsRestrained() || vector.Distance(shopPosition.position, raider.GetPosition()) > DZLConfig.Get().crimeConfig.maximumRaidDistanceToShop) {
             raider = null;
             robTimer.Stop();
             robTimer = null;

@@ -1,22 +1,4 @@
 modded class DZLCrimeConfig {
-    private string version = "1";
-    int maxMoneyPerTick = 30;
-    int minMoneyPerTick = 3;
-    int maxMoneyPerRob = 100000;
-    ref array<string> robTools;
-    bool raidIsCopControlled = false;
-    bool raidTimeControlled = false;
-    int minCountCopsForRaid = 5;
-    int raidStartTimeHour = 16;
-    int raidEndTimeHour = 22;
-    int raidStartTimeMinute = 0;
-    int raidEndTimeMinute = 59;
-    int raidDurationTickInSeconds = 60;
-    int maxRaidDurationInSeconds = 6000;
-    float copAlarmFactorForCopMessage = 0.95;
-    int raidCoolDownTimeInSeconds = 1800;
-    bool canStartRaidIfBankRaidRuns = false;
-    ref array<ref DZLCrimePosition> shopPosition;
 
     void DZLCrimeConfig() {
         if(!Load()) {
@@ -31,8 +13,16 @@ modded class DZLCrimeConfig {
     private bool Load() {
         if(FileExist(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json")) {
             JsonFileLoader<DZLCrimeConfig>.JsonLoadFile(DAY_Z_LIFE_SERVER_FOLDER_CONFIG + "CrimeConfig.json", this);
+
+            if(version == "1") {
+                version = "2";
+                Save();
+                return true;
+            }
+
             return true;
         }
+
         return false;
     }
 

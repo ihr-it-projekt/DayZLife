@@ -1,7 +1,6 @@
 class DZLDatabase {
     private ref map<string, ref DZLPlayer> dzlPlayers;
     private ref DZLPlayerIdentities dzlPlayerIdentities;
-    private ref DZLBank bank;
 
     void DZLDatabase() {
         dzlPlayers = new map<string, ref DZLPlayer>;

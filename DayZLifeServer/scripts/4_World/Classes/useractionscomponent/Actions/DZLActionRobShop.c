@@ -25,11 +25,4 @@ modded class DZLActionRobShop {
         return true;
     }
 
-    override void OnStartClient(ActionData action_data) {
-        PlayerBase player = action_data.m_Player;
-
-        if(player) {
-            g_Game.RPCSingleParam(player, DZL_RPC.START_ROB_MONEY_FROM_SHOP, null, true);
-        }
-    }
 };

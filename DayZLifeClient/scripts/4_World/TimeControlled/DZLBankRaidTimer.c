@@ -4,7 +4,7 @@ class DZLBankRaidTimer {
     private ref DZLBank bank;
 
     static DZLBankRaidTimer Get(ref DZLBank _bank) {
-        if(!bankRaidTimer) {
+        if(!bankRaidTimer || bankRaidTimer.bank != _bank) {
             bankRaidTimer = new DZLBankRaidTimer(_bank);
         }
 

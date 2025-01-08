@@ -29,7 +29,7 @@ modded class DZLBank {
             raidPosition = position.ToString(false);
             Save();
             DZLBankRaidTimer.Get(this).Start();
-            this.countDownRaid = _countDownRaid;
+            countDownRaid = _countDownRaid;
         }
     }
 

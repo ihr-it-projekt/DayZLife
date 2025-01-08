@@ -15,6 +15,7 @@ class DZLCrimeConfig {
     int maxRaidDurationInSeconds = 6000;
     float copAlarmFactorForCopMessage = 0.95;
     int raidCoolDownTimeInSeconds = 1800;
+    int maximumRaidDistanceToShop = 20;
     bool canStartRaidIfBankRaidRuns = false;
     ref array<ref DZLCrimePosition> shopPosition;
 

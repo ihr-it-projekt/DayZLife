@@ -10,8 +10,8 @@ class DZLPlayerSpawnListener: DZLBaseEventListener {
                 DZLJobSpawnPoints points = DZLConfig.Get().GetJobSpawnPointsByJobId(param.param2);
                 DZLSpawnPoint point = points.FindSpawnById(param.param1);
 
+                DZLPlayer dzlPlayer = player.GetDZLPlayer();
                 if(point) {
-                    DZLPlayer dzlPlayer = player.GetDZLPlayer();
                     dzlPlayer.UpdateActiveJob(param.param2);
 
                     player.RemoveAllItems();
