@@ -92,6 +92,7 @@ class DZLShopRaidListener: DZLBaseEventListener {
             raider = null;
             robTimer.Stop();
             robTimer = null;
+			moneyForRob = 0;
             DZLSendMessage(null, "#rob_raid_was_stopped");
             DZLDatabaseLayer.Get().GetCrimeData().SetShopRaid(false);
             return;
