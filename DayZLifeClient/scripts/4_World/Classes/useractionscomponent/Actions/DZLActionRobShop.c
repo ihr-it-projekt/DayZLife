@@ -47,4 +47,7 @@ class DZLActionRobShop: ActionInteractBase {
             g_Game.RPCSingleParam(player, DZL_RPC.START_ROB_MONEY_FROM_SHOP, null, true);
         }
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };

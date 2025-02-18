@@ -25,4 +25,7 @@ class DZLActionTakeRobtMoneyBank: ActionInteractBase {
 
         return true;
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };

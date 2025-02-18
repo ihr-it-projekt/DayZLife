@@ -32,4 +32,7 @@ class DZLActionLicenceCrafting: ActionInteractBase {
         super.OnStartClient(action_data);
         g_Game.GetUIManager().ShowScriptedMenu(action_data.m_Player.GetLicenceProgressBar(), NULL);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };

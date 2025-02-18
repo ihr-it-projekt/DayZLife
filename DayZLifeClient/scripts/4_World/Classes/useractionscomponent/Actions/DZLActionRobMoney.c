@@ -21,4 +21,7 @@ class DZLActionRobMoney: ActionInteractBase {
 
         return targetPlayer.IsRestrained() || targetPlayer.IsUnconscious();
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 }

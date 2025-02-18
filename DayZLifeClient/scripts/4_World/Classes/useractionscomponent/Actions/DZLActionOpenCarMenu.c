@@ -33,4 +33,7 @@ class DZLActionOpenCarMenu: ActionInteractBase {
 
         return car.IsOwner(player.GetIdentity()) || DZLConfig.Get().adminIds.HasAccess(DAY_Z_LIFE_ACCESS_CARS, player.GetPlayerId());
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 }

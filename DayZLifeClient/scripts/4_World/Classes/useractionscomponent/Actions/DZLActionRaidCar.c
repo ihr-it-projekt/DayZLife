@@ -51,4 +51,7 @@ class DZLActionRaidCar: ActionInteractBase {
 
         g_Game.GetUIManager().ShowScriptedMenu(bar, NULL);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };

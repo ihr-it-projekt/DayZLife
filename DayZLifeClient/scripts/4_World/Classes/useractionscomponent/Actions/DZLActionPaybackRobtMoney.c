@@ -27,5 +27,8 @@ class DZLActionPaybackRobtMoney: ActionInteractBase {
 
         return true;
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 
 };

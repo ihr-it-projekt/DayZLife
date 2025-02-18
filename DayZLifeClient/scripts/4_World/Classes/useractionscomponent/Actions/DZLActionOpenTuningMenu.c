@@ -36,4 +36,7 @@ class DZLActionOpenTuningMenu: ActionInteractBase {
 
         return dzlPlayer.IsActiveJob(config.requiredJob);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 }

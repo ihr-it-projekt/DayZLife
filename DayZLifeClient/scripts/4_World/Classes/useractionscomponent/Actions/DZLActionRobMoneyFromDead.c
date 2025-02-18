@@ -30,4 +30,7 @@ class DZLActionRobMoneyFromDead: ActionInteractBase {
         PlayerBase targetPlayer = PlayerBase.Cast(action_data.m_Target.GetObject());
         targetPlayer.SetMoneyPlayerIsDead(0);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 }

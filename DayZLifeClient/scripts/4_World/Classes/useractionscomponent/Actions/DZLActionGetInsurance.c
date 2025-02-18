@@ -23,4 +23,7 @@ class DZLActionGetInsurance: ActionInteractBase {
 
         action_data.m_Player.DisplayMessage("#has_insurance: " + hasInsurance);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };

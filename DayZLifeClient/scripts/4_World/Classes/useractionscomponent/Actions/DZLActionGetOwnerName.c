@@ -20,4 +20,7 @@ class DZLActionGetOwnerName: ActionInteractBase {
 
         action_data.m_Player.DisplayMessage("#owner_is: " + car.ownerName);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };

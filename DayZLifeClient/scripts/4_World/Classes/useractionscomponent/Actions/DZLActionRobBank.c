@@ -60,5 +60,8 @@ class DZLActionRobBank: ActionInteractBase {
         }
         return false;
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 
 };

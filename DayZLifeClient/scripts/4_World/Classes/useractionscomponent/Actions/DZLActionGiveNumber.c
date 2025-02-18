@@ -13,4 +13,7 @@ class DZLActionGiveNumber: ActionInteractBase {
     override string GetText() {
         return "#send_contact";
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 }

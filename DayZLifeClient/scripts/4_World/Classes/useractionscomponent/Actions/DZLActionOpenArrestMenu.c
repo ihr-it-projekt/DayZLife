@@ -36,4 +36,7 @@ class DZLActionOpenArrestMenu: ActionInteractBase {
         menu.SetReceiver(targetPlayer);
         g_Game.GetUIManager().ShowScriptedMenu(menu, NULL);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 }

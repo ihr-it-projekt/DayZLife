@@ -64,4 +64,7 @@ class DZLActionRaidDoors: ActionInteractBase {
         bar.SetBuilding(buildingClient, doorIndex, definition);
         g_Game.GetUIManager().ShowScriptedMenu(bar, NULL);
     }
+    override bool IsLockTargetOnUse() {
+        return false;
+    }
 };
