@@ -20,7 +20,7 @@ class DZLTradeObject {
     ref DZLTraderPosition traderPosition;
     ref DZLPlayer dzlPlayer;
 
-    void DZLTradeObject(PlayerBase _player, ref array<EntityAI> _itemsToSell, ref array<string> _itemsToBuy, ref DZLTraderPosition _traderPosition) {
+    void DZLTradeObject(PlayerBase _player, array<EntityAI> _itemsToSell, array<string> _itemsToBuy, DZLTraderPosition _traderPosition) {
         player = _player;
         playerItems = player.GetPlayerItems();
         playerIdentity = player.GetIdentity();

@@ -108,7 +108,7 @@ class DZLFractionListener: DZLBaseEventListener {
         }
     }
 
-    private void HandleAddPotential(ref array<ref DZLFractionMember> newPotentialMembers, ref array<ref DZLFractionMember> oldPotet, DZLFraction fraction) {
+    private void HandleAddPotential(array<ref DZLFractionMember> newPotentialMembers, array<ref DZLFractionMember> oldPotet, DZLFraction fraction) {
         foreach(DZLFractionMember member: newPotentialMembers) {
             member.isMember = false;
             fraction.AddPotentialMember(member);
@@ -117,7 +117,7 @@ class DZLFractionListener: DZLBaseEventListener {
         }
     }
 
-    private void HandleRemoveMembers(ref array<ref DZLFractionMember> members, ref array<ref DZLFractionMember> membersToCompare, DZLFraction fraction) {
+    private void HandleRemoveMembers(array<ref DZLFractionMember> members, array<ref DZLFractionMember> membersToCompare, DZLFraction fraction) {
         foreach(DZLFractionMember member: members) {
             if(member.IsFractionBoss()) continue;
             bool hasFound = false;
@@ -135,7 +135,7 @@ class DZLFractionListener: DZLBaseEventListener {
         }
     }
 
-    private void HandleUpdateMemberRights(ref array<ref DZLFractionMember> members, DZLFraction fraction) {
+    private void HandleUpdateMemberRights(array<ref DZLFractionMember> members, DZLFraction fraction) {
         foreach(DZLFractionMember member: members) {
             fraction.UpdateMember(member);
             DZLPlayer player = database.GetPlayer(member.playerId);
@@ -144,7 +144,7 @@ class DZLFractionListener: DZLBaseEventListener {
         }
     }
 
-    private void HandleRemovePotentialsMembers(ref array<ref DZLFractionMember> members, ref array<ref DZLFractionMember> membersToCompare, DZLFraction fraction) {
+    private void HandleRemovePotentialsMembers(array<ref DZLFractionMember> members, array<ref DZLFractionMember> membersToCompare, DZLFraction fraction) {
         foreach(DZLFractionMember member: members) {
             bool hasFound = false;
             foreach(DZLFractionMember memberToCompare: membersToCompare) {

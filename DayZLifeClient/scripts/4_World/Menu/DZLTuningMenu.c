@@ -77,11 +77,11 @@ class DZLTuningMenu: DZLBaseMenu {
             }
 
             carTuningOptionList.ClearItems();
-            CarScript _car = null;
-            carFoundList.GetItemData(index, 0, _car);
+            CarScript carFound = null;
+            carFoundList.GetItemData(index, 0, carFound);
 
-            if(_car) {
-                array<ref DZLCarTuneConfig>options = config.tuningConfig.GetTargetCarsForCar(_car.GetType());
+            if(carFound) {
+                array<ref DZLCarTuneConfig>options = config.tuningConfig.GetTargetCarsForCar(carFound.GetType());
                 if(options) {
                     foreach(DZLCarTuneConfig option: options) {
                         string name = GetItemDisplayName(option.type);

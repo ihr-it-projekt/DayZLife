@@ -1,6 +1,6 @@
 modded class DZLLicence: DZLIdModel {
 
-    void DZLLicence(int _price, string _name, vector _position, string _dependencyLicence, ref DZLLicenceCraftedItem _craftedItem, int _durationForCrafting, DZLLicenceToolItemCollection _toolItems, DZLLicenceCraftItemCollection _craftItems) {
+    void DZLLicence(int _price, string _name, vector _position, string _dependencyLicence, DZLLicenceCraftedItem _craftedItem, int _durationForCrafting, DZLLicenceToolItemCollection _toolItems, DZLLicenceCraftItemCollection _craftItems) {
         this.price = _price;
         this.name = _name;
         this.position = _position;

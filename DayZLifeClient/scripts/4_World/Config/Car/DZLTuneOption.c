@@ -2,8 +2,8 @@ class DZLTuneOption {
     string car;
     ref array<ref DZLCarTuneConfig>targetCars;
 
-    void DZLTuneOption(string _car, array<ref DZLCarTuneConfig> _targetCars) {
-        car = _car;
+    void DZLTuneOption(string carIn, array<ref DZLCarTuneConfig> _targetCars) {
+        car = carIn;
         targetCars = _targetCars;
     }
 

@@ -7,7 +7,7 @@ modded class DZLJobPayCheck {
         paychecks.Insert(new DZLPaycheck(_jobId, "Boss", 3000, 30));
     }
 
-    void MigrateV3(ref array<ref DZLPaycheck> _paychecks) {
+    void MigrateV3(array<ref DZLPaycheck> _paychecks) {
         paychecks = _paychecks;
     }
 }

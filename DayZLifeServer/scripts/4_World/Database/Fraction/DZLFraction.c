@@ -32,12 +32,12 @@ modded class DZLFraction {
         }
     }
 
-    void AddMember(ref DZLFractionMember member) {
+    void AddMember(DZLFractionMember member) {
         if(HasMember(member.playerId)) return;
         members.Insert(member);
     }
 
-    void AddPotentialMember(ref DZLFractionMember member) {
+    void AddPotentialMember(DZLFractionMember member) {
         if(HasPotentialMember(member.playerId)) return;
         potentialMembers.Insert(member);
     }

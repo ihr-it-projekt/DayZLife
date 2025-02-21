@@ -48,7 +48,7 @@ modded class DZLPlayerIdentities {
         return collection;
     }
 
-    void UpdateJob(string job, ref array<DZLOnlinePlayer> players) {
+    void UpdateJob(string job, array<DZLOnlinePlayer> players) {
         if(!players) return;
 
         foreach(string ident: playerIdentities) {
@@ -67,7 +67,7 @@ modded class DZLPlayerIdentities {
         }
     }
 
-    void UpdateCarKeys(PlayerIdentity player, CarScript car, ref array<DZLOnlinePlayer> players) {
+    void UpdateCarKeys(PlayerIdentity player, CarScript car, array<DZLOnlinePlayer> players) {
         if(!players) return;
 
         array<ref DZLOnlinePlayer> collection = new array<ref DZLOnlinePlayer>;

@@ -36,13 +36,9 @@ class DZLSpawnHelper {
         }
     }
 
-    static bool Add(EntityAI parent, DZLStoreItem itemInStock, ref InventoryLocation inventoryLocation = null) {
+    static bool Add(EntityAI parent, DZLStoreItem itemInStock, InventoryLocation inventoryLocation) {
         EntityAI item;
         bool spawnOnGround = false;
-
-        if(!inventoryLocation) {
-            inventoryLocation = new InventoryLocation;
-        }
 
         if(parent.GetInventory().FindFirstFreeLocationForNewEntity(itemInStock.type, FindInventoryLocationType.ANY, inventoryLocation)) {
             item = parent.GetInventory().CreateInInventory(itemInStock.type);

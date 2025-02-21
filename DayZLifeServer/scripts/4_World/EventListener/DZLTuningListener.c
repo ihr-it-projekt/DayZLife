@@ -38,7 +38,7 @@ class DZLTuningListener: DZLBaseEventListener {
             CarScript carSpawned = SpawnCar(sender, storedCar, carPosition, carHeading, lastStoragePosition, hasInsurance);
 
             if(!carSpawned) return;
-            if(hasInsurance) DZLInsuranceManager.Get().AddCar(carSpawned, null);
+            if(hasInsurance) DZLInsuranceManager.Get().AddCar(carSpawned, new DZLCarStoreItem(carSpawned, carSpawned.GetLastStoragePosition(), false, true));
         }
     }
 
@@ -74,7 +74,7 @@ class DZLTuningListener: DZLBaseEventListener {
         array<ref DZLStoreItem> attached = itemInStock.attached;
         bool spawnOnGround = false;
         foreach(DZLStoreItem attach: attached) {
-            if(DZLSpawnHelper.Add(car, attach) && !spawnOnGround) {
+            if(DZLSpawnHelper.Add(car, attach, new InventoryLocation) && !spawnOnGround) {
                 spawnOnGround = true;
             }
         }

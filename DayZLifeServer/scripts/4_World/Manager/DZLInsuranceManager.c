@@ -18,12 +18,8 @@ class DZLInsuranceManager {
         return manager;
     }
 
-    ref DZLCarStoreItem AddCar(CarScript car, ref DZLCarStoreItem storeItem) {
+    ref DZLCarStoreItem AddCar(CarScript car, DZLCarStoreItem storeItem) {
         if(car.ownerId != "" && car.dzlCarId && !cars.Contains(car.dzlCarId)) {
-            if(!storeItem) {
-                storeItem = new DZLCarStoreItem(car, car.GetLastStoragePosition(), false, true);
-            }
-
             cars.Set(car.dzlCarId, storeItem);
             scriptCars.Set(car.dzlCarId, car);
             ownerIds.Set(car.dzlCarId, car.ownerId);

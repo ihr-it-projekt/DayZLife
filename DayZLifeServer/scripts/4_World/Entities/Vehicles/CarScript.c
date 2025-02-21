@@ -99,7 +99,7 @@ modded class CarScript {
     void EnableInsurance(vector _lastGaragePosition) {
         hasInsurance = true;
         this.lastGaragePosition = _lastGaragePosition;
-        carStoreItem = DZLInsuranceManager.Get().AddCar(this, null);
+        carStoreItem = DZLInsuranceManager.Get().AddCar(this, new DZLCarStoreItem(this, lastGaragePosition, false, true));
         SetSynchDirty();
     }
 

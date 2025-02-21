@@ -89,7 +89,7 @@ class DZLStorageListener: DZLBaseEventListener {
 
                     if(withInsurance) {
                         dzlPlayer.AddMoneyToPlayerBank(config.carInsurancePrice * -1);
-                        DZLInsuranceManager.Get().AddCar(carSpawned, null);
+                        DZLInsuranceManager.Get().AddCar(carSpawned, new DZLCarStoreItem(carSpawned, carSpawned.GetLastStoragePosition(), false, true));
                         g_Game.RPCSingleParam(null, DZL_RPC.EVENT_CLIENT_SHOULD_REQUEST_PLAYER_BASE, null, true, sender);
                     }
                 }
@@ -121,7 +121,7 @@ class DZLStorageListener: DZLBaseEventListener {
             array<ref DZLStoreItem> attached = itemInStock.attached;
             bool spawnOnGround = false;
             foreach(DZLStoreItem attach: attached) {
-                if(DZLSpawnHelper.Add(car, attach) && !spawnOnGround) {
+                if(DZLSpawnHelper.Add(car, attach, new InventoryLocation) && !spawnOnGround) {
                     spawnOnGround = true;
                 }
             }

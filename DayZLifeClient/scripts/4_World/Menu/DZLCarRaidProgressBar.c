@@ -6,8 +6,8 @@ class DZLCarRaidProgressBar: DZLBaseProgressBar {
         return super.Init();
     }
 
-    void SetCar(CarScript _car) {
-        this.car = _car;
+    void SetCar(CarScript carIn) {
+        this.car = carIn;
 
         duration = 999999999999999;
     }
