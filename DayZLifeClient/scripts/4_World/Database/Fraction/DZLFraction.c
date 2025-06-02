@@ -25,7 +25,7 @@ class DZLFraction: DZLFileSerializer {
             }
         }
 
-        return null,
+        return null;
     }
 
     bool HasPotentialMember(string playerId) {
@@ -35,7 +35,7 @@ class DZLFraction: DZLFileSerializer {
             }
         }
 
-        return false,
+        return false;
     }
 
     bool HasMember(string playerId) {
@@ -45,7 +45,7 @@ class DZLFraction: DZLFileSerializer {
             }
         }
 
-        return false,
+        return false;
     }
 
     ref array<ref DZLFractionMember> GetMembers() {
