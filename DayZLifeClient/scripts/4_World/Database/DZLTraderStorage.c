@@ -2,7 +2,7 @@ class DZLTraderStorage {
     private ref array<ref DZLTraderTypeStorage> storageArray = new array<ref DZLTraderTypeStorage>();
     [NonSerialized()] private ref map<string, ref DZLTraderTypeStorage> storageMap;
 
-    ref array<ref DZLTraderTypeStorage> GetStorageItems() {
+    array<ref DZLTraderTypeStorage> GetStorageItems() {
         return storageArray;
     }
 

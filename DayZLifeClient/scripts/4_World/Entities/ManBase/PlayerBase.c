@@ -278,7 +278,7 @@ modded class PlayerBase {
         return null;
     }
 
-    ref DZLTraderPosition GetTraderByPosition(int distance = 3) {
+    DZLTraderPosition GetTraderByPosition(int distance = 3) {
         vector playerPosition = GetPosition();
         if(!playerPosition || !DZLConfig.Get() || !DZLConfig.Get().traderConfig) {
             return null;

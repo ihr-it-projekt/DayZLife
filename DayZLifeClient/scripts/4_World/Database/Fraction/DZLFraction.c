@@ -48,11 +48,11 @@ class DZLFraction: DZLFileSerializer {
         return false;
     }
 
-    ref array<ref DZLFractionMember> GetMembers() {
+    array<ref DZLFractionMember> GetMembers() {
         return members;
     }
 
-    ref array<ref DZLFractionMember> GetPotentialMembers() {
+    array<ref DZLFractionMember> GetPotentialMembers() {
         return potentialMembers;
     }
 
