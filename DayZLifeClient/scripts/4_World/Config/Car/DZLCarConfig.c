@@ -1,5 +1,6 @@
 class DZLCarConfig {
     bool carCollisionDamage = false;
+    bool disallowCarCollisionWhenNoMedicIsOnline = true;
     bool canStoreCarsWithGoods = false;
     bool canGetCarsFromEveryGarage = true;
     int carRaidTimeInSeconds = 60;

@@ -172,4 +172,12 @@ modded class CarScript {
 
         RPCSingleParam(DZL_RPC.UPDATE_CAR, new Param3<ref array<string>, string, string>(playerAccess, ownerId, ownerName), true);
     }
+
+    override void OnContact(string zoneName, vector localPos, IEntity other, Contact data) {
+        DZLCarConfig carConfig = DZLConfig.Get().carConfig;
+        if(!carConfig.carCollisionDamage) return;
+        if(carConfig.disallowCarCollisionWhenNoMedicIsOnline && !DZLPlayerArrestListener.instance.medicCount) return;
+
+        super.OnContact(zoneName, localPos, other, data);
+    }
 }

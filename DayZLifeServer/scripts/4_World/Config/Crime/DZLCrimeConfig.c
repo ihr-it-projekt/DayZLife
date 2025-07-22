@@ -20,6 +20,12 @@ modded class DZLCrimeConfig {
                 return true;
             }
 
+            if(version == "2") {
+                canUnrestrainSelf = true;
+                version = "3";
+                Save();
+            }
+
             return true;
         }
 

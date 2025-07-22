@@ -112,12 +112,4 @@ modded class CarScript {
 
         return super.IsInventoryVisible() && HasPlayerAccess(player);
     }
-
-    override void OnContact(string zoneName, vector localPos, IEntity other, Contact data) {
-        bool carCollisionDamage = DZLConfig.Get().carConfig.carCollisionDamage;
-        if(!carCollisionDamage) return;
-
-        super.OnContact(zoneName, localPos, other, data);
-    }
-
 }

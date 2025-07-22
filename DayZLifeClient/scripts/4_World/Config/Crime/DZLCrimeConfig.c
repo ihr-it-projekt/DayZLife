@@ -17,6 +17,7 @@ class DZLCrimeConfig {
     int raidCoolDownTimeInSeconds = 1800;
     int maximumRaidDistanceToShop = 20;
     bool canStartRaidIfBankRaidRuns = false;
+    bool canUnrestrainSelf = true;
     ref array<ref DZLCrimePosition> shopPosition;
 
 

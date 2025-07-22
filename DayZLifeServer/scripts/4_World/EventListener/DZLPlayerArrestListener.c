@@ -2,12 +2,15 @@ class DZLPlayerArrestListener: DZLBaseEventListener {
     private ref Timer timerArrest;
     private ref array<ref DZLEscapedPlayer> escapeePlayers = new array<ref DZLEscapedPlayer>;
     private ref array<ref DZLOpenTicketPlayer> openTicketPlayers = new array<ref DZLOpenTicketPlayer>;
-    private int copCount = 0;
-    private int civCount = 0;
-    private int medicCount = 0;
-    private int armyCont = 0;
+    int copCount = 0;
+    int civCount = 0;
+    int medicCount = 0;
+    int armyCont = 0;
+
+    static ref DZLPlayerArrestListener instance;
 
     void DZLPlayerArrestListener() {
+        instance = this;
         timerArrest = new Timer;
         timerArrest.Run(60, this, "CheckPrisoners", null, true);
     }

@@ -80,6 +80,12 @@ modded class DZLCarConfig {
 
             Save();
         }
+
+        if(version == "5") {
+            disallowCarCollisionWhenNoMedicIsOnline = false;
+            version = "6";
+            Save();
+        }
     }
 
 
