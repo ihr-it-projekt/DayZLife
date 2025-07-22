@@ -1,5 +1,7 @@
 # DayZLife
-A role play mod for DayZ. See website https://dayz-life.net/en/ for detailed information.
+A role play mod for DayZ. See Readme https://github.com/ihr-it-projekt/DayZModsInfo/tree/main/DayZLife
+
+My Discord: https://discord.gg/mUZsvup3Sx
 
 ## I want to contribute
 
