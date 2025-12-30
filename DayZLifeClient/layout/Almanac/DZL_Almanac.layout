@@ -879,7 +879,7 @@ FrameWidgetClass Almanac {
        vexactpos 0
        hexactsize 0
        vexactsize 0
-       text "#PlayerEscape"
+       text "#EscapedPlayer"
        "exact text" 0
        "size to text h" 1
        "text halign" center
