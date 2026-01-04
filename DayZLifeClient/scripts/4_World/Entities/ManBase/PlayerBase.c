@@ -77,7 +77,7 @@ modded class PlayerBase {
 
     void DisplayMessage(string message) {
 #ifdef TBLibClient
-        TBLibDisplayMessage(message);
+        TBLibSendMessage(this, message);
         return;
 #endif
 
