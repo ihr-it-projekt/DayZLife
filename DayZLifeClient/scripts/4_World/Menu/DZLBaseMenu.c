@@ -85,9 +85,19 @@ class DZLBaseMenu: UIScriptedMenu {
 
     override void Update(float timeslice) {
         super.Update(timeslice);
-        if(canClose && GetUApi() && GetUApi().GetInputByName("UAUIBack").LocalPress()) {
+        if(canClose && IsBackPressed()) {
             g_Game.GetUIManager().HideScriptedMenu(this);
         }
+    }
+
+    private bool IsBackPressed() {
+        if(GetUApi() && GetUApi().GetInputByID(UAUIBack).LocalPress()) return true;
+        // since 1.30 UAUIBack never fires for menus opened via ShowScriptedMenu, read the raw key instead
+        if(KeyState(KeyCode.KC_ESCAPE)) {
+            ClearKey(KeyCode.KC_ESCAPE);
+            return true;
+        }
+        return false;
     }
 
     override void OnHide() {
